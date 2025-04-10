@@ -2,14 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 23:44:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:44:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:44:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:44:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:44:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 01:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_image_feed_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dashboard-directory-size-settings-general', 'a:6:{s:22:\"transient-time-minutes\";i:360;s:18:\"common-directories\";a:3:{i:0;s:7:\"uploads\";i:1;s:6:\"themes\";i:2;s:7:\"plugins\";}s:18:\"show-database-size\";s:1:\"1\";s:8:\"show-sum\";s:1:\"0\";s:18:\"custom-directories\";s:0:\"\";s:14:\"decimal-places\";i:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +17,7 @@ Error: [05-Apr-2025 23:44:57 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_image_feed_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dashboard-directory-size-settings-general' , 'a:6:{s:22:&quot;transient-time-minutes&quot;;i:360;s:18:&quot;common-directories&quot;;a:3:{i:0;s:7:&quot;uploads&quot;;i:1;s:6:&quot;themes&quot;;i:2;s:7:&quot;plugins&quot;;}s:18:&quot;show-database-size&quot;;s:1:&quot;1&quot;;s:8:&quot;show-sum&quot;;s:1:&quot;0&quot;;s:18:&quot;custom-directories&quot;;s:0:&quot;&quot;;s:14:&quot;decimal-places&quot;;i:0;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,47 +29,485 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_image_fe...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_image_fe...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-content/plugins/dashboard-directory-size/includes/class-dashboard-directory-size-settings.php(50): add_option('dashboard-direc...', Array, '', 'off')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Dashboard_Directory_Size_Settings::activation_hook(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dashbo...', false)
+#9 /internal/eval.php(20): activate_plugin('dashboard-direc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dashboard-directory-size-settings-general', 'a:6:{s:22:\"transient-time-minutes\";i:360;s:18:\"common-directories\";a:3:{i:0;s:7:\"uploads\";i:1;s:6:\"themes\";i:2;s:7:\"plugins\";}s:18:\"show-database-size\";s:1:\"1\";s:8:\"show-sum\";s:1:\"0\";s:18:\"custom-directories\";s:0:\"\";s:14:\"decimal-places\";i:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dashboard-directory-size/dashboard-directory-size.php'), WP_Hook->do_action, WP_Hook->apply_filters, Dashboard_Directory_Size_Settings::activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dashboard-directory-size-plugin-activated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dashboard-directory-size-plugin-activated' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/dashboard-directory-size/includes/class-dashboard-directory-size-settings.php(53): add_option('dashboard-direc...', '1')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Dashboard_Directory_Size_Settings::activation_hook(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dashbo...', false)
+#9 /internal/eval.php(20): activate_plugin('dashboard-direc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dashboard-directory-size-plugin-activated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dashboard-directory-size/dashboard-directory-size.php'), WP_Hook->do_action, WP_Hook->apply_filters, Dashboard_Directory_Size_Settings::activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:49:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:49:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:49:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/dbc-backup/dbcbackup.php on line 89
+[10-Apr-2025 01:49:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/dbc-backup/dbcbackup.php on line 89
+[10-Apr-2025 01:49:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/dbc-backup/dbcbackup.php on line 89
+[10-Apr-2025 01:50:23 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:23 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:50:24 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:24 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:32 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:32 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:33 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:33 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:41 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:41 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:42 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2823
+[10-Apr-2025 01:50:42 UTC] PHP Deprecated:  Required parameter $bugs_page follows optional parameter $currency in /wordpress/wp-content/plugins/demo-data-creator/demodata.php on line 2881
+[10-Apr-2025 01:50:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg() in /wordpress/wp-content/plugins/discography/discography.php:627
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discography/dis...')
+#2 /internal/eval.php(20): activate_plugin('discography/dis...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/discography/discography.php on line 627
+[10-Apr-2025 01:50:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg() in /wordpress/wp-content/plugins/discography/discography.php:627
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discography/dis...')
+#2 /internal/eval.php(20): activate_plugin('discography/dis...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/discography/discography.php on line 627
+[10-Apr-2025 01:51:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg() in /wordpress/wp-content/plugins/discography/discography.php:627
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discography/dis...')
+#2 /internal/eval.php(20): activate_plugin('discography/dis...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/discography/discography.php on line 627
+[10-Apr-2025 01:51:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"doubly/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744249907;s:11:\"plugin_path\";s:17:\"doubly/doubly.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:17:\"doubly/doubly.php\";s:8:\"sdk_path\";s:22:\"doubly/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744249907;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:22:&quot;doubly/vendor/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744249907;s:11:&quot;plugin_path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:17:&quot;doubly/doubly.php&quot;;s:8:&quot;sdk_path&quot;;s:22:&quot;doubly/vendor/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744249907;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(242): fs_update_sdk_newest_version('doubly/vendor/f...', 'doubly/doubly.p...')
+#7 /wordpress/wp-content/plugins/doubly/doubly.php(29): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#11 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"doubly/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744249907;s:11:\"plugin_path\";s:17:\"doubly/doubly.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:17:\"doubly/doubly.php\";s:8:\"sdk_path\";s:22:\"doubly/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744249907;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, require_once('/plugins/doubly/vendor/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/doubly/vendor/freemius/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/require.php(14): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(576): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/doubly/doubly.php(29): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#11 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, require_once('/plugins/doubly/vendor/freemius/start.php'), require_once('/plugins/doubly/vendor/freemius/require.php'), require_once('/plugins/doubly/vendor/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('9579', 'doubly')
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#12 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#16 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:1:{s:19:\"last_load_timestamp\";i:1744249907;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744249907)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744249907)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744249907)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#17 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:1:{s:19:\"last_load_timestamp\";i:1744249907;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:2:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'doubly/doubly.p...')
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:2:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:3:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#17 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:3:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:3:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(514): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#12 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#16 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:3:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:4:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744249907)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1744249907)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1744249907)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#17 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:4:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:5:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('was_plugin_load...', true)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(1337): FS_Storage->__set('was_plugin_load...', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#19 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
 #20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_image_feed_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:45:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:45:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:45:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:45:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:45:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:45:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:45:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:45:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:45:36 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/deviantart-widgets/libraries/Image.php on line 446
-[05-Apr-2025 23:45:39 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/deviantart-widgets/libraries/Image.php on line 446
-[05-Apr-2025 23:45:42 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/deviantart-widgets/libraries/Image.php on line 446
-[05-Apr-2025 23:45:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:46:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:5:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('df-draggable-options', 's:163:\"a:6:{s:18:\"makeDraggableClass\";s:4:\"post\";s:11:\"containment\";s:6:\"window\";s:11:\"dragBGcolor\";s:7:\"#efefef\";s:4:\"snap\";b:1;s:9:\"iframeFix\";b:1;s:6:\"handle\";s:0:\"\";}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:6:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -85,7 +519,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'df-draggable-options' , 's:163:&quot;a:6:{s:18:&quot;makeDraggableClass&quot;;s:4:&quot;post&quot;;s:11:&quot;containment&quot;;s:6:&quot;window&quot;;s:11:&quot;dragBGcolor&quot;;s:7:&quot;#efefef&quot;;s:4:&quot;snap&quot;;b:1;s:9:&quot;iframeFix&quot;;b:1;s:6:&quot;handle&quot;;s:0:&quot;&quot;;}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:6:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -97,23 +531,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('df-draggable-op...', 'a:6:{s:18:"make...', '', 'auto')
-#5 /wordpress/wp-content/plugins/df-draggable/df-draggable.php(54): update_option('df-draggable-op...', 'a:6:{s:18:"make...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): init_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_df-dra...', false)
-#10 /internal/eval.php(20): activate_plugin('df-draggable/df...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('df-draggable-options', 's:163:\"a:6:{s:18:\"makeDraggableClass\";s:4:\"post\";s:11:\"containment\";s:6:\"window\";s:11:\"dragBGcolor\";s:7:\"#efefef\";s:4:\"snap\";b:1;s:9:\"iframeFix\";b:1;s:6:\"handle\";s:0:\"\";}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_df-draggable/df-draggable.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:46:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:46:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:46:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(1351): FS_Storage->__set('is_plugin_new_i...', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#19 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:6:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '@K#CwC2s%dkKSB(kmw$ZA8}MK@n_Zy?YLrj[0LOY#m4u?JvbdKrghS~A4TrnP@PI', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:7:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -125,7 +564,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '@K#CwC2s%dkKSB(kmw$ZA8}MK@n_Zy?YLrj[0LOY#m4u?JvbdKrghS~A4TrnP@PI' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:7:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -137,34 +576,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '@K#CwC2s%dkKSB(...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '@K#CwC2s%dkKSB(...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '@K#CwC2s%dkKSB(...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '@K#CwC2s%dkKSB(...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/df-draggable/df-draggable.php(78): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): df_draggable_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '@K#CwC2s%dkKSB(kmw$ZA8}MK@n_Zy?YLrj[0LOY#m4u?JvbdKrghS~A4TrnP@PI', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, df_draggable_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(897): FS_Storage->__set('sdk_last_versio...', NULL)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:7:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Vx$DC=JtyE|=[79n7]KG:QhF#I_Ey!WH?2ig.ULHW~St>~b7&9X!<h+2|5{wrPz,', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:8:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -176,7 +608,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'Vx$DC=JtyE|=[79n7]KG:QhF#I_Ey!WH?2ig.ULHW~St&gt;~b7&amp;9X!&lt;h+2|5{wrPz,' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:8:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -188,38 +620,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'Vx$DC=JtyE|=[79...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'Vx$DC=JtyE|=[79...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'Vx$DC=JtyE|=[79...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'Vx$DC=JtyE|=[79...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/df-draggable/df-draggable.php(78): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): df_draggable_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Vx$DC=JtyE|=[79n7]KG:QhF#I_Ey!WH?2ig.ULHW~St>~b7&9X!<h+2|5{wrPz,', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, df_draggable_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:46:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:46:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:46:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.11.0')
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_version', '2.11.0')
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(898): FS_Storage->__set('sdk_version', '2.11.0')
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:8:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dialogs', 'a:1:{s:18:\"default_sc_content\";s:9:\"Click Me!\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:9:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -231,7 +652,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dialogs' , 'a:1:{s:18:&quot;default_sc_content&quot;;s:9:&quot;Click Me!&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:9:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -243,23 +664,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dialogs/Ixiter_Plugin.php(30): add_option('dialogs', Array)
-#5 /wordpress/wp-content/plugins/dialogs/dialogs.php(48): Ixiter_Plugin->init()
-#6 /wordpress/wp-content/plugins/dialogs/dialogs.php(91): TK_Dialogs->__construct()
-#7 /wordpress/wp-content/plugins/dialogs/loader.php(37): TK_Dialogs::getInstance()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): tk_dialogs_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dialogs', 'a:1:{s:18:\"default_sc_content\";s:9:\"Click Me!\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, tk_dialogs_init, TK_Dialogs::getInstance, TK_Dialogs->__construct, Ixiter_Plugin->init, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(903): FS_Storage->__set('sdk_upgrade_mod...', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:9:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'cs0cGU4~qrp{o{Y;)@?&x{U*?Y.>0pEKm0uFACqdbGwmeviI|(l P,efl>)B |)@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:10:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -271,7 +696,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'cs0cGU4~qrp{o{Y;)@?&amp;x{U*?Y.&gt;0pEKm0uFACqdbGwmeviI|(l P,efl&gt;)B |)@' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:10:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -283,34 +708,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'cs0cGU4~qrp{o{Y...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'cs0cGU4~qrp{o{Y...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'cs0cGU4~qrp{o{Y...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'cs0cGU4~qrp{o{Y...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/dialogs/dialogs.php(176): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): TK_Dialogs->init_js('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'cs0cGU4~qrp{o{Y;)@?&x{U*?Y.>0pEKm0uFACqdbGwmeviI|(l P,efl>)B |)@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TK_Dialogs->init_js, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(904): FS_Storage->__set('sdk_downgrade_m...', false)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:10:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'r@{5B(ZCz.@H7I>Yx_Lw}0}5+X4lnf!nnS53P>kkn.byFoRld-7SMsa$WB4$(8h%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:11:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -322,7 +740,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'r@{5B(ZCz.@H7I&gt;Yx_Lw}0}5+X4lnf!nnS53P&gt;kkn.byFoRld-7SMsa$WB4$(8h%' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:11:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -334,186 +752,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'r@{5B(ZCz.@H7I>...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'r@{5B(ZCz.@H7I>...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'r@{5B(ZCz.@H7I>...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'r@{5B(ZCz.@H7I>...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/dialogs/dialogs.php(176): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): TK_Dialogs->init_js('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'r@{5B(ZCz.@H7I>Yx_Lw}0}5+X4lnf!nnS53P>kkn.byFoRld-7SMsa$WB4$(8h%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TK_Dialogs->init_js, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:46:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:46:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:46:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:46:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:46:52 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:46:52 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:46:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:46:55 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:46:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:46:57 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:47:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:47:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:47:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:47:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:07 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:10 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 23:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 23:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(917): FS_Storage->__set('plugin_last_ver...', NULL)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:11:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-dashboard]', '', 'Dashboard', '', 'publish', 'page', 'closed', 'closed', '', 'dashboard', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , '[Digimall-dashboard]' , '' , 'Dashboard' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'dashboard' , '' , '' , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(191): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(156): Digimall_Installer->create_page(Array)
-#8 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(17): Digimall_Installer->setup_pages()
-#9 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/digimall.php(175): Digimall_Installer->do_install()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): Asset_Digimall::activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digima...', false)
-#14 /internal/eval.php(20): activate_plugin('digimall-litemu...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-dashboard]', '', 'Dashboard', '', 'publish', 'page', 'closed', 'closed', '', 'dashboard', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '') made by activate_plugin, do_action('activate_digimall-litemulti-vendore-store/digimall.php'), WP_Hook->do_action, WP_Hook->apply_filters, Asset_Digimall::activate, Digimall_Installer->do_install, Digimall_Installer->setup_pages, Digimall_Installer->create_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-stores]', '', 'Store List', '', 'publish', 'page', 'closed', 'closed', '', 'store-listing', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , '[Digimall-stores]' , '' , 'Store List' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'store-listing' , '' , '' , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(191): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(156): Digimall_Installer->create_page(Array)
-#8 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(17): Digimall_Installer->setup_pages()
-#9 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/digimall.php(175): Digimall_Installer->do_install()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): Asset_Digimall::activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digima...', false)
-#14 /internal/eval.php(20): activate_plugin('digimall-litemu...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-stores]', '', 'Store List', '', 'publish', 'page', 'closed', 'closed', '', 'store-listing', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '') made by activate_plugin, do_action('activate_digimall-litemulti-vendore-store/digimall.php'), WP_Hook->do_action, WP_Hook->apply_filters, Asset_Digimall::activate, Digimall_Installer->do_install, Digimall_Installer->setup_pages, Digimall_Installer->create_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-my-orders]', '', 'My Orders', '', 'publish', 'page', 'closed', 'closed', '', 'my-orders', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , '[Digimall-my-orders]' , '' , 'My Orders' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'my-orders' , '' , '' , '2025-04-05 23:47:17' , '2025-04-05 23:47:17' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(191): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(156): Digimall_Installer->create_page(Array)
-#8 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(17): Digimall_Installer->setup_pages()
-#9 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/digimall.php(175): Digimall_Installer->do_install()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): Asset_Digimall::activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digima...', false)
-#14 /internal/eval.php(20): activate_plugin('digimall-litemu...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-05 23:47:17', '2025-04-05 23:47:17', '[Digimall-my-orders]', '', 'My Orders', '', 'publish', 'page', 'closed', 'closed', '', 'my-orders', '', '', '2025-04-05 23:47:17', '2025-04-05 23:47:17', 0, 0, '', '') made by activate_plugin, do_action('activate_digimall-litemulti-vendore-store/digimall.php'), WP_Hook->do_action, WP_Hook->apply_filters, Asset_Digimall::activate, Digimall_Installer->do_install, Digimall_Installer->setup_pages, Digimall_Installer->create_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Digimall_pages', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:12:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -525,7 +784,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Digimall_pages' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:12:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.0.46&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -537,21 +796,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Digimall_pages', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(176): update_option('Digimall_pages', Array)
-#6 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(17): Digimall_Installer->setup_pages()
-#7 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/digimall.php(175): Digimall_Installer->do_install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Asset_Digimall::activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digima...', false)
-#12 /internal/eval.php(20): activate_plugin('digimall-litemu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Digimall_pages', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_digimall-litemulti-vendore-store/digimall.php'), WP_Hook->do_action, WP_Hook->apply_filters, Asset_Digimall::activate, Digimall_Installer->do_install, Digimall_Installer->setup_pages, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 23:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '1.0.46')
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_version', '1.0.46')
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(918): FS_Storage->__set('plugin_version', '1.0.46')
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:12:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Digimall_pages_created', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:13:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -563,7 +828,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Digimall_pages_created' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:13:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.0.46&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -575,14 +840,90 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Digimall_pages_...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(177): update_option('Digimall_pages_...', true)
-#6 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/classes/installer.php(17): Digimall_Installer->setup_pages()
-#7 /wordpress/wp-content/plugins/digimall-litemulti-vendore-store/digimall.php(175): Digimall_Installer->do_install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Asset_Digimall::activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digima...', false)
-#12 /internal/eval.php(20): activate_plugin('digimall-litemu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Digimall_pages_created', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_nam
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(923): FS_Storage->__set('plugin_upgrade_...', true)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:13:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:14:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:14:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.0.46&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_downgrad...', false)
+#9 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
+#10 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(924): FS_Storage->__set('plugin_downgrad...', false)
+#11 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/doubly/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('9579', 'doubly', true)
+#13 /wordpress/wp-content/plugins/doubly/vendor/freemius/start.php(615): Freemius::instance('9579', 'doubly', true)
+#14 /wordpress/wp-content/plugins/doubly/doubly.php(32): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/doubly/doubly.php(53): doubly_freemius()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('doubly/doubly.p...')
+#18 /internal/eval.php(20): activate_plugin('doubly/doubly.p...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:14:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/doubly/doubly.php'), doubly_freemius, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:51:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:9579;a:3:{s:4:\"slug\";s:6:\"doubly\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:17:\"doubly/doubly.php\";}}s:11:\"plugin_data\";a:1:{s:6:\"doubly\";a:14:{s:19:\"last_load_timestamp\";i:1744249907;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:17:\"doubly/doubly.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744249907;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.0.46\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:17:\"doubly/doubly.php\";s:6:\"doubly\";}s:7:\"plugins\";a:1:{s:6:\"doubly\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:6:\"Doubly\";s:4:\"slug\";s:6:\"doubly\";s:12:\"premium_slug\";s:10:\"doubly-pro\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:17:\"doubly/doubly.php\";s:7:\"version\";s:6:\"1.0.46\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:5:\"(Pro)\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";N;s:10:\"public_key\";s:32:\"pk_b682eb54fedb56bad60782fc78e2e\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"9579\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9579;a:3:{s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:6:&quot;doubly&quot;;a:14:{s:19:&quot;last_load_timestamp&quot;;i:1744249907;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:17:&quot;doubly/doubly.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744249907;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.0.46&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:17:&quot;doubly/doubly.php&quot;;s:6:&quot;doubly&quot;;}s:7:&quot;plugins&quot;;a:1:{s:6:&quot;doubly&quot;;O:9:&quot;FS_Plugin&quot;:24:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:6:&quot;Doubly&quot;;s:4:&quot;slug&quot;;s:6:&quot;doubly&quot;;s:12:&quot;premium_slug&quot;;s:10:&quot;doubly-pro&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:20:&quot;affiliate_moderation&quot;;b:0;s:19:&quot;is_wp_org_compliant&quot;;b:1;s:22:&quot;premium_releases_count&quot;;N;s:4:&quot;file&quot;;s:17:&quot;doubly/doubly.php&quot;;s:7:&quot;version&quot;;s:6:&quot;1.0.46&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:14:&quot;premium_suffix&quot;;s:5:&quot;(Pro)&quot;;s:7:&quot;is_live&quot;;b:1;s:9:&quot;bundle_id&quot;;N;s:17:&quot;bundle_public_key&quot;;N;s:17:&quot;opt_in_moderation&quot;;N;s:10:&quot;public_key&quot;;s:32:&quot;pk_b682eb54fedb56bad60782fc78e2e&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:4:&quot;9579&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sql
