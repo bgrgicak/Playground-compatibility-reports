@@ -2,7 +2,126 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 05:26:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 17:49:38 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307376.026)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:49:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
+#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
+#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fast-getrespons...')
+#8 /internal/eval.php(20): activate_plugin('fast-getrespons...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:49:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
+#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
+#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:49:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
+#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
+#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fast-getrespons...')
+#8 /internal/eval.php(20): activate_plugin('fast-getrespons...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:49:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
+#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
+#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:51:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE wp_form_notify_history (
@@ -44,446 +163,92 @@ Failed to parse the MySQL query.
 			`notify_time` DATETIME,
 			`status` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE 
 		) made by activate_plugin, do_action('activate_form-notify/form-notify.php'), WP_Hook->do_action, WP_Hook->apply_filters, FORMNOTIFY\Options\History->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('form_notify_db_version', '1.1.08', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'form_notify_db_version' , '1.1.08' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('form_notify_db_...', '1.1.08', '', 'auto')
-#5 /wordpress/wp-content/plugins/form-notify/src/Options/History.php(115): update_option('form_notify_db_...', '1.1.08')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FORMNOTIFY\Options\History->create_table(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+[10-Apr-2025 17:51:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
+[10-Apr-2025 17:54:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:57 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
+[10-Apr-2025 17:55:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:55:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "fss_widgetOption" in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php:164
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): fss_register('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/feed-subscriber-stats/feedsubstats.php on line 164
+[10-Apr-2025 17:56:17 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307775.01)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_form-n...', false)
-#10 /internal/eval.php(20): activate_plugin('form-notify/for...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('form_notify_db_version', '1.1.08', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_form-notify/form-notify.php'), WP_Hook->do_action, WP_Hook->apply_filters, FORMNOTIFY\Options\History->create_table, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:26:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:26:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:26:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:26:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 05:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'YyPEqx)<6lAR:Ok$,>L[l!><uvZr]/r$)zd4LL8 *[u+o~$jeS// )eMdG[Bm{<P', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'YyPEqx)&lt;6lAR:Ok$,&gt;L[l!&gt;&lt;uvZr]/r$)zd4LL8 *[u+o~$jeS// )eMdG[Bm{&lt;P' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'YyPEqx)<6lAR:Ok...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'YyPEqx)<6lAR:Ok...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'YyPEqx)<6lAR:Ok...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'YyPEqx)<6lAR:Ok...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/form-notify/vendor/wpackio/enqueue/inc/Enqueue.php(188): wp_register_script('wpackio_formNot...', 'http://127.0.0....', Array, '1.0.0', Array)
-#19 /wordpress/wp-content/plugins/form-notify/vendor/wpackio/enqueue/inc/Enqueue.php(229): WPackio\Enqueue->register('blocks', 'lineLoginButton', Array)
-#20 /wordpress/wp-content/plugins/form-notify/form-notify.php(116): WPackio\Enqueue->enqueue('blocks', 'lineLoginButton', Array)
-#21 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-settings.php(704): do_action('init')
-#25 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#26 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#27 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#28 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'YyPEqx)<6lAR:Ok$,>L[l!><uvZr]/r$)zd4LL8 *[u+o~$jeS// )eMdG[Bm{<P', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, WPackio\Enqueue->enqueue, WPackio\Enqueue->register, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}/$ra76)SfUS=swd%uL@9 D,`&<_:pLb4H~ruJ-nR<lt^VJ+/*tmyH_z^g9=#(@)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '}/$ra76)SfUS=swd%uL@9 D,`&amp;&lt;_:pLb4H~ruJ-nR&lt;lt^VJ+/*tmyH_z^g9=#(@)' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '}/$ra76)SfUS=sw...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '}/$ra76)SfUS=sw...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '}/$ra76)SfUS=sw...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '}/$ra76)SfUS=sw...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/form-notify/vendor/wpackio/enqueue/inc/Enqueue.php(188): wp_register_script('wpackio_formNot...', 'http://127.0.0....', Array, '1.0.0', Array)
-#19 /wordpress/wp-content/plugins/form-notify/vendor/wpackio/enqueue/inc/Enqueue.php(229): WPackio\Enqueue->register('blocks', 'lineLoginButton', Array)
-#20 /wordpress/wp-content/plugins/form-notify/form-notify.php(116): WPackio\Enqueue->enqueue('blocks', 'lineLoginButton', Array)
-#21 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-settings.php(704): do_action('init')
-#25 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#26 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#27 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#28 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}/$ra76)SfUS=swd%uL@9 D,`&<_:pLb4H~ruJ-nR<lt^VJ+/*tmyH_z^g9=#(@)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, WPackio\Enqueue->enqueue, WPackio\Enqueue->register, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 05:26:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>form-notify</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 05:27:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php on line 77
-[09-Apr-2025 05:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('facebook_the_like_box_in_the_post_options', 'a:9:{s:15:\"position_button\";s:5:\"after\";s:7:\"own_css\";s:13:\"float: right;\";s:5:\"width\";s:3:\"480\";s:7:\"streams\";s:4:\"true\";s:11:\"colorScheme\";s:5:\"light\";s:9:\"showFaces\";s:4:\"true\";s:6:\"header\";s:4:\"true\";s:8:\"creditOn\";s:4:\"true\";s:7:\"pageURL\";s:57:\"http://www.facebook.com/pages/CMS-Vote-Up/101900273224629\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'facebook_the_like_box_in_the_post_options' , 'a:9:{s:15:&quot;position_button&quot;;s:5:&quot;after&quot;;s:7:&quot;own_css&quot;;s:13:&quot;float: right;&quot;;s:5:&quot;width&quot;;s:3:&quot;480&quot;;s:7:&quot;streams&quot;;s:4:&quot;true&quot;;s:11:&quot;colorScheme&quot;;s:5:&quot;light&quot;;s:9:&quot;showFaces&quot;;s:4:&quot;true&quot;;s:6:&quot;header&quot;;s:4:&quot;true&quot;;s:8:&quot;creditOn&quot;;s:4:&quot;true&quot;;s:7:&quot;pageURL&quot;;s:57:&quot;http://www.facebook.com/pages/CMS-Vote-Up/101900273224629&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php(33): add_option('facebook_the_li...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_facebook_the_like_box_in_the_post(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_facebo...', false)
-#9 /internal/eval.php(20): activate_plugin('facebook-the-li...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('facebook_the_like_box_in_the_post_options', 'a:9:{s:15:\"position_button\";s:5:\"after\";s:7:\"own_css\";s:13:\"float: right;\";s:5:\"width\";s:3:\"480\";s:7:\"streams\";s:4:\"true\";s:11:\"colorScheme\";s:5:\"light\";s:9:\"showFaces\";s:4:\"true\";s:6:\"header\";s:4:\"true\";s:8:\"creditOn\";s:4:\"true\";s:7:\"pageURL\";s:57:\"http://www.facebook.com/pages/CMS-Vote-Up/101900273224629\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_facebook_the_like_box_in_the_post, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:27:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php on line 77
-[09-Apr-2025 05:27:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php on line 77
-[09-Apr-2025 05:27:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/facebook-the-like-box-in-the-post-plugin/facebook-the-like-box-in-the-post.php on line 77
-[09-Apr-2025 05:27:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_fastflow_settings` WHERE `settings_for` = 'Get Response' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#6 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#7 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fast-getrespons...')
-#10 /internal/eval.php(20): activate_plugin('fast-getrespons...')
-#11 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:32 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:27:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:27:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:27:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:27:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_fastflow_settings` WHERE `settings_for` = 'Get Response' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#6 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#7 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fast-getrespons...')
-#8 /internal/eval.php(20): activate_plugin('fast-getrespons...')
-#9 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fast-getrespons...')
-#8 /internal/eval.php(20): activate_plugin('fast-getrespons...')
-#9 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:27:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_fastflow_settings WHERE settings_for=:param0  | parameters: Get Response</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(103): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(45): FastGetResponse->fast_getresponse_settings_db('Get Response')
-#4 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(24): FastGetResponse->fast_getresponse_apikey()
-#5 /wordpress/wp-content/plugins/fast-getresponse/fast-getresponse.php(393): FastGetResponse->__construct()
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT * FROM wp_fastflow_settings WHERE settings_for='Get Response' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fast-getresponse/fast-getresponse.php'), FastGetResponse->__construct, FastGetResponse->fast_getresponse_apikey, FastGetResponse->fast_getresponse_settings_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:28:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:28:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:28:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:28:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:29:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:29:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:29:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:29:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:30:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:30:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:30:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:30:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:30:28 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 46
-[09-Apr-2025 05:30:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fsml_options', 'a:91:{s:14:\"plugin_version\";s:5:\"1.5.2\";s:13:\"displaymethod\";s:6:\"custom\";s:11:\"expandtitle\";s:17:\"Show Social Links\";s:11:\"hsanimation\";s:4:\"jqhs\";s:12:\"fixeddynamic\";s:5:\"fixed\";s:11:\"closeoption\";s:2:\"no\";s:6:\"ie7fix\";s:0:\"\";s:13:\"hidefromsmall\";s:1:\"1\";s:12:\"metaviewport\";s:0:\"\";s:8:\"hidesize\";s:3:\"800\";s:10:\"usecookies\";s:1:\"0\";s:12:\"cookielength\";s:1:\"1\";s:22:\"chk_default_options_db\";s:0:\"\";s:11:\"genadvanced\";s:6:\"hidden\";s:10:\"apadvanced\";s:6:\"hidden\";s:5:\"theme\";s:6:\"bright\";s:11:\"settingstab\";s:7:\"general\";s:13:\"sitesubmitted\";s:2:\"no\";s:9:\"outputcss\";s:0:\"\";s:11:\"facebookurl\";s:0:\"\";s:16:\"facebookurltitle\";s:23:\"Visit Our Facebook Page\";s:14:\"enablefacebook\";s:1:\"1\";s:10:\"youtubeurl\";s:0:\"\";s:15:\"youtubeurltitle\";s:25:\"Visit Our YouTube Channel\";s:13:\"enableyoutube\";s:1:\"1\";s:10:\"twitterurl\";s:0:\"\";s:15:\"twitterurltitle\";s:21:\"View Our Twitter Feed\";s:13:\"enabletwitter\";s:1:\"1\";s:8:\"likelocs\";s:7:\"bylinks\";s:6:\"fblike\";s:0:\"\";s:6:\"tolike\";s:2:\"fb\";s:13:\"fblikeincroot\";s:2:\"no\";s:8:\"twfollow\";s:0:\"\";s:5:\"ytsub\";s:0:\"\";s:11:\"ytuseridnum\";s:0:\"\";s:6:\"fbsend\";s:0:\"\";s:15:\"numactivecustom\";s:1:\"0\";s:10:\"customurl1\";s:0:\"\";s:15:\"customurltitle1\";s:14:\"Visit Our Blog\";s:15:\"customurlimage1\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/blog-default.png\";s:10:\"customurl2\";s:0:\"\";s:15:\"customurltitle2\";s:7:\"More...\";s:15:\"customurlimage2\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl3\";s:0:\"\";s:15:\"customurltitle3\";s:7:\"More...\";s:15:\"customurlimage3\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl4\";s:0:\"\";s:15:\"customurltitle4\";s:7:\"More...\";s:15:\"customurlimage4\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl5\";s:0:\"\";s:15:\"customurltitle5\";s:7:\"More...\";s:15:\"customurlimage5\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl6\";s:0:\"\";s:15:\"customurltitle6\";s:7:\"More...\";s:15:\"customurlimage6\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl7\";s:0:\"\";s:15:\"customurltitle7\";s:7:\"More...\";s:15:\"customurlimage7\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:13:\"customtarget1\";s:1:\"1\";s:13:\"customtarget2\";s:1:\"1\";s:13:\"customtarget3\";s:1:\"1\";s:13:\"customtarget4\";s:1:\"1\";s:13:\"customtarget5\";s:1:\"1\";s:13:\"customtarget6\";s:1:\"1\";s:13:\"customtarget7\";s:1:\"1\";s:13:\"enablecustom1\";s:0:\"\";s:13:\"enablecustom2\";s:0:\"\";s:13:\"enablecustom3\";s:0:\"\";s:13:\"enablecustom4\";s:0:\"\";s:13:\"enablecustom5\";s:0:\"\";s:13:\"enablecustom6\";s:0:\"\";s:13:\"enablecustom7\";s:0:\"\";s:9:\"leftright\";s:5:\"right\";s:4:\"size\";s:7:\"snormal\";s:11:\"customwidth\";s:0:\"\";s:9:\"customtop\";s:1:\"5\";s:8:\"custombr\";s:0:\"\";s:8:\"topunits\";s:3:\"pct\";s:12:\"customzindex\";s:0:\"\";s:16:\"framehovereffect\";s:3:\"yes\";s:11:\"hovereffect\";s:3:\"yes\";s:12:\"borderradius\";s:4:\"none\";s:6:\"border\";s:2:\"no\";s:6:\"shadow\";s:2:\"no\";s:11:\"colorscheme\";s:5:\"light\";s:15:\"backgroundcolor\";s:7:\"#ffffff\";s:11:\"bordercolor\";s:7:\"#ababab\";s:4:\"shbw\";s:5:\"black\";s:11:\"frameshadow\";s:5:\"black\";s:11:\"fblikecolor\";s:5:\"light\";s:9:\"customcss\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fsml_options' , 'a:91:{s:14:&quot;plugin_version&quot;;s:5:&quot;1.5.2&quot;;s:13:&quot;displaymethod&quot;;s:6:&quot;custom&quot;;s:11:&quot;expandtitle&quot;;s:17:&quot;Show Social Links&quot;;s:11:&quot;hsanimation&quot;;s:4:&quot;jqhs&quot;;s:12:&quot;fixeddynamic&quot;;s:5:&quot;fixed&quot;;s:11:&quot;closeoption&quot;;s:2:&quot;no&quot;;s:6:&quot;ie7fix&quot;;s:0:&quot;&quot;;s:13:&quot;hidefromsmall&quot;;s:1:&quot;1&quot;;s:12:&quot;metaviewport&quot;;s:0:&quot;&quot;;s:8:&quot;hidesize&quot;;s:3:&quot;800&quot;;s:10:&quot;usecookies&quot;;s:1:&quot;0&quot;;s:12:&quot;cookielength&quot;;s:1:&quot;1&quot;;s:22:&quot;chk_default_options_db&quot;;s:0:&quot;&quot;;s:11:&quot;genadvanced&quot;;s:6:&quot;hidden&quot;;s:10:&quot;apadvanced&quot;;s:6:&quot;hidden&quot;;s:5:&quot;theme&quot;;s:6:&quot;bright&quot;;s:11:&quot;settingstab&quot;;s:7:&quot;general&quot;;s:13:&quot;sitesubmitted&quot;;s:2:&quot;no&quot;;s:9:&quot;outputcss&quot;;s:0:&quot;&quot;;s:11:&quot;facebookurl&quot;;s:0:&quot;&quot;;s:16:&quot;facebookurltitle&quot;;s:23:&quot;Visit Our Facebook Page&quot;;s:14:&quot;enablefacebook&quot;;s:1:&quot;1&quot;;s:10:&quot;youtubeurl&quot;;s:0:&quot;&quot;;s:15:&quot;youtubeurltitle&quot;;s:25:&quot;Visit Our YouTube Channel&quot;;s:13:&quot;enableyoutube&quot;;s:1:&quot;1&quot;;s:10:&quot;twitterurl&quot;;s:0:&quot;&quot;;s:15:&quot;twitterurltitle&quot;;s:21:&quot;View Our Twitter Feed&quot;;s:13:&quot;enabletwitter&quot;;s:1:&quot;1&quot;;s:8:&quot;likelocs&quot;;s:7:&quot;bylinks&quot;;s:6:&quot;fblike&quot;;s:0:&quot;&quot;;s:6:&quot;tolike&quot;;s:2:&quot;fb&quot;;s:13:&quot;fblikeincroot&quot;;s:2:&quot;no&quot;;s:8:&quot;twfollow&quot;;s:0:&quot;&quot;;s:5:&quot;ytsub&quot;;s:0:&quot;&quot;;s:11:&quot;ytuseridnum&quot;;s:0:&quot;&quot;;s:6:&quot;fbsend&quot;;s:0:&quot;&quot;;s:15:&quot;numactivecustom&quot;;s:1:&quot;0&quot;;s:10:&quot;customurl1&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle1&quot;;s:14:&quot;Visit Our Blog&quot;;s:15:&quot;customurlimage1&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/blog-default.png&quot;;s:10:&quot;customurl2&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle2&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage2&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:10:&quot;customurl3&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle3&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage3&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:10:&quot;customurl4&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle4&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage4&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:10:&quot;customurl5&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle5&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage5&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:10:&quot;customurl6&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle6&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage6&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:10:&quot;customurl7&quot;;s:0:&quot;&quot;;s:15:&quot;customurltitle7&quot;;s:7:&quot;More...&quot;;s:15:&quot;customurlimage7&quot;;s:89:&quot;http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png&quot;;s:13:&quot;customtarget1&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget2&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget3&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget4&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget5&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget6&quot;;s:1:&quot;1&quot;;s:13:&quot;customtarget7&quot;;s:1:&quot;1&quot;;s:13:&quot;enablecustom1&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom2&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom3&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom4&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom5&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom6&quot;;s:0:&quot;&quot;;s:13:&quot;enablecustom7&quot;;s:0:&quot;&quot;;s:9:&quot;leftright&quot;;s:5:&quot;right&quot;;s:4:&quot;size&quot;;s:7:&quot;snormal&quot;;s:11:&quot;customwidth&quot;;s:0:&quot;&quot;;s:9:&quot;customtop&quot;;s:1:&quot;5&quot;;s:8:&quot;custombr&quot;;s:0:&quot;&quot;;s:8:&quot;topunits&quot;;s:3:&quot;pct&quot;;s:12:&quot;customzindex&quot;;s:0:&quot;&quot;;s:16:&quot;framehovereffect&quot;;s:3:&quot;yes&quot;;s:11:&quot;hovereffect&quot;;s:3:&quot;yes&quot;;s:12:&quot;borderradius&quot;;s:4:&quot;none&quot;;s:6:&quot;border&quot;;s:2:&quot;no&quot;;s:6:&quot;shadow&quot;;s:2:&quot;no&quot;;s:11:&quot;colorscheme&quot;;s:5:&quot;light&quot;;s:15:&quot;backgroundcolor&quot;;s:7:&quot;#ffffff&quot;;s:11:&quot;bordercolor&quot;;s:7:&quot;#ababab&quot;;s:4:&quot;shbw&quot;;s:5:&quot;black&quot;;s:11:&quot;frameshadow&quot;;s:5:&quot;black&quot;;s:11:&quot;fblikecolor&quot;;s:5:&quot;light&quot;;s:9:&quot;customcss&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fsml_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php(157): update_option('fsml_options', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): fsml_add_defaults(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floati...', false)
-#10 /internal/eval.php(20): activate_plugin('floating-social...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fsml_options', 'a:91:{s:14:\"plugin_version\";s:5:\"1.5.2\";s:13:\"displaymethod\";s:6:\"custom\";s:11:\"expandtitle\";s:17:\"Show Social Links\";s:11:\"hsanimation\";s:4:\"jqhs\";s:12:\"fixeddynamic\";s:5:\"fixed\";s:11:\"closeoption\";s:2:\"no\";s:6:\"ie7fix\";s:0:\"\";s:13:\"hidefromsmall\";s:1:\"1\";s:12:\"metaviewport\";s:0:\"\";s:8:\"hidesize\";s:3:\"800\";s:10:\"usecookies\";s:1:\"0\";s:12:\"cookielength\";s:1:\"1\";s:22:\"chk_default_options_db\";s:0:\"\";s:11:\"genadvanced\";s:6:\"hidden\";s:10:\"apadvanced\";s:6:\"hidden\";s:5:\"theme\";s:6:\"bright\";s:11:\"settingstab\";s:7:\"general\";s:13:\"sitesubmitted\";s:2:\"no\";s:9:\"outputcss\";s:0:\"\";s:11:\"facebookurl\";s:0:\"\";s:16:\"facebookurltitle\";s:23:\"Visit Our Facebook Page\";s:14:\"enablefacebook\";s:1:\"1\";s:10:\"youtubeurl\";s:0:\"\";s:15:\"youtubeurltitle\";s:25:\"Visit Our YouTube Channel\";s:13:\"enableyoutube\";s:1:\"1\";s:10:\"twitterurl\";s:0:\"\";s:15:\"twitterurltitle\";s:21:\"View Our Twitter Feed\";s:13:\"enabletwitter\";s:1:\"1\";s:8:\"likelocs\";s:7:\"bylinks\";s:6:\"fblike\";s:0:\"\";s:6:\"tolike\";s:2:\"fb\";s:13:\"fblikeincroot\";s:2:\"no\";s:8:\"twfollow\";s:0:\"\";s:5:\"ytsub\";s:0:\"\";s:11:\"ytuseridnum\";s:0:\"\";s:6:\"fbsend\";s:0:\"\";s:15:\"numactivecustom\";s:1:\"0\";s:10:\"customurl1\";s:0:\"\";s:15:\"customurltitle1\";s:14:\"Visit Our Blog\";s:15:\"customurlimage1\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/blog-default.png\";s:10:\"customurl2\";s:0:\"\";s:15:\"customurltitle2\";s:7:\"More...\";s:15:\"customurlimage2\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl3\";s:0:\"\";s:15:\"customurltitle3\";s:7:\"More...\";s:15:\"customurlimage3\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl4\";s:0:\"\";s:15:\"customurltitle4\";s:7:\"More...\";s:15:\"customurlimage4\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl5\";s:0:\"\";s:15:\"customurltitle5\";s:7:\"More...\";s:15:\"customurlimage5\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl6\";s:0:\"\";s:15:\"customurltitle6\";s:7:\"More...\";s:15:\"customurlimage6\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:10:\"customurl7\";s:0:\"\";s:15:\"customurltitle7\";s:7:\"More...\";s:15:\"customurlimage7\";s:89:\"http://127.0.0.1:9403/wp-content/plugins/floating-social-media-links/img/more-default.png\";s:13:\"customtarget1\";s:1:\"1\";s:13:\"customtarget2\";s:1:\"1\";s:13:\"customtarget3\";s:1:\"1\";s:13:\"customtarget4\";s:1:\"1\";s:13:\"customtarget5\";s:1:\"1\";s:13:\"customtarget6\";s:1:\"1\";s:13:\"customtarget7\";s:1:\"1\";s:13:\"enablecustom1\";s:0:\"\";s:13:\"enablecustom2\";s:0:\"\";s:13:\"enablecustom3\";s:0:\"\";s:13:\"enablecustom4\";s:0:\"\";s:13:\"enablecustom5\";s:0:\"\";s:13:\"enablecustom6\";s:0:\"\";s:13:\"enablecustom7\";s:0:\"\";s:9:\"leftright\";s:5:\"right\";s:4:\"size\";s:7:\"snormal\";s:11:\"customwidth\";s:0:\"\";s:9:\"customtop\";s:1:\"5\";s:8:\"custombr\";s:0:\"\";s:8:\"topunits\";s:3:\"pct\";s:12:\"customzindex\";s:0:\"\";s:16:\"framehovereffect\";s:3:\"yes\";s:11:\"hovereffect\";s:3:\"yes\";s:12:\"borderradius\";s:4:\"none\";s:6:\"border\";s:2:\"no\";s:6:\"shadow\";s:2:\"no\";s:11:\"colorscheme\";s:5:\"light\";s:15:\"backgroundcolor\";s:7:\"#ffffff\";s:11:\"bordercolor\";s:7:\"#ababab\";s:4:\"shbw\";s:5:\"black\";s:11:\"frameshadow\";s:5:\"black\";s:11:\"fblikecolor\";s:5:\"light\";s:9:\"customcss\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_floating-social-media-links/floating-social-media-links.php'), WP_Hook->do_action, WP_Hook->apply_filters, fsml_add_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:30:29 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:37 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 46
-[09-Apr-2025 05:30:38 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:46 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 46
-[09-Apr-2025 05:30:47 UTC] PHP Deprecated:  Required parameter $input follows optional parameter $version_from in /wordpress/wp-content/plugins/floating-social-media-links/floating-social-media-links.php on line 185
-[09-Apr-2025 05:30:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fmtuner_cachepath', '/wordpress/wp-content/plugins/fmtuner/fmtuner_cache.xml', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:56:26 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /wordpress/wp-content/plugins/flexy-seo/vendors/wps-framework/Query.class.php on line 166
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"flexy-seo"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/7.4.31-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
 Node.js v23.11.0
