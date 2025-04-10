@@ -2,182 +2,1546 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 20:28:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:28:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:29:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 11:25:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woosupply-lite</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('millikart_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'millikart_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woo-millikart-payment/woocommerce-millikart-payment.php(97): add_option('millikart_db_ve...', '1.0')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): millikart_install(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(88): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(89): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(119): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(120): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(135): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(136): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(146): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(147): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(88): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(89): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-mi...', false)
-#9 /internal/eval.php(20): activate_plugin('woo-millikart-p...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('millikart_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woo-millikart-payment/woocommerce-millikart-payment.php'), WP_Hook->do_action, WP_Hook->apply_filters, millikart_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:29:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:29:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:29:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:29:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:29:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woof_show_author_search', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woof_show_author_search' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woof_show_autho...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(37): update_option('woof_show_autho...', 0)
-#6 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(15): WOOF_EXT_BY_AUTHOR->init()
-#7 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(115): WOOF_EXT_BY_AUTHOR->__construct()
-#8 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(3266): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(113): WOOF->init_extensions()
-#10 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(4035): WOOF->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-pro...')
-#13 /internal/eval.php(20): activate_plugin('woocommerce-pro...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woof_show_author_search', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-products-filter/index.php'), WOOF->__construct, WOOF->init_extensions, include_once('/plugins/woocommerce-products-filter/ext/by_author/index.php'), WOOF_EXT_BY_AUTHOR->__construct, WOOF_EXT_BY_AUTHOR->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:29:48 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:29:48 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:29:48 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:29:48 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:29:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(119): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woof_show_author_search', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woof_show_author_search' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woof_show_autho...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(37): update_option('woof_show_autho...', 0)
-#6 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(15): WOOF_EXT_BY_AUTHOR->init()
-#7 /wordpress/wp-content/plugins/woocommerce-products-filter/ext/by_author/index.php(115): WOOF_EXT_BY_AUTHOR->__construct()
-#8 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(3266): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(113): WOOF->init_extensions()
-#10 /wordpress/wp-content/plugins/woocommerce-products-filter/index.php(4035): WOOF->__construct()
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woof_show_author_search', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/woocommerce-products-filter/index.php'), WOOF->__construct, WOOF->init_extensions, include_once('/plugins/woocommerce-products-filter/ext/by_author/index.php'), WOOF_EXT_BY_AUTHOR->__construct, WOOF_EXT_BY_AUTHOR->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:29:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(120): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_woof_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_woof_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_woof_wid...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_woof_wid...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_woof_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:20 UTC] 
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(135): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(136): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(146): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(147): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woosupply-lite</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(88): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(89): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(119): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(120): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(135): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(136): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(146): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(147): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/include/updater.php(18): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-content/plugins/woosupply/woosupply.php(51): LWS\WOOSUPPLY\Updater::update(Object(LWS_WooSupply), '0')
+#6 /wordpress/wp-content/plugins/woosupply/woosupply.php(320): LWS_WooSupply::init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woosupply/woosu...')
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woosupply/woosupply.php'), LWS_WooSupply::init, LWS\WOOSUPPLY\Updater::update, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(88): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplier (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			email varchar(255) NOT NULL COMMENT 'Supplier email',
+			contact_firstname varchar(255) COMMENT 'Supplier contact first name',
+			contact_lastname varchar(255) COMMENT 'Supplier contact last name',
+			address varchar(255) COMMENT 'Supplier address line 1',
+			address_2 varchar(255) COMMENT 'Supplier address line 2',
+			address_zipcode varchar(25) COMMENT 'Supplier address zip code',
+			address_city varchar(255) COMMENT 'Supplier address city',
+			address_country varchar(100) COMMENT 'Supplier address country',
+			address_state varchar(100) COMMENT 'Supplier address state',
+			phone_number varchar(50) COMMENT 'Supplier phone number',
+			fax_number varchar(50) COMMENT 'Supplier fax number if needed',
+			tax_number varchar(25) COMMENT 'Supplier tax number',
+			PRIMARY KEY id (id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(89): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_suppliermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplier_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplier_id (lws_woosupply_supplier_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(119): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorder (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			supplier_id bigint(20) NOT NULL COMMENT 'Supplier id',
+			status varchar(25) COMMENT 'Order status',
+			order_date datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Official order date',
+			delivery_name varchar(255) NOT NULL COMMENT 'Delivery Company Name',
+			delivery_tax_number varchar(25) COMMENT 'Own tax number',
+			delivery_address varchar(255) COMMENT 'Delivery address line 1',
+			delivery_address_2 varchar(255) COMMENT 'Delivery address line 2',
+			delivery_address_zipcode varchar(25) COMMENT 'Delivery address zip code',
+			delivery_address_city varchar(255) COMMENT 'Delivery address city',
+			delivery_address_country varchar(100) COMMENT 'Delivery address country',
+			delivery_address_state varchar(100) COMMENT 'Delivery address state',
+			supplier_name varchar(255) NOT NULL COMMENT 'Supplier Company Name',
+			supplier_contact varchar(513) NULL COMMENT 'Supplier contact used for this order',
+			supplier_email varchar(255) NOT NULL COMMENT 'Supplier email',
+			supplier_tax_number varchar(25) COMMENT 'Supplier tax number legal copy',
+			supplier_address varchar(255) COMMENT 'Supplier address line 1 legal copy',
+			supplier_address_2 varchar(255) COMMENT 'Supplier address line 2 legal copy',
+			supplier_address_zipcode varchar(25) COMMENT 'Supplier address zip code legal copy',
+			supplier_address_city varchar(255) COMMENT 'Supplier address city legal copy',
+			supplier_address_country varchar(100) COMMENT 'Supplier address country legal copy',
+			supplier_address_state varchar(100) COMMENT 'Supplier address state legal copy',
+			PRIMARY KEY id (id),
+			KEY supplier_id (supplier_id),
+			KEY status (status)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(120): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierordermeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorder_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorder_id (lws_woosupply_supplierorder_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(135): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitem (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			order_id bigint(20) NOT NULL COMMENT 'Local Supplier Order id',
+			product_id bigint(20) NOT NULL COMMENT 'Local Supplier Product id',
+			supplier_reference varchar(255) NOT NULL COMMENT 'Product reference from supplier side',
+			item_key varchar(25) NOT NULL COMMENT 'A order local id of the line',
+			quantity float NOT NULL DEFAULT 0 COMMENT 'Ordered product count',
+			unit_price float NOT NULL DEFAULT 0 COMMENT 'price for one product',
+			amount float NOT NULL DEFAULT 0 COMMENT 'total price of the line (with any discount)',
+			PRIMARY KEY id (id),
+			KEY order_id (order_id)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(136): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierorderitemmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierorderitem_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierorderitem_id (lws_woosupply_supplierorderitem_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(146): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#8 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproduct (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name varchar(255) NOT NULL COMMENT 'Denomination',
+			PRIMARY KEY id (id),
+			FULLTEXT INDEX name (name)
+		) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/woosupply/include/updater.php(166): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woosupply/include/updater.php(147): LWS\WOOSUPPLY\Updater::createTableMeta('wp_lws_woosuppl...', 'DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/woosupply/woosupply.php(303): LWS\WOOSUPPLY\Updater::activation()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LWS_WooSupply::activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woosup...', false)
+#9 /internal/eval.php(20): activate_plugin('woosupply/woosu...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_lws_woosupply_supplierproductmeta (
+			meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+			lws_woosupply_supplierproduct_id bigint(20) NOT NULL,
+			meta_key varchar(255) NOT NULL,
+			meta_value longtext NULL DEFAULT NULL,
+			PRIMARY KEY meta_id (meta_id),
+			KEY lws_woosupply_supplierproduct_id (lws_woosupply_supplierproduct_id),
+			KEY meta_key (meta_key)
+		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_woosupply/woosupply.php'), WP_Hook->do_action, WP_Hook->apply_filters, LWS_WooSupply::activate, LWS\WOOSUPPLY\Updater::activation, LWS\WOOSUPPLY\Updater::createTableMeta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:26:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woosupply-lite</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:26:35 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -187,11 +1551,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:30:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:30:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:30:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:30:21 UTC] 
+[10-Apr-2025 11:26:36 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -201,7 +1561,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:21 UTC] 
+[10-Apr-2025 11:26:36 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : loaded
@@ -210,7 +1570,7 @@ ACTION   : plugins_loaded
 SNIFFER DISABLED
 ********************************************************************************
 
-[08-Apr-2025 20:30:29 UTC] 
+[10-Apr-2025 11:26:43 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -220,7 +1580,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:30 UTC] 
+[10-Apr-2025 11:26:44 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -230,7 +1590,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:30 UTC] 
+[10-Apr-2025 11:26:44 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : loaded
@@ -239,7 +1599,7 @@ ACTION   : plugins_loaded
 SNIFFER DISABLED
 ********************************************************************************
 
-[08-Apr-2025 20:30:39 UTC] 
+[10-Apr-2025 11:26:52 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -249,7 +1609,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:40 UTC] 
+[10-Apr-2025 11:26:53 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : init
@@ -259,7 +1619,7 @@ ACTION   :
 ADD INIT ACTION
 ********************************************************************************
 
-[08-Apr-2025 20:30:40 UTC] 
+[10-Apr-2025 11:26:53 UTC] 
 
 CLASS    : WP4Me_Title_Remover\Plugin
 FUNCTION : loaded
@@ -268,154 +1628,43 @@ ACTION   : plugins_loaded
 SNIFFER DISABLED
 ********************************************************************************
 
-[08-Apr-2025 20:30:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:30:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:30:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:30:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:31:18 UTC] PHP Warning:  Undefined variable $time_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 129
-[08-Apr-2025 20:31:18 UTC] PHP Warning:  Undefined variable $upload_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 162
-[08-Apr-2025 20:31:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: define() expects at least 2 arguments, 1 given in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php:178
+[10-Apr-2025 11:27:38 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 173
+[10-Apr-2025 11:27:38 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 174
+[10-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 173
+[10-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 174
+[10-Apr-2025 11:27:55 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 173
+[10-Apr-2025 11:27:55 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/wp-lists/wp-lists.php on line 174
+[10-Apr-2025 11:28:09 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:09 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:09 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:10 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:10 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:10 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:21 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:21 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:21 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:22 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:22 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:22 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:34 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:34 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:34 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:36 UTC] PHP Deprecated:  Required parameter $messages follows optional parameter $options in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.settings.php on line 121
+[10-Apr-2025 11:28:36 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:36 UTC] PHP Deprecated:  Required parameter $field_index follows optional parameter $value in /wordpress/wp-content/plugins/wp-registration/inc/classes/class.field.php on line 279
+[10-Apr-2025 11:28:55 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php(178): define('WP_MEMORY_LIMIT')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): wpl_change_limits->wp_limits_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-lim...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-limits/chang...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 178
-[08-Apr-2025 20:31:26 UTC] PHP Warning:  Undefined variable $time_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 129
-[08-Apr-2025 20:31:26 UTC] PHP Warning:  Undefined variable $upload_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 162
-[08-Apr-2025 20:31:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: define() expects at least 2 arguments, 1 given in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php:178
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php(178): define('WP_MEMORY_LIMIT')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): wpl_change_limits->wp_limits_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-lim...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-limits/chang...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 178
-[08-Apr-2025 20:31:33 UTC] PHP Warning:  Undefined variable $time_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 129
-[08-Apr-2025 20:31:33 UTC] PHP Warning:  Undefined variable $upload_limit in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 162
-[08-Apr-2025 20:31:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: define() expects at least 2 arguments, 1 given in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php:178
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php(178): define('WP_MEMORY_LIMIT')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): wpl_change_limits->wp_limits_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-lim...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-limits/chang...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-limits/change-wp-limits.php on line 178
-[08-Apr-2025 20:31:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:31:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:31:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:31:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:32:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:32:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:32:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:32:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:32:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpcomredirect', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpcomredirect' , 'yes' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('wpcomredirect', 'yes', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'wpcomredirect', 'yes')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'wpcomredirect', 'yes')
-#7 /wordpress/wp-content/plugins/wpcom-migration/wp_settings.php(27): update_site_option('wpcomredirect', 'yes')
-#8 /wordpress/wp-content/plugins/wpcom-migration/account.php(138): WPCOMWPSettings->updateOption('wpcomredirect', 'yes')
-#9 /wordpress/wp-content/plugins/wpcom-migration/wp_actions.php(28): WPCOMAccount::setup(Object(WPCOMWPSettings))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WPCOMWPAction->activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcom-...', false)
-#14 /internal/eval.php(20): activate_plugin('wpcom-migration...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpcomredirect', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpcom-migration/wpcom_migration.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPCOMWPAction->activate, WPCOMAccount::setup, WPCOMWPSettings->updateOption, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:32:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bvActivateTime', '1744144359', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bvActivateTime' , '1744144359' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('bvActivateTime', 1744144359, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'bvActivateTime', 1744144359)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'bvActivateTime', 1744144359)
-#7 /wordpress/wp-content/plugins/wpcom-migration/wp_settings.php(27): update_site_option('bvActivateTime', 1744144359)
-#8 /wordpress/wp-content/plugins/wpcom-migration/account.php(139): WPCOMWPSettings->updateOption('bvActivateTime', 1744144359)
-#9 /wordpress/wp-content/plugins/wpcom-migration/wp_actions.php(28): WPCOMAccount::setup(Object(WPCOMWPSettings))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WPCOMWPAction->activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcom-...', false)
-#14 /internal/eval.php(20): activate_plugin('wpcom-migration...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bvActivateTime', '1744144359', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpcom-migration/wpcom_migration.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPCOMWPAction->activate, WPCOMAccount::setup, WPCOMWPSettings->updateOption, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:32:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:33:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:33:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:33:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:33:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:33:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744284532.884)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
