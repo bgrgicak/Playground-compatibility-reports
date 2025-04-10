@@ -2,896 +2,112 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 23:45:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:45:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:45:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:45:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_jetpack_autoloader_plugin_paths', 'a:1:{i:0;s:28:\"{{WP_PLUGIN_DIR}}/graphicsly\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_jetpack_autoloader_plugin_paths' , 'a:1:{i:0;s:28:&quot;{{WP_PLUGIN_DIR}}/graphicsly&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_jetp...', Array, '', 'on')
-#5 /wordpress/wp-content/plugins/graphicsly/vendor/jetpack-autoloader/class-plugins-handler.php(142): set_transient('jetpack_autoloa...', Array)
-#6 /wordpress/wp-content/plugins/graphicsly/vendor/jetpack-autoloader/class-shutdown-handler.php(90): Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Plugins_Handler->cache_plugins(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Shutdown_Handler->__invoke('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_jetpack_autoloader_plugin_paths', 'a:1:{i:0;s:28:\"{{WP_PLUGIN_DIR}}/graphicsly\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Shutdown_Handler->__invoke, Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Plugins_Handler->cache_plugins, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '_j/;!I43.>YQwd>kiY0#~+1vh<;3VY(eS@Re4etB-k&Q,=&~xZ**r_^:R_AuOS:)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '_j/;!I43.&gt;YQwd&gt;kiY0#~+1vh&lt;;3VY(eS@Re4etB-k&amp;Q,=&amp;~xZ**r_^:R_AuOS:)' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '_j/;!I43.>YQwd>...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '_j/;!I43.>YQwd>...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '_j/;!I43.>YQwd>...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '_j/;!I43.>YQwd>...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Providers/InitialDataProvider.php(43): wp_create_nonce('wp_rest')
-#11 [internal function]: Graphicsly\Bootstrap\System\Providers\InitialDataProvider->boot()
-#12 /wordpress/wp-content/plugins/graphicsly/vendor/plugin-master/foundation/src/DIC/DependencyInjectionContainer.php(58): ReflectionMethod->invoke(Object(Graphicsly\Bootstrap\System\Providers\InitialDataProvider))
-#13 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Application.php(322): PluginMaster\Foundation\DIC\DependencyInjectionContainer->call(Array)
-#14 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Application.php(294): Graphicsly\Bootstrap\System\Application->bootProvider()
-#15 /wordpress/wp-content/plugins/graphicsly/bootstrap/Bootstrap.php(48): Graphicsly\Bootstrap\System\Application->boot()
-#16 /wordpress/wp-includes/class-wp-hook.php(324): Graphicsly\Bootstrap\Bootstrap::Graphicsly\Bootstrap\{closure}('')
-#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#19 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#20 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#21 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#22 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '_j/;!I43.>YQwd>kiY0#~+1vh<;3VY(eS@Re4etB-k&Q,=&~xZ**r_^:R_AuOS:)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Graphicsly\Bootstrap\Bootstrap::Graphicsly\Bootstrap\{closure}, Graphicsly\Bootstrap\System\Application->boot, Graphicsly\Bootstrap\System\Application->bootProvider, PluginMaster\Foundation\DIC\DependencyInjectionContainer->call, ReflectionMethod->invoke, Graphicsly\Bootstrap\System\Providers\InitialDataProvider->boot, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'z0+3${oQH/z2}KW[#@{~J6.DZa; [Rm*hCmNd?E faR{Rp+K@%4w|5}T!o>ij}T3', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'z0+3${oQH/z2}KW[#@{~J6.DZa; [Rm*hCmNd?E faR{Rp+K@%4w|5}T!o&gt;ij}T3' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'z0+3${oQH/z2}KW...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'z0+3${oQH/z2}KW...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'z0+3${oQH/z2}KW...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'z0+3${oQH/z2}KW...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Providers/InitialDataProvider.php(43): wp_create_nonce('wp_rest')
-#11 [internal function]: Graphicsly\Bootstrap\System\Providers\InitialDataProvider->boot()
-#12 /wordpress/wp-content/plugins/graphicsly/vendor/plugin-master/foundation/src/DIC/DependencyInjectionContainer.php(58): ReflectionMethod->invoke(Object(Graphicsly\Bootstrap\System\Providers\InitialDataProvider))
-#13 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Application.php(322): PluginMaster\Foundation\DIC\DependencyInjectionContainer->call(Array)
-#14 /wordpress/wp-content/plugins/graphicsly/bootstrap/System/Application.php(294): Graphicsly\Bootstrap\System\Application->bootProvider()
-#15 /wordpress/wp-content/plugins/graphicsly/bootstrap/Bootstrap.php(48): Graphicsly\Bootstrap\System\Application->boot()
-#16 /wordpress/wp-includes/class-wp-hook.php(324): Graphicsly\Bootstrap\Bootstrap::Graphicsly\Bootstrap\{closure}('')
-#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#19 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#20 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#21 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#22 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'z0+3${oQH/z2}KW[#@{~J6.DZa; [Rm*hCmNd?E faR{Rp+K@%4w|5}T!o>ij}T3', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Graphicsly\Bootstrap\Bootstrap::Graphicsly\Bootstrap\{closure}, Graphicsly\Bootstrap\System\Application->boot, Graphicsly\Bootstrap\System\Application->bootProvider, PluginMaster\Foundation\DIC\DependencyInjectionContainer->call, ReflectionMethod->invoke, Graphicsly\Bootstrap\System\Providers\InitialDataProvider->boot, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_jetpack_autoloader_plugin_paths', 'a:1:{i:0;s:28:\"{{WP_PLUGIN_DIR}}/graphicsly\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_jetpack_autoloader_plugin_paths' , 'a:1:{i:0;s:28:&quot;{{WP_PLUGIN_DIR}}/graphicsly&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_jetp...', Array, '', 'on')
-#5 /wordpress/wp-content/plugins/graphicsly/vendor/jetpack-autoloader/class-plugins-handler.php(142): set_transient('jetpack_autoloa...', Array)
-#6 /wordpress/wp-content/plugins/graphicsly/vendor/jetpack-autoloader/class-shutdown-handler.php(90): Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Plugins_Handler->cache_plugins(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Shutdown_Handler->__invoke('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_jetpack_autoloader_plugin_paths', 'a:1:{i:0;s:28:\"{{WP_PLUGIN_DIR}}/graphicsly\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Shutdown_Handler->__invoke, Automattic\Jetpack\Autoloader\jp30754d424dcaf78f5781c886c89867b1\Plugins_Handler->cache_plugins, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"gravity-forms-sticky-list/includes\";O:8:\"stdClass\":4:{s:7:\"version\";s:8:\"1.2.2.10\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744155986;s:11:\"plugin_path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:8:\"sdk_path\";s:34:\"gravity-forms-sticky-list/includes\";s:7:\"version\";s:8:\"1.2.2.10\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744155986;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:34:&quot;gravity-forms-sticky-list/includes&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:8:&quot;1.2.2.10&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744155986;s:11:&quot;plugin_path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:8:&quot;sdk_path&quot;;s:34:&quot;gravity-forms-sticky-list/includes&quot;;s:7:&quot;version&quot;;s:8:&quot;1.2.2.10&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744155986;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/fs-essential-functions.php(383): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(147): fs_update_sdk_newest_version('gravity-forms-s...', 'gravity-forms-s...')
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(24): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#11 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"gravity-forms-sticky-list/includes\";O:8:\"stdClass\":4:{s:7:\"version\";s:8:\"1.2.2.10\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744155986;s:11:\"plugin_path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:8:\"sdk_path\";s:34:\"gravity-forms-sticky-list/includes\";s:7:\"version\";s:8:\"1.2.2.10\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744155986;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, require_once('/plugins/gravity-forms-sticky-list/includes/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/config.php(298): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(453): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(24): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#11 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, require_once('/plugins/gravity-forms-sticky-list/includes/start.php'), require_once('/plugins/gravity-forms-sticky-list/includes/require.php'), require_once('/plugins/gravity-forms-sticky-list/includes/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-fs-logger.php on line 145
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1076): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(336): Freemius->store_id_slug_type_path_map('1528', 'gravity-forms-s...')
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#15 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(973): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(348): Freemius->_find_caller_plugin_file(true)
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(6083): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(365): Freemius->store_file_slug_map()
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#15 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('install_timesta...', 1744155986)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(369): FS_Key_Value_Storage->__set('install_timesta...', 1744155986)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#16 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(690): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(782): Freemius->_plugins_loaded()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(396): Freemius->_register_hooks()
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#18 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_register_hooks, Freemius->_plugins_loaded, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('is_plugin_new_i...', false)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(704): FS_Key_Value_Storage->__set('is_plugin_new_i...', false)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(782): Freemius->_plugins_loaded()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(396): Freemius->_register_hooks()
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#18 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_register_hooks, Freemius->_plugins_loaded, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(501): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('sdk_version', '1.2.2.10')
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(502): FS_Key_Value_Storage->__set('sdk_version', '1.2.2.10')
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(507): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:8:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(508): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:9:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(521): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:10:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;1.5.2&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('plugin_version', '1.5.2')
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(522): FS_Key_Value_Storage->__set('plugin_version', '1.5.2')
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:11:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;1.5.2&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(527): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:12:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;1.5.2&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(138): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-key-value-storage.php(222): FS_Key_Value_Storage->store('plugin_downgrad...', false)
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(528): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(400): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(1511): Freemius->__construct('1528', 'gravity-forms-s...', true)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(492): Freemius::instance('1528', 'gravity-forms-s...', true)
-#13 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#17 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}s:7:\"plugins\";a:1:{s:25:\"gravity-forms-sticky-list\";O:9:\"FS_Plugin\":17:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:25:\"Gravity Forms Sticky List\";s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"file\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:7:\"version\";s:5:\"1.5.2\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:7:\"is_live\";b:1;s:20:\"affiliate_moderation\";b:0;s:10:\"public_key\";s:32:\"pk_ab96a4a2bac76862a81de1dde21a9\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"1528\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1528;a:3:{s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;a:12:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744155986;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:8:&quot;1.2.2.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;1.5.2&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;}s:7:&quot;plugins&quot;;a:1:{s:25:&quot;gravity-forms-sticky-list&quot;;O:9:&quot;FS_Plugin&quot;:17:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:25:&quot;Gravity Forms Sticky List&quot;;s:4:&quot;slug&quot;;s:25:&quot;gravity-forms-sticky-list&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;file&quot;;s:41:&quot;gravity-forms-sticky-list/sticky-list.php&quot;;s:7:&quot;version&quot;;s:5:&quot;1.5.2&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:7:&quot;is_live&quot;;b:1;s:20:&quot;affiliate_moderation&quot;;b:0;s:10:&quot;public_key&quot;;s:32:&quot;pk_ab96a4a2bac76862a81de1dde21a9&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:4:&quot;1528&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(347): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-option-manager.php(295): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/managers/class-fs-plugin-manager.php(160): FS_Option_Manager->set_option('plugins', Array, true)
-#8 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(3480): FS_Plugin_Manager->store(Object(FS_Plugin))
-#9 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/includes/class-freemius.php(3010): Freemius->parse_settings(Array)
-#10 /wordpress/wp-content/plugins/gravity-forms-sticky-list/includes/start.php(493): Freemius->dynamic_init(Array)
-#11 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(27): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/gravity-forms-sticky-list/sticky-list.php(44): stickylist_fs()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gravity-forms-s...')
-#15 /internal/eval.php(20): activate_plugin('gravity-forms-s...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}s:7:\"plugins\";a:1:{s:25:\"gravity-forms-sticky-list\";O:9:\"FS_Plugin\":17:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:25:\"Gravity Forms Sticky List\";s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"file\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:7:\"version\";s:5:\"1.5.2\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:7:\"is_live\";b:1;s:20:\"affiliate_moderation\";b:0;s:10:\"public_key\";s:32:\"pk_ab96a4a2bac76862a81de1dde21a9\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"1528\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gravity-forms-sticky-list/sticky-list.php'), stickylist_fs, fs_dynamic_init, Freemius->dynamic_init, Freemius->parse_settings, FS_Plugin_Manager->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:5:{s:21:\"id_slug_type_path_map\";a:1:{i:1528;a:3:{s:4:\"slug\";s:25:\"gravity-forms-sticky-list\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}}s:11:\"plugin_data\";a:1:{s:25:\"gravity-forms-sticky-list\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:41:\"gravity-forms-sticky-list/sticky-list.php\";}s:17:\"install_timestamp\";i:1744155986;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:8:\"1.2.2.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.5.2\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:41:\"gravity-forms-sticky-list/sticky-list.php\";s:25:\"gravity-forms-sticky-list\";}s:7:\"plugins\";a:1:{s:25:\"gravity-forms-sticky-list\";O:9:\"FS_Plugin\":17:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:25:\"Gravity Forms Sticky List\";s:4:\"slug\";s
+Error: [10-Apr-2025 13:35:37 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[10-Apr-2025 13:35:46 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[10-Apr-2025 13:35:53 UTC] PHP Fatal error:  Redefinition of parameter $nothing in /wordpress/wp-content/plugins/gotcha-gesture-based-captcha/admin/layout/setting.php on line 131
+[10-Apr-2025 13:36:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php:428
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gplus-badge/gpl...')
+#2 /internal/eval.php(20): activate_plugin('gplus-badge/gpl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php on line 428
+[10-Apr-2025 13:36:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php:428
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gplus-badge/gpl...')
+#2 /internal/eval.php(20): activate_plugin('gplus-badge/gpl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php on line 428
+[10-Apr-2025 13:36:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php:428
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gplus-badge/gpl...')
+#2 /internal/eval.php(20): activate_plugin('gplus-badge/gpl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/gplus-badge/gplus_badge.php on line 428
+[10-Apr-2025 13:38:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "GROUPON_API_PATH" in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('groupon-widget/...')
+#2 /internal/eval.php(20): activate_plugin('groupon-widget/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php on line 22
+[10-Apr-2025 13:38:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "GROUPON_API_PATH" in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('groupon-widget/...')
+#2 /internal/eval.php(20): activate_plugin('groupon-widget/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php on line 22
+[10-Apr-2025 13:38:42 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "GROUPON_API_PATH" in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('groupon-widget/...')
+#2 /internal/eval.php(20): activate_plugin('groupon-widget/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php on line 22
+[10-Apr-2025 13:41:03 UTC] PHP Warning:  fopen(../wp-content/plugins/gears-this-blog/gearsThisBlogManifest.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 51
+[10-Apr-2025 13:41:03 UTC] PHP Warning:  file_put_contents(../wp-content/plugins/gears-this-blog/gearsThisBlogManifest.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 65
+[10-Apr-2025 13:41:03 UTC] PHP Fatal error:  Uncaught TypeError: fclose(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(66): fclose(false)
+#1 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(39): gearsthisblog_manifest_reset()
+#2 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(11): gearsthisblog_reset()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gearsthisblog_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gears-...', false)
+#7 /internal/eval.php(20): activate_plugin('gears-this-blog...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 66
+[10-Apr-2025 13:41:11 UTC] PHP Warning:  fopen(../wp-content/plugins/gears-this-blog/gearsThisBlogManifest.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 51
+[10-Apr-2025 13:41:11 UTC] PHP Warning:  file_put_contents(../wp-content/plugins/gears-this-blog/gearsThisBlogManifest.json): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 65
+[10-Apr-2025 13:41:11 UTC] PHP Fatal error:  Uncaught TypeError: fclose(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(66): fclose(false)
+#1 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(39): gearsthisblog_manifest_reset()
+#2 /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php(11): gearsthisblog_reset()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): gearsthisblog_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_gears-...', false)
+#7 /internal/eval.php(20): activate_plugin('gears-this-blog...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php on line 66
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"gears-this-blog"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
