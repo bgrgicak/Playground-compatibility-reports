@@ -2,128 +2,91 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_wc_obs_settings` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#5 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(154): OBS_Admin_Query::obs_wc_stripe_integration_workflow()
-#6 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
-#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
-#8 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
-#11 /internal/eval.php(20): activate_plugin('online-billing-...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Query::obs_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_wc_obs_api_key` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#5 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(158): OBS_Admin_Authentication::global_api_key()
-#6 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
-#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
-#8 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
-#11 /internal/eval.php(20): activate_plugin('online-billing-...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` ORDER BY `id` ASC LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM R...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM R...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM R...')
-#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
-#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
-#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
-#9 /internal/eval.php(20): activate_plugin('online-billing-...')
-#10 {main}</pre>
- for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('1ddf97a2cf500647fb0280452a391d9e', 'd04a538019af1ef67007254d2d2fb9c9')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
-<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` () SELECT  FROM (VALUES ( '1ddf97a2cf500647fb0280452a391d9e' , 'd04a538019af1ef67007254d2d2fb9c9' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `RE...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `RE...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `RE...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
-#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
-#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
-#10 /internal/eval.php(20): activate_plugin('online-billing-...')
-#11 {main}</pre>
- for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('1ddf97a2cf500647fb0280452a391d9e', 'd04a538019af1ef67007254d2d2fb9c9') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 11:25:32 UTC] PHP Fatal error:  Declaration of OfferMatch::form() must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/offermatch/offermatch.php on line 105
+[10-Apr-2025 11:25:39 UTC] PHP Fatal error:  Declaration of OfferMatch::form() must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/offermatch/offermatch.php on line 105
+[10-Apr-2025 11:25:48 UTC] PHP Fatal error:  Declaration of OfferMatch::form() must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/offermatch/offermatch.php on line 105
+[10-Apr-2025 11:27:01 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744284419.503)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:29:53 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/offers-for-woocommerce/public/class-offers-for-woocommerce.php on line 298
+[10-Apr-2025 11:30:02 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/offers-for-woocommerce/public/class-offers-for-woocommerce.php on line 298
+[10-Apr-2025 11:30:11 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/offers-for-woocommerce/public/class-offers-for-woocommerce.php on line 298
+[10-Apr-2025 11:30:23 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:23 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:23 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:23 UTC] PHP Warning:  Undefined array key "query" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 139
+[10-Apr-2025 11:30:23 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:23 UTC] PHP Warning:  Undefined array key "port" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 146
+[10-Apr-2025 11:30:24 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:32 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:32 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:33 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:33 UTC] PHP Warning:  Undefined array key "query" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 139
+[10-Apr-2025 11:30:33 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:33 UTC] PHP Warning:  Undefined array key "port" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 146
+[10-Apr-2025 11:30:34 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:43 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:43 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:43 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:43 UTC] PHP Warning:  Undefined array key "query" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 139
+[10-Apr-2025 11:30:43 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:30:43 UTC] PHP Warning:  Undefined array key "port" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 146
+[10-Apr-2025 11:30:44 UTC] PHP Warning:  Undefined array key "result" in /wordpress/wp-content/plugins/old-post-notifier/old-post-notifier.php on line 47
+[10-Apr-2025 11:30:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:31:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:31:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 11:31:24 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744284682.209)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:32:52 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744284769.773)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:34:34 UTC] PHP Deprecated:  addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 107
+[10-Apr-2025 11:34:46 UTC] PHP Deprecated:  addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 107
+[10-Apr-2025 11:37:14 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285032.039)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:37:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1</p>
@@ -150,7 +113,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('online-billing-...')
 #10 {main}</pre>
  for query SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Query::obs_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-Apr-2025 11:37:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1</p>
@@ -177,7 +140,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('online-billing-...')
 #10 {main}</pre>
  for query SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-Apr-2025 11:37:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
@@ -202,14 +165,14 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #7 /internal/eval.php(20): activate_plugin('online-billing-...')
 #8 {main}</pre>
  for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[10-Apr-2025 11:37:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ef951d2b78a8daabe9c67001f6384218', '87966adfb1c3fba1e74089d50881e2a2')</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('e6d9e662fcd497a432b74d07fc4c7f1d', 'dc4067174674cfef93479bedfacd226d')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES (:param0 , :param1 ) | parameters: ef951d2b78a8daabe9c67001f6384218, 87966adfb1c3fba1e74089d50881e2a2</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES (:param0 , :param1 ) | parameters: e6d9e662fcd497a432b74d07fc4c7f1d, dc4067174674cfef93479bedfacd226d</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -227,7 +190,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
 #8 /internal/eval.php(20): activate_plugin('online-billing-...')
 #9 {main}</pre>
- for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ef951d2b78a8daabe9c67001f6384218', '87966adfb1c3fba1e74089d50881e2a2') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('e6d9e662fcd497a432b74d07fc4c7f1d', 'dc4067174674cfef93479bedfacd226d') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
