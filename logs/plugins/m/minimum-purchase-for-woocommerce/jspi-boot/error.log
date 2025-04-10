@@ -2,656 +2,255 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 20:50:43 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:50:45 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:50:52 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:50:53 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:51:01 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:51:02 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/myst-facebook-comment/includes/lib/class-myst-facebook-comment-admin-api.php on line 281
+[10-Apr-2025 20:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:38:\"modern-designs-for-gravity-forms/incfs\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.4.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744192180;s:11:\"plugin_path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:8:\"sdk_path\";s:38:\"modern-designs-for-gravity-forms/incfs\";s:7:\"version\";s:5:\"2.4.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744192180;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_maakapay_transactions_logs (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				transaction_code varchar(250) NOT NULL,
+				invoice_number bigint NOT NULL,
+				order_created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				order_updated_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				name varchar(65) NOT NULL,
+				contact_number varchar(20) NOT NULL,
+				email varchar(55) NOT NULL,
+				amount varchar(65) NOT NULL,
+				currency varchar(65) NOT NULL,
+				client_ip varchar(100) NOT NULL,
+				app_mode varchar(5) NOT NULL,
+				status varchar(20) DEFAULT 'pending' NOT NULL,
+				PRIMARY KEY id (id),
+				UNIQUE KEY id (id),
+				UNIQUE KEY transaction_code (transaction_code),
+				INDEX index_transaction_code (transaction_code),
+				INDEX index_invoice_number (invoice_number)
+			) DEFAULT CHARACTER SET utf8mb4;
+		</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:38:&quot;modern-designs-for-gravity-forms/incfs&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.4.1&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744192180;s:11:&quot;plugin_path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:8:&quot;sdk_path&quot;;s:38:&quot;modern-designs-for-gravity-forms/incfs&quot;;s:7:&quot;version&quot;;s:5:&quot;2.4.1&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744192180;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/fs-essential-functions.php(366): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(166): fs_update_sdk_newest_version('modern-designs-...', 'modern-designs-...')
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#12 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:38:\"modern-designs-for-gravity-forms/incfs\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.4.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744192180;s:11:\"plugin_path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:8:\"sdk_path\";s:38:\"modern-designs-for-gravity-forms/incfs\";s:7:\"version\";s:5:\"2.4.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744192180;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, require_once('/plugins/modern-designs-for-gravity-forms/incfs/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/maakapay-invoice-payer/includes/class-maakapay-wordpress-activator.php(66): maybe_create_table('wp_maakapay_tra...', 'CREATE TABLE wp...')
+#3 /wordpress/wp-content/plugins/maakapay-invoice-payer/maakapay-wordpress.php(47): Maakapay_Wordpress_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_maakapay_wordpress(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_maakap...', false)
+#8 /internal/eval.php(20): activate_plugin('maakapay-invoic...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_maakapay_transactions_logs (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				transaction_code varchar(250) NOT NULL,
+				invoice_number bigint NOT NULL,
+				order_created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				order_updated_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				name varchar(65) NOT NULL,
+				contact_number varchar(20) NOT NULL,
+				email varchar(55) NOT NULL,
+				amount varchar(65) NOT NULL,
+				currency varchar(65) NOT NULL,
+				client_ip varchar(100) NOT NULL,
+				app_mode varchar(5) NOT NULL,
+				status varchar(20) DEFAULT 'pending' NOT NULL,
+				PRIMARY KEY id (id),
+				UNIQUE KEY id (id),
+				UNIQUE KEY transaction_code (transaction_code),
+				INDEX index_transaction_code (transaction_code),
+				INDEX index_invoice_number (invoice_number)
+			) DEFAULT CHARACTER SET utf8mb4;
+		 made by activate_plugin, do_action('activate_maakapay-invoice-payer/maakapay-wordpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_maakapay_wordpress, Maakapay_Wordpress_Activator::activate, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:51:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_maakapay_transactions_logs (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				transaction_code varchar(250) NOT NULL,
+				invoice_number bigint NOT NULL,
+				order_created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				order_updated_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				name varchar(65) NOT NULL,
+				contact_number varchar(20) NOT NULL,
+				email varchar(55) NOT NULL,
+				amount varchar(65) NOT NULL,
+				currency varchar(65) NOT NULL,
+				client_ip varchar(100) NOT NULL,
+				app_mode varchar(5) NOT NULL,
+				status varchar(20) DEFAULT 'pending' NOT NULL,
+				PRIMARY KEY id (id),
+				UNIQUE KEY id (id),
+				UNIQUE KEY transaction_code (transaction_code),
+				INDEX index_transaction_code (transaction_code),
+				INDEX index_invoice_number (invoice_number)
+			) DEFAULT CHARACTER SET utf8mb4;
+		</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(482): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#12 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, require_once('/plugins/modern-designs-for-gravity-forms/incfs/start.php'), require_once('/plugins/modern-designs-for-gravity-forms/incfs/require.php'), require_once('/plugins/modern-designs-for-gravity-forms/incfs/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-logger.php on line 145
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2254): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(405): Freemius->store_id_slug_type_path_map('6728', 'modern-designs-...')
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#17 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2145): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(420): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(448): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#18 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(10329): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(495): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#17 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744192180)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('install_timesta...', 1744192180)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(499): FS_Storage->__set('install_timesta...', 1744192180)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#18 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(1466): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(1618): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(526): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#17 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#20 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(1480): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(1618): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(526): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#17 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#20 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(875): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.1&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.4.1')
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_version', '2.4.1')
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(876): FS_Storage->__set('sdk_version', '2.4.1')
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:8:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(881): FS_Storage->__set('sdk_upgrade_mod...', true)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:9:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(882): FS_Storage->__set('sdk_downgrade_m...', false)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:10:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(895): FS_Storage->__set('plugin_last_ver...', NULL)
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php(63): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('modern-designs-...')
-#19 /internal/eval.php(20): activate_plugin('modern-designs-...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php'), require_once('/plugins/modern-designs-for-gravity-forms/fs.php'), mdfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6728;a:3:{s:4:\"slug\";s:32:\"modern-designs-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}}s:11:\"plugin_data\";a:1:{s:32:\"modern-designs-for-gravity-forms\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744192180;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"1.1.3\";}}s:13:\"file_slug_map\";a:1:{s:69:\"modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php\";s:32:\"modern-designs-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6728;a:3:{s:4:&quot;slug&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:32:&quot;modern-designs-for-gravity-forms&quot;;a:11:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744192180;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;1.1.3&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:69:&quot;modern-designs-for-gravity-forms/modern-designs-for-gravity-forms.php&quot;;s:32:&quot;modern-designs-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '1.1.3')
-#9 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_version', '1.1.3')
-#10 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(896): FS_Storage->__set('plugin_version', '1.1.3')
-#11 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/includes/class-freemius.php(2825): Freemius->__construct('6728', 'modern-designs-...', true)
-#13 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/incfs/start.php(521): Freemius::instance('6728', 'modern-designs-...', true)
-#14 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(21): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/modern-designs-for-gravity-forms/fs.php(42): mdfgf_fs()
-#16 /wordpress/wp-content/plugins/modern-designs-f
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/maakapay-invoice-payer/includes/class-maakapay-wordpress-activator.php(66): maybe_create_table('wp_maakapay_tra...', 'CREATE TABLE wp...')
+#3 /wordpress/wp-content/plugins/maakapay-invoice-payer/maakapay-wordpress.php(47): Maakapay_Wordpress_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_maakapay_wordpress(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_maakap...', false)
+#8 /internal/eval.php(20): activate_plugin('maakapay-invoic...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_maakapay_transactions_logs (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				transaction_code varchar(250) NOT NULL,
+				invoice_number bigint NOT NULL,
+				order_created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				order_updated_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				name varchar(65) NOT NULL,
+				contact_number varchar(20) NOT NULL,
+				email varchar(55) NOT NULL,
+				amount varchar(65) NOT NULL,
+				currency varchar(65) NOT NULL,
+				client_ip varchar(100) NOT NULL,
+				app_mode varchar(5) NOT NULL,
+				status varchar(20) DEFAULT 'pending' NOT NULL,
+				PRIMARY KEY id (id),
+				UNIQUE KEY id (id),
+				UNIQUE KEY transaction_code (transaction_code),
+				INDEX index_transaction_code (transaction_code),
+				INDEX index_invoice_number (invoice_number)
+			) DEFAULT CHARACTER SET utf8mb4;
+		 made by activate_plugin, do_action('activate_maakapay-invoice-payer/maakapay-wordpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_maakapay_wordpress, Maakapay_Wordpress_Activator::activate, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:53:26 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744318403.942)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:56:11 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744318569.616)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:58:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_cart() on null in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/core/vtmin-apply-rules.php(47): vtmin_load_vtmin_cart_for_processing()
+#1 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-cart-validation.php(224): VTMIN_Apply_Rules->__construct()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): VTMIN_Parent_Cart_Validation->vtmin_woo_apply_checkout_cntl('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(false, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php on line 13
+[10-Apr-2025 20:59:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_cart() on null in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/core/vtmin-apply-rules.php(47): vtmin_load_vtmin_cart_for_processing()
+#1 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-cart-validation.php(224): VTMIN_Apply_Rules->__construct()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): VTMIN_Parent_Cart_Validation->vtmin_woo_apply_checkout_cntl('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(false, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php on line 13
+[10-Apr-2025 20:59:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_cart() on null in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php:13
+Stack trace:
+#0 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/core/vtmin-apply-rules.php(47): vtmin_load_vtmin_cart_for_processing()
+#1 /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-cart-validation.php(224): VTMIN_Apply_Rules->__construct()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): VTMIN_Parent_Cart_Validation->vtmin_woo_apply_checkout_cntl('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(false, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/minimum-purchase-for-woocommerce/woo-integration/vtmin-parent-functions.php on line 13
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"minimum-purchase-for-woocommerce"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'set-cookie': [ 'PHPSESSID=3252b77d6015fe4450a8d838ad1542ac; path=/' ],
+          pragma: [ 'no-cache' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
