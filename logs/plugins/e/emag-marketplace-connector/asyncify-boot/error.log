@@ -2,14 +2,87 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 05:46:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 05:46:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 05:46:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 05:46:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 05:46:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 05:26:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:26:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:26:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:26:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:26:27 UTC] PHP Warning:  The magic method Zitec\MkpApiWrapper\Client::__wakeup() must have public visibility in /wordpress/wp-content/plugins/emag-marketplace-connector/vendor/emag-marketplace-integrator/apiwrapper/src/Client.php on line 71
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_envy_chimp_widget_function', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#11 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#12 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#11 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#12 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +94,7 @@ Error: [05-Apr-2025 05:46:25 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_envy_chimp_widget_function' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emkp_migration_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,40 +106,69 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_envy_chi...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_envy_chi...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_envy_chimp_widget_function', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('emkp_migration_...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(467): update_option('emkp_migration_...', 1)
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Spine', 'spine', 0)</p>
+<p>CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TRIGGER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TRIGGER ...')
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-002.php(35): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_002->run()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#11 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#12 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_002->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Spine' , 'spine' , 0 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emkp_migration_version' , '2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -77,35 +179,84 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Spine', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(90): wp_create_category('Spine', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Spine', 'spine', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('emkp_migration_...', 2, '', 'auto')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(467): update_option('emkp_migration_...', 2)
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Cervical Spine', 'cervical-spine', 0)</p>
+<p>ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emkp_categories</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_emkp_categories, ean_is_mandatory, 1, 0, NO, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emkp_categories</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_emkp_categories' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_emkp_...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-003.php(6): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_003->run()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#11 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_003->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Cervical Spine' , 'cervical-spine' , 0 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emkp_migration_version' , '3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -116,35 +267,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Cervical Spine', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(92): wp_create_category('Cervical Spine', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Cervical Spine', 'cervical-spine', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('emkp_migration_...', 3, '', 'auto')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(467): update_option('emkp_migration_...', 3)
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('General Spine', 'general-spine', 0)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'General Spine' , 'general-spine' , 0 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emkp_migration_version' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -155,35 +305,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('General Spine', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(93): wp_create_category('General Spine', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('General Spine', 'general-spine', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('emkp_migration_...', 4, '', 'auto')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(467): update_option('emkp_migration_...', 4)
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Lumbar Spine', 'lumbar-spine', 0)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Lumbar Spine' , 'lumbar-spine' , 0 )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emkp_migration_version' , '5' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -194,567 +343,172 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Lumbar Spine', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(94): wp_create_category('Lumbar Spine', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Lumbar Spine', 'lumbar-spine', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('emkp_migration_...', 5, '', 'auto')
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(467): update_option('emkp_migration_...', 5)
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#7 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#8 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#9 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#12 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emkp_migration_version', '5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:37 UTC] PHP Warning:  The magic method Zitec\MkpApiWrapper\Client::__wakeup() must have public visibility in /wordpress/wp-content/plugins/emag-marketplace-connector/vendor/emag-marketplace-integrator/apiwrapper/src/Client.php on line 71
+[10-Apr-2025 05:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Thoracic Spine', 'thoracic-spine', 0)</p>
+<p>CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Thoracic Spine' , 'thoracic-spine' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Thoracic Spine', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(95): wp_create_category('Thoracic Spine', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Thoracic Spine', 'thoracic-spine', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#2 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#9 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#10 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_products_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_products_queue`
+  FOR EACH ROW
+  SET NEW.updated_at = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Ankle', 'ankle', 0)</p>
+<p>CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Ankle' , 'ankle' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Ankle', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Ankle', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Ankle', 'ankle', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-001.php(52): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#2 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_001->run()
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#9 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#10 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_orders_queue_before`
+  BEFORE UPDATE
+  ON `wp_emkp_orders_queue`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_001->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Children\'s Orthopedics', 'childrens-orthopedics', 0)</p>
+<p>CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW();</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Children''s Orthopedics' , 'childrens-orthopedics' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Children's Orth...', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Children's Orth...', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Children\'s Orthopedics', 'childrens-orthopedics', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-002.php(35): WP_SQLite_DB->query('CREATE TRIGGER ...')
+#2 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_002->run()
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#9 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#10 {main}</pre>
+ for query CREATE TRIGGER `wp_emkp_localities_before`
+  BEFORE UPDATE
+  ON `wp_emkp_localities`
+  FOR EACH ROW
+  SET NEW.last_updated = NOW(); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_002->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Elbow', 'elbow', 0)</p>
+<p>ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Elbow' , 'elbow' , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_emkp_categories, EAN_IS_MANDATORY, tinyint(1)</li>
+<li>Executing: ALTER TABLE wp_emkp_categories ADD ean_is_mandatory integer DEFAULT 0 NOT NULL; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emkp_categories.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Elbow', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Elbow', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Elbow', 'elbow', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Foot', 'foot', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Foot' , 'foot' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Foot', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Foot', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Foot', 'foot', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Fractures', 'fractures', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Fractures' , 'fractures' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Fractures', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Fractures', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Fractures', 'fractures', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('General Orthopedics', 'general-orthopedics', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'General Orthopedics' , 'general-orthopedics' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('General Orthope...', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('General Orthope...', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('General Orthopedics', 'general-orthopedics', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Hand', 'hand', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Hand' , 'hand' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Hand', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Hand', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Hand', 'hand', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Hip', 'hip', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Hip' , 'hip' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Hip', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Hip', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Hip', 'hip', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Knee', 'knee', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Knee' , 'knee' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Knee', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Knee', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Knee', 'knee', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Pain Management', 'pain-management', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Pain Management' , 'pain-management' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Pain Management', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Pain Management', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Pain Management', 'pain-management', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Shoulder', 'shoulder', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Shoulder' , 'shoulder' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Shoulder', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Shoulder', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Shoulder', 'shoulder', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Wrist', 'wrist', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Wrist' , 'wrist' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Wrist', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Wrist', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Wrist', 'wrist', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Patient Education', 'patient-education', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Patient Education' , 'patient-education' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-admin/includes/taxonomy.php(164): wp_insert_term('Patient Educati...', 'category', Array)
-#7 /wordpress/wp-admin/includes/taxonomy.php(64): wp_insert_category(Array)
-#8 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(99): wp_create_category('Patient Educati...', 0)
-#9 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(21): EorthopodPlugin->insert_eorthopod_categories()
-#10 /wordpress/wp-content/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php(283): EorthopodPlugin->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('eorthopod-patie...')
-#13 /internal/eval.php(20): activate_plugin('eorthopod-patie...')
-#14 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Patient Education', 'patient-education', 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/eorthopod-patient-education-materials/eorthopod-content-plugin.php'), EorthopodPlugin->__construct, EorthopodPlugin->insert_eorthopod_categories, wp_create_category, wp_insert_category, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 05:46:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_users` (`user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `display_name`, `user_login`) VALUES ('$P$BrBOVuavMQ/R/a0xgeS1ZXJbQz0b/61', 'eorthopod-admin', 'info@eorthopod.com', 'https://eorthopod.com
-Node.js v20.15.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/emag-marketplace-connector/includes/migrations/migration-003.php(6): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(465): Emkp_Migration_Version_003->run()
+#3 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(73): Emkp->run_migrations()
+#4 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(178): Emkp->__construct()
+#5 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(476): Emkp::instance()
+#6 /wordpress/wp-content/plugins/emag-marketplace-connector/emkp.php(480): Emkp()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('emag-marketplac...')
+#9 /internal/eval.php(20): activate_plugin('emag-marketplac...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_emkp_categories ADD ean_is_mandatory tinyint(1) DEFAULT 0 NOT NULL; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/emag-marketplace-connector/emkp.php'), Emkp, Emkp::instance, Emkp->__construct, Emkp->run_migrations, Emkp_Migration_Version_003->run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"emag-marketplace-connector"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/emag-marketplace-connector could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/emag-marketplace-connector could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0
