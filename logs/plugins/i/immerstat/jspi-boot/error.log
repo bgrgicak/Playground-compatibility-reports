@@ -2,64 +2,122 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 22:47:36 UTC] PHP Warning:  Undefined variable $failed in /wordpress/wp-content/plugins/loko-payment-gateway/loko-payment-gateway.php on line 47
-[08-Apr-2025 22:47:44 UTC] PHP Warning:  Undefined variable $failed in /wordpress/wp-content/plugins/loko-payment-gateway/loko-payment-gateway.php on line 47
-[08-Apr-2025 22:47:53 UTC] PHP Warning:  Undefined variable $failed in /wordpress/wp-content/plugins/loko-payment-gateway/loko-payment-gateway.php on line 47
-[08-Apr-2025 22:48:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php:94
+Error: [10-Apr-2025 11:24:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_lsd_data` (
+            `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+            `latitude` decimal(10,8) NOT NULL DEFAULT '0.00000000',
+            `longitude` decimal(11,8) NOT NULL DEFAULT '0.00000000',
+            `point` point DEFAULT NULL,
+            PRIMARY KEY (id),
+            INDEX `latitude` (`latitude`,`longitude`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: point.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(142): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(112): LSD_Plugin_Hooks::db_update()
+#4 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(60): LSD_Plugin_Hooks->install(1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LSD_Plugin_Hooks->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_listdo...', false)
+#9 /internal/eval.php(20): activate_plugin('listdom/listdom...')
+#10 {main}</pre>
+ for query CREATE TABLE `wp_lsd_data` (
+            `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+            `latitude` decimal(10,8) NOT NULL DEFAULT '0.00000000',
+            `longitude` decimal(11,8) NOT NULL DEFAULT '0.00000000',
+            `point` point DEFAULT NULL,
+            PRIMARY KEY (id),
+            INDEX `latitude` (`latitude`,`longitude`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_listdom/listdom.php'), WP_Hook->do_action, WP_Hook->apply_filters, LSD_Plugin_Hooks->activate, LSD_Plugin_Hooks->install, LSD_Plugin_Hooks::db_update, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:24:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_lsd_data` (
+            `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+            `latitude` decimal(10,8) NOT NULL DEFAULT '0.00000000',
+            `longitude` decimal(11,8) NOT NULL DEFAULT '0.00000000',
+            `point` point DEFAULT NULL,
+            PRIMARY KEY (id),
+            INDEX `latitude` (`latitude`,`longitude`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: point.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(142): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(112): LSD_Plugin_Hooks::db_update()
+#4 /wordpress/wp-content/plugins/listdom/app/includes/plugin/hooks.php(60): LSD_Plugin_Hooks->install(1)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LSD_Plugin_Hooks->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_listdo...', false)
+#9 /internal/eval.php(20): activate_plugin('listdom/listdom...')
+#10 {main}</pre>
+ for query CREATE TABLE `wp_lsd_data` (
+            `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+            `latitude` decimal(10,8) NOT NULL DEFAULT '0.00000000',
+            `longitude` decimal(11,8) NOT NULL DEFAULT '0.00000000',
+            `point` point DEFAULT NULL,
+            PRIMARY KEY (id),
+            INDEX `latitude` (`latitude`,`longitude`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_listdom/listdom.php'), WP_Hook->do_action, WP_Hook->apply_filters, LSD_Plugin_Hooks->activate, LSD_Plugin_Hooks->install, LSD_Plugin_Hooks::db_update, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:31:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "FANCIFIED_URL" in /wordpress/wp-content/plugins/images-fancified/images-fancified.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lottery-number-...')
-#2 /internal/eval.php(20): activate_plugin('lottery-number-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('images-fancifie...')
+#2 /internal/eval.php(20): activate_plugin('images-fancifie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php on line 94
-[08-Apr-2025 22:48:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php:94
+  thrown in /wordpress/wp-content/plugins/images-fancified/images-fancified.php on line 29
+[10-Apr-2025 11:31:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "FANCIFIED_URL" in /wordpress/wp-content/plugins/images-fancified/images-fancified.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lottery-number-...')
-#2 /internal/eval.php(20): activate_plugin('lottery-number-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('images-fancifie...')
+#2 /internal/eval.php(20): activate_plugin('images-fancifie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php on line 94
-[08-Apr-2025 22:48:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php:94
+  thrown in /wordpress/wp-content/plugins/images-fancified/images-fancified.php on line 29
+[10-Apr-2025 11:31:22 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "FANCIFIED_URL" in /wordpress/wp-content/plugins/images-fancified/images-fancified.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lottery-number-...')
-#2 /internal/eval.php(20): activate_plugin('lottery-number-...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('images-fancifie...')
+#2 /internal/eval.php(20): activate_plugin('images-fancifie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/lottery-number-generator/eu-lottery.php on line 94
-[08-Apr-2025 22:48:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:48:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:48:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:48:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:48:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:48:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:48:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:48:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:49:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:49:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:49:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:49:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:49:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:50:18 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _FILES in /wordpress/wp-content/plugins/imasters-wp-adserver/imasters-wp-adserver.php on line 420
-[08-Apr-2025 22:50:26 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _FILES in /wordpress/wp-content/plugins/imasters-wp-adserver/imasters-wp-adserver.php on line 420
-[08-Apr-2025 22:50:35 UTC] PHP Fatal error:  Cannot re-assign auto-global variable _FILES in /wordpress/wp-content/plugins/imasters-wp-adserver/imasters-wp-adserver.php on line 420
-[08-Apr-2025 22:50:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
+  thrown in /wordpress/wp-content/plugins/images-fancified/images-fancified.php on line 29
+[10-Apr-2025 11:31:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('immerstat/immer...')
 #2 /internal/eval.php(20): activate_plugin('immerstat/immer...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/immerstat/immerstat.php on line 186
-[08-Apr-2025 22:50:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
+[10-Apr-2025 11:32:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('immerstat/immer...')
 #2 /internal/eval.php(20): activate_plugin('immerstat/immer...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/immerstat/immerstat.php on line 186
-[08-Apr-2025 22:50:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
+[10-Apr-2025 11:32:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immerstat/immerstat.php:186
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('immerstat/immer...')
