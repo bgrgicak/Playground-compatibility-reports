@@ -2,59 +2,12 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:26:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:26:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pushmagnet_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pushmagnet_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/push-magnet-web-push-notifications/include/push-magnet_functions.php(47): add_option('pushmagnet_do_a...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pushMagnet_setup(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_push-m...', false)
-#9 /internal/eval.php(20): activate_plugin('push-magnet-web...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pushmagnet_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_push-magnet-web-push-notifications/push-magnet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pushMagnet_setup, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [10-Apr-2025 17:48:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
-#2 /wordpress/wp-content/plugins/paste-press/pastepress.php(417): register_widget('pp_WP_Widget_Re...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pp_widget('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpcpostsWidget')
+#2 /wordpress/wp-content/plugins/phpcodez-posts/PHPCodezPosts.php(14): register_widget('wpcpostsWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpc_posts_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -67,12 +20,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 07:27:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 17:48:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
-#2 /wordpress/wp-content/plugins/paste-press/pastepress.php(417): register_widget('pp_WP_Widget_Re...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pp_widget('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpcpostsWidget')
+#2 /wordpress/wp-content/plugins/phpcodez-posts/PHPCodezPosts.php(14): register_widget('wpcpostsWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpc_posts_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -85,12 +38,12 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 07:27:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 17:48:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
-#2 /wordpress/wp-content/plugins/paste-press/pastepress.php(417): register_widget('pp_WP_Widget_Re...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): pp_widget('')
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpcpostsWidget')
+#2 /wordpress/wp-content/plugins/phpcodez-posts/PHPCodezPosts.php(14): register_widget('wpcpostsWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpc_posts_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
@@ -103,718 +56,105 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
-[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
-[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
-[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
-[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
-[09-Apr-2025 07:28:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_grids_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_grids_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/class-adamlabsgallery.php(884): update_option('adamlabsgallery...', '1')
-#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/class-adamlabsgallery.php(806): AdamLabsGallery::_create_tables()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery::create_tables(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
-#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_grids_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery::create_tables, AdamLabsGallery::_create_tables, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css_imported', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_custom_css_imported' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', 'true', '', 'auto')
-#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(81): update_option('adamlabsgallery...', 'true')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery_Global_Css::propagate_default_global_css(false)
+[10-Apr-2025 17:49:14 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307351.527)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
-#10 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css_imported', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery_Global_Css::propagate_default_global_css, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css', '/* HENRY HARRISON */
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:49:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Ilabs\BM_Woocommerce\Domain\Service\Currency\get_woocommerce_currency() in /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php:254
+Stack trace:
+#0 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php(334): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->get_shop_currency()
+#1 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php(26): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->migrate()
+#2 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(724): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->init()
+#3 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(636): Ilabs\BM_Woocommerce\Plugin->get_currency_manager()
+#4 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(457): Ilabs\BM_Woocommerce\Plugin->resolve_blue_media_currency_symbol()
+#5 /wordp in /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php on line 254
+[10-Apr-2025 17:49:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Ilabs\BM_Woocommerce\Domain\Service\Currency\get_woocommerce_currency() in /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php:254
+Stack trace:
+#0 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php(334): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->get_shop_currency()
+#1 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php(26): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->migrate()
+#2 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(724): Ilabs\BM_Woocommerce\Domain\Service\Currency\Currency->init()
+#3 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(636): Ilabs\BM_Woocommerce\Plugin->get_currency_manager()
+#4 /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Plugin.php(457): Ilabs\BM_Woocommerce\Plugin->resolve_blue_media_currency_symbol()
+#5 /wordp in /wordpress/wp-content/plugins/platnosci-online-blue-media/src/Domain/Service/Currency/Currency.php on line 254
+[10-Apr-2025 17:50:42 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:42 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:51 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:01 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:44 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307501.681)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:52:45 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/ps-wp-multi-domain/ps-wp-multidomain.php on line 115
+[10-Apr-2025 17:52:53 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/ps-wp-multi-domain/ps-wp-multidomain.php on line 115
+[10-Apr-2025 17:53:01 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/ps-wp-multi-domain/ps-wp-multidomain.php on line 115
+[10-Apr-2025 17:53:15 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307592.916)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:53:58 UTC] PHP Fatal error:  Cannot use $this as parameter in /wordpress/wp-content/plugins/parallel-loading-system/wp-pls.php on line 544
+[10-Apr-2025 17:54:06 UTC] PHP Fatal error:  Cannot use $this as parameter in /wordpress/wp-content/plugins/parallel-loading-system/wp-pls.php on line 544
 
-a.adamlabsgallery-henryharrison-element-1,
-a.adamlabsgallery-henryharrison-element-2 {
-  -webkit-transition: all .4s linear;  
-    -moz-transition: all .4s linear;  
-    -o-transition: all .4s linear;  
-    -ms-transition: all .4s linear;  
-    transition: all .4s linear; 
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"parallel-loading-system"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
 }
 
-/* JIMMY CARTER */
-.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
-
-
-/* HARDING */
-.adamlabsgallery-harding-element-17 { letter-spacing:1px}
-.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*ULYSSES S GRANT */
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*RICHARD NIXON */
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-
-/* HERBERT HOOVER */
-.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-
-/* JOOHNSON */
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-
-/*RONALD REAGAN*/
-.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH*/
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
-
-/*JEFFERSON*/
-.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
-
-/*MONROE*/
-.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
-
-/*LYNDON JOHNSON*/
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-
-/*WILBERT*/
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
-  -webkit-transition: 0.4s ease-in-out;
-    -moz-transition:  0.4s ease-in-out;
-    -o-transition:  0.4s ease-in-out;
-    transition:  0.4s ease-in-out;
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-/*PHILLIE*/
-.adamlabsgallery-phillie-element-3:after { 
-content:\" \";
-width: 0px;
-height: 0px;
-border-style: solid;
-border-width: 5px 5px 0 5px;
-border-color: #000 transparent transparent transparent;
-left:50%;
-margin-left:-5px; bottom:-5px; position:absolute; }
-
-/*HOWARD TAFT*/
-.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);
-}
-
-.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-/* WOOCOMMERCE */
-.myportfolio-container .added_to_cart.wc-forward { font-family: \"Open Sans\"; font-size: 13px; color: #fff; margin-top: 10px; }
-
-/* LIGHTBOX */
-.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
-.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_custom_css' , '/* HENRY HARRISON */
-
-a.adamlabsgallery-henryharrison-element-1,
-a.adamlabsgallery-henryharrison-element-2 {
-  -webkit-transition: all .4s linear;  
-    -moz-transition: all .4s linear;  
-    -o-transition: all .4s linear;  
-    -ms-transition: all .4s linear;  
-    transition: all .4s linear; 
-}
-
-/* JIMMY CARTER */
-.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
-
-
-/* HARDING */
-.adamlabsgallery-harding-element-17 { letter-spacing:1px}
-.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*ULYSSES S GRANT */
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*RICHARD NIXON */
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-
-/* HERBERT HOOVER */
-.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
-    -webkit-filter: grayscale(0%);}
-
-
-/* JOOHNSON */
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
-    -webkit-filter: grayscale(0%);}
-
-
-/*RONALD REAGAN*/
-.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#00000000'', endColorstr=''#d9000000'',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH*/
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#00000000'', endColorstr=''#d9000000'',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
-
-/*JEFFERSON*/
-.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
-
-/*MONROE*/
-.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
-
-/*LYNDON JOHNSON*/
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#59000000'', endColorstr=''#00131313'',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-
-/*WILBERT*/
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#59000000'', endColorstr=''#00131313'',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
-  -webkit-transition: 0.4s ease-in-out;
-    -moz-transition:  0.4s ease-in-out;
-    -o-transition:  0.4s ease-in-out;
-    transition:  0.4s ease-in-out;
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
-    -webkit-filter: grayscale(0%);}
-
-/*PHILLIE*/
-.adamlabsgallery-phillie-element-3:after { 
-content:&quot; &quot;;
-width: 0px;
-height: 0px;
-border-style: solid;
-border-width: 5px 5px 0 5px;
-border-color: #000 transparent transparent transparent;
-left:50%;
-margin-left:-5px; bottom:-5px; position:absolute; }
-
-/*HOWARD TAFT*/
-.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
-    -webkit-filter: grayscale(0%);
-}
-
-.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-/* WOOCOMMERCE */
-.myportfolio-container .added_to_cart.wc-forward { font-family: &quot;Open Sans&quot;; font-size: 13px; color: #fff; margin-top: 10px; }
-
-/* LIGHTBOX */
-.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
-.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', '/* HENRY HARRIS...', '', 'auto')
-#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(24): update_option('adamlabsgallery...', '/* HENRY HARRIS...')
-#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(83): AdamLabsGallery_Global_Css::set_global_css_styles('/* HENRY HARRIS...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery_Global_Css::propagate_default_global_css(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
-#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css', '/* HENRY HARRISON */
-
-a.adamlabsgallery-henryharrison-element-1,
-a.adamlabsgallery-henryharrison-element-2 {
-  -webkit-transition: all .4s linear;  
-    -moz-transition: all .4s linear;  
-    -o-transition: all .4s linear;  
-    -ms-transition: all .4s linear;  
-    transition: all .4s linear; 
-}
-
-/* JIMMY CARTER */
-.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
-
-
-/* HARDING */
-.adamlabsgallery-harding-element-17 { letter-spacing:1px}
-.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*ULYSSES S GRANT */
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-/*RICHARD NIXON */
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
-            box-sizing:border-box;
-            -webkit-box-sizing:border-box;
-            -moz-box-sizing:border-box;
-            padding:30px 30px 0px 30px;
-}
-
-.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
-            border-radius:50%;
-            -webkit-border-radius:50%;
-            -moz-border-radius:50%;
-}
-
-
-/* HERBERT HOOVER */
-.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-
-/* JOOHNSON */
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-
-/*RONALD REAGAN*/
-.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH*/
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
-
-/*GEORGE BUSH
-.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
-
-/*JEFFERSON*/
-.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
-
-/*MONROE*/
-.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
-
-/*LYNDON JOHNSON*/
-.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-
-/*WILBERT*/
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
- }
-.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
-  -webkit-transition: 0.4s ease-in-out;
-    -moz-transition:  0.4s ease-in-out;
-    -o-transition:  0.4s ease-in-out;
-    transition:  0.4s ease-in-out;
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);}
-
-/*PHILLIE*/
-.adamlabsgallery-phillie-element-3:after { 
-content:\" \";
-width: 0px;
-height: 0px;
-border-style: solid;
-border-width: 5px 5px 0 5px;
-border-color: #000 transparent transparent transparent;
-left:50%;
-margin-left:-5px; bottom:-5px; position:absolute; }
-
-/*HOWARD TAFT*/
-.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
-    -webkit-filter: grayscale(0%);
-}
-
-.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
-    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
-}
-
-/* WOOCOMMERCE */
-.myportfolio-container .added_to_cart.wc-forward { font-family: \"Open Sans\"; font-size: 13px; color: #fff; margin-top: 10px; }
-
-/* LIGHTBOX */
-.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
-.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery_Global_Css::propagate_default_global_css, AdamLabsGallery_Global_Css::set_global_css_styles, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabs-google-fonts', 'a:3:{i:0;a:2:{s:3:\"url\";s:29:\"Open+Sans:300,400,600,700,800\";s:6:\"handle\";s:9:\"open-sans\";}i:1;a:2:{s:3:\"url\";s:43:\"Raleway:100,200,300,400,500,600,700,800,900\";s:6:\"handle\";s:7:\"raleway\";}i:2;a:2:{s:3:\"url\";s:19:\"Droid+Serif:400,700\";s:6:\"handle\";s:11:\"droid-serif\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabs-google-fonts' , 'a:3:{i:0;a:2:{s:3:&quot;url&quot;;s:29:&quot;Open+Sans:300,400,600,700,800&quot;;s:6:&quot;handle&quot;;s:9:&quot;open-sans&quot;;}i:1;a:2:{s:3:&quot;url&quot;;s:43:&quot;Raleway:100,200,300,400,500,600,700,800,900&quot;;s:6:&quot;handle&quot;;s:7:&quot;raleway&quot;;}i:2;a:2:{s:3:&quot;url&quot;;s:19:&quot;Droid+Serif:400,700&quot;;s:6:&quot;handle&quot;;s:11:&quot;droid-serif&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('adamlabs-google...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-fonts.php(224): update_option('adamlabs-google...', Array)
-#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-fonts.php(193): AdamLabs_Fonts::_propagate_default_fonts(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabs_Fonts::propagate_default_fonts(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
-#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabs-google-fonts', 'a:3:{i:0;a:2:{s:3:\"url\";s:29:\"Open+Sans:300,400,600,700,800\";s:6:\"handle\";s:9:\"open-sans\";}i:1;a:2:{s:3:\"url\";s:43:\"Raleway:100,200,300,400,500,600,700,800,900\";s:6:\"handle\";s:7:\"raleway\";}i:2;a:2:{s:3:\"url\";s:19:\"Droid+Serif:400,700\";s:6:\"handle\";s:11:\"droid-serif\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabs_Fonts::propagate_default_fonts, AdamLabs_Fonts::_propagate_default_fonts, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:28:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
-[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
-[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
-[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
-[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
-[09-Apr-2025 07:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_adamlabsgallery-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_adamlabsgallery-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_adamlabs...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_adamlabs...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wo
+Node.js v23.11.0
