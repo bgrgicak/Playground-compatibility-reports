@@ -2,63 +2,209 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:26:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:26:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 19:45:53 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>flattrscript</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:46:03 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>flattrscript</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:46:12 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>flattrscript</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:48:14 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744314493.162)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('acautoloan_key', 'a:44:{s:7:\"op_size\";N;s:15:\"op_custom_style\";s:2:\"No\";s:11:\"op_add_link\";s:2:\"No\";s:13:\"op_brand_name\";s:0:\"\";s:14:\"op_hide_resize\";s:2:\"No\";s:8:\"op_price\";s:7:\"35000.0\";s:10:\"op_dwn_pmt\";s:6:\"2000.0\";s:11:\"op_loan_amt\";s:3:\"0.0\";s:11:\"op_n_months\";s:2:\"60\";s:7:\"op_rate\";s:3:\"5.5\";s:11:\"op_currency\";s:3:\"999\";s:12:\"op_date_mask\";s:3:\"999\";s:23:\"op_theme_base_font_size\";s:4:\"16px\";s:22:\"op_theme_primary_color\";s:7:\"#28a745\";s:28:\"op_theme_primary_color_hover\";s:7:\"#218838\";s:28:\"op_theme_primary_color_light\";s:7:\"#30c853\";s:27:\"op_theme_primary_color_text\";s:4:\"#fff\";s:35:\"op_theme_primary_color_text_inverse\";s:4:\"#fff\";s:25:\"op_theme_background_muted\";s:7:\"#f7f7f7\";s:34:\"op_theme_background_color_disabled\";s:7:\"#efefef\";s:36:\"op_theme_background_calculator_color\";s:4:\"#fff\";s:31:\"op_theme_background_modal_color\";s:4:\"#fff\";s:21:\"op_theme_border_color\";s:7:\"#dee2e6\";s:19:\"op_theme_text_color\";s:7:\"#333333\";s:27:\"op_theme_tooltip_text_color\";s:4:\"#fff\";s:21:\"op_theme_shadow_color\";s:18:\"rgba(0, 0, 0, 0.1)\";s:34:\"op_theme_primary_font_family_stack\";s:54:\"Roboto, \'Helvetica Neue\', Helvetica, Arial, sans-serif\";s:31:\"op_theme_mono_font_family_stack\";s:57:\"\'Roboto Mono\', \'Source Code Pro\', ui-monospace, monospace\";s:28:\"op_calculator_min_width_tiny\";s:5:\"150px\";s:28:\"op_calculator_max_width_tiny\";s:5:\"250px\";s:29:\"op_calculator_min_width_small\";s:5:\"200px\";s:29:\"op_calculator_max_width_small\";s:5:\"300px\";s:30:\"op_calculator_min_width_medium\";s:5:\"200px\";s:30:\"op_calculator_max_width_medium\";s:5:\"400px\";s:29:\"op_calculator_min_width_large\";s:5:\"200px\";s:29:\"op_calculator_max_width_large\";s:5:\"440px\";s:24:\"op_hide_intl_conventions\";s:2:\"No\";s:22:\"op_hide_payment_method\";s:2:\"No\";s:11:\"op_preparer\";N;s:19:\"op_preparer_company\";N;s:19:\"op_preparer_address\";N;s:22:\"op_preparer_city_state\";N;s:17:\"op_preparer_phone\";N;s:17:\"op_preparer_email\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_farazsms_woocommerce_order_actions` (
+					 `id` int(10) NOT NULL AUTO_INCREMENT,
+					 `title` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+					 `order_type` json DEFAULT NULL,
+					 `order_status` json DEFAULT NULL,
+					 `action` json DEFAULT NULL,
+					 PRIMARY KEY (`id`)
+					) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'acautoloan_key' , 'a:44:{s:7:&quot;op_size&quot;;N;s:15:&quot;op_custom_style&quot;;s:2:&quot;No&quot;;s:11:&quot;op_add_link&quot;;s:2:&quot;No&quot;;s:13:&quot;op_brand_name&quot;;s:0:&quot;&quot;;s:14:&quot;op_hide_resize&quot;;s:2:&quot;No&quot;;s:8:&quot;op_price&quot;;s:7:&quot;35000.0&quot;;s:10:&quot;op_dwn_pmt&quot;;s:6:&quot;2000.0&quot;;s:11:&quot;op_loan_amt&quot;;s:3:&quot;0.0&quot;;s:11:&quot;op_n_months&quot;;s:2:&quot;60&quot;;s:7:&quot;op_rate&quot;;s:3:&quot;5.5&quot;;s:11:&quot;op_currency&quot;;s:3:&quot;999&quot;;s:12:&quot;op_date_mask&quot;;s:3:&quot;999&quot;;s:23:&quot;op_theme_base_font_size&quot;;s:4:&quot;16px&quot;;s:22:&quot;op_theme_primary_color&quot;;s:7:&quot;#28a745&quot;;s:28:&quot;op_theme_primary_color_hover&quot;;s:7:&quot;#218838&quot;;s:28:&quot;op_theme_primary_color_light&quot;;s:7:&quot;#30c853&quot;;s:27:&quot;op_theme_primary_color_text&quot;;s:4:&quot;#fff&quot;;s:35:&quot;op_theme_primary_color_text_inverse&quot;;s:4:&quot;#fff&quot;;s:25:&quot;op_theme_background_muted&quot;;s:7:&quot;#f7f7f7&quot;;s:34:&quot;op_theme_background_color_disabled&quot;;s:7:&quot;#efefef&quot;;s:36:&quot;op_theme_background_calculator_color&quot;;s:4:&quot;#fff&quot;;s:31:&quot;op_theme_background_modal_color&quot;;s:4:&quot;#fff&quot;;s:21:&quot;op_theme_border_color&quot;;s:7:&quot;#dee2e6&quot;;s:19:&quot;op_theme_text_color&quot;;s:7:&quot;#333333&quot;;s:27:&quot;op_theme_tooltip_text_color&quot;;s:4:&quot;#fff&quot;;s:21:&quot;op_theme_shadow_color&quot;;s:18:&quot;rgba(0, 0, 0, 0.1)&quot;;s:34:&quot;op_theme_primary_font_family_stack&quot;;s:54:&quot;Roboto, ''Helvetica Neue'', Helvetica, Arial, sans-serif&quot;;s:31:&quot;op_theme_mono_font_family_stack&quot;;s:57:&quot;''Roboto Mono'', ''Source Code Pro'', ui-monospace, monospace&quot;;s:28:&quot;op_calculator_min_width_tiny&quot;;s:5:&quot;150px&quot;;s:28:&quot;op_calculator_max_width_tiny&quot;;s:5:&quot;250px&quot;;s:29:&quot;op_calculator_min_width_small&quot;;s:5:&quot;200px&quot;;s:29:&quot;op_calculator_max_width_small&quot;;s:5:&quot;300px&quot;;s:30:&quot;op_calculator_min_width_medium&quot;;s:5:&quot;200px&quot;;s:30:&quot;op_calculator_max_width_medium&quot;;s:5:&quot;400px&quot;;s:29:&quot;op_calculator_min_width_large&quot;;s:5:&quot;200px&quot;;s:29:&quot;op_calculator_max_width_large&quot;;s:5:&quot;440px&quot;;s:24:&quot;op_hide_intl_conventions&quot;;s:2:&quot;No&quot;;s:22:&quot;op_hide_payment_method&quot;;s:2:&quot;No&quot;;s:11:&quot;op_preparer&quot;;N;s:19:&quot;op_preparer_company&quot;;N;s:19:&quot;op_preparer_address&quot;;N;s:22:&quot;op_preparer_city_state&quot;;N;s:17:&quot;op_preparer_phone&quot;;N;s:17:&quot;op_preparer_email&quot;;N;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('acautoloan_key', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/fc-auto-loan-calculator/fc-auto-loan-calculator.php(341): update_option('acautoloan_key', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): fc_autoloan_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/farazsms/classes/class-farazsms-activator.php(78): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/farazsms/farazsms.php(112): Farazsms_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Farazsms->activate_farazsms(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_farazs...', false)
+#8 /internal/eval.php(20): activate_plugin('farazsms/farazs...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_farazsms_woocommerce_order_actions` (
+					 `id` int(10) NOT NULL AUTO_INCREMENT,
+					 `title` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+					 `order_type` json DEFAULT NULL,
+					 `order_status` json DEFAULT NULL,
+					 `action` json DEFAULT NULL,
+					 PRIMARY KEY (`id`)
+					) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_farazsms/farazsms.php'), WP_Hook->do_action, WP_Hook->apply_filters, Farazsms->activate_farazsms, Farazsms_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_farazsms_gravity_forms`
+    ADD COLUMN `name_field_id` int(10) NOT NULL AFTER `field_id`,
+    ADD COLUMN `name_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `field_label`,
+    ADD COLUMN `content_field_id` int(10) NOT NULL AFTER `name_field_id`,
+    ADD COLUMN `content_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `name_field_label`,
+    ADD COLUMN `user_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `action_label`,
+    ADD COLUMN `admin_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `user_pattern_code`
+;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_farazsms_gravity_forms, name_field_id, int(10)</li>
+<li>Executing: ALTER TABLE wp_farazsms_gravity_forms
+    ADD COLUMN `name_field_id` integer NOT NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/farazsms/classes/class-farazsms-activator.php(82): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/farazsms/farazsms.php(112): Farazsms_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Farazsms->activate_farazsms(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_farazs...', false)
+#7 /internal/eval.php(20): activate_plugin('farazsms/farazs...')
+#8 {main}</pre>
+ for query ALTER TABLE `wp_farazsms_gravity_forms`
+    ADD COLUMN `name_field_id` int(10) NOT NULL AFTER `field_id`,
+    ADD COLUMN `name_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `field_label`,
+    ADD COLUMN `content_field_id` int(10) NOT NULL AFTER `name_field_id`,
+    ADD COLUMN `content_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `name_field_label`,
+    ADD COLUMN `user_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `action_label`,
+    ADD COLUMN `admin_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `user_pattern_code`
+; made by activate_plugin, do_action('activate_farazsms/farazsms.php'), WP_Hook->do_action, WP_Hook->apply_filters, Farazsms->activate_farazsms, Farazsms_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_farazsms_woocommerce_order_actions` (
+					 `id` int(10) NOT NULL AUTO_INCREMENT,
+					 `title` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+					 `order_type` json DEFAULT NULL,
+					 `order_status` json DEFAULT NULL,
+					 `action` json DEFAULT NULL,
+					 PRIMARY KEY (`id`)
+					) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/farazsms/classes/class-farazsms-activator.php(78): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/farazsms/farazsms.php(112): Farazsms_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Farazsms->activate_farazsms(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_farazs...', false)
+#8 /internal/eval.php(20): activate_plugin('farazsms/farazs...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_farazsms_woocommerce_order_actions` (
+					 `id` int(10) NOT NULL AUTO_INCREMENT,
+					 `title` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+					 `order_type` json DEFAULT NULL,
+					 `order_status` json DEFAULT NULL,
+					 `action` json DEFAULT NULL,
+					 PRIMARY KEY (`id`)
+					) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_farazsms/farazsms.php'), WP_Hook->do_action, WP_Hook->apply_filters, Farazsms->activate_farazsms, Farazsms_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_farazsms_gravity_forms`
+    ADD COLUMN `name_field_id` int(10) NOT NULL AFTER `field_id`,
+    ADD COLUMN `name_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `field_label`,
+    ADD COLUMN `content_field_id` int(10) NOT NULL AFTER `name_field_id`,
+    ADD COLUMN `content_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `name_field_label`,
+    ADD COLUMN `user_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `action_label`,
+    ADD COLUMN `admin_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `user_pattern_code`
+;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_farazsms_gravity_forms, name_field_id, int(10)</li>
+<li>Executing: ALTER TABLE wp_farazsms_gravity_forms
+    ADD COLUMN `name_field_id` integer NOT NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/farazsms/classes/class-farazsms-activator.php(82): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/farazsms/farazsms.php(112): Farazsms_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Farazsms->activate_farazsms(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_farazs...', false)
+#7 /internal/eval.php(20): activate_plugin('farazsms/farazs...')
+#8 {main}</pre>
+ for query ALTER TABLE `wp_farazsms_gravity_forms`
+    ADD COLUMN `name_field_id` int(10) NOT NULL AFTER `field_id`,
+    ADD COLUMN `name_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `field_label`,
+    ADD COLUMN `content_field_id` int(10) NOT NULL AFTER `name_field_id`,
+    ADD COLUMN `content_field_label` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `name_field_label`,
+    ADD COLUMN `user_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `action_label`,
+    ADD COLUMN `admin_pattern_code` tinytext COLLATE utf8mb4_unicode_ci DEFAULT NULL AFTER `user_pattern_code`
+; made by activate_plugin, do_action('activate_farazsms/farazsms.php'), WP_Hook->do_action, WP_Hook->apply_filters, Farazsms->activate_farazsms, Farazsms_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:49:54 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744314592.419)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fc-aut...', false)
-#10 /internal/eval.php(20): activate_plugin('fc-auto-loan-ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('acautoloan_key', 'a:44:{s:7:\"op_size\";N;s:15:\"op_custom_style\";s:2:\"No\";s:11:\"op_add_link\";s:2:\"No\";s:13:\"op_brand_name\";s:0:\"\";s:14:\"op_hide_resize\";s:2:\"No\";s:8:\"op_price\";s:7:\"35000.0\";s:10:\"op_dwn_pmt\";s:6:\"2000.0\";s:11:\"op_loan_amt\";s:3:\"0.0\";s:11:\"op_n_months\";s:2:\"60\";s:7:\"op_rate\";s:3:\"5.5\";s:11:\"op_currency\";s:3:\"999\";s:12:\"op_date_mask\";s:3:\"999\";s:23:\"op_theme_base_font_size\";s:4:\"16px\";s:22:\"op_theme_primary_color\";s:7:\"#28a745\";s:28:\"op_theme_primary_color_hover\";s:7:\"#218838\";s:28:\"op_theme_primary_color_light\";s:7:\"#30c853\";s:27:\"op_theme_primary_color_text\";s:4:\"#fff\";s:35:\"op_theme_primary_color_text_inverse\";s:4:\"#fff\";s:25:\"op_theme_background_muted\";s:7:\"#f7f7f7\";s:34:\"op_theme_background_color_disabled\";s:7:\"#efefef\";s:36:\"op_theme_background_calculator_color\";s:4:\"#fff\";s:31:\"op_theme_background_modal_color\";s:4:\"#fff\";s:21:\"op_theme_border_color\";s:7:\"#dee2e6\";s:19:\"op_theme_text_color\";s:7:\"#333333\";s:27:\"op_theme_tooltip_text_color\";s:4:\"#fff\";s:21:\"op_theme_shadow_color\";s:18:\"rgba(0, 0, 0, 0.1)\";s:34:\"op_theme_primary_font_family_stack\";s:54:\"Roboto, \'Helvetica Neue\', Helvetica, Arial, sans-serif\";s:31:\"op_theme_mono_font_family_stack\";s:57:\"\'Roboto Mono\', \'Source Code Pro\', ui-monospace, monospace\";s:28:\"op_calculator_min_width_tiny\";s:5:\"150px\";s:28:\"op_calculator_max_width_tiny\";s:5:\"250px\";s:29:\"op_calculator_min_width_small\";s:5:\"200px\";s:29:\"op_calculator_max_width_small\";s:5:\"300px\";s:30:\"op_calculator_min_width_medium\";s:5:\"200px\";s:30:\"op_calculator_max_width_medium\";s:5:\"400px\";s:29:\"op_calculator_min_width_large\";s:5:\"200px\";s:29:\"op_calculator_max_width_large\";s:5:\"440px\";s:24:\"op_hide_intl_conventions\";s:2:\"No\";s:22:\"op_hide_payment_method\";s:2:\"No\";s:11:\"op_preparer\";N;s:19:\"op_preparer_company\";N;s:19:\"op_preparer_address\";N;s:22:\"op_preparer_city_state\";N;s:17:\"op_preparer_phone\";N;s:17:\"op_preparer_email\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_fc-auto-loan-calculator/fc-auto-loan-calculator.php'), WP_Hook->do_action, WP_Hook->apply_filters, fc_autoloan_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:27:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:28:33 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 31
-[09-Apr-2025 07:28:33 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 40
-[09-Apr-2025 07:28:33 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 41
-[09-Apr-2025 07:28:33 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 42
-[09-Apr-2025 07:28:33 UTC] PHP Fatal error:  Uncaught Error: Non-static method wdshare_AdminPages::serve() cannot be called statically in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php:59
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 19:50:24 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/fastspring-integration-for-wp/fastspring-integration-for-wp.php on line 436
+[10-Apr-2025 19:50:33 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/fastspring-integration-for-wp/fastspring-integration-for-wp.php on line 436
+[10-Apr-2025 19:50:41 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/fastspring-integration-for-wp/fastspring-integration-for-wp.php on line 436
+[10-Apr-2025 19:53:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 31
+[10-Apr-2025 19:53:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 40
+[10-Apr-2025 19:53:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 41
+[10-Apr-2025 19:53:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 42
+[10-Apr-2025 19:53:35 UTC] PHP Fatal error:  Uncaught Error: Non-static method wdshare_AdminPages::serve() cannot be called statically in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php:59
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('floating-social...')
@@ -67,24 +213,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/floating-social-sharing-buttons/floatingsocialshraingbuttons.php on line 59
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"floating-social-sharing-buttons"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
