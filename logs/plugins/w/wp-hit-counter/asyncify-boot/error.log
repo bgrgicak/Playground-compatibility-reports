@@ -2,394 +2,142 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 09:50:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:51:23 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:23', '2025-04-09 09:51:23', '', '', 'Yes', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'yes', '', '', '2025-04-09 09:51:23', '2025-04-09 09:51:23', 0, 1, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 09:51:23' , '2025-04-09 09:51:23' , '' , '' , 'Yes' , '' , 'publish' , 'wpes_answers' , 'closed' , 'closed' , '' , 'yes' , '' , '' , '2025-04-09 09:51:23' , '2025-04-09 09:51:23' , 0 , 1 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(375): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:23', '2025-04-09 09:51:23', '', '', 'Yes', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'yes', '', '', '2025-04-09 09:51:23', '2025-04-09 09:51:23', 0, 1, '', '') made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'No', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'no', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 2, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , '' , '' , 'No' , '' , 'publish' , 'wpes_answers' , 'closed' , 'closed' , '' , 'no' , '' , '' , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , 0 , 2 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(375): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'No', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'no', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 2, '', '') made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'NA', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'na', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 3, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , '' , '' , 'NA' , '' , 'publish' , 'wpes_answers' , 'closed' , 'closed' , '' , 'na' , '' , '' , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , 0 , 3 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(375): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'NA', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'na', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 3, '', '') made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'NC', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'nc', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 4, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , '' , '' , 'NC' , '' , 'publish' , 'wpes_answers' , 'closed' , 'closed' , '' , 'nc' , '' , '' , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , 0 , 4 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(375): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'NC', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'nc', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 4, '', '') made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'Percentage', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'percentage', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 5, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , '' , '' , 'Percentage' , '' , 'publish' , 'wpes_answers' , 'closed' , 'closed' , '' , 'percentage' , '' , '' , '2025-04-09 09:51:24' , '2025-04-09 09:51:24' , 0 , 5 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(375): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 09:51:24', '2025-04-09 09:51:24', '', '', 'Percentage', '', 'publish', 'wpes_answers', 'closed', 'closed', '', 'percentage', '', '', '2025-04-09 09:51:24', '2025-04-09 09:51:24', 0, 5, '', '') made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpes_options', 'a:1:{s:22:\"default_answer_created\";s:19:\"2025-04-09 09:51:24\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpes_options' , 'a:1:{s:22:&quot;default_answer_created&quot;;s:19:&quot;2025-04-09 09:51:24&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpes_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-easy-survey/modules/answer.class.php(383): update_option('wpes_options', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wpes_answer->create_default_answers(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-eas...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-easy-survey/...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpes_options', 'a:1:{s:22:\"default_answer_created\";s:19:\"2025-04-09 09:51:24\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-easy-survey/wp-easy-survey.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpes_answer->create_default_answers, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:51:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:51:25 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_easy_survey</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 09:51:36 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:38 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_easy_survey</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 09:51:48 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-easy-survey/wp-easy-survey.php on line 32
-[09-Apr-2025 09:51:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_easy_survey</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 09:52:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "LS_URL" in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php:16
+Error: [10-Apr-2025 23:49:22 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-blipbot/idna.php on line 370
+[10-Apr-2025 23:49:31 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-blipbot/idna.php on line 370
+[10-Apr-2025 23:49:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-blipbot/idna.php on line 370
+[10-Apr-2025 23:49:50 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-flexible-csv-importer/library/WPFlexibleCSVImporter.php on line 37
+[10-Apr-2025 23:49:58 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-flexible-csv-importer/library/WPFlexibleCSVImporter.php on line 37
+[10-Apr-2025 23:50:05 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-flexible-csv-importer/library/WPFlexibleCSVImporter.php on line 37
+[10-Apr-2025 23:51:16 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
+[10-Apr-2025 23:51:23 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
+[10-Apr-2025 23:51:31 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-roids/wp-roids.php on line 2575
+[10-Apr-2025 23:51:42 UTC] PHP Warning:  Undefined variable $wpsocialcount_ver in /wordpress/wp-content/plugins/wp-socialcount/wpsocialcount.php on line 56
+[10-Apr-2025 23:51:51 UTC] PHP Warning:  Undefined variable $wpsocialcount_ver in /wordpress/wp-content/plugins/wp-socialcount/wpsocialcount.php on line 56
+[10-Apr-2025 23:52:00 UTC] PHP Warning:  Undefined variable $wpsocialcount_ver in /wordpress/wp-content/plugins/wp-socialcount/wpsocialcount.php on line 56
+[10-Apr-2025 23:53:17 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:53:18 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:53:26 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:53:26 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:53:33 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:53:35 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:56:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method Hirarchical_Category_UI::plugin_init() cannot be called statically in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php:234
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-stream/...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-stream/...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-dropdown-hie...')
+#2 /internal/eval.php(20): activate_plugin('wp-dropdown-hie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php on line 16
-[09-Apr-2025 09:52:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "LS_URL" in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php:16
+  thrown in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php on line 234
+[10-Apr-2025 23:56:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method Hirarchical_Category_UI::plugin_init() cannot be called statically in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php:234
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-stream/...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-stream/...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-dropdown-hie...')
+#2 /internal/eval.php(20): activate_plugin('wp-dropdown-hie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php on line 16
-[09-Apr-2025 09:52:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "LS_URL" in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php:16
+  thrown in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php on line 234
+[10-Apr-2025 23:56:55 UTC] PHP Fatal error:  Uncaught Error: Non-static method Hirarchical_Category_UI::plugin_init() cannot be called statically in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php:234
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-stream/...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-stream/...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-dropdown-hie...')
+#2 /internal/eval.php(20): activate_plugin('wp-dropdown-hie...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-stream/live-stream.php on line 16
-[09-Apr-2025 09:52:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:52:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:52:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:52:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:52:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:53:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+  thrown in /wordpress/wp-content/plugins/wp-dropdown-hierarchial-category-ui/wp-dropdown-hierarchical-category-ui.php on line 234
+[10-Apr-2025 23:57:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpsl_settings', 'a:93:{s:15:\"api_browser_key\";s:0:\"\";s:14:\"api_server_key\";s:0:\"\";s:12:\"api_language\";s:2:\"en\";s:10:\"api_region\";s:0:\"\";s:21:\"api_geocode_component\";i:0;s:12:\"api_versions\";a:1:{s:12:\"autocomplete\";s:6:\"latest\";}s:13:\"distance_unit\";s:2:\"km\";s:11:\"max_results\";s:14:\"[25],50,75,100\";s:13:\"search_radius\";s:22:\"10,25,[50],100,200,500\";s:16:\"force_postalcode\";i:0;s:13:\"marker_effect\";s:6:\"bounce\";s:14:\"address_format\";s:14:\"city_state_zip\";s:13:\"hide_distance\";i:0;s:12:\"hide_country\";i:0;s:20:\"show_contact_details\";i:0;s:25:\"clickable_contact_details\";i:0;s:11:\"auto_locate\";i:1;s:12:\"autocomplete\";i:0;s:8:\"autoload\";i:1;s:14:\"autoload_limit\";i:50;s:13:\"run_fitbounds\";i:1;s:10:\"zoom_level\";i:3;s:15:\"auto_zoom_level\";i:15;s:10:\"start_name\";s:0:\"\";s:12:\"start_latlng\";s:0:\"\";s:6:\"height\";i:350;s:8:\"map_type\";s:7:\"roadmap\";s:9:\"map_style\";s:0:\"\";s:12:\"type_control\";i:0;s:10:\"streetview\";i:0;s:16:\"results_dropdown\";i:1;s:15:\"radius_dropdown\";i:1;s:15:\"category_filter\";i:0;s:20:\"category_filter_type\";s:8:\"dropdown\";s:16:\"infowindow_width\";i:225;s:12:\"search_width\";i:179;s:11:\"label_width\";i:95;s:16:\"control_position\";s:4:\"left\";s:11:\"scrollwheel\";i:1;s:15:\"marker_clusters\";i:0;s:12:\"cluster_zoom\";i:0;s:12:\"cluster_size\";i:0;s:10:\"new_window\";i:0;s:9:\"reset_map\";i:0;s:11:\"template_id\";s:7:\"default\";s:23:\"listing_below_no_scroll\";i:0;s:18:\"direction_redirect\";i:0;s:9:\"more_info\";i:0;s:9:\"store_url\";i:0;s:9:\"phone_url\";i:0;s:17:\"marker_streetview\";i:0;s:14:\"marker_zoom_to\";i:0;s:18:\"more_info_location\";s:11:\"info window\";s:11:\"mouse_focus\";i:0;s:12:\"start_marker\";s:7:\"red.png\";s:12:\"store_marker\";s:8:\"blue.png\";s:14:\"editor_country\";s:0:\"\";s:12:\"editor_hours\";a:2:{s:8:\"dropdown\";a:7:{s:6:\"monday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:7:\"tuesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:9:\"wednesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"thursday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:6:\"friday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"saturday\";s:0:\"\";s:6:\"sunday\";s:0:\"\";}s:8:\"textarea\";s:132:\"Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed\";}s:17:\"editor_hour_input\";s:8:\"dropdown\";s:18:\"editor_hour_format\";i:12;s:15:\"editor_map_type\";s:7:\"roadmap\";s:10:\"hide_hours\";i:0;s:10:\"permalinks\";i:0;s:22:\"permalink_remove_front\";i:0;s:14:\"permalink_slug\";s:6:\"stores\";s:13:\"category_slug\";s:14:\"store-category\";s:16:\"infowindow_style\";s:7:\"default\";s:12:\"show_credits\";i:0;s:5:\"debug\";i:0;s:16:\"deregister_gmaps\";i:0;s:13:\"delay_loading\";i:0;s:11:\"start_label\";s:14:\"Start location\";s:12:\"search_label\";s:13:\"Your location\";s:16:\"search_btn_label\";s:6:\"Search\";s:15:\"preloader_label\";s:12:\"Searching...\";s:12:\"radius_label\";s:13:\"Search radius\";s:16:\"no_results_label\";s:16:\"No results found\";s:13:\"results_label\";s:7:\"Results\";s:10:\"more_label\";s:9:\"More info\";s:16:\"directions_label\";s:10:\"Directions\";s:19:\"no_directions_label\";s:58:\"No route could be found between the origin and destination\";s:10:\"back_label\";s:4:\"Back\";s:17:\"street_view_label\";s:11:\"Street view\";s:15:\"zoom_here_label\";s:9:\"Zoom here\";s:11:\"error_label\";s:39:\"Something went wrong, please try again!\";s:11:\"limit_label\";s:23:\"API usage limit reached\";s:11:\"phone_label\";s:5:\"Phone\";s:9:\"fax_label\";s:3:\"Fax\";s:11:\"email_label\";s:5:\"Email\";s:9:\"url_label\";s:3:\"Url\";s:11:\"hours_label\";s:5:\"Hours\";s:14:\"category_label\";s:15:\"Category filter\";s:22:\"category_default_label\";s:3:\"Any\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpsl_settings' , 'a:93:{s:15:&quot;api_browser_key&quot;;s:0:&quot;&quot;;s:14:&quot;api_server_key&quot;;s:0:&quot;&quot;;s:12:&quot;api_language&quot;;s:2:&quot;en&quot;;s:10:&quot;api_region&quot;;s:0:&quot;&quot;;s:21:&quot;api_geocode_component&quot;;i:0;s:12:&quot;api_versions&quot;;a:1:{s:12:&quot;autocomplete&quot;;s:6:&quot;latest&quot;;}s:13:&quot;distance_unit&quot;;s:2:&quot;km&quot;;s:11:&quot;max_results&quot;;s:14:&quot;[25],50,75,100&quot;;s:13:&quot;search_radius&quot;;s:22:&quot;10,25,[50],100,200,500&quot;;s:16:&quot;force_postalcode&quot;;i:0;s:13:&quot;marker_effect&quot;;s:6:&quot;bounce&quot;;s:14:&quot;address_format&quot;;s:14:&quot;city_state_zip&quot;;s:13:&quot;hide_distance&quot;;i:0;s:12:&quot;hide_country&quot;;i:0;s:20:&quot;show_contact_details&quot;;i:0;s:25:&quot;clickable_contact_details&quot;;i:0;s:11:&quot;auto_locate&quot;;i:1;s:12:&quot;autocomplete&quot;;i:0;s:8:&quot;autoload&quot;;i:1;s:14:&quot;autoload_limit&quot;;i:50;s:13:&quot;run_fitbounds&quot;;i:1;s:10:&quot;zoom_level&quot;;i:3;s:15:&quot;auto_zoom_level&quot;;i:15;s:10:&quot;start_name&quot;;s:0:&quot;&quot;;s:12:&quot;start_latlng&quot;;s:0:&quot;&quot;;s:6:&quot;height&quot;;i:350;s:8:&quot;map_type&quot;;s:7:&quot;roadmap&quot;;s:9:&quot;map_style&quot;;s:0:&quot;&quot;;s:12:&quot;type_control&quot;;i:0;s:10:&quot;streetview&quot;;i:0;s:16:&quot;results_dropdown&quot;;i:1;s:15:&quot;radius_dropdown&quot;;i:1;s:15:&quot;category_filter&quot;;i:0;s:20:&quot;category_filter_type&quot;;s:8:&quot;dropdown&quot;;s:16:&quot;infowindow_width&quot;;i:225;s:12:&quot;search_width&quot;;i:179;s:11:&quot;label_width&quot;;i:95;s:16:&quot;control_position&quot;;s:4:&quot;left&quot;;s:11:&quot;scrollwheel&quot;;i:1;s:15:&quot;marker_clusters&quot;;i:0;s:12:&quot;cluster_zoom&quot;;i:0;s:12:&quot;cluster_size&quot;;i:0;s:10:&quot;new_window&quot;;i:0;s:9:&quot;reset_map&quot;;i:0;s:11:&quot;template_id&quot;;s:7:&quot;default&quot;;s:23:&quot;listing_below_no_scroll&quot;;i:0;s:18:&quot;direction_redirect&quot;;i:0;s:9:&quot;more_info&quot;;i:0;s:9:&quot;store_url&quot;;i:0;s:9:&quot;phone_url&quot;;i:0;s:17:&quot;marker_streetview&quot;;i:0;s:14:&quot;marker_zoom_to&quot;;i:0;s:18:&quot;more_info_location&quot;;s:11:&quot;info window&quot;;s:11:&quot;mouse_focus&quot;;i:0;s:12:&quot;start_marker&quot;;s:7:&quot;red.png&quot;;s:12:&quot;store_marker&quot;;s:8:&quot;blue.png&quot;;s:14:&quot;editor_country&quot;;s:0:&quot;&quot;;s:12:&quot;editor_hours&quot;;a:2:{s:8:&quot;dropdown&quot;;a:7:{s:6:&quot;monday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:7:&quot;tuesday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:9:&quot;wednesday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:8:&quot;thursday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:6:&quot;friday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:8:&quot;saturday&quot;;s:0:&quot;&quot;;s:6:&quot;sunday&quot;;s:0:&quot;&quot;;}s:8:&quot;textarea&quot;;s:132:&quot;Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed&quot;;}s:17:&quot;editor_hour_input&quot;;s:8:&quot;dropdown&quot;;s:18:&quot;editor_hour_format&quot;;i:12;s:15:&quot;editor_map_type&quot;;s:7:&quot;roadmap&quot;;s:10:&quot;hide_hours&quot;;i:0;s:10:&quot;permalinks&quot;;i:0;s:22:&quot;permalink_remove_front&quot;;i:0;s:14:&quot;permalink_slug&quot;;s:6:&quot;stores&quot;;s:13:&quot;category_slug&quot;;s:14:&quot;store-category&quot;;s:16:&quot;infowindow_style&quot;;s:7:&quot;default&quot;;s:12:&quot;show_credits&quot;;i:0;s:5:&quot;debug&quot;;i:0;s:16:&quot;deregister_gmaps&quot;;i:0;s:13:&quot;delay_loading&quot;;i:0;s:11:&quot;start_label&quot;;s:14:&quot;Start location&quot;;s:12:&quot;search_label&quot;;s:13:&quot;Your location&quot;;s:16:&quot;search_btn_label&quot;;s:6:&quot;Search&quot;;s:15:&quot;preloader_label&quot;;s:12:&quot;Searching...&quot;;s:12:&quot;radius_label&quot;;s:13:&quot;Search radius&quot;;s:16:&quot;no_results_label&quot;;s:16:&quot;No results found&quot;;s:13:&quot;results_label&quot;;s:7:&quot;Results&quot;;s:10:&quot;more_label&quot;;s:9:&quot;More info&quot;;s:16:&quot;directions_label&quot;;s:10:&quot;Directions&quot;;s:19:&quot;no_directions_label&quot;;s:58:&quot;No route could be found between the origin and destination&quot;;s:10:&quot;back_label&quot;;s:4:&quot;Back&quot;;s:17:&quot;street_view_label&quot;;s:11:&quot;Street view&quot;;s:15:&quot;zoom_here_label&quot;;s:9:&quot;Zoom here&quot;;s:11:&quot;error_label&quot;;s:39:&quot;Something went wrong, please try again!&quot;;s:11:&quot;limit_label&quot;;s:23:&quot;API usage limit reached&quot;;s:11:&quot;phone_label&quot;;s:5:&quot;Phone&quot;;s:9:&quot;fax_label&quot;;s:3:&quot;Fax&quot;;s:11:&quot;email_label&quot;;s:5:&quot;Email&quot;;s:9:&quot;url_label&quot;;s:3:&quot;Url&quot;;s:11:&quot;hours_label&quot;;s:5:&quot;Hours&quot;;s:14:&quot;category_label&quot;;s:15:&quot;Category filter&quot;;s:22:&quot;category_default_label&quot;;s:3:&quot;Any&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `hitcounter` , `imagename` , `flag` FROM `wp_imagecounter` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpsl_settings', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-store-locator/inc/wpsl-functions.php(196): update_option('wpsl_settings', Array)
-#6 /wordpress/wp-content/plugins/wp-store-locator/wp-store-locator.php(139): wpsl_get_settings()
-#7 /wordpress/wp-content/plugins/wp-store-locator/wp-store-locator.php(76): WP_Store_locator->plugin_settings()
-#8 /wordpress/wp-content/plugins/wp-store-locator/wp-store-locator.php(156): WP_Store_locator->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-store-locato...')
-#11 /internal/eval.php(20): activate_plugin('wp-store-locato...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpsl_settings', 'a:93:{s:15:\"api_browser_key\";s:0:\"\";s:14:\"api_server_key\";s:0:\"\";s:12:\"api_language\";s:2:\"en\";s:10:\"api_region\";s:0:\"\";s:21:\"api_geocode_component\";i:0;s:12:\"api_versions\";a:1:{s:12:\"autocomplete\";s:6:\"latest\";}s:13:\"distance_unit\";s:2:\"km\";s:11:\"max_results\";s:14:\"[25],50,75,100\";s:13:\"search_radius\";s:22:\"10,25,[50],100,200,500\";s:16:\"force_postalcode\";i:0;s:13:\"marker_effect\";s:6:\"bounce\";s:14:\"address_format\";s:14:\"city_state_zip\";s:13:\"hide_distance\";i:0;s:12:\"hide_country\";i:0;s:20:\"show_contact_details\";i:0;s:25:\"clickable_contact_details\";i:0;s:11:\"auto_locate\";i:1;s:12:\"autocomplete\";i:0;s:8:\"autoload\";i:1;s:14:\"autoload_limit\";i:50;s:13:\"run_fitbounds\";i:1;s:10:\"zoom_level\";i:3;s:15:\"auto_zoom_level\";i:15;s:10:\"start_name\";s:0:\"\";s:12:\"start_latlng\";s:0:\"\";s:6:\"height\";i:350;s:8:\"map_type\";s:7:\"roadmap\";s:9:\"map_style\";s:0:\"\";s:12:\"type_control\";i:0;s:10:\"streetview\";i:0;s:16:\"results_dropdown\";i:1;s:15:\"radius_dropdown\";i:1;s:15:\"category_filter\";i:0;s:20:\"category_filter_type\";s:8:\"dropdown\";s:16:\"infowindow_width\";i:225;s:12:\"search_width\";i:179;s:11:\"label_width\";i:95;s:16:\"control_position\";s:4:\"left\";s:11:\"scrollwheel\";i:1;s:15:\"marker_clusters\";i:0;s:12:\"cluster_zoom\";i:0;s:12:\"cluster_size\";i:0;s:10:\"new_window\";i:0;s:9:\"reset_map\";i:0;s:11:\"template_id\";s:7:\"default\";s:23:\"listing_below_no_scroll\";i:0;s:18:\"direction_redirect\";i:0;s:9:\"more_info\";i:0;s:9:\"store_url\";i:0;s:9:\"phone_url\";i:0;s:17:\"marker_streetview\";i:0;s:14:\"marker_zoom_to\";i:0;s:18:\"more_info_location\";s:11:\"info window\";s:11:\"mouse_focus\";i:0;s:12:\"start_marker\";s:7:\"red.png\";s:12:\"store_marker\";s:8:\"blue.png\";s:14:\"editor_country\";s:0:\"\";s:12:\"editor_hours\";a:2:{s:8:\"dropdown\";a:7:{s:6:\"monday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:7:\"tuesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:9:\"wednesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"thursday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:6:\"friday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"saturday\";s:0:\"\";s:6:\"sunday\";s:0:\"\";}s:8:\"textarea\";s:132:\"Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed\";}s:17:\"editor_hour_input\";s:8:\"dropdown\";s:18:\"editor_hour_format\";i:12;s:15:\"editor_map_type\";s:7:\"roadmap\";s:10:\"hide_hours\";i:0;s:10:\"permalinks\";i:0;s:22:\"permalink_remove_front\";i:0;s:14:\"permalink_slug\";s:6:\"stores\";s:13:\"category_slug\";s:14:\"store-category\";s:16:\"infowindow_style\";s:7:\"default\";s:12:\"show_credits\";i:0;s:5:\"debug\";i:0;s:16:\"deregister_gmaps\";i:0;s:13:\"delay_loading\";i:0;s:11:\"start_label\";s:14:\"Start location\";s:12:\"search_label\";s:13:\"Your location\";s:16:\"search_btn_label\";s:6:\"Search\";s:15:\"preloader_label\";s:12:\"Searching...\";s:12:\"radius_label\";s:13:\"Search radius\";s:16:\"no_results_label\";s:16:\"No results found\";s:13:\"results_label\";s:7:\"Results\";s:10:\"more_label\";s:9:\"More info\";s:16:\"directions_label\";s:10:\"Directions\";s:19:\"no_directions_label\";s:58:\"No route could be found between the origin and destination\";s:10:\"back_label\";s:4:\"Back\";s:17:\"street_view_label\";s:11:\"Street view\";s:15:\"zoom_here_label\";s:9:\"Zoom here\";s:11:\"error_label\";s:39:\"Something went wrong, please try again!\";s:11:\"limit_label\";s:23:\"API usage limit reached\";s:11:\"phone_label\";s:5:\"Phone\";s:9:\"fax_label\";s:3:\"Fax\";s:11:\"email_label\";s:5:\"Email\";s:9:\"url_label\";s:3:\"Url\";s:11:\"hours_label\";s:5:\"Hours\";s:14:\"category_label\";s:15:\"Category filter\";s:22:\"category_default_label\";s:3:\"Any\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-store-locator/wp-store-locator.php'), WP_Store_locator->__construct, WP_Store_locator->plugin_settings, wpsl_get_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:53:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:53:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT hitcount...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT hitcount...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT hitcount...')
+#4 /wordpress/wp-content/plugins/wp-hit-counter/image.php(102): wpdb->get_row('SELECT hitcount...')
+#5 /wordpress/wp-content/plugins/wp-hit-counter/image.php(27): perform_install()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
+#8 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
+#9 {main}</pre>
+ for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hit-counter/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:57:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-hit-counter/image.php:183
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
+#2 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-hit-counter/image.php on line 183
+[10-Apr-2025 23:57:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpsl_settings', 'a:93:{s:15:\"api_browser_key\";s:0:\"\";s:14:\"api_server_key\";s:0:\"\";s:12:\"api_language\";s:2:\"en\";s:10:\"api_region\";s:0:\"\";s:21:\"api_geocode_component\";i:0;s:12:\"api_versions\";a:1:{s:12:\"autocomplete\";s:6:\"latest\";}s:13:\"distance_unit\";s:2:\"km\";s:11:\"max_results\";s:14:\"[25],50,75,100\";s:13:\"search_radius\";s:22:\"10,25,[50],100,200,500\";s:16:\"force_postalcode\";i:0;s:13:\"marker_effect\";s:6:\"bounce\";s:14:\"address_format\";s:14:\"city_state_zip\";s:13:\"hide_distance\";i:0;s:12:\"hide_country\";i:0;s:20:\"show_contact_details\";i:0;s:25:\"clickable_contact_details\";i:0;s:11:\"auto_locate\";i:1;s:12:\"autocomplete\";i:0;s:8:\"autoload\";i:1;s:14:\"autoload_limit\";i:50;s:13:\"run_fitbounds\";i:1;s:10:\"zoom_level\";i:3;s:15:\"auto_zoom_level\";i:15;s:10:\"start_name\";s:0:\"\";s:12:\"start_latlng\";s:0:\"\";s:6:\"height\";i:350;s:8:\"map_type\";s:7:\"roadmap\";s:9:\"map_style\";s:0:\"\";s:12:\"type_control\";i:0;s:10:\"streetview\";i:0;s:16:\"results_dropdown\";i:1;s:15:\"radius_dropdown\";i:1;s:15:\"category_filter\";i:0;s:20:\"category_filter_type\";s:8:\"dropdown\";s:16:\"infowindow_width\";i:225;s:12:\"search_width\";i:179;s:11:\"label_width\";i:95;s:16:\"control_position\";s:4:\"left\";s:11:\"scrollwheel\";i:1;s:15:\"marker_clusters\";i:0;s:12:\"cluster_zoom\";i:0;s:12:\"cluster_size\";i:0;s:10:\"new_window\";i:0;s:9:\"reset_map\";i:0;s:11:\"template_id\";s:7:\"default\";s:23:\"listing_below_no_scroll\";i:0;s:18:\"direction_redirect\";i:0;s:9:\"more_info\";i:0;s:9:\"store_url\";i:0;s:9:\"phone_url\";i:0;s:17:\"marker_streetview\";i:0;s:14:\"marker_zoom_to\";i:0;s:18:\"more_info_location\";s:11:\"info window\";s:11:\"mouse_focus\";i:0;s:12:\"start_marker\";s:7:\"red.png\";s:12:\"store_marker\";s:8:\"blue.png\";s:14:\"editor_country\";s:0:\"\";s:12:\"editor_hours\";a:2:{s:8:\"dropdown\";a:7:{s:6:\"monday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:7:\"tuesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:9:\"wednesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"thursday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:6:\"friday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"saturday\";s:0:\"\";s:6:\"sunday\";s:0:\"\";}s:8:\"textarea\";s:132:\"Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed\";}s:17:\"editor_hour_input\";s:8:\"dropdown\";s:18:\"editor_hour_format\";i:12;s:15:\"editor_map_type\";s:7:\"roadmap\";s:10:\"hide_hours\";i:0;s:10:\"permalinks\";i:0;s:22:\"permalink_remove_front\";i:0;s:14:\"permalink_slug\";s:6:\"stores\";s:13:\"category_slug\";s:14:\"store-category\";s:16:\"infowindow_style\";s:7:\"default\";s:12:\"show_credits\";i:0;s:5:\"debug\";i:0;s:16:\"deregister_gmaps\";i:0;s:13:\"delay_loading\";i:0;s:11:\"start_label\";s:14:\"Start location\";s:12:\"search_label\";s:13:\"Your location\";s:16:\"search_btn_label\";s:6:\"Search\";s:15:\"preloader_label\";s:12:\"Searching...\";s:12:\"radius_label\";s:13:\"Search radius\";s:16:\"no_results_label\";s:16:\"No results found\";s:13:\"results_label\";s:7:\"Results\";s:10:\"more_label\";s:9:\"More info\";s:16:\"directions_label\";s:10:\"Directions\";s:19:\"no_directions_label\";s:58:\"No route could be found between the origin and destination\";s:10:\"back_label\";s:4:\"Back\";s:17:\"street_view_label\";s:11:\"Street view\";s:15:\"zoom_here_label\";s:9:\"Zoom here\";s:11:\"error_label\";s:39:\"Something went wrong, please try again!\";s:11:\"limit_label\";s:23:\"API usage limit reached\";s:11:\"phone_label\";s:5:\"Phone\";s:9:\"fax_label\";s:3:\"Fax\";s:11:\"email_label\";s:5:\"Email\";s:9:\"url_label\";s:3:\"Url\";s:11:\"hours_label\";s:5:\"Hours\";s:14:\"category_label\";s:15:\"Category filter\";s:22:\"category_default_label\";s:3:\"Any\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpsl_settings' , 'a:93:{s:15:&quot;api_browser_key&quot;;s:0:&quot;&quot;;s:14:&quot;api_server_key&quot;;s:0:&quot;&quot;;s:12:&quot;api_language&quot;;s:2:&quot;en&quot;;s:10:&quot;api_region&quot;;s:0:&quot;&quot;;s:21:&quot;api_geocode_component&quot;;i:0;s:12:&quot;api_versions&quot;;a:1:{s:12:&quot;autocomplete&quot;;s:6:&quot;latest&quot;;}s:13:&quot;distance_unit&quot;;s:2:&quot;km&quot;;s:11:&quot;max_results&quot;;s:14:&quot;[25],50,75,100&quot;;s:13:&quot;search_radius&quot;;s:22:&quot;10,25,[50],100,200,500&quot;;s:16:&quot;force_postalcode&quot;;i:0;s:13:&quot;marker_effect&quot;;s:6:&quot;bounce&quot;;s:14:&quot;address_format&quot;;s:14:&quot;city_state_zip&quot;;s:13:&quot;hide_distance&quot;;i:0;s:12:&quot;hide_country&quot;;i:0;s:20:&quot;show_contact_details&quot;;i:0;s:25:&quot;clickable_contact_details&quot;;i:0;s:11:&quot;auto_locate&quot;;i:1;s:12:&quot;autocomplete&quot;;i:0;s:8:&quot;autoload&quot;;i:1;s:14:&quot;autoload_limit&quot;;i:50;s:13:&quot;run_fitbounds&quot;;i:1;s:10:&quot;zoom_level&quot;;i:3;s:15:&quot;auto_zoom_level&quot;;i:15;s:10:&quot;start_name&quot;;s:0:&quot;&quot;;s:12:&quot;start_latlng&quot;;s:0:&quot;&quot;;s:6:&quot;height&quot;;i:350;s:8:&quot;map_type&quot;;s:7:&quot;roadmap&quot;;s:9:&quot;map_style&quot;;s:0:&quot;&quot;;s:12:&quot;type_control&quot;;i:0;s:10:&quot;streetview&quot;;i:0;s:16:&quot;results_dropdown&quot;;i:1;s:15:&quot;radius_dropdown&quot;;i:1;s:15:&quot;category_filter&quot;;i:0;s:20:&quot;category_filter_type&quot;;s:8:&quot;dropdown&quot;;s:16:&quot;infowindow_width&quot;;i:225;s:12:&quot;search_width&quot;;i:179;s:11:&quot;label_width&quot;;i:95;s:16:&quot;control_position&quot;;s:4:&quot;left&quot;;s:11:&quot;scrollwheel&quot;;i:1;s:15:&quot;marker_clusters&quot;;i:0;s:12:&quot;cluster_zoom&quot;;i:0;s:12:&quot;cluster_size&quot;;i:0;s:10:&quot;new_window&quot;;i:0;s:9:&quot;reset_map&quot;;i:0;s:11:&quot;template_id&quot;;s:7:&quot;default&quot;;s:23:&quot;listing_below_no_scroll&quot;;i:0;s:18:&quot;direction_redirect&quot;;i:0;s:9:&quot;more_info&quot;;i:0;s:9:&quot;store_url&quot;;i:0;s:9:&quot;phone_url&quot;;i:0;s:17:&quot;marker_streetview&quot;;i:0;s:14:&quot;marker_zoom_to&quot;;i:0;s:18:&quot;more_info_location&quot;;s:11:&quot;info window&quot;;s:11:&quot;mouse_focus&quot;;i:0;s:12:&quot;start_marker&quot;;s:7:&quot;red.png&quot;;s:12:&quot;store_marker&quot;;s:8:&quot;blue.png&quot;;s:14:&quot;editor_country&quot;;s:0:&quot;&quot;;s:12:&quot;editor_hours&quot;;a:2:{s:8:&quot;dropdown&quot;;a:7:{s:6:&quot;monday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:7:&quot;tuesday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:9:&quot;wednesday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:8:&quot;thursday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:6:&quot;friday&quot;;a:1:{i:0;s:15:&quot;9:00 AM,5:00 PM&quot;;}s:8:&quot;saturday&quot;;s:0:&quot;&quot;;s:6:&quot;sunday&quot;;s:0:&quot;&quot;;}s:8:&quot;textarea&quot;;s:132:&quot;Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed&quot;;}s:17:&quot;editor_hour_input&quot;;s:8:&quot;dropdown&quot;;s:18:&quot;editor_hour_format&quot;;i:12;s:15:&quot;editor_map_type&quot;;s:7:&quot;roadmap&quot;;s:10:&quot;hide_hours&quot;;i:0;s:10:&quot;permalinks&quot;;i:0;s:22:&quot;permalink_remove_front&quot;;i:0;s:14:&quot;permalink_slug&quot;;s:6:&quot;stores&quot;;s:13:&quot;category_slug&quot;;s:14:&quot;store-category&quot;;s:16:&quot;infowindow_style&quot;;s:7:&quot;default&quot;;s:12:&quot;show_credits&quot;;i:0;s:5:&quot;debug&quot;;i:0;s:16:&quot;deregister_gmaps&quot;;i:0;s:13:&quot;delay_loading&quot;;i:0;s:11:&quot;start_label&quot;;s:14:&quot;Start location&quot;;s:12:&quot;search_label&quot;;s:13:&quot;Your location&quot;;s:16:&quot;search_btn_label&quot;;s:6:&quot;Search&quot;;s:15:&quot;preloader_label&quot;;s:12:&quot;Searching...&quot;;s:12:&quot;radius_label&quot;;s:13:&quot;Search radius&quot;;s:16:&quot;no_results_label&quot;;s:16:&quot;No results found&quot;;s:13:&quot;results_label&quot;;s:7:&quot;Results&quot;;s:10:&quot;more_label&quot;;s:9:&quot;More info&quot;;s:16:&quot;directions_label&quot;;s:10:&quot;Directions&quot;;s:19:&quot;no_directions_label&quot;;s:58:&quot;No route could be found between the origin and destination&quot;;s:10:&quot;back_label&quot;;s:4:&quot;Back&quot;;s:17:&quot;street_view_label&quot;;s:11:&quot;Street view&quot;;s:15:&quot;zoom_here_label&quot;;s:9:&quot;Zoom here&quot;;s:11:&quot;error_label&quot;;s:39:&quot;Something went wrong, please try again!&quot;;s:11:&quot;limit_label&quot;;s:23:&quot;API usage limit reached&quot;;s:11:&quot;phone_label&quot;;s:5:&quot;Phone&quot;;s:9:&quot;fax_label&quot;;s:3:&quot;Fax&quot;;s:11:&quot;email_label&quot;;s:5:&quot;Email&quot;;s:9:&quot;url_label&quot;;s:3:&quot;Url&quot;;s:11:&quot;hours_label&quot;;s:5:&quot;Hours&quot;;s:14:&quot;category_label&quot;;s:15:&quot;Category filter&quot;;s:22:&quot;category_default_label&quot;;s:3:&quot;Any&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT hitcounter, imagename, flag FROM wp_imagecounter | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpsl_settings', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-store-locator/inc/wpsl-functions.php(228): update_option('wpsl_settings', Array)
-#6 /wordpress/wp-content/plugins/wp-store-locator/inc/install.php(62): wpsl_set_default_settings()
-#7 /wordpress/wp-content/plugins/wp-store-locator/inc/install.php(36): wpsl_install_data()
-#8 /wordpress/wp-content/plugins/wp-store-locator/wp-store-locator.php(152): wpsl_install(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Store_locator->install(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sto...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-store-locato...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpsl_settings', 'a:93:{s:15:\"api_browser_key\";s:0:\"\";s:14:\"api_server_key\";s:0:\"\";s:12:\"api_language\";s:2:\"en\";s:10:\"api_region\";s:0:\"\";s:21:\"api_geocode_component\";i:0;s:12:\"api_versions\";a:1:{s:12:\"autocomplete\";s:6:\"latest\";}s:13:\"distance_unit\";s:2:\"km\";s:11:\"max_results\";s:14:\"[25],50,75,100\";s:13:\"search_radius\";s:22:\"10,25,[50],100,200,500\";s:16:\"force_postalcode\";i:0;s:13:\"marker_effect\";s:6:\"bounce\";s:14:\"address_format\";s:14:\"city_state_zip\";s:13:\"hide_distance\";i:0;s:12:\"hide_country\";i:0;s:20:\"show_contact_details\";i:0;s:25:\"clickable_contact_details\";i:0;s:11:\"auto_locate\";i:1;s:12:\"autocomplete\";i:0;s:8:\"autoload\";i:1;s:14:\"autoload_limit\";i:50;s:13:\"run_fitbounds\";i:1;s:10:\"zoom_level\";i:3;s:15:\"auto_zoom_level\";i:15;s:10:\"start_name\";s:0:\"\";s:12:\"start_latlng\";s:0:\"\";s:6:\"height\";i:350;s:8:\"map_type\";s:7:\"roadmap\";s:9:\"map_style\";s:0:\"\";s:12:\"type_control\";i:0;s:10:\"streetview\";i:0;s:16:\"results_dropdown\";i:1;s:15:\"radius_dropdown\";i:1;s:15:\"category_filter\";i:0;s:20:\"category_filter_type\";s:8:\"dropdown\";s:16:\"infowindow_width\";i:225;s:12:\"search_width\";i:179;s:11:\"label_width\";i:95;s:16:\"control_position\";s:4:\"left\";s:11:\"scrollwheel\";i:1;s:15:\"marker_clusters\";i:0;s:12:\"cluster_zoom\";i:0;s:12:\"cluster_size\";i:0;s:10:\"new_window\";i:0;s:9:\"reset_map\";i:0;s:11:\"template_id\";s:7:\"default\";s:23:\"listing_below_no_scroll\";i:0;s:18:\"direction_redirect\";i:0;s:9:\"more_info\";i:0;s:9:\"store_url\";i:0;s:9:\"phone_url\";i:0;s:17:\"marker_streetview\";i:0;s:14:\"marker_zoom_to\";i:0;s:18:\"more_info_location\";s:11:\"info window\";s:11:\"mouse_focus\";i:0;s:12:\"start_marker\";s:7:\"red.png\";s:12:\"store_marker\";s:8:\"blue.png\";s:14:\"editor_country\";s:0:\"\";s:12:\"editor_hours\";a:2:{s:8:\"dropdown\";a:7:{s:6:\"monday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:7:\"tuesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:9:\"wednesday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"thursday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:6:\"friday\";a:1:{i:0;s:15:\"9:00 AM,5:00 PM\";}s:8:\"saturday\";s:0:\"\";s:6:\"sunday\";s:0:\"\";}s:8:\"textarea\";s:132:\"Mon 9:00 AM - 5:00 PM
-Tue 9:00 AM - 5:00 PM
-Wed 9:00 AM - 5:00 PM
-Thu 9:00 AM - 5:00 PM
-Fri 9:00 AM - 5:00 PM
-Sat Closed 
-Sun Closed\";}s:17:\"editor_hour_input\";s:8:\"dropdown\";s:18:\"editor_hour_format\";i:12;s:15:\"editor_map_type\";s:7:\"roadmap\";s:10:\"hide_hours\";i:0;s:10:\"permalinks\";i:0;s:22:\"permalink_remove_front\";i:0;s:14:\"permalink_slug\";s:6:\"stores\";s:13:\"category_slug\";s:14:\"store-category\";s:16:\"infowindow_style\";s:7:\"default\";s:12:\"show_credits\";i:0;s:5:\"debug\";i:0;s:16:\"deregister_gmaps\";i:0;s:13:\"delay_loading\";i:0;s:11:\"start_label\";s:14:\"Start location\";s:12:\"search_label\";s:13:\"Your location\";s:16:\"search_btn_label\";s:6:\"Search\";s:15:\"preloader_label\";s:12:\"Searching...\";s:12:\"radius_label\";s:13:\"Search radius\";s:16:\"no_results_label\";s:16:\"No results found\";s:13:\"results_label\";s:7:\"Results\";s:10:\"more_label\";s:9:\"More info\";s:16:\"directions_label\";s:10:\"Directions\";s:19:\"no_directions_label\";s:58:\"No route could be found between the origin and destination\";s:10:\"back_label\";s:4:\"Back\";s:17:\"street_view_label\";s:11:\"Street view\";s:15:\"zoom_here_label\";s:9:\"Zoom here\";s:11:\"error_label\";s:39:\"Something went wrong, please try again!\";s:11:\"limit_label\";s:23:\"API usage limit reached\";s:11:\"phone_label\";s:5:\"Phone\";s:9:\"fax_label\";s:3:\"Fax\";s:11:\"email_label\";s:5:\"Email\";s:9:\"url_label\";s:3:\"Url\";s:11:\"hours_label\";s:5:\"Hours\";s:14:\"category_label\";s:15:\"Category filter\";s:22:\"category_default_label\";s:3:\"Any\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-store-locator/wp-store-locator.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Store_locator->install, wpsl_install, wpsl_install_data, wpsl_set_default_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:53:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpsl_version', '2.2.250', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schem
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT hitcount...')
+#2 /wordpress/wp-content/plugins/wp-hit-counter/image.php(102): wpdb->get_row('SELECT hitcount...')
+#3 /wordpress/wp-content/plugins/wp-hit-counter/image.php(27): perform_install()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
+#6 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
+#7 {main}</pre>
+ for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hit-counter/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:57:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-hit-counter/image.php:183
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hit-counter/...')
+#2 /internal/eval.php(20): activate_plugin('wp-hit-counter/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-hit-counter/image.php on line 183
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-hit-counter"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
