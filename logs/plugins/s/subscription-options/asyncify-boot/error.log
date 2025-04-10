@@ -2,378 +2,100 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 22:48:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:48:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_RmtCfg', '{\"data\":[],\"updTime\":0,\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_RmtCfg' , '{&quot;data&quot;:[],&quot;updTime&quot;:0,&quot;v&quot;:1,&quot;vPrev&quot;:0}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_RmtC...', '{"data":[],"upd...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_RmtC...', '{"data":[],"upd...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(62): seraph_osm\PluginOptions::Set(1, 'RmtCfg', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(272): seraph_osm\PluginOptions::Get(1, 'RmtCfg', 'seraph_osm\\Plug...')
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(431): seraph_osm\PluginRmtCfg::Update(false, true)
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#13 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_RmtCfg', '{\"data\":[],\"updTime\":0,\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\PluginRmtCfg::Update, seraph_osm\PluginOptions::Get, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(62): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1170): seraph_osm\PluginOptions::Get(1, 'State', 'seraph_osm\\Plug...')
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(282): seraph_osm\Plugin::StateGet()
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(431): seraph_osm\PluginRmtCfg::Update(false, true)
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#11 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#14 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\PluginRmtCfg::Update, seraph_osm\Plugin::StateGet, seraph_osm\PluginOptions::Get, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0,&quot;changeVerCheck&quot;:&quot;&quot;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1175): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(287): seraph_osm\Plugin::StateSet(Array)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(431): seraph_osm\PluginRmtCfg::Update(false, true)
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#13 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\PluginRmtCfg::Update, seraph_osm\Plugin::StateSet, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\",\"changePkCheck\":\"\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0,&quot;changeVerCheck&quot;:&quot;&quot;,&quot;changePkCheck&quot;:&quot;&quot;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1175): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(293): seraph_osm\Plugin::StateSet(Array)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(431): seraph_osm\PluginRmtCfg::Update(false, true)
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#13 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\",\"changePkCheck\":\"\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\PluginRmtCfg::Update, seraph_osm\Plugin::StateSet, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_RmtCfg', '{\"data\":{\"Info\":{\"LastVersion\":\"1.4\"},\"Links\":{\"UrlProductDownload\":\"https:\\/\\/www.s-sols.com\\/data\\/products\\/wordpress\\/old-slugs-mgr\\/OldSlugsMgr.zip\",\"UrlProductInfo\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductBuy\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#offer\",\"UrlProductFeatures\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#features\",\"UrlUserPurchases\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/myaccount?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlEula\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/wordpress-plugins-eula-2?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlRatingAboutUs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/about?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlMorePlugins\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/pcats\\/wordpress?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlMain\":\"https:\\/\\/www.s-sols.com{SiteLang}?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlSupport\":\"mailto:support@s-sols.com\",\"UrlProductDocs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductReqs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#reqs\",\"UrlProductSupport\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/support?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductLastChanges\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/news\\/wordpress\\/old-slugs-mgr\\/new-ver-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\"},\"Prms\":{\"UrlLicMgr\":\"https:\\/\\/www.s-sols.com\\/api\\/licmgr\",\"UrlSpecialApi\":\"https:\\/\\/www.s-sols.com\\/api\\/special\",\"FullProductDownloadPath\":\"OldSlugsMgr.zip\",\"RateItSpanTime\":2880,\"RateItSpanTimeNext\":10080,\"LocaleToSiteLang\":{\"ru\":\"\\/ru\"}},\"Help\":{\"PostEditor\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm#post_editor\",\"Settings\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm#settings\",\"\":\"\"}},\"updTime\":1744152530,\"v\":1,\"vPrev\":0,\"mdfTime\":1703676026,\"plgVer\":\"1.4\",\"plgPk\":\"Base\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_RmtCfg' , '{&quot;data&quot;:{&quot;Info&quot;:{&quot;LastVersion&quot;:&quot;1.4&quot;},&quot;Links&quot;:{&quot;UrlProductDownload&quot;:&quot;https:\/\/www.s-sols.com\/data\/products\/wordpress\/old-slugs-mgr\/OldSlugsMgr.zip&quot;,&quot;UrlProductInfo&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/products\/wordpress\/old-slugs-mgr?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlProductBuy&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/products\/wordpress\/old-slugs-mgr?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm#offer&quot;,&quot;UrlProductFeatures&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/products\/wordpress\/old-slugs-mgr?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm#features&quot;,&quot;UrlUserPurchases&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/myaccount?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlEula&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/wordpress-plugins-eula-2?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlRatingAboutUs&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/about?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlMorePlugins&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/pcats\/wordpress?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlMain&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlSupport&quot;:&quot;mailto:support@s-sols.com&quot;,&quot;UrlProductDocs&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/docs\/wordpress\/old-slugs-mgr\/getting-started-osm?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlProductReqs&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/docs\/wordpress\/old-slugs-mgr\/getting-started-osm?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm#reqs&quot;,&quot;UrlProductSupport&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/support?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;,&quot;UrlProductLastChanges&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/news\/wordpress\/old-slugs-mgr\/new-ver-osm?utm_source=product&amp;utm_medium=ui&amp;utm_campaign=inproduct_links&amp;utm_term=osm&quot;},&quot;Prms&quot;:{&quot;UrlLicMgr&quot;:&quot;https:\/\/www.s-sols.com\/api\/licmgr&quot;,&quot;UrlSpecialApi&quot;:&quot;https:\/\/www.s-sols.com\/api\/special&quot;,&quot;FullProductDownloadPath&quot;:&quot;OldSlugsMgr.zip&quot;,&quot;RateItSpanTime&quot;:2880,&quot;RateItSpanTimeNext&quot;:10080,&quot;LocaleToSiteLang&quot;:{&quot;ru&quot;:&quot;\/ru&quot;}},&quot;Help&quot;:{&quot;PostEditor&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/docs\/wordpress\/old-slugs-mgr\/getting-started-osm#post_editor&quot;,&quot;Settings&quot;:&quot;https:\/\/www.s-sols.com{SiteLang}\/docs\/wordpress\/old-slugs-mgr\/getting-started-osm#settings&quot;,&quot;&quot;:&quot;&quot;}},&quot;updTime&quot;:1744152530,&quot;v&quot;:1,&quot;vPrev&quot;:0,&quot;mdfTime&quot;:1703676026,&quot;plgVer&quot;:&quot;1.4&quot;,&quot;plgPk&quot;:&quot;Base&quot;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_RmtC...', '{"data":{"Info"...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_RmtC...', '{"data":{"Info"...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(364): seraph_osm\PluginOptions::Set(1, 'RmtCfg', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(431): seraph_osm\PluginRmtCfg::Update(true, true)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#12 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_RmtCfg', '{\"data\":{\"Info\":{\"LastVersion\":\"1.4\"},\"Links\":{\"UrlProductDownload\":\"https:\\/\\/www.s-sols.com\\/data\\/products\\/wordpress\\/old-slugs-mgr\\/OldSlugsMgr.zip\",\"UrlProductInfo\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductBuy\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#offer\",\"UrlProductFeatures\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/products\\/wordpress\\/old-slugs-mgr?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#features\",\"UrlUserPurchases\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/myaccount?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlEula\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/wordpress-plugins-eula-2?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlRatingAboutUs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/about?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlMorePlugins\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/pcats\\/wordpress?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlMain\":\"https:\\/\\/www.s-sols.com{SiteLang}?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlSupport\":\"mailto:support@s-sols.com\",\"UrlProductDocs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductReqs\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm#reqs\",\"UrlProductSupport\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/support?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\",\"UrlProductLastChanges\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/news\\/wordpress\\/old-slugs-mgr\\/new-ver-osm?utm_source=product&utm_medium=ui&utm_campaign=inproduct_links&utm_term=osm\"},\"Prms\":{\"UrlLicMgr\":\"https:\\/\\/www.s-sols.com\\/api\\/licmgr\",\"UrlSpecialApi\":\"https:\\/\\/www.s-sols.com\\/api\\/special\",\"FullProductDownloadPath\":\"OldSlugsMgr.zip\",\"RateItSpanTime\":2880,\"RateItSpanTimeNext\":10080,\"LocaleToSiteLang\":{\"ru\":\"\\/ru\"}},\"Help\":{\"PostEditor\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm#post_editor\",\"Settings\":\"https:\\/\\/www.s-sols.com{SiteLang}\\/docs\\/wordpress\\/old-slugs-mgr\\/getting-started-osm#settings\",\"\":\"\"}},\"updTime\":1744152530,\"v\":1,\"vPrev\":0,\"mdfTime\":1703676026,\"plgVer\":\"1.4\",\"plgPk\":\"Base\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\PluginRmtCfg::Update, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\",\"changePkCheck\":\"\",\"firstUseTimeStamp\":1744152531}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0,&quot;changeVerCheck&quot;:&quot;&quot;,&quot;changePkCheck&quot;:&quot;&quot;,&quot;firstUseTimeStamp&quot;:1744152531}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1175): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(519): seraph_osm\Plugin::StateSet(Array)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seraphinite-old...')
-#12 /internal/eval.php(20): activate_plugin('seraphinite-old...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"changeVerCheck\":\"\",\"changePkCheck\":\"\",\"firstUseTimeStamp\":1744152531}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\Plugin::StateSet, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:48:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:48:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:48:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(62): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1170): seraph_osm\PluginOptions::Get(1, 'State', 'seraph_osm\\Plug...')
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(515): seraph_osm\Plugin::StateGet()
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\Plugin::StateGet, seraph_osm\PluginOptions::Get, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"firstUseTimeStamp\":1744152532}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_State' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0,&quot;firstUseTimeStamp&quot;:1744152532}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Stat...', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Stat...', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1175): seraph_osm\PluginOptions::Set(1, 'State', Array, 'seraph_osm\\Plug...')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(519): seraph_osm\Plugin::StateSet(Array)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#9 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_State', '{\"v\":1,\"vPrev\":0,\"firstUseTimeStamp\":1744152532}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\Plugin::StateSet, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_Sett', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seraph_osm_Sett' , '{&quot;v&quot;:1,&quot;vPrev&quot;:0}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seraph_osm_Sett', '{"v":1,"vPrev":...', '', 'auto')
-#5 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(96): update_option('seraph_osm_Sett', '{"v":1,"vPrev":...')
-#6 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(62): seraph_osm\PluginOptions::Set(1, 'Sett', Array, 'seraph_osm\\')
-#7 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(1100): seraph_osm\PluginOptions::Get(1, 'Sett', 'seraph_osm\\', NULL)
-#8 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(17): seraph_osm\Plugin::SettGet()
-#9 [internal function]: seraph_osm\OnInit(false)
-#10 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Gen.php(241): call_user_func_array('seraph_osm\\OnIn...', Array)
-#11 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/Cmn/Plugin.php(603): seraph_osm\Gen::CallFunc('seraph_osm\\OnIn...', Array)
-#12 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/main.php(10): seraph_osm\Plugin::Init()
-#13 /wordpress/wp-content/plugins/seraphinite-old-slugs-mgr/plugin_root.php(53): include('/wordpress/wp-c...')
-#14 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seraph_osm_Sett', '{\"v\":1,\"vPrev\":0}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/seraphinite-old-slugs-mgr/plugin_root.php'), include('/plugins/seraphinite-old-slugs-mgr/main.php'), seraph_osm\Plugin::Init, seraph_osm\Gen::CallFunc, call_user_func_array, seraph_osm\OnInit, seraph_osm\Plugin::SettGet, seraph_osm\PluginOptions::Get, seraph_osm\PluginOptions::Set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:49:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:49:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:49:49 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [10-Apr-2025 09:30:46 UTC] PHP Deprecated:  Required parameter $larger_side follows optional parameter $new_file in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 1861
+[10-Apr-2025 09:30:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php:73
+Stack trace:
+#0 /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php(22): sb_uploader->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sb-uploader/sb_...')
+#3 /internal/eval.php(20): activate_plugin('sb-uploader/sb_...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 73
+[10-Apr-2025 09:30:55 UTC] PHP Deprecated:  Required parameter $larger_side follows optional parameter $new_file in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 1861
+[10-Apr-2025 09:30:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php:73
+Stack trace:
+#0 /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php(22): sb_uploader->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sb-uploader/sb_...')
+#3 /internal/eval.php(20): activate_plugin('sb-uploader/sb_...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 73
+[10-Apr-2025 09:31:04 UTC] PHP Deprecated:  Required parameter $larger_side follows optional parameter $new_file in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 1861
+[10-Apr-2025 09:31:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php:73
+Stack trace:
+#0 /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php(22): sb_uploader->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sb-uploader/sb_...')
+#3 /internal/eval.php(20): activate_plugin('sb-uploader/sb_...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/sb-uploader/sb_uploader.php on line 73
+[10-Apr-2025 09:36:28 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744277785.392)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 09:36:38 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'prwfr_view_pages_back' not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:36:38 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'prwfr_schedule_mails_RVP' not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:36:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function as_next_scheduled_action() in /wordpress/wp-content/plugins/sft-product-recommendations-for-woocommerce/sft-product-recommendations-woocommerce.php:1298
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): prwfr_start_bf_sale_action('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sft-product-recommendations-for-woocommerce/sft-product-recommendations-woocommerce.php on line 1298
+[10-Apr-2025 09:36:48 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'prwfr_view_pages_back' not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:36:48 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'prwfr_schedule_mails_RVP' not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:36:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function as_next_scheduled_action() in /wordpress/wp-content/plugins/sft-product-recommendations-for-woocommerce/sft-product-recommendations-woocommerce.php:1298
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): prwfr_start_bf_sale_action('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sft-product-recommendations-for-woocommerce/sft-product-recommendations-woocommerce.php on line 1298
+[10-Apr-2025 09:37:01 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>shopp-improved-product-edit</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:37:12 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>shopp-improved-product-edit</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:37:21 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>shopp-improved-product-edit</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:37:32 UTC] PHP Fatal error:  Declaration of table::insert() must be compatible with wpdb::insert($table, $data, $format = null) in /wordpress/wp-content/plugins/sidebar-adder/class-table.php on line 42
+[10-Apr-2025 09:37:41 UTC] PHP Fatal error:  Declaration of table::insert() must be compatible with wpdb::insert($table, $data, $format = null) in /wordpress/wp-content/plugins/sidebar-adder/class-table.php on line 42
+[10-Apr-2025 09:37:50 UTC] PHP Fatal error:  Declaration of table::insert() must be compatible with wpdb::insert($table, $data, $format = null) in /wordpress/wp-content/plugins/sidebar-adder/class-table.php on line 42
+[10-Apr-2025 09:38:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php:400
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-header-m...')
+#2 /internal/eval.php(20): activate_plugin('simple-header-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php on line 400
+[10-Apr-2025 09:38:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php:400
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-header-m...')
+#2 /internal/eval.php(20): activate_plugin('simple-header-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php on line 400
+[10-Apr-2025 09:38:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php:400
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-header-m...')
+#2 /internal/eval.php(20): activate_plugin('simple-header-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/simple-header-modification/photo-gallery.php on line 400
+[10-Apr-2025 09:38:37 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('suboptions_widg...')
@@ -391,7 +113,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[08-Apr-2025 22:49:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 09:38:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('suboptions_widg...')
