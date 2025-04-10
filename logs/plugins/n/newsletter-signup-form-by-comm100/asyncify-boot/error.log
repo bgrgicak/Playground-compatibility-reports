@@ -2,203 +2,77 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 16:54:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:54:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.clearCacheFlag', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nativerent.clearCacheFlag' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nativerent.clea...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/nativerent/inc/Core/Options/WpOptionStorage.php(19): update_option('nativerent.clea...', 0)
-#6 /wordpress/wp-content/plugins/nativerent/inc/Common/Options.php(391): NativeRent\Core\Options\WpOptionStorage->set('nativerent.clea...', 0)
-#7 /wordpress/wp-content/plugins/nativerent/inc/Common/Listeners/SetupClearCacheFlag.php(61): NativeRent\Common\Options->setClearCacheFlag(0)
-#8 /wordpress/wp-content/plugins/nativerent/inc/Common/Listeners/SetupClearCacheFlag.php(33): NativeRent\Common\Listeners\SetupClearCacheFlag->pluginActivatedHandler(Object(NativeRent\Common\Events\PluginActivated))
-#9 /wordpress/wp-content/plugins/nativerent/inc/Core/Events/WpEventBus.php(45): NativeRent\Common\Listeners\SetupClearCacheFlag->__invoke(Object(NativeRent\Common\Events\PluginActivated))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Core\Events\WpEventBus::NativeRent\Core\Events\{closure}(Object(NativeRent\Common\Events\PluginActivated))
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-content/plugins/nativerent/inc/Core/Events/WpEventBus.php(30): do_action('nativerent_plug...', Object(NativeRent\Common\Events\PluginActivated))
-#14 /wordpress/wp-content/plugins/nativerent/inc/Common/Bootloader.php(277): NativeRent\Core\Events\WpEventBus->dispatch(Object(NativeRent\Common\Events\PluginActivated))
-#15 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Common\Bootloader->NativeRent\Common\{closure}(false)
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_native...', false)
-#19 /internal/eval.php(20): activate_plugin('nativerent/nati...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.clearCacheFlag', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nativerent/nativerent.php'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Common\Bootloader->NativeRent\Common\{closure}, NativeRent\Core\Events\WpEventBus->dispatch, do_action('nativerent_plugin-activated'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Core\Events\WpEventBus::NativeRent\Core\Events\{closure}, NativeRent\Common\Listeners\SetupClearCacheFlag->__invoke, NativeRent\Common\Listeners\SetupClearCacheFlag->pluginActivatedHandler, NativeRent\Common\Options->setClearCacheFlag, NativeRent\Core\Options\WpOptionStorage->set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:54:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:54:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.adUnitsConfig', '{\"regular\":{\"horizontalTop\":{\"insert\":\"after\",\"autoSelector\":\"firstParagraph\",\"customSelector\":\"\",\"settings\":[]},\"horizontalMiddle\":{\"insert\":\"after\",\"autoSelector\":\"middleParagraph\",\"customSelector\":\"\",\"settings\":[]},\"horizontalBottom\":{\"insert\":\"after\",\"autoSelector\":\"lastParagraph\",\"customSelector\":\"\",\"settings\":[]},\"popupTeaser\":{\"insert\":\"inside\",\"autoSelector\":\"body\",\"customSelector\":\"\",\"settings\":{\"desktopTeaser\":true,\"mobileTeaser\":true,\"mobileFullscreen\":true}}},\"ntgb\":{\"1\":{\"insert\":\"after\",\"autoSelector\":\"middleParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":false,\"noInsertion\":false,\"fallbackCode\":\"\"}},\"2\":{\"insert\":\"after\",\"autoSelector\":\"lastParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":true,\"noInsertion\":false,\"fallbackCode\":\"\"}},\"3\":{\"insert\":\"after\",\"autoSelector\":\"firstParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":true,\"noInsertion\":false,\"fallbackCode\":\"\"}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nativerent.adUnitsConfig' , '{&quot;regular&quot;:{&quot;horizontalTop&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;firstParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:[]},&quot;horizontalMiddle&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;middleParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:[]},&quot;horizontalBottom&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;lastParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:[]},&quot;popupTeaser&quot;:{&quot;insert&quot;:&quot;inside&quot;,&quot;autoSelector&quot;:&quot;body&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:{&quot;desktopTeaser&quot;:true,&quot;mobileTeaser&quot;:true,&quot;mobileFullscreen&quot;:true}}},&quot;ntgb&quot;:{&quot;1&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;middleParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:{&quot;inactive&quot;:false,&quot;noInsertion&quot;:false,&quot;fallbackCode&quot;:&quot;&quot;}},&quot;2&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;lastParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:{&quot;inactive&quot;:true,&quot;noInsertion&quot;:false,&quot;fallbackCode&quot;:&quot;&quot;}},&quot;3&quot;:{&quot;insert&quot;:&quot;after&quot;,&quot;autoSelector&quot;:&quot;firstParagraph&quot;,&quot;customSelector&quot;:&quot;&quot;,&quot;settings&quot;:{&quot;inactive&quot;:true,&quot;noInsertion&quot;:false,&quot;fallbackCode&quot;:&quot;&quot;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nativerent.adUn...', '{"regular":{"ho...', '', 'auto')
-#5 /wordpress/wp-content/plugins/nativerent/inc/Common/Migrations/V185.php(40): update_option('nativerent.adUn...', '{"regular":{"ho...')
-#6 /wordpress/wp-content/plugins/nativerent/inc/Core/Migration/Migrator.php(80): NativeRent\Common\Migrations\V185->__invoke()
-#7 /wordpress/wp-content/plugins/nativerent/inc/Common/Bootloader.php(175): NativeRent\Core\Migration\Migrator->run('0', '2.1.3')
-#8 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Common\Bootloader->NativeRent\Common\{closure}('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.adUnitsConfig', '{\"regular\":{\"horizontalTop\":{\"insert\":\"after\",\"autoSelector\":\"firstParagraph\",\"customSelector\":\"\",\"settings\":[]},\"horizontalMiddle\":{\"insert\":\"after\",\"autoSelector\":\"middleParagraph\",\"customSelector\":\"\",\"settings\":[]},\"horizontalBottom\":{\"insert\":\"after\",\"autoSelector\":\"lastParagraph\",\"customSelector\":\"\",\"settings\":[]},\"popupTeaser\":{\"insert\":\"inside\",\"autoSelector\":\"body\",\"customSelector\":\"\",\"settings\":{\"desktopTeaser\":true,\"mobileTeaser\":true,\"mobileFullscreen\":true}}},\"ntgb\":{\"1\":{\"insert\":\"after\",\"autoSelector\":\"middleParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":false,\"noInsertion\":false,\"fallbackCode\":\"\"}},\"2\":{\"insert\":\"after\",\"autoSelector\":\"lastParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":true,\"noInsertion\":false,\"fallbackCode\":\"\"}},\"3\":{\"insert\":\"after\",\"autoSelector\":\"firstParagraph\",\"customSelector\":\"\",\"settings\":{\"inactive\":true,\"noInsertion\":false,\"fallbackCode\":\"\"}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Common\Bootloader->NativeRent\Common\{closure}, NativeRent\Core\Migration\Migrator->run, NativeRent\Common\Migrations\V185->__invoke, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 16:54:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent_version', '2.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nativerent_version' , '2.1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nativerent_vers...', '2.1.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/nativerent/inc/Core/Options/WpOptionStorage.php(19): update_option('nativerent_vers...', '2.1.3')
-#6 /wordpress/wp-content/plugins/nativerent/inc/Common/Options.php(121): NativeRent\Core\Options\WpOptionStorage->set('nativerent_vers...', '2.1.3')
-#7 /wordpress/wp-content/plugins/nativerent/inc/Common/Bootloader.php(176): NativeRent\Common\Options->setPluginVersion('2.1.3')
-#8 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Common\Bootloader->NativeRent\Common\{closure}('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent_version', '2.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Common\Bootloader->NativeRent\Common\{closure}, NativeRent\Common\Options->setPluginVersion, NativeRent\Core\Options\WpOptionStorage->set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 16:54:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.clearCacheFlag', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nativerent.clearCacheFlag' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nativerent.clea...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/nativerent/inc/Core/Options/WpOptionStorage.php(19): update_option('nativerent.clea...', 0)
-#6 /wordpress/wp-content/plugins/nativerent/inc/Common/Options.php(391): NativeRent\Core\Options\WpOptionStorage->set('nativerent.clea...', 0)
-#7 /wordpress/wp-content/plugins/nativerent/inc/Common/Listeners/SetupClearCacheFlag.php(65): NativeRent\Common\Options->setClearCacheFlag(0)
-#8 /wordpress/wp-content/plugins/nativerent/inc/Common/Listeners/SetupClearCacheFlag.php(36): NativeRent\Common\Listeners\SetupClearCacheFlag->pluginVersionChangedHandler(Object(NativeRent\Common\Events\PluginVersionChanged))
-#9 /wordpress/wp-content/plugins/nativerent/inc/Core/Events/WpEventBus.php(45): NativeRent\Common\Listeners\SetupClearCacheFlag->__invoke(Object(NativeRent\Common\Events\PluginVersionChanged))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Core\Events\WpEventBus::NativeRent\Core\Events\{closure}(Object(NativeRent\Common\Events\PluginVersionChanged))
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-content/plugins/nativerent/inc/Core/Events/WpEventBus.php(30): do_action('nativerent_plug...', Object(NativeRent\Common\Events\PluginVersionChanged))
-#14 /wordpress/wp-content/plugins/nativerent/inc/Common/Bootloader.php(178): NativeRent\Core\Events\WpEventBus->dispatch(Object(NativeRent\Common\Events\PluginVersionChanged))
-#15 /wordpress/wp-includes/class-wp-hook.php(324): NativeRent\Common\Bootloader->NativeRent\Common\{closure}('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nativerent.clearCacheFlag', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Common\Bootloader->NativeRent\Common\{closure}, NativeRent\Core\Events\WpEventBus->dispatch, do_action('nativerent_plugin-version-changed'), WP_Hook->do_action, WP_Hook->apply_filters, NativeRent\Core\Events\WpEventBus::NativeRent\Core\Events\{closure}, NativeRent\Common\Listeners\SetupClearCacheFlag->__invoke, NativeRent\Common\Listeners\SetupClearCacheFlag->pluginVersionChangedHandler, NativeRent\Common\Options->setClearCacheFlag, NativeRent\Core\Options\WpOptionStorage->set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 16:55:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:55:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:55:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 16:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 16:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 16:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 16:56:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketing.class.php:35
+Error: [10-Apr-2025 06:36:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 06:36:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 06:36:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 06:36:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 06:37:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 06:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 06:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 06:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 06:37:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NBRM_Widget')
+#2 /wordpress/wp-content/plugins/nbrm-exchange-rates/nbrm-widget.php(15): register_widget('NBRM_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nbrm_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 06:37:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NBRM_Widget')
+#2 /wordpress/wp-content/plugins/nbrm-exchange-rates/nbrm-widget.php(15): register_widget('NBRM_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nbrm_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 06:37:35 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NBRM_Widget')
+#2 /wordpress/wp-content/plugins/nbrm-exchange-rates/nbrm-widget.php(15): register_widget('NBRM_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nbrm_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 06:37:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 06:37:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 06:37:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 06:37:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 06:38:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 06:38:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 06:38:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 06:38:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 06:38:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketing.class.php:35
 Stack trace:
 #0 /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketingAdmin.class.php(22): Comm100EmailMarketing->__construct()
 #1 /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketingAdmin.class.php(48): Comm100EmailMarketingAdmin->__construct()
@@ -208,7 +82,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('newsletter-sign...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketing.class.php on line 35
-[08-Apr-2025 16:56:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketing.class.php:35
+[10-Apr-2025 06:38:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketing.class.php:35
 Stack trace:
 #0 /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketingAdmin.class.php(22): Comm100EmailMarketing->__construct()
 #1 /wordpress/wp-content/plugins/newsletter-signup-form-by-comm100/plugin_files/Comm100EmailMarketingAdmin.class.php(48): Comm100EmailMarketingAdmin->__construct()
