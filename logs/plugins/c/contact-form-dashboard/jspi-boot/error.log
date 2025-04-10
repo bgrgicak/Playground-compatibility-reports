@@ -2,111 +2,23 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:26:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:19 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:53 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bz_sticky_categories', 'a:1:{i:1;a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bz_sticky_categories' , 'a:1:{i:1;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bz_sticky_categ...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/category-sticky-posts/bz_category_sticky.php(68): update_option('bz_sticky_categ...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): bz_category_sticky->bz_category_sticky_is_on(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_catego...', false)
-#10 /internal/eval.php(20): activate_plugin('category-sticky...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bz_sticky_categories', 'a:1:{i:1;a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_category-sticky-posts/bz_category_sticky.php'), WP_Hook->do_action, WP_Hook->apply_filters, bz_category_sticky->bz_category_sticky_is_on, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:27:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:54 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:28:02 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:28:03 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:28:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:28:12 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 07:28:29 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:28:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:28:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:28:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:28:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:29:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:29:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:30:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cfd_settings', 'a:1:{s:6:\"enable\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cfd_settings' , 'a:1:{s:6:&quot;enable&quot;;b:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cfd_settings', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/contact-form-dashboard/contact-form-dashboard.php(34): update_option('cfd_settings', Array)
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('contact-form-da...')
-#8 /internal/eval.php(20): activate_plugin('contact-form-da...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cfd_settings', 'a:1:{s:6:\"enable\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/contact-form-dashboard/contact-form-dashboard.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:30:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
+Error: [10-Apr-2025 13:51:33 UTC] PHP Warning:  Undefined variable $crl_plugin_dir in /wordpress/wp-content/plugins/custom-registration-link/custom-registration-link.php on line 117
+[10-Apr-2025 13:51:42 UTC] PHP Warning:  Undefined variable $crl_plugin_dir in /wordpress/wp-content/plugins/custom-registration-link/custom-registration-link.php on line 117
+[10-Apr-2025 13:51:50 UTC] PHP Warning:  Undefined variable $crl_plugin_dir in /wordpress/wp-content/plugins/custom-registration-link/custom-registration-link.php on line 117
+[10-Apr-2025 13:53:01 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:53:02 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:53:11 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:53:12 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:53:20 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:53:20 UTC] PHP Deprecated:  Required parameter $secret follows optional parameter $action in /wordpress/wp-content/plugins/cf7-salesforce-crm-add-on/public/functions.php on line 7
+[10-Apr-2025 13:56:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:56:07 UTC] Automatic updates starting...
+[10-Apr-2025 13:56:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:56:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:56:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:56:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:56:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cleancomments/cleancomment.php on line 153
+[10-Apr-2025 13:59:07 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
 Stack trace:
 #0 /wordpress/wp-content/plugins/contact-form-dashboard/setting.php(4): require_once()
 #1 /wordpress/wp-content/plugins/contact-form-dashboard/contact-form-dashboard.php(38): require_once('/wordpress/wp-c...')
@@ -115,7 +27,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('contact-form-da...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php on line 8
-[09-Apr-2025 07:30:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
+[10-Apr-2025 13:59:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
 Stack trace:
 #0 /wordpress/wp-content/plugins/contact-form-dashboard/setting.php(4): require_once()
 #1 /wordpress/wp-content/plugins/contact-form-dashboard/contact-form-dashboard.php(38): require_once('/wordpress/wp-c...')
@@ -124,7 +36,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('contact-form-da...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php on line 8
-[09-Apr-2025 07:30:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
+[10-Apr-2025 13:59:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CFD_PLUGIN_DEFAULT_CHANNEL" in /wordpress/wp-content/plugins/contact-form-dashboard/includes/class-entries.php:8
 Stack trace:
 #0 /wordpress/wp-content/plugins/contact-form-dashboard/setting.php(4): require_once()
 #1 /wordpress/wp-content/plugins/contact-form-dashboard/contact-form-dashboard.php(38): require_once('/wordpress/wp-c...')
