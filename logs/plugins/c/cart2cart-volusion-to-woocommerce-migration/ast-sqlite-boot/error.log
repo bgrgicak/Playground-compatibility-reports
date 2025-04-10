@@ -2,319 +2,58 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 16:56:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:56:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:56:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:56:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:57:02 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:57:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:57:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:57:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:57:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
-#11 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
-#12 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#13 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#14 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#15 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_2()
-#17 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(55): require('/wordpress/wp-c...')
-#18 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(38): composerRequire2686b128879ab42ecb4a42b945440e6c('49628becc291163...', '/wordpress/wp-c...')
-#19 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/autoload.php(25): ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader()
-#20 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(262): include('/wordpress/wp-c...')
-#21 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(182): RankMath->includes()
-#22 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(164): RankMath->setup()
-#23 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(551): RankMath::get()
-#24 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(555): rank_math()
-#25 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#26 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-by-rank-mat...')
-#27 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#28 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-by-rank-math/rank-math.php'), rank_math, RankMath::get, RankMath->setup, RankMath->includes, include('/plugins/seo-by-rank-math/vendor/autoload.php'), ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader, composerRequire2686b128879ab42ecb4a42b945440e6c, require('/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_2, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->update_table, do_action('action_scheduler/created_table'), WP_Hook->do_action, WP_Hook->apply_filters, ActionScheduler_HybridStore->set_autoincrement, ActionScheduler_HybridStore->set_demarkation_id, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744217822', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_StoreSchema' , '7.0.1744217822' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '7.0.1744217822', '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '7.0.1744217822')
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#9 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#10 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#11 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_2()
-#12 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(55): require('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(38): composerRequire2686b128879ab42ecb4a42b945440e6c('49628becc291163...', '/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/autoload.php(25): ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader()
-#15 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(262): include('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(182): RankMath->includes()
-#17 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(164): RankMath->setup()
-#18 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(551): RankMath::get()
-#19 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(555): rank_math()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-by-rank-mat...')
-#22 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744217822', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-by-rank-math/rank-math.php'), rank_math, RankMath::get, RankMath->setup, RankMath->includes, include('/plugins/seo-by-rank-math/vendor/autoload.php'), ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader, composerRequire2686b128879ab42ecb4a42b945440e6c, require('/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_2, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744217823', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_LoggerSchema' , '3.0.1744217823' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '3.0.1744217823', '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '3.0.1744217823')
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php(108): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(224): ActionScheduler_DBLogger->init()
-#9 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#10 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_2()
-#11 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(55): require('/wordpress/wp-c...')
-#12 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/composer/autoload_real.php(38): composerRequire2686b128879ab42ecb4a42b945440e6c('49628becc291163...', '/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/seo-by-rank-math/vendor/autoload.php(25): ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader()
-#14 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(262): include('/wordpress/wp-c...')
-#15 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(182): RankMath->includes()
-#16 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(164): RankMath->setup()
-#17 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(551): RankMath::get()
-#18 /wordpress/wp-content/plugins/seo-by-rank-math/rank-math.php(555): rank_math()
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-by-rank-mat...')
-#21 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744217823', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-by-rank-math/rank-math.php'), rank_math, RankMath::get, RankMath->setup, RankMath->includes, include('/plugins/seo-by-rank-math/vendor/autoload.php'), ComposerAutoloaderInit2686b128879ab42ecb4a42b945440e6c::getLoader, composerRequire2686b128879ab42ecb4a42b945440e6c, require('/plugins/seo-by-rank-math/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_2, ActionScheduler::init, ActionScheduler_DBLogger->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank_math_known_post_types', 'a:3:{s:4:\"post\";s:4:\"post\";s:4:\"page\";s:4:\"page\";s:10:\"attachment\";s:10:\"attachment\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rank_math_known_post_types' , 'a:3:{s:4:&quot;post&quot;;s:4:&quot;post&quot;;s:4:&quot;page&quot;;s:4:&quot;page&quot;;s:10:&quot;attachment&quot;;s:10:&quot;attachment&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(277): add_option('rank_math_known...', Array)
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(266): RankMath\Installer->create_misc_options()
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(137): RankMath\Installer->create_options()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(49): RankMath\Installer->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): RankMath\Installer->activation(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-by...', false)
-#12 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank_math_known_post_types', 'a:3:{s:4:\"post\";s:4:\"post\";s:4:\"page\";s:4:\"page\";s:10:\"attachment\";s:10:\"attachment\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-by-rank-math/rank-math.php'), WP_Hook->do_action, WP_Hook->apply_filters, RankMath\Installer->activation, RankMath\Installer->activate, RankMath\Installer->create_options, RankMath\Installer->create_misc_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank_math_modules', 'a:12:{i:0;s:12:\"link-counter\";i:1;s:9:\"analytics\";i:2;s:12:\"seo-analysis\";i:3;s:7:\"sitemap\";i:4;s:12:\"rich-snippet\";i:5;s:11:\"woocommerce\";i:6;s:10:\"buddypress\";i:7;s:7:\"bbpress\";i:8;s:3:\"acf\";i:9;s:11:\"web-stories\";i:10;s:10:\"content-ai\";i:11;s:16:\"instant-indexing\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rank_math_modules' , 'a:12:{i:0;s:12:&quot;link-counter&quot;;i:1;s:9:&quot;analytics&quot;;i:2;s:12:&quot;seo-analysis&quot;;i:3;s:7:&quot;sitemap&quot;;i:4;s:12:&quot;rich-snippet&quot;;i:5;s:11:&quot;woocommerce&quot;;i:6;s:10:&quot;buddypress&quot;;i:7;s:7:&quot;bbpress&quot;;i:8;s:3:&quot;acf&quot;;i:9;s:11:&quot;web-stories&quot;;i:10;s:10:&quot;content-ai&quot;;i:11;s:16:&quot;instant-indexing&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(310): add_option('rank_math_modul...', Array)
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(266): RankMath\Installer->create_misc_options()
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(137): RankMath\Installer->create_options()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(49): RankMath\Installer->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): RankMath\Installer->activation(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-by...', false)
-#12 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank_math_modules', 'a:12:{i:0;s:12:\"link-counter\";i:1;s:9:\"analytics\";i:2;s:12:\"seo-analysis\";i:3;s:7:\"sitemap\";i:4;s:12:\"rich-snippet\";i:5;s:11:\"woocommerce\";i:6;s:10:\"buddypress\";i:7;s:7:\"bbpress\";i:8;s:3:\"acf\";i:9;s:11:\"web-stories\";i:10;s:10:\"content-ai\";i:11;s:16:\"instant-indexing\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-by-rank-math/rank-math.php'), WP_Hook->do_action, WP_Hook->apply_filters, RankMath\Installer->activation, RankMath\Installer->activate, RankMath\Installer->create_options, RankMath\Installer->create_misc_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank-math-options-general', 'a:48:{s:19:\"strip_category_base\";s:3:\"off\";s:24:\"attachment_redirect_urls\";s:2:\"on\";s:27:\"attachment_redirect_default\";s:21:\"http://127.0.0.1:9408\";s:23:\"nofollow_external_links\";s:3:\"off\";s:20:\"nofollow_image_links\";s:3:\"off\";s:25:\"new_window_external_links\";s:2:\"on\";s:11:\"add_img_alt\";s:3:\"off\";s:14:\"img_alt_format\";s:11:\" %filename%\";s:13:\"add_img_title\";s:3:\"off\";s:16:\"img_title_format\";s:22:\"%title% %count(title)%\";s:11:\"breadcrumbs\";s:3:\"off\";s:21:\"breadcrumbs_separator\";s:1:\"-\";s:16:\"breadcrumbs_home\";s:2:\"on\";s:22:\"breadcrumbs_home_label\";s:4:\"Home\";s:26:\"breadcrumbs_archive_format\";s:15:\"Archives for %s\";s:25:\"breadcrumbs_search_format\";s:14:\"Results for %s\";s:21:\"breadcrumbs_404_label\";s:25:\"404 Error: page not found\";s:31:\"breadcrumbs_ancestor_categories\";s:3:\"off\";s:21:\"breadcrumbs_blog_page\";s:3:\"off\";s:16:\"404_monitor_mode\";s:6:\"simple\";s:17:\"404_monitor_limit\";i:100;s:35:\"404_monitor_ignore_query_parameters\";s:2:\"on\";s:24:\"redirections_header_code\";s:3:\"301\";s:18:\"redirections_debug\";s:3:\"off\";s:23:\"console_caching_control\";s:2:\"90\";s:21:\"console_email_reports\";s:2:\"on\";s:23:\"console_email_frequency\";s:7:\"monthly\";s:27:\"link_builder_links_per_page\";s:1:\"7\";s:29:\"link_builder_links_per_target\";s:1:\"1\";s:22:\"wc_remove_product_base\";s:3:\"off\";s:23:\"wc_remove_category_base\";s:3:\"off\";s:31:\"wc_remove_category_parent_slugs\";s:3:\"off\";s:18:\"rss_before_content\";s:0:\"\";s:17:\"rss_after_content\";s:0:\"\";s:19:\"wc_remove_generator\";s:2:\"on\";s:24:\"remove_shop_snippet_data\";s:2:\"on\";s:18:\"frontend_seo_score\";s:3:\"off\";s:29:\"frontend_seo_score_post_types\";a:1:{i:0;s:4:\"post\";}s:27:\"frontend_seo_score_position\";s:3:\"top\";s:10:\"setup_mode\";s:8:\"advanced\";s:21:\"content_ai_post_types\";a:2:{i:0;s:4:\"post\";i:1;s:4:\"page\";}s:18:\"content_ai_country\";s:3:\"all\";s:15:\"content_ai_tone\";s:6:\"Formal\";s:19:\"content_ai_audience\";s:16:\"General Audience\";s:19:\"content_ai_language\";s:10:\"US English\";s:15:\"analytics_stats\";s:2:\"on\";s:15:\"toc_block_title\";s:17:\"Table of Contents\";s:20:\"toc_block_list_style\";s:2:\"ul\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rank-math-options-general' , 'a:48:{s:19:&quot;strip_category_base&quot;;s:3:&quot;off&quot;;s:24:&quot;attachment_redirect_urls&quot;;s:2:&quot;on&quot;;s:27:&quot;attachment_redirect_default&quot;;s:21:&quot;http://127.0.0.1:9408&quot;;s:23:&quot;nofollow_external_links&quot;;s:3:&quot;off&quot;;s:20:&quot;nofollow_image_links&quot;;s:3:&quot;off&quot;;s:25:&quot;new_window_external_links&quot;;s:2:&quot;on&quot;;s:11:&quot;add_img_alt&quot;;s:3:&quot;off&quot;;s:14:&quot;img_alt_format&quot;;s:11:&quot; %filename%&quot;;s:13:&quot;add_img_title&quot;;s:3:&quot;off&quot;;s:16:&quot;img_title_format&quot;;s:22:&quot;%title% %count(title)%&quot;;s:11:&quot;breadcrumbs&quot;;s:3:&quot;off&quot;;s:21:&quot;breadcrumbs_separator&quot;;s:1:&quot;-&quot;;s:16:&quot;breadcrumbs_home&quot;;s:2:&quot;on&quot;;s:22:&quot;breadcrumbs_home_label&quot;;s:4:&quot;Home&quot;;s:26:&quot;breadcrumbs_archive_format&quot;;s:15:&quot;Archives for %s&quot;;s:25:&quot;breadcrumbs_search_format&quot;;s:14:&quot;Results for %s&quot;;s:21:&quot;breadcrumbs_404_label&quot;;s:25:&quot;404 Error: page not found&quot;;s:31:&quot;breadcrumbs_ancestor_categories&quot;;s:3:&quot;off&quot;;s:21:&quot;breadcrumbs_blog_page&quot;;s:3:&quot;off&quot;;s:16:&quot;404_monitor_mode&quot;;s:6:&quot;simple&quot;;s:17:&quot;404_monitor_limit&quot;;i:100;s:35:&quot;404_monitor_ignore_query_parameters&quot;;s:2:&quot;on&quot;;s:24:&quot;redirections_header_code&quot;;s:3:&quot;301&quot;;s:18:&quot;redirections_debug&quot;;s:3:&quot;off&quot;;s:23:&quot;console_caching_control&quot;;s:2:&quot;90&quot;;s:21:&quot;console_email_reports&quot;;s:2:&quot;on&quot;;s:23:&quot;console_email_frequency&quot;;s:7:&quot;monthly&quot;;s:27:&quot;link_builder_links_per_page&quot;;s:1:&quot;7&quot;;s:29:&quot;link_builder_links_per_target&quot;;s:1:&quot;1&quot;;s:22:&quot;wc_remove_product_base&quot;;s:3:&quot;off&quot;;s:23:&quot;wc_remove_category_base&quot;;s:3:&quot;off&quot;;s:31:&quot;wc_remove_category_parent_slugs&quot;;s:3:&quot;off&quot;;s:18:&quot;rss_before_content&quot;;s:0:&quot;&quot;;s:17:&quot;rss_after_content&quot;;s:0:&quot;&quot;;s:19:&quot;wc_remove_generator&quot;;s:2:&quot;on&quot;;s:24:&quot;remove_shop_snippet_data&quot;;s:2:&quot;on&quot;;s:18:&quot;frontend_seo_score&quot;;s:3:&quot;off&quot;;s:29:&quot;frontend_seo_score_post_types&quot;;a:1:{i:0;s:4:&quot;post&quot;;}s:27:&quot;frontend_seo_score_position&quot;;s:3:&quot;top&quot;;s:10:&quot;setup_mode&quot;;s:8:&quot;advanced&quot;;s:21:&quot;content_ai_post_types&quot;;a:2:{i:0;s:4:&quot;post&quot;;i:1;s:4:&quot;page&quot;;}s:18:&quot;content_ai_country&quot;;s:3:&quot;all&quot;;s:15:&quot;content_ai_tone&quot;;s:6:&quot;Formal&quot;;s:19:&quot;content_ai_audience&quot;;s:16:&quot;General Audience&quot;;s:19:&quot;content_ai_language&quot;;s:10:&quot;US English&quot;;s:15:&quot;analytics_stats&quot;;s:2:&quot;on&quot;;s:15:&quot;toc_block_title&quot;;s:17:&quot;Table of Contents&quot;;s:20:&quot;toc_block_list_style&quot;;s:2:&quot;ul&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(377): add_option('rank-math-optio...', Array)
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(267): RankMath\Installer->create_general_options()
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(137): RankMath\Installer->create_options()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(49): RankMath\Installer->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): RankMath\Installer->activation(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-by...', false)
-#12 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank-math-options-general', 'a:48:{s:19:\"strip_category_base\";s:3:\"off\";s:24:\"attachment_redirect_urls\";s:2:\"on\";s:27:\"attachment_redirect_default\";s:21:\"http://127.0.0.1:9408\";s:23:\"nofollow_external_links\";s:3:\"off\";s:20:\"nofollow_image_links\";s:3:\"off\";s:25:\"new_window_external_links\";s:2:\"on\";s:11:\"add_img_alt\";s:3:\"off\";s:14:\"img_alt_format\";s:11:\" %filename%\";s:13:\"add_img_title\";s:3:\"off\";s:16:\"img_title_format\";s:22:\"%title% %count(title)%\";s:11:\"breadcrumbs\";s:3:\"off\";s:21:\"breadcrumbs_separator\";s:1:\"-\";s:16:\"breadcrumbs_home\";s:2:\"on\";s:22:\"breadcrumbs_home_label\";s:4:\"Home\";s:26:\"breadcrumbs_archive_format\";s:15:\"Archives for %s\";s:25:\"breadcrumbs_search_format\";s:14:\"Results for %s\";s:21:\"breadcrumbs_404_label\";s:25:\"404 Error: page not found\";s:31:\"breadcrumbs_ancestor_categories\";s:3:\"off\";s:21:\"breadcrumbs_blog_page\";s:3:\"off\";s:16:\"404_monitor_mode\";s:6:\"simple\";s:17:\"404_monitor_limit\";i:100;s:35:\"404_monitor_ignore_query_parameters\";s:2:\"on\";s:24:\"redirections_header_code\";s:3:\"301\";s:18:\"redirections_debug\";s:3:\"off\";s:23:\"console_caching_control\";s:2:\"90\";s:21:\"console_email_reports\";s:2:\"on\";s:23:\"console_email_frequency\";s:7:\"monthly\";s:27:\"link_builder_links_per_page\";s:1:\"7\";s:29:\"link_builder_links_per_target\";s:1:\"1\";s:22:\"wc_remove_product_base\";s:3:\"off\";s:23:\"wc_remove_category_base\";s:3:\"off\";s:31:\"wc_remove_category_parent_slugs\";s:3:\"off\";s:18:\"rss_before_content\";s:0:\"\";s:17:\"rss_after_content\";s:0:\"\";s:19:\"wc_remove_generator\";s:2:\"on\";s:24:\"remove_shop_snippet_data\";s:2:\"on\";s:18:\"frontend_seo_score\";s:3:\"off\";s:29:\"frontend_seo_score_post_types\";a:1:{i:0;s:4:\"post\";}s:27:\"frontend_seo_score_position\";s:3:\"top\";s:10:\"setup_mode\";s:8:\"advanced\";s:21:\"content_ai_post_types\";a:2:{i:0;s:4:\"post\";i:1;s:4:\"page\";}s:18:\"content_ai_country\";s:3:\"all\";s:15:\"content_ai_tone\";s:6:\"Formal\";s:19:\"content_ai_audience\";s:16:\"General Audience\";s:19:\"content_ai_language\";s:10:\"US English\";s:15:\"analytics_stats\";s:2:\"on\";s:15:\"toc_block_title\";s:17:\"Table of Contents\";s:20:\"toc_block_list_style\";s:2:\"ul\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-by-rank-math/rank-math.php'), WP_Hook->do_action, WP_Hook->apply_filters, RankMath\Installer->activation, RankMath\Installer->activate, RankMath\Installer->create_options, RankMath\Installer->create_general_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank-math-options-titles', 'a:111:{s:24:\"noindex_empty_taxonomies\";s:2:\"on\";s:15:\"title_separator\";s:1:\"-\";s:17:\"capitalize_titles\";s:3:\"off\";s:17:\"twitter_card_type\";s:19:\"summary_large_image\";s:19:\"knowledgegraph_type\";s:6:\"person\";s:19:\"knowledgegraph_name\";s:20:\"My WordPress Website\";s:12:\"website_name\";s:20:\"My WordPress Website\";s:19:\"local_business_type\";s:12:\"Organization\";s:20:\"local_address_format\";s:43:\"{address} {locality}, {region} {postalcode}\";s:13:\"opening_hours\";a:7:{i:0;a:2:{s:3:\"day\";s:6:\"Monday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:1;a:2:{s:3:\"day\";s:7:\"Tuesday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:2;a:2:{s:3:\"day\";s:9:\"Wednesday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:3;a:2:{s:3:\"day\";s:8:\"Thursday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:4;a:2:{s:3:\"day\";s:6:\"Friday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:5;a:2:{s:3:\"day\";s:8:\"Saturday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:6;a:2:{s:3:\"day\";s:6:\"Sunday\";s:4:\"time\";s:11:\"09:00-17:00\";}}s:20:\"opening_hours_format\";s:3:\"off\";s:14:\"homepage_title\";s:34:\"%sitename% %page% %sep% %sitedesc%\";s:20:\"homepage_description\";s:0:\"\";s:22:\"homepage_custom_robots\";s:3:\"off\";s:23:\"disable_author_archives\";s:3:\"off\";s:15:\"url_author_base\";s:6:\"author\";s:20:\"author_custom_robots\";s:2:\"on\";s:13:\"author_robots\";a:1:{i:0;s:7:\"noindex\";}s:20:\"author_archive_title\";s:30:\"%name% %sep% %sitename% %page%\";s:19:\"author_add_meta_box\";s:2:\"on\";s:21:\"disable_date_archives\";s:2:\"on\";s:18:\"date_archive_title\";s:30:\"%date% %page% %sep% %sitename%\";s:12:\"search_title\";s:38:\"%search_query% %page% %sep% %sitename%\";s:9:\"404_title\";s:31:\"Page Not Found %sep% %sitename%\";s:19:\"date_archive_robots\";a:1:{i:0;s:7:\"noindex\";}s:14:\"noindex_search\";s:2:\"on\";s:24:\"noindex_archive_subpages\";s:3:\"off\";s:26:\"noindex_password_protected\";s:3:\"off\";s:32:\"pt_download_default_rich_snippet\";s:7:\"product\";s:29:\"author_slack_enhanced_sharing\";s:2:\"on\";s:13:\"pt_post_title\";s:24:\"%title% %sep% %sitename%\";s:19:\"pt_post_description\";s:9:\"%excerpt%\";s:14:\"pt_post_robots\";a:0:{}s:21:\"pt_post_custom_robots\";s:3:\"off\";s:28:\"pt_post_default_rich_snippet\";s:7:\"article\";s:28:\"pt_post_default_article_type\";s:11:\"BlogPosting\";s:28:\"pt_post_default_snippet_name\";s:11:\"%seo_title%\";s:28:\"pt_post_default_snippet_desc\";s:17:\"%seo_description%\";s:30:\"pt_post_slack_enhanced_sharing\";s:2:\"on\";s:17:\"pt_post_ls_use_fk\";s:6:\"titles\";s:20:\"pt_post_add_meta_box\";s:2:\"on\";s:20:\"pt_post_bulk_editing\";s:7:\"editing\";s:24:\"pt_post_link_suggestions\";s:2:\"on\";s:24:\"pt_post_primary_taxonomy\";s:8:\"category\";s:13:\"pt_page_title\";s:24:\"%title% %sep% %sitename%\";s:19:\"pt_page_description\";s:9:\"%excerpt%\";s:14:\"pt_page_robots\";a:0:{}s:21:\"pt_page_custom_robots\";s:3:\"off\";s:28:\"pt_page_default_rich_snippet\";s:7:\"article\";s:28:\"pt_page_default_article_type\";s:7:\"Article\";s:28:\"pt_page_default_snippet_name\";s:11:\"%seo_title%\";s:28:\"pt_page_default_snippet_desc\";s:17:\"%seo_description%\";s:30:\"pt_page_slack_enhanced_sharing\";s:2:\"on\";s:17:\"pt_page_ls_use_fk\";s:6:\"titles\";s:20:\"pt_page_add_meta_box\";s:2:\"on\";s:20:\"pt_page_bulk_editing\";s:7:\"editing\";s:24:\"pt_page_link_suggestions\";s:2:\"on\";s:19:\"pt_attachment_title\";s:24:\"%title% %sep% %sitename%\";s:25:\"pt_attachment_description\";s:9:\"%excerpt%\";s:20:\"pt_attachment_robots\";a:1:{i:0;s:7:\"noindex\";}s:27:\"pt_attachment_custom_robots\";s:2:\"on\";s:34:\"pt_attachment_default_rich_snippet\";s:3:\"off\";s:34:\"pt_attachment_default_article_type\";s:7:\"Article\";s:34:\"pt_attachment_default_snippet_name\";s:11:\"%seo_title%\";s:34:\"pt_attachment_default_snippet_desc\";s:17:\"%seo_description%\";s:36:\"pt_attachment_slack_enhanced_sharing\";s:3:\"off\";s:26:\"pt_attachment_add_meta_box\";s:3:\"off\";s:16:\"pt_product_title\";s:24:\"%title% %sep% %sitename%\";s:22:\"pt_product_description\";s:9:\"%excerpt%\";s:17:\"pt_product_robots\";a:0:{}s:24:\"pt_product_custom_robots\";s:3:\"off\";s:31:\"pt_product_default_rich_snippet\";s:7:\"product\";s:31:\"pt_product_default_article_type\";s:7:\"Article\";s:31:\"pt_product_default_snippet_name\";s:11:\"%seo_title%\";s:31:\"pt_product_default_snippet_desc\";s:17:\"%seo_description%\";s:33:\"pt_product_slack_enhanced_sharing\";s:2:\"on\";s:20:\"pt_product_ls_use_fk\";s:6:\"titles\";s:23:\"pt_product_add_meta_box\";s:2:\"on\";s:23:\"pt_product_bulk_editing\";s:7:\"editing\";s:27:\"pt_product_link_suggestions\";s:2:\"on\";s:27:\"pt_product_primary_taxonomy\";s:11:\"product_cat\";s:18:\"pt_web-story_title\";s:24:\"%title% %sep% %sitename%\";s:24:\"pt_web-story_description\";s:9:\"%excerpt%\";s:19:\"pt_web-story_robots\";a:0:{}s:26:\"pt_web-story_custom_robots\";s:3:\"off\";s:33:\"pt_web-story_default_rich_snippet\";s:7:\"article\";s:33:\"pt_web-story_default_article_type\";s:7:\"Article\";s:33:\"pt_web-story_default_snippet_name\";s:11:\"%seo_title%\";s:33:\"pt_web-story_default_snippet_desc\";s:17:\"%seo_description%\";s:35:\"pt_web-story_slack_enhanced_sharing\";s:3:\"off\";s:25:\"pt_web-story_add_meta_box\";s:3:\"off\";s:18:\"tax_category_title\";s:23:\"%term% %sep% %sitename%\";s:19:\"tax_category_robots\";a:0:{}s:25:\"tax_category_add_meta_box\";s:2:\"on\";s:26:\"tax_category_custom_robots\";s:3:\"off\";s:24:\"tax_category_description\";s:18:\"%term_description%\";s:35:\"tax_category_slack_enhanced_sharing\";s:2:\"on\";s:18:\"tax_post_tag_title\";s:23:\"%term% %sep% %sitename%\";s:19:\"tax_post_tag_robots\";a:1:{i:0;s:7:\"noindex\";}s:25:\"tax_post_tag_add_meta_box\";s:3:\"off\";s:26:\"tax_post_tag_custom_robots\";s:2:\"on\";s:24:\"tax_post_tag_description\";s:18:\"%term_description%\";s:35:\"tax_post_tag_slack_enhanced_sharing\";s:2:\"on\";s:21:\"tax_post_format_title\";s:23:\"%term% %sep% %sitename%\";s:22:\"tax_post_format_robots\";a:1:{i:0;s:7:\"noindex\";}s:28:\"tax_post_format_add_meta_box\";s:3:\"off\";s:29:\"tax_post_format_custom_robots\";s:2:\"on\";s:27:\"tax_post_format_description\";s:18:\"%term_description%\";s:38:\"tax_post_format_slack_enhanced_sharing\";s:2:\"on\";s:31:\"remove_product_cat_snippet_data\";s:2:\"on\";s:31:\"remove_product_tag_snippet_data\";s:2:\"on\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rank-math-options-titles' , 'a:111:{s:24:&quot;noindex_empty_taxonomies&quot;;s:2:&quot;on&quot;;s:15:&quot;title_separator&quot;;s:1:&quot;-&quot;;s:17:&quot;capitalize_titles&quot;;s:3:&quot;off&quot;;s:17:&quot;twitter_card_type&quot;;s:19:&quot;summary_large_image&quot;;s:19:&quot;knowledgegraph_type&quot;;s:6:&quot;person&quot;;s:19:&quot;knowledgegraph_name&quot;;s:20:&quot;My WordPress Website&quot;;s:12:&quot;website_name&quot;;s:20:&quot;My WordPress Website&quot;;s:19:&quot;local_business_type&quot;;s:12:&quot;Organization&quot;;s:20:&quot;local_address_format&quot;;s:43:&quot;{address} {locality}, {region} {postalcode}&quot;;s:13:&quot;opening_hours&quot;;a:7:{i:0;a:2:{s:3:&quot;day&quot;;s:6:&quot;Monday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:1;a:2:{s:3:&quot;day&quot;;s:7:&quot;Tuesday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:2;a:2:{s:3:&quot;day&quot;;s:9:&quot;Wednesday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:3;a:2:{s:3:&quot;day&quot;;s:8:&quot;Thursday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:4;a:2:{s:3:&quot;day&quot;;s:6:&quot;Friday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:5;a:2:{s:3:&quot;day&quot;;s:8:&quot;Saturday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}i:6;a:2:{s:3:&quot;day&quot;;s:6:&quot;Sunday&quot;;s:4:&quot;time&quot;;s:11:&quot;09:00-17:00&quot;;}}s:20:&quot;opening_hours_format&quot;;s:3:&quot;off&quot;;s:14:&quot;homepage_title&quot;;s:34:&quot;%sitename% %page% %sep% %sitedesc%&quot;;s:20:&quot;homepage_description&quot;;s:0:&quot;&quot;;s:22:&quot;homepage_custom_robots&quot;;s:3:&quot;off&quot;;s:23:&quot;disable_author_archives&quot;;s:3:&quot;off&quot;;s:15:&quot;url_author_base&quot;;s:6:&quot;author&quot;;s:20:&quot;author_custom_robots&quot;;s:2:&quot;on&quot;;s:13:&quot;author_robots&quot;;a:1:{i:0;s:7:&quot;noindex&quot;;}s:20:&quot;author_archive_title&quot;;s:30:&quot;%name% %sep% %sitename% %page%&quot;;s:19:&quot;author_add_meta_box&quot;;s:2:&quot;on&quot;;s:21:&quot;disable_date_archives&quot;;s:2:&quot;on&quot;;s:18:&quot;date_archive_title&quot;;s:30:&quot;%date% %page% %sep% %sitename%&quot;;s:12:&quot;search_title&quot;;s:38:&quot;%search_query% %page% %sep% %sitename%&quot;;s:9:&quot;404_title&quot;;s:31:&quot;Page Not Found %sep% %sitename%&quot;;s:19:&quot;date_archive_robots&quot;;a:1:{i:0;s:7:&quot;noindex&quot;;}s:14:&quot;noindex_search&quot;;s:2:&quot;on&quot;;s:24:&quot;noindex_archive_subpages&quot;;s:3:&quot;off&quot;;s:26:&quot;noindex_password_protected&quot;;s:3:&quot;off&quot;;s:32:&quot;pt_download_default_rich_snippet&quot;;s:7:&quot;product&quot;;s:29:&quot;author_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:13:&quot;pt_post_title&quot;;s:24:&quot;%title% %sep% %sitename%&quot;;s:19:&quot;pt_post_description&quot;;s:9:&quot;%excerpt%&quot;;s:14:&quot;pt_post_robots&quot;;a:0:{}s:21:&quot;pt_post_custom_robots&quot;;s:3:&quot;off&quot;;s:28:&quot;pt_post_default_rich_snippet&quot;;s:7:&quot;article&quot;;s:28:&quot;pt_post_default_article_type&quot;;s:11:&quot;BlogPosting&quot;;s:28:&quot;pt_post_default_snippet_name&quot;;s:11:&quot;%seo_title%&quot;;s:28:&quot;pt_post_default_snippet_desc&quot;;s:17:&quot;%seo_description%&quot;;s:30:&quot;pt_post_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:17:&quot;pt_post_ls_use_fk&quot;;s:6:&quot;titles&quot;;s:20:&quot;pt_post_add_meta_box&quot;;s:2:&quot;on&quot;;s:20:&quot;pt_post_bulk_editing&quot;;s:7:&quot;editing&quot;;s:24:&quot;pt_post_link_suggestions&quot;;s:2:&quot;on&quot;;s:24:&quot;pt_post_primary_taxonomy&quot;;s:8:&quot;category&quot;;s:13:&quot;pt_page_title&quot;;s:24:&quot;%title% %sep% %sitename%&quot;;s:19:&quot;pt_page_description&quot;;s:9:&quot;%excerpt%&quot;;s:14:&quot;pt_page_robots&quot;;a:0:{}s:21:&quot;pt_page_custom_robots&quot;;s:3:&quot;off&quot;;s:28:&quot;pt_page_default_rich_snippet&quot;;s:7:&quot;article&quot;;s:28:&quot;pt_page_default_article_type&quot;;s:7:&quot;Article&quot;;s:28:&quot;pt_page_default_snippet_name&quot;;s:11:&quot;%seo_title%&quot;;s:28:&quot;pt_page_default_snippet_desc&quot;;s:17:&quot;%seo_description%&quot;;s:30:&quot;pt_page_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:17:&quot;pt_page_ls_use_fk&quot;;s:6:&quot;titles&quot;;s:20:&quot;pt_page_add_meta_box&quot;;s:2:&quot;on&quot;;s:20:&quot;pt_page_bulk_editing&quot;;s:7:&quot;editing&quot;;s:24:&quot;pt_page_link_suggestions&quot;;s:2:&quot;on&quot;;s:19:&quot;pt_attachment_title&quot;;s:24:&quot;%title% %sep% %sitename%&quot;;s:25:&quot;pt_attachment_description&quot;;s:9:&quot;%excerpt%&quot;;s:20:&quot;pt_attachment_robots&quot;;a:1:{i:0;s:7:&quot;noindex&quot;;}s:27:&quot;pt_attachment_custom_robots&quot;;s:2:&quot;on&quot;;s:34:&quot;pt_attachment_default_rich_snippet&quot;;s:3:&quot;off&quot;;s:34:&quot;pt_attachment_default_article_type&quot;;s:7:&quot;Article&quot;;s:34:&quot;pt_attachment_default_snippet_name&quot;;s:11:&quot;%seo_title%&quot;;s:34:&quot;pt_attachment_default_snippet_desc&quot;;s:17:&quot;%seo_description%&quot;;s:36:&quot;pt_attachment_slack_enhanced_sharing&quot;;s:3:&quot;off&quot;;s:26:&quot;pt_attachment_add_meta_box&quot;;s:3:&quot;off&quot;;s:16:&quot;pt_product_title&quot;;s:24:&quot;%title% %sep% %sitename%&quot;;s:22:&quot;pt_product_description&quot;;s:9:&quot;%excerpt%&quot;;s:17:&quot;pt_product_robots&quot;;a:0:{}s:24:&quot;pt_product_custom_robots&quot;;s:3:&quot;off&quot;;s:31:&quot;pt_product_default_rich_snippet&quot;;s:7:&quot;product&quot;;s:31:&quot;pt_product_default_article_type&quot;;s:7:&quot;Article&quot;;s:31:&quot;pt_product_default_snippet_name&quot;;s:11:&quot;%seo_title%&quot;;s:31:&quot;pt_product_default_snippet_desc&quot;;s:17:&quot;%seo_description%&quot;;s:33:&quot;pt_product_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:20:&quot;pt_product_ls_use_fk&quot;;s:6:&quot;titles&quot;;s:23:&quot;pt_product_add_meta_box&quot;;s:2:&quot;on&quot;;s:23:&quot;pt_product_bulk_editing&quot;;s:7:&quot;editing&quot;;s:27:&quot;pt_product_link_suggestions&quot;;s:2:&quot;on&quot;;s:27:&quot;pt_product_primary_taxonomy&quot;;s:11:&quot;product_cat&quot;;s:18:&quot;pt_web-story_title&quot;;s:24:&quot;%title% %sep% %sitename%&quot;;s:24:&quot;pt_web-story_description&quot;;s:9:&quot;%excerpt%&quot;;s:19:&quot;pt_web-story_robots&quot;;a:0:{}s:26:&quot;pt_web-story_custom_robots&quot;;s:3:&quot;off&quot;;s:33:&quot;pt_web-story_default_rich_snippet&quot;;s:7:&quot;article&quot;;s:33:&quot;pt_web-story_default_article_type&quot;;s:7:&quot;Article&quot;;s:33:&quot;pt_web-story_default_snippet_name&quot;;s:11:&quot;%seo_title%&quot;;s:33:&quot;pt_web-story_default_snippet_desc&quot;;s:17:&quot;%seo_description%&quot;;s:35:&quot;pt_web-story_slack_enhanced_sharing&quot;;s:3:&quot;off&quot;;s:25:&quot;pt_web-story_add_meta_box&quot;;s:3:&quot;off&quot;;s:18:&quot;tax_category_title&quot;;s:23:&quot;%term% %sep% %sitename%&quot;;s:19:&quot;tax_category_robots&quot;;a:0:{}s:25:&quot;tax_category_add_meta_box&quot;;s:2:&quot;on&quot;;s:26:&quot;tax_category_custom_robots&quot;;s:3:&quot;off&quot;;s:24:&quot;tax_category_description&quot;;s:18:&quot;%term_description%&quot;;s:35:&quot;tax_category_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:18:&quot;tax_post_tag_title&quot;;s:23:&quot;%term% %sep% %sitename%&quot;;s:19:&quot;tax_post_tag_robots&quot;;a:1:{i:0;s:7:&quot;noindex&quot;;}s:25:&quot;tax_post_tag_add_meta_box&quot;;s:3:&quot;off&quot;;s:26:&quot;tax_post_tag_custom_robots&quot;;s:2:&quot;on&quot;;s:24:&quot;tax_post_tag_description&quot;;s:18:&quot;%term_description%&quot;;s:35:&quot;tax_post_tag_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:21:&quot;tax_post_format_title&quot;;s:23:&quot;%term% %sep% %sitename%&quot;;s:22:&quot;tax_post_format_robots&quot;;a:1:{i:0;s:7:&quot;noindex&quot;;}s:28:&quot;tax_post_format_add_meta_box&quot;;s:3:&quot;off&quot;;s:29:&quot;tax_post_format_custom_robots&quot;;s:2:&quot;on&quot;;s:27:&quot;tax_post_format_description&quot;;s:18:&quot;%term_description%&quot;;s:38:&quot;tax_post_format_slack_enhanced_sharing&quot;;s:2:&quot;on&quot;;s:31:&quot;remove_product_cat_snippet_data&quot;;s:2:&quot;on&quot;;s:31:&quot;remove_product_tag_snippet_data&quot;;s:2:&quot;on&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(432): add_option('rank-math-optio...', Array)
-#5 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(268): RankMath\Installer->create_titles_sitemaps_options()
-#6 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(137): RankMath\Installer->create_options()
-#7 /wordpress/wp-content/plugins/seo-by-rank-math/includes/class-installer.php(49): RankMath\Installer->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): RankMath\Installer->activation(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-by...', false)
-#12 /internal/eval.php(20): activate_plugin('seo-by-rank-mat...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rank-math-options-titles', 'a:111:{s:24:\"noindex_empty_taxonomies\";s:2:\"on\";s:15:\"title_separator\";s:1:\"-\";s:17:\"capitalize_titles\";s:3:\"off\";s:17:\"twitter_card_type\";s:19:\"summary_large_image\";s:19:\"knowledgegraph_type\";s:6:\"person\";s:19:\"knowledgegraph_name\";s:20:\"My WordPress Website\";s:12:\"website_name\";s:20:\"My WordPress Website\";s:19:\"local_business_type\";s:12:\"Organization\";s:20:\"local_address_format\";s:43:\"{address} {locality}, {region} {postalcode}\";s:13:\"opening_hours\";a:7:{i:0;a:2:{s:3:\"day\";s:6:\"Monday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:1;a:2:{s:3:\"day\";s:7:\"Tuesday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:2;a:2:{s:3:\"day\";s:9:\"Wednesday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:3;a:2:{s:3:\"day\";s:8:\"Thursday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:4;a:2:{s:3:\"day\";s:6:\"Friday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:5;a:2:{s:3:\"day\";s:8:\"Saturday\";s:4:\"time\";s:11:\"09:00-17:00\";}i:6;a:2:{s:3:\"day\";s:6:\"Sunday\";s:4:\"time\";s:11:\"09:00-17:00\";}}s:20:\"opening_hours_format\";s:3:\"off\";s:14:\"homepage_title\";s:34:\"%sitename% %page% %sep% %sitedesc%\";s:20:\"homepage_description\";s:0:\"\";s:22:\"homepage_custom_robots\";s:3:\"off\";s:23:\"disable_author_archives\";s:3:\"off\";s:15:\"url_author_base\";s:6:\"author\";s:20:\"author_custom_robots\";s:2:\"on\";s:13:\"author_robots\";a:1:{i:0;s:7:\"noindex\";}s:20:\"author_archive_title\";s:30:\"%name% %sep% %sitename% %page%\";s:19:\"author_add_meta_box\";s:2:\"on\";s:21:\"disable_date_archives\";s:2:\"on\";s:18:\"date_archive_title\";s:30:\"%date% %page% %sep% %sitename%\";s:12:\"search_title\";s:38:\"%search_query% %page% %sep% %sitename%\";s:9:\"404_title\";s:31:\"Page Not Found %sep% %sitename%\";s:19:\"date_archive_robots\";a:1:{i:0;s:7:\"noindex\";}s:14:\"noindex_search\";s:2:\"on\";s:24:\"noindex_archive_subpages\";s:3:\"off\";s:26:\"noindex_password_protected\";s:3:\"off\";s:32:\"pt_download_default_rich_snippet\";s:7:\"product\";s:29:\"author_slack_enhanced_sharing\";s:2:\"on\";s:13:\"pt_post_title\";s:24:\"%title% %sep% %sitename%\";s:19:\"pt_post_description\";s:9:\"%excerpt%\";s:14:\"pt_post_robots\";a:0:{}s:21:\"pt_post_custom_robots\";s:3:\"off\";s:28:\"pt_post_default_rich_snippet\";s:7:\"article\";s:28:\"pt_post_default_article_type\";s:11:\"BlogPosting\";s:28:\"pt_post_default_snippet_name\";s:11:\"%seo_title%\";s:28:\"pt_post_default_snippet_desc\";s:17:\"%seo_description%\";s:30:\"pt_post_slack_enhanced_sharing\";s:2:\"on\";s:17:\"pt_post_ls_use_fk\";s:6:\"titles\";s:20:\"pt_post_add_meta_box\";s:2:\"on\";s:20:\"pt_post_bulk_editing\";s:7:\"editing\";s:24:\"pt_post_link_suggestions\";s:2:\"on\";s:24:\"pt_post_primary_taxonomy\";s:8:\"category\";s:13:\"pt_page_title\";s:24:\"%title% %sep% %sitename%\";s:19:\"pt_page_description\";s:9:\"%excerpt%\";s:14:\"pt_page_robots\";a:0:{}s:21:\"pt_page_custom_robots\";s:3:\"off\";s:28:\"pt_page_default_rich_snippet\";s:7:\"article\";s:28:\"pt_page_default_article_type\";s:7:\"Article\";s:28:\"pt_page_default_snippet_name\";s:11:\"%seo_title%\";s:28:\"pt_page_default_snippet_desc\";s:17:\"%seo_description%\";s:30:\"pt_page_slack_enhanced_sharing\";s:2:\"on\";s:17:\"pt_page_ls_use_fk\";s:6:\"titles\";s:20:\"pt_page_add_meta_box\";s:2:\"on\";s:20:\"pt_page_bulk_editing\";s:7:\"editing\";s:24:\"pt_page_link_suggestions\";s:2:\"on\";s:19:\"pt_attachment_title\";s:24:\"%title% %sep% %sitename%\";s:25:\"pt_attachment_description\";s:9:\"%excerpt%\";s:20:\"pt_attachment_robots\";a:1:{i:0;s:7:\"noindex\";}s:27:\"pt_attachment_custom_robots\";s:2:\"on\";s:34:\"pt_attachment_default_rich_snippet\";s:3:\"off\";s:34:\"pt_attachment_default_article_type\";s:7:\"Article\";s:34:\"pt_attachment_default_snippet_name\";s:11:\"%seo_title%\";s:34:\"pt_attachment_default_snippet_desc\";s:17:\"%seo_description%\";s:36:\"pt_attachment_slack_enhanced_sharing\";s:3:\"off\";s:26:\"pt_attachment_add_meta_box\";s:3:\"off\";s:16:\"pt_product_title\";s:24:\"%title% %sep% %sitename%\";s:22:\"pt_product_description\";s:9:\"%excerpt%\";s:17:\"pt_product_robots\";a:0:{}s:24:\"pt_product_custom_robots\";s:3:\"off\";s:31:\"pt_product_default_rich_snippet\";s:7:\"product\";s:31:\"pt_product_default_article_type\";s:7:\"Article\";s:31:\"pt_product_default_snippet_name\";s:11:\"%seo_title%\";s:31:\"pt_product_default_snippet_desc\";s:17:\"%seo_description%\";s:33:\"pt_product_slack_enhanced_sharing\";s:2:\"on\";s:20:\"pt_product_ls_use_fk\";s:6:\"titles\";s:23:\"pt_product_add_meta_box\";s:2:\"on\";s:23:\"pt_product_bulk_editing\";s:7:\"editing\";s:27:\"pt_product_link_suggestions\";s:2:\"on\";s:27:\"pt_product_primary_taxonomy\";s:11:\"product_cat\";s:18:\"pt_web-story_title\";s:24:\"%title% %sep% %sitename%\";s:24:\"pt_web-story_description\";s:9:\"%excerpt%\";s:19:\"pt_web-story_robots\";a:0:{}s:26:\"pt_web-story_custom_robots\";s:3:\"off\";s:33:\"pt_web-story_default_rich_snippet\";s:7:\"article\";s:33:\"pt_web-story_default_article_type\";s:7:\"Article\";s:33:\"pt_web-story_default_snippet_name\";s:11:\"%seo_title%\";s:33:\"pt_web-story_default_snippet_desc\";s:17:\"%seo_description%\";s:35:\"pt_web-story_slack_enhanced_sharing\";s:3:\"off\";s:25:\"pt_web-story_add_meta_box\";s:3:\"off\";s:18:\"tax_category_title\";s:23:\"%term% %sep% %sitename%\";s:19:\"tax_category_robots\";a:0:{}s:25:\"tax_category_add_meta_box\";s:2:\"on\";s:26:\"tax_category_custom_robots\";s:3:\"off\";s:24:\"tax_category_description\";s:18:\"%term_description%\";s:35:\"tax_category_slack_enhanced_sharing\";s:2:\"on\";s:18:\"tax_post_tag_title\";s:23:\"%term% %sep% %sitename%\";s:19:\"tax_post_tag_robots\";a:1:{i:0;s:7:\"noindex\";}s:25:\"tax_
+Error: [10-Apr-2025 23:28:05 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/AutoLoad.php on line 11
+[10-Apr-2025 23:28:05 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-volus...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-volusion-to-woocommerce-migration/class/Api.php on line 41
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"cart2cart-volusion-to-woocommerce-migration"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
