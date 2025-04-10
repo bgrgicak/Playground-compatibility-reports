@@ -2,163 +2,122 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 05:25:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:25:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 14:53:45 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:53:45 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[10-Apr-2025 14:53:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[10-Apr-2025 14:53:46 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:53:55 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:53:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_spr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS wp_sogrid_objects
+									(ID bigint(20) NOT NULL AUTO_INCREMENT,
+										title tinytext NOT NULL COLLATE utf8_general_ci,
+										PRIMARY KEY (id)
+										)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_spr_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_spr_widg...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_spr_widg...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_spr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:25:48 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/so-grid-main-class.php(702): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Class_My_Wp_SoGrid_Main_Class::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sogrid...', false)
+#6 /internal/eval.php(20): activate_plugin('sogrid-lite-soc...')
+#7 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_sogrid_objects
+									(ID bigint(20) NOT NULL AUTO_INCREMENT,
+										title tinytext NOT NULL COLLATE utf8_general_ci,
+										PRIMARY KEY (id)
+										) made by activate_plugin, do_action('activate_sogrid-lite-social-networks-posts-grid/so-grid-main-class.php'), WP_Hook->do_action, WP_Hook->apply_filters, Class_My_Wp_SoGrid_Main_Class::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:53:56 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:54:05 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:54:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_sogrid_objects
+									(ID bigint(20) NOT NULL AUTO_INCREMENT,
+										title tinytext NOT NULL COLLATE utf8_general_ci,
+										PRIMARY KEY (id)
+										)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/so-grid-main-class.php(702): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Class_My_Wp_SoGrid_Main_Class::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sogrid...', false)
+#6 /internal/eval.php(20): activate_plugin('sogrid-lite-soc...')
+#7 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_sogrid_objects
+									(ID bigint(20) NOT NULL AUTO_INCREMENT,
+										title tinytext NOT NULL COLLATE utf8_general_ci,
+										PRIMARY KEY (id)
+										) made by activate_plugin, do_action('activate_sogrid-lite-social-networks-posts-grid/so-grid-main-class.php'), WP_Hook->do_action, WP_Hook->apply_filters, Class_My_Wp_SoGrid_Main_Class::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:54:06 UTC] PHP Deprecated:  Required parameter $cache_lifetime follows optional parameter $cache_responses in /wordpress/wp-content/plugins/sogrid-lite-social-networks-posts-grid/includes/functions/functions.php on line 2488
+[10-Apr-2025 14:54:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php:279
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stories-post-ty...')
+#2 /internal/eval.php(20): activate_plugin('stories-post-ty...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php on line 279
+[10-Apr-2025 14:54:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php:279
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stories-post-ty...')
+#2 /internal/eval.php(20): activate_plugin('stories-post-ty...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php on line 279
+[10-Apr-2025 14:54:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php:279
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stories-post-ty...')
+#2 /internal/eval.php(20): activate_plugin('stories-post-ty...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/stories-post-type/stories-post-type.php on line 279
+[10-Apr-2025 14:56:39 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IC_Sales_Trend_Analysis_Report_Lite::myplugin_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sales-...', false)
+#3 /internal/eval.php(20): activate_plugin('sales-trends-an...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 05:25:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[10-Apr-2025 14:56:47 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IC_Sales_Trend_Analysis_Report_Lite::myplugin_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sales-...', false)
+#3 /internal/eval.php(20): activate_plugin('sales-trends-an...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 05:26:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[10-Apr-2025 14:56:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IC_Sales_Trend_Analysis_Report_Lite::myplugin_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sales-...', false)
+#3 /internal/eval.php(20): activate_plugin('sales-trends-an...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 05:26:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:26:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:27:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
-#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
-[09-Apr-2025 05:27:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
-#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
-[09-Apr-2025 05:27:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
-#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
-[09-Apr-2025 05:27:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:28:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:28:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
-#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
-[09-Apr-2025 05:28:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
-#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
-[09-Apr-2025 05:28:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
-#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
-[09-Apr-2025 05:28:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
-#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
-[09-Apr-2025 05:29:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
-#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
-[09-Apr-2025 05:29:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
-#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
-[09-Apr-2025 05:29:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:29:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php:88
+[10-Apr-2025 14:57:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php:88
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('scrolling-notic...')
@@ -167,24 +126,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php on line 88
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"scrolling-notice-board"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
