@@ -2,122 +2,34 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 09:30:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_auth', 'a:11:{s:12:\"consumer_key\";s:21:\"o1WYNgwG1PMHW2Lh5ceYQ\";s:15:\"consumer_secret\";s:43:\"OUygrqtDDueidU9qRGjuvOdz3JaVyyoCFkDgRBIMerI\";s:21:\"default_consumer_keys\";s:1:\"1\";s:11:\"request_key\";s:0:\"\";s:14:\"request_secret\";s:0:\"\";s:12:\"request_link\";s:0:\"\";s:10:\"access_key\";s:0:\"\";s:13:\"access_secret\";s:0:\"\";s:10:\"auth1_flag\";s:1:\"0\";s:10:\"auth2_flag\";s:1:\"0\";s:10:\"auth3_flag\";s:1:\"0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tweet_updater_auth' , 'a:11:{s:12:&quot;consumer_key&quot;;s:21:&quot;o1WYNgwG1PMHW2Lh5ceYQ&quot;;s:15:&quot;consumer_secret&quot;;s:43:&quot;OUygrqtDDueidU9qRGjuvOdz3JaVyyoCFkDgRBIMerI&quot;;s:21:&quot;default_consumer_keys&quot;;s:1:&quot;1&quot;;s:11:&quot;request_key&quot;;s:0:&quot;&quot;;s:14:&quot;request_secret&quot;;s:0:&quot;&quot;;s:12:&quot;request_link&quot;;s:0:&quot;&quot;;s:10:&quot;access_key&quot;;s:0:&quot;&quot;;s:13:&quot;access_secret&quot;;s:0:&quot;&quot;;s:10:&quot;auth1_flag&quot;;s:1:&quot;0&quot;;s:10:&quot;auth2_flag&quot;;s:1:&quot;0&quot;;s:10:&quot;auth3_flag&quot;;s:1:&quot;0&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/tweetupdater/tweetupdater_manager.php(40): add_option('tweet_updater_a...', Array, '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tweet_updater_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tweetu...', false)
-#9 /internal/eval.php(20): activate_plugin('tweetupdater/tw...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_auth', 'a:11:{s:12:\"consumer_key\";s:21:\"o1WYNgwG1PMHW2Lh5ceYQ\";s:15:\"consumer_secret\";s:43:\"OUygrqtDDueidU9qRGjuvOdz3JaVyyoCFkDgRBIMerI\";s:21:\"default_consumer_keys\";s:1:\"1\";s:11:\"request_key\";s:0:\"\";s:14:\"request_secret\";s:0:\"\";s:12:\"request_link\";s:0:\"\";s:10:\"access_key\";s:0:\"\";s:13:\"access_secret\";s:0:\"\";s:10:\"auth1_flag\";s:1:\"0\";s:10:\"auth2_flag\";s:1:\"0\";s:10:\"auth3_flag\";s:1:\"0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tweetupdater/tweetupdater.php'), WP_Hook->do_action, WP_Hook->apply_filters, tweet_updater_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:30:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_options', 'a:15:{s:14:\"newpost_update\";s:1:\"1\";s:14:\"newpost_format\";s:29:\"New blog post: #title#: #url#\";s:13:\"edited_update\";s:1:\"1\";s:13:\"edited_format\";s:33:\"Updated blog post: #title#: #url#\";s:14:\"limit_activate\";s:1:\"0\";s:17:\"limit_to_category\";a:0:{}s:25:\"limit_to_custom_field_key\";s:0:\"\";s:25:\"limit_to_custom_field_val\";s:0:\"\";s:10:\"url_method\";s:7:\"default\";s:14:\"bitly_username\";s:0:\"\";s:12:\"bitly_appkey\";s:0:\"\";s:10:\"yourls_url\";s:7:\"http://\";s:15:\"yourls_username\";s:0:\"\";s:13:\"yourls_passwd\";s:0:\"\";s:12:\"yourls_token\";s:0:\"\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tweet_updater_options' , 'a:15:{s:14:&quot;newpost_update&quot;;s:1:&quot;1&quot;;s:14:&quot;newpost_format&quot;;s:29:&quot;New blog post: #title#: #url#&quot;;s:13:&quot;edited_update&quot;;s:1:&quot;1&quot;;s:13:&quot;edited_format&quot;;s:33:&quot;Updated blog post: #title#: #url#&quot;;s:14:&quot;limit_activate&quot;;s:1:&quot;0&quot;;s:17:&quot;limit_to_category&quot;;a:0:{}s:25:&quot;limit_to_custom_field_key&quot;;s:0:&quot;&quot;;s:25:&quot;limit_to_custom_field_val&quot;;s:0:&quot;&quot;;s:10:&quot;url_method&quot;;s:7:&quot;default&quot;;s:14:&quot;bitly_username&quot;;s:0:&quot;&quot;;s:12:&quot;bitly_appkey&quot;;s:0:&quot;&quot;;s:10:&quot;yourls_url&quot;;s:7:&quot;http://&quot;;s:15:&quot;yourls_username&quot;;s:0:&quot;&quot;;s:13:&quot;yourls_passwd&quot;;s:0:&quot;&quot;;s:12:&quot;yourls_token&quot;;s:0:&quot;&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/tweetupdater/tweetupdater_manager.php(61): add_option('tweet_updater_o...', Array, '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tweet_updater_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tweetu...', false)
-#9 /internal/eval.php(20): activate_plugin('tweetupdater/tw...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_options', 'a:15:{s:14:\"newpost_update\";s:1:\"1\";s:14:\"newpost_format\";s:29:\"New blog post: #title#: #url#\";s:13:\"edited_update\";s:1:\"1\";s:13:\"edited_format\";s:33:\"Updated blog post: #title#: #url#\";s:14:\"limit_activate\";s:1:\"0\";s:17:\"limit_to_category\";a:0:{}s:25:\"limit_to_custom_field_key\";s:0:\"\";s:25:\"limit_to_custom_field_val\";s:0:\"\";s:10:\"url_method\";s:7:\"default\";s:14:\"bitly_username\";s:0:\"\";s:12:\"bitly_appkey\";s:0:\"\";s:10:\"yourls_url\";s:7:\"http://\";s:15:\"yourls_username\";s:0:\"\";s:13:\"yourls_passwd\";s:0:\"\";s:12:\"yourls_token\";s:0:\"\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tweetupdater/tweetupdater.php'), WP_Hook->do_action, WP_Hook->apply_filters, tweet_updater_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:30:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/tweetupdater/tweetupdater_manager.php on line 81
-[09-Apr-2025 09:30:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_options', 'a:15:{s:14:\"newpost_update\";s:1:\"1\";s:14:\"newpost_format\";s:29:\"New blog post: #title#: #url#\";s:13:\"edited_update\";s:1:\"1\";s:13:\"edited_format\";s:33:\"Updated blog post: #title#: #url#\";s:14:\"limit_activate\";s:1:\"0\";s:17:\"limit_to_category\";a:0:{}s:25:\"limit_to_custom_field_key\";s:0:\"\";s:25:\"limit_to_custom_field_val\";s:0:\"\";s:10:\"url_method\";s:7:\"default\";s:14:\"bitly_username\";s:0:\"\";s:12:\"bitly_appkey\";s:0:\"\";s:10:\"yourls_url\";s:7:\"http://\";s:15:\"yourls_username\";s:0:\"\";s:13:\"yourls_passwd\";s:0:\"\";s:12:\"yourls_token\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tweet_updater_options' , 'a:15:{s:14:&quot;newpost_update&quot;;s:1:&quot;1&quot;;s:14:&quot;newpost_format&quot;;s:29:&quot;New blog post: #title#: #url#&quot;;s:13:&quot;edited_update&quot;;s:1:&quot;1&quot;;s:13:&quot;edited_format&quot;;s:33:&quot;Updated blog post: #title#: #url#&quot;;s:14:&quot;limit_activate&quot;;s:1:&quot;0&quot;;s:17:&quot;limit_to_category&quot;;a:0:{}s:25:&quot;limit_to_custom_field_key&quot;;s:0:&quot;&quot;;s:25:&quot;limit_to_custom_field_val&quot;;s:0:&quot;&quot;;s:10:&quot;url_method&quot;;s:7:&quot;default&quot;;s:14:&quot;bitly_username&quot;;s:0:&quot;&quot;;s:12:&quot;bitly_appkey&quot;;s:0:&quot;&quot;;s:10:&quot;yourls_url&quot;;s:7:&quot;http://&quot;;s:15:&quot;yourls_username&quot;;s:0:&quot;&quot;;s:13:&quot;yourls_passwd&quot;;s:0:&quot;&quot;;s:12:&quot;yourls_token&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('tweet_updater_o...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tweetupdater/tweetupdater_manager.php(83): update_option('tweet_updater_o...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): tweet_updater_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tweetu...', false)
-#10 /internal/eval.php(20): activate_plugin('tweetupdater/tw...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tweet_updater_options', 'a:15:{s:14:\"newpost_update\";s:1:\"1\";s:14:\"newpost_format\";s:29:\"New blog post: #title#: #url#\";s:13:\"edited_update\";s:1:\"1\";s:13:\"edited_format\";s:33:\"Updated blog post: #title#: #url#\";s:14:\"limit_activate\";s:1:\"0\";s:17:\"limit_to_category\";a:0:{}s:25:\"limit_to_custom_field_key\";s:0:\"\";s:25:\"limit_to_custom_field_val\";s:0:\"\";s:10:\"url_method\";s:7:\"default\";s:14:\"bitly_username\";s:0:\"\";s:12:\"bitly_appkey\";s:0:\"\";s:10:\"yourls_url\";s:7:\"http://\";s:15:\"yourls_username\";s:0:\"\";s:13:\"yourls_passwd\";s:0:\"\";s:12:\"yourls_token\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tweetupdater/tweetupdater.php'), WP_Hook->do_action, WP_Hook->apply_filters, tweet_updater_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:30:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:30:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:30:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:30:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:30:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 09:30:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 09:30:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 09:30:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 09:30:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [10-Apr-2025 09:48:49 UTC] PHP Notice:  Function register_block_type_from_metadata() was called <strong>incorrectly</strong>. Block "tiles/progress" is declaring <code>fontSize</code> support in <code>block.json</code> file under <code>supports.fontSize</code>. <code>fontSize</code> support is now declared under <code>supports.typography.fontSize</code>. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.8.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:48:58 UTC] PHP Notice:  Function register_block_type_from_metadata() was called <strong>incorrectly</strong>. Block "tiles/progress" is declaring <code>fontSize</code> support in <code>block.json</code> file under <code>supports.fontSize</code>. <code>fontSize</code> support is now declared under <code>supports.typography.fontSize</code>. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.8.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:07 UTC] PHP Notice:  Function register_block_type_from_metadata() was called <strong>incorrectly</strong>. Block "tiles/progress" is declaring <code>fontSize</code> support in <code>block.json</code> file under <code>supports.fontSize</code>. <code>fontSize</code> support is now declared under <code>supports.typography.fontSize</code>. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.8.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:50:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/toplist-cz/toplist.php:832
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toplist-cz/topl...')
+#2 /internal/eval.php(20): activate_plugin('toplist-cz/topl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/toplist-cz/toplist.php on line 832
+[10-Apr-2025 09:50:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/toplist-cz/toplist.php:832
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toplist-cz/topl...')
+#2 /internal/eval.php(20): activate_plugin('toplist-cz/topl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/toplist-cz/toplist.php on line 832
+[10-Apr-2025 09:50:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/toplist-cz/toplist.php:832
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('toplist-cz/topl...')
+#2 /internal/eval.php(20): activate_plugin('toplist-cz/topl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/toplist-cz/toplist.php on line 832
+[10-Apr-2025 09:50:45 UTC] PHP Warning:  Undefined variable $ip_address in /wordpress/wp-content/plugins/tournamatch/includes/classes/class-tournamatch-online-users.php on line 133
+[10-Apr-2025 09:50:56 UTC] PHP Warning:  Undefined variable $ip_address in /wordpress/wp-content/plugins/tournamatch/includes/classes/class-tournamatch-online-users.php on line 133
+[10-Apr-2025 09:51:07 UTC] PHP Warning:  Undefined variable $ip_address in /wordpress/wp-content/plugins/tournamatch/includes/classes/class-tournamatch-online-users.php on line 133
+[10-Apr-2025 09:51:49 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Twitter_Trends_...')
@@ -135,7 +47,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 09:31:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 09:51:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Twitter_Trends_...')
@@ -153,7 +65,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 09:31:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 09:52:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Twitter_Trends_...')
