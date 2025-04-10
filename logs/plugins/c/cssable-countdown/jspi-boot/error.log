@@ -2,748 +2,124 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 02:20:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_enable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cgarb_enable' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cgarb_enable', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(69): update_option('cgarb_enable', 'yes')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-garb/ca...')
-#10 /internal/eval.php(20): activate_plugin('captcha-garb/ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_enable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_css', '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cgarb_css' , '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cgarb_css', '.captchagarb {\r...', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(70): update_option('cgarb_css', '.captchagarb {\r...')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-garb/ca...')
-#10 /internal/eval.php(20): activate_plugin('captcha-garb/ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_css', '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('captcha_garb_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'captcha_garb_install' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('captcha_garb_in...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(73): update_option('captcha_garb_in...', '1')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-garb/ca...')
-#10 /internal/eval.php(20): activate_plugin('captcha-garb/ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('captcha_garb_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:20:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:20:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:20:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:20:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_enable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cgarb_enable' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cgarb_enable', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(69): update_option('cgarb_enable', 'yes')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_enable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_css', '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cgarb_css' , '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cgarb_css', '.captchagarb {\r...', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(70): update_option('cgarb_css', '.captchagarb {\r...')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cgarb_css', '.captchagarb {
-background-color:#005F89;
-margin-top:5px;
-margin-bottom:5px;
-width:160px;
--webkit-border-radius:5px;
-border-radius:5px;
-border-color:#004C6D;
-border-style:solid;
-border-width:1px;
-}
-
-.captchagarb .loader {
-display:none;
-margin:5px auto;
-}
-
-.captchagarb .puzit {
-display:block;
-background-color:#004C6D;
-text-align:center;
-color:#49B1DF;
-text-transform:uppercase;
-}
-
-.captchagarb .refr {
-width:58px;
-height:20px;
-line-height:20px;
-display:block;
-background-color:#0084BE;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-text-transform:uppercase;
-color:#003851;
--webkit-border-radius:2px;
-border-radius:2px;
-margin:auto auto 4px;
-}
-
-.captchagarb .refr:hover {
-background-color:#09D;
-}
-
-.captchagarb .puz_container {
-margin:0;
-padding:0;
-}
-
-.captchagarb .puz_container ul {
-width:154px;
-margin:5px auto;
-padding:0;
-}
-
-.captchagarb .puz_container ul li {
-cursor:move;
-border-color:#004462;
-border-style:outset;
-border-width:1px;
-padding:0;
-}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('captcha_garb_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'captcha_garb_install' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('captcha_garb_in...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/captcha-garb/install.php(73): update_option('captcha_garb_in...', '1')
-#6 /wordpress/wp-content/plugins/captcha-garb/install.php(78): captcha_garb_install()
-#7 /wordpress/wp-content/plugins/captcha-garb/captchagarb.php(16): require('/wordpress/wp-c...')
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('captcha_garb_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-garb/captchagarb.php'), require('/plugins/captcha-garb/install.php'), captcha_garb_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_chc::plugin_path(), 0 passed in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 36 and exactly 1 expected in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php:100
+Error: [10-Apr-2025 08:35:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(36): WP_chc->plugin_path()
-#1 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(76): WP_chc->__construct()
-#2 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(106): WP_chc::instance()
-#3 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(109): WP_CHC()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-captcha/ch-c...')
-#6 /internal/eval.php(20): activate_plugin('ch-captcha/ch-c...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 100
-[09-Apr-2025 02:20:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_chc::plugin_path(), 0 passed in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 36 and exactly 1 expected in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php:100
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Clock_Widgets')
+#2 /wordpress/wp-content/plugins/clock-widgets/clock-widgets.php(35): register_widget('Clock_Widgets')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): clock_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 08:35:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(36): WP_chc->plugin_path()
-#1 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(76): WP_chc->__construct()
-#2 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(106): WP_chc::instance()
-#3 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(109): WP_CHC()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-captcha/ch-c...')
-#6 /internal/eval.php(20): activate_plugin('ch-captcha/ch-c...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 100
-[09-Apr-2025 02:20:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_chc::plugin_path(), 0 passed in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 36 and exactly 1 expected in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php:100
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Clock_Widgets')
+#2 /wordpress/wp-content/plugins/clock-widgets/clock-widgets.php(35): register_widget('Clock_Widgets')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): clock_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 08:36:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(36): WP_chc->plugin_path()
-#1 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(76): WP_chc->__construct()
-#2 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(106): WP_chc::instance()
-#3 /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php(109): WP_CHC()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ch-captcha/ch-c...')
-#6 /internal/eval.php(20): activate_plugin('ch-captcha/ch-c...')
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Clock_Widgets')
+#2 /wordpress/wp-content/plugins/clock-widgets/clock-widgets.php(35): register_widget('Clock_Widgets')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): clock_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 08:36:18 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:36:19 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:36:28 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:36:29 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:36:38 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:36:38 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/collapsing-category-list/libraries/admin_page_framework/factory/admin_page/AdminPageFramework.php on line 370
+[10-Apr-2025 08:38:29 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php:36
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): init_tingg_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
-  thrown in /wordpress/wp-content/plugins/ch-captcha/ch-captcha.php on line 100
-[09-Apr-2025 02:21:02 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:21:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:21:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:21:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:21:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:21:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:21:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:21:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:21:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cmshelplive_j2woptions', 'a:20:{s:5:\"title\";s:32:\"CMSHelpLive: Joomla to WordPress\";s:11:\"description\";s:70:\"We\'ll help you import your Joomla content into this site. Let\'s start!\";s:15:\"automatic_empty\";i:0;s:3:\"url\";N;s:8:\"hostname\";s:9:\"localhost\";s:4:\"port\";i:3306;s:8:\"database\";N;s:8:\"username\";s:4:\"root\";s:8:\"password\";s:0:\"\";s:6:\"prefix\";s:4:\"jos_\";s:9:\"introtext\";s:10:\"in_content\";s:14:\"archived_posts\";s:12:\"not_imported\";s:10:\"skip_media\";i:0;s:11:\"first_image\";s:18:\"as_is_and_featured\";s:15:\"import_external\";i:0;s:17:\"import_duplicates\";i:0;s:18:\"force_media_import\";i:0;s:21:\"meta_keywords_in_tags\";i:0;s:15:\"import_as_pages\";i:0;s:7:\"timeout\";i:5;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cmshelplive_j2woptions' , 'a:20:{s:5:&quot;title&quot;;s:32:&quot;CMSHelpLive: Joomla to WordPress&quot;;s:11:&quot;description&quot;;s:70:&quot;We''ll help you import your Joomla content into this site. Let''s start!&quot;;s:15:&quot;automatic_empty&quot;;i:0;s:3:&quot;url&quot;;N;s:8:&quot;hostname&quot;;s:9:&quot;localhost&quot;;s:4:&quot;port&quot;;i:3306;s:8:&quot;database&quot;;N;s:8:&quot;username&quot;;s:4:&quot;root&quot;;s:8:&quot;password&quot;;s:0:&quot;&quot;;s:6:&quot;prefix&quot;;s:4:&quot;jos_&quot;;s:9:&quot;introtext&quot;;s:10:&quot;in_content&quot;;s:14:&quot;archived_posts&quot;;s:12:&quot;not_imported&quot;;s:10:&quot;skip_media&quot;;i:0;s:11:&quot;first_image&quot;;s:18:&quot;as_is_and_featured&quot;;s:15:&quot;import_external&quot;;i:0;s:17:&quot;import_duplicates&quot;;i:0;s:18:&quot;force_media_import&quot;;i:0;s:21:&quot;meta_keywords_in_tags&quot;;i:0;s:15:&quot;import_as_pages&quot;;i:0;s:7:&quot;timeout&quot;;i:5;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cmshelplive_j2w...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cmshelplive-joomla-importer/index.php(73): update_option('cmshelplive_j2w...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cmshelplivej2w_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cmshel...', false)
-#10 /internal/eval.php(20): activate_plugin('cmshelplive-joo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cmshelplive_j2woptions', 'a:20:{s:5:\"title\";s:32:\"CMSHelpLive: Joomla to WordPress\";s:11:\"description\";s:70:\"We\'ll help you import your Joomla content into this site. Let\'s start!\";s:15:\"automatic_empty\";i:0;s:3:\"url\";N;s:8:\"hostname\";s:9:\"localhost\";s:4:\"port\";i:3306;s:8:\"database\";N;s:8:\"username\";s:4:\"root\";s:8:\"password\";s:0:\"\";s:6:\"prefix\";s:4:\"jos_\";s:9:\"introtext\";s:10:\"in_content\";s:14:\"archived_posts\";s:12:\"not_imported\";s:10:\"skip_media\";i:0;s:11:\"first_image\";s:18:\"as_is_and_featured\";s:15:\"import_external\";i:0;s:17:\"import_duplicates\";i:0;s:18:\"force_media_import\";i:0;s:21:\"meta_keywords_in_tags\";i:0;s:15:\"import_as_pages\";i:0;s:7:\"timeout\";i:5;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cmshelplive-joomla-importer/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, cmshelplivej2w_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:21:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:21:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:21:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:21:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:22:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:22:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:22:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:22:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:22:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wpb-caw-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_wpb-caw-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_wpb-caw-...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_wpb-caw-...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wpb-caw-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:22:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:22:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:22:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:22:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:23:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:23:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:23:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:23:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:23:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:24:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:24:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:24:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:24:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:24:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+  thrown in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php on line 36
+[10-Apr-2025 08:38:37 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php:36
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): init_tingg_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php on line 36
+[10-Apr-2025 08:38:46 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php:36
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): init_tingg_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/cellulant-tingg-payment-gateway/cellulant-tingg-payment-gateway.php on line 36
+[10-Apr-2025 08:42:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php(61): cop_pdfmenu->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cop-pdf-attachm...')
+#3 /internal/eval.php(20): activate_plugin('cop-pdf-attachm...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php on line 79
+[10-Apr-2025 08:42:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php(61): cop_pdfmenu->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cop-pdf-attachm...')
+#3 /internal/eval.php(20): activate_plugin('cop-pdf-attachm...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php on line 79
+[10-Apr-2025 08:42:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php(61): cop_pdfmenu->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cop-pdf-attachm...')
+#3 /internal/eval.php(20): activate_plugin('cop-pdf-attachm...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/cop-pdf-attachment-menu/cop_pdf_attachment_menu.php on line 79
+[10-Apr-2025 08:44:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CSSable_Countdo...')
@@ -761,7 +137,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 02:24:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 08:44:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CSSable_Countdo...')
@@ -779,7 +155,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 02:24:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 08:44:36 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CSSable_Countdo...')
