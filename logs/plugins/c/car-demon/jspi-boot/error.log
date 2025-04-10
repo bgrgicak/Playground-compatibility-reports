@@ -2,13 +2,115 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:24:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:24:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:24:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:24:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:24:55 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
-[09-Apr-2025 17:25:04 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
-[09-Apr-2025 17:25:13 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
+Error: [10-Apr-2025 23:46:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+CREATE TABLE IF NOT EXISTS wp_clgs_entries (
+    id INT NOT NULL AUTO_INCREMENT,
+    category VARCHAR(190) NOT NULL,
+    blog_id INT NOT NULL,
+    blog_name LONGTEXT NOT NULL,
+    date BIGINT NOT NULL,
+    user_name VARCHAR(255),
+    severity INT NOT NULL,
+    text LONGTEXT,
+    seen BOOL NOT NULL DEFAULT FALSE,
+    PRIMARY KEY  ( id ),
+    KEY  ( category ),
+    KEY  ( date )
+    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: seen.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\nCREATE TABLE I...')
+#2 /wordpress/wp-content/plugins/custom-logging-service/includes/class-database.php(87): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/custom-logging-service/custom-logging-service.php(117): Clgs_DB->create()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): clgs_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#8 /internal/eval.php(20): activate_plugin('custom-logging-...')
+#9 {main}</pre>
+ for query 
+CREATE TABLE IF NOT EXISTS wp_clgs_entries (
+    id INT NOT NULL AUTO_INCREMENT,
+    category VARCHAR(190) NOT NULL,
+    blog_id INT NOT NULL,
+    blog_name LONGTEXT NOT NULL,
+    date BIGINT NOT NULL,
+    user_name VARCHAR(255),
+    severity INT NOT NULL,
+    text LONGTEXT,
+    seen BOOL NOT NULL DEFAULT FALSE,
+    PRIMARY KEY  ( id ),
+    KEY  ( category ),
+    KEY  ( date )
+    ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_custom-logging-service/custom-logging-service.php'), WP_Hook->do_action, WP_Hook->apply_filters, clgs_activation, Clgs_DB->create, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:46:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+CREATE TABLE IF NOT EXISTS wp_clgs_entries (
+    id INT NOT NULL AUTO_INCREMENT,
+    category VARCHAR(190) NOT NULL,
+    blog_id INT NOT NULL,
+    blog_name LONGTEXT NOT NULL,
+    date BIGINT NOT NULL,
+    user_name VARCHAR(255),
+    severity INT NOT NULL,
+    text LONGTEXT,
+    seen BOOL NOT NULL DEFAULT FALSE,
+    PRIMARY KEY  ( id ),
+    KEY  ( category ),
+    KEY  ( date )
+    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: seen.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\nCREATE TABLE I...')
+#2 /wordpress/wp-content/plugins/custom-logging-service/includes/class-database.php(87): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/custom-logging-service/custom-logging-service.php(117): Clgs_DB->create()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): clgs_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#8 /internal/eval.php(20): activate_plugin('custom-logging-...')
+#9 {main}</pre>
+ for query 
+CREATE TABLE IF NOT EXISTS wp_clgs_entries (
+    id INT NOT NULL AUTO_INCREMENT,
+    category VARCHAR(190) NOT NULL,
+    blog_id INT NOT NULL,
+    blog_name LONGTEXT NOT NULL,
+    date BIGINT NOT NULL,
+    user_name VARCHAR(255),
+    severity INT NOT NULL,
+    text LONGTEXT,
+    seen BOOL NOT NULL DEFAULT FALSE,
+    PRIMARY KEY  ( id ),
+    KEY  ( category ),
+    KEY  ( date )
+    ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_custom-logging-service/custom-logging-service.php'), WP_Hook->do_action, WP_Hook->apply_filters, clgs_activation, Clgs_DB->create, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:47:06 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
+[10-Apr-2025 23:47:14 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
+[10-Apr-2025 23:47:24 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/car-demon/includes/cd-init.php on line 129
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
