@@ -2,789 +2,148 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 06:37:07 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:37:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sedox_vehicle_catalogue_configuration', 'a:5:{s:7:\"api_key\";s:0:\"\";s:9:\"languages\";a:0:{}s:5:\"debug\";b:0;s:13:\"btnClearCache\";b:0;s:22:\"translations_timestamp\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sedox_vehicle_catalogue_configuration' , 'a:5:{s:7:&quot;api_key&quot;;s:0:&quot;&quot;;s:9:&quot;languages&quot;;a:0:{}s:5:&quot;debug&quot;;b:0;s:13:&quot;btnClearCache&quot;;b:0;s:22:&quot;translations_timestamp&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sedox_vehicle_c...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/sedox-performance-vehicle-catalogue/src/Base/Activate.php(28): update_option('sedox_vehicle_c...', Array)
-#6 /wordpress/wp-content/plugins/sedox-performance-vehicle-catalogue/sedox-catalogue.php(60): SedoxVDb\Base\Activate::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): sedoxVDbActivatePlugin(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sedox-...', false)
-#11 /internal/eval.php(20): activate_plugin('sedox-performan...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sedox_vehicle_catalogue_configuration', 'a:5:{s:7:\"api_key\";s:0:\"\";s:9:\"languages\";a:0:{}s:5:\"debug\";b:0;s:13:\"btnClearCache\";b:0;s:22:\"translations_timestamp\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_sedox-performance-vehicle-catalogue/sedox-catalogue.php'), WP_Hook->do_action, WP_Hook->apply_filters, sedoxVDbActivatePlugin, SedoxVDb\Base\Activate::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sedox_vehicle_catalogue_customization', 'a:11:{s:13:\"catalog_theme\";s:11:\"theme-light\";s:24:\"catalog_custom_css_class\";s:0:\"\";s:13:\"primary_color\";s:7:\"#c30f0f\";s:15:\"secondary_color\";s:7:\"#3c86d9\";s:12:\"company_name\";s:24:\"Sedox performance tuning\";s:19:\"show_vehicle_photos\";i:1;s:14:\"show_dynochart\";i:1;s:20:\"use_unbranded_photos\";i:0;s:12:\"company_logo\";s:0:\"\";s:20:\"default_torque_units\";s:2:\"nm\";s:8:\"language\";s:5:\"en-GB\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sedox_vehicle_catalogue_customization' , 'a:11:{s:13:&quot;catalog_theme&quot;;s:11:&quot;theme-light&quot;;s:24:&quot;catalog_custom_css_class&quot;;s:0:&quot;&quot;;s:13:&quot;primary_color&quot;;s:7:&quot;#c30f0f&quot;;s:15:&quot;secondary_color&quot;;s:7:&quot;#3c86d9&quot;;s:12:&quot;company_name&quot;;s:24:&quot;Sedox performance tuning&quot;;s:19:&quot;show_vehicle_photos&quot;;i:1;s:14:&quot;show_dynochart&quot;;i:1;s:20:&quot;use_unbranded_photos&quot;;i:0;s:12:&quot;company_logo&quot;;s:0:&quot;&quot;;s:20:&quot;default_torque_units&quot;;s:2:&quot;nm&quot;;s:8:&quot;language&quot;;s:5:&quot;en-GB&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sedox_vehicle_c...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/sedox-performance-vehicle-catalogue/src/Base/Activate.php(29): update_option('sedox_vehicle_c...', Array)
-#6 /wordpress/wp-content/plugins/sedox-performance-vehicle-catalogue/sedox-catalogue.php(60): SedoxVDb\Base\Activate::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): sedoxVDbActivatePlugin(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sedox-...', false)
-#11 /internal/eval.php(20): activate_plugin('sedox-performan...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sedox_vehicle_catalogue_customization', 'a:11:{s:13:\"catalog_theme\";s:11:\"theme-light\";s:24:\"catalog_custom_css_class\";s:0:\"\";s:13:\"primary_color\";s:7:\"#c30f0f\";s:15:\"secondary_color\";s:7:\"#3c86d9\";s:12:\"company_name\";s:24:\"Sedox performance tuning\";s:19:\"show_vehicle_photos\";i:1;s:14:\"show_dynochart\";i:1;s:20:\"use_unbranded_photos\";i:0;s:12:\"company_logo\";s:0:\"\";s:20:\"default_torque_units\";s:2:\"nm\";s:8:\"language\";s:5:\"en-GB\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_sedox-performance-vehicle-catalogue/sedox-catalogue.php'), WP_Hook->do_action, WP_Hook->apply_filters, sedoxVDbActivatePlugin, SedoxVDb\Base\Activate::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:37:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_tags', 'a:9:{i:0;s:12:\"[staff-name]\";i:1;s:17:\"[staff-name-slug]\";i:2;s:17:\"[staff-photo-url]\";i:3;s:16:\"[staff-position]\";i:4;s:13:\"[staff-email]\";i:5;s:13:\"[staff-phone]\";i:6;s:11:\"[staff-bio]\";i:7;s:16:\"[staff-facebook]\";i:8;s:15:\"[staff-twitter]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_tags' , 'a:9:{i:0;s:12:&quot;[staff-name]&quot;;i:1;s:17:&quot;[staff-name-slug]&quot;;i:2;s:17:&quot;[staff-photo-url]&quot;;i:3;s:16:&quot;[staff-position]&quot;;i:4;s:13:&quot;[staff-email]&quot;;i:5;s:13:&quot;[staff-phone]&quot;;i:6;s:11:&quot;[staff-bio]&quot;;i:7;s:16:&quot;[staff-facebook]&quot;;i:8;s:15:&quot;[staff-twitter]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(63): update_option('_staff_listing_...', Array)
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_tags', 'a:9:{i:0;s:12:\"[staff-name]\";i:1;s:17:\"[staff-name-slug]\";i:2;s:17:\"[staff-photo-url]\";i:3;s:16:\"[staff-position]\";i:4;s:13:\"[staff-email]\";i:5;s:13:\"[staff-phone]\";i:6;s:11:\"[staff-bio]\";i:7;s:16:\"[staff-facebook]\";i:8;s:15:\"[staff-twitter]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_tag_string', '[staff-name], [staff-name-slug], [staff-photo-url], [staff-position], [staff-email], [staff-phone], [staff-bio], [staff-facebook], [staff-twitter]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_tag_string' , '[staff-name], [staff-name-slug], [staff-photo-url], [staff-position], [staff-email], [staff-phone], [staff-bio], [staff-facebook], [staff-twitter]' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', '[staff-name], [...', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(64): update_option('_staff_listing_...', '[staff-name], [...')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_tag_string', '[staff-name], [staff-name-slug], [staff-photo-url], [staff-position], [staff-email], [staff-phone], [staff-bio], [staff-facebook], [staff-twitter]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_formatted_tags', 'a:5:{i:0;s:22:\"[staff-name-formatted]\";i:1;s:26:\"[staff-position-formatted]\";i:2;s:13:\"[staff-photo]\";i:3;s:18:\"[staff-email-link]\";i:4;s:21:\"[staff-bio-formatted]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_formatted_tags' , 'a:5:{i:0;s:22:&quot;[staff-name-formatted]&quot;;i:1;s:26:&quot;[staff-position-formatted]&quot;;i:2;s:13:&quot;[staff-photo]&quot;;i:3;s:18:&quot;[staff-email-link]&quot;;i:4;s:21:&quot;[staff-bio-formatted]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(65): update_option('_staff_listing_...', Array)
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_formatted_tags', 'a:5:{i:0;s:22:\"[staff-name-formatted]\";i:1;s:26:\"[staff-position-formatted]\";i:2;s:13:\"[staff-photo]\";i:3;s:18:\"[staff-email-link]\";i:4;s:21:\"[staff-bio-formatted]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_formatted_tag_string', '[staff-name-formatted], [staff-position-formatted], [staff-photo], [staff-email-link], [staff-bio-formatted]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_formatted_tag_string' , '[staff-name-formatted], [staff-position-formatted], [staff-photo], [staff-email-link], [staff-bio-formatted]' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', '[staff-name-for...', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(66): update_option('_staff_listing_...', '[staff-name-for...')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_formatted_tag_string', '[staff-name-formatted], [staff-position-formatted], [staff-photo], [staff-email-link], [staff-bio-formatted]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_html', '[staff_loop]
-    <img class=\"staff-member-photo\" src=\"[staff-photo-url]\" alt=\"[staff-name] : [staff-position]\">
-    <div class=\"staff-member-info-wrap\">
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    </div>
-[/staff_loop]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_html' , '[staff_loop]
-    &lt;img class=&quot;staff-member-photo&quot; src=&quot;[staff-photo-url]&quot; alt=&quot;[staff-name] : [staff-position]&quot;&gt;
-    &lt;div class=&quot;staff-member-info-wrap&quot;&gt;
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    &lt;/div&gt;
-[/staff_loop]' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', '[staff_loop]\n  ...', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(67): update_option('_staff_listing_...', '[staff_loop]\n  ...')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_html', '[staff_loop]
-    <img class=\"staff-member-photo\" src=\"[staff-photo-url]\" alt=\"[staff-name] : [staff-position]\">
-    <div class=\"staff-member-info-wrap\">
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    </div>
-[/staff_loop]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_css', '/*  div wrapped around entire staff list  */
-    div.staff-member-listing {
+Error: [10-Apr-2025 15:52:03 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744300321.461)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 00:52:12 Asia/Tokyo] PHP Warning:  copy(/wordpress/wp-content/languages/plugins/simple-nft-protection-manager-ja.mo): failed to open stream: No such file or directory in /wordpress/wp-content/plugins/simple-nft-protection-manager/includes/snpmAdmin.php on line 684
+[11-Apr-2025 00:52:23 Asia/Tokyo] PHP Warning:  copy(/wordpress/wp-content/languages/plugins/simple-nft-protection-manager-ja.mo): failed to open stream: No such file or directory in /wordpress/wp-content/plugins/simple-nft-protection-manager/includes/snpmAdmin.php on line 684
+[10-Apr-2025 15:53:08 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744300385.107)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 15:54:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 448
+[10-Apr-2025 15:54:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 70
+[10-Apr-2025 15:55:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 448
+[10-Apr-2025 15:55:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 70
+[10-Apr-2025 15:55:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 448
+[10-Apr-2025 15:55:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/submission-manager-by-submittable/submittable.php on line 70
+[10-Apr-2025 15:55:38 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $name in /wordpress/wp-content/plugins/sandbox/class-sandbox.php on line 48
+[10-Apr-2025 15:55:38 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 119
+[10-Apr-2025 15:55:38 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 120
+[10-Apr-2025 15:55:38 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 136
+[10-Apr-2025 15:55:38 UTC] PHP Warning:  file(/wordpress//.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:55:38 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php:141
+Stack trace:
+#0 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(141): implode('', false)
+#1 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(71): update_htaccess()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sandbox_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sandbo...', false)
+#6 /internal/eval.php(20): activate_plugin('sandbox/sandbox...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:55:46 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $name in /wordpress/wp-content/plugins/sandbox/class-sandbox.php on line 48
+[10-Apr-2025 15:55:46 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 119
+[10-Apr-2025 15:55:46 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 120
+[10-Apr-2025 15:55:46 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 136
+[10-Apr-2025 15:55:46 UTC] PHP Warning:  file(/wordpress//.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:55:46 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php:141
+Stack trace:
+#0 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(141): implode('', false)
+#1 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(71): update_htaccess()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sandbox_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sandbo...', false)
+#6 /internal/eval.php(20): activate_plugin('sandbox/sandbox...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:55:55 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $name in /wordpress/wp-content/plugins/sandbox/class-sandbox.php on line 48
+[10-Apr-2025 15:55:55 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 119
+[10-Apr-2025 15:55:55 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 120
+[10-Apr-2025 15:55:55 UTC] PHP Warning:  Undefined array key "path" in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 136
+[10-Apr-2025 15:55:55 UTC] PHP Warning:  file(/wordpress//.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:55:55 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php:141
+Stack trace:
+#0 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(141): implode('', false)
+#1 /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php(71): update_htaccess()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sandbox_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sandbo...', false)
+#6 /internal/eval.php(20): activate_plugin('sandbox/sandbox...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/sandbox/sandbox-plugin.php on line 141
+[10-Apr-2025 15:56:40 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/sensei/includes/sensei-functions.php on line 101
+[10-Apr-2025 15:56:50 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/sensei/includes/sensei-functions.php on line 101
+[10-Apr-2025 15:56:59 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/sensei/includes/sensei-functions.php on line 101
+[10-Apr-2025 15:57:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php:138
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sf-love-quotes-...')
+#2 /internal/eval.php(20): activate_plugin('sf-love-quotes-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php on line 138
+[10-Apr-2025 15:57:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php:138
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sf-love-quotes-...')
+#2 /internal/eval.php(20): activate_plugin('sf-love-quotes-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php on line 138
+[10-Apr-2025 15:57:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php:138
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sf-love-quotes-...')
+#2 /internal/eval.php(20): activate_plugin('sf-love-quotes-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sf-love-quotes-widget/love-quotes-widget.php on line 138
+[10-Apr-2025 15:57:40 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-my-pagerank/Show-My-PageRank.php on line 241
+[10-Apr-2025 15:57:48 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-my-pagerank/Show-My-PageRank.php on line 241
+[10-Apr-2025 15:57:57 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/show-my-pagerank/Show-My-PageRank.php on line 241
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"show-my-pagerank"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
 }
-/*  div wrapped around each staff member  */
-div.staff-member {
-    padding-bottom: 2em;
-    border-bottom: thin dotted #aaa;
-}
-/*  Even staff member  */
-div.staff-member.even {
-}
-/*  Odd staff member  */
-div.staff-member.odd {
-    margin-top: 2em;
-}
-/*  Last staff member  */
-div.staff-member.last {
-    padding-bottom: 0;
-    border: none;
-}
-/*  Wrap around staff info  */
-.staff-member-info-wrap {
-    float: left;
-    width: 70%;
-    margin-left: 3%;
-}
-/*  [staff-bio-formatted]  */
-div.staff-member-bio {
-}
-/*  p tags within [staff-bio-formatted]  */
-div.staff-member-bio p {
-}
-/*  [staff-photo]  */
-img.staff-member-photo {
-    float: left;
-}
-/*  [staff-email-link]  */
-.staff-member-email {
-}
-/*  [staff-name-formatted]  */
-div.staff-member-listing h3.staff-member-name {
-    margin: 0;
-}
-/*  [staff-position-formatted]  */
-div.staff-member-listing h4.staff-member-position {
-    margin: 0;
-    font-style: italic;
-}
-/* Clearfix for div.staff-member */
-div.staff-member:after {
-    content: \"\";
-    display: block;
-    clear: both;
-}
-/* Clearfix for <= IE7 */
-* html div.staff-member { height: 1%; }
-div.staff-member { display: block; }
-', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_css' , '/*  div wrapped around entire staff list  */
-    div.staff-member-listing {
-}
-/*  div wrapped around each staff member  */
-div.staff-member {
-    padding-bottom: 2em;
-    border-bottom: thin dotted #aaa;
-}
-/*  Even staff member  */
-div.staff-member.even {
-}
-/*  Odd staff member  */
-div.staff-member.odd {
-    margin-top: 2em;
-}
-/*  Last staff member  */
-div.staff-member.last {
-    padding-bottom: 0;
-    border: none;
-}
-/*  Wrap around staff info  */
-.staff-member-info-wrap {
-    float: left;
-    width: 70%;
-    margin-left: 3%;
-}
-/*  [staff-bio-formatted]  */
-div.staff-member-bio {
-}
-/*  p tags within [staff-bio-formatted]  */
-div.staff-member-bio p {
-}
-/*  [staff-photo]  */
-img.staff-member-photo {
-    float: left;
-}
-/*  [staff-email-link]  */
-.staff-member-email {
-}
-/*  [staff-name-formatted]  */
-div.staff-member-listing h3.staff-member-name {
-    margin: 0;
-}
-/*  [staff-position-formatted]  */
-div.staff-member-listing h4.staff-member-position {
-    margin: 0;
-    font-style: italic;
-}
-/* Clearfix for div.staff-member */
-div.staff-member:after {
-    content: &quot;&quot;;
-    display: block;
-    clear: both;
-}
-/* Clearfix for &lt;= IE7 */
-* html div.staff-member { height: 1%; }
-div.staff-member { display: block; }
-' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', '/*  div wrapped...', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(68): update_option('_staff_listing_...', '/*  div wrapped...')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_css', '/*  div wrapped around entire staff list  */
-    div.staff-member-listing {
-}
-/*  div wrapped around each staff member  */
-div.staff-member {
-    padding-bottom: 2em;
-    border-bottom: thin dotted #aaa;
-}
-/*  Even staff member  */
-div.staff-member.even {
-}
-/*  Odd staff member  */
-div.staff-member.odd {
-    margin-top: 2em;
-}
-/*  Last staff member  */
-div.staff-member.last {
-    padding-bottom: 0;
-    border: none;
-}
-/*  Wrap around staff info  */
-.staff-member-info-wrap {
-    float: left;
-    width: 70%;
-    margin-left: 3%;
-}
-/*  [staff-bio-formatted]  */
-div.staff-member-bio {
-}
-/*  p tags within [staff-bio-formatted]  */
-div.staff-member-bio p {
-}
-/*  [staff-photo]  */
-img.staff-member-photo {
-    float: left;
-}
-/*  [staff-email-link]  */
-.staff-member-email {
-}
-/*  [staff-name-formatted]  */
-div.staff-member-listing h3.staff-member-name {
-    margin: 0;
-}
-/*  [staff-position-formatted]  */
-div.staff-member-listing h4.staff-member-position {
-    margin: 0;
-    font-style: italic;
-}
-/* Clearfix for div.staff-member */
-div.staff-member:after {
-    content: \"\";
-    display: block;
-    clear: both;
-}
-/* Clearfix for <= IE7 */
-* html div.staff-member { height: 1%; }
-div.staff-member { display: block; }
-', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_slug', 'staff-members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_slug' , 'staff-members' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'staff-members', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(69): update_option('_staff_listing_...', 'staff-members')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_slug', 'staff-members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_name_singular', 'Staff Member', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_name_singular' , 'Staff Member' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'Staff Member', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(70): update_option('_staff_listing_...', 'Staff Member')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_name_singular', 'Staff Member', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_name_plural', 'Staff Members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_default_name_plural' , 'Staff Members' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'Staff Members', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(71): update_option('_staff_listing_...', 'Staff Members')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_default_name_plural', 'Staff Members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_html', '[staff_loop]
-    <img class=\"staff-member-photo\" src=\"[staff-photo-url]\" alt=\"[staff-name] : [staff-position]\">
-    <div class=\"staff-member-info-wrap\">
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    </div>
-[/staff_loop]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_custom_html' , '[staff_loop]
-    &lt;img class=&quot;staff-member-photo&quot; src=&quot;[staff-photo-url]&quot; alt=&quot;[staff-name] : [staff-position]&quot;&gt;
-    &lt;div class=&quot;staff-member-info-wrap&quot;&gt;
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    &lt;/div&gt;
-[/staff_loop]' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', '[staff_loop]\n  ...', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(74): update_option('_staff_listing_...', '[staff_loop]\n  ...')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_html', '[staff_loop]
-    <img class=\"staff-member-photo\" src=\"[staff-photo-url]\" alt=\"[staff-name] : [staff-position]\">
-    <div class=\"staff-member-info-wrap\">
-        [staff-name-formatted]
-        [staff-position-formatted]
-        [staff-bio-formatted]
-        [staff-email-link]
-    </div>
-[/staff_loop]', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_slug', 'staff-members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_custom_slug' , 'staff-members' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'staff-members', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(89): update_option('_staff_listing_...', 'staff-members')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_slug', 'staff-members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_name_singular', 'Staff Member', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_custom_name_singular' , 'Staff Member' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'Staff Member', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(92): update_option('_staff_listing_...', 'Staff Member')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_name_singular', 'Staff Member', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_name_plural', 'Staff Members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_staff_listing_custom_name_plural' , 'Staff Members' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('_staff_listing_...', 'Staff Members', '', 'auto')
-#5 /wordpress/wp-content/plugins/simple-staff-list/includes/class-simple-staff-list-activator.php(95): update_option('_staff_listing_...', 'Staff Members')
-#6 /wordpress/wp-content/plugins/simple-staff-list/simple-staff-list.php(44): Simple_Staff_List_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_simple_staff_list(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#11 /internal/eval.php(20): activate_plugin('simple-staff-li...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_staff_listing_custom_name_plural', 'Staff Members', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simple-staff-list/simple-staff-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_simple_staff_list, Simple_Staff_List_Activator::activate, update_option, add_option, WP_SQLite_DB->quer
+
+Node.js v23.11.0
