@@ -2,314 +2,48 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 02:19:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from `wp_admin_bar_table` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * from w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * from w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(77): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(26): AdminBar->get_all_custom_nodes()
-#6 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#7 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#10 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#11 {main}</pre>
- for query SELECT * from wp_admin_bar_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table where parent_node = ''</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from `wp_admin_bar_table` where `parent_node` = '' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * from w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * from w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(82): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(27): AdminBar->get_all_custom_parent_nodes()
-#6 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#7 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#10 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#11 {main}</pre>
- for query SELECT * from wp_admin_bar_table where parent_node = '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_parent_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_widgets_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from `wp_widgets_table` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * from w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * from w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(88): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(25): DashboardWidget->get_dash_widgets()
-#6 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(152): DashboardWidget->__construct()
-#7 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#10 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#11 {main}</pre>
- for query SELECT * from wp_widgets_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.dashboard.widget.php'), DashboardWidget->__construct, DashboardWidget->get_dash_widgets, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:14 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/adminpress/modules/class.footer.text.php on line 54
-[09-Apr-2025 02:19:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_admin_bar_table | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(77): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(26): AdminBar->get_all_custom_nodes()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_admin_bar_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table where parent_node = ''</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_admin_bar_table where parent_node = :param0  | parameters: </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(82): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(27): AdminBar->get_all_custom_parent_nodes()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_admin_bar_table where parent_node = '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_parent_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_widgets_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_widgets_table | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(88): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(25): DashboardWidget->get_dash_widgets()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(152): DashboardWidget->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_widgets_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.dashboard.widget.php'), DashboardWidget->__construct, DashboardWidget->get_dash_widgets, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:22 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/adminpress/modules/class.footer.text.php on line 54
-[09-Apr-2025 02:19:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_admin_bar_table | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(77): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(26): AdminBar->get_all_custom_nodes()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_admin_bar_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_admin_bar_table where parent_node = ''</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_admin_bar_table where parent_node = :param0  | parameters: </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(82): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(27): AdminBar->get_all_custom_parent_nodes()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.custom.admin.bar.php(190): AdminBar->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_admin_bar_table where parent_node = '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.custom.admin.bar.php'), AdminBar->__construct, AdminBar->get_all_custom_parent_nodes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * from wp_widgets_table</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * from wp_widgets_table | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * from w...')
-#2 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(88): wpdb->get_results('SELECT * from w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(25): DashboardWidget->get_dash_widgets()
-#4 /wordpress/wp-content/plugins/adminpress/modules/class.dashboard.widget.php(152): DashboardWidget->__construct()
-#5 /wordpress/wp-content/plugins/adminpress/adminpress.php(275): include('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adminpress/admi...')
-#8 /internal/eval.php(20): activate_plugin('adminpress/admi...')
-#9 {main}</pre>
- for query SELECT * from wp_widgets_table made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/adminpress/adminpress.php'), include('/plugins/adminpress/modules/class.dashboard.widget.php'), DashboardWidget->__construct, DashboardWidget->get_dash_widgets, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:19:29 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/adminpress/modules/class.footer.text.php on line 54
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:20:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ax_logwriter', 'a:9:{s:10:\"error_type\";s:6:\"CUSTOM\";s:14:\"error_log_path\";s:18:\"/storage/www/logs/\";s:14:\"error_log_name\";s:21:\"sites_auth_errors.log\";s:18:\"error_log_timezone\";s:11:\"Europe/Rome\";s:26:\"security_log_each_pingback\";s:1:\"0\";s:30:\"security_stop_user_enumeration\";s:1:\"0\";s:25:\"security_remove_generator\";s:1:\"0\";s:35:\"security_kill_xmlrpc_on_login_error\";s:1:\"0\";s:45:\"security_disable_xmlrpc_authenticated_methods\";s:1:\"0\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ax_logwriter' , 'a:9:{s:10:&quot;error_type&quot;;s:6:&quot;CUSTOM&quot;;s:14:&quot;error_log_path&quot;;s:18:&quot;/storage/www/logs/&quot;;s:14:&quot;error_log_name&quot;;s:21:&quot;sites_auth_errors.log&quot;;s:18:&quot;error_log_timezone&quot;;s:11:&quot;Europe/Rome&quot;;s:26:&quot;security_log_each_pingback&quot;;s:1:&quot;0&quot;;s:30:&quot;security_stop_user_enumeration&quot;;s:1:&quot;0&quot;;s:25:&quot;security_remove_generator&quot;;s:1:&quot;0&quot;;s:35:&quot;security_kill_xmlrpc_on_login_error&quot;;s:1:&quot;0&quot;;s:45:&quot;security_disable_xmlrpc_authenticated_methods&quot;;s:1:&quot;0&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ax_logwriter', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/authentication-and-xmlrpc-log-writer/includes/plugin-class.php(213): update_option('ax_logwriter', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): axLogWriter->ax_logwriter_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 10:33:40 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744281218.064)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_authen...', false)
-#10 /internal/eval.php(20): activate_plugin('authentication-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ax_logwriter', 'a:9:{s:10:\"error_type\";s:6:\"CUSTOM\";s:14:\"error_log_path\";s:18:\"/storage/www/logs/\";s:14:\"error_log_name\";s:21:\"sites_auth_errors.log\";s:18:\"error_log_timezone\";s:11:\"Europe/Rome\";s:26:\"security_log_each_pingback\";s:1:\"0\";s:30:\"security_stop_user_enumeration\";s:1:\"0\";s:25:\"security_remove_generator\";s:1:\"0\";s:35:\"security_kill_xmlrpc_on_login_error\";s:1:\"0\";s:45:\"security_disable_xmlrpc_authenticated_methods\";s:1:\"0\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_authentication-and-xmlrpc-log-writer/authentication-and-xmlrpc-log-writer.php'), WP_Hook->do_action, WP_Hook->apply_filters, axLogWriter->ax_logwriter_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 02:20:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:20:33 UTC] PHP Fatal error:  Declaration of automatic_comment_scheduler::addPluginContent($links, $file) must be compatible with mijnpress_plugin_framework::addPluginContent($filename, $links, $file, $config_url = null) in /wordpress/wp-content/plugins/automatic-comment-scheduler/plugin.php on line 295
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 10:34:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ald-login-page</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 10:34:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ald-login-page</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 10:34:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ald-login-page</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 10:36:25 UTC] PHP Fatal error:  Declaration of automatic_comment_scheduler::addPluginContent($links, $file) must be compatible with mijnpress_plugin_framework::addPluginContent($filename, $links, $file, $config_url = null) in /wordpress/wp-content/plugins/automatic-comment-scheduler/plugin.php on line 295
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"automatic-comment-scheduler"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
