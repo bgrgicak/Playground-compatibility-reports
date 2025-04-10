@@ -2,245 +2,203 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 23:25:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:25:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:25:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:25:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:26:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:26:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_apiki-wp-faq-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_apiki-wp-faq-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_apiki-wp...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_apiki-wp...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_apiki-wp-faq-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:26:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-08 23:26:02', '2025-04-08 23:26:02', 'Here you can add an answer as well as add a content in posts and pages.', '', 'Sample Question?', '', 'publish', 'apiki-wp-faq', 'closed', 'closed', '', 'sample-question', '', '', '2025-04-08 23:26:02', '2025-04-08 23:26:02', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-08 23:26:02' , '2025-04-08 23:26:02' , 'Here you can add an answer as well as add a content in posts and pages.' , '' , 'Sample Question?' , '' , 'publish' , 'apiki-wp-faq' , 'closed' , 'closed' , '' , 'sample-question' , '' , '' , '2025-04-08 23:26:02' , '2025-04-08 23:26:02' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/apiki-wp-faq/apiki-wp-faq.php(202): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Apiki_WP_FAQ->create_sample_faq('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-08 23:26:02', '2025-04-08 23:26:02', 'Here you can add an answer as well as add a content in posts and pages.', '', 'Sample Question?', '', 'publish', 'apiki-wp-faq', 'closed', 'closed', '', 'sample-question', '', '', '2025-04-08 23:26:02', '2025-04-08 23:26:02', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Apiki_WP_FAQ->create_sample_faq, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:26:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:27:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:27:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [10-Apr-2025 08:55:09 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ATT_YouTube')
-#2 /wordpress/wp-content/plugins/att-youtube/att-youtube.php(235): register_widget('ATT_YouTube')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_att_youtube_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[08-Apr-2025 23:27:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744275307.359)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 08:56:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php:310
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ATT_YouTube')
-#2 /wordpress/wp-content/plugins/att-youtube/att-youtube.php(235): register_widget('ATT_YouTube')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_att_youtube_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[08-Apr-2025 23:27:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adsense-custom-...')
+#2 /internal/eval.php(20): activate_plugin('adsense-custom-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php on line 310
+[10-Apr-2025 08:56:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php:310
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ATT_YouTube')
-#2 /wordpress/wp-content/plugins/att-youtube/att-youtube.php(235): register_widget('ATT_YouTube')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_att_youtube_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[08-Apr-2025 23:27:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:28:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('asl_options', 'a:192:{s:5:\"theme\";s:10:\"simple-red\";s:20:\"override_search_form\";i:0;s:24:\"override_woo_search_form\";i:0;s:13:\"keyword_logic\";s:3:\"and\";s:28:\"mob_auto_focus_menu_selector\";s:12:\"#menu-toggle\";s:23:\"trigger_on_facet_change\";i:1;s:12:\"click_action\";s:12:\"results_page\";s:13:\"return_action\";s:12:\"results_page\";s:21:\"click_action_location\";s:4:\"same\";s:22:\"return_action_location\";s:4:\"same\";s:19:\"custom_redirect_url\";s:11:\"?s={phrase}\";s:16:\"results_per_page\";s:4:\"auto\";s:13:\"triggerontype\";i:1;s:19:\"trigger_update_href\";i:0;s:11:\"customtypes\";a:2:{i:0;s:4:\"post\";i:1;s:4:\"page\";}s:13:\"searchintitle\";i:1;s:15:\"searchincontent\";i:1;s:15:\"searchinexcerpt\";i:1;s:20:\"search_in_permalinks\";i:0;s:23:\"post_password_protected\";i:1;s:13:\"search_in_ids\";i:0;s:13:\"search_all_cf\";i:0;s:12:\"customfields\";s:0:\"\";s:11:\"post_status\";s:7:\"publish\";s:24:\"override_default_results\";i:1;s:15:\"override_method\";s:3:\"get\";s:15:\"res_live_search\";i:0;s:17:\"res_live_selector\";s:5:\"#main\";s:21:\"res_live_trigger_type\";i:1;s:22:\"res_live_trigger_facet\";i:1;s:22:\"res_live_trigger_click\";i:0;s:23:\"res_live_trigger_return\";i:0;s:9:\"exactonly\";i:0;s:20:\"exact_match_location\";s:8:\"anywhere\";s:13:\"searchinterms\";i:0;s:9:\"charcount\";i:0;s:10:\"maxresults\";i:10;s:10:\"itemscount\";i:4;s:16:\"resultitemheight\";s:4:\"70px\";s:15:\"orderby_primary\";s:14:\"relevance DESC\";s:17:\"orderby_secondary\";s:14:\"post_date DESC\";s:18:\"orderby_primary_cf\";s:0:\"\";s:20:\"orderby_secondary_cf\";s:0:\"\";s:23:\"orderby_primary_cf_type\";s:7:\"numeric\";s:25:\"orderby_secondary_cf_type\";s:7:\"numeric\";s:11:\"show_images\";i:1;s:11:\"image_width\";i:70;s:12:\"image_height\";i:70;s:25:\"image_parser_image_number\";i:1;s:30:\"image_parser_exclude_filenames\";s:0:\"\";s:18:\"image_display_mode\";s:5:\"cover\";s:26:\"image_apply_content_filter\";i:0;s:13:\"image_sources\";a:7:{i:0;a:2:{s:6:\"option\";s:14:\"Featured image\";s:5:\"value\";s:8:\"featured\";}i:1;a:2:{s:6:\"option\";s:12:\"Post Content\";s:5:\"value\";s:7:\"content\";}i:2;a:2:{s:6:\"option\";s:12:\"Post Excerpt\";s:5:\"value\";s:7:\"excerpt\";}i:3;a:2:{s:6:\"option\";s:12:\"Custom field\";s:5:\"value\";s:6:\"custom\";}i:4;a:2:{s:6:\"option\";s:15:\"Page Screenshot\";s:5:\"value\";s:10:\"screenshot\";}i:5;a:2:{s:6:\"option\";s:13:\"Default image\";s:5:\"value\";s:7:\"default\";}i:6;a:2:{s:6:\"option\";s:8:\"Disabled\";s:5:\"value\";s:8:\"disabled\";}}s:13:\"image_source1\";s:8:\"featured\";s:13:\"image_source2\";s:7:\"content\";s:13:\"image_source3\";s:7:\"excerpt\";s:13:\"image_source4\";s:6:\"custom\";s:13:\"image_source5\";s:7:\"default\";s:13:\"image_default\";s:73:\"http://127.0.0.1:9408/wp-content/plugins/ajax-search-lite/img/default.jpg\";s:21:\"image_source_featured\";s:8:\"original\";s:18:\"image_custom_field\";s:0:\"\";s:12:\"use_timthumb\";i:1;s:29:\"show_frontend_search_settings\";i:0;s:16:\"showexactmatches\";i:1;s:17:\"showsearchintitle\";i:1;s:19:\"showsearchincontent\";i:1;s:15:\"showcustomtypes\";s:0:\"\";s:20:\"showsearchincomments\";i:1;s:19:\"showsearchinexcerpt\";i:1;s:19:\"showsearchinbpusers\";i:0;s:20:\"showsearchinbpgroups\";i:0;s:20:\"showsearchinbpforums\";i:0;s:16:\"exactmatchestext\";s:18:\"Exact matches only\";s:17:\"searchintitletext\";s:15:\"Search in title\";s:19:\"searchincontenttext\";s:17:\"Search in content\";s:20:\"searchincommentstext\";s:18:\"Search in comments\";s:19:\"searchinexcerpttext\";s:17:\"Search in excerpt\";s:19:\"searchinbpuserstext\";s:15:\"Search in users\";s:20:\"searchinbpgroupstext\";s:16:\"Search in groups\";s:20:\"searchinbpforumstext\";s:16:\"Search in forums\";s:22:\"showsearchincategories\";i:0;s:17:\"showuncategorised\";i:0;s:20:\"exsearchincategories\";s:0:\"\";s:26:\"exsearchincategoriesheight\";i:200;s:22:\"showsearchintaxonomies\";i:1;s:9:\"showterms\";s:0:\"\";s:23:\"showseparatefilterboxes\";i:1;s:24:\"exsearchintaxonomiestext\";s:9:\"Filter by\";s:24:\"exsearchincategoriestext\";s:20:\"Filter by Categories\";s:13:\"auto_populate\";s:8:\"disabled\";s:20:\"auto_populate_phrase\";s:0:\"\";s:19:\"auto_populate_count\";s:1:\"1\";s:15:\"results_snap_to\";s:4:\"left\";s:9:\"box_width\";s:4:\"100%\";s:16:\"box_width_tablet\";s:4:\"100%\";s:15:\"box_width_phone\";s:4:\"100%\";s:10:\"box_margin\";s:22:\"||0px||0px||0px||0px||\";s:8:\"box_font\";s:9:\"Open Sans\";s:11:\"override_bg\";i:0;s:17:\"override_bg_color\";s:7:\"#FFFFFF\";s:13:\"override_icon\";i:0;s:22:\"override_icon_bg_color\";s:7:\"#FFFFFF\";s:19:\"override_icon_color\";s:7:\"#000000\";s:15:\"override_border\";i:0;s:21:\"override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:19:\"results_bg_override\";i:0;s:25:\"results_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"results_item_bg_override\";i:0;s:30:\"results_item_bg_override_color\";s:7:\"#FFFFFF\";s:23:\"results_override_border\";i:0;s:29:\"results_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:20:\"settings_bg_override\";i:0;s:26:\"settings_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"settings_override_border\";i:0;s:30:\"settings_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:15:\"resultstype_def\";a:4:{i:0;a:2:{s:6:\"option\";s:16:\"Vertical Results\";s:5:\"value\";s:8:\"vertical\";}i:1;a:2:{s:6:\"option\";s:18:\"Horizontal Results\";s:5:\"value\";s:10:\"horizontal\";}i:2;a:2:{s:6:\"option\";s:16:\"Isotopic Results\";s:5:\"value\";s:8:\"isotopic\";}i:3;a:2:{s:6:\"option\";s:22:\"Polaroid style Results\";s:5:\"value\";s:8:\"polaroid\";}}s:11:\"resultstype\";s:8:\"vertical\";s:19:\"resultsposition_def\";a:2:{i:0;a:2:{s:6:\"option\";s:20:\"Hover - over content\";s:5:\"value\";s:5:\"hover\";}i:1;a:2:{s:6:\"option\";s:22:\"Block - pushes content\";s:5:\"value\";s:5:\"block\";}}s:15:\"resultsposition\";s:5:\"hover\";s:16:\"resultsmargintop\";s:4:\"12px\";s:13:\"results_width\";s:4:\"auto\";s:19:\"results_width_phone\";s:4:\"auto\";s:20:\"results_width_tablet\";s:4:\"auto\";s:16:\"v_res_max_height\";s:4:\"none\";s:18:\"v_res_column_count\";i:1;s:22:\"v_res_column_min_width\";s:5:\"200px\";s:29:\"v_res_column_min_width_tablet\";s:5:\"200px\";s:28:\"v_res_column_min_width_phone\";s:5:\"200px\";s:17:\"defaultsearchtext\";s:13:\"Search here..\";s:15:\"showmoreresults\";i:0;s:19:\"showmoreresultstext\";s:15:\"More results...\";s:19:\"results_click_blank\";i:0;s:17:\"scroll_to_results\";i:0;s:19:\"resultareaclickable\";i:1;s:23:\"close_on_document_click\";i:1;s:15:\"show_close_icon\";i:1;s:10:\"showauthor\";i:0;s:8:\"showdate\";i:0;s:11:\"custom_date\";i:0;s:18:\"custom_date_format\";s:11:\"Y-m-d H:i:s\";s:15:\"showdescription\";i:1;s:17:\"descriptionlength\";i:100;s:19:\"description_context\";i:0;s:25:\"description_context_depth\";i:10000;s:13:\"noresultstext\";s:11:\"No results!\";s:14:\"didyoumeantext\";s:13:\"Did you mean:\";s:12:\"kw_highlight\";i:0;s:24:\"kw_highlight_whole_words\";i:1;s:15:\"highlight_color\";s:7:\"#d9312b\";s:18:\"highlight_bg_color\";s:4:\"#eee\";s:16:\"single_highlight\";i:0;s:26:\"single_highlightwholewords\";i:1;s:21:\"single_highlightcolor\";s:7:\"#d9312b\";s:23:\"single_highlightbgcolor\";s:4:\"#eee\";s:23:\"single_highlight_scroll\";i:0;s:23:\"single_highlight_offset\";i:0;s:25:\"single_highlight_selector\";s:8:\"#content\";s:10:\"custom_css\";s:0:\"\";s:12:\"autocomplete\";i:1;s:14:\"kw_suggestions\";i:1;s:9:\"kw_length\";i:60;s:8:\"kw_count\";i:10;s:14:\"kw_google_lang\";s:2:\"en\";s:12:\"shortcode_op\";s:6:\"remove\";s:16:\"striptagsexclude\";s:0:\"\";s:12:\"runshortcode\";i:1;s:14:\"stripshortcode\";i:0;s:19:\"pageswithcategories\";i:0;s:18:\"primary_titlefield\";i:0;s:21:\"primary_titlefield_cf\";s:0:\"\";s:24:\"primary_descriptionfield\";i:0;s:27:\"primary_descriptionfield_cf\";s:0:\"\";s:20:\"secondary_titlefield\";i:-1;s:23:\"secondary_titlefield_cf\";s:0:\"\";s:26:\"secondary_descriptionfield\";i:-1;s:29:\"secondary_descriptionfield_cf\";s:0:\"\";s:13:\"advtitlefield\";s:12:\"{titlefield}\";s:19:\"advdescriptionfield\";s:18:\"{descriptionfield}\";s:22:\"woo_exclude_outofstock\";i:0;s:18:\"exclude_woo_hidden\";i:1;s:19:\"exclude_woo_catalog\";i:0;s:17:\"excludecategories\";s:0:\"\";s:12:\"excludeposts\";s:0:\"\";s:18:\"wpml_compatibility\";i:1;s:22:\"polylang_compatibility\";i:1;s:13:\"kw_exceptions\";s:0:\"\";s:15:\"kw_exceptions_e\";s:0:\"\";s:22:\"aria_search_form_label\";s:11:\"Search form\";s:24:\"aria_settings_form_label\";s:20:\"Search settings form\";s:23:\"aria_search_input_label\";s:12:\"Search input\";s:30:\"aria_search_autocomplete_label\";s:19:\"Search autocomplete\";s:20:\"aria_magnifier_label\";s:16:\"Search magnifier\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'asl_options' , 'a:192:{s:5:&quot;theme&quot;;s:10:&quot;simple-red&quot;;s:20:&quot;override_search_form&quot;;i:0;s:24:&quot;override_woo_search_form&quot;;i:0;s:13:&quot;keyword_logic&quot;;s:3:&quot;and&quot;;s:28:&quot;mob_auto_focus_menu_selector&quot;;s:12:&quot;#menu-toggle&quot;;s:23:&quot;trigger_on_facet_change&quot;;i:1;s:12:&quot;click_action&quot;;s:12:&quot;results_page&quot;;s:13:&quot;return_action&quot;;s:12:&quot;results_page&quot;;s:21:&quot;click_action_location&quot;;s:4:&quot;same&quot;;s:22:&quot;return_action_location&quot;;s:4:&quot;same&quot;;s:19:&quot;custom_redirect_url&quot;;s:11:&quot;?s={phrase}&quot;;s:16:&quot;results_per_page&quot;;s:4:&quot;auto&quot;;s:13:&quot;triggerontype&quot;;i:1;s:19:&quot;trigger_update_href&quot;;i:0;s:11:&quot;customtypes&quot;;a:2:{i:0;s:4:&quot;post&quot;;i:1;s:4:&quot;page&quot;;}s:13:&quot;searchintitle&quot;;i:1;s:15:&quot;searchincontent&quot;;i:1;s:15:&quot;searchinexcerpt&quot;;i:1;s:20:&quot;search_in_permalinks&quot;;i:0;s:23:&quot;post_password_protected&quot;;i:1;s:13:&quot;search_in_ids&quot;;i:0;s:13:&quot;search_all_cf&quot;;i:0;s:12:&quot;customfields&quot;;s:0:&quot;&quot;;s:11:&quot;post_status&quot;;s:7:&quot;publish&quot;;s:24:&quot;override_default_results&quot;;i:1;s:15:&quot;override_method&quot;;s:3:&quot;get&quot;;s:15:&quot;res_live_search&quot;;i:0;s:17:&quot;res_live_selector&quot;;s:5:&quot;#main&quot;;s:21:&quot;res_live_trigger_type&quot;;i:1;s:22:&quot;res_live_trigger_facet&quot;;i:1;s:22:&quot;res_live_trigger_click&quot;;i:0;s:23:&quot;res_live_trigger_return&quot;;i:0;s:9:&quot;exactonly&quot;;i:0;s:20:&quot;exact_match_location&quot;;s:8:&quot;anywhere&quot;;s:13:&quot;searchinterms&quot;;i:0;s:9:&quot;charcount&quot;;i:0;s:10:&quot;maxresults&quot;;i:10;s:10:&quot;itemscount&quot;;i:4;s:16:&quot;resultitemheight&quot;;s:4:&quot;70px&quot;;s:15:&quot;orderby_primary&quot;;s:14:&quot;relevance DESC&quot;;s:17:&quot;orderby_secondary&quot;;s:14:&quot;post_date DESC&quot;;s:18:&quot;orderby_primary_cf&quot;;s:0:&quot;&quot;;s:20:&quot;orderby_secondary_cf&quot;;s:0:&quot;&quot;;s:23:&quot;orderby_primary_cf_type&quot;;s:7:&quot;numeric&quot;;s:25:&quot;orderby_secondary_cf_type&quot;;s:7:&quot;numeric&quot;;s:11:&quot;show_images&quot;;i:1;s:11:&quot;image_width&quot;;i:70;s:12:&quot;image_height&quot;;i:70;s:25:&quot;image_parser_image_number&quot;;i:1;s:30:&quot;image_parser_exclude_filenames&quot;;s:0:&quot;&quot;;s:18:&quot;image_display_mode&quot;;s:5:&quot;cover&quot;;s:26:&quot;image_apply_content_filter&quot;;i:0;s:13:&quot;image_sources&quot;;a:7:{i:0;a:2:{s:6:&quot;option&quot;;s:14:&quot;Featured image&quot;;s:5:&quot;value&quot;;s:8:&quot;featured&quot;;}i:1;a:2:{s:6:&quot;option&quot;;s:12:&quot;Post Content&quot;;s:5:&quot;value&quot;;s:7:&quot;content&quot;;}i:2;a:2:{s:6:&quot;option&quot;;s:12:&quot;Post Excerpt&quot;;s:5:&quot;value&quot;;s:7:&quot;excerpt&quot;;}i:3;a:2:{s:6:&quot;option&quot;;s:12:&quot;Custom field&quot;;s:5:&quot;value&quot;;s:6:&quot;custom&quot;;}i:4;a:2:{s:6:&quot;option&quot;;s:15:&quot;Page Screenshot&quot;;s:5:&quot;value&quot;;s:10:&quot;screenshot&quot;;}i:5;a:2:{s:6:&quot;option&quot;;s:13:&quot;Default image&quot;;s:5:&quot;value&quot;;s:7:&quot;default&quot;;}i:6;a:2:{s:6:&quot;option&quot;;s:8:&quot;Disabled&quot;;s:5:&quot;value&quot;;s:8:&quot;disabled&quot;;}}s:13:&quot;image_source1&quot;;s:8:&quot;featured&quot;;s:13:&quot;image_source2&quot;;s:7:&quot;content&quot;;s:13:&quot;image_source3&quot;;s:7:&quot;excerpt&quot;;s:13:&quot;image_source4&quot;;s:6:&quot;custom&quot;;s:13:&quot;image_source5&quot;;s:7:&quot;default&quot;;s:13:&quot;image_default&quot;;s:73:&quot;http://127.0.0.1:9408/wp-content/plugins/ajax-search-lite/img/default.jpg&quot;;s:21:&quot;image_source_featured&quot;;s:8:&quot;original&quot;;s:18:&quot;image_custom_field&quot;;s:0:&quot;&quot;;s:12:&quot;use_timthumb&quot;;i:1;s:29:&quot;show_frontend_search_settings&quot;;i:0;s:16:&quot;showexactmatches&quot;;i:1;s:17:&quot;showsearchintitle&quot;;i:1;s:19:&quot;showsearchincontent&quot;;i:1;s:15:&quot;showcustomtypes&quot;;s:0:&quot;&quot;;s:20:&quot;showsearchincomments&quot;;i:1;s:19:&quot;showsearchinexcerpt&quot;;i:1;s:19:&quot;showsearchinbpusers&quot;;i:0;s:20:&quot;showsearchinbpgroups&quot;;i:0;s:20:&quot;showsearchinbpforums&quot;;i:0;s:16:&quot;exactmatchestext&quot;;s:18:&quot;Exact matches only&quot;;s:17:&quot;searchintitletext&quot;;s:15:&quot;Search in title&quot;;s:19:&quot;searchincontenttext&quot;;s:17:&quot;Search in content&quot;;s:20:&quot;searchincommentstext&quot;;s:18:&quot;Search in comments&quot;;s:19:&quot;searchinexcerpttext&quot;;s:17:&quot;Search in excerpt&quot;;s:19:&quot;searchinbpuserstext&quot;;s:15:&quot;Search in users&quot;;s:20:&quot;searchinbpgroupstext&quot;;s:16:&quot;Search in groups&quot;;s:20:&quot;searchinbpforumstext&quot;;s:16:&quot;Search in forums&quot;;s:22:&quot;showsearchincategories&quot;;i:0;s:17:&quot;showuncategorised&quot;;i:0;s:20:&quot;exsearchincategories&quot;;s:0:&quot;&quot;;s:26:&quot;exsearchincategoriesheight&quot;;i:200;s:22:&quot;showsearchintaxonomies&quot;;i:1;s:9:&quot;showterms&quot;;s:0:&quot;&quot;;s:23:&quot;showseparatefilterboxes&quot;;i:1;s:24:&quot;exsearchintaxonomiestext&quot;;s:9:&quot;Filter by&quot;;s:24:&quot;exsearchincategoriestext&quot;;s:20:&quot;Filter by Categories&quot;;s:13:&quot;auto_populate&quot;;s:8:&quot;disabled&quot;;s:20:&quot;auto_populate_phrase&quot;;s:0:&quot;&quot;;s:19:&quot;auto_populate_count&quot;;s:1:&quot;1&quot;;s:15:&quot;results_snap_to&quot;;s:4:&quot;left&quot;;s:9:&quot;box_width&quot;;s:4:&quot;100%&quot;;s:16:&quot;box_width_tablet&quot;;s:4:&quot;100%&quot;;s:15:&quot;box_width_phone&quot;;s:4:&quot;100%&quot;;s:10:&quot;box_margin&quot;;s:22:&quot;||0px||0px||0px||0px||&quot;;s:8:&quot;box_font&quot;;s:9:&quot;Open Sans&quot;;s:11:&quot;override_bg&quot;;i:0;s:17:&quot;override_bg_color&quot;;s:7:&quot;#FFFFFF&quot;;s:13:&quot;override_icon&quot;;i:0;s:22:&quot;override_icon_bg_color&quot;;s:7:&quot;#FFFFFF&quot;;s:19:&quot;override_icon_color&quot;;s:7:&quot;#000000&quot;;s:15:&quot;override_border&quot;;i:0;s:21:&quot;override_border_style&quot;;s:59:&quot;border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;&quot;;s:19:&quot;results_bg_override&quot;;i:0;s:25:&quot;results_bg_override_color&quot;;s:7:&quot;#FFFFFF&quot;;s:24:&quot;results_item_bg_override&quot;;i:0;s:30:&quot;results_item_bg_override_color&quot;;s:7:&quot;#FFFFFF&quot;;s:23:&quot;results_override_border&quot;;i:0;s:29:&quot;results_override_border_style&quot;;s:59:&quot;border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;&quot;;s:20:&quot;settings_bg_override&quot;;i:0;s:26:&quot;settings_bg_override_color&quot;;s:7:&quot;#FFFFFF&quot;;s:24:&quot;settings_override_border&quot;;i:0;s:30:&quot;settings_override_border_style&quot;;s:59:&quot;border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;&quot;;s:15:&quot;resultstype_def&quot;;a:4:{i:0;a:2:{s:6:&quot;option&quot;;s:16:&quot;Vertical Results&quot;;s:5:&quot;value&quot;;s:8:&quot;vertical&quot;;}i:1;a:2:{s:6:&quot;option&quot;;s:18:&quot;Horizontal Results&quot;;s:5:&quot;value&quot;;s:10:&quot;horizontal&quot;;}i:2;a:2:{s:6:&quot;option&quot;;s:16:&quot;Isotopic Results&quot;;s:5:&quot;value&quot;;s:8:&quot;isotopic&quot;;}i:3;a:2:{s:6:&quot;option&quot;;s:22:&quot;Polaroid style Results&quot;;s:5:&quot;value&quot;;s:8:&quot;polaroid&quot;;}}s:11:&quot;resultstype&quot;;s:8:&quot;vertical&quot;;s:19:&quot;resultsposition_def&quot;;a:2:{i:0;a:2:{s:6:&quot;option&quot;;s:20:&quot;Hover - over content&quot;;s:5:&quot;value&quot;;s:5:&quot;hover&quot;;}i:1;a:2:{s:6:&quot;option&quot;;s:22:&quot;Block - pushes content&quot;;s:5:&quot;value&quot;;s:5:&quot;block&quot;;}}s:15:&quot;resultsposition&quot;;s:5:&quot;hover&quot;;s:16:&quot;resultsmargintop&quot;;s:4:&quot;12px&quot;;s:13:&quot;results_width&quot;;s:4:&quot;auto&quot;;s:19:&quot;results_width_phone&quot;;s:4:&quot;auto&quot;;s:20:&quot;results_width_tablet&quot;;s:4:&quot;auto&quot;;s:16:&quot;v_res_max_height&quot;;s:4:&quot;none&quot;;s:18:&quot;v_res_column_count&quot;;i:1;s:22:&quot;v_res_column_min_width&quot;;s:5:&quot;200px&quot;;s:29:&quot;v_res_column_min_width_tablet&quot;;s:5:&quot;200px&quot;;s:28:&quot;v_res_column_min_width_phone&quot;;s:5:&quot;200px&quot;;s:17:&quot;defaultsearchtext&quot;;s:13:&quot;Search here..&quot;;s:15:&quot;showmoreresults&quot;;i:0;s:19:&quot;showmoreresultstext&quot;;s:15:&quot;More results...&quot;;s:19:&quot;results_click_blank&quot;;i:0;s:17:&quot;scroll_to_results&quot;;i:0;s:19:&quot;resultareaclickable&quot;;i:1;s:23:&quot;close_on_document_click&quot;;i:1;s:15:&quot;show_close_icon&quot;;i:1;s:10:&quot;showauthor&quot;;i:0;s:8:&quot;showdate&quot;;i:0;s:11:&quot;custom_date&quot;;i:0;s:18:&quot;custom_date_format&quot;;s:11:&quot;Y-m-d H:i:s&quot;;s:15:&quot;showdescription&quot;;i:1;s:17:&quot;descriptionlength&quot;;i:100;s:19:&quot;description_context&quot;;i:0;s:25:&quot;description_context_depth&quot;;i:10000;s:13:&quot;noresultstext&quot;;s:11:&quot;No results!&quot;;s:14:&quot;didyoumeantext&quot;;s:13:&quot;Did you mean:&quot;;s:12:&quot;kw_highlight&quot;;i:0;s:24:&quot;kw_highlight_whole_words&quot;;i:1;s:15:&quot;highlight_color&quot;;s:7:&quot;#d9312b&quot;;s:18:&quot;highlight_bg_color&quot;;s:4:&quot;#eee&quot;;s:16:&quot;single_highlight&quot;;i:0;s:26:&quot;single_highlightwholewords&quot;;i:1;s:21:&quot;single_highlightcolor&quot;;s:7:&quot;#d9312b&quot;;s:23:&quot;single_highlightbgcolor&quot;;s:4:&quot;#eee&quot;;s:23:&quot;single_highlight_scroll&quot;;i:0;s:23:&quot;single_highlight_offset&quot;;i:0;s:25:&quot;single_highlight_selector&quot;;s:8:&quot;#content&quot;;s:10:&quot;custom_css&quot;;s:0:&quot;&quot;;s:12:&quot;autocomplete&quot;;i:1;s:14:&quot;kw_suggestions&quot;;i:1;s:9:&quot;kw_length&quot;;i:60;s:8:&quot;kw_count&quot;;i:10;s:14:&quot;kw_google_lang&quot;;s:2:&quot;en&quot;;s:12:&quot;shortcode_op&quot;;s:6:&quot;remove&quot;;s:16:&quot;striptagsexclude&quot;;s:0:&quot;&quot;;s:12:&quot;runshortcode&quot;;i:1;s:14:&quot;stripshortcode&quot;;i:0;s:19:&quot;pageswithcategories&quot;;i:0;s:18:&quot;primary_titlefield&quot;;i:0;s:21:&quot;primary_titlefield_cf&quot;;s:0:&quot;&quot;;s:24:&quot;primary_descriptionfield&quot;;i:0;s:27:&quot;primary_descriptionfield_cf&quot;;s:0:&quot;&quot;;s:20:&quot;secondary_titlefield&quot;;i:-1;s:23:&quot;secondary_titlefield_cf&quot;;s:0:&quot;&quot;;s:26:&quot;secondary_descriptionfield&quot;;i:-1;s:29:&quot;secondary_descriptionfield_cf&quot;;s:0:&quot;&quot;;s:13:&quot;advtitlefield&quot;;s:12:&quot;{titlefield}&quot;;s:19:&quot;advdescriptionfield&quot;;s:18:&quot;{descriptionfield}&quot;;s:22:&quot;woo_exclude_outofstock&quot;;i:0;s:18:&quot;exclude_woo_hidden&quot;;i:1;s:19:&quot;exclude_woo_catalog&quot;;i:0;s:17:&quot;excludecategories&quot;;s:0:&quot;&quot;;s:12:&quot;excludeposts&quot;;s:0:&quot;&quot;;s:18:&quot;wpml_compatibility&quot;;i:1;s:22:&quot;polylang_compatibility&quot;;i:1;s:13:&quot;kw_exceptions&quot;;s:0:&quot;&quot;;s:15:&quot;kw_exceptions_e&quot;;s:0:&quot;&quot;;s:22:&quot;aria_search_form_label&quot;;s:11:&quot;Search form&quot;;s:24:&quot;aria_settings_form_label&quot;;s:20:&quot;Search settings form&quot;;s:23:&quot;aria_search_input_label&quot;;s:12:&quot;Search input&quot;;s:30:&quot;aria_search_autocomplete_label&quot;;s:19:&quot;Search autocomplete&quot;;s:20:&quot;aria_magnifier_label&quot;;s:16:&quot;Search magnifier&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('asl_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-instances.php(113): update_option('asl_options', Array)
-#6 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-init.php(213): WD_ASL_Instances->update(0, Array)
-#7 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-init.php(32): WD_ASL_Init->backwards_compatibility_fixes()
-#8 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-manager.php(266): WD_ASL_Init->activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WD_ASL_Manager->activationHook(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ajax-s...', false)
-#13 /internal/eval.php(20): activate_plugin('ajax-search-lit...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('asl_options', 'a:192:{s:5:\"theme\";s:10:\"simple-red\";s:20:\"override_search_form\";i:0;s:24:\"override_woo_search_form\";i:0;s:13:\"keyword_logic\";s:3:\"and\";s:28:\"mob_auto_focus_menu_selector\";s:12:\"#menu-toggle\";s:23:\"trigger_on_facet_change\";i:1;s:12:\"click_action\";s:12:\"results_page\";s:13:\"return_action\";s:12:\"results_page\";s:21:\"click_action_location\";s:4:\"same\";s:22:\"return_action_location\";s:4:\"same\";s:19:\"custom_redirect_url\";s:11:\"?s={phrase}\";s:16:\"results_per_page\";s:4:\"auto\";s:13:\"triggerontype\";i:1;s:19:\"trigger_update_href\";i:0;s:11:\"customtypes\";a:2:{i:0;s:4:\"post\";i:1;s:4:\"page\";}s:13:\"searchintitle\";i:1;s:15:\"searchincontent\";i:1;s:15:\"searchinexcerpt\";i:1;s:20:\"search_in_permalinks\";i:0;s:23:\"post_password_protected\";i:1;s:13:\"search_in_ids\";i:0;s:13:\"search_all_cf\";i:0;s:12:\"customfields\";s:0:\"\";s:11:\"post_status\";s:7:\"publish\";s:24:\"override_default_results\";i:1;s:15:\"override_method\";s:3:\"get\";s:15:\"res_live_search\";i:0;s:17:\"res_live_selector\";s:5:\"#main\";s:21:\"res_live_trigger_type\";i:1;s:22:\"res_live_trigger_facet\";i:1;s:22:\"res_live_trigger_click\";i:0;s:23:\"res_live_trigger_return\";i:0;s:9:\"exactonly\";i:0;s:20:\"exact_match_location\";s:8:\"anywhere\";s:13:\"searchinterms\";i:0;s:9:\"charcount\";i:0;s:10:\"maxresults\";i:10;s:10:\"itemscount\";i:4;s:16:\"resultitemheight\";s:4:\"70px\";s:15:\"orderby_primary\";s:14:\"relevance DESC\";s:17:\"orderby_secondary\";s:14:\"post_date DESC\";s:18:\"orderby_primary_cf\";s:0:\"\";s:20:\"orderby_secondary_cf\";s:0:\"\";s:23:\"orderby_primary_cf_type\";s:7:\"numeric\";s:25:\"orderby_secondary_cf_type\";s:7:\"numeric\";s:11:\"show_images\";i:1;s:11:\"image_width\";i:70;s:12:\"image_height\";i:70;s:25:\"image_parser_image_number\";i:1;s:30:\"image_parser_exclude_filenames\";s:0:\"\";s:18:\"image_display_mode\";s:5:\"cover\";s:26:\"image_apply_content_filter\";i:0;s:13:\"image_sources\";a:7:{i:0;a:2:{s:6:\"option\";s:14:\"Featured image\";s:5:\"value\";s:8:\"featured\";}i:1;a:2:{s:6:\"option\";s:12:\"Post Content\";s:5:\"value\";s:7:\"content\";}i:2;a:2:{s:6:\"option\";s:12:\"Post Excerpt\";s:5:\"value\";s:7:\"excerpt\";}i:3;a:2:{s:6:\"option\";s:12:\"Custom field\";s:5:\"value\";s:6:\"custom\";}i:4;a:2:{s:6:\"option\";s:15:\"Page Screenshot\";s:5:\"value\";s:10:\"screenshot\";}i:5;a:2:{s:6:\"option\";s:13:\"Default image\";s:5:\"value\";s:7:\"default\";}i:6;a:2:{s:6:\"option\";s:8:\"Disabled\";s:5:\"value\";s:8:\"disabled\";}}s:13:\"image_source1\";s:8:\"featured\";s:13:\"image_source2\";s:7:\"content\";s:13:\"image_source3\";s:7:\"excerpt\";s:13:\"image_source4\";s:6:\"custom\";s:13:\"image_source5\";s:7:\"default\";s:13:\"image_default\";s:73:\"http://127.0.0.1:9408/wp-content/plugins/ajax-search-lite/img/default.jpg\";s:21:\"image_source_featured\";s:8:\"original\";s:18:\"image_custom_field\";s:0:\"\";s:12:\"use_timthumb\";i:1;s:29:\"show_frontend_search_settings\";i:0;s:16:\"showexactmatches\";i:1;s:17:\"showsearchintitle\";i:1;s:19:\"showsearchincontent\";i:1;s:15:\"showcustomtypes\";s:0:\"\";s:20:\"showsearchincomments\";i:1;s:19:\"showsearchinexcerpt\";i:1;s:19:\"showsearchinbpusers\";i:0;s:20:\"showsearchinbpgroups\";i:0;s:20:\"showsearchinbpforums\";i:0;s:16:\"exactmatchestext\";s:18:\"Exact matches only\";s:17:\"searchintitletext\";s:15:\"Search in title\";s:19:\"searchincontenttext\";s:17:\"Search in content\";s:20:\"searchincommentstext\";s:18:\"Search in comments\";s:19:\"searchinexcerpttext\";s:17:\"Search in excerpt\";s:19:\"searchinbpuserstext\";s:15:\"Search in users\";s:20:\"searchinbpgroupstext\";s:16:\"Search in groups\";s:20:\"searchinbpforumstext\";s:16:\"Search in forums\";s:22:\"showsearchincategories\";i:0;s:17:\"showuncategorised\";i:0;s:20:\"exsearchincategories\";s:0:\"\";s:26:\"exsearchincategoriesheight\";i:200;s:22:\"showsearchintaxonomies\";i:1;s:9:\"showterms\";s:0:\"\";s:23:\"showseparatefilterboxes\";i:1;s:24:\"exsearchintaxonomiestext\";s:9:\"Filter by\";s:24:\"exsearchincategoriestext\";s:20:\"Filter by Categories\";s:13:\"auto_populate\";s:8:\"disabled\";s:20:\"auto_populate_phrase\";s:0:\"\";s:19:\"auto_populate_count\";s:1:\"1\";s:15:\"results_snap_to\";s:4:\"left\";s:9:\"box_width\";s:4:\"100%\";s:16:\"box_width_tablet\";s:4:\"100%\";s:15:\"box_width_phone\";s:4:\"100%\";s:10:\"box_margin\";s:22:\"||0px||0px||0px||0px||\";s:8:\"box_font\";s:9:\"Open Sans\";s:11:\"override_bg\";i:0;s:17:\"override_bg_color\";s:7:\"#FFFFFF\";s:13:\"override_icon\";i:0;s:22:\"override_icon_bg_color\";s:7:\"#FFFFFF\";s:19:\"override_icon_color\";s:7:\"#000000\";s:15:\"override_border\";i:0;s:21:\"override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:19:\"results_bg_override\";i:0;s:25:\"results_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"results_item_bg_override\";i:0;s:30:\"results_item_bg_override_color\";s:7:\"#FFFFFF\";s:23:\"results_override_border\";i:0;s:29:\"results_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:20:\"settings_bg_override\";i:0;s:26:\"settings_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"settings_override_border\";i:0;s:30:\"settings_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:15:\"resultstype_def\";a:4:{i:0;a:2:{s:6:\"option\";s:16:\"Vertical Results\";s:5:\"value\";s:8:\"vertical\";}i:1;a:2:{s:6:\"option\";s:18:\"Horizontal Results\";s:5:\"value\";s:10:\"horizontal\";}i:2;a:2:{s:6:\"option\";s:16:\"Isotopic Results\";s:5:\"value\";s:8:\"isotopic\";}i:3;a:2:{s:6:\"option\";s:22:\"Polaroid style Results\";s:5:\"value\";s:8:\"polaroid\";}}s:11:\"resultstype\";s:8:\"vertical\";s:19:\"resultsposition_def\";a:2:{i:0;a:2:{s:6:\"option\";s:20:\"Hover - over content\";s:5:\"value\";s:5:\"hover\";}i:1;a:2:{s:6:\"option\";s:22:\"Block - pushes content\";s:5:\"value\";s:5:\"block\";}}s:15:\"resultsposition\";s:5:\"hover\";s:16:\"resultsmargintop\";s:4:\"12px\";s:13:\"results_width\";s:4:\"auto\";s:19:\"results_width_phone\";s:4:\"auto\";s:20:\"results_width_tablet\";s:4:\"auto\";s:16:\"v_res_max_height\";s:4:\"none\";s:18:\"v_res_column_count\";i:1;s:22:\"v_res_column_min_width\";s:5:\"200px\";s:29:\"v_res_column_min_width_tablet\";s:5:\"200px\";s:28:\"v_res_column_min_width_phone\";s:5:\"200px\";s:17:\"defaultsearchtext\";s:13:\"Search here..\";s:15:\"showmoreresults\";i:0;s:19:\"showmoreresultstext\";s:15:\"More results...\";s:19:\"results_click_blank\";i:0;s:17:\"scroll_to_results\";i:0;s:19:\"resultareaclickable\";i:1;s:23:\"close_on_document_click\";i:1;s:15:\"show_close_icon\";i:1;s:10:\"showauthor\";i:0;s:8:\"showdate\";i:0;s:11:\"custom_date\";i:0;s:18:\"custom_date_format\";s:11:\"Y-m-d H:i:s\";s:15:\"showdescription\";i:1;s:17:\"descriptionlength\";i:100;s:19:\"description_context\";i:0;s:25:\"description_context_depth\";i:10000;s:13:\"noresultstext\";s:11:\"No results!\";s:14:\"didyoumeantext\";s:13:\"Did you mean:\";s:12:\"kw_highlight\";i:0;s:24:\"kw_highlight_whole_words\";i:1;s:15:\"highlight_color\";s:7:\"#d9312b\";s:18:\"highlight_bg_color\";s:4:\"#eee\";s:16:\"single_highlight\";i:0;s:26:\"single_highlightwholewords\";i:1;s:21:\"single_highlightcolor\";s:7:\"#d9312b\";s:23:\"single_highlightbgcolor\";s:4:\"#eee\";s:23:\"single_highlight_scroll\";i:0;s:23:\"single_highlight_offset\";i:0;s:25:\"single_highlight_selector\";s:8:\"#content\";s:10:\"custom_css\";s:0:\"\";s:12:\"autocomplete\";i:1;s:14:\"kw_suggestions\";i:1;s:9:\"kw_length\";i:60;s:8:\"kw_count\";i:10;s:14:\"kw_google_lang\";s:2:\"en\";s:12:\"shortcode_op\";s:6:\"remove\";s:16:\"striptagsexclude\";s:0:\"\";s:12:\"runshortcode\";i:1;s:14:\"stripshortcode\";i:0;s:19:\"pageswithcategories\";i:0;s:18:\"primary_titlefield\";i:0;s:21:\"primary_titlefield_cf\";s:0:\"\";s:24:\"primary_descriptionfield\";i:0;s:27:\"primary_descriptionfield_cf\";s:0:\"\";s:20:\"secondary_titlefield\";i:-1;s:23:\"secondary_titlefield_cf\";s:0:\"\";s:26:\"secondary_descriptionfield\";i:-1;s:29:\"secondary_descriptionfield_cf\";s:0:\"\";s:13:\"advtitlefield\";s:12:\"{titlefield}\";s:19:\"advdescriptionfield\";s:18:\"{descriptionfield}\";s:22:\"woo_exclude_outofstock\";i:0;s:18:\"exclude_woo_hidden\";i:1;s:19:\"exclude_woo_catalog\";i:0;s:17:\"excludecategories\";s:0:\"\";s:12:\"excludeposts\";s:0:\"\";s:18:\"wpml_compatibility\";i:1;s:22:\"polylang_compatibility\";i:1;s:13:\"kw_exceptions\";s:0:\"\";s:15:\"kw_exceptions_e\";s:0:\"\";s:22:\"aria_search_form_label\";s:11:\"Search form\";s:24:\"aria_settings_form_label\";s:20:\"Search settings form\";s:23:\"aria_search_input_label\";s:12:\"Search input\";s:30:\"aria_search_autocomplete_label\";s:19:\"Search autocomplete\";s:20:\"aria_magnifier_label\";s:16:\"Search magnifier\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ajax-search-lite/ajax-search-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, WD_ASL_Manager->activationHook, WD_ASL_Init->activate, WD_ASL_Init->backwards_compatibility_fixes, WD_ASL_Instances->update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('asl_version', '4768', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'asl_version' , '4768' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('asl_version', 4768, '', 'auto')
-#5 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-init.php(40): update_option('asl_version', 4768)
-#6 /wordpress/wp-content/plugins/ajax-search-lite/includes/classes/core/class-asl-manager.php(266): WD_ASL_Init->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WD_ASL_Manager->activationHook(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ajax-s...', false)
-#11 /internal/eval.php(20): activate_plugin('ajax-search-lit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('asl_version', '4768', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ajax-search-lite/ajax-search-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, WD_ASL_Manager->activationHook, WD_ASL_Init->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:28:31 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:28:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:28:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:28:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:28:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('asl_options', 'a:192:{s:5:\"theme\";s:10:\"simple-red\";s:20:\"override_search_form\";i:0;s:24:\"override_woo_search_form\";i:0;s:13:\"keyword_logic\";s:3:\"and\";s:28:\"mob_auto_focus_menu_selector\";s:12:\"#menu-toggle\";s:23:\"trigger_on_facet_change\";i:1;s:12:\"click_action\";s:12:\"results_page\";s:13:\"return_action\";s:12:\"results_page\";s:21:\"click_action_location\";s:4:\"same\";s:22:\"return_action_location\";s:4:\"same\";s:19:\"custom_redirect_url\";s:11:\"?s={phrase}\";s:16:\"results_per_page\";s:4:\"auto\";s:13:\"triggerontype\";i:1;s:19:\"trigger_update_href\";i:0;s:11:\"customtypes\";a:2:{i:0;s:4:\"post\";i:1;s:4:\"page\";}s:13:\"searchintitle\";i:1;s:15:\"searchincontent\";i:1;s:15:\"searchinexcerpt\";i:1;s:20:\"search_in_permalinks\";i:0;s:23:\"post_password_protected\";i:1;s:13:\"search_in_ids\";i:0;s:13:\"search_all_cf\";i:0;s:12:\"customfields\";s:0:\"\";s:11:\"post_status\";s:7:\"publish\";s:24:\"override_default_results\";i:1;s:15:\"override_method\";s:3:\"get\";s:15:\"res_live_search\";i:0;s:17:\"res_live_selector\";s:5:\"#main\";s:21:\"res_live_trigger_type\";i:1;s:22:\"res_live_trigger_facet\";i:1;s:22:\"res_live_trigger_click\";i:0;s:23:\"res_live_trigger_return\";i:0;s:9:\"exactonly\";i:0;s:20:\"exact_match_location\";s:8:\"anywhere\";s:13:\"searchinterms\";i:0;s:9:\"charcount\";i:0;s:10:\"maxresults\";i:10;s:10:\"itemscount\";i:4;s:16:\"resultitemheight\";s:4:\"70px\";s:15:\"orderby_primary\";s:14:\"relevance DESC\";s:17:\"orderby_secondary\";s:14:\"post_date DESC\";s:18:\"orderby_primary_cf\";s:0:\"\";s:20:\"orderby_secondary_cf\";s:0:\"\";s:23:\"orderby_primary_cf_type\";s:7:\"numeric\";s:25:\"orderby_secondary_cf_type\";s:7:\"numeric\";s:11:\"show_images\";i:1;s:11:\"image_width\";i:70;s:12:\"image_height\";i:70;s:25:\"image_parser_image_number\";i:1;s:30:\"image_parser_exclude_filenames\";s:0:\"\";s:18:\"image_display_mode\";s:5:\"cover\";s:26:\"image_apply_content_filter\";i:0;s:13:\"image_sources\";a:7:{i:0;a:2:{s:6:\"option\";s:14:\"Featured image\";s:5:\"value\";s:8:\"featured\";}i:1;a:2:{s:6:\"option\";s:12:\"Post Content\";s:5:\"value\";s:7:\"content\";}i:2;a:2:{s:6:\"option\";s:12:\"Post Excerpt\";s:5:\"value\";s:7:\"excerpt\";}i:3;a:2:{s:6:\"option\";s:12:\"Custom field\";s:5:\"value\";s:6:\"custom\";}i:4;a:2:{s:6:\"option\";s:15:\"Page Screenshot\";s:5:\"value\";s:10:\"screenshot\";}i:5;a:2:{s:6:\"option\";s:13:\"Default image\";s:5:\"value\";s:7:\"default\";}i:6;a:2:{s:6:\"option\";s:8:\"Disabled\";s:5:\"value\";s:8:\"disabled\";}}s:13:\"image_source1\";s:8:\"featured\";s:13:\"image_source2\";s:7:\"content\";s:13:\"image_source3\";s:7:\"excerpt\";s:13:\"image_source4\";s:6:\"custom\";s:13:\"image_source5\";s:7:\"default\";s:13:\"image_default\";s:73:\"http://127.0.0.1:9408/wp-content/plugins/ajax-search-lite/img/default.jpg\";s:21:\"image_source_featured\";s:8:\"original\";s:18:\"image_custom_field\";s:0:\"\";s:12:\"use_timthumb\";i:1;s:29:\"show_frontend_search_settings\";i:0;s:16:\"showexactmatches\";i:1;s:17:\"showsearchintitle\";i:1;s:19:\"showsearchincontent\";i:1;s:15:\"showcustomtypes\";s:0:\"\";s:20:\"showsearchincomments\";i:1;s:19:\"showsearchinexcerpt\";i:1;s:19:\"showsearchinbpusers\";i:0;s:20:\"showsearchinbpgroups\";i:0;s:20:\"showsearchinbpforums\";i:0;s:16:\"exactmatchestext\";s:18:\"Exact matches only\";s:17:\"searchintitletext\";s:15:\"Search in title\";s:19:\"searchincontenttext\";s:17:\"Search in content\";s:20:\"searchincommentstext\";s:18:\"Search in comments\";s:19:\"searchinexcerpttext\";s:17:\"Search in excerpt\";s:19:\"searchinbpuserstext\";s:15:\"Search in users\";s:20:\"searchinbpgroupstext\";s:16:\"Search in groups\";s:20:\"searchinbpforumstext\";s:16:\"Search in forums\";s:22:\"showsearchincategories\";i:0;s:17:\"showuncategorised\";i:0;s:20:\"exsearchincategories\";s:0:\"\";s:26:\"exsearchincategoriesheight\";i:200;s:22:\"showsearchintaxonomies\";i:1;s:9:\"showterms\";s:0:\"\";s:23:\"showseparatefilterboxes\";i:1;s:24:\"exsearchintaxonomiestext\";s:9:\"Filter by\";s:24:\"exsearchincategoriestext\";s:20:\"Filter by Categories\";s:13:\"auto_populate\";s:8:\"disabled\";s:20:\"auto_populate_phrase\";s:0:\"\";s:19:\"auto_populate_count\";s:1:\"1\";s:15:\"results_snap_to\";s:4:\"left\";s:9:\"box_width\";s:4:\"100%\";s:16:\"box_width_tablet\";s:4:\"100%\";s:15:\"box_width_phone\";s:4:\"100%\";s:10:\"box_margin\";s:22:\"||0px||0px||0px||0px||\";s:8:\"box_font\";s:9:\"Open Sans\";s:11:\"override_bg\";i:0;s:17:\"override_bg_color\";s:7:\"#FFFFFF\";s:13:\"override_icon\";i:0;s:22:\"override_icon_bg_color\";s:7:\"#FFFFFF\";s:19:\"override_icon_color\";s:7:\"#000000\";s:15:\"override_border\";i:0;s:21:\"override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:19:\"results_bg_override\";i:0;s:25:\"results_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"results_item_bg_override\";i:0;s:30:\"results_item_bg_override_color\";s:7:\"#FFFFFF\";s:23:\"results_override_border\";i:0;s:29:\"results_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:20:\"settings_bg_override\";i:0;s:26:\"settings_bg_override_color\";s:7:\"#FFFFFF\";s:24:\"settings_override_border\";i:0;s:30:\"settings_override_border_style\";s:59:\"border:1px none rgb(0, 0, 0);border-radius:0px 0px 0px 0px;\";s:15:\"resultstype_def\";a:4:{i:0;a:2:{s:6:\"option\";s:16:\"Vertical Results\";s:5:\"value\";s:8:\"vertical\";}i:1;a:2:{s:6:\"option\";s:18:\"Horizontal Results\";s:5:\"value\";s:10:\"horizontal\";}i:2;a:2:{s:6:\"option\";s:16:\"Isotopic Results\";s:5:\"value\";s:8:\"isotopic\";}i:3;a:2:{s:6:\"option\";s:22:\"Polaroid style Results\";s:5:\"value\";s:8:\"polaroid\";}}s:11:\"resultstype\";s:8:\"vertical\";s:19:\"resultsposition_def\";a:2:{i:0;a:2:{s:6:\"option\";s:20:\"Hover - over content\";s:5:\"value\";s:5:\"hover\";}i:1;a:2:{s:6:\"option\";s:22:\"Block - pushes content\";s:5:\"value\";s:5:\"block\";}}s:15:\"resultsposition\";s:5:\"hover\";s:16:\"resultsmargintop\";s:4:\"12px\";s:13:\"results_width\";s:4:\"auto\";s:19:\"results_width_phone\";s:4:\"auto\";s:20:\"results_width_tablet\";s:4:\"auto\";s:16:\"v_res_max_height\";s:4:\"none\";s:18:\"v_res_column_count\";i:1;s:22:\"v_res_column_min_width\";s:5:\"200px\";s:29:\"v_res_column_min_width_tablet\";s:5:\"200px\";s:28:\"v_res_column_min_width_phone\";s:5:\"200px\";s:17:\"defaultsearchtext\";s:13:\"Search here..\";s:15:\"showmoreresults\";i:0;s:19:\"showmoreresultstext\";s:15:\"More results...\";s:19:\"results_click_blank\";i:0;s:17:\"scroll_to_results\";i:0;s:19:\"resultareaclickable\";i:1;s:23:\"close_on_document_click\";i:1;s:15:\"show_close_icon\";i:1;s:10:\"showauthor\";i:0;s:8:\"showdate\";i:0;s:11:\"custom_date\";i:0;s:18:\"custom_date_format\";s:11:\"Y-m-d H:i:s\";s:15:\"showdescription\";i:1;s:17:\"descriptionlength\";i:100;s:19:\"description_context\";i:0;s:25:\"description_context_depth\";i:10000;s:13:\"noresultstext\";s:11:\"No results!\";s:14:\"didyoumeantext\";s:13:\"Did you mean:\";s:12:\"kw_highlight\";i:0;s:24:\"kw_highlight_whole_words\";i:1;s:15:\"highlight_color\";s:7:\"#d9312b\";s:18:\"highlight_bg_color\";s:4:\"#eee\";s:16:\"single_highlight\";i:0;s:26:\"single_highlightwholewords\";i:1;s:21:\"single_highlightcolor\";s:7:\"#d9312b\";s:23:\"single_highlightbgcolor\";s:4:\"#eee\";s:23:\"single_highlight_scroll\";i:0;s:23:\"single_highlight_offset\";i:0;s:25:\"single_highlight_selector\";s:8:\"#content\";s:10:\"custom_css\";s:0:\"\";s:12:\"autocomplete\";i:1;s:14:\"kw_suggestions\";i:1;s:9:\"kw_length\";i:60;s:8:\"kw_count\";i:10;s:14:\"kw_google_lang\";s:2:\"en\";s:12:\"shortcode_op\";s:6:\"remove\";s:16:\"striptagsexclude\";s:0:\"\";s:12:\"runshortcode\";i:1;s:14:\"stripshortcode\";i:0;s:19:\"pageswithcategories\";i:0;s:18:\"primary_titlefield\";i:0;s:21:\"primary_titlefield_cf\";s:0:\"\";s:24:\"primary_descriptionfield\";i:0;s:27:\"primary_descriptionfield_cf\";s:0:\"\";s:20:\"secondary_titlefield\";i:-1;s:23:\"secondary_titlefield_cf\";s:0:\"\";s:26:\"secondary_descriptionfield\";i:-1;s:29:\"secondary_descriptionfield_cf\";s:0:\"\";s:13:\"advtitlefield\";s:12:\"{titlefield}\";s:19:\"advdescriptionfield\";s:18:\"{descriptionfield}\";s:22:\"woo_exclude_outofstock\";i:0;s:18:\"exclude_woo_hidden\";i:1;s:19:\"exclude_woo_catalog\";i:0;s:17:\"excludecategories\";s:0:\"\";s:12:\"excludeposts\";s:0:\"\";s:18:\"wpml_compatibility\";i:1;s:22:\"polylang_compatibility\";i:1;s:13:\"kw_exceptions\";s:0:\"\";s:15:\"kw_exceptions_e\";s:0:\"\";s:22:\"aria_search_form_label\";s:11:\"Search form\";s:24:\"aria_settings_form_label\";s:20:\"Search settings form\";s:23:\"aria_search_input_label\";s:12:\"Search input\";s:30:\"aria_search_autocomplete_label\";s:19:\"Search autocomplete\";s:20:\"aria_magnifier_label\";s:16:\"Search magnifier\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = 
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adsense-custom-...')
+#2 /internal/eval.php(20): activate_plugin('adsense-custom-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php on line 310
+[10-Apr-2025 08:56:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php:310
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('adsense-custom-...')
+#2 /internal/eval.php(20): activate_plugin('adsense-custom-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/adsense-custom-placement/cr-adsense-custom-placement.php on line 310
+[10-Apr-2025 08:57:05 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 08:57:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[10-Apr-2025 08:57:14 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 08:57:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[10-Apr-2025 08:57:22 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 08:57:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[10-Apr-2025 09:00:34 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:36 UTC] Automatic updates starting...
+[10-Apr-2025 09:00:39 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 09:00:39 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 09:00:39 UTC]   Automatic theme updates starting...
+[10-Apr-2025 09:00:39 UTC]   Automatic theme updates complete.
+[10-Apr-2025 09:00:39 UTC] Automatic updates complete.
+[10-Apr-2025 09:00:46 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:46 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:47 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:48 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:48 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:00:59 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:00:59 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:10 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:11 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:12 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:12 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:13 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:14 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:24 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:24 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:34 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:34 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:35 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:35 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:36 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:37 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:37 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:37 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[10-Apr-2025 09:01:37 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[10-Apr-2025 09:01:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_product() in /wordpress/wp-content/plugins/aistore-recharge/activate.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/aistore-recharge/activate.php(32): Aistore_Install::cteate_product_if_not_exist()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Aistore_Install::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aistor...', false)
+#5 /internal/eval.php(20): activate_plugin('aistore-recharg...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/aistore-recharge/activate.php on line 79
+[10-Apr-2025 09:02:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_product() in /wordpress/wp-content/plugins/aistore-recharge/activate.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/aistore-recharge/activate.php(32): Aistore_Install::cteate_product_if_not_exist()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Aistore_Install::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aistor...', false)
+#5 /internal/eval.php(20): activate_plugin('aistore-recharg...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/aistore-recharge/activate.php on line 79
+[10-Apr-2025 09:02:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_product() in /wordpress/wp-content/plugins/aistore-recharge/activate.php:79
+Stack trace:
+#0 /wordpress/wp-content/plugins/aistore-recharge/activate.php(32): Aistore_Install::cteate_product_if_not_exist()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Aistore_Install::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aistor...', false)
+#5 /internal/eval.php(20): activate_plugin('aistore-recharg...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/aistore-recharge/activate.php on line 79
+[10-Apr-2025 09:02:43 UTC] PHP Warning:  fopen(http://www.writoo.com/scriptallo.php): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 169
+[10-Apr-2025 09:02:43 UTC] PHP Fatal error:  Uncaught TypeError: stream_get_meta_data(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php:171
+Stack trace:
+#0 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(171): stream_get_meta_data(false)
+#1 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(32): allopass_post(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): allopass_init(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_allopa...', false)
+#6 /internal/eval.php(20): activate_plugin('allopass/allopa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 171
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"allopass"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0

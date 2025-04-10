@@ -2,277 +2,24 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_notice', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_notice' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_notice', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin-notices.php(17): update_option('aphsh_notice', Array)
-#6 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin-notices.php(10): Aphsh_Admin_Notices->activate_plugin()
-#7 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(133): Aphsh_Admin_Notices->__construct()
-#8 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(17): Aphsh_Admin->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('aph-syntax-high...')
-#11 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_notice', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php'), Aphsh_Admin->__construct, Aphsh_Admin_Notices->__construct, Aphsh_Admin_Notices->activate_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:16:{s:9:\"lang-pack\";s:9:\"compact-1\";s:12:\"default-lang\";s:3:\"php\";s:5:\"theme\";s:7:\"default\";s:6:\"gutter\";i:1;s:12:\"start-number\";i:1;s:10:\"auto-links\";i:1;s:8:\"collapse\";i:0;s:5:\"class\";s:0:\"\";s:10:\"smart-tabs\";i:1;s:8:\"tab-size\";i:4;s:5:\"title\";s:0:\"\";s:9:\"font-size\";s:7:\"default\";s:10:\"max-height\";s:3:\"480\";s:7:\"add-css\";i:0;s:13:\"add-css-value\";s:0:\"\";s:5:\"token\";s:10:\"1470914799\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_options' , 'a:16:{s:9:&quot;lang-pack&quot;;s:9:&quot;compact-1&quot;;s:12:&quot;default-lang&quot;;s:3:&quot;php&quot;;s:5:&quot;theme&quot;;s:7:&quot;default&quot;;s:6:&quot;gutter&quot;;i:1;s:12:&quot;start-number&quot;;i:1;s:10:&quot;auto-links&quot;;i:1;s:8:&quot;collapse&quot;;i:0;s:5:&quot;class&quot;;s:0:&quot;&quot;;s:10:&quot;smart-tabs&quot;;i:1;s:8:&quot;tab-size&quot;;i:4;s:5:&quot;title&quot;;s:0:&quot;&quot;;s:9:&quot;font-size&quot;;s:7:&quot;default&quot;;s:10:&quot;max-height&quot;;s:3:&quot;480&quot;;s:7:&quot;add-css&quot;;i:0;s:13:&quot;add-css-value&quot;;s:0:&quot;&quot;;s:5:&quot;token&quot;;s:10:&quot;1470914799&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(137): update_option('aphsh_options', Array)
-#6 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(17): Aphsh_Admin->__construct()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('aph-syntax-high...')
-#9 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:16:{s:9:\"lang-pack\";s:9:\"compact-1\";s:12:\"default-lang\";s:3:\"php\";s:5:\"theme\";s:7:\"default\";s:6:\"gutter\";i:1;s:12:\"start-number\";i:1;s:10:\"auto-links\";i:1;s:8:\"collapse\";i:0;s:5:\"class\";s:0:\"\";s:10:\"smart-tabs\";i:1;s:8:\"tab-size\";i:4;s:5:\"title\";s:0:\"\";s:9:\"font-size\";s:7:\"default\";s:10:\"max-height\";s:3:\"480\";s:7:\"add-css\";i:0;s:13:\"add-css-value\";s:0:\"\";s:5:\"token\";s:10:\"1470914799\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php'), Aphsh_Admin->__construct, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:16:{s:9:\"lang-pack\";s:9:\"compact-1\";s:12:\"default-lang\";s:3:\"php\";s:5:\"theme\";s:7:\"default\";s:6:\"gutter\";i:1;s:12:\"start-number\";i:1;s:10:\"auto-links\";i:1;s:8:\"collapse\";i:0;s:5:\"class\";s:0:\"\";s:10:\"smart-tabs\";i:1;s:8:\"tab-size\";i:4;s:5:\"title\";s:0:\"\";s:9:\"font-size\";s:7:\"default\";s:10:\"max-height\";s:3:\"480\";s:7:\"add-css\";i:0;s:13:\"add-css-value\";s:0:\"\";s:5:\"token\";s:10:\"1470914799\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_options' , 'a:16:{s:9:&quot;lang-pack&quot;;s:9:&quot;compact-1&quot;;s:12:&quot;default-lang&quot;;s:3:&quot;php&quot;;s:5:&quot;theme&quot;;s:7:&quot;default&quot;;s:6:&quot;gutter&quot;;i:1;s:12:&quot;start-number&quot;;i:1;s:10:&quot;auto-links&quot;;i:1;s:8:&quot;collapse&quot;;i:0;s:5:&quot;class&quot;;s:0:&quot;&quot;;s:10:&quot;smart-tabs&quot;;i:1;s:8:&quot;tab-size&quot;;i:4;s:5:&quot;title&quot;;s:0:&quot;&quot;;s:9:&quot;font-size&quot;;s:7:&quot;default&quot;;s:10:&quot;max-height&quot;;s:3:&quot;480&quot;;s:7:&quot;add-css&quot;;i:0;s:13:&quot;add-css-value&quot;;s:0:&quot;&quot;;s:5:&quot;token&quot;;s:10:&quot;1470914799&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(189): update_option('aphsh_options', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Aphsh_Admin->activate_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 08:54:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[10-Apr-2025 08:54:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[10-Apr-2025 08:54:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[10-Apr-2025 08:56:04 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744275361.907)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aph-sy...', false)
-#10 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:16:{s:9:\"lang-pack\";s:9:\"compact-1\";s:12:\"default-lang\";s:3:\"php\";s:5:\"theme\";s:7:\"default\";s:6:\"gutter\";i:1;s:12:\"start-number\";i:1;s:10:\"auto-links\";i:1;s:8:\"collapse\";i:0;s:5:\"class\";s:0:\"\";s:10:\"smart-tabs\";i:1;s:8:\"tab-size\";i:4;s:5:\"title\";s:0:\"\";s:9:\"font-size\";s:7:\"default\";s:10:\"max-height\";s:3:\"480\";s:7:\"add-css\";i:0;s:13:\"add-css-value\";s:0:\"\";s:5:\"token\";s:10:\"1470914799\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_aph-syntax-highlighter/aph-syntax-highlighter.php'), WP_Hook->do_action, WP_Hook->apply_filters, Aphsh_Admin->activate_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_plugin_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_plugin_version' , '1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_plugin_ve...', '1.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(190): update_option('aphsh_plugin_ve...', '1.2')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Aphsh_Admin->activate_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aph-sy...', false)
-#10 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_plugin_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_aph-syntax-highlighter/aph-syntax-highlighter.php'), WP_Hook->do_action, WP_Hook->apply_filters, Aphsh_Admin->activate_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_shdata', 'a:3:{s:9:\"lang-pack\";a:4:{s:9:\"compact-1\";s:9:\"Compact 1\";s:9:\"compact-2\";s:9:\"Compact 2\";s:8:\"common-1\";s:8:\"Common 1\";s:4:\"full\";s:4:\"Full\";}s:9:\"lang-list\";a:4:{s:9:\"compact-1\";a:9:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:3:\"sql\";s:3:\"SQL\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:9:\"compact-2\";a:11:{s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:3:\"sql\";s:3:\"SQL\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:8:\"common-1\";a:17:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:3:\"sql\";s:3:\"SQL\";s:4:\"diff\";s:4:\"Diff\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:4:\"full\";a:32:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:2:\"vb\";s:2:\"VB\";s:9:\"poweshell\";s:11:\"Power Shell\";s:10:\"typescript\";s:10:\"Typescript\";s:3:\"tap\";s:3:\"Tap\";s:5:\"swift\";s:5:\"Swift\";s:5:\"scala\";s:5:\"Scala\";s:6:\"javafx\";s:7:\"Java FX\";s:4:\"haxe\";s:4:\"Haxe\";s:6:\"groovy\";s:6:\"Groovy\";s:6:\"erlang\";s:6:\"Erlang\";s:6:\"delphi\";s:6:\"Delphi\";s:11:\"coldfushion\";s:11:\"Coldfushion\";s:3:\"as3\";s:15:\"Action Script 3\";s:11:\"applescript\";s:11:\"Applescript\";s:4:\"base\";s:4:\"Base\";s:3:\"sql\";s:3:\"SQL\";s:4:\"diff\";s:4:\"Diff\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}}s:6:\"themes\";a:9:{s:7:\"default\";s:7:\"Default\";s:6:\"django\";s:6:\"Django\";s:7:\"eclipse\";s:7:\"Eclipse\";s:5:\"emacs\";s:5:\"EMACS\";s:10:\"fadetogrey\";s:12:\"Fade to Grey\";s:7:\"mdultra\";s:7:\"MDUltra\";s:8:\"midnight\";s:8:\"Midnight\";s:5:\"rdark\";s:5:\"RDark\";s:5:\"swift\";s:5:\"Swift\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_shdata' , 'a:3:{s:9:&quot;lang-pack&quot;;a:4:{s:9:&quot;compact-1&quot;;s:9:&quot;Compact 1&quot;;s:9:&quot;compact-2&quot;;s:9:&quot;Compact 2&quot;;s:8:&quot;common-1&quot;;s:8:&quot;Common 1&quot;;s:4:&quot;full&quot;;s:4:&quot;Full&quot;;}s:9:&quot;lang-list&quot;;a:4:{s:9:&quot;compact-1&quot;;a:9:{s:3:&quot;php&quot;;s:3:&quot;PHP&quot;;s:3:&quot;xml&quot;;s:10:&quot;XML / HTML&quot;;s:3:&quot;css&quot;;s:3:&quot;CSS&quot;;s:10:&quot;javascript&quot;;s:10:&quot;Javascript&quot;;s:4:&quot;sass&quot;;s:4:&quot;SASS&quot;;s:3:&quot;sql&quot;;s:3:&quot;SQL&quot;;s:5:&quot;plain&quot;;s:8:&quot;SH Plain&quot;;s:12:&quot;adddarkplain&quot;;s:20:&quot;Dark Plain (Console)&quot;;s:13:&quot;addlightplain&quot;;s:11:&quot;Light Plain&quot;;}s:9:&quot;compact-2&quot;;a:11:{s:4:&quot;java&quot;;s:4:&quot;Java&quot;;s:4:&quot;bash&quot;;s:4:&quot;Bash&quot;;s:4:&quot;ruby&quot;;s:4:&quot;Ruby&quot;;s:6:&quot;python&quot;;s:6:&quot;Python&quot;;s:3:&quot;cpp&quot;;s:3:&quot;C++&quot;;s:6:&quot;csharp&quot;;s:2:&quot;C#&quot;;s:4:&quot;perl&quot;;s:4:&quot;Perl&quot;;s:3:&quot;sql&quot;;s:3:&quot;SQL&quot;;s:5:&quot;plain&quot;;s:8:&quot;SH Plain&quot;;s:12:&quot;adddarkplain&quot;;s:20:&quot;Dark Plain (Console)&quot;;s:13:&quot;addlightplain&quot;;s:11:&quot;Light Plain&quot;;}s:8:&quot;common-1&quot;;a:17:{s:3:&quot;php&quot;;s:3:&quot;PHP&quot;;s:3:&quot;xml&quot;;s:10:&quot;XML / HTML&quot;;s:3:&quot;css&quot;;s:3:&quot;CSS&quot;;s:10:&quot;javascript&quot;;s:10:&quot;Javascript&quot;;s:4:&quot;sass&quot;;s:4:&quot;SASS&quot;;s:4:&quot;java&quot;;s:4:&quot;Java&quot;;s:4:&quot;bash&quot;;s:4:&quot;Bash&quot;;s:4:&quot;ruby&quot;;s:4:&quot;Ruby&quot;;s:6:&quot;python&quot;;s:6:&quot;Python&quot;;s:3:&quot;cpp&quot;;s:3:&quot;C++&quot;;s:6:&quot;csharp&quot;;s:2:&quot;C#&quot;;s:4:&quot;perl&quot;;s:4:&quot;Perl&quot;;s:3:&quot;sql&quot;;s:3:&quot;SQL&quot;;s:4:&quot;diff&quot;;s:4:&quot;Diff&quot;;s:5:&quot;plain&quot;;s:8:&quot;SH Plain&quot;;s:12:&quot;adddarkplain&quot;;s:20:&quot;Dark Plain (Console)&quot;;s:13:&quot;addlightplain&quot;;s:11:&quot;Light Plain&quot;;}s:4:&quot;full&quot;;a:32:{s:3:&quot;php&quot;;s:3:&quot;PHP&quot;;s:3:&quot;xml&quot;;s:10:&quot;XML / HTML&quot;;s:3:&quot;css&quot;;s:3:&quot;CSS&quot;;s:10:&quot;javascript&quot;;s:10:&quot;Javascript&quot;;s:4:&quot;sass&quot;;s:4:&quot;SASS&quot;;s:4:&quot;java&quot;;s:4:&quot;Java&quot;;s:4:&quot;bash&quot;;s:4:&quot;Bash&quot;;s:4:&quot;ruby&quot;;s:4:&quot;Ruby&quot;;s:6:&quot;python&quot;;s:6:&quot;Python&quot;;s:3:&quot;cpp&quot;;s:3:&quot;C++&quot;;s:6:&quot;csharp&quot;;s:2:&quot;C#&quot;;s:4:&quot;perl&quot;;s:4:&quot;Perl&quot;;s:2:&quot;vb&quot;;s:2:&quot;VB&quot;;s:9:&quot;poweshell&quot;;s:11:&quot;Power Shell&quot;;s:10:&quot;typescript&quot;;s:10:&quot;Typescript&quot;;s:3:&quot;tap&quot;;s:3:&quot;Tap&quot;;s:5:&quot;swift&quot;;s:5:&quot;Swift&quot;;s:5:&quot;scala&quot;;s:5:&quot;Scala&quot;;s:6:&quot;javafx&quot;;s:7:&quot;Java FX&quot;;s:4:&quot;haxe&quot;;s:4:&quot;Haxe&quot;;s:6:&quot;groovy&quot;;s:6:&quot;Groovy&quot;;s:6:&quot;erlang&quot;;s:6:&quot;Erlang&quot;;s:6:&quot;delphi&quot;;s:6:&quot;Delphi&quot;;s:11:&quot;coldfushion&quot;;s:11:&quot;Coldfushion&quot;;s:3:&quot;as3&quot;;s:15:&quot;Action Script 3&quot;;s:11:&quot;applescript&quot;;s:11:&quot;Applescript&quot;;s:4:&quot;base&quot;;s:4:&quot;Base&quot;;s:3:&quot;sql&quot;;s:3:&quot;SQL&quot;;s:4:&quot;diff&quot;;s:4:&quot;Diff&quot;;s:5:&quot;plain&quot;;s:8:&quot;SH Plain&quot;;s:12:&quot;adddarkplain&quot;;s:20:&quot;Dark Plain (Console)&quot;;s:13:&quot;addlightplain&quot;;s:11:&quot;Light Plain&quot;;}}s:6:&quot;themes&quot;;a:9:{s:7:&quot;default&quot;;s:7:&quot;Default&quot;;s:6:&quot;django&quot;;s:6:&quot;Django&quot;;s:7:&quot;eclipse&quot;;s:7:&quot;Eclipse&quot;;s:5:&quot;emacs&quot;;s:5:&quot;EMACS&quot;;s:10:&quot;fadetogrey&quot;;s:12:&quot;Fade to Grey&quot;;s:7:&quot;mdultra&quot;;s:7:&quot;MDUltra&quot;;s:8:&quot;midnight&quot;;s:8:&quot;Midnight&quot;;s:5:&quot;rdark&quot;;s:5:&quot;RDark&quot;;s:5:&quot;swift&quot;;s:5:&quot;Swift&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_shdata', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(191): update_option('aphsh_shdata', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Aphsh_Admin->activate_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_aph-sy...', false)
-#10 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_shdata', 'a:3:{s:9:\"lang-pack\";a:4:{s:9:\"compact-1\";s:9:\"Compact 1\";s:9:\"compact-2\";s:9:\"Compact 2\";s:8:\"common-1\";s:8:\"Common 1\";s:4:\"full\";s:4:\"Full\";}s:9:\"lang-list\";a:4:{s:9:\"compact-1\";a:9:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:3:\"sql\";s:3:\"SQL\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:9:\"compact-2\";a:11:{s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:3:\"sql\";s:3:\"SQL\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:8:\"common-1\";a:17:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:3:\"sql\";s:3:\"SQL\";s:4:\"diff\";s:4:\"Diff\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}s:4:\"full\";a:32:{s:3:\"php\";s:3:\"PHP\";s:3:\"xml\";s:10:\"XML / HTML\";s:3:\"css\";s:3:\"CSS\";s:10:\"javascript\";s:10:\"Javascript\";s:4:\"sass\";s:4:\"SASS\";s:4:\"java\";s:4:\"Java\";s:4:\"bash\";s:4:\"Bash\";s:4:\"ruby\";s:4:\"Ruby\";s:6:\"python\";s:6:\"Python\";s:3:\"cpp\";s:3:\"C++\";s:6:\"csharp\";s:2:\"C#\";s:4:\"perl\";s:4:\"Perl\";s:2:\"vb\";s:2:\"VB\";s:9:\"poweshell\";s:11:\"Power Shell\";s:10:\"typescript\";s:10:\"Typescript\";s:3:\"tap\";s:3:\"Tap\";s:5:\"swift\";s:5:\"Swift\";s:5:\"scala\";s:5:\"Scala\";s:6:\"javafx\";s:7:\"Java FX\";s:4:\"haxe\";s:4:\"Haxe\";s:6:\"groovy\";s:6:\"Groovy\";s:6:\"erlang\";s:6:\"Erlang\";s:6:\"delphi\";s:6:\"Delphi\";s:11:\"coldfushion\";s:11:\"Coldfushion\";s:3:\"as3\";s:15:\"Action Script 3\";s:11:\"applescript\";s:11:\"Applescript\";s:4:\"base\";s:4:\"Base\";s:3:\"sql\";s:3:\"SQL\";s:4:\"diff\";s:4:\"Diff\";s:5:\"plain\";s:8:\"SH Plain\";s:12:\"adddarkplain\";s:20:\"Dark Plain (Console)\";s:13:\"addlightplain\";s:11:\"Light Plain\";}}s:6:\"themes\";a:9:{s:7:\"default\";s:7:\"Default\";s:6:\"django\";s:6:\"Django\";s:7:\"eclipse\";s:7:\"Eclipse\";s:5:\"emacs\";s:5:\"EMACS\";s:10:\"fadetogrey\";s:12:\"Fade to Grey\";s:7:\"mdultra\";s:7:\"MDUltra\";s:8:\"midnight\";s:8:\"Midnight\";s:5:\"rdark\";s:5:\"RDark\";s:5:\"swift\";s:5:\"Swift\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_aph-syntax-highlighter/aph-syntax-highlighter.php'), WP_Hook->do_action, WP_Hook->apply_filters, Aphsh_Admin->activate_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 7
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Undefined variable $time in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 10
-[08-Apr-2025 23:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:1:{s:5:\"token\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_options' , 'a:1:{s:5:&quot;token&quot;;N;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php(11): update_option('aphsh_options', Array)
-#6 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-admin.php(183): Aphsh_Build->build_files()
-#7 /wordpress/wp-includes/class-wp-hook.php(326): Aphsh_Admin->update_files('active_plugins')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/option.php(1022): do_action('updated_option', 'active_plugins', Array, Array)
-#11 /wordpress/wp-admin/includes/plugin.php(714): update_option('active_plugins', Array)
-#12 /internal/eval.php(20): activate_plugin('aph-syntax-high...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:1:{s:5:\"token\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, update_option, do_action('updated_option'), WP_Hook->do_action, WP_Hook->apply_filters, Aphsh_Admin->update_files, Aphsh_Build->build_files, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Undefined array key "theme" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 13
-[08-Apr-2025 23:25:55 UTC] PHP Warning:  Undefined array key "lang-pack" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 61
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 37
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 38
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 7
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Undefined variable $time in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 10
-[08-Apr-2025 23:25:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:1:{s:5:\"token\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aphsh_options' , 'a:1:{s:5:&quot;token&quot;;N;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('aphsh_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php(11): update_option('aphsh_options', Array)
-#6 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php(44): Aphsh_Build->build_files()
-#7 /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php(15): Aphsh_Front->check_file()
-#8 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(24): Aphsh_Front->__construct()
-#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aphsh_options', 'a:1:{s:5:\"token\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php'), Aphsh_Front->__construct, Aphsh_Front->check_file, Aphsh_Build->build_files, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Undefined array key "theme" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 13
-[08-Apr-2025 23:25:56 UTC] PHP Warning:  Undefined array key "lang-pack" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-build.php on line 61
-[08-Apr-2025 23:25:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "APHSH_SHDATA" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php:27
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 08:56:57 UTC] Automatic updates starting...
+[10-Apr-2025 08:57:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "APHSH_SHDATA" in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php:27
 Stack trace:
 #0 /wordpress/wp-content/plugins/aph-syntax-highlighter/aph-syntax-highlighter.php(24): Aphsh_Front->__construct()
 #1 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
@@ -283,24 +30,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/aph-syntax-highlighter/includes/aphsh-front.php on line 27
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"aph-syntax-highlighter"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
