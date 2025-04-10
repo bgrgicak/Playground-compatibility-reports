@@ -2,512 +2,78 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 23:45:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:46:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_ipag_gateway (
-                id INT(11) NOT NULL AUTO_INCREMENT,
-                order_id INT(11) NOT NULL,
-                trans_id VARCHAR(128) NOT NULL,
-                status INT(11) NOT NULL,
-                payment_date DATE NOT NULL,
-                PRIMARY KEY pkipag_id (id)
-                ) ;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(129): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(40): WC_iPag_Gateway::create_table()
-#3 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(68): WC_iPag_Gateway->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WC_iPag_Gateway::get_instance('')
+Error: [10-Apr-2025 13:12:29 UTC] PHP Fatal error:  Uncaught Error: Class 'WC_Payment_Gateway' not found in /wordpress/wp-content/plugins/instacash-pos-payment/extends/InstaCashApplication.php:21
+Stack trace:
+#0 /wordpress/wp-content/plugins/instacash-pos-payment/vendor/composer/ClassLoader.php(444): include()
+#1 /wordpress/wp-content/plugins/instacash-pos-payment/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/wordpress/wp-c...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('InstaCashApplic...')
+#3 /wordpress/wp-content/plugins/instacash-pos-payment/instacash-pos.php(63): spl_autoload_call('InstaCashApplic...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): InitInstacashApplication('')
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
 #8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_ipag_gateway (
-                id INT(11) NOT NULL AUTO_INCREMENT,
-                order_id INT(11) NOT NULL,
-                trans_id VARCHAR(128) NOT NULL,
-                status INT(11) NOT NULL,
-                payment_date DATE NOT NULL,
-                PRIMARY KEY pkipag_id (id)
-                ) ; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WC_iPag_Gateway::get_instance, WC_iPag_Gateway->__construct, WC_iPag_Gateway::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_ipag_gateway (
-                id INT(11) NOT NULL AUTO_INCREMENT,
-                order_id INT(11) NOT NULL,
-                trans_id VARCHAR(128) NOT NULL,
-                status INT(11) NOT NULL,
-                payment_date DATE NOT NULL,
-                PRIMARY KEY pkipag_id (id)
-                ) ;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(129): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(40): WC_iPag_Gateway::create_table()
-#3 /wordpress/wp-content/plugins/ipag-woocommerce/ipag-gateway.php(68): WC_iPag_Gateway->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): WC_iPag_Gateway::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_ipag_gateway (
-                id INT(11) NOT NULL AUTO_INCREMENT,
-                order_id INT(11) NOT NULL,
-                trans_id VARCHAR(128) NOT NULL,
-                status INT(11) NOT NULL,
-                payment_date DATE NOT NULL,
-                PRIMARY KEY pkipag_id (id)
-                ) ; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WC_iPag_Gateway::get_instance, WC_iPag_Gateway->__construct, WC_iPag_Gateway::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:46:23 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:46:23 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:46:23 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:46:23 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:46:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:46:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:46:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:46:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:47:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:47:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:47:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:47:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:47:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:47:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:47:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:47:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:48:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wcp_caption', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_wcp_caption' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_wcp_capt...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_wcp_capt...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wcp_caption', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wcpich_caption', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_wcpich_caption' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_wcpich_c...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_wcpich_c...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wcpich_caption', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_sheet_promo_data' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_sheet_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(330): update_option('jltimghe_sheet_...', Array)
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(280): JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(43): JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(253): JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('image-hover-eff...')
-#15 /internal/eval.php(20): activate_plugin('image-hover-eff...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct, JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data, JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data_hash', 'W10=', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_sheet_promo_data_hash' , 'W10=' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_sheet_...', 'W10=', '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(331): update_option('jltimghe_sheet_...', 'W10=')
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(280): JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(43): JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(253): JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('image-hover-eff...')
-#15 /internal/eval.php(20): activate_plugin('image-hover-eff...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data_hash', 'W10=', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct, JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data, JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_ask_for_rating', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:8:{i:0;a:3:{s:4:\"days\";i:7;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-15\";}i:1;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-25\";}i:2;a:3:{s:4:\"days\";i:11;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-06\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-21\";}i:4;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-05\";}i:5;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-25\";}i:6;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-20\";}i:7;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-08-19\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_notice_ask_for_rating' , 'a:3:{s:9:&quot;is_active&quot;;b:1;s:9:&quot;intervals&quot;;a:8:{i:0;a:3:{s:4:&quot;days&quot;;i:7;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-15&quot;;}i:1;a:3:{s:4:&quot;days&quot;;i:10;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-25&quot;;}i:2;a:3:{s:4:&quot;days&quot;;i:11;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-05-06&quot;;}i:3;a:3:{s:4:&quot;days&quot;;i:15;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-05-21&quot;;}i:4;a:3:{s:4:&quot;days&quot;;i:15;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-06-05&quot;;}i:5;a:3:{s:4:&quot;days&quot;;i:20;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-06-25&quot;;}i:6;a:3:{s:4:&quot;days&quot;;i:25;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-07-20&quot;;}i:7;a:3:{s:4:&quot;days&quot;;i:30;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-08-19&quot;;}}s:16:&quot;current_interval&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_notice...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(159): update_option('jltimghe_notice...', Array)
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(52): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(35): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Manager.php(26): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Notifications.php(31): JLTIMGHE\Inc\Classes\Notifications\Manager->__construct()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(254): JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#13 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#14 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('image-hover-eff...')
-#17 /internal/eval.php(20): activate_plugin('image-hover-eff...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_ask_for_rating', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:8:{i:0;a:3:{s:4:\"days\";i:7;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-15\";}i:1;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-25\";}i:2;a:3:{s:4:\"days\";i:11;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-06\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-21\";}i:4;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-05\";}i:5;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-25\";}i:6;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-20\";}i:7;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-08-19\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct, JLTIMGHE\Inc\Classes\Notifications\Manager->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_subscribe', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:7:{i:0;a:3:{s:4:\"days\";i:4;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-12\";}i:1;a:3:{s:4:\"days\";i:5;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-17\";}i:2;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-27\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-12\";}i:4;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-01\";}i:5;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-26\";}i:6;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-26\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_notice_subscribe' , 'a:3:{s:9:&quot;is_active&quot;;b:1;s:9:&quot;intervals&quot;;a:7:{i:0;a:3:{s:4:&quot;days&quot;;i:4;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-12&quot;;}i:1;a:3:{s:4:&quot;days&quot;;i:5;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-17&quot;;}i:2;a:3:{s:4:&quot;days&quot;;i:10;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-27&quot;;}i:3;a:3:{s:4:&quot;days&quot;;i:15;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-05-12&quot;;}i:4;a:3:{s:4:&quot;days&quot;;i:20;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-06-01&quot;;}i:5;a:3:{s:4:&quot;days&quot;;i:25;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-06-26&quot;;}i:6;a:3:{s:4:&quot;days&quot;;i:30;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-07-26&quot;;}}s:16:&quot;current_interval&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_notice...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(159): update_option('jltimghe_notice...', Array)
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(52): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(35): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Subscribe.php(25): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Manager.php(29): JLTIMGHE\Inc\Classes\Notifications\Subscribe->__construct()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Notifications.php(31): JLTIMGHE\Inc\Classes\Notifications\Manager->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(254): JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#13 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#14 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#15 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('image-hover-eff...')
-#18 /internal/eval.php(20): activate_plugin('image-hover-eff...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_subscribe', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:7:{i:0;a:3:{s:4:\"days\";i:4;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-12\";}i:1;a:3:{s:4:\"days\";i:5;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-17\";}i:2;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-27\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-12\";}i:4;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-01\";}i:5;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-26\";}i:6;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-26\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct, JLTIMGHE\Inc\Classes\Notifications\Manager->__construct, JLTIMGHE\Inc\Classes\Notifications\Subscribe->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_what_we_collect', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:7:{i:0;a:3:{s:4:\"days\";i:7;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-15\";}i:1;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-25\";}i:2;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-10\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-25\";}i:4;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-14\";}i:5;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-09\";}i:6;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-08-08\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_notice_what_we_collect' , 'a:3:{s:9:&quot;is_active&quot;;b:1;s:9:&quot;intervals&quot;;a:7:{i:0;a:3:{s:4:&quot;days&quot;;i:7;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-15&quot;;}i:1;a:3:{s:4:&quot;days&quot;;i:10;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-04-25&quot;;}i:2;a:3:{s:4:&quot;days&quot;;i:15;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-05-10&quot;;}i:3;a:3:{s:4:&quot;days&quot;;i:15;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-05-25&quot;;}i:4;a:3:{s:4:&quot;days&quot;;i:20;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-06-14&quot;;}i:5;a:3:{s:4:&quot;days&quot;;i:25;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-07-09&quot;;}i:6;a:3:{s:4:&quot;days&quot;;i:30;s:5:&quot;fired&quot;;b:0;s:4:&quot;date&quot;;s:10:&quot;2025-08-08&quot;;}}s:16:&quot;current_interval&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_notice...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(159): update_option('jltimghe_notice...', Array)
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(52): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Model/Notification.php(35): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/What_We_Collect.php(26): JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Manager.php(32): JLTIMGHE\Inc\Classes\Notifications\What_We_Collect->__construct()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Notifications/Notifications.php(31): JLTIMGHE\Inc\Classes\Notifications\Manager->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(254): JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#13 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#14 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#15 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('image-hover-eff...')
-#18 /internal/eval.php(20): activate_plugin('image-hover-eff...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_what_we_collect', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:7:{i:0;a:3:{s:4:\"days\";i:7;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-15\";}i:1;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-25\";}i:2;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-10\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-25\";}i:4;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-14\";}i:5;a:3:{s:4:\"days\";i:25;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-07-09\";}i:6;a:3:{s:4:\"days\";i:30;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-08-08\";}}s:16:\"current_interval\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Notifications\Notifications->__construct, JLTIMGHE\Inc\Classes\Notifications\Manager->__construct, JLTIMGHE\Inc\Classes\Notifications\What_We_Collect->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->__construct, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->init, JLTIMGHE\Inc\Classes\Notifications\Model\Notification->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 23:48:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_sheet_promo_data' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_sheet_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(330): update_option('jltimghe_sheet_...', Array)
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(280): JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(43): JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(253): JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct, JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data, JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data_hash', 'W10=', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jltimghe_sheet_promo_data_hash' , 'W10=' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jltimghe_sheet_...', 'W10=', '', 'auto')
-#5 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(331): update_option('jltimghe_sheet_...', 'W10=')
-#6 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(280): JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync()
-#7 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/Inc/Classes/Pro_Upgrade.php(43): JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data()
-#8 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(253): JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct()
-#9 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(52): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes()
-#10 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(291): JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct()
-#11 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php(300): JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance()
-#12 /wordpress/wp-content/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php(101): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_sheet_promo_data_hash', 'W10=', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/image-hover-effects-elementor-addon/image-hover-effects-elementor-addon.php'), include_once('/plugins/image-hover-effects-elementor-addon/class-image-hover-effects-elementor-addon.php'), JLTIMGHE\JLT_Elementor_Image_Hover_Effect::get_instance, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->__construct, JLTIMGHE\JLT_Elementor_Image_Hover_Effect->includes, JLTIMGHE\Inc\Classes\Pro_Upgrade->__construct, JLTIMGHE\Inc\Classes\Pro_Upgrade->maybe_sync_remote_data, JLTIMGHE\Inc\Classes\Pro_Upgrade->sheet_data_remote_sync, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 23:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jltimghe_notice_ask_for_rating', 'a:3:{s:9:\"is_active\";b:1;s:9:\"intervals\";a:8:{i:0;a:3:{s:4:\"days\";i:7;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-15\";}i:1;a:3:{s:4:\"days\";i:10;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-04-25\";}i:2;a:3:{s:4:\"days\";i:11;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-06\";}i:3;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-05-21\";}i:4;a:3:{s:4:\"days\";i:15;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-05\";}i:5;a:3:{s:4:\"days\";i:20;s:5:\"fired\";b:0;s:4:\"date\";s:10:\"2025-06-25\";}i:6;a:3:{s:4:\"d
+#9 /wordpress/wp-load.php(50): require_once('/w in /wordpress/wp-content/plugins/instacash-pos-payment/extends/InstaCashApplication.php on line 21
+[10-Apr-2025 13:12:42 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/instacash-pos-payment/extends/InstaCashApplication.php on line 45
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"instacash-pos-payment"},"options":{"activate":true}}) : memory access out of bounds
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: memory access out of bounds
+        at PHP.ae (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1446:78)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:981:17)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      cause: Error: Rethrown
+          at UnhandledRejectionsTarget.e (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1423:19)
+          at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+          at UnhandledRejectionsTarget.dispatchEvent (node:internal/event_target:762:26)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:565:15)
+          at invoke_vii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:131807:7)
+          at php.wasm.php_call_shutdown_functions (wasm://wasm/php.wasm-035edb3e:wasm-function[10292]:0x5eb458)
+          at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[14901]:0x7735f4)
+          at php.wasm.call (wasm://wasm/php.wasm-035edb3e:wasm-function[5528]:0x4221bd)
+          at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:131278:22)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18) {
+        cause: RuntimeError: memory access out of bounds
+            at php.wasm.strncmp (wasm://wasm/php.wasm-035edb3e:wasm-function[165]:0x125e5)
+            at php.wasm.wasm_sapi_getenv (wasm://wasm/php.wasm-035edb3e:wasm-function[8836]:0x567946)
+            at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[14799]:0x772dd2)
+            at php.wasm.sapi_getenv (wasm://wasm/php.wasm-035edb3e:wasm-function[2740]:0x1f9abb)
+            at php.wasm.zif_getenv (wasm://wasm/php.wasm-035edb3e:wasm-function[7934]:0x51be17)
+            at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[20717]:0x78d998)
+            at php.wasm.ZEND_DO_ICALL_SPEC_RETVAL_USED_HANDLER (wasm://wasm/php.wasm-035edb3e:wasm-function[13588]:0x738bd8)
+            at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[21651]:0x792322)
+            at php.wasm.execute_ex (wasm://wasm/php.wasm-035edb3e:wasm-function[11842]:0x6a6c6e)
+            at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[22499]:0x794e18) {
+          cause: Error
+              at Asyncify.handleSleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:132055:45)
+              at _fd_sync (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:130154:23)
+              at php.wasm.fsync (wasm://wasm/php.wasm-035edb3e:wasm-function[3659]:0x2a0d49)
+              at php.wasm.unixSync (wasm://wasm/php.wasm-035edb3e:wasm-function[8954]:0x56ee43)
+              at php.wasm (wasm://wasm/php.wasm-035edb3e:wasm-function[18842]:0x785d9e)
+              at php.wasm.sqlite3PagerSync (wasm://wasm/php.wasm-035edb3e:wasm-function[4635]:0x3559fb)
+              at php.wasm.sqlite3PagerCommitPhaseOne (wasm://wasm/php.wasm-035edb3e:wasm-function[3352]:0x259f61)
+              at php.wasm.sqlite3BtreeCommitPhaseOne (wasm://wasm/php.wasm-035edb3e:wasm-function[1960]:0x150715)
+              at php.wasm.sqlite3VdbeHalt (wasm://wasm/php.wasm-035edb3e:wasm-function[2232]:0x1970fa)
+              at php.wasm.sqlite3VdbeExec (wasm://wasm/php.wasm-035edb3e:wasm-function[4617]:0x352682)
+        },
+        betterMessage: 'memory access out of bounds'
+      }
+    }
+  }
+}
+
+Node.js v23.11.0
