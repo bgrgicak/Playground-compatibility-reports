@@ -2,67 +2,196 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:41:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:41:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:41:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:41:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('snapchat_pixel_code', 'a:13:{s:8:\"pixel_id\";s:0:\"\";s:10:\"user_email\";s:19:\"admin@localhost.com\";s:8:\"homepage\";s:0:\"\";s:5:\"pages\";s:0:\"\";s:5:\"posts\";s:0:\"\";s:6:\"search\";s:0:\"\";s:10:\"categories\";s:0:\"\";s:4:\"tags\";s:0:\"\";s:8:\"viewcart\";s:0:\"\";s:8:\"checkout\";s:0:\"\";s:11:\"paymentinfo\";s:0:\"\";s:9:\"addtocart\";s:0:\"\";s:14:\"ajax_addtocart\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'snapchat_pixel_code' , 'a:13:{s:8:&quot;pixel_id&quot;;s:0:&quot;&quot;;s:10:&quot;user_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:8:&quot;homepage&quot;;s:0:&quot;&quot;;s:5:&quot;pages&quot;;s:0:&quot;&quot;;s:5:&quot;posts&quot;;s:0:&quot;&quot;;s:6:&quot;search&quot;;s:0:&quot;&quot;;s:10:&quot;categories&quot;;s:0:&quot;&quot;;s:4:&quot;tags&quot;;s:0:&quot;&quot;;s:8:&quot;viewcart&quot;;s:0:&quot;&quot;;s:8:&quot;checkout&quot;;s:0:&quot;&quot;;s:11:&quot;paymentinfo&quot;;s:0:&quot;&quot;;s:9:&quot;addtocart&quot;;s:0:&quot;&quot;;s:14:&quot;ajax_addtocart&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('snapchat_pixel_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/snap-pixel/snap-pixel.php(59): update_option('snapchat_pixel_...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): snap_pixel_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_snap-p...', false)
-#10 /internal/eval.php(20): activate_plugin('snap-pixel/snap...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('snapchat_pixel_code', 'a:13:{s:8:\"pixel_id\";s:0:\"\";s:10:\"user_email\";s:19:\"admin@localhost.com\";s:8:\"homepage\";s:0:\"\";s:5:\"pages\";s:0:\"\";s:5:\"posts\";s:0:\"\";s:6:\"search\";s:0:\"\";s:10:\"categories\";s:0:\"\";s:4:\"tags\";s:0:\"\";s:8:\"viewcart\";s:0:\"\";s:8:\"checkout\";s:0:\"\";s:11:\"paymentinfo\";s:0:\"\";s:9:\"addtocart\";s:0:\"\";s:14:\"ajax_addtocart\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_snap-pixel/snap-pixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, snap_pixel_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:57 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method StubWire::Install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [10-Apr-2025 13:36:14 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:14 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:18 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:36:22 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:22 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:22 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:36:22 UTC] PHP Deprecated:  Required parameter $shortcode_object follows optional parameter $options in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pagebuilder.class.php on line 837
+[10-Apr-2025 13:36:22 UTC] PHP Deprecated:  Required parameter $current_id follows optional parameter $parent_skin in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pb-shortcodes.class.php on line 492
+[10-Apr-2025 13:36:36 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:36 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:38 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:36:41 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:41 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:41 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:36:41 UTC] PHP Deprecated:  Required parameter $shortcode_object follows optional parameter $options in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pagebuilder.class.php on line 837
+[10-Apr-2025 13:36:41 UTC] PHP Deprecated:  Required parameter $current_id follows optional parameter $parent_skin in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pb-shortcodes.class.php on line 492
+[10-Apr-2025 13:36:55 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:55 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:36:57 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:37:01 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:37:01 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/site-editor/includes/functions.php on line 857
+[10-Apr-2025 13:37:01 UTC] PHP Deprecated:  Required parameter $working_dir follows optional parameter $delete_package in /wordpress/wp-content/plugins/site-editor/includes/app_file.class.php on line 4
+[10-Apr-2025 13:37:01 UTC] PHP Deprecated:  Required parameter $shortcode_object follows optional parameter $options in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pagebuilder.class.php on line 837
+[10-Apr-2025 13:37:01 UTC] PHP Deprecated:  Required parameter $current_id follows optional parameter $parent_skin in /wordpress/wp-content/plugins/site-editor/editor/extensions/pagebuilder/includes/pb-shortcodes.class.php on line 492
+[10-Apr-2025 13:37:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php:45
+Stack trace:
+#0 /wordpress/wp-content/plugins/social-wiggle/includes/wp_pluginbase_v2_3.php(61): socialwiggle->init()
+#1 /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php(161): wp_pluginbase_v2_3->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-wiggle/s...')
+#4 /internal/eval.php(20): activate_plugin('social-wiggle/s...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php on line 45
+[10-Apr-2025 13:37:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php:45
+Stack trace:
+#0 /wordpress/wp-content/plugins/social-wiggle/includes/wp_pluginbase_v2_3.php(61): socialwiggle->init()
+#1 /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php(161): wp_pluginbase_v2_3->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-wiggle/s...')
+#4 /internal/eval.php(20): activate_plugin('social-wiggle/s...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php on line 45
+[10-Apr-2025 13:37:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php:45
+Stack trace:
+#0 /wordpress/wp-content/plugins/social-wiggle/includes/wp_pluginbase_v2_3.php(61): socialwiggle->init()
+#1 /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php(161): wp_pluginbase_v2_3->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-wiggle/s...')
+#4 /internal/eval.php(20): activate_plugin('social-wiggle/s...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/social-wiggle/socialwiggle.php on line 45
+[10-Apr-2025 13:37:47 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:37:47 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:37:48 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:37:48 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:37:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 42
+[10-Apr-2025 13:37:48 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php:49
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): sqod_widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sqod_widget')
+#2 /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php(32): register_widget('sqod_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(322): quotes_load_widget()
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 49
+[10-Apr-2025 13:37:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:37:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:37:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:37:57 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:37:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 42
+[10-Apr-2025 13:37:57 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php:49
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): sqod_widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sqod_widget')
+#2 /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php(32): register_widget('sqod_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(322): quotes_load_widget()
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 49
+[10-Apr-2025 13:38:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:38:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:38:06 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 20
+[10-Apr-2025 13:38:06 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php on line 21
+[10-Apr-2025 13:38:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 42
+[10-Apr-2025 13:38:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php:49
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): sqod_widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sqod_widget')
+#2 /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/spanish-quotes.php(32): register_widget('sqod_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(322): quotes_load_widget()
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-content/plugins/spanish-quote-of-the-day-frase-del-dia/includes/widget-interface.php on line 49
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 21
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:00 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_functions.php on line 54
+[10-Apr-2025 13:39:00 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(286): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/stb-network-ads/index.php(18): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stb-network-ads...')
+#6 /internal/eval.php(20): activate_plugin('stb-network-ads...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php on line 29
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 21
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:10 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_functions.php on line 54
+[10-Apr-2025 13:39:10 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(286): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/stb-network-ads/index.php(18): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stb-network-ads...')
+#6 /internal/eval.php(20): activate_plugin('stb-network-ads...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php on line 29
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 21
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 45
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_cdn.php on line 100
+[10-Apr-2025 13:39:20 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_functions.php on line 54
+[10-Apr-2025 13:39:20 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php(286): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/stb-network-ads/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/stb-network-ads/index.php(18): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stb-network-ads...')
+#6 /internal/eval.php(20): activate_plugin('stb-network-ads...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/stb-network-ads/redux-framework/inc/class.redux_filesystem.php on line 29
+[10-Apr-2025 13:39:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method StubWire::Install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -70,7 +199,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('stubwirecom-eve...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 03:45:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method StubWire::Install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[10-Apr-2025 13:39:50 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method StubWire::Install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
