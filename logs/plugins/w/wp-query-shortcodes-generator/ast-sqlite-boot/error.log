@@ -2,264 +2,79 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 17:24:20 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:24:20 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:24:20 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:24:20 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 17:24:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:24:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:24:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:24:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 17:25:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_sitemap_url', 'Not generated yet', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wccs_sitemap_url' , 'Not generated yet' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce-category-sitemaps/index.php(47): add_option('wccs_sitemap_ur...', 'Not generated y...', '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wccs_activation_hook(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#9 /internal/eval.php(20): activate_plugin('woocommerce-cat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_sitemap_url', 'Not generated yet', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce-category-sitemaps/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wccs_activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 17:25:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_sitemap_generation_time', 'Never', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wccs_sitemap_generation_time' , 'Never' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce-category-sitemaps/index.php(50): add_option('wccs_sitemap_ge...', 'Never', '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wccs_activation_hook(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#9 /internal/eval.php(20): activate_plugin('woocommerce-cat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_sitemap_generation_time', 'Never', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce-category-sitemaps/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wccs_activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 17:25:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_ping_time', 'Never', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wccs_ping_time' , 'Never' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce-category-sitemaps/index.php(53): add_option('wccs_ping_time', 'Never', '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wccs_activation_hook(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#9 /internal/eval.php(20): activate_plugin('woocommerce-cat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wccs_ping_time', 'Never', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce-category-sitemaps/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wccs_activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 17:25:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 17:25:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_wpg_options', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ns_wpg_options' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-gallery-plugin/wp-gallery-plugin.php(84): add_option('ns_wpg_options', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ns_wpg_activate_function(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wordpr...', false)
-#9 /internal/eval.php(20): activate_plugin('wordpress-galle...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_wpg_options', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wordpress-gallery-plugin/wp-gallery-plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, ns_wpg_activate_function, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 17:25:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:25:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:25:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:25:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 02:26:10 Asia/Tokyo] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cmt_meta_version', '1.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cmt_meta_version' , '1.2.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cmt_meta_versio...', '1.2.1', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-bemoove/class.bemoove-admin.php(1376): update_option('cmt_meta_versio...', '1.2.1')
-#6 /wordpress/wp-content/plugins/wp-bemoove/class.bemoove-admin.php(37): BeMoOve_Admin_Class->cmt_activate(Object(WPMovieMetaDataAdapter))
-#7 /wordpress/wp-content/plugins/wp-bemoove/bemoove.php(24): BeMoOve_Admin_Class->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bemoove/bemo...')
-#10 /internal/eval.php(20): activate_plugin('wp-bemoove/bemo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cmt_meta_version', '1.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-bemoove/bemoove.php'), BeMoOve_Admin_Class->__construct, BeMoOve_Admin_Class->cmt_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 114
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 115
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 116
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 117
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 118
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 119
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 120
-[09-Apr-2025 02:26:10 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php:360
+Error: [10-Apr-2025 09:49:12 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/watermark-my-image/watermark-my-image.php on line 688
+[10-Apr-2025 09:49:21 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/watermark-my-image/watermark-my-image.php on line 688
+[10-Apr-2025 09:49:30 UTC] PHP Fatal error:  'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/watermark-my-image/watermark-my-image.php on line 688
+[10-Apr-2025 09:51:04 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:51:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:51:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:51:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:51:21 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:51:21 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/wp-easy-notices/wp-easy-notices.php on line 24
+[10-Apr-2025 09:52:00 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 251
+[10-Apr-2025 09:52:00 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 47
+[10-Apr-2025 09:52:09 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 251
+[10-Apr-2025 09:52:09 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 47
+[10-Apr-2025 09:52:18 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 251
+[10-Apr-2025 09:52:18 UTC] PHP Notice:  Only variables should be assigned by reference in /wordpress/wp-content/plugins/wp-hard-mailer/wp-hard-mailer.php on line 47
+[10-Apr-2025 09:53:29 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:29 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:30 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:30 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:31 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wp_posts_filter::wppf_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php(349): wp_cgmCLass->checkBehlsAccountInfo('http://127.0.0....')
-#1 /wordpress/wp-content/plugins/wp-bemoove/bemoove.php(31): wp_cgmCLass->createBM_account_table(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bemoove/bemo...')
-#4 /internal/eval.php(20): activate_plugin('wp-bemoove/bemo...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php on line 360
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 114
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 115
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 116
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 117
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 118
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 119
-[09-Apr-2025 02:26:18 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 120
-[09-Apr-2025 02:26:19 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php:360
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:53:39 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:39 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:40 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:40 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:40 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wp_posts_filter::wppf_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php(349): wp_cgmCLass->checkBehlsAccountInfo('http://127.0.0....')
-#1 /wordpress/wp-content/plugins/wp-bemoove/bemoove.php(31): wp_cgmCLass->createBM_account_table(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bemoove/bemo...')
-#4 /internal/eval.php(20): activate_plugin('wp-bemoove/bemo...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php on line 360
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 114
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 115
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 116
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 117
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 118
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 119
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-bemoove/util/UserAccountInfo.php on line 120
-[09-Apr-2025 02:26:27 Asia/Tokyo] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php:360
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:53:48 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:48 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:49 UTC] PHP Deprecated:  Required parameter $max_num_pages follows optional parameter $label in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 379
+[10-Apr-2025 09:53:49 UTC] PHP Deprecated:  Required parameter $post_date follows optional parameter $date_format in /wordpress/wp-content/plugins/wp-posts-filter/wp-posts-filter.php on line 686
+[10-Apr-2025 09:53:49 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method wp_posts_filter::wppf_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php(349): wp_cgmCLass->checkBehlsAccountInfo('http://127.0.0....')
-#1 /wordpress/wp-content/plugins/wp-bemoove/bemoove.php(31): wp_cgmCLass->createBM_account_table(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bemoove/bemo...')
-#4 /internal/eval.php(20): activate_plugin('wp-bemoove/bemo...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-bemoove/bm_cgvidposts.php on line 360
-[08-Apr-2025 17:26:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:26:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:26:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:26:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 17:27:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 17:27:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 17:27:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 17:27:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 17:27:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 17:27:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 17:27:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 17:27:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WCP_Query" in /wordpress/wp-content/plugins/wp-query-shortcodes-generator/index.php:29
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:56:52 UTC] Automatic updates starting...
+[10-Apr-2025 09:56:53 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 09:56:53 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 09:56:53 UTC]   Automatic theme updates starting...
+[10-Apr-2025 09:56:53 UTC]   Automatic theme updates complete.
+[10-Apr-2025 09:56:53 UTC] Automatic updates complete.
+[10-Apr-2025 09:56:54 UTC] WiasanoClient->send_categories: HTTP Status Code 400
+[10-Apr-2025 09:56:57 UTC] WiasanoClient->list_todos: HTTP Status Code 400
+[10-Apr-2025 09:57:07 UTC] WiasanoClient->send_categories: HTTP Status Code 400
+[10-Apr-2025 09:57:08 UTC] WiasanoClient->list_todos: HTTP Status Code 400
+[10-Apr-2025 09:57:19 UTC] WiasanoClient->send_categories: HTTP Status Code 400
+[10-Apr-2025 09:57:20 UTC] WiasanoClient->list_todos: HTTP Status Code 400
+[10-Apr-2025 09:59:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:59:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:59:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-mechanic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 10:00:01 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WCP_Query" in /wordpress/wp-content/plugins/wp-query-shortcodes-generator/index.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-query-shortc...')
@@ -268,24 +83,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/wp-query-shortcodes-generator/index.php on line 29
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-query-shortcodes-generator"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
