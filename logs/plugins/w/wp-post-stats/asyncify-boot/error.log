@@ -2,14 +2,462 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 01:44:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function screen_icon() in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php:148
+Error: [10-Apr-2025 05:49:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:49:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:49:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:49:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:49:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_adelya_newsletter', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_adelya_newsletter' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_adelya_n...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_adelya_n...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_adelya_newsletter', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:50:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:50:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:50:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:50:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:50:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:20 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:29 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:29 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:50:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:50:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '#g~[9>!f6iX<r62N%,z$@9j|P0.3fiLm!r5i.ka^xi~/hf*pYd(uF&LQ329xlFWC', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '#g~[9&gt;!f6iX&lt;r62N%,z$@9j|P0.3fiLm!r5i.ka^xi~/hf*pYd(uF&amp;LQ329xlFWC' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '#g~[9>!f6iX<r62...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '#g~[9>!f6iX<r62...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '#g~[9>!f6iX<r62...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '#g~[9>!f6iX<r62...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/woo-quick-product-inquiry/motif-main-pinquiry.php(196): wp_enqueue_script('jquery')
+#19 /wordpress/wp-includes/class-wp-hook.php(324): motif_product_inquiry_main_class->motif_scripts_main('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '#g~[9>!f6iX<r62N%,z$@9j|P0.3fiLm!r5i.ka^xi~/hf*pYd(uF&LQ329xlFWC', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, motif_product_inquiry_main_class->motif_scripts_main, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:50:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '6j?9OQ38!46drULTIYVM+eR5isijLF/Q9$]xIU$L{XWFCnf&N)A4x3Isn0w!U<%n', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '6j?9OQ38!46drULTIYVM+eR5isijLF/Q9$]xIU$L{XWFCnf&amp;N)A4x3Isn0w!U&lt;%n' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '6j?9OQ38!46drUL...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '6j?9OQ38!46drUL...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '6j?9OQ38!46drUL...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '6j?9OQ38!46drUL...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/woo-quick-product-inquiry/motif-main-pinquiry.php(196): wp_enqueue_script('jquery')
+#19 /wordpress/wp-includes/class-wp-hook.php(324): motif_product_inquiry_main_class->motif_scripts_main('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '6j?9OQ38!46drULTIYVM+eR5isijLF/Q9$]xIU$L{XWFCnf&N)A4x3Isn0w!U<%n', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, motif_product_inquiry_main_class->motif_scripts_main, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:51:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:51:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:51:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:51:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:51:40 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-baduk/wp-baduk.php on line 70
+[10-Apr-2025 05:51:48 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-baduk/wp-baduk.php on line 70
+[10-Apr-2025 05:51:56 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-baduk/wp-baduk.php on line 70
+[10-Apr-2025 05:52:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:52:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:52:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:52:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_redirect_settings', 'a:2:{s:19:\"wpmp_login_redirect\";s:2:\"-1\";s:20:\"wpmp_logout_redirect\";s:2:\"-1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmp_redirect_settings' , 'a:2:{s:19:&quot;wpmp_login_redirect&quot;;s:2:&quot;-1&quot;;s:20:&quot;wpmp_logout_redirect&quot;;s:2:&quot;-1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-front-end-login-and-register/includes/class-wp-mp-register-login-activator.php(48): add_option('wpmp_redirect_s...', Array)
+#5 /wordpress/wp-content/plugins/wp-front-end-login-and-register/wp-mp-register-login.php(24): Wp_Mp_Register_Login_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wp_mp_register_login(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fro...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-front-end-lo...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_redirect_settings', 'a:2:{s:19:\"wpmp_login_redirect\";s:2:\"-1\";s:20:\"wpmp_logout_redirect\";s:2:\"-1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-front-end-login-and-register/wp-mp-register-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wp_mp_register_login, Wp_Mp_Register_Login_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_display_settings', 'a:10:{s:24:\"wpmp_email_error_message\";s:46:\"Could not able to send the email notification.\";s:30:\"wpmp_account_activated_message\";s:51:\"Your account has been activated. You can login now.\";s:33:\"wpmp_account_notactivated_message\";s:72:\"Your account has not been activated yet, please verify your email first.\";s:24:\"wpmp_login_error_message\";s:34:\"Username or password is incorrect.\";s:26:\"wpmp_login_success_message\";s:31:\"You are successfully logged in.\";s:41:\"wpmp_password_reset_invalid_email_message\";s:44:\"We cannot identify any user with this email.\";s:37:\"wpmp_password_reset_link_sent_message\";s:51:\"A link to reset your password has been sent to you.\";s:40:\"wpmp_password_reset_link_notsent_message\";s:29:\"Password reset link not sent.\";s:35:\"wpmp_password_reset_success_message\";s:44:\"Your password has been changed successfully.\";s:41:\"wpmp_invalid_password_reset_token_message\";s:33:\"This token appears to be invalid.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmp_display_settings' , 'a:10:{s:24:&quot;wpmp_email_error_message&quot;;s:46:&quot;Could not able to send the email notification.&quot;;s:30:&quot;wpmp_account_activated_message&quot;;s:51:&quot;Your account has been activated. You can login now.&quot;;s:33:&quot;wpmp_account_notactivated_message&quot;;s:72:&quot;Your account has not been activated yet, please verify your email first.&quot;;s:24:&quot;wpmp_login_error_message&quot;;s:34:&quot;Username or password is incorrect.&quot;;s:26:&quot;wpmp_login_success_message&quot;;s:31:&quot;You are successfully logged in.&quot;;s:41:&quot;wpmp_password_reset_invalid_email_message&quot;;s:44:&quot;We cannot identify any user with this email.&quot;;s:37:&quot;wpmp_password_reset_link_sent_message&quot;;s:51:&quot;A link to reset your password has been sent to you.&quot;;s:40:&quot;wpmp_password_reset_link_notsent_message&quot;;s:29:&quot;Password reset link not sent.&quot;;s:35:&quot;wpmp_password_reset_success_message&quot;;s:44:&quot;Your password has been changed successfully.&quot;;s:41:&quot;wpmp_invalid_password_reset_token_message&quot;;s:33:&quot;This token appears to be invalid.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-front-end-login-and-register/includes/class-wp-mp-register-login-activator.php(66): add_option('wpmp_display_se...', Array)
+#5 /wordpress/wp-content/plugins/wp-front-end-login-and-register/wp-mp-register-login.php(24): Wp_Mp_Register_Login_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wp_mp_register_login(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fro...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-front-end-lo...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_display_settings', 'a:10:{s:24:\"wpmp_email_error_message\";s:46:\"Could not able to send the email notification.\";s:30:\"wpmp_account_activated_message\";s:51:\"Your account has been activated. You can login now.\";s:33:\"wpmp_account_notactivated_message\";s:72:\"Your account has not been activated yet, please verify your email first.\";s:24:\"wpmp_login_error_message\";s:34:\"Username or password is incorrect.\";s:26:\"wpmp_login_success_message\";s:31:\"You are successfully logged in.\";s:41:\"wpmp_password_reset_invalid_email_message\";s:44:\"We cannot identify any user with this email.\";s:37:\"wpmp_password_reset_link_sent_message\";s:51:\"A link to reset your password has been sent to you.\";s:40:\"wpmp_password_reset_link_notsent_message\";s:29:\"Password reset link not sent.\";s:35:\"wpmp_password_reset_success_message\";s:44:\"Your password has been changed successfully.\";s:41:\"wpmp_invalid_password_reset_token_message\";s:33:\"This token appears to be invalid.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-front-end-login-and-register/wp-mp-register-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wp_mp_register_login, Wp_Mp_Register_Login_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_form_settings', 'a:10:{s:19:\"wpmp_signup_heading\";s:8:\"Register\";s:19:\"wpmp_signin_heading\";s:5:\"Login\";s:26:\"wpmp_resetpassword_heading\";s:14:\"Reset Password\";s:23:\"wpmp_signin_button_text\";s:5:\"Login\";s:23:\"wpmp_signup_button_text\";s:8:\"Register\";s:30:\"wpmp_returntologin_button_text\";s:15:\"Return to Login\";s:32:\"wpmp_forgot_password_button_text\";s:15:\"Forgot Password\";s:30:\"wpmp_resetpassword_button_text\";s:14:\"Reset Password\";s:19:\"wpmp_enable_captcha\";s:1:\"1\";s:27:\"wpmp_enable_forgot_password\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmp_form_settings' , 'a:10:{s:19:&quot;wpmp_signup_heading&quot;;s:8:&quot;Register&quot;;s:19:&quot;wpmp_signin_heading&quot;;s:5:&quot;Login&quot;;s:26:&quot;wpmp_resetpassword_heading&quot;;s:14:&quot;Reset Password&quot;;s:23:&quot;wpmp_signin_button_text&quot;;s:5:&quot;Login&quot;;s:23:&quot;wpmp_signup_button_text&quot;;s:8:&quot;Register&quot;;s:30:&quot;wpmp_returntologin_button_text&quot;;s:15:&quot;Return to Login&quot;;s:32:&quot;wpmp_forgot_password_button_text&quot;;s:15:&quot;Forgot Password&quot;;s:30:&quot;wpmp_resetpassword_button_text&quot;;s:14:&quot;Reset Password&quot;;s:19:&quot;wpmp_enable_captcha&quot;;s:1:&quot;1&quot;;s:27:&quot;wpmp_enable_forgot_password&quot;;s:1:&quot;1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-front-end-login-and-register/includes/class-wp-mp-register-login-activator.php(84): add_option('wpmp_form_setti...', Array)
+#5 /wordpress/wp-content/plugins/wp-front-end-login-and-register/wp-mp-register-login.php(24): Wp_Mp_Register_Login_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wp_mp_register_login(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fro...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-front-end-lo...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_form_settings', 'a:10:{s:19:\"wpmp_signup_heading\";s:8:\"Register\";s:19:\"wpmp_signin_heading\";s:5:\"Login\";s:26:\"wpmp_resetpassword_heading\";s:14:\"Reset Password\";s:23:\"wpmp_signin_button_text\";s:5:\"Login\";s:23:\"wpmp_signup_button_text\";s:8:\"Register\";s:30:\"wpmp_returntologin_button_text\";s:15:\"Return to Login\";s:32:\"wpmp_forgot_password_button_text\";s:15:\"Forgot Password\";s:30:\"wpmp_resetpassword_button_text\";s:14:\"Reset Password\";s:19:\"wpmp_enable_captcha\";s:1:\"1\";s:27:\"wpmp_enable_forgot_password\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-front-end-login-and-register/wp-mp-register-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wp_mp_register_login, Wp_Mp_Register_Login_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_email_settings', 'a:8:{s:25:\"wpmp_notification_subject\";s:21:\"Welcome to %BLOGNAME%\";s:25:\"wpmp_notification_message\";s:390:\"Thank you for registering on %BLOGNAME%.
+<br><br>
+<strong>First Name :</strong> %FIRSTNAME%<br>
+<strong>Last Name : </strong>%LASTNAME%<br>
+<strong>Username :</strong> %USERNAME%<br>
+<strong>Email :</strong> %USEREMAIL%<br>
+<strong>Password :</strong> As choosen at the time of registration.
+<br><br>
+Please visit %BLOGURL% to login.
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";s:29:\"wpmp_admin_email_notification\";s:1:\"1\";s:28:\"wpmp_user_email_confirmation\";s:1:\"1\";s:43:\"wpmp_new_account_verification_email_subject\";s:38:\"%BLOGNAME% | Please confirm your email\";s:43:\"wpmp_new_account_verification_email_message\";s:186:\"Thank you for registering on %BLOGNAME%.
+<br><br>
+Please confirm your email by clicking on below link :
+<br><br>
+%ACTIVATIONLINK%
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";s:33:\"wpmp_password_reset_email_subject\";s:27:\"%BLOGNAME% | Password Reset\";s:33:\"wpmp_password_reset_email_message\";s:204:\"Hello %USERNAME%,
+<br><br>
+We have received a request to change your password.
+Click on the link to change your password : 
+<br><br>
+%RECOVERYLINK%
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmp_email_settings' , 'a:8:{s:25:&quot;wpmp_notification_subject&quot;;s:21:&quot;Welcome to %BLOGNAME%&quot;;s:25:&quot;wpmp_notification_message&quot;;s:390:&quot;Thank you for registering on %BLOGNAME%.
+&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;First Name :&lt;/strong&gt; %FIRSTNAME%&lt;br&gt;
+&lt;strong&gt;Last Name : &lt;/strong&gt;%LASTNAME%&lt;br&gt;
+&lt;strong&gt;Username :&lt;/strong&gt; %USERNAME%&lt;br&gt;
+&lt;strong&gt;Email :&lt;/strong&gt; %USEREMAIL%&lt;br&gt;
+&lt;strong&gt;Password :&lt;/strong&gt; As choosen at the time of registration.
+&lt;br&gt;&lt;br&gt;
+Please visit %BLOGURL% to login.
+&lt;br&gt;&lt;br&gt;
+Thanks and regards,
+&lt;br&gt;
+The team at %BLOGNAME%&quot;;s:29:&quot;wpmp_admin_email_notification&quot;;s:1:&quot;1&quot;;s:28:&quot;wpmp_user_email_confirmation&quot;;s:1:&quot;1&quot;;s:43:&quot;wpmp_new_account_verification_email_subject&quot;;s:38:&quot;%BLOGNAME% | Please confirm your email&quot;;s:43:&quot;wpmp_new_account_verification_email_message&quot;;s:186:&quot;Thank you for registering on %BLOGNAME%.
+&lt;br&gt;&lt;br&gt;
+Please confirm your email by clicking on below link :
+&lt;br&gt;&lt;br&gt;
+%ACTIVATIONLINK%
+&lt;br&gt;&lt;br&gt;
+Thanks and regards,
+&lt;br&gt;
+The team at %BLOGNAME%&quot;;s:33:&quot;wpmp_password_reset_email_subject&quot;;s:27:&quot;%BLOGNAME% | Password Reset&quot;;s:33:&quot;wpmp_password_reset_email_message&quot;;s:204:&quot;Hello %USERNAME%,
+&lt;br&gt;&lt;br&gt;
+We have received a request to change your password.
+Click on the link to change your password : 
+&lt;br&gt;&lt;br&gt;
+%RECOVERYLINK%
+&lt;br&gt;&lt;br&gt;
+Thanks and regards,
+&lt;br&gt;
+The team at %BLOGNAME%&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-front-end-login-and-register/includes/class-wp-mp-register-login-activator.php(129): add_option('wpmp_email_sett...', Array)
+#5 /wordpress/wp-content/plugins/wp-front-end-login-and-register/wp-mp-register-login.php(24): Wp_Mp_Register_Login_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wp_mp_register_login(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fro...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-front-end-lo...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmp_email_settings', 'a:8:{s:25:\"wpmp_notification_subject\";s:21:\"Welcome to %BLOGNAME%\";s:25:\"wpmp_notification_message\";s:390:\"Thank you for registering on %BLOGNAME%.
+<br><br>
+<strong>First Name :</strong> %FIRSTNAME%<br>
+<strong>Last Name : </strong>%LASTNAME%<br>
+<strong>Username :</strong> %USERNAME%<br>
+<strong>Email :</strong> %USEREMAIL%<br>
+<strong>Password :</strong> As choosen at the time of registration.
+<br><br>
+Please visit %BLOGURL% to login.
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";s:29:\"wpmp_admin_email_notification\";s:1:\"1\";s:28:\"wpmp_user_email_confirmation\";s:1:\"1\";s:43:\"wpmp_new_account_verification_email_subject\";s:38:\"%BLOGNAME% | Please confirm your email\";s:43:\"wpmp_new_account_verification_email_message\";s:186:\"Thank you for registering on %BLOGNAME%.
+<br><br>
+Please confirm your email by clicking on below link :
+<br><br>
+%ACTIVATIONLINK%
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";s:33:\"wpmp_password_reset_email_subject\";s:27:\"%BLOGNAME% | Password Reset\";s:33:\"wpmp_password_reset_email_message\";s:204:\"Hello %USERNAME%,
+<br><br>
+We have received a request to change your password.
+Click on the link to change your password : 
+<br><br>
+%RECOVERYLINK%
+<br><br>
+Thanks and regards,
+<br>
+The team at %BLOGNAME%\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-front-end-login-and-register/wp-mp-register-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wp_mp_register_login, Wp_Mp_Register_Login_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 05:52:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:52:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:52:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:52:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:02 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:02 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 05:53:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 05:53:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmonitorus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:03 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmonitorus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:12 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:20 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:20 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmonitorus</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 130
+[10-Apr-2025 05:53:21 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 05:53:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 336
+[10-Apr-2025 05:53:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-monitorus/includes/wpmon-settings.php on line 349
+[10-Apr-2025 05:53:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function screen_icon() in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php:148
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-post-stats/p...')
 #2 /internal/eval.php(20): activate_plugin('wp-post-stats/p...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php on line 148
-[05-Apr-2025 01:44:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function screen_icon() in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php:148
+[10-Apr-2025 05:53:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function screen_icon() in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php:148
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-post-stats/p...')
@@ -18,17 +466,17 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/wp-post-stats/post-stats-options.php on line 148
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-post-stats"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
@@ -62,4 +510,4 @@ Stack trace:
   }
 }
 
-Node.js v20.15.0
+Node.js v23.11.0
