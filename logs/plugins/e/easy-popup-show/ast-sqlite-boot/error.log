@@ -2,14 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 01:46:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:46:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 01:47:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_etlak_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emagic_db_version', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +17,7 @@ Error: [08-Apr-2025 01:46:48 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_etlak_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emagic_db_version' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,280 +29,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_etlak_wi...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_etlak_wi...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_etlak_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:46:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '@TjH#AE?ps:4Y2jD&c*+g~PE6v.Mb%g]*bb9PD$Rui[:S)DqMq^~F>Y3mKVH2@d7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '@TjH#AE?ps:4Y2jD&amp;c*+g~PE6v.Mb%g]*bb9PD$Rui[:S)DqMq^~F&gt;Y3mKVH2@d7' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '@TjH#AE?ps:4Y2j...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '@TjH#AE?ps:4Y2j...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '@TjH#AE?ps:4Y2j...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '@TjH#AE?ps:4Y2j...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40373|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/everest-timeline-lite/inc/etlak-block/etlak-block-init.php(80): wp_register_script('etlak-block-scr...', 'http://127.0.0....', Array, 1655293358)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): ETLAK_Class->{closure}('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '@TjH#AE?ps:4Y2jD&c*+g~PE6v.Mb%g]*bb9PD$Rui[:S)DqMq^~F>Y3mKVH2@d7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ETLAK_Class->{closure}, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:46:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'IJPQUK:m/Y5SOqhZU<>v@PF+T^|{R;voD& <oU88`|$Un8]6Buu[6rh6q7rtJ-Tz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'IJPQUK:m/Y5SOqhZU&lt;&gt;v@PF+T^|{R;voD&amp; &lt;oU88`|$Un8]6Buu[6rh6q7rtJ-Tz' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'IJPQUK:m/Y5SOqh...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'IJPQUK:m/Y5SOqh...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'IJPQUK:m/Y5SOqh...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'IJPQUK:m/Y5SOqh...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40373|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/everest-timeline-lite/inc/etlak-block/etlak-block-init.php(80): wp_register_script('etlak-block-scr...', 'http://127.0.0....', Array, 1655293358)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): ETLAK_Class->{closure}('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'IJPQUK:m/Y5SOqhZU<>v@PF+T^|{R;voD& <oU88`|$Un8]6Buu[6rh6q7rtJ-Tz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ETLAK_Class->{closure}, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_atl_kurs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_atl_kurs' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_atl_kurs', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_atl_kurs', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_atl_kurs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_currency_table (
-                id int(11) unsigned NOT NULL auto_increment,
-                number int(11) unsigned NOT NULL, 
-                city varchar(255) NOT NULL,
-                date_modify timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-                date_update int(24) unsigned NOT NULL, 
-                currency json DEFAULT NULL, 
-                PRIMARY KEY  (id),
-                UNIQUE (number)
-            ) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(53): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(26): wp_atl_createTableCurrency()
-#4 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(5): isDBMS()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): atl_wp_currency_active(false)
+#4 /wordpress/wp-content/plugins/eventprime-event-calendar-management/event-prime.php(53): add_option('emagic_db_versi...', 4)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_eventprime_event_calendar_management(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exchan...', false)
-#9 /internal/eval.php(20): activate_plugin('exchange-rate-b...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eventp...', false)
+#9 /internal/eval.php(20): activate_plugin('eventprime-even...')
 #10 {main}</pre>
- for query CREATE TABLE wp_currency_table (
-                id int(11) unsigned NOT NULL auto_increment,
-                number int(11) unsigned NOT NULL, 
-                city varchar(255) NOT NULL,
-                date_modify timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-                date_update int(24) unsigned NOT NULL, 
-                currency json DEFAULT NULL, 
-                PRIMARY KEY  (id),
-                UNIQUE (number)
-            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_exchange-rate-belarusbank-by-atlas/wp-atl-kurs-valut.php'), WP_Hook->do_action, WP_Hook->apply_filters, atl_wp_currency_active, isDBMS, wp_atl_createTableCurrency, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emagic_db_version', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_eventprime-event-calendar-management/event-prime.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_eventprime_event_calendar_management, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:47:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_currency_table (
-                id int(11) unsigned NOT NULL auto_increment,
-                number int(11) unsigned NOT NULL, 
-                city varchar(255) NOT NULL,
-                date_modify timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-                date_update int(24) unsigned NOT NULL, 
-                currency json DEFAULT NULL, 
-                PRIMARY KEY  (id),
-                UNIQUE (number)
-            ) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(53): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(26): wp_atl_createTableCurrency()
-#4 /wordpress/wp-content/plugins/exchange-rate-belarusbank-by-atlas/includes/functions.php(5): isDBMS()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): atl_wp_currency_active(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exchan...', false)
-#9 /internal/eval.php(20): activate_plugin('exchange-rate-b...')
-#10 {main}</pre>
- for query CREATE TABLE wp_currency_table (
-                id int(11) unsigned NOT NULL auto_increment,
-                number int(11) unsigned NOT NULL, 
-                city varchar(255) NOT NULL,
-                date_modify timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-                date_update int(24) unsigned NOT NULL, 
-                currency json DEFAULT NULL, 
-                PRIMARY KEY  (id),
-                UNIQUE (number)
-            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_exchange-rate-belarusbank-by-atlas/wp-atl-kurs-valut.php'), WP_Hook->do_action, WP_Hook->apply_filters, atl_wp_currency_active, isDBMS, wp_atl_createTableCurrency, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:26 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 01:47:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('exitpagecontents', 'Thank you for your visit, You`ll be redirected in %n% seconds <br> <a href=\"%link%\">Click here if you are not redirected automatically</a>', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('em_global_settings', 'O:8:\"stdClass\":1:{s:6:\"scalar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -318,7 +52,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'exitpagecontents' , 'Thank you for your visit, You`ll be redirected in %n% seconds &lt;br&gt; &lt;a href=&quot;%link%&quot;&gt;Click here if you are not redirected automatically&lt;/a&gt;' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'em_global_settings' , 'O:8:&quot;stdClass&quot;:1:{s:6:&quot;scalar&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -330,18 +64,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/exit-strategy/exitpage.php(28): add_option('exitpagecontent...', 'Thank you for y...', 'Contents of the...', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): exitstrategy_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exit-s...', false)
-#9 /internal/eval.php(20): activate_plugin('exit-strategy/e...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('exitpagecontents', 'Thank you for your visit, You`ll be redirected in %n% seconds <br> <a href=\"%link%\">Click here if you are not redirected automatically</a>', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_exit-strategy/exitpage.php'), WP_Hook->do_action, WP_Hook->apply_filters, exitstrategy_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('em_global_setti...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(247): update_option('em_global_setti...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(48): Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings()
+#7 /wordpress/wp-content/plugins/eventprime-event-calendar-management/event-prime.php(55): Eventprime_Event_Calendar_Management_Activator->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_eventprime_event_calendar_management(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eventp...', false)
+#12 /internal/eval.php(20): activate_plugin('eventprime-even...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('em_global_settings', 'O:8:\"stdClass\":1:{s:6:\"scalar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_eventprime-event-calendar-management/event-prime.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_eventprime_event_calendar_management, Eventprime_Event_Calendar_Management_Activator->activate, Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:47:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('exitpagedelay', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ep_update_revamp_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -353,7 +90,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'exitpagedelay' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ep_update_revamp_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -365,18 +102,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/exit-strategy/exitpage.php(29): add_option('exitpagedelay', '10', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): exitstrategy_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exit-s...', false)
-#9 /internal/eval.php(20): activate_plugin('exit-strategy/e...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('exitpagedelay', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_exit-strategy/exitpage.php'), WP_Hook->do_action, WP_Hook->apply_filters, exitstrategy_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ep_update_revam...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(248): update_option('ep_update_revam...', 1)
+#6 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(48): Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings()
+#7 /wordpress/wp-content/plugins/eventprime-event-calendar-management/event-prime.php(55): Eventprime_Event_Calendar_Management_Activator->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_eventprime_event_calendar_management(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eventp...', false)
+#12 /internal/eval.php(20): activate_plugin('eventprime-even...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ep_update_revamp_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_eventprime-event-calendar-management/event-prime.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_eventprime_event_calendar_management, Eventprime_Event_Calendar_Management_Activator->activate, Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:47:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('autoredirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ep_db_need_to_run_migration', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -388,7 +128,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'autoredirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ep_db_need_to_run_migration' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -400,18 +140,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/exit-strategy/exitpage.php(30): add_option('autoredirect', '1', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): exitstrategy_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exit-s...', false)
-#9 /internal/eval.php(20): activate_plugin('exit-strategy/e...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('autoredirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_exit-strategy/exitpage.php'), WP_Hook->do_action, WP_Hook->apply_filters, exitstrategy_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ep_db_need_to_r...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(249): update_option('ep_db_need_to_r...', 0)
+#6 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(48): Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings()
+#7 /wordpress/wp-content/plugins/eventprime-event-calendar-management/event-prime.php(55): Eventprime_Event_Calendar_Management_Activator->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_eventprime_event_calendar_management(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eventp...', false)
+#12 /internal/eval.php(20): activate_plugin('eventprime-even...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ep_db_need_to_run_migration', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_eventprime-event-calendar-management/event-prime.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_eventprime_event_calendar_management, Eventprime_Event_Calendar_Management_Activator->activate, Eventprime_Event_Calendar_Management_Activator->ep_update_new_global_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:47:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('countmessage', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('em_global_settings', 'O:8:\"stdClass\":245:{s:10:\"custom_css\";s:0:\"\";s:13:\"button_titles\";s:0:\"\";s:22:\"performer_display_view\";s:4:\"card\";s:15:\"performer_limit\";i:0;s:19:\"pop_performer_limit\";i:5;s:23:\"performer_no_of_columns\";i:4;s:19:\"performer_load_more\";i:1;s:16:\"performer_search\";i:1;s:28:\"single_performer_show_events\";i:1;s:35:\"single_performer_event_display_view\";s:9:\"mini-list\";s:28:\"single_performer_event_limit\";i:0;s:29:\"single_performer_event_column\";i:4;s:32:\"single_performer_event_load_more\";i:1;s:33:\"single_performer_hide_past_events\";i:0;s:19:\"performer_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:36:\"single_performer_event_section_title\";s:15:\"Upcoming Events\";s:37:\"event_listings_date_format_std_option\";s:0:\"\";s:30:\"event_listings_date_format_val\";s:0:\"\";s:16:\"default_cal_view\";s:5:\"month\";s:28:\"enable_default_calendar_date\";i:0;s:21:\"calendar_title_format\";s:10:\"MMMM, YYYY\";s:18:\"hide_calendar_rows\";i:0;s:27:\"hide_time_on_front_calendar\";i:0;s:28:\"show_event_types_on_calendar\";i:1;s:16:\"eventprime_theme\";s:7:\"default\";s:24:\"front_switch_view_option\";a:8:{i:0;s:5:\"month\";i:1;s:4:\"week\";i:2;s:3:\"day\";i:3;s:8:\"listweek\";i:4;s:11:\"square_grid\";i:5;s:14:\"staggered_grid\";i:6;s:6:\"slider\";i:7;s:4:\"rows\";}s:16:\"hide_past_events\";i:0;s:22:\"show_no_of_events_card\";i:10;s:22:\"card_view_custom_value\";i:1;s:22:\"disable_filter_options\";i:0;s:17:\"hide_old_bookings\";i:0;s:29:\"calendar_column_header_format\";s:4:\"dddd\";s:30:\"shortcode_hide_upcoming_events\";i:0;s:20:\"redirect_third_party\";i:0;s:22:\"hide_event_custom_link\";i:0;s:28:\"show_qr_code_on_single_event\";i:1;s:31:\"show_max_event_on_calendar_date\";i:3;s:27:\"event_booking_status_option\";s:0:\"\";s:27:\"open_detail_page_in_new_tab\";i:0;s:20:\"events_no_of_columns\";s:0:\"\";s:31:\"events_image_visibility_options\";s:5:\"cover\";s:19:\"events_image_height\";s:0:\"\";s:25:\"show_trending_event_types\";i:0;s:27:\"no_of_event_types_displayed\";i:5;s:26:\"show_events_per_event_type\";i:0;s:26:\"sort_by_events_or_bookings\";s:0:\"\";s:17:\"type_display_view\";s:4:\"card\";s:10:\"type_limit\";i:0;s:18:\"type_no_of_columns\";i:4;s:14:\"type_load_more\";i:1;s:11:\"type_search\";i:1;s:23:\"single_type_show_events\";i:1;s:30:\"single_type_event_display_view\";s:9:\"mini-list\";s:23:\"single_type_event_limit\";i:0;s:24:\"single_type_event_column\";i:4;s:27:\"single_type_event_load_more\";i:1;s:28:\"single_type_hide_past_events\";i:0;s:14:\"type_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:23:\"single_type_event_order\";s:3:\"asc\";s:25:\"single_type_event_orderby\";s:18:\"em_start_date_time\";s:31:\"single_type_event_section_title\";s:15:\"Upcoming Events\";s:18:\"venue_display_view\";s:4:\"card\";s:11:\"venue_limit\";i:0;s:19:\"venue_no_of_columns\";i:4;s:15:\"venue_load_more\";i:1;s:12:\"venue_search\";i:1;s:24:\"single_venue_show_events\";i:1;s:31:\"single_venue_event_display_view\";s:9:\"mini-list\";s:24:\"single_venue_event_limit\";i:0;s:25:\"single_venue_event_column\";i:4;s:28:\"single_venue_event_load_more\";i:1;s:29:\"single_venue_hide_past_events\";i:1;s:32:\"single_venue_event_section_title\";s:15:\"Upcoming Events\";s:15:\"venue_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:22:\"organizer_display_view\";s:4:\"card\";s:15:\"organizer_limit\";i:0;s:23:\"organizer_no_of_columns\";i:4;s:19:\"organizer_load_more\";i:1;s:16:\"organizer_search\";i:1;s:28:\"single_organizer_show_events\";i:1;s:35:\"single_organizer_event_display_view\";s:9:\"mini-list\";s:28:\"single_organizer_event_limit\";i:0;s:29:\"single_organizer_event_column\";i:0;s:32:\"single_organizer_event_load_more\";i:1;s:33:\"single_organizer_hide_past_events\";i:0;s:36:\"single_organizer_event_section_title\";s:15:\"Upcoming Events\";s:19:\"organizer_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:35:\"single_event_date_format_std_option\";s:0:\"\";s:28:\"single_event_date_format_val\";s:0:\"\";s:16:\"hide_weather_tab\";i:0;s:23:\"weather_unit_fahrenheit\";i:0;s:12:\"hide_map_tab\";i:0;s:20:\"hide_other_event_tab\";i:0;s:22:\"hide_age_group_section\";i:0;s:17:\"hide_note_section\";i:0;s:23:\"hide_performers_section\";i:0;s:23:\"hide_organizers_section\";i:0;s:24:\"event_detail_image_width\";s:0:\"\";s:25:\"event_detail_image_height\";s:4:\"auto\";s:32:\"event_detail_image_height_custom\";s:0:\"\";s:24:\"event_detail_image_align\";s:0:\"\";s:30:\"event_detail_image_auto_scroll\";i:0;s:34:\"event_detail_image_slider_duration\";i:4;s:30:\"event_detail_message_for_recap\";s:51:\"This event has ended and results are now available.\";s:27:\"event_detail_result_heading\";s:7:\"Results\";s:32:\"event_detail_result_button_label\";s:12:\"View Results\";s:15:\"performers_page\";s:0:\"\";s:11:\"venues_page\";s:0:\"\";s:11:\"events_page\";s:0:\"\";s:12:\"booking_page\";s:0:\"\";s:12:\"profile_page\";s:0:\"\";s:11:\"event_types\";s:0:\"\";s:17:\"event_submit_form\";s:0:\"\";s:20:\"booking_details_page\";s:0:\"\";s:16:\"event_organizers\";s:0:\"\";s:10:\"login_page\";s:0:\"\";s:13:\"register_page\";s:0:\"\";s:13:\"payment_order\";a:0:{}s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"paypal_processor\";s:0:\"\";s:16:\"paypal_client_id\";s:0:\"\";s:25:\"default_payment_processor\";s:0:\"\";s:19:\"disable_admin_email\";s:0:\"\";s:22:\"disable_frontend_email\";s:0:\"\";s:26:\"registration_email_subject\";s:29:\"User registration successful!\";s:26:\"registration_email_content\";s:0:\"\";s:27:\"reset_password_mail_subject\";s:19:\"Reset your password\";s:19:\"reset_password_mail\";s:0:\"\";s:26:\"send_booking_pending_email\";i:1;s:29:\"booking_pending_email_subject\";s:23:\"Your payment is pending\";s:21:\"booking_pending_email\";s:0:\"\";s:24:\"booking_pending_email_cc\";s:0:\"\";s:26:\"send_booking_confirm_email\";i:1;s:29:\"booking_confirm_email_subject\";s:26:\"Your booking is confirmed!\";s:23:\"booking_confirmed_email\";s:0:\"\";s:26:\"booking_confirmed_email_cc\";s:0:\"\";s:31:\"send_booking_cancellation_email\";i:1;s:33:\"booking_cancelation_email_subject\";s:31:\"Your booking has been cancelled\";s:25:\"booking_cancelation_email\";s:0:\"\";s:28:\"booking_cancelation_email_cc\";s:0:\"\";s:25:\"send_booking_refund_email\";i:1;s:28:\"booking_refund_email_subject\";s:23:\"Refund for your booking\";s:20:\"booking_refund_email\";s:0:\"\";s:23:\"booking_refund_email_cc\";s:0:\"\";s:26:\"send_event_submitted_email\";i:1;s:29:\"event_submitted_email_subject\";s:29:\"Event submitted successfully!\";s:21:\"event_submitted_email\";s:0:\"\";s:24:\"event_submitted_email_cc\";s:0:\"\";s:25:\"send_event_approved_email\";i:1;s:28:\"event_approved_email_subject\";s:23:\"Your event is now live!\";s:20:\"event_approved_email\";s:0:\"\";s:32:\"send_admin_booking_confirm_email\";i:1;s:37:\"admin_booking_confirmed_email_subject\";s:17:\"New event booking\";s:29:\"admin_booking_confirmed_email\";s:0:\"\";s:32:\"admin_booking_confirmed_email_cc\";s:0:\"\";s:37:\"admin_booking_confirm_email_attendees\";s:0:\"\";s:17:\"ep_admin_email_to\";s:19:\"admin@localhost.com\";s:19:\"ep_admin_email_from\";s:19:\"admin@localhost.com\";s:11:\"time_format\";s:5:\"h:mmt\";s:21:\"default_calendar_date\";d:1744249671;s:30:\"required_booking_attendee_name\";i:0;s:26:\"hide_0_price_from_frontend\";i:0;s:17:\"datepicker_format\";s:14:\"yy-mm-dd&Y-m-d\";s:22:\"show_qr_code_on_ticket\";i:1;s:19:\"checkout_page_timer\";i:4;s:34:\"enable_event_time_to_user_timezone\";i:1;s:35:\"show_timezone_message_on_event_page\";i:1;s:24:\"timezone_related_message\";s:62:\"All event times are displayed based on {{$timezone}} timezone.\";s:21:\"ep_frontend_font_size\";i:14;s:18:\"hide_wishlist_icon\";i:0;s:16:\"enable_dark_mode\";i:0;s:15:\"enable_seo_urls\";i:0;s:8:\"seo_urls\";a:6:{s:19:\"event_page_type_url\";s:5:\"event\";s:23:\"performer_page_type_url\";s:9:\"performer\";s:23:\"organizer_page_type_url\";s:9:\"organizer\";s:20:\"venues_page_type_url\";s:5:\"venue\";s:19:\"types_page_type_url\";s:10:\"event-type\";s:21:\"sponsor_page_type_url\";s:7:\"sponsor\";}s:21:\"ep_desk_normal_screen\";s:0:\"\";s:20:\"ep_desk_large_screen\";s:0:\"\";s:12:\"gmap_api_key\";s:0:\"\";s:14:\"social_sharing\";i:0;s:12:\"gcal_sharing\";i:0;s:20:\"google_cal_client_id\";s:0:\"\";s:18:\"google_cal_api_key\";s:0:\"\";s:16:\"google_recaptcha\";i:0;s:25:\"google_recaptcha_site_key\";s:0:\"\";s:27:\"google_recaptcha_secret_key\";s:0:\"\";s:19:\"ues_confirm_message\";s:72:\"Thank you for submitting your event. We will review and publish it soon.\";s:17:\"ues_login_message\";s:34:\"Please login to submit your event.\";s:18:\"ues_default_status\";s:5:\"draft\";s:34:\"allow_submission_by_anonymous_user\";s:0:\"\";s:25:\"frontend_submission_roles\";a:0:{}s:33:\"ues_restricted_submission_message\";s:83:\"You are not authorised to access this page. Please contact with your administrator.\";s:28:\"frontend_submission_sections\";a:9:{s:24:\"fes_event_featured_image\";i:1;s:17:\"fes_event_booking\";i:1;s:14:\"fes_event_link\";i:1;s:14:\"fes_event_type\";i:1;s:18:\"fes_event_location\";i:1;s:19:\"fes_event_performer\";i:1;s:19:\"fes_event_organizer\";i:1;s:22:\"fes_event_more_options\";i:1;s:20:\"fes_event_text_color\";i:1;}s:28:\"frontend_submission_required\";a:8:{s:21:\"fes_event_description\";i:0;s:17:\"fes_event_booking\";i:0;s:17:\"fes_booking_price\";i:0;s:14:\"fes_event_link\";i:0;s:14:\"fes_event_type\";i:0;s:18:\"fes_event_location\";i:0;s:19:\"fes_event_performer\";i:0;s:19:\"fes_event_organizer\";i:0;}s:23:\"fes_allow_media_library\";s:0:\"\";s:30:\"fes_allow_user_to_delete_event\";s:0:\"\";s:29:\"fes_show_add_event_in_profile\";s:0:\"\";s:14:\"login_id_field\";s:8:\"username\";s:28:\"login_id_field_label_setting\";s:9:\"User Name\";s:20:\"login_password_label\";s:8:\"Password\";s:21:\"login_show_rememberme\";s:1:\"1\";s:27:\"login_show_rememberme_label\";s:11:\"Remember me\";s:25:\"login_show_forgotpassword\";s:1:\"1\";s:31:\"login_show_forgotpassword_label\";s:16:\"Forgot password?\";s:22:\"login_google_recaptcha\";s:0:\"\";s:28:\"login_google_recaptcha_label\";s:0:\"\";s:18:\"login_heading_text\";s:0:\"\";s:21:\"login_subheading_text\";s:0:\"\";s:18:\"login_button_label\";s:5:\"Login\";s:26:\"login_redirect_after_login\";s:0:\"\";s:23:\"login_show_registerlink\";i:1;s:29:\"login_show_registerlink_label\";s:8:\"Register\";s:23:\"login_registration_form\";s:2:\"ep\";s:26:\"login_rm_registration_form\";s:0:\"\";s:25:\"register_google_recaptcha\";s:0:\"\";s:17:\"register_username\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:1;s:5:\"label\";s:9:\"User Name\";}s:14:\"register_email\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:1;s:5:\"label\";s:10:\"User Email\";}s:17:\"register_password\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:8:\"Password\";}s:24:\"register_repeat_password\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:15:\"Repeat Password\";}s:12:\"register_dob\";a:3:{s:4:\"show\";i:0;s:9:\"mandatory\";i:0;s:5:\"label\";s:13:\"Date of Birth\";}s:14:\"register_phone\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:5:\"Phone\";}s:17:\"register_timezone\";a:3:{s:4:\"show\";i:0;s:9:\"mandatory\";i:0;s:5:\"label\";s:8:\"Timezone\";}s:23:\"checkout_register_fname\";a:1:{s:5:\"label\";s:10:\"First Name\";}s:23:\"checkout_register_lname\";a:1:{s:5:\"label\";s:9:\"Last Name\";}s:26:\"checkout_register_username\";a:1:{s:5:\"label\";s:9:\"User Name\";}s:23:\"checkout_register_email\";a:1:{s:5:\"label\";s:5:\"Email\";}s:26:\"checkout_register_password\";a:1:{s:5:\"label\";s:8:\"Password\";}s:29:\"checkout_reg_google_recaptcha\";i:0;s:31:\"ep_premium_license_option_value\";s:0:\"\";s:23:\"ep_free_license_item_id\";i:23935;s:25:\"ep_free_license_item_name\";s:15:\"EventPrime Free\";s:26:\"ep_premium_license_item_id\";i:19088;s:28:\"ep_premium_license_item_name\";s:19:\"EventPrime Business\";s:22:\"ep_premium_license_key\";s:0:\"\";s:25:\"ep_premium_license_status\";s:0:\"\";s:27:\"ep_premium_license_response\";s:0:\"\";s:31:\"ep_professional_license_item_id\";i:23912;s:33:\"ep_professional_license_item_name\";s:23:\"EventPrime Professional\";s:28:\"ep_essential_license_item_id\";i:23902;s:30:\"ep_essential_license_item_name\";s:20:\"EventPrime Essential\";s:31:\"ep_premium_plus_license_item_id\";i:21789;s:33:\"ep_premium_plus_license_item_name\";s:19:\"EventPrime Premium+\";s:29:\"ep_metabundle_license_item_id\";i:22462;s:31:\"ep_metabundle_license_item_name\";s:25:\"EventPrime for MetaBundle\";s:34:\"ep_metabundle_plus_license_item_id\";i:21790;s:36:\"ep_metabundle_plus_license_item_name\";s:26:\"EventPrime for MetaBundle+\";s:6:\"scalar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -423,7 +166,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'countmessage' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'em_global_settings' , 'O:8:&quot;stdClass&quot;:245:{s:10:&quot;custom_css&quot;;s:0:&quot;&quot;;s:13:&quot;button_titles&quot;;s:0:&quot;&quot;;s:22:&quot;performer_display_view&quot;;s:4:&quot;card&quot;;s:15:&quot;performer_limit&quot;;i:0;s:19:&quot;pop_performer_limit&quot;;i:5;s:23:&quot;performer_no_of_columns&quot;;i:4;s:19:&quot;performer_load_more&quot;;i:1;s:16:&quot;performer_search&quot;;i:1;s:28:&quot;single_performer_show_events&quot;;i:1;s:35:&quot;single_performer_event_display_view&quot;;s:9:&quot;mini-list&quot;;s:28:&quot;single_performer_event_limit&quot;;i:0;s:29:&quot;single_performer_event_column&quot;;i:4;s:32:&quot;single_performer_event_load_more&quot;;i:1;s:33:&quot;single_performer_hide_past_events&quot;;i:0;s:19:&quot;performer_box_color&quot;;a:4:{i:0;s:6:&quot;A6E7CF&quot;;i:1;s:6:&quot;DBEEC1&quot;;i:2;s:6:&quot;FFD3B6&quot;;i:3;s:6:&quot;FFA9A5&quot;;}s:36:&quot;single_performer_event_section_title&quot;;s:15:&quot;Upcoming Events&quot;;s:37:&quot;event_listings_date_format_std_option&quot;;s:0:&quot;&quot;;s:30:&quot;event_listings_date_format_val&quot;;s:0:&quot;&quot;;s:16:&quot;default_cal_view&quot;;s:5:&quot;month&quot;;s:28:&quot;enable_default_calendar_date&quot;;i:0;s:21:&quot;calendar_title_format&quot;;s:10:&quot;MMMM, YYYY&quot;;s:18:&quot;hide_calendar_rows&quot;;i:0;s:27:&quot;hide_time_on_front_calendar&quot;;i:0;s:28:&quot;show_event_types_on_calendar&quot;;i:1;s:16:&quot;eventprime_theme&quot;;s:7:&quot;default&quot;;s:24:&quot;front_switch_view_option&quot;;a:8:{i:0;s:5:&quot;month&quot;;i:1;s:4:&quot;week&quot;;i:2;s:3:&quot;day&quot;;i:3;s:8:&quot;listweek&quot;;i:4;s:11:&quot;square_grid&quot;;i:5;s:14:&quot;staggered_grid&quot;;i:6;s:6:&quot;slider&quot;;i:7;s:4:&quot;rows&quot;;}s:16:&quot;hide_past_events&quot;;i:0;s:22:&quot;show_no_of_events_card&quot;;i:10;s:22:&quot;card_view_custom_value&quot;;i:1;s:22:&quot;disable_filter_options&quot;;i:0;s:17:&quot;hide_old_bookings&quot;;i:0;s:29:&quot;calendar_column_header_format&quot;;s:4:&quot;dddd&quot;;s:30:&quot;shortcode_hide_upcoming_events&quot;;i:0;s:20:&quot;redirect_third_party&quot;;i:0;s:22:&quot;hide_event_custom_link&quot;;i:0;s:28:&quot;show_qr_code_on_single_event&quot;;i:1;s:31:&quot;show_max_event_on_calendar_date&quot;;i:3;s:27:&quot;event_booking_status_option&quot;;s:0:&quot;&quot;;s:27:&quot;open_detail_page_in_new_tab&quot;;i:0;s:20:&quot;events_no_of_columns&quot;;s:0:&quot;&quot;;s:31:&quot;events_image_visibility_options&quot;;s:5:&quot;cover&quot;;s:19:&quot;events_image_height&quot;;s:0:&quot;&quot;;s:25:&quot;show_trending_event_types&quot;;i:0;s:27:&quot;no_of_event_types_displayed&quot;;i:5;s:26:&quot;show_events_per_event_type&quot;;i:0;s:26:&quot;sort_by_events_or_bookings&quot;;s:0:&quot;&quot;;s:17:&quot;type_display_view&quot;;s:4:&quot;card&quot;;s:10:&quot;type_limit&quot;;i:0;s:18:&quot;type_no_of_columns&quot;;i:4;s:14:&quot;type_load_more&quot;;i:1;s:11:&quot;type_search&quot;;i:1;s:23:&quot;single_type_show_events&quot;;i:1;s:30:&quot;single_type_event_display_view&quot;;s:9:&quot;mini-list&quot;;s:23:&quot;single_type_event_limit&quot;;i:0;s:24:&quot;single_type_event_column&quot;;i:4;s:27:&quot;single_type_event_load_more&quot;;i:1;s:28:&quot;single_type_hide_past_events&quot;;i:0;s:14:&quot;type_box_color&quot;;a:4:{i:0;s:6:&quot;A6E7CF&quot;;i:1;s:6:&quot;DBEEC1&quot;;i:2;s:6:&quot;FFD3B6&quot;;i:3;s:6:&quot;FFA9A5&quot;;}s:23:&quot;single_type_event_order&quot;;s:3:&quot;asc&quot;;s:25:&quot;single_type_event_orderby&quot;;s:18:&quot;em_start_date_time&quot;;s:31:&quot;single_type_event_section_title&quot;;s:15:&quot;Upcoming Events&quot;;s:18:&quot;venue_display_view&quot;;s:4:&quot;card&quot;;s:11:&quot;venue_limit&quot;;i:0;s:19:&quot;venue_no_of_columns&quot;;i:4;s:15:&quot;venue_load_more&quot;;i:1;s:12:&quot;venue_search&quot;;i:1;s:24:&quot;single_venue_show_events&quot;;i:1;s:31:&quot;single_venue_event_display_view&quot;;s:9:&quot;mini-list&quot;;s:24:&quot;single_venue_event_limit&quot;;i:0;s:25:&quot;single_venue_event_column&quot;;i:4;s:28:&quot;single_venue_event_load_more&quot;;i:1;s:29:&quot;single_venue_hide_past_events&quot;;i:1;s:32:&quot;single_venue_event_section_title&quot;;s:15:&quot;Upcoming Events&quot;;s:15:&quot;venue_box_color&quot;;a:4:{i:0;s:6:&quot;A6E7CF&quot;;i:1;s:6:&quot;DBEEC1&quot;;i:2;s:6:&quot;FFD3B6&quot;;i:3;s:6:&quot;FFA9A5&quot;;}s:22:&quot;organizer_display_view&quot;;s:4:&quot;card&quot;;s:15:&quot;organizer_limit&quot;;i:0;s:23:&quot;organizer_no_of_columns&quot;;i:4;s:19:&quot;organizer_load_more&quot;;i:1;s:16:&quot;organizer_search&quot;;i:1;s:28:&quot;single_organizer_show_events&quot;;i:1;s:35:&quot;single_organizer_event_display_view&quot;;s:9:&quot;mini-list&quot;;s:28:&quot;single_organizer_event_limit&quot;;i:0;s:29:&quot;single_organizer_event_column&quot;;i:0;s:32:&quot;single_organizer_event_load_more&quot;;i:1;s:33:&quot;single_organizer_hide_past_events&quot;;i:0;s:36:&quot;single_organizer_event_section_title&quot;;s:15:&quot;Upcoming Events&quot;;s:19:&quot;organizer_box_color&quot;;a:4:{i:0;s:6:&quot;A6E7CF&quot;;i:1;s:6:&quot;DBEEC1&quot;;i:2;s:6:&quot;FFD3B6&quot;;i:3;s:6:&quot;FFA9A5&quot;;}s:35:&quot;single_event_date_format_std_option&quot;;s:0:&quot;&quot;;s:28:&quot;single_event_date_format_val&quot;;s:0:&quot;&quot;;s:16:&quot;hide_weather_tab&quot;;i:0;s:23:&quot;weather_unit_fahrenheit&quot;;i:0;s:12:&quot;hide_map_tab&quot;;i:0;s:20:&quot;hide_other_event_tab&quot;;i:0;s:22:&quot;hide_age_group_section&quot;;i:0;s:17:&quot;hide_note_section&quot;;i:0;s:23:&quot;hide_performers_section&quot;;i:0;s:23:&quot;hide_organizers_section&quot;;i:0;s:24:&quot;event_detail_image_width&quot;;s:0:&quot;&quot;;s:25:&quot;event_detail_image_height&quot;;s:4:&quot;auto&quot;;s:32:&quot;event_detail_image_height_custom&quot;;s:0:&quot;&quot;;s:24:&quot;event_detail_image_align&quot;;s:0:&quot;&quot;;s:30:&quot;event_detail_image_auto_scroll&quot;;i:0;s:34:&quot;event_detail_image_slider_duration&quot;;i:4;s:30:&quot;event_detail_message_for_recap&quot;;s:51:&quot;This event has ended and results are now available.&quot;;s:27:&quot;event_detail_result_heading&quot;;s:7:&quot;Results&quot;;s:32:&quot;event_detail_result_button_label&quot;;s:12:&quot;View Results&quot;;s:15:&quot;performers_page&quot;;s:0:&quot;&quot;;s:11:&quot;venues_page&quot;;s:0:&quot;&quot;;s:11:&quot;events_page&quot;;s:0:&quot;&quot;;s:12:&quot;booking_page&quot;;s:0:&quot;&quot;;s:12:&quot;profile_page&quot;;s:0:&quot;&quot;;s:11:&quot;event_types&quot;;s:0:&quot;&quot;;s:17:&quot;event_submit_form&quot;;s:0:&quot;&quot;;s:20:&quot;booking_details_page&quot;;s:0:&quot;&quot;;s:16:&quot;event_organizers&quot;;s:0:&quot;&quot;;s:10:&quot;login_page&quot;;s:0:&quot;&quot;;s:13:&quot;register_page&quot;;s:0:&quot;&quot;;s:13:&quot;payment_order&quot;;a:0:{}s:8:&quot;currency&quot;;s:3:&quot;USD&quot;;s:17:&quot;currency_position&quot;;s:6:&quot;before&quot;;s:16:&quot;paypal_processor&quot;;s:0:&quot;&quot;;s:16:&quot;paypal_client_id&quot;;s:0:&quot;&quot;;s:25:&quot;default_payment_processor&quot;;s:0:&quot;&quot;;s:19:&quot;disable_admin_email&quot;;s:0:&quot;&quot;;s:22:&quot;disable_frontend_email&quot;;s:0:&quot;&quot;;s:26:&quot;registration_email_subject&quot;;s:29:&quot;User registration successful!&quot;;s:26:&quot;registration_email_content&quot;;s:0:&quot;&quot;;s:27:&quot;reset_password_mail_subject&quot;;s:19:&quot;Reset your password&quot;;s:19:&quot;reset_password_mail&quot;;s:0:&quot;&quot;;s:26:&quot;send_booking_pending_email&quot;;i:1;s:29:&quot;booking_pending_email_subject&quot;;s:23:&quot;Your payment is pending&quot;;s:21:&quot;booking_pending_email&quot;;s:0:&quot;&quot;;s:24:&quot;booking_pending_email_cc&quot;;s:0:&quot;&quot;;s:26:&quot;send_booking_confirm_email&quot;;i:1;s:29:&quot;booking_confirm_email_subject&quot;;s:26:&quot;Your booking is confirmed!&quot;;s:23:&quot;booking_confirmed_email&quot;;s:0:&quot;&quot;;s:26:&quot;booking_confirmed_email_cc&quot;;s:0:&quot;&quot;;s:31:&quot;send_booking_cancellation_email&quot;;i:1;s:33:&quot;booking_cancelation_email_subject&quot;;s:31:&quot;Your booking has been cancelled&quot;;s:25:&quot;booking_cancelation_email&quot;;s:0:&quot;&quot;;s:28:&quot;booking_cancelation_email_cc&quot;;s:0:&quot;&quot;;s:25:&quot;send_booking_refund_email&quot;;i:1;s:28:&quot;booking_refund_email_subject&quot;;s:23:&quot;Refund for your booking&quot;;s:20:&quot;booking_refund_email&quot;;s:0:&quot;&quot;;s:23:&quot;booking_refund_email_cc&quot;;s:0:&quot;&quot;;s:26:&quot;send_event_submitted_email&quot;;i:1;s:29:&quot;event_submitted_email_subject&quot;;s:29:&quot;Event submitted successfully!&quot;;s:21:&quot;event_submitted_email&quot;;s:0:&quot;&quot;;s:24:&quot;event_submitted_email_cc&quot;;s:0:&quot;&quot;;s:25:&quot;send_event_approved_email&quot;;i:1;s:28:&quot;event_approved_email_subject&quot;;s:23:&quot;Your event is now live!&quot;;s:20:&quot;event_approved_email&quot;;s:0:&quot;&quot;;s:32:&quot;send_admin_booking_confirm_email&quot;;i:1;s:37:&quot;admin_booking_confirmed_email_subject&quot;;s:17:&quot;New event booking&quot;;s:29:&quot;admin_booking_confirmed_email&quot;;s:0:&quot;&quot;;s:32:&quot;admin_booking_confirmed_email_cc&quot;;s:0:&quot;&quot;;s:37:&quot;admin_booking_confirm_email_attendees&quot;;s:0:&quot;&quot;;s:17:&quot;ep_admin_email_to&quot;;s:19:&quot;admin@localhost.com&quot;;s:19:&quot;ep_admin_email_from&quot;;s:19:&quot;admin@localhost.com&quot;;s:11:&quot;time_format&quot;;s:5:&quot;h:mmt&quot;;s:21:&quot;default_calendar_date&quot;;d:1744249671;s:30:&quot;required_booking_attendee_name&quot;;i:0;s:26:&quot;hide_0_price_from_frontend&quot;;i:0;s:17:&quot;datepicker_format&quot;;s:14:&quot;yy-mm-dd&amp;Y-m-d&quot;;s:22:&quot;show_qr_code_on_ticket&quot;;i:1;s:19:&quot;checkout_page_timer&quot;;i:4;s:34:&quot;enable_event_time_to_user_timezone&quot;;i:1;s:35:&quot;show_timezone_message_on_event_page&quot;;i:1;s:24:&quot;timezone_related_message&quot;;s:62:&quot;All event times are displayed based on {{$timezone}} timezone.&quot;;s:21:&quot;ep_frontend_font_size&quot;;i:14;s:18:&quot;hide_wishlist_icon&quot;;i:0;s:16:&quot;enable_dark_mode&quot;;i:0;s:15:&quot;enable_seo_urls&quot;;i:0;s:8:&quot;seo_urls&quot;;a:6:{s:19:&quot;event_page_type_url&quot;;s:5:&quot;event&quot;;s:23:&quot;performer_page_type_url&quot;;s:9:&quot;performer&quot;;s:23:&quot;organizer_page_type_url&quot;;s:9:&quot;organizer&quot;;s:20:&quot;venues_page_type_url&quot;;s:5:&quot;venue&quot;;s:19:&quot;types_page_type_url&quot;;s:10:&quot;event-type&quot;;s:21:&quot;sponsor_page_type_url&quot;;s:7:&quot;sponsor&quot;;}s:21:&quot;ep_desk_normal_screen&quot;;s:0:&quot;&quot;;s:20:&quot;ep_desk_large_screen&quot;;s:0:&quot;&quot;;s:12:&quot;gmap_api_key&quot;;s:0:&quot;&quot;;s:14:&quot;social_sharing&quot;;i:0;s:12:&quot;gcal_sharing&quot;;i:0;s:20:&quot;google_cal_client_id&quot;;s:0:&quot;&quot;;s:18:&quot;google_cal_api_key&quot;;s:0:&quot;&quot;;s:16:&quot;google_recaptcha&quot;;i:0;s:25:&quot;google_recaptcha_site_key&quot;;s:0:&quot;&quot;;s:27:&quot;google_recaptcha_secret_key&quot;;s:0:&quot;&quot;;s:19:&quot;ues_confirm_message&quot;;s:72:&quot;Thank you for submitting your event. We will review and publish it soon.&quot;;s:17:&quot;ues_login_message&quot;;s:34:&quot;Please login to submit your event.&quot;;s:18:&quot;ues_default_status&quot;;s:5:&quot;draft&quot;;s:34:&quot;allow_submission_by_anonymous_user&quot;;s:0:&quot;&quot;;s:25:&quot;frontend_submission_roles&quot;;a:0:{}s:33:&quot;ues_restricted_submission_message&quot;;s:83:&quot;You are not authorised to access this page. Please contact with your administrator.&quot;;s:28:&quot;frontend_submission_sections&quot;;a:9:{s:24:&quot;fes_event_featured_image&quot;;i:1;s:17:&quot;fes_event_booking&quot;;i:1;s:14:&quot;fes_event_link&quot;;i:1;s:14:&quot;fes_event_type&quot;;i:1;s:18:&quot;fes_event_location&quot;;i:1;s:19:&quot;fes_event_performer&quot;;i:1;s:19:&quot;fes_event_organizer&quot;;i:1;s:22:&quot;fes_event_more_options&quot;;i:1;s:20:&quot;fes_event_text_color&quot;;i:1;}s:28:&quot;frontend_submission_required&quot;;a:8:{s:21:&quot;fes_event_description&quot;;i:0;s:17:&quot;fes_event_booking&quot;;i:0;s:17:&quot;fes_booking_price&quot;;i:0;s:14:&quot;fes_event_link&quot;;i:0;s:14:&quot;fes_event_type&quot;;i:0;s:18:&quot;fes_event_location&quot;;i:0;s:19:&quot;fes_event_performer&quot;;i:0;s:19:&quot;fes_event_organizer&quot;;i:0;}s:23:&quot;fes_allow_media_library&quot;;s:0:&quot;&quot;;s:30:&quot;fes_allow_user_to_delete_event&quot;;s:0:&quot;&quot;;s:29:&quot;fes_show_add_event_in_profile&quot;;s:0:&quot;&quot;;s:14:&quot;login_id_field&quot;;s:8:&quot;username&quot;;s:28:&quot;login_id_field_label_setting&quot;;s:9:&quot;User Name&quot;;s:20:&quot;login_password_label&quot;;s:8:&quot;Password&quot;;s:21:&quot;login_show_rememberme&quot;;s:1:&quot;1&quot;;s:27:&quot;login_show_rememberme_label&quot;;s:11:&quot;Remember me&quot;;s:25:&quot;login_show_forgotpassword&quot;;s:1:&quot;1&quot;;s:31:&quot;login_show_forgotpassword_label&quot;;s:16:&quot;Forgot password?&quot;;s:22:&quot;login_google_recaptcha&quot;;s:0:&quot;&quot;;s:28:&quot;login_google_recaptcha_label&quot;;s:0:&quot;&quot;;s:18:&quot;login_heading_text&quot;;s:0:&quot;&quot;;s:21:&quot;login_subheading_text&quot;;s:0:&quot;&quot;;s:18:&quot;login_button_label&quot;;s:5:&quot;Login&quot;;s:26:&quot;login_redirect_after_login&quot;;s:0:&quot;&quot;;s:23:&quot;login_show_registerlink&quot;;i:1;s:29:&quot;login_show_registerlink_label&quot;;s:8:&quot;Register&quot;;s:23:&quot;login_registration_form&quot;;s:2:&quot;ep&quot;;s:26:&quot;login_rm_registration_form&quot;;s:0:&quot;&quot;;s:25:&quot;register_google_recaptcha&quot;;s:0:&quot;&quot;;s:17:&quot;register_username&quot;;a:3:{s:4:&quot;show&quot;;i:1;s:9:&quot;mandatory&quot;;i:1;s:5:&quot;label&quot;;s:9:&quot;User Name&quot;;}s:14:&quot;register_email&quot;;a:3:{s:4:&quot;show&quot;;i:1;s:9:&quot;mandatory&quot;;i:1;s:5:&quot;label&quot;;s:10:&quot;User Email&quot;;}s:17:&quot;register_password&quot;;a:3:{s:4:&quot;show&quot;;i:1;s:9:&quot;mandatory&quot;;i:0;s:5:&quot;label&quot;;s:8:&quot;Password&quot;;}s:24:&quot;register_repeat_password&quot;;a:3:{s:4:&quot;show&quot;;i:1;s:9:&quot;mandatory&quot;;i:0;s:5:&quot;label&quot;;s:15:&quot;Repeat Password&quot;;}s:12:&quot;register_dob&quot;;a:3:{s:4:&quot;show&quot;;i:0;s:9:&quot;mandatory&quot;;i:0;s:5:&quot;label&quot;;s:13:&quot;Date of Birth&quot;;}s:14:&quot;register_phone&quot;;a:3:{s:4:&quot;show&quot;;i:1;s:9:&quot;mandatory&quot;;i:0;s:5:&quot;label&quot;;s:5:&quot;Phone&quot;;}s:17:&quot;register_timezone&quot;;a:3:{s:4:&quot;show&quot;;i:0;s:9:&quot;mandatory&quot;;i:0;s:5:&quot;label&quot;;s:8:&quot;Timezone&quot;;}s:23:&quot;checkout_register_fname&quot;;a:1:{s:5:&quot;label&quot;;s:10:&quot;First Name&quot;;}s:23:&quot;checkout_register_lname&quot;;a:1:{s:5:&quot;label&quot;;s:9:&quot;Last Name&quot;;}s:26:&quot;checkout_register_username&quot;;a:1:{s:5:&quot;label&quot;;s:9:&quot;User Name&quot;;}s:23:&quot;checkout_register_email&quot;;a:1:{s:5:&quot;label&quot;;s:5:&quot;Email&quot;;}s:26:&quot;checkout_register_password&quot;;a:1:{s:5:&quot;label&quot;;s:8:&quot;Password&quot;;}s:29:&quot;checkout_reg_google_recaptcha&quot;;i:0;s:31:&quot;ep_premium_license_option_value&quot;;s:0:&quot;&quot;;s:23:&quot;ep_free_license_item_id&quot;;i:23935;s:25:&quot;ep_free_license_item_name&quot;;s:15:&quot;EventPrime Free&quot;;s:26:&quot;ep_premium_license_item_id&quot;;i:19088;s:28:&quot;ep_premium_license_item_name&quot;;s:19:&quot;EventPrime Business&quot;;s:22:&quot;ep_premium_license_key&quot;;s:0:&quot;&quot;;s:25:&quot;ep_premium_license_status&quot;;s:0:&quot;&quot;;s:27:&quot;ep_premium_license_response&quot;;s:0:&quot;&quot;;s:31:&quot;ep_professional_license_item_id&quot;;i:23912;s:33:&quot;ep_professional_license_item_name&quot;;s:23:&quot;EventPrime Professional&quot;;s:28:&quot;ep_essential_license_item_id&quot;;i:23902;s:30:&quot;ep_essential_license_item_name&quot;;s:20:&quot;EventPrime Essential&quot;;s:31:&quot;ep_premium_plus_license_item_id&quot;;i:21789;s:33:&quot;ep_premium_plus_license_item_name&quot;;s:19:&quot;EventPrime Premium+&quot;;s:29:&quot;ep_metabundle_license_item_id&quot;;i:22462;s:31:&quot;ep_metabundle_license_item_name&quot;;s:25:&quot;EventPrime for MetaBundle&quot;;s:34:&quot;ep_metabundle_plus_license_item_id&quot;;i:21790;s:36:&quot;ep_metabundle_plus_license_item_name&quot;;s:26:&quot;EventPrime for MetaBundle+&quot;;s:6:&quot;scalar&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -435,30 +178,33 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/exit-strategy/exitpage.php(31): add_option('countmessage', '', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): exitstrategy_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exit-s...', false)
-#9 /internal/eval.php(20): activate_plugin('exit-strategy/e...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('countmessage', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_exit-strategy/exitpage.php'), WP_Hook->do_action, WP_Hook->apply_filters, exitstrategy_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('em_global_setti...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(66): update_option('em_global_setti...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-event-calendar-management-activator.php(50): Eventprime_Event_Calendar_Management_Activator->ep_update_global_settings()
+#7 /wordpress/wp-content/plugins/eventprime-event-calendar-management/event-prime.php(55): Eventprime_Event_Calendar_Management_Activator->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_eventprime_event_calendar_management(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eventp...', false)
+#12 /internal/eval.php(20): activate_plugin('eventprime-even...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('em_global_settings', 'O:8:\"stdClass\":245:{s:10:\"custom_css\";s:0:\"\";s:13:\"button_titles\";s:0:\"\";s:22:\"performer_display_view\";s:4:\"card\";s:15:\"performer_limit\";i:0;s:19:\"pop_performer_limit\";i:5;s:23:\"performer_no_of_columns\";i:4;s:19:\"performer_load_more\";i:1;s:16:\"performer_search\";i:1;s:28:\"single_performer_show_events\";i:1;s:35:\"single_performer_event_display_view\";s:9:\"mini-list\";s:28:\"single_performer_event_limit\";i:0;s:29:\"single_performer_event_column\";i:4;s:32:\"single_performer_event_load_more\";i:1;s:33:\"single_performer_hide_past_events\";i:0;s:19:\"performer_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:36:\"single_performer_event_section_title\";s:15:\"Upcoming Events\";s:37:\"event_listings_date_format_std_option\";s:0:\"\";s:30:\"event_listings_date_format_val\";s:0:\"\";s:16:\"default_cal_view\";s:5:\"month\";s:28:\"enable_default_calendar_date\";i:0;s:21:\"calendar_title_format\";s:10:\"MMMM, YYYY\";s:18:\"hide_calendar_rows\";i:0;s:27:\"hide_time_on_front_calendar\";i:0;s:28:\"show_event_types_on_calendar\";i:1;s:16:\"eventprime_theme\";s:7:\"default\";s:24:\"front_switch_view_option\";a:8:{i:0;s:5:\"month\";i:1;s:4:\"week\";i:2;s:3:\"day\";i:3;s:8:\"listweek\";i:4;s:11:\"square_grid\";i:5;s:14:\"staggered_grid\";i:6;s:6:\"slider\";i:7;s:4:\"rows\";}s:16:\"hide_past_events\";i:0;s:22:\"show_no_of_events_card\";i:10;s:22:\"card_view_custom_value\";i:1;s:22:\"disable_filter_options\";i:0;s:17:\"hide_old_bookings\";i:0;s:29:\"calendar_column_header_format\";s:4:\"dddd\";s:30:\"shortcode_hide_upcoming_events\";i:0;s:20:\"redirect_third_party\";i:0;s:22:\"hide_event_custom_link\";i:0;s:28:\"show_qr_code_on_single_event\";i:1;s:31:\"show_max_event_on_calendar_date\";i:3;s:27:\"event_booking_status_option\";s:0:\"\";s:27:\"open_detail_page_in_new_tab\";i:0;s:20:\"events_no_of_columns\";s:0:\"\";s:31:\"events_image_visibility_options\";s:5:\"cover\";s:19:\"events_image_height\";s:0:\"\";s:25:\"show_trending_event_types\";i:0;s:27:\"no_of_event_types_displayed\";i:5;s:26:\"show_events_per_event_type\";i:0;s:26:\"sort_by_events_or_bookings\";s:0:\"\";s:17:\"type_display_view\";s:4:\"card\";s:10:\"type_limit\";i:0;s:18:\"type_no_of_columns\";i:4;s:14:\"type_load_more\";i:1;s:11:\"type_search\";i:1;s:23:\"single_type_show_events\";i:1;s:30:\"single_type_event_display_view\";s:9:\"mini-list\";s:23:\"single_type_event_limit\";i:0;s:24:\"single_type_event_column\";i:4;s:27:\"single_type_event_load_more\";i:1;s:28:\"single_type_hide_past_events\";i:0;s:14:\"type_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:23:\"single_type_event_order\";s:3:\"asc\";s:25:\"single_type_event_orderby\";s:18:\"em_start_date_time\";s:31:\"single_type_event_section_title\";s:15:\"Upcoming Events\";s:18:\"venue_display_view\";s:4:\"card\";s:11:\"venue_limit\";i:0;s:19:\"venue_no_of_columns\";i:4;s:15:\"venue_load_more\";i:1;s:12:\"venue_search\";i:1;s:24:\"single_venue_show_events\";i:1;s:31:\"single_venue_event_display_view\";s:9:\"mini-list\";s:24:\"single_venue_event_limit\";i:0;s:25:\"single_venue_event_column\";i:4;s:28:\"single_venue_event_load_more\";i:1;s:29:\"single_venue_hide_past_events\";i:1;s:32:\"single_venue_event_section_title\";s:15:\"Upcoming Events\";s:15:\"venue_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:22:\"organizer_display_view\";s:4:\"card\";s:15:\"organizer_limit\";i:0;s:23:\"organizer_no_of_columns\";i:4;s:19:\"organizer_load_more\";i:1;s:16:\"organizer_search\";i:1;s:28:\"single_organizer_show_events\";i:1;s:35:\"single_organizer_event_display_view\";s:9:\"mini-list\";s:28:\"single_organizer_event_limit\";i:0;s:29:\"single_organizer_event_column\";i:0;s:32:\"single_organizer_event_load_more\";i:1;s:33:\"single_organizer_hide_past_events\";i:0;s:36:\"single_organizer_event_section_title\";s:15:\"Upcoming Events\";s:19:\"organizer_box_color\";a:4:{i:0;s:6:\"A6E7CF\";i:1;s:6:\"DBEEC1\";i:2;s:6:\"FFD3B6\";i:3;s:6:\"FFA9A5\";}s:35:\"single_event_date_format_std_option\";s:0:\"\";s:28:\"single_event_date_format_val\";s:0:\"\";s:16:\"hide_weather_tab\";i:0;s:23:\"weather_unit_fahrenheit\";i:0;s:12:\"hide_map_tab\";i:0;s:20:\"hide_other_event_tab\";i:0;s:22:\"hide_age_group_section\";i:0;s:17:\"hide_note_section\";i:0;s:23:\"hide_performers_section\";i:0;s:23:\"hide_organizers_section\";i:0;s:24:\"event_detail_image_width\";s:0:\"\";s:25:\"event_detail_image_height\";s:4:\"auto\";s:32:\"event_detail_image_height_custom\";s:0:\"\";s:24:\"event_detail_image_align\";s:0:\"\";s:30:\"event_detail_image_auto_scroll\";i:0;s:34:\"event_detail_image_slider_duration\";i:4;s:30:\"event_detail_message_for_recap\";s:51:\"This event has ended and results are now available.\";s:27:\"event_detail_result_heading\";s:7:\"Results\";s:32:\"event_detail_result_button_label\";s:12:\"View Results\";s:15:\"performers_page\";s:0:\"\";s:11:\"venues_page\";s:0:\"\";s:11:\"events_page\";s:0:\"\";s:12:\"booking_page\";s:0:\"\";s:12:\"profile_page\";s:0:\"\";s:11:\"event_types\";s:0:\"\";s:17:\"event_submit_form\";s:0:\"\";s:20:\"booking_details_page\";s:0:\"\";s:16:\"event_organizers\";s:0:\"\";s:10:\"login_page\";s:0:\"\";s:13:\"register_page\";s:0:\"\";s:13:\"payment_order\";a:0:{}s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"paypal_processor\";s:0:\"\";s:16:\"paypal_client_id\";s:0:\"\";s:25:\"default_payment_processor\";s:0:\"\";s:19:\"disable_admin_email\";s:0:\"\";s:22:\"disable_frontend_email\";s:0:\"\";s:26:\"registration_email_subject\";s:29:\"User registration successful!\";s:26:\"registration_email_content\";s:0:\"\";s:27:\"reset_password_mail_subject\";s:19:\"Reset your password\";s:19:\"reset_password_mail\";s:0:\"\";s:26:\"send_booking_pending_email\";i:1;s:29:\"booking_pending_email_subject\";s:23:\"Your payment is pending\";s:21:\"booking_pending_email\";s:0:\"\";s:24:\"booking_pending_email_cc\";s:0:\"\";s:26:\"send_booking_confirm_email\";i:1;s:29:\"booking_confirm_email_subject\";s:26:\"Your booking is confirmed!\";s:23:\"booking_confirmed_email\";s:0:\"\";s:26:\"booking_confirmed_email_cc\";s:0:\"\";s:31:\"send_booking_cancellation_email\";i:1;s:33:\"booking_cancelation_email_subject\";s:31:\"Your booking has been cancelled\";s:25:\"booking_cancelation_email\";s:0:\"\";s:28:\"booking_cancelation_email_cc\";s:0:\"\";s:25:\"send_booking_refund_email\";i:1;s:28:\"booking_refund_email_subject\";s:23:\"Refund for your booking\";s:20:\"booking_refund_email\";s:0:\"\";s:23:\"booking_refund_email_cc\";s:0:\"\";s:26:\"send_event_submitted_email\";i:1;s:29:\"event_submitted_email_subject\";s:29:\"Event submitted successfully!\";s:21:\"event_submitted_email\";s:0:\"\";s:24:\"event_submitted_email_cc\";s:0:\"\";s:25:\"send_event_approved_email\";i:1;s:28:\"event_approved_email_subject\";s:23:\"Your event is now live!\";s:20:\"event_approved_email\";s:0:\"\";s:32:\"send_admin_booking_confirm_email\";i:1;s:37:\"admin_booking_confirmed_email_subject\";s:17:\"New event booking\";s:29:\"admin_booking_confirmed_email\";s:0:\"\";s:32:\"admin_booking_confirmed_email_cc\";s:0:\"\";s:37:\"admin_booking_confirm_email_attendees\";s:0:\"\";s:17:\"ep_admin_email_to\";s:19:\"admin@localhost.com\";s:19:\"ep_admin_email_from\";s:19:\"admin@localhost.com\";s:11:\"time_format\";s:5:\"h:mmt\";s:21:\"default_calendar_date\";d:1744249671;s:30:\"required_booking_attendee_name\";i:0;s:26:\"hide_0_price_from_frontend\";i:0;s:17:\"datepicker_format\";s:14:\"yy-mm-dd&Y-m-d\";s:22:\"show_qr_code_on_ticket\";i:1;s:19:\"checkout_page_timer\";i:4;s:34:\"enable_event_time_to_user_timezone\";i:1;s:35:\"show_timezone_message_on_event_page\";i:1;s:24:\"timezone_related_message\";s:62:\"All event times are displayed based on {{$timezone}} timezone.\";s:21:\"ep_frontend_font_size\";i:14;s:18:\"hide_wishlist_icon\";i:0;s:16:\"enable_dark_mode\";i:0;s:15:\"enable_seo_urls\";i:0;s:8:\"seo_urls\";a:6:{s:19:\"event_page_type_url\";s:5:\"event\";s:23:\"performer_page_type_url\";s:9:\"performer\";s:23:\"organizer_page_type_url\";s:9:\"organizer\";s:20:\"venues_page_type_url\";s:5:\"venue\";s:19:\"types_page_type_url\";s:10:\"event-type\";s:21:\"sponsor_page_type_url\";s:7:\"sponsor\";}s:21:\"ep_desk_normal_screen\";s:0:\"\";s:20:\"ep_desk_large_screen\";s:0:\"\";s:12:\"gmap_api_key\";s:0:\"\";s:14:\"social_sharing\";i:0;s:12:\"gcal_sharing\";i:0;s:20:\"google_cal_client_id\";s:0:\"\";s:18:\"google_cal_api_key\";s:0:\"\";s:16:\"google_recaptcha\";i:0;s:25:\"google_recaptcha_site_key\";s:0:\"\";s:27:\"google_recaptcha_secret_key\";s:0:\"\";s:19:\"ues_confirm_message\";s:72:\"Thank you for submitting your event. We will review and publish it soon.\";s:17:\"ues_login_message\";s:34:\"Please login to submit your event.\";s:18:\"ues_default_status\";s:5:\"draft\";s:34:\"allow_submission_by_anonymous_user\";s:0:\"\";s:25:\"frontend_submission_roles\";a:0:{}s:33:\"ues_restricted_submission_message\";s:83:\"You are not authorised to access this page. Please contact with your administrator.\";s:28:\"frontend_submission_sections\";a:9:{s:24:\"fes_event_featured_image\";i:1;s:17:\"fes_event_booking\";i:1;s:14:\"fes_event_link\";i:1;s:14:\"fes_event_type\";i:1;s:18:\"fes_event_location\";i:1;s:19:\"fes_event_performer\";i:1;s:19:\"fes_event_organizer\";i:1;s:22:\"fes_event_more_options\";i:1;s:20:\"fes_event_text_color\";i:1;}s:28:\"frontend_submission_required\";a:8:{s:21:\"fes_event_description\";i:0;s:17:\"fes_event_booking\";i:0;s:17:\"fes_booking_price\";i:0;s:14:\"fes_event_link\";i:0;s:14:\"fes_event_type\";i:0;s:18:\"fes_event_location\";i:0;s:19:\"fes_event_performer\";i:0;s:19:\"fes_event_organizer\";i:0;}s:23:\"fes_allow_media_library\";s:0:\"\";s:30:\"fes_allow_user_to_delete_event\";s:0:\"\";s:29:\"fes_show_add_event_in_profile\";s:0:\"\";s:14:\"login_id_field\";s:8:\"username\";s:28:\"login_id_field_label_setting\";s:9:\"User Name\";s:20:\"login_password_label\";s:8:\"Password\";s:21:\"login_show_rememberme\";s:1:\"1\";s:27:\"login_show_rememberme_label\";s:11:\"Remember me\";s:25:\"login_show_forgotpassword\";s:1:\"1\";s:31:\"login_show_forgotpassword_label\";s:16:\"Forgot password?\";s:22:\"login_google_recaptcha\";s:0:\"\";s:28:\"login_google_recaptcha_label\";s:0:\"\";s:18:\"login_heading_text\";s:0:\"\";s:21:\"login_subheading_text\";s:0:\"\";s:18:\"login_button_label\";s:5:\"Login\";s:26:\"login_redirect_after_login\";s:0:\"\";s:23:\"login_show_registerlink\";i:1;s:29:\"login_show_registerlink_label\";s:8:\"Register\";s:23:\"login_registration_form\";s:2:\"ep\";s:26:\"login_rm_registration_form\";s:0:\"\";s:25:\"register_google_recaptcha\";s:0:\"\";s:17:\"register_username\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:1;s:5:\"label\";s:9:\"User Name\";}s:14:\"register_email\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:1;s:5:\"label\";s:10:\"User Email\";}s:17:\"register_password\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:8:\"Password\";}s:24:\"register_repeat_password\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:15:\"Repeat Password\";}s:12:\"register_dob\";a:3:{s:4:\"show\";i:0;s:9:\"mandatory\";i:0;s:5:\"label\";s:13:\"Date of Birth\";}s:14:\"register_phone\";a:3:{s:4:\"show\";i:1;s:9:\"mandatory\";i:0;s:5:\"label\";s:5:\"Phone\";}s:17:\"register_timezone\";a:3:{s:4:\"show\";i:0;s:9:\"mandatory\";i:0;s:5:\"label\";s:8:\"Timezone\";}s:23:\"checkout_register_fname\";a:1:{s:5:\"label\";s:10:\"First Name\";}s:23:\"checkout_register_lname\";a:1:{s:5:\"label\";s:9:\"Last Name\";}s:26:\"checkout_register_username\";a:1:{s:5:\"label\";s:9:\"User Name\";}s:23:\"checkout_register_email\";a:1:{s:5:\"label\";s:5:\"Email\";}s:26:\"checkout_register_password\";a:1:{s:5:\"label\";s:8:\"Password\";}s:29:\"checkout_reg_google_recaptcha\";i:0;s:31:\"ep_premium_license_option_value\";s:0:\"\";s:23:\"ep_free_license_item_id\";i:23935;s:25:\"ep_free_license_item_name\";s:15:\"EventPrime Free\";s:26:\"ep_premium_license_item_id\";i:19088;s:28:\"ep_premium_license_item_name\";s:19:\"EventPrime Business\";s:22:\"ep_premium_license_key\";s:0:\"\";s:25:\"ep_premium_license_status\";s:0:\"\";s:27:\"ep_premium_license_response\";s:0:\"\";s:31:\"ep_professional_license_item_id\";i:23912;s:33:\"ep_professional_license_item_name\";s:23:\"EventPrime Professional\";s:28:\"ep_essential_license_item_id\";i:23902;s:30:\"ep_essential_license_item_name\";s:20:\"EventPrime Essential\";s:31:\"ep_premium_plus_license_item_id\";i:21789;s:33:\"ep_premium_plus_license_item_name\";s:19:\"EventPrime Premium+\";s:29:\"ep_metabundle_license_item_id\";i:22462;s:31:\"ep_metabundle_license_item_name\";s:25:\"EventPrime for MetaBundle\";s:34:\"ep_metabundle_plus_license_item_id\";i:21790;s:36:\"ep_metabundle_plus_license_item_name\";s:26:\"EventPrime for MetaBundle+\";s:6:\"scalar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_eventprime-event-calendar-management/event-prime.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_eventprime_event_calendar_management, Eventprime_Event_Calendar_Management_Activator->activate, Eventprime_Event_Calendar_Management_Activator->ep_update_global_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 01:47:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('redirecttoparent', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 01:47:52', '2025-04-10 01:47:52', '[em_performers]', '', 'Performers', '', 'publish', 'page', 'closed', 'closed', '', 'performers', '', '', '2025-04-10 01:47:52', '2025-04-10 01:47:52', 0, 0, '', '')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'redirecttoparent' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 01:47:52' , '2025-04-10 01:47:52' , '[em_performers]' , '' , 'Performers' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'performers' , '' , '' , '2025-04-10 01:47:52' , '2025-04-10 01:47:52' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -469,215 +215,8 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/exit-strategy/exitpage.php(32): add_option('redirecttoparen...', '1', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): exitstrategy_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_exit-s...', false)
-#9 /internal/eval.php(20): activate_plugin('exit-strategy/e...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('redirecttoparent', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_exit-strategy/exitpage.php'), WP_Hook->do_action, WP_Hook->apply_filters, exitstrategy_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:29 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 01:47:31 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 01:47:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 01:47:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 01:47:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 01:47:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_options', 'a:1:{s:9:\"feed_type\";s:4:\"user\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extf_options' , 'a:1:{s:9:&quot;feed_type&quot;;s:4:&quot;user&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('extf_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/express-twitter-feed/functions.php(17): update_option('extf_options', Array)
-#6 /wordpress/wp-content/plugins/express-twitter-feed/express-twitter-feed.php(60): extf_set_opt('feed_type', 'user', 'extf_options')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): extf_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expres...', false)
-#11 /internal/eval.php(20): activate_plugin('express-twitter...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_options', 'a:1:{s:9:\"feed_type\";s:4:\"user\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_express-twitter-feed/express-twitter-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, extf_activation, extf_set_opt, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_options', 'a:1:{s:15:\"extf_num_tweets\";i:5;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extf_options' , 'a:1:{s:15:&quot;extf_num_tweets&quot;;i:5;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('extf_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/express-twitter-feed/functions.php(17): update_option('extf_options', Array)
-#6 /wordpress/wp-content/plugins/express-twitter-feed/express-twitter-feed.php(60): extf_set_opt('extf_num_tweets', 5, 'extf_options')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): extf_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expres...', false)
-#11 /internal/eval.php(20): activate_plugin('express-twitter...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_options', 'a:1:{s:15:\"extf_num_tweets\";i:5;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_express-twitter-feed/express-twitter-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, extf_activation, extf_set_opt, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:24:\"extf_display_author_name\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extf_display_options' , 'a:1:{s:24:&quot;extf_display_author_name&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('extf_display_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/express-twitter-feed/functions.php(17): update_option('extf_display_op...', Array)
-#6 /wordpress/wp-content/plugins/express-twitter-feed/express-twitter-feed.php(60): extf_set_opt('extf_display_au...', 1, 'extf_display_op...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): extf_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expres...', false)
-#11 /internal/eval.php(20): activate_plugin('express-twitter...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:24:\"extf_display_author_name\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_express-twitter-feed/express-twitter-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, extf_activation, extf_set_opt, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:30:\"extf_display_author_screenname\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extf_display_options' , 'a:1:{s:30:&quot;extf_display_author_screenname&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('extf_display_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/express-twitter-feed/functions.php(17): update_option('extf_display_op...', Array)
-#6 /wordpress/wp-content/plugins/express-twitter-feed/express-twitter-feed.php(60): extf_set_opt('extf_display_au...', 1, 'extf_display_op...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): extf_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expres...', false)
-#11 /internal/eval.php(20): activate_plugin('express-twitter...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:30:\"extf_display_author_screenname\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_express-twitter-feed/express-twitter-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, extf_activation, extf_set_opt, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:23:\"extf_display_tweet_text\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extf_display_options' , 'a:1:{s:23:&quot;extf_display_tweet_text&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('extf_display_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/express-twitter-feed/functions.php(17): update_option('extf_display_op...', Array)
-#6 /wordpress/wp-content/plugins/express-twitter-feed/express-twitter-feed.php(60): extf_set_opt('extf_display_tw...', 1, 'extf_display_op...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): extf_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expres...', false)
-#11 /internal/eval.php(20): activate_plugin('express-twitter...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:23:\"extf_display_tweet_text\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_express-twitter-feed/express-twitter-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, extf_activation, extf_set_opt, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 01:47:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extf_display_options', 'a:1:{s:25:\"extf_display_avatar_image\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | param
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/eventprime-event-calendar-management/includes/class-eventprime-even
+Node.js v23.11.0
