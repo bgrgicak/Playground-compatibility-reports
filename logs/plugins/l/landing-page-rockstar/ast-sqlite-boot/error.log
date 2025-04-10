@@ -2,633 +2,972 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 21:25:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:25:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:25:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 09:47:57 UTC] Automatic updates starting...
+[10-Apr-2025 09:47:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_mw_lastupdated_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>drop procedure if exists lightningimport_create_db_objects;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_mw_lastupdated_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: drop procedure if exists `lightningimport_create_db_objects` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 near "procedure": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_mw_lastu...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_mw_lastu...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_mw_lastupdated_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:26:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:26:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:26:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:26:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:26:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:26:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-simple-facebook-pixel/lh-simple-facebook-pixel.php on line 122
-[08-Apr-2025 21:26:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-simple-facebook-pixel/lh-simple-facebook-pixel.php on line 122
-[08-Apr-2025 21:27:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lh-simple-facebook-pixel/lh-simple-facebook-pixel.php on line 122
-[08-Apr-2025 21:27:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php:196
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('like-box-widget...')
-#2 /internal/eval.php(20): activate_plugin('like-box-widget...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php on line 196
-[08-Apr-2025 21:27:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php:196
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('like-box-widget...')
-#2 /internal/eval.php(20): activate_plugin('like-box-widget...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php on line 196
-[08-Apr-2025 21:27:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php:196
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('like-box-widget...')
-#2 /internal/eval.php(20): activate_plugin('like-box-widget...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/like-box-widget/like-box-widget.php on line 196
-[08-Apr-2025 21:27:39 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:27:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:27:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:27:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:28:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php:187
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('live-drafts/liv...')
-#2 /internal/eval.php(20): activate_plugin('live-drafts/liv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php on line 187
-[08-Apr-2025 21:28:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php:187
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('live-drafts/liv...')
-#2 /internal/eval.php(20): activate_plugin('live-drafts/liv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php on line 187
-[08-Apr-2025 21:28:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php:187
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('live-drafts/liv...')
-#2 /internal/eval.php(20): activate_plugin('live-drafts/liv...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/live-drafts/liveDrafts.php on line 187
-[08-Apr-2025 21:28:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:28:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:29:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('drop procedure ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('drop procedure ...')
+#3 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(44): WP_SQLite_DB->query('drop procedure ...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#8 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#9 {main}</pre>
+ for query drop procedure if exists lightningimport_create_db_objects; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:47:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('feedback_options', 'a:8:{s:18:\"ss-select-position\";a:1:{i:0;s:14:\"before-content\";}s:10:\"ss-show-on\";a:2:{i:0;s:5:\"pages\";i:1;s:5:\"posts\";}s:15:\"ss-title-phrase\";s:0:\"\";s:13:\"ss-exclude-on\";s:0:\"\";s:17:\"ss-feedback-email\";s:0:\"\";s:12:\"ss-font-size\";s:3:\"2.4\";s:12:\"ss-thumbs-up\";s:7:\"#5C7ED7\";s:14:\"ss-thumbs-down\";s:7:\"#FF3234\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'feedback_options' , 'a:8:{s:18:&quot;ss-select-position&quot;;a:1:{i:0;s:14:&quot;before-content&quot;;}s:10:&quot;ss-show-on&quot;;a:2:{i:0;s:5:&quot;pages&quot;;i:1;s:5:&quot;posts&quot;;}s:15:&quot;ss-title-phrase&quot;;s:0:&quot;&quot;;s:13:&quot;ss-exclude-on&quot;;s:0:&quot;&quot;;s:17:&quot;ss-feedback-email&quot;;s:0:&quot;&quot;;s:12:&quot;ss-font-size&quot;;s:3:&quot;2.4&quot;;s:12:&quot;ss-thumbs-up&quot;;s:7:&quot;#5C7ED7&quot;;s:14:&quot;ss-thumbs-down&quot;;s:7:&quot;#FF3234&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createProcedure"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('create procedur...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('create procedur...')
+#3 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(45): WP_SQLite_DB->query('create procedur...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#8 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#9 {main}</pre>
+ for query create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:47:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CALL lightningimport_create_db_objects(0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "callStatement"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CALL lightningi...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CALL lightningi...')
+#3 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(51): WP_SQLite_DB->query('CALL lightningi...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#8 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#9 {main}</pre>
+ for query CALL lightningimport_create_db_objects(0) made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:47:58 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 09:47:58 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 09:48:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>drop procedure if exists lightningimport_create_db_objects;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: procedure.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(44): WP_SQLite_DB->query('drop procedure ...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#6 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#7 {main}</pre>
+ for query drop procedure if exists lightningimport_create_db_objects; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:48:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: procedure.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(45): WP_SQLite_DB->query('create procedur...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#6 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#7 {main}</pre>
+ for query create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:48:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>drop procedure if exists lightningimport_create_db_objects;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: procedure.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(44): WP_SQLite_DB->query('drop procedure ...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#6 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#7 {main}</pre>
+ for query drop procedure if exists lightningimport_create_db_objects; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:48:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: procedure.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/lightning-import/lightningimport_setup.php(45): WP_SQLite_DB->query('create procedur...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): lightningimport_plugin_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lightn...', false)
+#6 /internal/eval.php(20): activate_plugin('lightning-impor...')
+#7 {main}</pre>
+ for query create procedure lightningimport_create_db_objects (in _delete_existing_tables bit(1))
+begin
+	
+	if _delete_existing_tables = 1 then		
+		drop table if exists lightningimport_product_attributes;      
+		drop table if exists lightningimport_product_attribute_mapping; 		
+	end if;    
+	
+    /*Holds unique combinations of product attribute values for searching*/
+	create table if not exists `lightningimport_product_attributes` (
+		`product_attribute_id` bigint not null auto_increment	
+		,`post_id` bigint null
+		,`sku` varchar(100) not null
+		,`f1` varchar(100) null
+        ,`f2` varchar(100) null
+        ,`f3` varchar(100) null
+		,`f4` varchar(100) null
+		,`f5` varchar(100) null
+		,`f6` varchar(100) null
+		,`f7` varchar(100) null
+		,`f8` varchar(100) null
+		, primary key(`product_attribute_id`)		
+		,index(`sku`)
+		,index(`post_id`)
+		,UNIQUE KEY (`sku`(15),`f1`(10), `f2`(10), `f3`(10), `f4`(10))
+	);
+	
+	/*Holds names for product attribute columns to allow for dynamic naming of searchable columns*/	
+	create table if not exists `lightningimport_product_attribute_mapping` (
+		`product_attribute_mapping_id` bigint not null auto_increment		
+		,`columnname` varchar(255) not null
+		,`columnorder` bigint not null
+        ,`attributename` varchar(255) null 
+		,`attributedescription` varchar(255) null			
+		, primary key(`product_attribute_mapping_id`)
+	);		
+
+CREATE TABLE if not exists `lightningimport_temp` (
+`import_id` bigint(20) NOT NULL AUTO_INCREMENT,
+`PostMeta_Sku` varchar(255) NOT NULL,
+`PostTitle` text,
+`PostContent` longtext,
+`PostExcerpt` text,
+`PostContentFiltered` longtext,
+`PostMeta_RegularPrice` varchar(255) DEFAULT NULL,
+`PostMeta_SalePrice` varchar(255) DEFAULT NULL,
+`PostMeta_Weight` varchar(255) DEFAULT NULL,
+`PostMeta_Length` varchar(255) DEFAULT NULL,
+`PostMeta_Width` varchar(255) DEFAULT NULL,
+`PostMeta_Height` varchar(255) DEFAULT NULL,
+`PostMeta_Price` varchar(255) DEFAULT NULL,
+`PostMeta_Stock` varchar(255) DEFAULT NULL,
+`PostMeta_Image` varchar(255) DEFAULT NULL,
+`RequestBatchId` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`import_id`),
+KEY `PostMeta_Sku` (`PostMeta_Sku`)
+) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE if not exists `lightningimport_sku` (
+`sku` varchar(255) NOT NULL,
+`post_id` bigint(20) NOT NULL,
+`image` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`sku`),
+UNIQUE KEY `post_id` (`post_id`),
+KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;	
+	
+	if _delete_existing_tables = 1 then		
+		/*Populate the attribute mapping with the column names from the product attributes table*/
+		insert lightningimport_product_attribute_mapping(
+			columnname
+			,columnorder
+		)
+		select concat('f',cast(option_id as char)),option_id FROM wp_options
+		WHERE option_id <= 8;
+	end if;
+
+end; made by activate_plugin, do_action('activate_lightning-import/lightningimport_setup.php'), WP_Hook->do_action, WP_Hook->apply_filters, lightningimport_plugin_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:49:02 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:02 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:18 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:49:18 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:50:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `liftgate_fee` FROM wp_carriers LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `liftgate_fee` FROM `wp_carriers` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('feedback_option...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/launchpad-article-feedback/index.php(298): update_option('feedback_option...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): LaunchpadFeedback->load_defaults(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `liftgat...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `liftgat...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `liftgat...')
+#4 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(57): wpdb->get_row('SELECT `liftgat...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#9 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#10 {main}</pre>
+ for query SELECT `liftgate_fee` FROM wp_carriers LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:50:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `enable_store_pickup` FROM `wp_warehouse` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `enable_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `enable_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `enable_...')
+#4 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(76): wpdb->get_row('SELECT `enable_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#9 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#10 {main}</pre>
+ for query SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:50:30 UTC] Automatic updates starting...
+[10-Apr-2025 09:50:31 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 09:50:31 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 09:50:31 UTC]   Automatic theme updates starting...
+[10-Apr-2025 09:50:31 UTC]   Automatic theme updates complete.
+[10-Apr-2025 09:50:31 UTC] Automatic updates complete.
+[10-Apr-2025 09:50:35 UTC] PHP Deprecated:  Function wp_update_https_detection_errors is <strong>deprecated</strong> since version 6.4.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:50:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:50:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:50:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:50:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:50:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:50:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:51:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `liftgate_fee` FROM wp_carriers LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `liftgate_fee` FROM wp_carriers LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `liftgat...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(57): wpdb->get_row('SELECT `liftgat...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query SELECT `liftgate_fee` FROM wp_carriers LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:51:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `enable_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(76): wpdb->get_row('SELECT `enable_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:51:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:51:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:51:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:51:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:51:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:51:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `liftgate_fee` FROM wp_carriers LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `liftgate_fee` FROM wp_carriers LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: liftgate_fee.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `liftgat...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(57): wpdb->get_row('SELECT `liftgat...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query SELECT `liftgate_fee` FROM wp_carriers LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:51:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: enable_store_pickup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `enable_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/includes/en-cerasis-install-uninstall.php(76): wpdb->get_row('SELECT `enable_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): En_Cerasis_Install_Uninstall::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query SELECT `enable_store_pickup` FROM wp_warehouse LIMIT 1 made by activate_plugin, do_action('activate_ltl-freight-quotes-cerasis-edition/ltl-freight-quotes-cerasis-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, En_Cerasis_Install_Uninstall::install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:51:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:51:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:51:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:51:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:51:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:51:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 46
+[10-Apr-2025 09:51:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 47
+[10-Apr-2025 09:51:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 48
+[10-Apr-2025 09:51:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 49
+[10-Apr-2025 09:51:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ltl-freight-quotes-cerasis-edition/update-plan.php on line 51
+[10-Apr-2025 09:52:29 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Latest_tweets::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_latest...', false)
+#3 /internal/eval.php(20): activate_plugin('latest-tweets/l...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:52:37 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Latest_tweets::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_latest...', false)
+#3 /internal/eval.php(20): activate_plugin('latest-tweets/l...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:52:45 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Latest_tweets::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_latest...', false)
+#3 /internal/eval.php(20): activate_plugin('latest-tweets/l...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 09:52:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lazyest-maps</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:53:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lazyest-maps</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:53:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>lazyest-maps</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:53:25 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744278802.985)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_launch...', false)
-#10 /internal/eval.php(20): activate_plugin('launchpad-artic...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('feedback_options', 'a:8:{s:18:\"ss-select-position\";a:1:{i:0;s:14:\"before-content\";}s:10:\"ss-show-on\";a:2:{i:0;s:5:\"pages\";i:1;s:5:\"posts\";}s:15:\"ss-title-phrase\";s:0:\"\";s:13:\"ss-exclude-on\";s:0:\"\";s:17:\"ss-feedback-email\";s:0:\"\";s:12:\"ss-font-size\";s:3:\"2.4\";s:12:\"ss-thumbs-up\";s:7:\"#5C7ED7\";s:14:\"ss-thumbs-down\";s:7:\"#FF3234\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_launchpad-article-feedback/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, LaunchpadFeedback->load_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:29:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:29:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:29:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:29:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:30:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mo_ldap_ds_config_status', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mo_ldap_ds_config_status' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mo_ldap_ds_conf...', '0', '', 'auto')
-#5 /wordpress/wp-content/plugins/ldap-ad-staff-employee-directory-search/mo-ldap-directory-search.php(88): update_option('mo_ldap_ds_conf...', '0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): MO_LDAP_Directory_Search->mo_ldap_directory_search_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ldap-a...', false)
-#10 /internal/eval.php(20): activate_plugin('ldap-ad-staff-e...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mo_ldap_ds_config_status', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ldap-ad-staff-employee-directory-search/mo-ldap-directory-search.php'), WP_Hook->do_action, WP_Hook->apply_filters, MO_LDAP_Directory_Search->mo_ldap_directory_search_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:30:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mo_ldap_ds_customer_token', 'MlSdBdp1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mo_ldap_ds_customer_token' , 'MlSdBdp1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mo_ldap_ds_cust...', 'MlSdBdp1', '', 'auto')
-#5 /wordpress/wp-content/plugins/ldap-ad-staff-employee-directory-search/mo-ldap-directory-search.php(91): update_option('mo_ldap_ds_cust...', 'MlSdBdp1')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): MO_LDAP_Directory_Search->mo_ldap_directory_search_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ldap-a...', false)
-#10 /internal/eval.php(20): activate_plugin('ldap-ad-staff-e...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mo_ldap_ds_customer_token', 'MlSdBdp1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ldap-ad-staff-employee-directory-search/mo-ldap-directory-search.php'), WP_Hook->do_action, WP_Hook->apply_filters, MO_LDAP_Directory_Search->mo_ldap_directory_search_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:30:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:30:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:30:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:30:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:30:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('SLT_LockPages_options', 'a:5:{s:24:\"slt_lockpages_capability\";s:14:\"manage_options\";s:30:\"slt_lockpages_protect_from_all\";b:0;s:19:\"slt_lockpages_scope\";s:6:\"locked\";s:24:\"slt_lockpages_post_types\";a:0:{}s:26:\"slt_lockpages_locked_pages\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'SLT_LockPages_options' , 'a:5:{s:24:&quot;slt_lockpages_capability&quot;;s:14:&quot;manage_options&quot;;s:30:&quot;slt_lockpages_protect_from_all&quot;;b:0;s:19:&quot;slt_lockpages_scope&quot;;s:6:&quot;locked&quot;;s:24:&quot;slt_lockpages_post_types&quot;;a:0:{}s:26:&quot;slt_lockpages_locked_pages&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('SLT_LockPages_o...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(640): update_option('SLT_LockPages_o...', Array)
-#6 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(63): SLT_LockPages->load_options()
-#7 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(803): SLT_LockPages->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('lock-pages/lock...')
-#10 /internal/eval.php(20): activate_plugin('lock-pages/lock...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('SLT_LockPages_options', 'a:5:{s:24:\"slt_lockpages_capability\";s:14:\"manage_options\";s:30:\"slt_lockpages_protect_from_all\";b:0;s:19:\"slt_lockpages_scope\";s:6:\"locked\";s:24:\"slt_lockpages_post_types\";a:0:{}s:26:\"slt_lockpages_locked_pages\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/lock-pages/lock-pages.php'), SLT_LockPages->__construct, SLT_LockPages->load_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:30:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:30:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('SLT_LockPages_options', 'a:5:{s:24:\"slt_lockpages_capability\";s:14:\"manage_options\";s:30:\"slt_lockpages_protect_from_all\";b:0;s:19:\"slt_lockpages_scope\";s:6:\"locked\";s:24:\"slt_lockpages_post_types\";a:0:{}s:26:\"slt_lockpages_locked_pages\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'SLT_LockPages_options' , 'a:5:{s:24:&quot;slt_lockpages_capability&quot;;s:14:&quot;manage_options&quot;;s:30:&quot;slt_lockpages_protect_from_all&quot;;b:0;s:19:&quot;slt_lockpages_scope&quot;;s:6:&quot;locked&quot;;s:24:&quot;slt_lockpages_post_types&quot;;a:0:{}s:26:&quot;slt_lockpages_locked_pages&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('SLT_LockPages_o...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(640): update_option('SLT_LockPages_o...', Array)
-#6 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(63): SLT_LockPages->load_options()
-#7 /wordpress/wp-content/plugins/lock-pages/lock-pages.php(803): SLT_LockPages->__construct()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('SLT_LockPages_options', 'a:5:{s:24:\"slt_lockpages_capability\";s:14:\"manage_options\";s:30:\"slt_lockpages_protect_from_all\";b:0;s:19:\"slt_lockpages_scope\";s:6:\"locked\";s:24:\"slt_lockpages_post_types\";a:0:{}s:26:\"slt_lockpages_locked_pages\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/lock-pages/lock-pages.php'), SLT_LockPages->__construct, SLT_LockPages->load_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:31:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:31:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:31:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:31:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:31:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:31:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:31:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:31:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:32:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:32:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:32:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:32:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:32:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:32:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:32:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:32:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:33:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('preview_css', '#at_preview .preview_footer {
-                background: #fcfcfc !important;
-                font-size: 70% !important;
-            }
-            #at_preview .preview_footer a,#at_preview .preview_footer {
-                text-decoration: none !important;
-                text-transform: uppercase !important;
-            }', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'preview_css' , '#at_preview .preview_footer {
-                background: #fcfcfc !important;
-                font-size: 70% !important;
-            }
-            #at_preview .preview_footer a,#at_preview .preview_footer {
-                text-decoration: none !important;
-                text-transform: uppercase !important;
-            }' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/link-preview/preview.php(60): add_option('preview_css', '#at_preview .pr...', '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): preview_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_link-p...', false)
-#9 /internal/eval.php(20): activate_plugin('link-preview/pr...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('preview_css', '#at_preview .preview_footer {
-                background: #fcfcfc !important;
-                font-size: 70% !important;
-            }
-            #at_preview .preview_footer a,#at_preview .preview_footer {
-                text-decoration: none !important;
-                text-transform: uppercase !important;
-            }', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_link-preview/preview.php'), WP_Hook->do_action, WP_Hook->apply_filters, preview_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 21:33:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 21:33:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 21:33:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 21:33:35 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_start', '<li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_start' , '&lt;li&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(78): add_option('lcb_ldp_start', '<li>', 'Beginning of ou...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_start', '<li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_finish', '</li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_finish' , '&lt;/li&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(79): add_option('lcb_ldp_finish', '</li>', 'End of output')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_finish', '</li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_before_heading', '<h2>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_before_heading' , '&lt;h2&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(80): add_option('lcb_ldp_before_...', '<h2>', 'Begin the headi...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_before_heading', '<h2>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_heading', 'Coming soon', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_heading' , 'Coming soon' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(81): add_option('lcb_ldp_heading', 'Coming soon', 'The heading')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_heading', 'Coming soon', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_after_heading', '</h2>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_after_heading' , '&lt;/h2&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(82): add_option('lcb_ldp_after_h...', '</h2>', 'End the heading')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_after_heading', '</h2>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_before_list', '<ul>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_before_list' , '&lt;ul&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(83): add_option('lcb_ldp_before_...', '<ul>', 'Begin the list')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_before_list', '<ul>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_list-draft-posts/lcb_list_draft_posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, lcb_set_ldp_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 21:33:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_after_list', '</ul>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lcb_ldp_after_list' , '&lt;/ul&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/list-draft-posts/lcb_list_draft_posts.php(84): add_option('lcb_ldp_after_l...', '</ul>', 'End the list')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): lcb_set_ldp_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_list-d...', false)
-#9 /internal/eval.php(20): activate_plugin('list-draft-post...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lcb_ldp_after_list', '</ul>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autol
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 09:54:25 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:54:26 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:54:34 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:54:35 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:54:43 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:54:44 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/librafire-pinpoints/includes/lib/class-lf-pinpoints-admin-api.php on line 290
+[10-Apr-2025 09:55:52 UTC] PHP Fatal error:  Uncaught Error: Non-static method ReverbPlugin::addHooks() cannot be called statically in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('listings-for-re...')
+#2 /internal/eval.php(20): activate_plugin('listings-for-re...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php on line 71
+[10-Apr-2025 09:56:00 UTC] PHP Fatal error:  Uncaught Error: Non-static method ReverbPlugin::addHooks() cannot be called statically in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('listings-for-re...')
+#2 /internal/eval.php(20): activate_plugin('listings-for-re...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php on line 71
+[10-Apr-2025 09:56:08 UTC] PHP Fatal error:  Uncaught Error: Non-static method ReverbPlugin::addHooks() cannot be called statically in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('listings-for-re...')
+#2 /internal/eval.php(20): activate_plugin('listings-for-re...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/listings-for-reverb/reverb.php on line 71
+[10-Apr-2025 09:56:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/localizer/localizerco-widget.php:76
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('localizer/local...')
+#2 /internal/eval.php(20): activate_plugin('localizer/local...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/localizer/localizerco-widget.php on line 76
+[10-Apr-2025 09:56:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/localizer/localizerco-widget.php:76
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('localizer/local...')
+#2 /internal/eval.php(20): activate_plugin('localizer/local...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/localizer/localizerco-widget.php on line 76
+[10-Apr-2025 09:57:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/localizer/localizerco-widget.php:76
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('localizer/local...')
+#2 /internal/eval.php(20): activate_plugin('localizer/local...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/localizer/localizerco-widget.php on line 76
+[10-Apr-2025 09:57:48 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/landing-page-rockstar/metabox/init.php:810
+Stack trace:
+#0 /wordpress/wp-content/plugins/landing-page-rockstar/metabox/init.php(164): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/landing-page-rockstar/metabox/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/landing-page-rockstar/lprockstar.php(33): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('landing-page-ro...')
+#5 /internal/eval.php(20): activate_plugin('landing-page-ro...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/landing-page-rockstar/metabox/init.php on line 810
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"landing-page-rockstar"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
 Node.js v23.11.0
