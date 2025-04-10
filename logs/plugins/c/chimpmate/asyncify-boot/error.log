@@ -2,603 +2,162 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 06:54:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:55:14 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:14 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:14 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 06:55:14', '2025-04-09 06:55:14', 'This is a fake page used for the CashPress login page \"myAccount.php\". This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.', '', 'myAccount', '', 'publish', 'page', 'closed', 'closed', '', 'myaccount', '', '', '2025-04-09 06:55:14', '2025-04-09 06:55:14', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 06:55:14' , '2025-04-09 06:55:14' , 'This is a fake page used for the CashPress login page &quot;myAccount.php&quot;. This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.' , '' , 'myAccount' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'myaccount' , '' , '' , '2025-04-09 06:55:14' , '2025-04-09 06:55:14' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cashpress/cashpress.php(55): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): my_account_post(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cashpr...', false)
-#11 /internal/eval.php(20): activate_plugin('cashpress/cashp...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 06:55:14', '2025-04-09 06:55:14', 'This is a fake page used for the CashPress login page \"myAccount.php\". This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.', '', 'myAccount', '', 'publish', 'page', 'closed', 'closed', '', 'myaccount', '', '', '2025-04-09 06:55:14', '2025-04-09 06:55:14', 0, 0, '', '') made by activate_plugin, do_action('activate_cashpress/cashpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, my_account_post, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CSP_myAccount_page', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'CSP_myAccount_page' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/cashpress/cashpress.php(56): add_option('CSP_myAccount_p...', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): my_account_post(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cashpr...', false)
-#9 /internal/eval.php(20): activate_plugin('cashpress/cashp...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CSP_myAccount_page', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cashpress/cashpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, my_account_post, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 06:55:15', '2025-04-09 06:55:15', 'This is a fake page used for the CashPress logout page \"logout.php\". This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.', '', 'logout', '', 'publish', 'page', 'closed', 'closed', '', 'logout', '', '', '2025-04-09 06:55:15', '2025-04-09 06:55:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 06:55:15' , '2025-04-09 06:55:15' , 'This is a fake page used for the CashPress logout page &quot;logout.php&quot;. This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.' , '' , 'logout' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'logout' , '' , '' , '2025-04-09 06:55:15' , '2025-04-09 06:55:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cashpress/cashpress.php(110): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): csp_logout_post(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cashpr...', false)
-#11 /internal/eval.php(20): activate_plugin('cashpress/cashp...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 06:55:15', '2025-04-09 06:55:15', 'This is a fake page used for the CashPress logout page \"logout.php\". This content is not displayed on the page when the plugin is active, but DO NOT DELETE this content unless you know what you are doing.', '', 'logout', '', 'publish', 'page', 'closed', 'closed', '', 'logout', '', '', '2025-04-09 06:55:15', '2025-04-09 06:55:15', 0, 0, '', '') made by activate_plugin, do_action('activate_cashpress/cashpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, csp_logout_post, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CSP_log_out_page', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'CSP_log_out_page' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/cashpress/cashpress.php(111): add_option('CSP_log_out_pag...', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): csp_logout_post(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cashpr...', false)
-#9 /internal/eval.php(20): activate_plugin('cashpress/cashp...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CSP_log_out_page', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cashpress/cashpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, csp_logout_post, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:55:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:55:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:55:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:55:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:55:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:55:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_settings', 'a:12:{s:9:\"usepaypal\";s:3:\"yes\";s:12:\"invoiceterms\";s:106:\"Please pay within 5 business days of invoice receipt. Payment is requested through Cash, Check, or Paypal.\";s:10:\"useapprove\";s:3:\"yes\";s:13:\"allowcomments\";s:3:\"yes\";s:13:\"proposalterms\";s:106:\"Thank you for giving us the opportunity to present this proposal. The terms and conditions are as follows:\";s:8:\"desctype\";s:8:\"lightbox\";s:11:\"displaytype\";s:4:\"grid\";s:7:\"captcha\";s:7:\"nothing\";s:11:\"botquestion\";s:35:\"Are you a real person or a spammer?\";s:9:\"botanswer\";s:11:\"real person\";s:17:\"proposal_password\";s:3:\"yes\";s:16:\"invoice_password\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'csp_settings' , 'a:12:{s:9:&quot;usepaypal&quot;;s:3:&quot;yes&quot;;s:12:&quot;invoiceterms&quot;;s:106:&quot;Please pay within 5 business days of invoice receipt. Payment is requested through Cash, Check, or Paypal.&quot;;s:10:&quot;useapprove&quot;;s:3:&quot;yes&quot;;s:13:&quot;allowcomments&quot;;s:3:&quot;yes&quot;;s:13:&quot;proposalterms&quot;;s:106:&quot;Thank you for giving us the opportunity to present this proposal. The terms and conditions are as follows:&quot;;s:8:&quot;desctype&quot;;s:8:&quot;lightbox&quot;;s:11:&quot;displaytype&quot;;s:4:&quot;grid&quot;;s:7:&quot;captcha&quot;;s:7:&quot;nothing&quot;;s:11:&quot;botquestion&quot;;s:35:&quot;Are you a real person or a spammer?&quot;;s:9:&quot;botanswer&quot;;s:11:&quot;real person&quot;;s:17:&quot;proposal_password&quot;;s:3:&quot;yes&quot;;s:16:&quot;invoice_password&quot;;s:3:&quot;yes&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('csp_settings', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cashpress/default_values.php(57): update_option('csp_settings', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): csp_default_values('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_settings', 'a:12:{s:9:\"usepaypal\";s:3:\"yes\";s:12:\"invoiceterms\";s:106:\"Please pay within 5 business days of invoice receipt. Payment is requested through Cash, Check, or Paypal.\";s:10:\"useapprove\";s:3:\"yes\";s:13:\"allowcomments\";s:3:\"yes\";s:13:\"proposalterms\";s:106:\"Thank you for giving us the opportunity to present this proposal. The terms and conditions are as follows:\";s:8:\"desctype\";s:8:\"lightbox\";s:11:\"displaytype\";s:4:\"grid\";s:7:\"captcha\";s:7:\"nothing\";s:11:\"botquestion\";s:35:\"Are you a real person or a spammer?\";s:9:\"botanswer\";s:11:\"real person\";s:17:\"proposal_password\";s:3:\"yes\";s:16:\"invoice_password\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, csp_default_values, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_company', 'a:14:{s:12:\"businessname\";s:9:\"CashPress\";s:8:\"logofile\";s:56:\"http://127.0.0.1:9408/wp-content/plugins/images/logo.png\";s:11:\"paypalemail\";s:0:\"\";s:12:\"contactemail\";s:0:\"\";s:5:\"phone\";s:14:\"(555) 555-5555\";s:8:\"address1\";s:12:\"14 Sample St\";s:8:\"address2\";s:19:\"Palo Alto, CA 94301\";s:8:\"address3\";s:3:\"USA\";s:7:\"social1\";s:8:\"Facebook\";s:7:\"social2\";s:7:\"Twitter\";s:7:\"social3\";s:8:\"LinkedIn\";s:10:\"socialurl1\";s:23:\"http://www.facebook.com\";s:10:\"socialurl2\";s:22:\"http://www.twitter.com\";s:10:\"socialurl3\";s:23:\"http://www.linkedin.com\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'csp_company' , 'a:14:{s:12:&quot;businessname&quot;;s:9:&quot;CashPress&quot;;s:8:&quot;logofile&quot;;s:56:&quot;http://127.0.0.1:9408/wp-content/plugins/images/logo.png&quot;;s:11:&quot;paypalemail&quot;;s:0:&quot;&quot;;s:12:&quot;contactemail&quot;;s:0:&quot;&quot;;s:5:&quot;phone&quot;;s:14:&quot;(555) 555-5555&quot;;s:8:&quot;address1&quot;;s:12:&quot;14 Sample St&quot;;s:8:&quot;address2&quot;;s:19:&quot;Palo Alto, CA 94301&quot;;s:8:&quot;address3&quot;;s:3:&quot;USA&quot;;s:7:&quot;social1&quot;;s:8:&quot;Facebook&quot;;s:7:&quot;social2&quot;;s:7:&quot;Twitter&quot;;s:7:&quot;social3&quot;;s:8:&quot;LinkedIn&quot;;s:10:&quot;socialurl1&quot;;s:23:&quot;http://www.facebook.com&quot;;s:10:&quot;socialurl2&quot;;s:22:&quot;http://www.twitter.com&quot;;s:10:&quot;socialurl3&quot;;s:23:&quot;http://www.linkedin.com&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('csp_company', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cashpress/default_values.php(58): update_option('csp_company', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): csp_default_values('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_company', 'a:14:{s:12:\"businessname\";s:9:\"CashPress\";s:8:\"logofile\";s:56:\"http://127.0.0.1:9408/wp-content/plugins/images/logo.png\";s:11:\"paypalemail\";s:0:\"\";s:12:\"contactemail\";s:0:\"\";s:5:\"phone\";s:14:\"(555) 555-5555\";s:8:\"address1\";s:12:\"14 Sample St\";s:8:\"address2\";s:19:\"Palo Alto, CA 94301\";s:8:\"address3\";s:3:\"USA\";s:7:\"social1\";s:8:\"Facebook\";s:7:\"social2\";s:7:\"Twitter\";s:7:\"social3\";s:8:\"LinkedIn\";s:10:\"socialurl1\";s:23:\"http://www.facebook.com\";s:10:\"socialurl2\";s:22:\"http://www.twitter.com\";s:10:\"socialurl3\";s:23:\"http://www.linkedin.com\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, csp_default_values, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_defaults_installed', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'csp_defaults_installed' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/cashpress/default_values.php(59): add_option('csp_defaults_in...', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): csp_default_values('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csp_defaults_installed', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, csp_default_values, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/proposal_type.php on line 1169
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/invoice_type.php on line 1176
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/proposal_type.php on line 1169
-[09-Apr-2025 06:55:25 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/invoice_type.php on line 1176
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/proposal_type.php on line 1169
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/invoice_type.php on line 1176
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 213
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 216
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Attempt to read property "post_type" on null in /wordpress/wp-content/plugins/cashpress/client_type.php on line 219
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/proposal_type.php on line 1169
-[09-Apr-2025 06:55:35 UTC] PHP Warning:  Undefined array key "csp-nonce" in /wordpress/wp-content/plugins/cashpress/invoice_type.php on line 1176
-[09-Apr-2025 06:55:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:55:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:55:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:55:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:56:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:56:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:56:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:56:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.0.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_version' , '2.0.14' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_versi...', '2.0.14', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(51): update_option('chat_help_versi...', '2.0.14')
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(74): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.0.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_db_version', '2.0.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_db_version' , '2.0.14' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_db_ve...', '2.0.14', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(52): update_option('chat_help_db_ve...', '2.0.14')
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(74): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_db_version', '2.0.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_first_version', '2.2.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_first_version' , '2.2.4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_first...', '2.2.4', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(55): update_option('chat_help_first...', '2.2.4')
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(74): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_first_version', '2.2.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_activation_date', '1744181775', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_activation_date' , '1744181775' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_activ...', 1744181775, '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(58): update_option('chat_help_activ...', 1744181775)
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(74): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_activation_date', '1744181775', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->is_needs_update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_version' , '2.1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_versi...', '2.1.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/updates/update-2.1.0.php(6): update_option('chat_help_versi...', '2.1.0')
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(82): include('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, include('/plugins/chat-help/src/Admin/updates/update-2.1.0.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_db_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_db_version' , '2.1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_db_ve...', '2.1.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/updates/update-2.1.0.php(7): update_option('chat_help_db_ve...', '2.1.0')
-#6 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(82): include('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_db_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, include('/plugins/chat-help/src/Admin/updates/update-2.1.0.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_version' , '2.1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chat_help_versi...', '2.1.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/chat-help/src/Admin/DBUpdates.php(83): update_option('chat_help_versi...', '2.1.0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ThemeAtelier\ChatWhatsapp\Admin\DBUpdates->perform_updates, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chat_help_version', '2.2.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chat_help_version' , '2.2.4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /inter
+Error: [10-Apr-2025 13:38:43 UTC] PHP Deprecated:  Required parameter $endPoint follows optional parameter $httpVerb in /wordpress/wp-content/plugins/chimpmate/src/MailChimp.php on line 59
+[10-Apr-2025 13:38:51 UTC] PHP Deprecated:  Required parameter $endPoint follows optional parameter $httpVerb in /wordpress/wp-content/plugins/chimpmate/src/MailChimp.php on line 59
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"chimpmate"},"options":{"activate":true}}) : 
+  "unreachable" WASM instruction executed.
+  
+  The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+  list when building PHP.wasm.
+  
+  You will need to file a new issue in the WordPress Playground repository
+  and paste this error message there:
+  
+  https://github.com/WordPress/wordpress-playground/issues/new
+  
+  If you're a core developer, the typical fix is to:
+  
+  * Isolate a minimal reproduction of the error
+  * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+  * Run 'npm run fix-asyncify'
+  * Commit the changes, push to the repo, release updated NPM packages
+  
+  Below is a list of all the PHP functions found in the stack trace to
+  help with the minimal reproduction. If they're all already listed in
+  the Dockerfile, you'll need to trigger this error again with long stack
+  traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+  CLI option: 
+  
+      * php.wasm.__wrap_select
+      * php.wasm.RAND_poll
+      * php.wasm.rand_status
+      * php.wasm.RAND_status
+      * php.wasm.Curl_ossl_seed
+      * php.wasm.Curl_ossl_random
+      * php.wasm.Curl_rand
+      * php.wasm.Curl_rand_hex
+  
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: 
+    "unreachable" WASM instruction executed.
+    
+    The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+    list when building PHP.wasm.
+    
+    You will need to file a new issue in the WordPress Playground repository
+    and paste this error message there:
+    
+    https://github.com/WordPress/wordpress-playground/issues/new
+    
+    If you're a core developer, the typical fix is to:
+    
+    * Isolate a minimal reproduction of the error
+    * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+    * Run 'npm run fix-asyncify'
+    * Commit the changes, push to the repo, release updated NPM packages
+    
+    Below is a list of all the PHP functions found in the stack trace to
+    help with the minimal reproduction. If they're all already listed in
+    the Dockerfile, you'll need to trigger this error again with long stack
+    traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+    CLI option: 
+    
+        * php.wasm.__wrap_select
+        * php.wasm.RAND_poll
+        * php.wasm.rand_status
+        * php.wasm.RAND_status
+        * php.wasm.Curl_ossl_seed
+        * php.wasm.Curl_ossl_random
+        * php.wasm.Curl_rand
+        * php.wasm.Curl_rand_hex
+    
+        at PHP.ae (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1446:78)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:981:17)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      cause: Error: Rethrown
+          at UnhandledRejectionsTarget.e (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1423:19)
+          at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+          at UnhandledRejectionsTarget.dispatchEvent (node:internal/event_target:762:26)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:565:15)
+          at invoke_iiiii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109620:14)
+          at php.wasm.php_execute_script (wasm://wasm/php.wasm-0372e072:wasm-function[11032]:0x5fcfba)
+          at php.wasm.dynCall_ii (wasm://wasm/php.wasm-0372e072:wasm-function[12823]:0x6c1791)
+          at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109067:22)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18)
+          at invoke_ii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109631:14) {
+        cause: RuntimeError: unreachable
+            at php.wasm.RAND_bytes (wasm://wasm/php.wasm-0372e072:wasm-function[457]:0x32de0)
+            at php.wasm.Curl_ossl_random (wasm://wasm/php.wasm-0372e072:wasm-function[14872]:0x76af86)
+            at php.wasm.Curl_rand (wasm://wasm/php.wasm-0372e072:wasm-function[3344]:0x225b82)
+            at php.wasm.Curl_rand_hex (wasm://wasm/php.wasm-0372e072:wasm-function[4354]:0x2de8b4)
+            at php.wasm.curl_mime_init (wasm://wasm/php.wasm-0372e072:wasm-function[3187]:0x211731)
+            at php.wasm.build_mime_structure_from_hash (wasm://wasm/php.wasm-0372e072:wasm-function[4149]:0x2bb5f6)
+            at php.wasm._php_curl_setopt (wasm://wasm/php.wasm-0372e072:wasm-function[6319]:0x43992e)
+            at php.wasm.zif_curl_setopt (wasm://wasm/php.wasm-0372e072:wasm-function[8891]:0x551857)
+            at php.wasm.ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER (wasm://wasm/php.wasm-0372e072:wasm-function[14225]:0x7272b9)
+            at php.wasm.execute_ex (wasm://wasm/php.wasm-0372e072:wasm-function[12641]:0x6a6f7e) {
+          cause: Error
+              at Asyncify.handleSleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109868:45)
+              at _emscripten_sleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:107828:44)
+              at php.wasm.__wrap_select (wasm://wasm/php.wasm-0372e072:wasm-function[1345]:0xc6766)
+              at php.wasm.RAND_poll (wasm://wasm/php.wasm-0372e072:wasm-function[6548]:0x457ab8)
+              at php.wasm.rand_status (wasm://wasm/php.wasm-0372e072:wasm-function[10454]:0x5c51e3)
+              at php.wasm.RAND_status (wasm://wasm/php.wasm-0372e072:wasm-function[1783]:0x109352)
+              at php.wasm.Curl_ossl_seed (wasm://wasm/php.wasm-0372e072:wasm-function[6690]:0x4687a9)
+              at php.wasm.Curl_ossl_random (wasm://wasm/php.wasm-0372e072:wasm-function[14872]:0x76af69)
+              at php.wasm.Curl_rand (wasm://wasm/php.wasm-0372e072:wasm-function[3344]:0x225b82)
+              at php.wasm.Curl_rand_hex (wasm://wasm/php.wasm-0372e072:wasm-function[4354]:0x2de8b4)
+        },
+        betterMessage: '\n' +
+          '"unreachable" WASM instruction executed.\n' +
+          '\n' +
+          'The typical reason is a PHP function missing from the ASYNCIFY_ONLY\n' +
+          'list when building PHP.wasm.\n' +
+          '\n' +
+          'You will need to file a new issue in the WordPress Playground repository\n' +
+          'and paste this error message there:\n' +
+          '\n' +
+          'https://github.com/WordPress/wordpress-playground/issues/new\n' +
+          '\n' +
+          "If you're a core developer, the typical fix is to:\n" +
+          '\n' +
+          '* Isolate a minimal reproduction of the error\n' +
+          '* Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository\n' +
+          "* Run 'npm run fix-asyncify'\n" +
+          '* Commit the changes, push to the repo, release updated NPM packages\n' +
+          '\n' +
+          'Below is a list of all the PHP functions found in the stack trace to\n' +
+          "help with the minimal reproduction. If they're all already listed in\n" +
+          "the Dockerfile, you'll need to trigger this error again with long stack\n" +
+          'traces enabled. In node.js, you can do it using the --stack-trace-limit=100\n' +
+          'CLI option: \n' +
+          '\n' +
+          '    * php.wasm.__wrap_select\n' +
+          '    * php.wasm.RAND_poll\n' +
+          '    * php.wasm.rand_status\n' +
+          '    * php.wasm.RAND_status\n' +
+          '    * php.wasm.Curl_ossl_seed\n' +
+          '    * php.wasm.Curl_ossl_random\n' +
+          '    * php.wasm.Curl_rand\n' +
+          '    * php.wasm.Curl_rand_hex\n'
+      }
+    }
+  }
+}
+
+Node.js v23.11.0
