@@ -2,574 +2,95 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:1:{s:10:\"posts-list\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:1:{s:10:&quot;posts-list&quot;;b:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(95): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:1:{s:10:\"posts-list\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:2:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:2:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:2:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:3:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:3:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:3:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:4:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:4:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:4:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:5:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:5:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:5:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:6:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:6:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(95): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:6:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:7:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:7:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:7:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:8:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:8:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:8:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:9:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:9:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:9:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:10:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:10:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:10:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:11:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:11:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:11:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:12:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:12:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;s:13:&quot;telegram-chat&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:12:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:13:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:13:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;s:13:&quot;telegram-chat&quot;;b:0;s:14:&quot;google-reviews&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:13:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:14:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;s:20:\"advanced-google-maps\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:14:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;s:13:&quot;telegram-chat&quot;;b:0;s:14:&quot;google-reviews&quot;;b:0;s:20:&quot;advanced-google-maps&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:14:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;s:20:\"advanced-google-maps\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:15:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;s:20:\"advanced-google-maps\";b:0;s:14:\"image-hotspots\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:15:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;s:13:&quot;telegram-chat&quot;;b:0;s:14:&quot;google-reviews&quot;;b:0;s:20:&quot;advanced-google-maps&quot;;b:0;s:14:&quot;image-hotspots&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_atheme...', false)
-#10 /internal/eval.php(20): activate_plugin('athemes-addons-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:15:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;s:20:\"advanced-google-maps\";b:0;s:14:\"image-hotspots\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_athemes-addons-for-elementor-lite/athemes-addons-elementor.php'), WP_Hook->do_action, WP_Hook->apply_filters, aThemes_Addons_Elementor->activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 09:49:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('athemes-addons-modules', 'a:16:{s:10:\"posts-list\";b:1;s:14:\"posts-carousel\";b:0;s:15:\"advanced-button\";b:0;s:13:\"advanced-tabs\";b:0;s:17:\"advanced-carousel\";b:0;s:12:\"testimonials\";b:1;s:16:\"animated-heading\";b:0;s:12:\"dual-heading\";b:0;s:16:\"advanced-heading\";b:0;s:15:\"creative-button\";b:0;s:13:\"whatsapp-chat\";b:0;s:13:\"telegram-chat\";b:0;s:14:\"google-reviews\";b:0;s:20:\"advanced-google-maps\";b:0;s:14:\"image-hotspots\";b:0;s:10:\"image-card\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'athemes-addons-modules' , 'a:16:{s:10:&quot;posts-list&quot;;b:1;s:14:&quot;posts-carousel&quot;;b:0;s:15:&quot;advanced-button&quot;;b:0;s:13:&quot;advanced-tabs&quot;;b:0;s:17:&quot;advanced-carousel&quot;;b:0;s:12:&quot;testimonials&quot;;b:1;s:16:&quot;animated-heading&quot;;b:0;s:12:&quot;dual-heading&quot;;b:0;s:16:&quot;advanced-heading&quot;;b:0;s:15:&quot;creative-button&quot;;b:0;s:13:&quot;whatsapp-chat&quot;;b:0;s:13:&quot;telegram-chat&quot;;b:0;s:14:&quot;google-reviews&quot;;b:0;s:20:&quot;advanced-google-maps&quot;;b:0;s:14:&quot;image-hotspots&quot;;b:0;s:10:&quot;image-card&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('athemes-addons-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/athemes-addons-for-elementor-lite/athemes-addons-elementor.php(99): update_option('athemes-addons-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): aThemes_Addons_Elementor->activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 18:35:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
+Stack trace:
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
+[10-Apr-2025 18:35:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
+Stack trace:
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
+[10-Apr-2025 18:35:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php:114
+Stack trace:
+#0 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(116): include_once()
+#1 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(18): wd_ads::includes()
+#2 /wordpress/wp-content/plugins/ad-manager-wd/wd_ads_class.php(147): wd_ads->__construct()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wd_ads::get_instance('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/ad-manager-wd/views/wd_ads_widgets.php on line 114
+[10-Apr-2025 18:35:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/add-my-networks/add-my-networks.php:119
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-my-networks...')
+#2 /internal/eval.php(20): activate_plugin('add-my-networks...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/add-my-networks/add-my-networks.php on line 119
+[10-Apr-2025 18:35:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/add-my-networks/add-my-networks.php:119
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-my-networks...')
+#2 /internal/eval.php(20): activate_plugin('add-my-networks...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/add-my-networks/add-my-networks.php on line 119
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"add-my-networks"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
