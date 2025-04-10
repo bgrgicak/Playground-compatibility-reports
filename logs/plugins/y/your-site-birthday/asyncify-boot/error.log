@@ -2,361 +2,48 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:25:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yit_recently_activated', 'a:1:{i:0;s:50:\"yith-woocommerce-recently-viewed-products/init.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yit_recently_activated' , 'a:1:{i:0;s:50:&quot;yith-woocommerce-recently-viewed-products/init.php&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('yit_recently_ac...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/yith-woocommerce-recently-viewed-products/plugin-fw/yit-plugin-registration-hook.php(21): update_option('yit_recently_ac...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): yith_plugin_registration_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 17:50:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/yumjam-masonry-layout-for-posts-and-custom-post-types/class/masonry_custom_cpt.php on line 56
+[10-Apr-2025 17:50:37 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307434.897)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yith-w...', false)
-#10 /internal/eval.php(20): activate_plugin('yith-woocommerc...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yit_recently_activated', 'a:1:{i:0;s:50:\"yith-woocommerce-recently-viewed-products/init.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yith-woocommerce-recently-viewed-products/init.php'), WP_Hook->do_action, WP_Hook->apply_filters, yith_plugin_registration_hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:26:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('youtubeprefs_alloptions', 'a:92:{s:7:\"version\";s:8:\"14.2.1.3\";s:9:\"centervid\";i:0;s:6:\"glance\";i:0;s:8:\"autoplay\";i:0;s:14:\"cc_load_policy\";i:0;s:12:\"cc_lang_pref\";s:0:\"\";s:14:\"iv_load_policy\";i:1;s:4:\"loop\";i:0;s:14:\"modestbranding\";i:0;s:3:\"rel\";i:1;s:2:\"fs\";i:1;s:11:\"playsinline\";i:0;s:6:\"origin\";i:0;s:8:\"autohide\";i:2;s:2:\"hl\";s:0:\"\";s:4:\"dohl\";i:0;s:5:\"theme\";s:4:\"dark\";s:5:\"color\";s:3:\"red\";s:3:\"pro\";s:0:\"\";s:8:\"nocookie\";i:0;s:9:\"gb_compat\";i:1;s:11:\"facade_mode\";i:0;s:15:\"facade_autoplay\";i:1;s:12:\"gdpr_consent\";i:0;s:20:\"gdpr_consent_message\";s:358:\"<p><strong>Please accept YouTube cookies to play this video.</strong> By accepting you will be accessing content from YouTube, a service provided by an external third party.</p><p><a href=\"https://policies.google.com/privacy\" target=\"_blank\">YouTube privacy policy</a></p><p>If you accept this notice, your choice will be saved and the page will refresh.</p>\";s:19:\"gdpr_consent_button\";s:22:\"Accept YouTube Content\";s:13:\"playlistorder\";i:0;s:8:\"acctitle\";i:0;s:7:\"migrate\";i:0;s:15:\"migrate_youtube\";i:0;s:22:\"migrate_embedplusvideo\";i:0;s:8:\"controls\";i:1;s:10:\"oldspacing\";i:0;s:13:\"frontend_only\";i:1;s:10:\"responsive\";i:0;s:14:\"responsive_all\";i:1;s:9:\"widgetfit\";i:1;s:16:\"evselector_light\";i:0;s:18:\"stop_mobile_buffer\";i:1;s:15:\"restrict_wizard\";i:0;s:21:\"restrict_wizard_roles\";a:5:{i:0;s:13:\"administrator\";i:1;s:6:\"editor\";i:2;s:6:\"author\";i:3;s:11:\"contributor\";i:4;s:10:\"subscriber\";}s:11:\"ajax_compat\";i:0;s:13:\"maxres_facade\";s:5:\"eager\";s:10:\"ytapi_load\";s:5:\"light\";s:11:\"defaultdims\";i:1;s:5:\"width\";i:800;s:6:\"height\";i:450;s:12:\"pause_others\";i:0;s:10:\"defaultvol\";i:0;s:3:\"vol\";s:0:\"\";s:6:\"apikey\";s:0:\"\";s:15:\"gallery_columns\";i:3;s:21:\"gallery_collapse_grid\";i:0;s:28:\"gallery_collapse_grid_breaks\";a:1:{i:0;a:2:{s:2:\"bp\";a:2:{s:3:\"min\";i:0;s:3:\"max\";i:767;}s:4:\"cols\";i:1;}}s:20:\"gallery_scrolloffset\";i:20;s:19:\"gallery_hideprivate\";i:1;s:17:\"gallery_showtitle\";i:1;s:18:\"gallery_showpaging\";i:1;s:16:\"gallery_autonext\";i:0;s:17:\"gallery_thumbplay\";i:1;s:18:\"gallery_channelsub\";i:0;s:22:\"gallery_channelsublink\";s:0:\"\";s:22:\"gallery_channelsubtext\";s:23:\"Subscribe to my channel\";s:20:\"gallery_customarrows\";i:0;s:18:\"gallery_customnext\";s:4:\"Next\";s:18:\"gallery_customprev\";s:4:\"Prev\";s:16:\"gallery_pagesize\";i:15;s:16:\"not_live_content\";s:0:\"\";s:11:\"not_live_on\";i:0;s:19:\"not_live_on_channel\";i:0;s:9:\"debugmode\";i:0;s:14:\"uninstall_data\";i:0;s:17:\"admin_off_scripts\";i:0;s:8:\"defer_js\";i:0;s:12:\"defer_jquery\";i:0;s:9:\"ajax_save\";i:1;s:12:\"show_pointer\";i:1;s:9:\"onboarded\";i:0;s:17:\"old_script_method\";i:0;s:9:\"vi_active\";i:0;s:20:\"vi_hide_monetize_tab\";i:0;s:12:\"vi_endpoints\";s:0:\"\";s:8:\"vi_token\";s:0:\"\";s:13:\"vi_last_login\";s:19:\"2000-01-01 00:00:00\";s:23:\"vi_last_category_update\";s:19:\"2000-01-01 00:00:00\";s:9:\"vi_adstxt\";s:0:\"\";s:14:\"vi_js_settings\";a:15:{s:5:\"divId\";s:20:\"ytvi_story_container\";s:8:\"language\";s:5:\"en-us\";s:11:\"iabCategory\";s:0:\"\";s:4:\"font\";s:5:\"Arial\";s:8:\"fontSize\";i:12;s:8:\"keywords\";s:0:\"\";s:9:\"textColor\";s:7:\"#000000\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:11:\"vioptional1\";s:0:\"\";s:11:\"vioptional2\";s:0:\"\";s:11:\"vioptional3\";s:0:\"\";s:5:\"float\";b:1;s:10:\"dfpSupport\";b:1;s:13:\"sponsoredText\";s:0:\"\";s:13:\"poweredByText\";s:0:\"\";}s:12:\"vi_js_script\";s:0:\"\";s:15:\"vi_js_posttypes\";a:0:{}s:14:\"vi_js_position\";s:3:\"top\";s:26:\"vi_show_gdpr_authorization\";i:1;s:22:\"vi_show_privacy_button\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'youtubeprefs_alloptions' , 'a:92:{s:7:&quot;version&quot;;s:8:&quot;14.2.1.3&quot;;s:9:&quot;centervid&quot;;i:0;s:6:&quot;glance&quot;;i:0;s:8:&quot;autoplay&quot;;i:0;s:14:&quot;cc_load_policy&quot;;i:0;s:12:&quot;cc_lang_pref&quot;;s:0:&quot;&quot;;s:14:&quot;iv_load_policy&quot;;i:1;s:4:&quot;loop&quot;;i:0;s:14:&quot;modestbranding&quot;;i:0;s:3:&quot;rel&quot;;i:1;s:2:&quot;fs&quot;;i:1;s:11:&quot;playsinline&quot;;i:0;s:6:&quot;origin&quot;;i:0;s:8:&quot;autohide&quot;;i:2;s:2:&quot;hl&quot;;s:0:&quot;&quot;;s:4:&quot;dohl&quot;;i:0;s:5:&quot;theme&quot;;s:4:&quot;dark&quot;;s:5:&quot;color&quot;;s:3:&quot;red&quot;;s:3:&quot;pro&quot;;s:0:&quot;&quot;;s:8:&quot;nocookie&quot;;i:0;s:9:&quot;gb_compat&quot;;i:1;s:11:&quot;facade_mode&quot;;i:0;s:15:&quot;facade_autoplay&quot;;i:1;s:12:&quot;gdpr_consent&quot;;i:0;s:20:&quot;gdpr_consent_message&quot;;s:358:&quot;&lt;p&gt;&lt;strong&gt;Please accept YouTube cookies to play this video.&lt;/strong&gt; By accepting you will be accessing content from YouTube, a service provided by an external third party.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;&gt;YouTube privacy policy&lt;/a&gt;&lt;/p&gt;&lt;p&gt;If you accept this notice, your choice will be saved and the page will refresh.&lt;/p&gt;&quot;;s:19:&quot;gdpr_consent_button&quot;;s:22:&quot;Accept YouTube Content&quot;;s:13:&quot;playlistorder&quot;;i:0;s:8:&quot;acctitle&quot;;i:0;s:7:&quot;migrate&quot;;i:0;s:15:&quot;migrate_youtube&quot;;i:0;s:22:&quot;migrate_embedplusvideo&quot;;i:0;s:8:&quot;controls&quot;;i:1;s:10:&quot;oldspacing&quot;;i:0;s:13:&quot;frontend_only&quot;;i:1;s:10:&quot;responsive&quot;;i:0;s:14:&quot;responsive_all&quot;;i:1;s:9:&quot;widgetfit&quot;;i:1;s:16:&quot;evselector_light&quot;;i:0;s:18:&quot;stop_mobile_buffer&quot;;i:1;s:15:&quot;restrict_wizard&quot;;i:0;s:21:&quot;restrict_wizard_roles&quot;;a:5:{i:0;s:13:&quot;administrator&quot;;i:1;s:6:&quot;editor&quot;;i:2;s:6:&quot;author&quot;;i:3;s:11:&quot;contributor&quot;;i:4;s:10:&quot;subscriber&quot;;}s:11:&quot;ajax_compat&quot;;i:0;s:13:&quot;maxres_facade&quot;;s:5:&quot;eager&quot;;s:10:&quot;ytapi_load&quot;;s:5:&quot;light&quot;;s:11:&quot;defaultdims&quot;;i:1;s:5:&quot;width&quot;;i:800;s:6:&quot;height&quot;;i:450;s:12:&quot;pause_others&quot;;i:0;s:10:&quot;defaultvol&quot;;i:0;s:3:&quot;vol&quot;;s:0:&quot;&quot;;s:6:&quot;apikey&quot;;s:0:&quot;&quot;;s:15:&quot;gallery_columns&quot;;i:3;s:21:&quot;gallery_collapse_grid&quot;;i:0;s:28:&quot;gallery_collapse_grid_breaks&quot;;a:1:{i:0;a:2:{s:2:&quot;bp&quot;;a:2:{s:3:&quot;min&quot;;i:0;s:3:&quot;max&quot;;i:767;}s:4:&quot;cols&quot;;i:1;}}s:20:&quot;gallery_scrolloffset&quot;;i:20;s:19:&quot;gallery_hideprivate&quot;;i:1;s:17:&quot;gallery_showtitle&quot;;i:1;s:18:&quot;gallery_showpaging&quot;;i:1;s:16:&quot;gallery_autonext&quot;;i:0;s:17:&quot;gallery_thumbplay&quot;;i:1;s:18:&quot;gallery_channelsub&quot;;i:0;s:22:&quot;gallery_channelsublink&quot;;s:0:&quot;&quot;;s:22:&quot;gallery_channelsubtext&quot;;s:23:&quot;Subscribe to my channel&quot;;s:20:&quot;gallery_customarrows&quot;;i:0;s:18:&quot;gallery_customnext&quot;;s:4:&quot;Next&quot;;s:18:&quot;gallery_customprev&quot;;s:4:&quot;Prev&quot;;s:16:&quot;gallery_pagesize&quot;;i:15;s:16:&quot;not_live_content&quot;;s:0:&quot;&quot;;s:11:&quot;not_live_on&quot;;i:0;s:19:&quot;not_live_on_channel&quot;;i:0;s:9:&quot;debugmode&quot;;i:0;s:14:&quot;uninstall_data&quot;;i:0;s:17:&quot;admin_off_scripts&quot;;i:0;s:8:&quot;defer_js&quot;;i:0;s:12:&quot;defer_jquery&quot;;i:0;s:9:&quot;ajax_save&quot;;i:1;s:12:&quot;show_pointer&quot;;i:1;s:9:&quot;onboarded&quot;;i:0;s:17:&quot;old_script_method&quot;;i:0;s:9:&quot;vi_active&quot;;i:0;s:20:&quot;vi_hide_monetize_tab&quot;;i:0;s:12:&quot;vi_endpoints&quot;;s:0:&quot;&quot;;s:8:&quot;vi_token&quot;;s:0:&quot;&quot;;s:13:&quot;vi_last_login&quot;;s:19:&quot;2000-01-01 00:00:00&quot;;s:23:&quot;vi_last_category_update&quot;;s:19:&quot;2000-01-01 00:00:00&quot;;s:9:&quot;vi_adstxt&quot;;s:0:&quot;&quot;;s:14:&quot;vi_js_settings&quot;;a:15:{s:5:&quot;divId&quot;;s:20:&quot;ytvi_story_container&quot;;s:8:&quot;language&quot;;s:5:&quot;en-us&quot;;s:11:&quot;iabCategory&quot;;s:0:&quot;&quot;;s:4:&quot;font&quot;;s:5:&quot;Arial&quot;;s:8:&quot;fontSize&quot;;i:12;s:8:&quot;keywords&quot;;s:0:&quot;&quot;;s:9:&quot;textColor&quot;;s:7:&quot;#000000&quot;;s:15:&quot;backgroundColor&quot;;s:7:&quot;#ffffff&quot;;s:11:&quot;vioptional1&quot;;s:0:&quot;&quot;;s:11:&quot;vioptional2&quot;;s:0:&quot;&quot;;s:11:&quot;vioptional3&quot;;s:0:&quot;&quot;;s:5:&quot;float&quot;;b:1;s:10:&quot;dfpSupport&quot;;b:1;s:13:&quot;sponsoredText&quot;;s:0:&quot;&quot;;s:13:&quot;poweredByText&quot;;s:0:&quot;&quot;;}s:12:&quot;vi_js_script&quot;;s:0:&quot;&quot;;s:15:&quot;vi_js_posttypes&quot;;a:0:{}s:14:&quot;vi_js_position&quot;;s:3:&quot;top&quot;;s:26:&quot;vi_show_gdpr_authorization&quot;;i:1;s:22:&quot;vi_show_privacy_button&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('youtubeprefs_al...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(2177): update_option('youtubeprefs_al...', Array)
-#6 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(214): YouTubePrefs::initoptions()
-#7 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(8738): YouTubePrefs->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-embed-p...')
-#10 /internal/eval.php(20): activate_plugin('youtube-embed-p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('youtubeprefs_alloptions', 'a:92:{s:7:\"version\";s:8:\"14.2.1.3\";s:9:\"centervid\";i:0;s:6:\"glance\";i:0;s:8:\"autoplay\";i:0;s:14:\"cc_load_policy\";i:0;s:12:\"cc_lang_pref\";s:0:\"\";s:14:\"iv_load_policy\";i:1;s:4:\"loop\";i:0;s:14:\"modestbranding\";i:0;s:3:\"rel\";i:1;s:2:\"fs\";i:1;s:11:\"playsinline\";i:0;s:6:\"origin\";i:0;s:8:\"autohide\";i:2;s:2:\"hl\";s:0:\"\";s:4:\"dohl\";i:0;s:5:\"theme\";s:4:\"dark\";s:5:\"color\";s:3:\"red\";s:3:\"pro\";s:0:\"\";s:8:\"nocookie\";i:0;s:9:\"gb_compat\";i:1;s:11:\"facade_mode\";i:0;s:15:\"facade_autoplay\";i:1;s:12:\"gdpr_consent\";i:0;s:20:\"gdpr_consent_message\";s:358:\"<p><strong>Please accept YouTube cookies to play this video.</strong> By accepting you will be accessing content from YouTube, a service provided by an external third party.</p><p><a href=\"https://policies.google.com/privacy\" target=\"_blank\">YouTube privacy policy</a></p><p>If you accept this notice, your choice will be saved and the page will refresh.</p>\";s:19:\"gdpr_consent_button\";s:22:\"Accept YouTube Content\";s:13:\"playlistorder\";i:0;s:8:\"acctitle\";i:0;s:7:\"migrate\";i:0;s:15:\"migrate_youtube\";i:0;s:22:\"migrate_embedplusvideo\";i:0;s:8:\"controls\";i:1;s:10:\"oldspacing\";i:0;s:13:\"frontend_only\";i:1;s:10:\"responsive\";i:0;s:14:\"responsive_all\";i:1;s:9:\"widgetfit\";i:1;s:16:\"evselector_light\";i:0;s:18:\"stop_mobile_buffer\";i:1;s:15:\"restrict_wizard\";i:0;s:21:\"restrict_wizard_roles\";a:5:{i:0;s:13:\"administrator\";i:1;s:6:\"editor\";i:2;s:6:\"author\";i:3;s:11:\"contributor\";i:4;s:10:\"subscriber\";}s:11:\"ajax_compat\";i:0;s:13:\"maxres_facade\";s:5:\"eager\";s:10:\"ytapi_load\";s:5:\"light\";s:11:\"defaultdims\";i:1;s:5:\"width\";i:800;s:6:\"height\";i:450;s:12:\"pause_others\";i:0;s:10:\"defaultvol\";i:0;s:3:\"vol\";s:0:\"\";s:6:\"apikey\";s:0:\"\";s:15:\"gallery_columns\";i:3;s:21:\"gallery_collapse_grid\";i:0;s:28:\"gallery_collapse_grid_breaks\";a:1:{i:0;a:2:{s:2:\"bp\";a:2:{s:3:\"min\";i:0;s:3:\"max\";i:767;}s:4:\"cols\";i:1;}}s:20:\"gallery_scrolloffset\";i:20;s:19:\"gallery_hideprivate\";i:1;s:17:\"gallery_showtitle\";i:1;s:18:\"gallery_showpaging\";i:1;s:16:\"gallery_autonext\";i:0;s:17:\"gallery_thumbplay\";i:1;s:18:\"gallery_channelsub\";i:0;s:22:\"gallery_channelsublink\";s:0:\"\";s:22:\"gallery_channelsubtext\";s:23:\"Subscribe to my channel\";s:20:\"gallery_customarrows\";i:0;s:18:\"gallery_customnext\";s:4:\"Next\";s:18:\"gallery_customprev\";s:4:\"Prev\";s:16:\"gallery_pagesize\";i:15;s:16:\"not_live_content\";s:0:\"\";s:11:\"not_live_on\";i:0;s:19:\"not_live_on_channel\";i:0;s:9:\"debugmode\";i:0;s:14:\"uninstall_data\";i:0;s:17:\"admin_off_scripts\";i:0;s:8:\"defer_js\";i:0;s:12:\"defer_jquery\";i:0;s:9:\"ajax_save\";i:1;s:12:\"show_pointer\";i:1;s:9:\"onboarded\";i:0;s:17:\"old_script_method\";i:0;s:9:\"vi_active\";i:0;s:20:\"vi_hide_monetize_tab\";i:0;s:12:\"vi_endpoints\";s:0:\"\";s:8:\"vi_token\";s:0:\"\";s:13:\"vi_last_login\";s:19:\"2000-01-01 00:00:00\";s:23:\"vi_last_category_update\";s:19:\"2000-01-01 00:00:00\";s:9:\"vi_adstxt\";s:0:\"\";s:14:\"vi_js_settings\";a:15:{s:5:\"divId\";s:20:\"ytvi_story_container\";s:8:\"language\";s:5:\"en-us\";s:11:\"iabCategory\";s:0:\"\";s:4:\"font\";s:5:\"Arial\";s:8:\"fontSize\";i:12;s:8:\"keywords\";s:0:\"\";s:9:\"textColor\";s:7:\"#000000\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:11:\"vioptional1\";s:0:\"\";s:11:\"vioptional2\";s:0:\"\";s:11:\"vioptional3\";s:0:\"\";s:5:\"float\";b:1;s:10:\"dfpSupport\";b:1;s:13:\"sponsoredText\";s:0:\"\";s:13:\"poweredByText\";s:0:\"\";}s:12:\"vi_js_script\";s:0:\"\";s:15:\"vi_js_posttypes\";a:0:{}s:14:\"vi_js_position\";s:3:\"top\";s:26:\"vi_show_gdpr_authorization\";i:1;s:22:\"vi_show_privacy_button\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/youtube-embed-plus/youtube.php'), YouTubePrefs->__construct, YouTubePrefs::initoptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 217
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 223
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 2201
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 2212
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 2226
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:26:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('youtubeprefs_alloptions', 'a:92:{s:7:\"version\";s:8:\"14.2.1.3\";s:9:\"centervid\";i:0;s:6:\"glance\";i:0;s:8:\"autoplay\";i:0;s:14:\"cc_load_policy\";i:0;s:12:\"cc_lang_pref\";s:0:\"\";s:14:\"iv_load_policy\";i:1;s:4:\"loop\";i:0;s:14:\"modestbranding\";i:0;s:3:\"rel\";i:1;s:2:\"fs\";i:1;s:11:\"playsinline\";i:0;s:6:\"origin\";i:0;s:8:\"autohide\";i:2;s:2:\"hl\";s:0:\"\";s:4:\"dohl\";i:0;s:5:\"theme\";s:4:\"dark\";s:5:\"color\";s:3:\"red\";s:3:\"pro\";s:0:\"\";s:8:\"nocookie\";i:0;s:9:\"gb_compat\";i:1;s:11:\"facade_mode\";i:0;s:15:\"facade_autoplay\";i:1;s:12:\"gdpr_consent\";i:0;s:20:\"gdpr_consent_message\";s:358:\"<p><strong>Please accept YouTube cookies to play this video.</strong> By accepting you will be accessing content from YouTube, a service provided by an external third party.</p><p><a href=\"https://policies.google.com/privacy\" target=\"_blank\">YouTube privacy policy</a></p><p>If you accept this notice, your choice will be saved and the page will refresh.</p>\";s:19:\"gdpr_consent_button\";s:22:\"Accept YouTube Content\";s:13:\"playlistorder\";i:0;s:8:\"acctitle\";i:0;s:7:\"migrate\";i:0;s:15:\"migrate_youtube\";i:0;s:22:\"migrate_embedplusvideo\";i:0;s:8:\"controls\";i:1;s:10:\"oldspacing\";i:0;s:13:\"frontend_only\";i:1;s:10:\"responsive\";i:0;s:14:\"responsive_all\";i:1;s:9:\"widgetfit\";i:1;s:16:\"evselector_light\";i:0;s:18:\"stop_mobile_buffer\";i:1;s:15:\"restrict_wizard\";i:0;s:21:\"restrict_wizard_roles\";a:5:{i:0;s:13:\"administrator\";i:1;s:6:\"editor\";i:2;s:6:\"author\";i:3;s:11:\"contributor\";i:4;s:10:\"subscriber\";}s:11:\"ajax_compat\";i:0;s:13:\"maxres_facade\";s:5:\"eager\";s:10:\"ytapi_load\";s:5:\"light\";s:11:\"defaultdims\";i:1;s:5:\"width\";i:800;s:6:\"height\";i:450;s:12:\"pause_others\";i:0;s:10:\"defaultvol\";i:0;s:3:\"vol\";s:0:\"\";s:6:\"apikey\";s:0:\"\";s:15:\"gallery_columns\";i:3;s:21:\"gallery_collapse_grid\";i:0;s:28:\"gallery_collapse_grid_breaks\";a:1:{i:0;a:2:{s:2:\"bp\";a:2:{s:3:\"min\";i:0;s:3:\"max\";i:767;}s:4:\"cols\";i:1;}}s:20:\"gallery_scrolloffset\";i:20;s:19:\"gallery_hideprivate\";i:1;s:17:\"gallery_showtitle\";i:1;s:18:\"gallery_showpaging\";i:1;s:16:\"gallery_autonext\";i:0;s:17:\"gallery_thumbplay\";i:1;s:18:\"gallery_channelsub\";i:0;s:22:\"gallery_channelsublink\";s:0:\"\";s:22:\"gallery_channelsubtext\";s:23:\"Subscribe to my channel\";s:20:\"gallery_customarrows\";i:0;s:18:\"gallery_customnext\";s:4:\"Next\";s:18:\"gallery_customprev\";s:4:\"Prev\";s:16:\"gallery_pagesize\";i:15;s:16:\"not_live_content\";s:0:\"\";s:11:\"not_live_on\";i:0;s:19:\"not_live_on_channel\";i:0;s:9:\"debugmode\";i:0;s:14:\"uninstall_data\";i:0;s:17:\"admin_off_scripts\";i:0;s:8:\"defer_js\";i:0;s:12:\"defer_jquery\";i:0;s:9:\"ajax_save\";i:1;s:12:\"show_pointer\";i:1;s:9:\"onboarded\";i:0;s:17:\"old_script_method\";i:0;s:9:\"vi_active\";i:0;s:20:\"vi_hide_monetize_tab\";i:0;s:12:\"vi_endpoints\";s:0:\"\";s:8:\"vi_token\";s:0:\"\";s:13:\"vi_last_login\";s:19:\"2000-01-01 00:00:00\";s:23:\"vi_last_category_update\";s:19:\"2000-01-01 00:00:00\";s:9:\"vi_adstxt\";s:0:\"\";s:14:\"vi_js_settings\";a:15:{s:5:\"divId\";s:20:\"ytvi_story_container\";s:8:\"language\";s:5:\"en-us\";s:11:\"iabCategory\";s:0:\"\";s:4:\"font\";s:5:\"Arial\";s:8:\"fontSize\";i:12;s:8:\"keywords\";s:0:\"\";s:9:\"textColor\";s:7:\"#000000\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:11:\"vioptional1\";s:0:\"\";s:11:\"vioptional2\";s:0:\"\";s:11:\"vioptional3\";s:0:\"\";s:5:\"float\";b:1;s:10:\"dfpSupport\";b:1;s:13:\"sponsoredText\";s:0:\"\";s:13:\"poweredByText\";s:0:\"\";}s:12:\"vi_js_script\";s:0:\"\";s:15:\"vi_js_posttypes\";a:0:{}s:14:\"vi_js_position\";s:3:\"top\";s:26:\"vi_show_gdpr_authorization\";i:1;s:22:\"vi_show_privacy_button\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'youtubeprefs_alloptions' , 'a:92:{s:7:&quot;version&quot;;s:8:&quot;14.2.1.3&quot;;s:9:&quot;centervid&quot;;i:0;s:6:&quot;glance&quot;;i:0;s:8:&quot;autoplay&quot;;i:0;s:14:&quot;cc_load_policy&quot;;i:0;s:12:&quot;cc_lang_pref&quot;;s:0:&quot;&quot;;s:14:&quot;iv_load_policy&quot;;i:1;s:4:&quot;loop&quot;;i:0;s:14:&quot;modestbranding&quot;;i:0;s:3:&quot;rel&quot;;i:1;s:2:&quot;fs&quot;;i:1;s:11:&quot;playsinline&quot;;i:0;s:6:&quot;origin&quot;;i:0;s:8:&quot;autohide&quot;;i:2;s:2:&quot;hl&quot;;s:0:&quot;&quot;;s:4:&quot;dohl&quot;;i:0;s:5:&quot;theme&quot;;s:4:&quot;dark&quot;;s:5:&quot;color&quot;;s:3:&quot;red&quot;;s:3:&quot;pro&quot;;s:0:&quot;&quot;;s:8:&quot;nocookie&quot;;i:0;s:9:&quot;gb_compat&quot;;i:1;s:11:&quot;facade_mode&quot;;i:0;s:15:&quot;facade_autoplay&quot;;i:1;s:12:&quot;gdpr_consent&quot;;i:0;s:20:&quot;gdpr_consent_message&quot;;s:358:&quot;&lt;p&gt;&lt;strong&gt;Please accept YouTube cookies to play this video.&lt;/strong&gt; By accepting you will be accessing content from YouTube, a service provided by an external third party.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://policies.google.com/privacy&quot; target=&quot;_blank&quot;&gt;YouTube privacy policy&lt;/a&gt;&lt;/p&gt;&lt;p&gt;If you accept this notice, your choice will be saved and the page will refresh.&lt;/p&gt;&quot;;s:19:&quot;gdpr_consent_button&quot;;s:22:&quot;Accept YouTube Content&quot;;s:13:&quot;playlistorder&quot;;i:0;s:8:&quot;acctitle&quot;;i:0;s:7:&quot;migrate&quot;;i:0;s:15:&quot;migrate_youtube&quot;;i:0;s:22:&quot;migrate_embedplusvideo&quot;;i:0;s:8:&quot;controls&quot;;i:1;s:10:&quot;oldspacing&quot;;i:0;s:13:&quot;frontend_only&quot;;i:1;s:10:&quot;responsive&quot;;i:0;s:14:&quot;responsive_all&quot;;i:1;s:9:&quot;widgetfit&quot;;i:1;s:16:&quot;evselector_light&quot;;i:0;s:18:&quot;stop_mobile_buffer&quot;;i:1;s:15:&quot;restrict_wizard&quot;;i:0;s:21:&quot;restrict_wizard_roles&quot;;a:5:{i:0;s:13:&quot;administrator&quot;;i:1;s:6:&quot;editor&quot;;i:2;s:6:&quot;author&quot;;i:3;s:11:&quot;contributor&quot;;i:4;s:10:&quot;subscriber&quot;;}s:11:&quot;ajax_compat&quot;;i:0;s:13:&quot;maxres_facade&quot;;s:5:&quot;eager&quot;;s:10:&quot;ytapi_load&quot;;s:5:&quot;light&quot;;s:11:&quot;defaultdims&quot;;i:1;s:5:&quot;width&quot;;i:800;s:6:&quot;height&quot;;i:450;s:12:&quot;pause_others&quot;;i:0;s:10:&quot;defaultvol&quot;;i:0;s:3:&quot;vol&quot;;s:0:&quot;&quot;;s:6:&quot;apikey&quot;;s:0:&quot;&quot;;s:15:&quot;gallery_columns&quot;;i:3;s:21:&quot;gallery_collapse_grid&quot;;i:0;s:28:&quot;gallery_collapse_grid_breaks&quot;;a:1:{i:0;a:2:{s:2:&quot;bp&quot;;a:2:{s:3:&quot;min&quot;;i:0;s:3:&quot;max&quot;;i:767;}s:4:&quot;cols&quot;;i:1;}}s:20:&quot;gallery_scrolloffset&quot;;i:20;s:19:&quot;gallery_hideprivate&quot;;i:1;s:17:&quot;gallery_showtitle&quot;;i:1;s:18:&quot;gallery_showpaging&quot;;i:1;s:16:&quot;gallery_autonext&quot;;i:0;s:17:&quot;gallery_thumbplay&quot;;i:1;s:18:&quot;gallery_channelsub&quot;;i:0;s:22:&quot;gallery_channelsublink&quot;;s:0:&quot;&quot;;s:22:&quot;gallery_channelsubtext&quot;;s:23:&quot;Subscribe to my channel&quot;;s:20:&quot;gallery_customarrows&quot;;i:0;s:18:&quot;gallery_customnext&quot;;s:4:&quot;Next&quot;;s:18:&quot;gallery_customprev&quot;;s:4:&quot;Prev&quot;;s:16:&quot;gallery_pagesize&quot;;i:15;s:16:&quot;not_live_content&quot;;s:0:&quot;&quot;;s:11:&quot;not_live_on&quot;;i:0;s:19:&quot;not_live_on_channel&quot;;i:0;s:9:&quot;debugmode&quot;;i:0;s:14:&quot;uninstall_data&quot;;i:0;s:17:&quot;admin_off_scripts&quot;;i:0;s:8:&quot;defer_js&quot;;i:0;s:12:&quot;defer_jquery&quot;;i:0;s:9:&quot;ajax_save&quot;;i:1;s:12:&quot;show_pointer&quot;;i:1;s:9:&quot;onboarded&quot;;i:0;s:17:&quot;old_script_method&quot;;i:0;s:9:&quot;vi_active&quot;;i:0;s:20:&quot;vi_hide_monetize_tab&quot;;i:0;s:12:&quot;vi_endpoints&quot;;s:0:&quot;&quot;;s:8:&quot;vi_token&quot;;s:0:&quot;&quot;;s:13:&quot;vi_last_login&quot;;s:19:&quot;2000-01-01 00:00:00&quot;;s:23:&quot;vi_last_category_update&quot;;s:19:&quot;2000-01-01 00:00:00&quot;;s:9:&quot;vi_adstxt&quot;;s:0:&quot;&quot;;s:14:&quot;vi_js_settings&quot;;a:15:{s:5:&quot;divId&quot;;s:20:&quot;ytvi_story_container&quot;;s:8:&quot;language&quot;;s:5:&quot;en-us&quot;;s:11:&quot;iabCategory&quot;;s:0:&quot;&quot;;s:4:&quot;font&quot;;s:5:&quot;Arial&quot;;s:8:&quot;fontSize&quot;;i:12;s:8:&quot;keywords&quot;;s:0:&quot;&quot;;s:9:&quot;textColor&quot;;s:7:&quot;#000000&quot;;s:15:&quot;backgroundColor&quot;;s:7:&quot;#ffffff&quot;;s:11:&quot;vioptional1&quot;;s:0:&quot;&quot;;s:11:&quot;vioptional2&quot;;s:0:&quot;&quot;;s:11:&quot;vioptional3&quot;;s:0:&quot;&quot;;s:5:&quot;float&quot;;b:1;s:10:&quot;dfpSupport&quot;;b:1;s:13:&quot;sponsoredText&quot;;s:0:&quot;&quot;;s:13:&quot;poweredByText&quot;;s:0:&quot;&quot;;}s:12:&quot;vi_js_script&quot;;s:0:&quot;&quot;;s:15:&quot;vi_js_posttypes&quot;;a:0:{}s:14:&quot;vi_js_position&quot;;s:3:&quot;top&quot;;s:26:&quot;vi_show_gdpr_authorization&quot;;i:1;s:22:&quot;vi_show_privacy_button&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('youtubeprefs_al...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(2177): update_option('youtubeprefs_al...', Array)
-#6 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(214): YouTubePrefs::initoptions()
-#7 /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php(8738): YouTubePrefs->__construct()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('youtubeprefs_alloptions', 'a:92:{s:7:\"version\";s:8:\"14.2.1.3\";s:9:\"centervid\";i:0;s:6:\"glance\";i:0;s:8:\"autoplay\";i:0;s:14:\"cc_load_policy\";i:0;s:12:\"cc_lang_pref\";s:0:\"\";s:14:\"iv_load_policy\";i:1;s:4:\"loop\";i:0;s:14:\"modestbranding\";i:0;s:3:\"rel\";i:1;s:2:\"fs\";i:1;s:11:\"playsinline\";i:0;s:6:\"origin\";i:0;s:8:\"autohide\";i:2;s:2:\"hl\";s:0:\"\";s:4:\"dohl\";i:0;s:5:\"theme\";s:4:\"dark\";s:5:\"color\";s:3:\"red\";s:3:\"pro\";s:0:\"\";s:8:\"nocookie\";i:0;s:9:\"gb_compat\";i:1;s:11:\"facade_mode\";i:0;s:15:\"facade_autoplay\";i:1;s:12:\"gdpr_consent\";i:0;s:20:\"gdpr_consent_message\";s:358:\"<p><strong>Please accept YouTube cookies to play this video.</strong> By accepting you will be accessing content from YouTube, a service provided by an external third party.</p><p><a href=\"https://policies.google.com/privacy\" target=\"_blank\">YouTube privacy policy</a></p><p>If you accept this notice, your choice will be saved and the page will refresh.</p>\";s:19:\"gdpr_consent_button\";s:22:\"Accept YouTube Content\";s:13:\"playlistorder\";i:0;s:8:\"acctitle\";i:0;s:7:\"migrate\";i:0;s:15:\"migrate_youtube\";i:0;s:22:\"migrate_embedplusvideo\";i:0;s:8:\"controls\";i:1;s:10:\"oldspacing\";i:0;s:13:\"frontend_only\";i:1;s:10:\"responsive\";i:0;s:14:\"responsive_all\";i:1;s:9:\"widgetfit\";i:1;s:16:\"evselector_light\";i:0;s:18:\"stop_mobile_buffer\";i:1;s:15:\"restrict_wizard\";i:0;s:21:\"restrict_wizard_roles\";a:5:{i:0;s:13:\"administrator\";i:1;s:6:\"editor\";i:2;s:6:\"author\";i:3;s:11:\"contributor\";i:4;s:10:\"subscriber\";}s:11:\"ajax_compat\";i:0;s:13:\"maxres_facade\";s:5:\"eager\";s:10:\"ytapi_load\";s:5:\"light\";s:11:\"defaultdims\";i:1;s:5:\"width\";i:800;s:6:\"height\";i:450;s:12:\"pause_others\";i:0;s:10:\"defaultvol\";i:0;s:3:\"vol\";s:0:\"\";s:6:\"apikey\";s:0:\"\";s:15:\"gallery_columns\";i:3;s:21:\"gallery_collapse_grid\";i:0;s:28:\"gallery_collapse_grid_breaks\";a:1:{i:0;a:2:{s:2:\"bp\";a:2:{s:3:\"min\";i:0;s:3:\"max\";i:767;}s:4:\"cols\";i:1;}}s:20:\"gallery_scrolloffset\";i:20;s:19:\"gallery_hideprivate\";i:1;s:17:\"gallery_showtitle\";i:1;s:18:\"gallery_showpaging\";i:1;s:16:\"gallery_autonext\";i:0;s:17:\"gallery_thumbplay\";i:1;s:18:\"gallery_channelsub\";i:0;s:22:\"gallery_channelsublink\";s:0:\"\";s:22:\"gallery_channelsubtext\";s:23:\"Subscribe to my channel\";s:20:\"gallery_customarrows\";i:0;s:18:\"gallery_customnext\";s:4:\"Next\";s:18:\"gallery_customprev\";s:4:\"Prev\";s:16:\"gallery_pagesize\";i:15;s:16:\"not_live_content\";s:0:\"\";s:11:\"not_live_on\";i:0;s:19:\"not_live_on_channel\";i:0;s:9:\"debugmode\";i:0;s:14:\"uninstall_data\";i:0;s:17:\"admin_off_scripts\";i:0;s:8:\"defer_js\";i:0;s:12:\"defer_jquery\";i:0;s:9:\"ajax_save\";i:1;s:12:\"show_pointer\";i:1;s:9:\"onboarded\";i:0;s:17:\"old_script_method\";i:0;s:9:\"vi_active\";i:0;s:20:\"vi_hide_monetize_tab\";i:0;s:12:\"vi_endpoints\";s:0:\"\";s:8:\"vi_token\";s:0:\"\";s:13:\"vi_last_login\";s:19:\"2000-01-01 00:00:00\";s:23:\"vi_last_category_update\";s:19:\"2000-01-01 00:00:00\";s:9:\"vi_adstxt\";s:0:\"\";s:14:\"vi_js_settings\";a:15:{s:5:\"divId\";s:20:\"ytvi_story_container\";s:8:\"language\";s:5:\"en-us\";s:11:\"iabCategory\";s:0:\"\";s:4:\"font\";s:5:\"Arial\";s:8:\"fontSize\";i:12;s:8:\"keywords\";s:0:\"\";s:9:\"textColor\";s:7:\"#000000\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:11:\"vioptional1\";s:0:\"\";s:11:\"vioptional2\";s:0:\"\";s:11:\"vioptional3\";s:0:\"\";s:5:\"float\";b:1;s:10:\"dfpSupport\";b:1;s:13:\"sponsoredText\";s:0:\"\";s:13:\"poweredByText\";s:0:\"\";}s:12:\"vi_js_script\";s:0:\"\";s:15:\"vi_js_posttypes\";a:0:{}s:14:\"vi_js_position\";s:3:\"top\";s:26:\"vi_show_gdpr_authorization\";i:1;s:22:\"vi_show_privacy_button\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/youtube-embed-plus/youtube.php'), YouTubePrefs->__construct, YouTubePrefs::initoptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 217
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 223
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 2212
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 2226
-[09-Apr-2025 17:26:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/youtube-embed-plus/youtube.php on line 263
-[09-Apr-2025 17:27:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:27:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:28:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:28:35 UTC] PHP Fatal error:  Uncaught Error: Non-static method AliyunRec_Guide::init() cannot be called statically in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php:229
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yun-tui-jian/al...')
-#2 /internal/eval.php(20): activate_plugin('yun-tui-jian/al...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php on line 229
-[09-Apr-2025 17:28:43 UTC] PHP Fatal error:  Uncaught Error: Non-static method AliyunRec_Guide::init() cannot be called statically in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php:229
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yun-tui-jian/al...')
-#2 /internal/eval.php(20): activate_plugin('yun-tui-jian/al...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php on line 229
-[09-Apr-2025 17:28:51 UTC] PHP Fatal error:  Uncaught Error: Non-static method AliyunRec_Guide::init() cannot be called statically in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php:229
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yun-tui-jian/al...')
-#2 /internal/eval.php(20): activate_plugin('yun-tui-jian/al...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/yun-tui-jian/aliyunrec.guide.class.php on line 229
-[09-Apr-2025 17:29:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Login', '', 'publish', 'page', 'closed', 'closed', '', 'custom-login', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , '' , '' , 'Custom Login' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'custom-login' , '' , '' , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/uix-usercenter/includes/modules/auto-create-pages.php(59): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): uix_usercenter_create_pages('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Login', '', 'publish', 'page', 'closed', 'closed', '', 'custom-login', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, uix_usercenter_create_pages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Register', '', 'publish', 'page', 'closed', 'closed', '', 'custom-register', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , '' , '' , 'Custom Register' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'custom-register' , '' , '' , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/uix-usercenter/includes/modules/auto-create-pages.php(59): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): uix_usercenter_create_pages('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Register', '', 'publish', 'page', 'closed', 'closed', '', 'custom-register', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, uix_usercenter_create_pages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Profile', '', 'publish', 'page', 'closed', 'closed', '', 'custom-profile', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , '' , '' , 'Custom Profile' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'custom-profile' , '' , '' , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/uix-usercenter/includes/modules/auto-create-pages.php(59): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): uix_usercenter_create_pages('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Profile', '', 'publish', 'page', 'closed', 'closed', '', 'custom-profile', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, uix_usercenter_create_pages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Password Reset', '', 'publish', 'page', 'closed', 'closed', '', 'custom-password-reset', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , '' , '' , 'Custom Password Reset' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'custom-password-reset' , '' , '' , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/uix-usercenter/includes/modules/auto-create-pages.php(59): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): uix_usercenter_create_pages('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Password Reset', '', 'publish', 'page', 'closed', 'closed', '', 'custom-password-reset', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, uix_usercenter_create_pages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 17:29:01', '2025-04-09 17:29:01', '', '', 'Custom Submission', '', 'publish', 'page', 'closed', 'closed', '', 'custom-submission', '', '', '2025-04-09 17:29:01', '2025-04-09 17:29:01', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , '' , '' , 'Custom Submission' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'custom-submission' , '' , '' , '2025-04-09 17:29:01' , '2025-04-09 17:29:01' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/uix-usercenter/includ
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:51:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+[10-Apr-2025 17:51:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+[10-Apr-2025 17:51:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ultimate-browser-specific-css/ultimate-browser-specific-css.php on line 105
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"your-site-birthday"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/your-site-birthday could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/your-site-birthday could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0
