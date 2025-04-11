@@ -2,15 +2,90 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 23:46:59 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/jigoshop-custom-payment-gateway/tgm-custom-gateway.php on line 119
-[09-Apr-2025 23:47:07 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/jigoshop-custom-payment-gateway/tgm-custom-gateway.php on line 119
-[09-Apr-2025 23:47:15 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/jigoshop-custom-payment-gateway/tgm-custom-gateway.php on line 119
-[09-Apr-2025 23:47:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:47:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:47:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:47:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:47:24 UTC] PHP Deprecated:  Required parameter $alt follows optional parameter $args in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/inc/qr_widget.class.php on line 182
-[09-Apr-2025 23:47:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/jm-sqrw.php:47
+Error: [11-Apr-2025 11:44:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLES LIKE wp_just_contact</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
+#4 /wordpress/wp-content/plugins/just-contact/just-contact-us.php(150): wpdb->get_var('SHOW TABLES LIK...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): CreateDatabase(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_just-c...', false)
+#9 /internal/eval.php(20): activate_plugin('just-contact/ju...')
+#10 {main}</pre>
+ for query SHOW TABLES LIKE wp_just_contact made by activate_plugin, do_action('activate_just-contact/just-contact-us.php'), WP_Hook->do_action, WP_Hook->apply_filters, CreateDatabase, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:44:29 UTC] This message is written to the log file
+[11-Apr-2025 11:44:38 UTC] This message is written to the log file
+[11-Apr-2025 11:44:46 UTC] This message is written to the log file
+[11-Apr-2025 11:45:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:45:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES ('widget', 'Voici le canal de discussion par défaut widget', '', '2025-04-11 11:45:56')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES (:param0 , :param1 , :param2 , :param3 ) | parameters: widget, Voici le canal de discussion par défaut widget, , 2025-04-11 11:45:56</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table wp_jschat_canal has no column named title.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_jschat_canal', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/javascript-chat-for-wordpress/wp_jschat.php(457): wpdb->insert('wp_jschat_canal', Array)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_jschat->wp_jschat_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_javasc...', false)
+#8 /internal/eval.php(20): activate_plugin('javascript-chat...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES ('widget', 'Voici le canal de discussion par défaut widget', '', '2025-04-11 11:45:56') made by activate_plugin, do_action('activate_javascript-chat-for-wordpress/wp_jschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_jschat->wp_jschat_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:45:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:46:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES ('widget', 'Voici le canal de discussion par défaut widget', '', '2025-04-11 11:46:05')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES (:param0 , :param1 , :param2 , :param3 ) | parameters: widget, Voici le canal de discussion par défaut widget, , 2025-04-11 11:46:05</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table wp_jschat_canal has no column named title.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_jschat_canal', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/javascript-chat-for-wordpress/wp_jschat.php(457): wpdb->insert('wp_jschat_canal', Array)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_jschat->wp_jschat_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_javasc...', false)
+#8 /internal/eval.php(20): activate_plugin('javascript-chat...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_jschat_canal` (`name`, `title`, `description`, `created_at`) VALUES ('widget', 'Voici le canal de discussion par défaut widget', '', '2025-04-11 11:46:05') made by activate_plugin, do_action('activate_javascript-chat-for-wordpress/wp_jschat.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_jschat->wp_jschat_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:46:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:49:16 UTC] PHP Deprecated:  Required parameter $alt follows optional parameter $args in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/inc/qr_widget.class.php on line 182
+[11-Apr-2025 11:49:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/jm-sqrw.php:47
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): jm_sqrw_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -21,8 +96,8 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/jm-sqrw.php on line 47
-[09-Apr-2025 23:47:33 UTC] PHP Deprecated:  Required parameter $alt follows optional parameter $args in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/inc/qr_widget.class.php on line 182
-[09-Apr-2025 23:47:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/jm-sqrw.php:47
+[11-Apr-2025 11:49:25 UTC] PHP Deprecated:  Required parameter $alt follows optional parameter $args in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/inc/qr_widget.class.php on line 182
+[11-Apr-2025 11:49:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jm-simple-qr-code-widget/jm-sqrw.php:47
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): jm_sqrw_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
