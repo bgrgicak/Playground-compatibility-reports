@@ -2,696 +2,61 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 21:22:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php:27
+Error: [11-Apr-2025 12:48:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-chat/WP...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-chat/WP...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php on line 27
-[09-Apr-2025 21:22:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php:27
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-chat/WP...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-chat/WP...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php on line 27
-[09-Apr-2025 21:23:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php:27
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-live-chat/WP...')
-#2 /internal/eval.php(20): activate_plugin('wp-live-chat/WP...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-live-chat/WP-chat-adult.php on line 27
-[09-Apr-2025 21:23:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mtredirect_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mtredirect_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-meta-tags/meta-tags.php(16): add_option('mtredirect_do_a...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mtinst_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-met...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-meta-tags/me...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mtredirect_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-meta-tags/meta-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, mtinst_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:23:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:23:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:23:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:23:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:23:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plugin_wp_realtime_sitemap_settings', 'a:52:{s:7:\"menu_id\";s:0:\"\";s:16:\"page_sort_column\";s:10:\"post_title\";s:15:\"page_sort_order\";s:3:\"ASC\";s:12:\"page_exclude\";s:0:\"\";s:10:\"page_depth\";s:1:\"0\";s:14:\"page_show_date\";s:0:\"\";s:12:\"post_orderby\";s:9:\"post_date\";s:10:\"post_order\";s:3:\"ASC\";s:12:\"post_exclude\";s:0:\"\";s:14:\"post_show_date\";s:2:\"No\";s:16:\"post_numberposts\";s:2:\"-1\";s:20:\"post_show_categories\";s:2:\"No\";s:12:\"archive_type\";s:7:\"monthly\";s:13:\"archive_limit\";s:0:\"\";s:23:\"archive_show_post_count\";i:1;s:17:\"category_tagcloud\";s:2:\"No\";s:16:\"category_orderby\";s:4:\"name\";s:14:\"category_order\";s:3:\"ASC\";s:24:\"category_show_post_count\";i:0;s:19:\"category_hide_empty\";i:1;s:16:\"category_exclude\";s:0:\"\";s:15:\"category_number\";s:1:\"0\";s:14:\"category_depth\";s:1:\"0\";s:13:\"tags_tagcloud\";s:2:\"No\";s:12:\"tags_orderby\";s:4:\"name\";s:10:\"tags_order\";s:3:\"ASC\";s:20:\"tags_show_post_count\";i:0;s:15:\"tags_hide_empty\";i:1;s:12:\"tags_exclude\";s:0:\"\";s:11:\"tags_number\";s:1:\"0\";s:11:\"menu_header\";s:0:\"\";s:12:\"pages_header\";s:0:\"\";s:12:\"posts_header\";s:0:\"\";s:15:\"archives_header\";s:0:\"\";s:17:\"categories_header\";s:0:\"\";s:11:\"tags_header\";s:0:\"\";s:9:\"show_menu\";s:2:\"No\";s:10:\"show_pages\";s:3:\"Yes\";s:10:\"show_posts\";s:3:\"Yes\";s:22:\"show_custom_post_types\";s:2:\"No\";s:13:\"show_archives\";s:3:\"Yes\";s:15:\"show_categories\";s:3:\"Yes\";s:9:\"show_tags\";s:2:\"No\";s:12:\"show_promote\";s:2:\"No\";s:11:\"first_order\";s:4:\"menu\";s:12:\"second_order\";s:5:\"pages\";s:11:\"third_order\";s:5:\"posts\";s:12:\"fourth_order\";s:12:\"custom_posts\";s:11:\"fifth_order\";s:8:\"archives\";s:11:\"sixth_order\";s:10:\"categories\";s:13:\"seventh_order\";s:4:\"tags\";s:12:\"install_date\";i:1744233821;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'plugin_wp_realtime_sitemap_settings' , 'a:52:{s:7:&quot;menu_id&quot;;s:0:&quot;&quot;;s:16:&quot;page_sort_column&quot;;s:10:&quot;post_title&quot;;s:15:&quot;page_sort_order&quot;;s:3:&quot;ASC&quot;;s:12:&quot;page_exclude&quot;;s:0:&quot;&quot;;s:10:&quot;page_depth&quot;;s:1:&quot;0&quot;;s:14:&quot;page_show_date&quot;;s:0:&quot;&quot;;s:12:&quot;post_orderby&quot;;s:9:&quot;post_date&quot;;s:10:&quot;post_order&quot;;s:3:&quot;ASC&quot;;s:12:&quot;post_exclude&quot;;s:0:&quot;&quot;;s:14:&quot;post_show_date&quot;;s:2:&quot;No&quot;;s:16:&quot;post_numberposts&quot;;s:2:&quot;-1&quot;;s:20:&quot;post_show_categories&quot;;s:2:&quot;No&quot;;s:12:&quot;archive_type&quot;;s:7:&quot;monthly&quot;;s:13:&quot;archive_limit&quot;;s:0:&quot;&quot;;s:23:&quot;archive_show_post_count&quot;;i:1;s:17:&quot;category_tagcloud&quot;;s:2:&quot;No&quot;;s:16:&quot;category_orderby&quot;;s:4:&quot;name&quot;;s:14:&quot;category_order&quot;;s:3:&quot;ASC&quot;;s:24:&quot;category_show_post_count&quot;;i:0;s:19:&quot;category_hide_empty&quot;;i:1;s:16:&quot;category_exclude&quot;;s:0:&quot;&quot;;s:15:&quot;category_number&quot;;s:1:&quot;0&quot;;s:14:&quot;category_depth&quot;;s:1:&quot;0&quot;;s:13:&quot;tags_tagcloud&quot;;s:2:&quot;No&quot;;s:12:&quot;tags_orderby&quot;;s:4:&quot;name&quot;;s:10:&quot;tags_order&quot;;s:3:&quot;ASC&quot;;s:20:&quot;tags_show_post_count&quot;;i:0;s:15:&quot;tags_hide_empty&quot;;i:1;s:12:&quot;tags_exclude&quot;;s:0:&quot;&quot;;s:11:&quot;tags_number&quot;;s:1:&quot;0&quot;;s:11:&quot;menu_header&quot;;s:0:&quot;&quot;;s:12:&quot;pages_header&quot;;s:0:&quot;&quot;;s:12:&quot;posts_header&quot;;s:0:&quot;&quot;;s:15:&quot;archives_header&quot;;s:0:&quot;&quot;;s:17:&quot;categories_header&quot;;s:0:&quot;&quot;;s:11:&quot;tags_header&quot;;s:0:&quot;&quot;;s:9:&quot;show_menu&quot;;s:2:&quot;No&quot;;s:10:&quot;show_pages&quot;;s:3:&quot;Yes&quot;;s:10:&quot;show_posts&quot;;s:3:&quot;Yes&quot;;s:22:&quot;show_custom_post_types&quot;;s:2:&quot;No&quot;;s:13:&quot;show_archives&quot;;s:3:&quot;Yes&quot;;s:15:&quot;show_categories&quot;;s:3:&quot;Yes&quot;;s:9:&quot;show_tags&quot;;s:2:&quot;No&quot;;s:12:&quot;show_promote&quot;;s:2:&quot;No&quot;;s:11:&quot;first_order&quot;;s:4:&quot;menu&quot;;s:12:&quot;second_order&quot;;s:5:&quot;pages&quot;;s:11:&quot;third_order&quot;;s:5:&quot;posts&quot;;s:12:&quot;fourth_order&quot;;s:12:&quot;custom_posts&quot;;s:11:&quot;fifth_order&quot;;s:8:&quot;archives&quot;;s:11:&quot;sixth_order&quot;;s:10:&quot;categories&quot;;s:13:&quot;seventh_order&quot;;s:4:&quot;tags&quot;;s:12:&quot;install_date&quot;;i:1744233821;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('plugin_wp_realt...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-realtime-sitemap/wp-realtime-sitemap.php(1799): update_option('plugin_wp_realt...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WPRealtimeSitemap->installSettings(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rea...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-realtime-sit...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plugin_wp_realtime_sitemap_settings', 'a:52:{s:7:\"menu_id\";s:0:\"\";s:16:\"page_sort_column\";s:10:\"post_title\";s:15:\"page_sort_order\";s:3:\"ASC\";s:12:\"page_exclude\";s:0:\"\";s:10:\"page_depth\";s:1:\"0\";s:14:\"page_show_date\";s:0:\"\";s:12:\"post_orderby\";s:9:\"post_date\";s:10:\"post_order\";s:3:\"ASC\";s:12:\"post_exclude\";s:0:\"\";s:14:\"post_show_date\";s:2:\"No\";s:16:\"post_numberposts\";s:2:\"-1\";s:20:\"post_show_categories\";s:2:\"No\";s:12:\"archive_type\";s:7:\"monthly\";s:13:\"archive_limit\";s:0:\"\";s:23:\"archive_show_post_count\";i:1;s:17:\"category_tagcloud\";s:2:\"No\";s:16:\"category_orderby\";s:4:\"name\";s:14:\"category_order\";s:3:\"ASC\";s:24:\"category_show_post_count\";i:0;s:19:\"category_hide_empty\";i:1;s:16:\"category_exclude\";s:0:\"\";s:15:\"category_number\";s:1:\"0\";s:14:\"category_depth\";s:1:\"0\";s:13:\"tags_tagcloud\";s:2:\"No\";s:12:\"tags_orderby\";s:4:\"name\";s:10:\"tags_order\";s:3:\"ASC\";s:20:\"tags_show_post_count\";i:0;s:15:\"tags_hide_empty\";i:1;s:12:\"tags_exclude\";s:0:\"\";s:11:\"tags_number\";s:1:\"0\";s:11:\"menu_header\";s:0:\"\";s:12:\"pages_header\";s:0:\"\";s:12:\"posts_header\";s:0:\"\";s:15:\"archives_header\";s:0:\"\";s:17:\"categories_header\";s:0:\"\";s:11:\"tags_header\";s:0:\"\";s:9:\"show_menu\";s:2:\"No\";s:10:\"show_pages\";s:3:\"Yes\";s:10:\"show_posts\";s:3:\"Yes\";s:22:\"show_custom_post_types\";s:2:\"No\";s:13:\"show_archives\";s:3:\"Yes\";s:15:\"show_categories\";s:3:\"Yes\";s:9:\"show_tags\";s:2:\"No\";s:12:\"show_promote\";s:2:\"No\";s:11:\"first_order\";s:4:\"menu\";s:12:\"second_order\";s:5:\"pages\";s:11:\"third_order\";s:5:\"posts\";s:12:\"fourth_order\";s:12:\"custom_posts\";s:11:\"fifth_order\";s:8:\"archives\";s:11:\"sixth_order\";s:10:\"categories\";s:13:\"seventh_order\";s:4:\"tags\";s:12:\"install_date\";i:1744233821;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-realtime-sitemap/wp-realtime-sitemap.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPRealtimeSitemap->installSettings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:24:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seerox_wpspu_activated', '1744233848', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'seerox_wpspu_activated' , '1744233848' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('seerox_wpspu_ac...', 1744233848, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-simple-plugin-upload/wp-simple-plugin-upload.php(34): update_option('seerox_wpspu_ac...', 1744233848)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): seerox_wpspu_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sim...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-simple-plugi...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('seerox_wpspu_activated', '1744233848', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-simple-plugin-upload/wp-simple-plugin-upload.php'), WP_Hook->do_action, WP_Hook->apply_filters, seerox_wpspu_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:24:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:24:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:24:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:24:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:25:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:25:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:25:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:25:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:25:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_block_analytics_spam_settings', 'a:2:{s:16:\"update_frequency\";s:1:\"1\";s:13:\"extra_domains\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_block_analytics_spam_settings' , 'a:2:{s:16:&quot;update_frequency&quot;;s:1:&quot;1&quot;;s:13:&quot;extra_domains&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-block-analytics-spam/wp-block-analytics-spam.php(69): add_option('wp_block_analyt...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WP_Block_analytics_Spam::plugin_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-blo...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-block-analyt...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_block_analytics_spam_settings', 'a:2:{s:16:\"update_frequency\";s:1:\"1\";s:13:\"extra_domains\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-block-analytics-spam/wp-block-analytics-spam.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Block_analytics_Spam::plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_block_analytics_spam_remote_domains', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_block_analytics_spam_remote_domains' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-block-analytics-spam/wp-block-analytics-spam.php(70): add_option('wp_block_analyt...', 'false')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WP_Block_analytics_Spam::plugin_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-blo...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-block-analyt...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_block_analytics_spam_remote_domains', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-block-analytics-spam/wp-block-analytics-spam.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Block_analytics_Spam::plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:26:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:26:43 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-download-codes/includes/helpers/string.php on line 40
-[09-Apr-2025 21:26:51 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-download-codes/includes/helpers/string.php on line 40
-[09-Apr-2025 21:26:59 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-download-codes/includes/helpers/string.php on line 40
-[09-Apr-2025 21:27:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:27:38'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_wpie_template` WHERE `opration` = 'import-draft' AND `last_update_date` &lt; '2025-04-09 20:27:38' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DELETE  FROM wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DELETE  FROM wp...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/function.php(54): WP_SQLite_DB->query('DELETE  FROM wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wpie_remove_draft_entries('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:27:38' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie_remove_draft_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Undefined array key "process_lock" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpie_template</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wpie_template</li>
-<li>Executing: UPDATE `wp_wpie_template` SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ( 'export' , 'schedule_export' ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE wp_wpie_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE wp_wpie_...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(204): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(152): wpie\export\bg\WPIE_BG->updateTemplateLock()
-#5 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(62): wpie\export\bg\WPIE_BG->unlockTemplate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->unlockTemplate, wpie\export\bg\WPIE_BG->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_wpie_template` where `opration` in ( 'export' , 'schedule_export' ) and `status` LIKE '%background%' ESCAPE '\' and `process_lock` = 0 ORDER BY `id` ASC limit 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(126): wpdb->get_row('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(86): wpie\export\bg\WPIE_BG->getTemplate(Array)
-#6 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(64): wpie\export\bg\WPIE_BG->setBgExport()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WordPress_Loop')
+#2 /wordpress/wp-content/plugins/wordpress-loop/wordpress-loop.php(42): register_widget('WordPress_Loop')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_wordpress_loop_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->setBgExport, wpie\export\bg\WPIE_BG->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Undefined array key "process_lock" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpie_template</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wpie_template</li>
-<li>Executing: UPDATE `wp_wpie_template` SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ( 'import' , 'schedule_import' ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE wp_wpie_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE wp_wpie_...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(217): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(165): wpie\import\bg\WPIE_BG_Import->updateTemplateLock()
-#5 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(79): wpie\import\bg\WPIE_BG_Import->unlockTemplate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->unlockTemplate, wpie\import\bg\WPIE_BG_Import->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_wpie_template` where `opration` in ( 'import' , 'schedule_import' ) and `status` LIKE '%background%' ESCAPE '\' and `process_lock` = 0 ORDER BY `id` ASC limit 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(139): wpdb->get_row('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(104): wpie\import\bg\WPIE_BG_Import->getTemplate(Array)
-#6 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(81): wpie\import\bg\WPIE_BG_Import->setBgImport()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 12:49:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WordPress_Loop')
+#2 /wordpress/wp-content/plugins/wordpress-loop/wordpress-loop.php(42): register_widget('WordPress_Loop')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_wordpress_loop_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->setBgImport, wpie\import\bg\WPIE_BG_Import->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:27:53'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE  FROM wp_wpie_template WHERE opration = :param0  AND last_update_date &lt; :param1  | parameters: import-draft, 2025-04-09 20:27:53</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/function.php(54): WP_SQLite_DB->query('DELETE  FROM wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpie_remove_draft_entries('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(704): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:27:53' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie_remove_draft_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpie_template SET `process_lock` = 0 WHERE rowid IN (SELECT rowid FROM wp_wpie_template WHERE `process_lock` = 1 and `opration` in (:param0 ,:param1 ) ) | parameters: export, schedule_export</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(204): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(152): wpie\export\bg\WPIE_BG->updateTemplateLock()
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(62): wpie\export\bg\WPIE_BG->unlockTemplate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->unlockTemplate, wpie\export\bg\WPIE_BG->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_wpie_template where `opration` in (:param0 ,:param1 ) and `status` LIKE :param2  and `process_lock` = 0  ORDER BY `id` ASC limit 1 | parameters: export, schedule_export, %background%</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(126): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(86): wpie\export\bg\WPIE_BG->getTemplate(Array)
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(64): wpie\export\bg\WPIE_BG->setBgExport()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->setBgExport, wpie\export\bg\WPIE_BG->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpie_template SET `process_lock` = 0 WHERE rowid IN (SELECT rowid FROM wp_wpie_template WHERE `process_lock` = 1 and `opration` in (:param0 ,:param1 ) ) | parameters: import, schedule_import</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(217): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(165): wpie\import\bg\WPIE_BG_Import->updateTemplateLock()
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(79): wpie\import\bg\WPIE_BG_Import->unlockTemplate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->unlockTemplate, wpie\import\bg\WPIE_BG_Import->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_wpie_template where `opration` in (:param0 ,:param1 ) and `status` LIKE :param2  and `process_lock` = 0  ORDER BY `id` ASC limit 1 | parameters: import, schedule_import, %background%</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(139): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(104): wpie\import\bg\WPIE_BG_Import->getTemplate(Array)
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(81): wpie\import\bg\WPIE_BG_Import->setBgImport()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->setBgImport, wpie\import\bg\WPIE_BG_Import->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:28:08'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE  FROM wp_wpie_template WHERE opration = :param0  AND last_update_date &lt; :param1  | parameters: import-draft, 2025-04-09 20:28:08</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/function.php(54): WP_SQLite_DB->query('DELETE  FROM wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpie_remove_draft_entries('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(704): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query DELETE  FROM wp_wpie_template WHERE opration = 'import-draft' AND last_update_date < '2025-04-09 20:28:08' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie_remove_draft_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpie_template SET `process_lock` = 0 WHERE rowid IN (SELECT rowid FROM wp_wpie_template WHERE `process_lock` = 1 and `opration` in (:param0 ,:param1 ) ) | parameters: export, schedule_export</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(204): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(152): wpie\export\bg\WPIE_BG->updateTemplateLock()
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(62): wpie\export\bg\WPIE_BG->unlockTemplate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('export','schedule_export')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->unlockTemplate, wpie\export\bg\WPIE_BG->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_wpie_template where `opration` in (:param0 ,:param1 ) and `status` LIKE :param2  and `process_lock` = 0  ORDER BY `id` ASC limit 1 | parameters: export, schedule_export, %background%</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(126): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(86): wpie\export\bg\WPIE_BG->getTemplate(Array)
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/export/extensions/bg/class-wpie-bg.php(64): wpie\export\bg\WPIE_BG->setBgExport()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpie\export\bg\WPIE_BG->init_process('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('export','schedule_export') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\export\bg\WPIE_BG->init_process, wpie\export\bg\WPIE_BG->setBgExport, wpie\export\bg\WPIE_BG->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import') </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpie_template SET `process_lock` = 0 WHERE rowid IN (SELECT rowid FROM wp_wpie_template WHERE `process_lock` = 1 and `opration` in (:param0 ,:param1 ) ) | parameters: import, schedule_import</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(217): WP_SQLite_DB->query('UPDATE wp_wpie_...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(165): wpie\import\bg\WPIE_BG_Import->updateTemplateLock()
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(79): wpie\import\bg\WPIE_BG_Import->unlockTemplate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query UPDATE wp_wpie_template SET `process_lock` = 0 WHERE `process_lock` = 1 and `opration` in ('import','schedule_import')  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->unlockTemplate, wpie\import\bg\WPIE_BG_Import->updateTemplateLock, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_wpie_template where `opration` in (:param0 ,:param1 ) and `status` LIKE :param2  and `process_lock` = 0  ORDER BY `id` ASC limit 1 | parameters: import, schedule_import, %background%</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(139): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(104): wpie\import\bg\WPIE_BG_Import->getTemplate(Array)
-#4 /wordpress/wp-content/plugins/wp-import-export-lite/includes/classes/import/extensions/bg/class-wpie-bg.php(81): wpie\import\bg\WPIE_BG_Import->setBgImport()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpie\import\bg\WPIE_BG_Import->init_process('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_wpie_template where `opration` in ('import','schedule_import') and `status` LIKE '%background%' and `process_lock` = 0  ORDER BY `id` ASC limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpie\import\bg\WPIE_BG_Import->init_process, wpie\import\bg\WPIE_BG_Import->setBgImport, wpie\import\bg\WPIE_BG_Import->getTemplate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:28:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-phpmyadmin/wp-phpmyadmin.php:46
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 12:49:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WordPress_Loop')
+#2 /wordpress/wp-content/plugins/wordpress-loop/wordpress-loop.php(42): register_widget('WordPress_Loop')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_wordpress_loop_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 12:49:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-phpmyadmin/wp-phpmyadmin.php:46
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-phpmyadmin/w...')
@@ -700,24 +65,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/wp-phpmyadmin/wp-phpmyadmin.php on line 46
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-phpmyadmin"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
