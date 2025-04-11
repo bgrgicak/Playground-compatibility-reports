@@ -1,898 +1,110 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
-
-Error: [10-Apr-2025 04:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_cart]', '', 'Cart', '', 'publish', 'page', 'closed', 'closed', '', 'cart', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , '[sacom_cart]' , '' , 'Cart' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cart' , '' , '' , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/saber-commerce/components/Cart/CartComponent.php(318): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/saber-commerce/components/Cart/CartComponent.php(361): SaberCommerce\Component\Cart\CartComponent->addCartPage(Object(SaberCommerce\ActivationEnvironment))
-#8 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(347): SaberCommerce\Component\Cart\CartComponent->activation(Object(SaberCommerce\ActivationEnvironment))
-#9 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(402): SaberCommerce\Plugin::componentActivation(Array, Object(SaberCommerce\ActivationEnvironment))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): SaberCommerce\Plugin::activation(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_saber-...', false)
-#14 /internal/eval.php(20): activate_plugin('saber-commerce/...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_cart]', '', 'Cart', '', 'publish', 'page', 'closed', 'closed', '', 'cart', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '') made by activate_plugin, do_action('activate_saber-commerce/saber-commerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, SaberCommerce\Plugin::activation, SaberCommerce\Plugin::componentActivation, SaberCommerce\Component\Cart\CartComponent->activation, SaberCommerce\Component\Cart\CartComponent->addCartPage, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_checkout]', '', 'Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'checkout', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , '[sacom_checkout]' , '' , 'Checkout' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'checkout' , '' , '' , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/saber-commerce/components/Checkout/CheckoutComponent.php(250): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/saber-commerce/components/Checkout/CheckoutComponent.php(258): SaberCommerce\Component\Checkout\CheckoutComponent->addCheckoutPage(Object(SaberCommerce\ActivationEnvironment))
-#8 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(347): SaberCommerce\Component\Checkout\CheckoutComponent->activation(Object(SaberCommerce\ActivationEnvironment))
-#9 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(402): SaberCommerce\Plugin::componentActivation(Array, Object(SaberCommerce\ActivationEnvironment))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): SaberCommerce\Plugin::activation(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_saber-...', false)
-#14 /internal/eval.php(20): activate_plugin('saber-commerce/...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_checkout]', '', 'Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'checkout', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '') made by activate_plugin, do_action('activate_saber-commerce/saber-commerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, SaberCommerce\Plugin::activation, SaberCommerce\Plugin::componentActivation, SaberCommerce\Component\Checkout\CheckoutComponent->activation, SaberCommerce\Component\Checkout\CheckoutComponent->addCheckoutPage, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_portal]', '', 'Account', '', 'publish', 'page', 'closed', 'closed', '', 'account', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , '[sacom_portal]' , '' , 'Account' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'account' , '' , '' , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/saber-commerce/components/Portal/PortalComponent.php(184): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(347): SaberCommerce\Component\Portal\PortalComponent->activation(Object(SaberCommerce\ActivationEnvironment))
-#8 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(402): SaberCommerce\Plugin::componentActivation(Array, Object(SaberCommerce\ActivationEnvironment))
-#9 /wordpress/wp-includes/class-wp-hook.php(324): SaberCommerce\Plugin::activation(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_saber-...', false)
-#13 /internal/eval.php(20): activate_plugin('saber-commerce/...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_portal]', '', 'Account', '', 'publish', 'page', 'closed', 'closed', '', 'account', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '') made by activate_plugin, do_action('activate_saber-commerce/saber-commerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, SaberCommerce\Plugin::activation, SaberCommerce\Plugin::componentActivation, SaberCommerce\Component\Portal\PortalComponent->activation, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_shop]', '', 'Shop', '', 'publish', 'page', 'closed', 'closed', '', 'shop', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , '[sacom_shop]' , '' , 'Shop' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'shop' , '' , '' , '2025-04-10 04:53:06' , '2025-04-10 04:53:06' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/saber-commerce/components/Product/ProductComponent.php(244): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/saber-commerce/components/Product/ProductComponent.php(253): SaberCommerce\Component\Product\ProductComponent->addShopPage(Object(SaberCommerce\ActivationEnvironment))
-#8 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(347): SaberCommerce\Component\Product\ProductComponent->activation(Object(SaberCommerce\ActivationEnvironment))
-#9 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(402): SaberCommerce\Plugin::componentActivation(Array, Object(SaberCommerce\ActivationEnvironment))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): SaberCommerce\Plugin::activation(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_saber-...', false)
-#14 /internal/eval.php(20): activate_plugin('saber-commerce/...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 04:53:06', '2025-04-10 04:53:06', '[sacom_shop]', '', 'Shop', '', 'publish', 'page', 'closed', 'closed', '', 'shop', '', '', '2025-04-10 04:53:06', '2025-04-10 04:53:06', 0, 0, '', '') made by activate_plugin, do_action('activate_saber-commerce/saber-commerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, SaberCommerce\Plugin::activation, SaberCommerce\Plugin::componentActivation, SaberCommerce\Component\Product\ProductComponent->activation, SaberCommerce\Component\Product\ProductComponent->addShopPage, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_mode" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_test_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_test_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_live_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "stripe_live_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "tax_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "company_name" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_line_1" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_line_2" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_city" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_state_province" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_country" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "address_zip_postal" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] PHP Warning:  Attempt to read property "currency_display_text" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:06 UTC] Array
-(
-    [0] => stdClass Object
-        (
-            [key] => payment
-            [title] => Payments
-            [menuLabel] => Payments
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_enabled
-                            [label] => Stripe Enabled
-                            [type] => toggle
-                            [default] => 0
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => ENABLED
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 0
-                                            [label] => DISABLED
-                                        )
-
-                                )
-
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_mode
-                            [label] => Stripe Mode
-                            [type] => toggle
-                            [default] => 1
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => TEST
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 2
-                                            [label] => LIVE
-                                        )
-
-                                )
-
-                        )
-
-                    [2] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_test_publishable_key
-                            [label] => Stripe Test Publishable Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [3] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_test_secret_key
-                            [label] => Stripe Test Secret Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [4] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_live_publishable_key
-                            [label] => Stripe Live Publishable Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [5] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_live_secret_key
-                            [label] => Stripe Live Secret Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                )
-
-        )
-
-    [1] => stdClass Object
-        (
-            [key] => tax
-            [title] => Taxes
-            [menuLabel] => Taxes
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => tax_enabled
-                            [label] => Tax Enabled
-                            [type] => toggle
-                            [default] => 0
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => ENABLED
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 0
-                                            [label] => DISABLED
-                                        )
-
-                                )
-
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => tax_enabled
-                            [label] => 
-                            [type] => html
-                            [value] => <div id="sacom-tax-editor"></div>
-                        )
-
-                )
-
-        )
-
-    [2] => stdClass Object
-        (
-            [key] => general
-            [title] => General Settings
-            [menuLabel] => General Settings
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => company_name
-                            [label] => Company Name
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_line_1
-                            [label] => Address Line 1
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [2] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_line_2
-                            [label] => Address Line 2
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [3] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_city
-                            [label] => City
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [4] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_state_province
-                            [label] => State/Province
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [5] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_country
-                            [label] => Country
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [6] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_zip_postal
-                            [label] => Zip/Postal Code
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [7] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => currency_display_text
-                            [label] => Currency Display Text
-                            [type] => text
-                            [default] => USD
-                            [value] => 
-                        )
-
-                )
-
-        )
-
-)
-
-[10-Apr-2025 04:53:06 UTC] stdClass Object
-(
-    [stripe_enabled] => 0
-    [stripe_mode] => 1
-    [stripe_test_publishable_key] => 
-    [stripe_test_secret_key] => 
-    [stripe_live_publishable_key] => 
-    [stripe_live_secret_key] => 
-    [tax_enabled] => 
-    [company_name] => 
-    [address_line_1] => 
-    [address_line_2] => 
-    [address_city] => 
-    [address_state_province] => 
-    [address_country] => 
-    [address_zip_postal] => 
-    [currency_display_text] => USD
-)
-
-[10-Apr-2025 04:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sacom_setting', 'O:8:\"stdClass\":15:{s:14:\"stripe_enabled\";i:0;s:11:\"stripe_mode\";i:1;s:27:\"stripe_test_publishable_key\";N;s:22:\"stripe_test_secret_key\";N;s:27:\"stripe_live_publishable_key\";N;s:22:\"stripe_live_secret_key\";N;s:11:\"tax_enabled\";N;s:12:\"company_name\";N;s:14:\"address_line_1\";N;s:14:\"address_line_2\";N;s:12:\"address_city\";N;s:22:\"address_state_province\";N;s:15:\"address_country\";N;s:18:\"address_zip_postal\";N;s:21:\"currency_display_text\";s:3:\"USD\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sacom_setting' , 'O:8:&quot;stdClass&quot;:15:{s:14:&quot;stripe_enabled&quot;;i:0;s:11:&quot;stripe_mode&quot;;i:1;s:27:&quot;stripe_test_publishable_key&quot;;N;s:22:&quot;stripe_test_secret_key&quot;;N;s:27:&quot;stripe_live_publishable_key&quot;;N;s:22:&quot;stripe_live_secret_key&quot;;N;s:11:&quot;tax_enabled&quot;;N;s:12:&quot;company_name&quot;;N;s:14:&quot;address_line_1&quot;;N;s:14:&quot;address_line_2&quot;;N;s:12:&quot;address_city&quot;;N;s:22:&quot;address_state_province&quot;;N;s:15:&quot;address_country&quot;;N;s:18:&quot;address_zip_postal&quot;;N;s:21:&quot;currency_display_text&quot;;s:3:&quot;USD&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sacom_setting', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php(37): update_option('sacom_setting', Object(stdClass))
-#6 /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingComponent.php(66): SaberCommerce\Component\Setting\SettingModel->save(Object(stdClass))
-#7 /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingComponent.php(54): SaberCommerce\Component\Setting\SettingComponent->saveSettingDefaults()
-#8 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(347): SaberCommerce\Component\Setting\SettingComponent->activation(Object(SaberCommerce\ActivationEnvironment))
-#9 /wordpress/wp-content/plugins/saber-commerce/saber-commerce.php(402): SaberCommerce\Plugin::componentActivation(Array, Object(SaberCommerce\ActivationEnvironment))
-#10 /wordpress/wp-includes/class-wp-hook.php(324): SaberCommerce\Plugin::activation(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_saber-...', false)
-#14 /internal/eval.php(20): activate_plugin('saber-commerce/...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sacom_setting', 'O:8:\"stdClass\":15:{s:14:\"stripe_enabled\";i:0;s:11:\"stripe_mode\";i:1;s:27:\"stripe_test_publishable_key\";N;s:22:\"stripe_test_secret_key\";N;s:27:\"stripe_live_publishable_key\";N;s:22:\"stripe_live_secret_key\";N;s:11:\"tax_enabled\";N;s:12:\"company_name\";N;s:14:\"address_line_1\";N;s:14:\"address_line_2\";N;s:12:\"address_city\";N;s:22:\"address_state_province\";N;s:15:\"address_country\";N;s:18:\"address_zip_postal\";N;s:21:\"currency_display_text\";s:3:\"USD\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_saber-commerce/saber-commerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, SaberCommerce\Plugin::activation, SaberCommerce\Plugin::componentActivation, SaberCommerce\Component\Setting\SettingComponent->activation, SaberCommerce\Component\Setting\SettingComponent->saveSettingDefaults, SaberCommerce\Component\Setting\SettingModel->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:53:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '2CPu1KQwop9`.{Y(H8qi%P<AA>?zX^pQYqY2_<!g$1h~I#_cUJ62guDD}yv8P[_<', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '2CPu1KQwop9`.{Y(H8qi%P&lt;AA&gt;?zX^pQYqY2_&lt;!g$1h~I#_cUJ62guDD}yv8P[_&lt;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '2CPu1KQwop9`.{Y...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '2CPu1KQwop9`.{Y...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '2CPu1KQwop9`.{Y...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '2CPu1KQwop9`.{Y...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('saber-commerce-...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/saber-commerce/blocks/cart/cart/cart.php(17): register_block_type('/wordpress/wp-c...')
-#22 /wordpress/wp-includes/class-wp-hook.php(324): create_block_cart_block_init('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '2CPu1KQwop9`.{Y(H8qi%P<AA>?zX^pQYqY2_<!g$1h~I#_cUJ62guDD}yv8P[_<', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, create_block_cart_block_init, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '18jT|_%*{=o[xi^L4E+56lsWSzxp{6q!&`|(k@>c,U:e;AH7D>Os[W7+_vDLMjxY', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '18jT|_%*{=o[xi^L4E+56lsWSzxp{6q!&amp;`|(k@&gt;c,U:e;AH7D&gt;Os[W7+_vDLMjxY' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '18jT|_%*{=o[xi^...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '18jT|_%*{=o[xi^...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '18jT|_%*{=o[xi^...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '18jT|_%*{=o[xi^...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('saber-commerce-...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/saber-commerce/blocks/cart/cart/cart.php(17): register_block_type('/wordpress/wp-c...')
-#22 /wordpress/wp-includes/class-wp-hook.php(324): create_block_cart_block_init('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '18jT|_%*{=o[xi^L4E+56lsWSzxp{6q!&`|(k@>c,U:e;AH7D>Os[W7+_vDLMjxY', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, create_block_cart_block_init, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:53:08 UTC] PHP Notice:  wp_json_file_decode(): Error when decoding a JSON file at path /wordpress/wp-content/plugins/saber-commerce/blocks/product/product-title/block.json: Syntax error in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_mode" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_test_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_test_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_live_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "stripe_live_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "tax_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "company_name" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_line_1" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_line_2" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_city" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_state_province" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_country" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "address_zip_postal" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] PHP Warning:  Attempt to read property "currency_display_text" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:22 UTC] Array
-(
-    [0] => stdClass Object
-        (
-            [key] => payment
-            [title] => Payments
-            [menuLabel] => Payments
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_enabled
-                            [label] => Stripe Enabled
-                            [type] => toggle
-                            [default] => 0
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => ENABLED
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 0
-                                            [label] => DISABLED
-                                        )
-
-                                )
-
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_mode
-                            [label] => Stripe Mode
-                            [type] => toggle
-                            [default] => 1
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => TEST
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 2
-                                            [label] => LIVE
-                                        )
-
-                                )
-
-                        )
-
-                    [2] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_test_publishable_key
-                            [label] => Stripe Test Publishable Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [3] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_test_secret_key
-                            [label] => Stripe Test Secret Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [4] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_live_publishable_key
-                            [label] => Stripe Live Publishable Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [5] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_live_secret_key
-                            [label] => Stripe Live Secret Key
-                            [type] => text
-                            [value] => 
-                        )
-
-                )
-
-        )
-
-    [1] => stdClass Object
-        (
-            [key] => tax
-            [title] => Taxes
-            [menuLabel] => Taxes
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => tax_enabled
-                            [label] => Tax Enabled
-                            [type] => toggle
-                            [default] => 0
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => ENABLED
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 0
-                                            [label] => DISABLED
-                                        )
-
-                                )
-
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => tax_enabled
-                            [label] => 
-                            [type] => html
-                            [value] => <div id="sacom-tax-editor"></div>
-                        )
-
-                )
-
-        )
-
-    [2] => stdClass Object
-        (
-            [key] => general
-            [title] => General Settings
-            [menuLabel] => General Settings
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => company_name
-                            [label] => Company Name
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_line_1
-                            [label] => Address Line 1
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [2] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_line_2
-                            [label] => Address Line 2
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [3] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_city
-                            [label] => City
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [4] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_state_province
-                            [label] => State/Province
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [5] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_country
-                            [label] => Country
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [6] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => address_zip_postal
-                            [label] => Zip/Postal Code
-                            [type] => text
-                            [value] => 
-                        )
-
-                    [7] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => currency_display_text
-                            [label] => Currency Display Text
-                            [type] => text
-                            [default] => USD
-                            [value] => 
-                        )
-
-                )
-
-        )
-
-)
-
-[10-Apr-2025 04:53:22 UTC] stdClass Object
-(
-    [stripe_enabled] => 0
-    [stripe_mode] => 1
-    [stripe_test_publishable_key] => 
-    [stripe_test_secret_key] => 
-    [stripe_live_publishable_key] => 
-    [stripe_live_secret_key] => 
-    [tax_enabled] => 
-    [company_name] => 
-    [address_line_1] => 
-    [address_line_2] => 
-    [address_city] => 
-    [address_state_province] => 
-    [address_country] => 
-    [address_zip_postal] => 
-    [currency_display_text] => USD
-)
-
-[10-Apr-2025 04:53:24 UTC] PHP Notice:  wp_json_file_decode(): Error when decoding a JSON file at path /wordpress/wp-content/plugins/saber-commerce/blocks/product/product-title/block.json: Syntax error in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_mode" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_test_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_test_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_live_publishable_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "stripe_live_secret_key" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "tax_enabled" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "company_name" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_line_1" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_line_2" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_city" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_state_province" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_country" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "address_zip_postal" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] PHP Warning:  Attempt to read property "currency_display_text" on bool in /wordpress/wp-content/plugins/saber-commerce/components/Setting/SettingModel.php on line 25
-[10-Apr-2025 04:53:39 UTC] Array
-(
-    [0] => stdClass Object
-        (
-            [key] => payment
-            [title] => Payments
-            [menuLabel] => Payments
-            [fields] => Array
-                (
-                    [0] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_enabled
-                            [label] => Stripe Enabled
-                            [type] => toggle
-                            [default] => 0
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => ENABLED
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 0
-                                            [label] => DISABLED
-                                        )
-
-                                )
-
-                        )
-
-                    [1] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_mode
-                            [label] => Stripe Mode
-                            [type] => toggle
-                            [default] => 1
-                            [value] => 
-                            [choices] => Array
-                                (
-                                    [0] => Array
-                                        (
-                                            [value] => 1
-                                            [label] => TEST
-                                        )
-
-                                    [1] => Array
-                                        (
-                                            [value] => 2
-                                            [label] => LIVE
-                                        )
-
-                                )
-
-                        )
-
-                    [2] => SaberCommerce\Component\Setting\SettingField Object
-                        (
-                            [id] => stripe_test_publishable_key
-                            [label] => Stripe Test Publishable Key
-                     
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
+
+Error: [11-Apr-2025 14:50:35 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/site-url-shortcode/site-url-shortcode.php on line 21
+[11-Apr-2025 14:50:44 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/site-url-shortcode/site-url-shortcode.php on line 21
+[11-Apr-2025 14:50:53 UTC] PHP Notice:  ob_end_flush(): Failed to delete and flush buffer. No buffer to delete or flush in /wordpress/wp-content/plugins/site-url-shortcode/site-url-shortcode.php on line 21
+[11-Apr-2025 14:52:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:08 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:17 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:26 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:26 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 603
+[11-Apr-2025 14:52:27 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php:604
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 604
+[11-Apr-2025 14:52:34 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:34 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 603
+[11-Apr-2025 14:52:35 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php:604
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 604
+[11-Apr-2025 14:52:43 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:43 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 603
+[11-Apr-2025 14:52:44 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:52:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php:604
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-advanced-search/spec-adv-search.php on line 604
+[11-Apr-2025 14:54:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php:114
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('storify-stories...')
+#2 /internal/eval.php(20): activate_plugin('storify-stories...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php on line 114
+[11-Apr-2025 14:54:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php:114
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('storify-stories...')
+#2 /internal/eval.php(20): activate_plugin('storify-stories...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php on line 114
+[11-Apr-2025 14:54:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php:114
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('storify-stories...')
+#2 /internal/eval.php(20): activate_plugin('storify-stories...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/storify-stories-slider/wp-storify-stories-slider.php on line 114
+[11-Apr-2025 14:54:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php:128
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subcategoria-wi...')
+#2 /internal/eval.php(20): activate_plugin('subcategoria-wi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php on line 128
+[11-Apr-2025 14:54:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php:128
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subcategoria-wi...')
+#2 /internal/eval.php(20): activate_plugin('subcategoria-wi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php on line 128
+[11-Apr-2025 14:54:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php:128
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subcategoria-wi...')
+#2 /internal/eval.php(20): activate_plugin('subcategoria-wi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/subcategoria-widget/subcategoria-widget.php on line 128
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"sendbyshare-shipping"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/sendbyshare-shipping could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/sendbyshare-shipping could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
+  }
+}
+
+Node.js v23.11.0
