@@ -2,476 +2,160 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:44:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:44:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:44:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:44:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:44:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:38:\"rankbear/vendor/freemius/wordpress-sdk\";O:8:\"stdClass\":4:{s:7:\"version\";s:7:\"2.4.0.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744227884;s:11:\"plugin_path\";s:21:\"rankbear/rankbear.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:21:\"rankbear/rankbear.php\";s:8:\"sdk_path\";s:38:\"rankbear/vendor/freemius/wordpress-sdk\";s:7:\"version\";s:7:\"2.4.0.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744227884;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:38:&quot;rankbear/vendor/freemius/wordpress-sdk&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:7:&quot;2.4.0.1&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744227884;s:11:&quot;plugin_path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;sdk_path&quot;;s:38:&quot;rankbear/vendor/freemius/wordpress-sdk&quot;;s:7:&quot;version&quot;;s:7:&quot;2.4.0.1&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744227884;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/fs-essential-functions.php(366): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(166): fs_update_sdk_newest_version('rankbear/vendor...', 'rankbear/rankbe...')
-#7 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(44): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#9 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#10 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#11 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#14 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:38:\"rankbear/vendor/freemius/wordpress-sdk\";O:8:\"stdClass\":4:{s:7:\"version\";s:7:\"2.4.0.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744227884;s:11:\"plugin_path\";s:21:\"rankbear/rankbear.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:21:\"rankbear/rankbear.php\";s:8:\"sdk_path\";s:38:\"rankbear/vendor/freemius/wordpress-sdk\";s:7:\"version\";s:7:\"2.4.0.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744227884;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, require_once('/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(482): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(44): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#9 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#10 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#11 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#14 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, require_once('/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php'), require_once('/plugins/rankbear/vendor/freemius/wordpress-sdk/require.php'), require_once('/plugins/rankbear/vendor/freemius/wordpress-sdk/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:44 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-logger.php on line 145
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2253): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(405): Freemius->store_id_slug_type_path_map('5213', 'rankbear')
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#12 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#14 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#15 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#16 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#19 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2144): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(420): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#13 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#14 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#16 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#17 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#18 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#21 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(448): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#13 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#15 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#16 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#17 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#20 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(10312): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(495): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#12 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#14 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#15 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#16 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#19 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744227884;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744227884)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('install_timesta...', 1744227884)
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(499): FS_Storage->__set('install_timesta...', 1744227884)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#13 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#15 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#16 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#17 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#20 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744227884;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1466): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1618): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(526): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#14 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#15 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#17 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#18 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#19 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#22 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744227884;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1480): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1618): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(526): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#14 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#15 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#17 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#18 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#19 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#22 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744227884;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(875): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(539): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2824): Freemius->__construct('5213', 'rankbear', true)
-#13 /wordpress/wp-content/plugins/rankbear/vendor/freemius/wordpress-sdk/start.php(521): Freemius::instance('5213', 'rankbear', true)
-#14 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/rankbear/src/RbFreemius.php(29): RankBear\RbFreemius->init()
-#16 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(115): RankBear\RbFreemius->freemius_global()
-#17 /wordpress/wp-content/plugins/rankbear/src/Bootstrap.php(30): RankBear\Bootstrap->is_ready()
-#18 /wordpress/wp-content/plugins/rankbear/rankbear.php(62): RankBear\Bootstrap->init()
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rankbear/rankbe...')
-#21 /internal/eval.php(20): activate_plugin('rankbear/rankbe...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rankbear/rankbear.php'), RankBear\Bootstrap->init, RankBear\Bootstrap->is_ready, RankBear\RbFreemius->freemius_global, RankBear\RbFreemius->init, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5213;a:3:{s:4:\"slug\";s:8:\"rankbear\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:21:\"rankbear/rankbear.php\";}}s:11:\"plugin_data\";a:1:{s:8:\"rankbear\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:21:\"rankbear/rankbear.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744227884;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:7:\"2.4.0.1\";}}s:13:\"file_slug_map\";a:1:{s:21:\"rankbear/rankbear.php\";s:8:\"rankbear\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5213;a:3:{s:4:&quot;slug&quot;;s:8:&quot;rankbear&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:8:&quot;rankbear&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:21:&quot;rankbear/rankbear.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744227884;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:7:&quot;2.4.0.1&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:21:&quot;rankbear/rankbear.php&quot;;s:8:&quot;rankbear&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`optio
+Error: [11-Apr-2025 06:54:43 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354481.461)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:57:08 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:08 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:09 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:09 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:18 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:18 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:19 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:19 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:26 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:26 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:27 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 06:57:27 UTC] PHP Deprecated:  Required parameter $url follows optional parameter $response in /wordpress/wp-content/plugins/restore-automatic-update/restore-automatic-update.php on line 59
+[11-Apr-2025 07:00:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
+#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
+[11-Apr-2025 07:00:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
+#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
+[11-Apr-2025 07:00:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
+#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
+[11-Apr-2025 07:01:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RandomPostsWith...')
+#2 /wordpress/wp-content/plugins/random-posts-within-date-range-widget/random-posts-within-date-range-widget.php(39): register_widget('RandomPostsWith...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): random_posts_within_date_range_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:01:41 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RandomPostsWith...')
+#2 /wordpress/wp-content/plugins/random-posts-within-date-range-widget/random-posts-within-date-range-widget.php(39): register_widget('RandomPostsWith...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): random_posts_within_date_range_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:01:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('RandomPostsWith...')
+#2 /wordpress/wp-content/plugins/random-posts-within-date-range-widget/random-posts-within-date-range-widget.php(39): register_widget('RandomPostsWith...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): random_posts_within_date_range_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:02:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recall-products/recall.php:295
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recall-products...')
+#2 /internal/eval.php(20): activate_plugin('recall-products...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recall-products/recall.php on line 295
+[11-Apr-2025 07:03:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recall-products/recall.php:295
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recall-products...')
+#2 /internal/eval.php(20): activate_plugin('recall-products...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recall-products/recall.php on line 295
+[11-Apr-2025 07:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recall-products/recall.php:295
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recall-products...')
+#2 /internal/eval.php(20): activate_plugin('recall-products...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/recall-products/recall.php on line 295
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"recall-products"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0

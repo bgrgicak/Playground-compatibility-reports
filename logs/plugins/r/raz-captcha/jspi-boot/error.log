@@ -2,420 +2,372 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:44:18 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:44:23 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /wordpress/wp-content/plugins/random-joke/random_joke.php:391
+Error: [11-Apr-2025 06:56:06 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/random-joke/random_joke.php(382): getDefaultLink()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): random_jokes_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#5 /internal/eval.php(20): activate_plugin('random-joke/ran...')
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354563.514)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:57:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, HIGHLIGHT, varchar(11)</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD highlight text NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, REPLY, text</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD reviewId TEXT NULL AFTER date</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, REVIEWID, text</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD reviewId text NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, HIDDEN, tinyint(1)</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, HIGHLIGHT, varchar(11)</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD highlight text NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, REPLY, text</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD reviewId TEXT NULL AFTER date</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, REVIEWID, text</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD reviewId text NULL   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_trustindex_booking_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_trustindex_booking_reviews, HIDDEN, tinyint(1)</li>
+<li>Executing: ALTER TABLE wp_trustindex_booking_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/review-widgets-for-booking-com/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/review-widgets-for-booking-com/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_booking->load('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_trustindex_booking_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_booking->load, include('/plugins/review-widgets-for-booking-com/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:57:59 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354676.545)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:58:28 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func(): Argument #1 ($callback) must be a valid callback, non-static method RichCategoryEditor::Enable() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:322
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #6 {main}
-  thrown in /wordpress/wp-content/plugins/random-joke/random_joke.php on line 391
-[09-Apr-2025 19:44:30 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:44:35 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /wordpress/wp-content/plugins/random-joke/random_joke.php:391
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 322
+[11-Apr-2025 06:58:37 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func(): Argument #1 ($callback) must be a valid callback, non-static method RichCategoryEditor::Enable() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:322
 Stack trace:
-#0 /wordpress/wp-content/plugins/random-joke/random_joke.php(382): getDefaultLink()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): random_jokes_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#5 /internal/eval.php(20): activate_plugin('random-joke/ran...')
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #6 {main}
-  thrown in /wordpress/wp-content/plugins/random-joke/random_joke.php on line 391
-[09-Apr-2025 19:44:42 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:44:47 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /wordpress/wp-content/plugins/random-joke/random_joke.php:391
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 322
+[11-Apr-2025 06:58:47 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func(): Argument #1 ($callback) must be a valid callback, non-static method RichCategoryEditor::Enable() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:322
 Stack trace:
-#0 /wordpress/wp-content/plugins/random-joke/random_joke.php(382): getDefaultLink()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): random_jokes_install(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#5 /internal/eval.php(20): activate_plugin('random-joke/ran...')
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(704): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #6 {main}
-  thrown in /wordpress/wp-content/plugins/random-joke/random_joke.php on line 391
-[09-Apr-2025 19:44:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 322
+[11-Apr-2025 06:58:58 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
-#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
-[09-Apr-2025 19:45:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354736.079)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 07:00:05 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
-#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
-[09-Apr-2025 19:45:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php:105
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rawr-raw-revisi...')
-#2 /internal/eval.php(20): activate_plugin('rawr-raw-revisi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/rawr-raw-revisited-for-wordpress/rawr.php on line 105
-[09-Apr-2025 19:45:18 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php:117
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Submit_Property::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
-#4 /internal/eval.php(20): activate_plugin('realty-portal-s...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php on line 117
-[09-Apr-2025 19:45:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php:117
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Submit_Property::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
-#4 /internal/eval.php(20): activate_plugin('realty-portal-s...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php on line 117
-[09-Apr-2025 19:45:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php:117
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Submit_Property::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
-#4 /internal/eval.php(20): activate_plugin('realty-portal-s...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/realty-portal-submit-property/realty-portal-submit-property.php on line 117
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:45:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:46:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:46:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:46:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:46:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'bZ.xqj-/f~Yy*#zY-3]Bp%H)FWhWpS>g_o_T29wEAN_,g{IHEI{_P|=]_j|;L^[!', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'bZ.xqj-/f~Yy*#zY-3]Bp%H)FWhWpS&gt;g_o_T29wEAN_,g{IHEI{_P|=]_j|;L^[!' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'bZ.xqj-/f~Yy*#z...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'bZ.xqj-/f~Yy*#z...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'bZ.xqj-/f~Yy*#z...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'bZ.xqj-/f~Yy*#z...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'bZ.xqj-/f~Yy*#zY-3]Bp%H)FWhWpS>g_o_T29wEAN_,g{IHEI{_P|=]_j|;L^[!', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:46:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', ']]f,N`0&&i z*unw/Izm@w|?R]=ZF] 30dNW=pcxm`Mi@)]Pz3C(3j@YHdF11|,b', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , ']]f,N`0&amp;&amp;i z*unw/Izm@w|?R]=ZF] 30dNW=pcxm`Mi@)]Pz3C(3j@YHdF11|,b' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', ']]f,N`0&&i z*un...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', ']]f,N`0&&i z*un...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', ']]f,N`0&&i z*un...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', ']]f,N`0&&i z*un...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', ']]f,N`0&&i z*unw/Izm@w|?R]=ZF] 30dNW=pcxm`Mi@)]Pz3C(3j@YHdF11|,b', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:18 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_deregister_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:27 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rektslide</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:46:35 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:46:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:46:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:46:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:47:01 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[09-Apr-2025 19:47:01 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emd_session_db_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'emd_session_db_version' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/emd-session-manager.php(70): add_option('emd_session_db_...', '1', '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
-#9 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#10 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#11 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#12 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#13 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('request-a-quote...')
-#16 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('emd_session_db_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_setup_pages', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'request_a_quote_setup_pages' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('request_a_quote...', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(347): update_option('request_a_quote...', 1)
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(103): Request_A_Quote_Install_Deactivate->set_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Request_A_Quote_Install_Deactivate->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#11 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_setup_pages', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_request-a-quote/request-a-quote.php'), WP_Hook->do_action, WP_Hook->apply_filters, Request_A_Quote_Install_Deactivate->install, Request_A_Quote_Install_Deactivate->set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_access_views', 'a:1:{s:6:\"single\";a:1:{i:0;a:2:{s:4:\"name\";s:12:\"single_quote\";s:3:\"obj\";s:9:\"emd_quote\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'request_a_quote_access_views' , 'a:1:{s:6:&quot;single&quot;;a:1:{i:0;a:2:{s:4:&quot;name&quot;;s:12:&quot;single_quote&quot;;s:3:&quot;obj&quot;;s:9:&quot;emd_quote&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('request_a_quote...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(355): update_option('request_a_quote...', Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(103): Request_A_Quote_Install_Deactivate->set_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Request_A_Quote_Install_Deactivate->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#11 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_access_views', 'a:1:{s:6:\"single\";a:1:{i:0;a:2:{s:4:\"name\";s:12:\"single_quote\";s:3:\"obj\";s:9:\"emd_quote\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_request-a-quote/request-a-quote.php'), WP_Hook->do_action, WP_Hook->apply_filters, Request_A_Quote_Install_Deactivate->install, Request_A_Quote_Install_Deactivate->set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_ent_list', 'a:1:{s:9:\"emd_quote\";a:8:{s:5:\"label\";s:6:\"Quotes\";s:7:\"rewrite\";s:9:\"emd_quote\";s:12:\"archive_view\";i:0;s:8:\"rest_api\";i:0;s:8:\"sortable\";i:0;s:10:\"searchable\";i:1;s:11:\"class_title\";a:1:{i:0;s:14:\"emd_contact_id\";}s:11:\"unique_keys\";a:1:{i:0;s:14:\"emd_contact_id\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'request_a_quote_ent_list' , 'a:1:{s:9:&quot;emd_quote&quot;;a:8:{s:5:&quot;label&quot;;s:6:&quot;Quotes&quot;;s:7:&quot;rewrite&quot;;s:9:&quot;emd_quote&quot;;s:12:&quot;archive_view&quot;;i:0;s:8:&quot;rest_api&quot;;i:0;s:8:&quot;sortable&quot;;i:0;s:10:&quot;searchable&quot;;i:1;s:11:&quot;class_title&quot;;a:1:{i:0;s:14:&quot;emd_contact_id&quot;;}s:11:&quot;unique_keys&quot;;a:1:{i:0;s:14:&quot;emd_contact_id&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('request_a_quote...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(372): update_option('request_a_quote...', Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(103): Request_A_Quote_Install_Deactivate->set_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Request_A_Quote_Install_Deactivate->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#11 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_ent_list', 'a:1:{s:9:\"emd_quote\";a:8:{s:5:\"label\";s:6:\"Quotes\";s:7:\"rewrite\";s:9:\"emd_quote\";s:12:\"archive_view\";i:0;s:8:\"rest_api\";i:0;s:8:\"sortable\";i:0;s:10:\"searchable\";i:1;s:11:\"class_title\";a:1:{i:0;s:14:\"emd_contact_id\";}s:11:\"unique_keys\";a:1:{i:0;s:14:\"emd_contact_id\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_request-a-quote/request-a-quote.php'), WP_Hook->do_action, WP_Hook->apply_filters, Request_A_Quote_Install_Deactivate->install, Request_A_Quote_Install_Deactivate->set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_shc_list', 'a:9:{s:3:\"app\";s:15:\"Request a quote\";s:8:\"has_gmap\";i:0;s:13:\"has_form_lite\";i:1;s:8:\"has_lite\";i:1;s:6:\"has_bs\";i:0;s:16:\"has_autocomplete\";i:0;s:10:\"remove_vis\";i:0;s:5:\"forms\";a:1:{s:15:\"request_a_quote\";a:37:{s:4:\"name\";s:15:\"request_a_quote\";s:4:\"type\";s:6:\"submit\";s:3:\"ent\";s:9:\"emd_quote\";s:15:\"targeted_device\";s:8:\"desktops\";s:14:\"label_position\";s:3:\"top\";s:12:\"element_size\";s:6:\"medium\";s:14:\"display_inline\";s:1:\"1\";s:12:\"noaccess_msg\";s:82:\"You are not allowed to access to this area. Please contact the site administrator.\";s:14:\"disable_submit\";s:1:\"0\";s:13:\"submit_status\";s:7:\"publish\";s:21:\"visitor_submit_status\";s:7:\"publish\";s:18:\"submit_button_type\";s:11:\"btn-primary\";s:19:\"submit_button_label\";s:14:\"Send a request\";s:18:\"submit_button_size\";s:9:\"btn-large\";s:19:\"submit_button_block\";s:1:\"0\";s:16:\"submit_button_fa\";s:0:\"\";s:21:\"submit_button_fa_size\";s:0:\"\";s:20:\"submit_button_fa_pos\";s:4:\"left\";s:12:\"show_captcha\";s:10:\"never-show\";s:13:\"disable_after\";s:1:\"0\";s:14:\"confirm_method\";s:4:\"text\";s:11:\"confirm_url\";s:0:\"\";s:19:\"confirm_success_txt\";s:27:\"Thanks for your submission.\";s:17:\"confirm_error_txt\";s:90:\"There has been an error when submitting your entry. Please contact the site administrator.\";s:11:\"enable_ajax\";s:1:\"1\";s:12:\"after_submit\";s:4:\"show\";s:14:\"schedule_start\";s:0:\"\";s:12:\"schedule_end\";s:0:\"\";s:16:\"enable_operators\";s:1:\"0\";s:11:\"ajax_search\";s:1:\"0\";s:12:\"result_templ\";s:0:\"\";s:13:\"result_fields\";s:0:\"\";s:12:\"noresult_msg\";s:0:\"\";s:9:\"view_name\";s:0:\"\";s:8:\"honeypot\";s:1:\"1\";s:9:\"login_reg\";s:4:\"none\";s:10:\"page_title\";s:15:\"Request a quote\";}}s:4:\"shcs\";a:1:{s:12:\"contact_list\";a:3:{s:10:\"class_name\";s:9:\"emd_quote\";s:4:\"type\";s:3:\"std\";s:10:\"page_title\";s:12:\"Contact List\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'request_a_quote_shc_list' , 'a:9:{s:3:&quot;app&quot;;s:15:&quot;Request a quote&quot;;s:8:&quot;has_gmap&quot;;i:0;s:13:&quot;has_form_lite&quot;;i:1;s:8:&quot;has_lite&quot;;i:1;s:6:&quot;has_bs&quot;;i:0;s:16:&quot;has_autocomplete&quot;;i:0;s:10:&quot;remove_vis&quot;;i:0;s:5:&quot;forms&quot;;a:1:{s:15:&quot;request_a_quote&quot;;a:37:{s:4:&quot;name&quot;;s:15:&quot;request_a_quote&quot;;s:4:&quot;type&quot;;s:6:&quot;submit&quot;;s:3:&quot;ent&quot;;s:9:&quot;emd_quote&quot;;s:15:&quot;targeted_device&quot;;s:8:&quot;desktops&quot;;s:14:&quot;label_position&quot;;s:3:&quot;top&quot;;s:12:&quot;element_size&quot;;s:6:&quot;medium&quot;;s:14:&quot;display_inline&quot;;s:1:&quot;1&quot;;s:12:&quot;noaccess_msg&quot;;s:82:&quot;You are not allowed to access to this area. Please contact the site administrator.&quot;;s:14:&quot;disable_submit&quot;;s:1:&quot;0&quot;;s:13:&quot;submit_status&quot;;s:7:&quot;publish&quot;;s:21:&quot;visitor_submit_status&quot;;s:7:&quot;publish&quot;;s:18:&quot;submit_button_type&quot;;s:11:&quot;btn-primary&quot;;s:19:&quot;submit_button_label&quot;;s:14:&quot;Send a request&quot;;s:18:&quot;submit_button_size&quot;;s:9:&quot;btn-large&quot;;s:19:&quot;submit_button_block&quot;;s:1:&quot;0&quot;;s:16:&quot;submit_button_fa&quot;;s:0:&quot;&quot;;s:21:&quot;submit_button_fa_size&quot;;s:0:&quot;&quot;;s:20:&quot;submit_button_fa_pos&quot;;s:4:&quot;left&quot;;s:12:&quot;show_captcha&quot;;s:10:&quot;never-show&quot;;s:13:&quot;disable_after&quot;;s:1:&quot;0&quot;;s:14:&quot;confirm_method&quot;;s:4:&quot;text&quot;;s:11:&quot;confirm_url&quot;;s:0:&quot;&quot;;s:19:&quot;confirm_success_txt&quot;;s:27:&quot;Thanks for your submission.&quot;;s:17:&quot;confirm_error_txt&quot;;s:90:&quot;There has been an error when submitting your entry. Please contact the site administrator.&quot;;s:11:&quot;enable_ajax&quot;;s:1:&quot;1&quot;;s:12:&quot;after_submit&quot;;s:4:&quot;show&quot;;s:14:&quot;schedule_start&quot;;s:0:&quot;&quot;;s:12:&quot;schedule_end&quot;;s:0:&quot;&quot;;s:16:&quot;enable_operators&quot;;s:1:&quot;0&quot;;s:11:&quot;ajax_search&quot;;s:1:&quot;0&quot;;s:12:&quot;result_templ&quot;;s:0:&quot;&quot;;s:13:&quot;result_fields&quot;;s:0:&quot;&quot;;s:12:&quot;noresult_msg&quot;;s:0:&quot;&quot;;s:9:&quot;view_name&quot;;s:0:&quot;&quot;;s:8:&quot;honeypot&quot;;s:1:&quot;1&quot;;s:9:&quot;login_reg&quot;;s:4:&quot;none&quot;;s:10:&quot;page_title&quot;;s:15:&quot;Request a quote&quot;;}}s:4:&quot;shcs&quot;;a:1:{s:12:&quot;contact_list&quot;;a:3:{s:10:&quot;class_name&quot;;s:9:&quot;emd_quote&quot;;s:4:&quot;type&quot;;s:3:&quot;std&quot;;s:10:&quot;page_title&quot;;s:12:&quot;Contact List&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('request_a_quote...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(425): update_option('request_a_quote...', Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-install-deactivate.php(103): Request_A_Quote_Install_Deactivate->set_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Request_A_Quote_Install_Deactivate->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_reques...', false)
-#11 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_shc_list', 'a:9:{s:3:\"app\";s:15:\"Request a quote\";s:8:\"has_gmap\";i:0;s:13:\"has_form_lite\";i:1;s:8:\"has_lite\";i:1;s:6:\"has_bs\";i:0;s:16:\"has_autocomplete\";i:0;s:10:\"remove_vis\";i:0;s:5:\"forms\";a:1:{s:15:\"request_a_quote\";a:37:{s:4:\"name\";s:15:\"request_a_quote\";s:4:\"type\";s:6:\"submit\";s:3:\"ent\";s:9:\"emd_quote\";s:15:\"targeted_device\";s:8:\"desktops\";s:14:\"label_position\";s:3:\"top\";s:12:\"element_size\";s:6:\"medium\";s:14:\"display_inline\";s:1:\"1\";s:12:\"noaccess_msg\";s:82:\"You are not allowed to access to this area. Please contact the site administrator.\";s:14:\"disable_submit\";s:1:\"0\";s:13:\"submit_status\";s:7:\"publish\";s:21:\"visitor_submit_status\";s:7:\"publish\";s:18:\"submit_button_type\";s:11:\"btn-primary\";s:19:\"submit_button_label\";s:14:\"Send a request\";s:18:\"submit_button_size\";s:9:\"btn-large\";s:19:\"submit_button_block\";s:1:\"0\";s:16:\"submit_button_fa\";s:0:\"\";s:21:\"submit_button_fa_size\";s:0:\"\";s:20:\"submit_button_fa_pos\";s:4:\"left\";s:12:\"show_captcha\";s:10:\"never-show\";s:13:\"disable_after\";s:1:\"0\";s:14:\"confirm_method\";s:4:\"text\";s:11:\"confirm_url\";s:0:\"\";s:19:\"confirm_success_txt\";s:27:\"Thanks for your submission.\";s:17:\"confirm_error_txt\";s:90:\"There has been an error when submitting your entry. Please contact the site administrator.\";s:11:\"enable_ajax\";s:1:\"1\";s:12:\"after_submit\";s:4:\"show\";s:14:\"schedule_start\";s:0:\"\";s:12:\"schedule_end\";s:0:\"\";s:16:\"enable_operators\";s:1:\"0\";s:11:\"ajax_search\";s:1:\"0\";s:12:\"result_templ\";s:0:\"\";s:13:\"result_fields\";s:0:\"\";s:12:\"noresult_msg\";s:0:\"\";s:9:\"view_name\";s:0:\"\";s:8:\"honeypot\";s:1:\"1\";s:9:\"login_reg\";s:4:\"none\";s:10:\"page_title\";s:15:\"Request a quote\";}}s:4:\"shcs\";a:1:{s:12:\"contact_list\";a:3:{s:10:\"class_name\";s:9:\"emd_quote\";s:4:\"type\";s:3:\"std\";s:10:\"page_title\";s:12:\"Contact List\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_request-a-quote/request-a-quote.php'), WP_Hook->do_action, WP_Hook->apply_filters, Request_A_Quote_Install_Deactivate->install, Request_A_Quote_Install_Deactivate->set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:47:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('request_a_quote_attr_list', 'a:1:{s:9:\"emd_quote\";a:18:{s:22:\"emd_contact_first_name\";a:8:{s:5:\"label\";s:10:\"First Name\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:1;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:21:\"emd_contact_last_name\";a:8:{s:5:\"label\";s:9:\"Last Name\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:1;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:19:\"emd_contact_address\";a:8:{s:5:\"label\";s:7:\"Address\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:0;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:16:\"emd_contact_city\";a:8:{s:5:\"label\";s:4:\"City\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:15:\"emd_contact_zip\";a:8:{s:5:\"label\";s:7:\"Zipcode\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:19:\"emd_contact_country\";a:10:{s:5:\"label\";s:7:\"Country\";s:12:\"display_type\";s:6:\"select\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:11:\"select_list\";s:7:\"country\";s:15:\"dependent_state\";s:17:\"emd_contact_state\";s:4:\"type\";s:4:\"char\";}s:17:\"emd_contact_state\";a:10:{s:5:\"label\";s:5:\"State\";s:12:\"display_type\";s:6:\"select\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:11:\"select_list\";s:5:\"state\";s:17:\"dependent_country\";s:19:\"emd_contact_country\";s:4:\"type\";s:4:\"char\";}s:17:\"emd_contact_email\";a:9:{s:5:\"label\";s:5:\"Email\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:1;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:5:\"email\";b:1;}s:17:\"emd_contact_phone\";a:8:{s:5:\"label\";s:5:\"Phone\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:16:\"emd_contact_pref\";a:11:{s:5:\"label\";s:18:\"Contact Preference\";s:12:\"display_type\";s:5:\"radio\";s:8:\"required\";i:1;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:7:\"options\";a:2:{s:5:\"email\";s:5:\"Email\";s:9:\"telephone\";s:9:\"Telephone\";}s:3:\"std\";s:5:\"Email\";s:11:\"conditional\";a:2:{s:10:\"attr_rules\";a:1:{s:25:\"emd_contact_callback_time\";a:4:{s:4:\"type\";s:6:\"select\";s:4:\"view\";s:4:\"show\";s:12:\"depend_check\";s:2:\"is\";s:12:\"depend_value\";s:9:\"telephone\";}}s:15:\"start_hide_attr\";a:1:{i:0;s:25:\"emd_contact_callback_time\";}}}s:25:\"emd_contact_callback_time\";a:9:{s:5:\"label\";s:13:\"Callback Time\";s:12:\"display_type\";s:6:\"select\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:7:\"options\";a:7:{s:0:\"\";s:13:\"Please Select\";s:2:\"em\";s:8:\"5 to 8am\";s:2:\"lm\";s:12:\"11am to 12pm\";s:2:\"ea\";s:8:\"1 to 3pm\";s:2:\"la\";s:8:\"4 to 5pm\";s:2:\"ee\";s:9:\"5 to 7 pm\";s:2:\"le\";s:10:\"9pm to 4am\";}}s:18:\"emd_contact_budget\";a:9:{s:5:\"label\";s:6:\"Budget\";s:12:\"display_type\";s:4:\"text\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:7:\"decimal\";s:6:\"number\";b:1;}s:21:\"emd_contact_extrainfo\";a:8:{s:5:\"label\";s:18:\"Additional Details\";s:12:\"display_type\";s:8:\"textarea\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:0;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";}s:14:\"emd_contact_id\";a:11:{s:5:\"label\";s:2:\"ID\";s:12:\"display_type\";s:6:\"hidden\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:0;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"desc\";s:38:\"Unique identifier for a quote request.\";s:4:\"type\";s:4:\"char\";s:11:\"hidden_func\";s:9:\"unique_id\";s:10:\"uniqueAttr\";b:1;}s:22:\"emd_contact_attachment\";a:9:{s:5:\"label\";s:11:\"Attachments\";s:12:\"display_type\";s:4:\"file\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:0;s:12:\"list_visible\";i:1;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"desc\";s:34:\"Attach related files to the quote.\";s:4:\"type\";s:4:\"char\";}s:14:\"wpas_form_name\";a:11:{s:5:\"label\";s:9:\"Form Name\";s:12:\"display_type\";s:6:\"hidden\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:7:\"options\";a:0:{}s:9:\"no_update\";i:1;s:3:\"std\";s:5:\"admin\";}s:22:\"wpas_form_submitted_by\";a:11:{s:5:\"label\";s:17:\"Form Submitted By\";s:12:\"display_type\";s:6:\"hidden\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:7:\"options\";a:0:{}s:11:\"hidden_func\";s:10:\"user_login\";s:9:\"no_update\";i:1;}s:22:\"wpas_form_submitted_ip\";a:11:{s:5:\"label\";s:17:\"Form Submitted IP\";s:12:\"display_type\";s:6:\"hidden\";s:8:\"required\";i:0;s:9:\"srequired\";i:0;s:10:\"filterable\";i:1;s:12:\"list_visible\";i:0;s:3:\"mid\";s:26:\"emd_quote_info_emd_quote_0\";s:4:\"type\";s:4:\"char\";s:7:\"options\";a:0:{}s:11:\"hidden_func\";s:7:\"user_ip\";s:9:\"no_update\";i:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'request_a_quote_attr_list' , 'a:1:{s:9:&quot;emd_quote&quot;;a:18:{s:22:&quot;emd_contact_first_name&quot;;a:8:{s:5:&quot;label&quot;;s:10:&quot;First Name&quot;;s:12:&quot;display_type&quot;;s:4:&quot;text&quot;;s:8:&quot;required&quot;;i:1;s:9:&quot;srequired&quot;;i:0;s:10:&quot;filterable&quot;;i:1;s:12:&quot;list_visible&quot;;i:1;s:3:&quot;mid&quot;;s:26:&quot;emd_quote_info_emd_quote_0&quot;;s:4:&quot;type&quot;;s:4:&quot;char&quot;;}s:21:&quot;emd_contact_last_name&quot;;a:8:{s:5:&quot;label&quot;;s:9:&quot;Last Name&quot;;s:12:&quot;display_type&quot;;s:4:&quot;text&quot;;s:8:&quot;required&quot;;i:1;s:9:&quot;srequired&quot;;i:0;s:10:&quot;filterable&quot;;i:1;s:12:&quot;list_visible&quot;;i:1;s:3:&quot;mid&quot;;s:26:&quot;emd_quote_info_emd_quote_0&quot;;s:4:&quot;type&quot;;s:4:&quot;char&quot;;}s:19:&quot;emd_conta
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354803.662)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 07:02:04 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/raz-captcha/raz-captcha.php on line 264
+[11-Apr-2025 07:02:13 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/raz-captcha/raz-captcha.php on line 264
+[11-Apr-2025 07:02:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/raz-captcha/raz-captcha.php on line 264
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"raz-captcha"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
