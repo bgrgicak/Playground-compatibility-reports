@@ -1,1 +1,59 @@
-{"landingPage":"\/wp-admin\/post.php?post=17948&action=edit","phpExtensionBundles":["kitchen-sink"],"preferredVersions":{"php":"8.2","wp":"latest"},"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"password"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"gutenkit-blocks-addon"},"options":{"activate":true}},{"step":"installTheme","themeData":{"resource":"wordpress.org\/themes","slug":"hello-blocks"},"options":{"activate":true}},{"step":"importWxr","file":{"resource":"url","url":"https:\/\/raw.githubusercontent.com\/wpmetcom\/wp-playground\/main\/gutenkit\/demo-page.xml"}},{"step":"writeFile","path":"\/wordpress\/wp-content\/mu-plugins\/gkit-blueprint.php","data":"<?php define('GKIT_BLUEPRINT',true);add_action('admin_init',function(){if(isset($_REQUEST['page'])&&isset($_REQUEST['activation-redirect'])&&$_REQUEST['page']=='gutenkit'){update_option('gutenkit_onboard_status','onboarded');$modules_list=get_option('gutenkit_modules_list');if(isset($modules_list['copy-paste-style']['status'])){$modules_list['copy-paste-style']['status']='inactive';update_option('gutenkit_modules_list',$modules_list);}wp_safe_redirect(home_url('\/wp-admin\/post.php?post=17948&action=edit'));exit();}});"}]}
+{
+  "landingPage": "/wp-admin/post.php?post=17948&action=edit",
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "preferredVersions": {
+    "php": "8.2",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "gutenkit-blocks-addon"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "hello-blocks"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/wpmetcom/wp-playground/main/gutenkit/demo-page.xml"
+      }
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/gkit-blueprint.php",
+      "data": "<?php define('GKIT_BLUEPRINT',true);add_action('admin_init',function(){if(isset($_REQUEST['page'])&&isset($_REQUEST['activation-redirect'])&&$_REQUEST['page']=='gutenkit'){update_option('gutenkit_onboard_status','onboarded');$modules_list=get_option('gutenkit_modules_list');if(isset($modules_list['copy-paste-style']['status'])){$modules_list['copy-paste-style']['status']='inactive';update_option('gutenkit_modules_list',$modules_list);}wp_safe_redirect(home_url('/wp-admin/post.php?post=17948&action=edit'));exit();}});"
+    }
+  ]
+}
