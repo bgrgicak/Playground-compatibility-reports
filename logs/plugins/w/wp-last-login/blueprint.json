@@ -1,1 +1,35 @@
-{"landingPage":"\/wp-admin\/users.php","preferredVersions":{"php":"8.0","wp":"latest"},"steps":[{"step":"login","username":"admin","password":"password"},{"step":"runPHP","code":"<?php require_once 'wordpress\/wp-load.php'; wp_insert_user( array( 'user_login' => 'test_subscriber' ) ); $user_id = wp_insert_user( array( 'user_login' => 'test_user' ) ); update_user_meta( 1, 'wp-last-login', time() ); update_user_meta( $user_id, 'wp-last-login', strtotime( 'yesterday' ) ); ?>"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"wp-last-login"},"options":{"activate":true}}]}
+{
+  "landingPage": "/wp-admin/users.php",
+  "preferredVersions": {
+    "php": "8.0",
+    "wp": "latest"
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once 'wordpress/wp-load.php'; wp_insert_user( array( 'user_login' => 'test_subscriber' ) ); $user_id = wp_insert_user( array( 'user_login' => 'test_user' ) ); update_user_meta( 1, 'wp-last-login', time() ); update_user_meta( $user_id, 'wp-last-login', strtotime( 'yesterday' ) ); ?>"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "wp-last-login"
+      },
+      "options": {
+        "activate": true
+      }
+    }
+  ]
+}
