@@ -2,185 +2,448 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:44:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 10:29:53 UTC] Automatic updates starting...
+[11-Apr-2025 10:29:54 UTC]   Automatic plugin updates starting...
+[11-Apr-2025 10:29:54 UTC]   Automatic plugin updates complete.
+[11-Apr-2025 10:30:29 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744367426.854)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 10:31:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227898</p>
+<p>INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpp_predict_entries</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wtwpn_subscribersgroup</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
+				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_wpp_predict_entries</li>
-<li>Executing: UPDATE `wp_wpp_predict_entries` SET `predictActive` = 0 WHERE `predictEndDatetime` &lt; 1744227898 | (no parameters)</li>
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_wtwpn_subscribersgroup</li>
+<li>Executing: INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6` FROM (VALUES ( '' , '1' , 'default group' , 'default group' , '1' , 'All' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpp_predict_entries
+SQLSTATE[HY000]: General error: 20 datatype mismatch
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE wp_wpp_p...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE wp_wpp_p...')
-#3 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
-#6 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
-#7 {main}</pre>
- for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227898 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:44:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:44:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:44:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:44:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:45:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
-#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_wtwpn_subscr...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/wt-web-push-notifications/includes/class-wtwpn-activator.php(96): wpdb->insert('wp_wtwpn_subscr...', Array)
+#6 /wordpress/wp-content/plugins/wt-web-push-notifications/wt-web-push-notifications.php(52): WTWPN_Activator::wtwpn_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wtwpn_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 19:45:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wt-web...', false)
+#11 /internal/eval.php(20): activate_plugin('wt-web-push-not...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All') made by activate_plugin, do_action('activate_wt-web-push-notifications/wt-web-push-notifications.php'), WP_Hook->do_action, WP_Hook->apply_filters, wtwpn_activate, WTWPN_Activator::wtwpn_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:31:29 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 101
+[11-Apr-2025 10:31:29 UTC] PHP Warning:  Undefined variable $bname in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 123
+[11-Apr-2025 10:31:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227907</p>
+<p>INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE rowid IN (SELECT rowid FROM wp_wpp_predict_entries WHERE predictEndDatetime &lt; 1744227907) | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: , 1, default group, default group, 1, All</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpp_predict_entries.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 20 datatype mismatch.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
-#4 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
-#5 {main}</pre>
- for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227907 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:45:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
-#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 19:45:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_wtwpn_subscr...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/wt-web-push-notifications/includes/class-wtwpn-activator.php(96): wpdb->insert('wp_wtwpn_subscr...', Array)
+#4 /wordpress/wp-content/plugins/wt-web-push-notifications/wt-web-push-notifications.php(52): WTWPN_Activator::wtwpn_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wtwpn_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wt-web...', false)
+#9 /internal/eval.php(20): activate_plugin('wt-web-push-not...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All') made by activate_plugin, do_action('activate_wt-web-push-notifications/wt-web-push-notifications.php'), WP_Hook->do_action, WP_Hook->apply_filters, wtwpn_activate, WTWPN_Activator::wtwpn_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 101
+[11-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined variable $bname in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 123
+[11-Apr-2025 10:31:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227917</p>
+<p>INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE rowid IN (SELECT rowid FROM wp_wpp_predict_entries WHERE predictEndDatetime &lt; 1744227917) | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 ) | parameters: , 1, default group, default group, 1, All</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpp_predict_entries.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 20 datatype mismatch.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(55): WP_SQLite_DB->query('UPDATE wp_wpp_p...')
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-predict/wp-p...')
-#4 /internal/eval.php(20): activate_plugin('wp-predict/wp-p...')
-#5 {main}</pre>
- for query UPDATE wp_wpp_predict_entries SET predictActive = 0 WHERE predictEndDatetime < 1744227917 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-predict/wp-predict.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:45:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_wtwpn_subscr...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/wt-web-push-notifications/includes/class-wtwpn-activator.php(96): wpdb->insert('wp_wtwpn_subscr...', Array)
+#4 /wordpress/wp-content/plugins/wt-web-push-notifications/wt-web-push-notifications.php(52): WTWPN_Activator::wtwpn_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wtwpn_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wt-web...', false)
+#9 /internal/eval.php(20): activate_plugin('wt-web-push-not...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_wtwpn_subscribersgroup` (`id`, `status`, `title`, `description`, `is_default`, `user_role`) VALUES ('', '1', 'default group', 'default group', '1', 'All') made by activate_plugin, do_action('activate_wt-web-push-notifications/wt-web-push-notifications.php'), WP_Hook->do_action, WP_Hook->apply_filters, wtwpn_activate, WTWPN_Activator::wtwpn_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 101
+[11-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined variable $bname in /wordpress/wp-content/plugins/wt-web-push-notifications/public/class-wtwpn-public.php on line 123
+[11-Apr-2025 10:31:59 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_get_server_info(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Driver given in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php:185
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Predi...')
-#2 /wordpress/wp-content/plugins/wp-predict/wp-predict.php(9404): register_widget('WP_Widget_Predi...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): rw('')
+#0 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(185): mysqli_get_server_info(Object(WP_SQLite_Driver))
+#1 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(147): MagenetLinkAutoinstall->table()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): MagenetLinkAutoinstall->activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#6 /internal/eval.php(20): activate_plugin('website-monetiz...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php on line 185
+[11-Apr-2025 10:32:07 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_get_server_info(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Translator given in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php:185
+Stack trace:
+#0 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(185): mysqli_get_server_info(Object(WP_SQLite_Translator))
+#1 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(147): MagenetLinkAutoinstall->table()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): MagenetLinkAutoinstall->activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#6 /internal/eval.php(20): activate_plugin('website-monetiz...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php on line 185
+[11-Apr-2025 10:32:15 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_get_server_info(): Argument #1 ($mysql) must be of type mysqli, WP_SQLite_Translator given in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php:185
+Stack trace:
+#0 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(185): mysqli_get_server_info(Object(WP_SQLite_Translator))
+#1 /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php(147): MagenetLinkAutoinstall->table()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): MagenetLinkAutoinstall->activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#6 /internal/eval.php(20): activate_plugin('website-monetiz...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/website-monetization-by-magenet/MagenetLinkAutoinstall.php on line 185
+[11-Apr-2025 10:32:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-template...')
+#2 /internal/eval.php(20): activate_plugin('widget-template...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php on line 13
+[11-Apr-2025 10:32:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-template...')
+#2 /internal/eval.php(20): activate_plugin('widget-template...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php on line 13
+[11-Apr-2025 10:32:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-template...')
+#2 /internal/eval.php(20): activate_plugin('widget-template...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-template-allocator/fk-widget-template-allocator.php on line 13
+[11-Apr-2025 10:33:26 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744367603.825)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 10:33:57 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/wp-amember-dashboard-widget/wp-amember.php on line 14
+[11-Apr-2025 10:33:59 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "widget_wpAmember_init" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-predict"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ],
-          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
-          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
-        },
-        bytes: Uint8Array(2653) [
-           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
-          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
-          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
-           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
-           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
-           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
-          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
-           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
-           99, 104,  97, 114,
-          ... 2553 more items
-        ],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:34:07 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/wp-amember-dashboard-widget/wp-amember.php on line 14
+[11-Apr-2025 10:34:08 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "widget_wpAmember_init" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:34:16 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/wp-amember-dashboard-widget/wp-amember.php on line 14
+[11-Apr-2025 10:34:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "widget_wpAmember_init" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:35:29 UTC] Automatic updates starting...
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:29 UTC]   Automatic plugin updates starting...
+[11-Apr-2025 10:35:29 UTC]   Automatic plugin updates complete.
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:29 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC]   Automatic theme updates starting...
+[11-Apr-2025 10:35:30 UTC]   Automatic theme updates complete.
+[11-Apr-2025 10:35:30 UTC] Automatic updates complete.
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:30 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:31 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:41 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:42 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SystemLiteral &quot; or ' expected in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : SYSTEM or PUBLIC, the URI is missing in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 153
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 155
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Space required after the Public Identifier in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): &lt;!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved P in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string():                                                  ^ in /wordpress/wp-content/plugins/wp-russian-horoscope/index.php on line 102
+[11-Apr-2025 10:35:43 UTC] PHP Warning:  simplexml_load_string(): Entity: line 
