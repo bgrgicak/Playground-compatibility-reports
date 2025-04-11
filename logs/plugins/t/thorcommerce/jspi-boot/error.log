@@ -2,57 +2,83 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 09:50:09 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Error: [11-Apr-2025 10:50:36 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:37 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:46 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:47 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:55 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:56 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:51:08 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744278607.412)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[10-Apr-2025 09:53:03 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php on line 58
+[11-Apr-2025 10:51:16 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_theme-...', false)
-#3 /internal/eval.php(20): activate_plugin('theme-junkie-fe...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[10-Apr-2025 09:53:11 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php on line 58
+[11-Apr-2025 10:51:24 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php:58
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_theme-...', false)
-#3 /internal/eval.php(20): activate_plugin('theme-junkie-fe...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[10-Apr-2025 09:53:19 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_theme-...', false)
-#3 /internal/eval.php(20): activate_plugin('theme-junkie-fe...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[10-Apr-2025 09:53:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:30 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:53:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:30 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:53:39 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:39 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:53:39 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:39 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:53:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:48 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:53:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
-[10-Apr-2025 09:53:48 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
-[10-Apr-2025 09:54:02 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
-[10-Apr-2025 09:54:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
+#0 /wordpress/wp-includes/class-wp-hook.php(324): totalproc_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/total-processing-gateway-for-woocommerce/totalprocessing-gateway.php on line 58
+[11-Apr-2025 10:52:34 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:34 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:52:35 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:35 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:52:43 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:43 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:52:44 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:44 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:52:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:52:53 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 138
+[11-Apr-2025 10:52:53 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/tabs-for-visual-composer/plugin.class.php on line 204
+[11-Apr-2025 10:53:33 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:34 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rncbc-calendar</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:34 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:34 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:42 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:44 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rncbc-calendar</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:44 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:44 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:52 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:53 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rncbc-calendar</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:53 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:53 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:54:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:34 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:35 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:54:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:43 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:54:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:43 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:54:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:52 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:54:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/theme-versioning/index.php on line 30
+[11-Apr-2025 10:54:52 UTC] PHP Warning:  Undefined variable $adapter in /wordpress/wp-content/plugins/theme-versioning/index.php on line 39
+[11-Apr-2025 10:55:06 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
+[11-Apr-2025 10:55:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
 Stack trace:
 #0 /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php(173): NMM_create_carousel_table()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): NMM_activate(false)
@@ -62,8 +88,8 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('thorcommerce/th...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
-[10-Apr-2025 09:54:13 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
-[10-Apr-2025 09:54:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
+[11-Apr-2025 10:55:16 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
+[11-Apr-2025 10:55:16 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
 Stack trace:
 #0 /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php(173): NMM_create_carousel_table()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): NMM_activate(false)
@@ -73,8 +99,8 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('thorcommerce/th...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
-[10-Apr-2025 09:54:23 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
-[10-Apr-2025 09:54:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
+[11-Apr-2025 10:55:27 UTC] PHP Warning:  require_once(src/NMM_Cryptocurrency.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php on line 294
+[11-Apr-2025 10:55:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'src/NMM_Cryptocurrency.php' (include_path='.:') in /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php:294
 Stack trace:
 #0 /wordpress/wp-content/plugins/thorcommerce/thor-commerce.php(173): NMM_create_carousel_table()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): NMM_activate(false)
