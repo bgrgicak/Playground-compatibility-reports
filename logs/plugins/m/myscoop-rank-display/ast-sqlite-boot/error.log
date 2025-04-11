@@ -2,469 +2,76 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 13:10:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:10:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:10:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:10:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:11:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tidio-goapp-external-private-key', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tidio-goapp-external-private-key' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('tidio-goapp-ext...', 'false', '', 'auto')
-#5 /wordpress/wp-content/plugins/mobile-app-converter/init.php(127): update_option('tidio-goapp-ext...', 'false')
-#6 /wordpress/wp-content/plugins/mobile-app-converter/init.php(21): TidioLiveGoApp::getPrivateKey()
-#7 /wordpress/wp-content/plugins/mobile-app-converter/init.php(186): TidioLiveGoApp->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mobile-app-conv...')
-#10 /internal/eval.php(20): activate_plugin('mobile-app-conv...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tidio-goapp-external-private-key', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mobile-app-converter/init.php'), TidioLiveGoApp->__construct, TidioLiveGoApp::getPrivateKey, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:11:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:11:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:11:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:11:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:11:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tidio-goapp-external-private-key', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tidio-goapp-external-private-key' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('tidio-goapp-ext...', 'false', '', 'auto')
-#5 /wordpress/wp-content/plugins/mobile-app-converter/init.php(127): update_option('tidio-goapp-ext...', 'false')
-#6 /wordpress/wp-content/plugins/mobile-app-converter/init.php(21): TidioLiveGoApp::getPrivateKey()
-#7 /wordpress/wp-content/plugins/mobile-app-converter/init.php(186): TidioLiveGoApp->__construct()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tidio-goapp-external-private-key', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/mobile-app-converter/init.php'), TidioLiveGoApp->__construct, TidioLiveGoApp::getPrivateKey, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:11:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:11:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:11:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:11:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:11:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:11:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:11:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:11:43 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:11:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:11:51 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 13:12:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mtc_fortune_cookie_db_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mtc_fortune_cookie_db_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mtc-fortune-cookies/fortune_cookies.php(315): add_option('mtc_fortune_coo...', 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mtc_fortune_cookie_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mtc-fo...', false)
-#9 /internal/eval.php(20): activate_plugin('mtc-fortune-coo...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mtc_fortune_cookie_db_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mtc-fortune-cookies/fortune_cookies.php'), WP_Hook->do_action, WP_Hook->apply_filters, mtc_fortune_cookie_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:12:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:12:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('mtc_fortune_coo...')
-#2 /wordpress/wp-content/plugins/mtc-fortune-cookies/fortune_cookies.php(296): register_widget('mtc_fortune_coo...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): mtc_fortune_cookie_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 13:12:10 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('mtc_fortune_coo...')
-#2 /wordpress/wp-content/plugins/mtc-fortune-cookies/fortune_cookies.php(296): register_widget('mtc_fortune_coo...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): mtc_fortune_cookie_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 13:12:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('mtc_fortune_coo...')
-#2 /wordpress/wp-content/plugins/mtc-fortune-cookies/fortune_cookies.php(296): register_widget('mtc_fortune_coo...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): mtc_fortune_cookie_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 13:12:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mfcf7-zl-admin-do-not-show-pro-tip', '1744463547', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mfcf7-zl-admin-do-not-show-pro-tip' , '1744463547' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mfcf7-zl-admin-...', 1744463547, '', 'auto')
-#5 /wordpress/wp-content/plugins/multiline-files-for-contact-form-7/multiline-files-upload-for-contact-form-7.php(99): update_option('mfcf7-zl-admin-...', 1744463547)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): mfcf7_zl_admin_notice_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_multil...', false)
-#10 /internal/eval.php(20): activate_plugin('multiline-files...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mfcf7-zl-admin-do-not-show-pro-tip', '1744463547', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_multiline-files-for-contact-form-7/multiline-files-upload-for-contact-form-7.php'), WP_Hook->do_action, WP_Hook->apply_filters, mfcf7_zl_admin_notice_activation_hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:12:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mfcf7-zl-admin-do-not-show-rating-tip', '1744636347', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mfcf7-zl-admin-do-not-show-rating-tip' , '1744636347' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mfcf7-zl-admin-...', 1744636347, '', 'auto')
-#5 /wordpress/wp-content/plugins/multiline-files-for-contact-form-7/multiline-files-upload-for-contact-form-7.php(105): update_option('mfcf7-zl-admin-...', 1744636347)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): mfcf7_zl_admin_notice_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_multil...', false)
-#10 /internal/eval.php(20): activate_plugin('multiline-files...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mfcf7-zl-admin-do-not-show-rating-tip', '1744636347', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_multiline-files-for-contact-form-7/multiline-files-upload-for-contact-form-7.php'), WP_Hook->do_action, WP_Hook->apply_filters, mfcf7_zl_admin_notice_activation_hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:12:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:12:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:12:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:12:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:12:53 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:12:53 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:12:53 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:12:53 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:13:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mx_like_button_pro', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mx_like_button_pro' , 'active' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mx_like_button_...', 'active', '', 'auto')
-#5 /wordpress/wp-content/plugins/mx-like-button/mx-like-button.php(86): update_option('mx_like_button_...', 'active')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mx-like-button/...')
-#8 /internal/eval.php(20): activate_plugin('mx-like-button/...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mx_like_button_pro', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mx-like-button/mx-like-button.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:13:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:13:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mx_like_button_pro', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mx_like_button_pro' , 'active' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mx_like_button_...', 'active', '', 'auto')
-#5 /wordpress/wp-content/plugins/mx-like-button/mx-like-button.php(86): update_option('mx_like_button_...', 'active')
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mx_like_button_pro', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/mx-like-button/mx-like-button.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:13:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:13:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:13:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:13:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:14:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php:34
-Stack trace:
-#0 /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php(43): NS_MM_Plugin->__construct()
-#1 /wordpress/wp-content/plugins/mailman-widget/mailman-widget.php(33): NS_MM_Plugin::get_instance()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mailman-widget/...')
-#4 /internal/eval.php(20): activate_plugin('mailman-widget/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php on line 34
-[09-Apr-2025 13:14:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php:34
-Stack trace:
-#0 /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php(43): NS_MM_Plugin->__construct()
-#1 /wordpress/wp-content/plugins/mailman-widget/mailman-widget.php(33): NS_MM_Plugin::get_instance()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mailman-widget/...')
-#4 /internal/eval.php(20): activate_plugin('mailman-widget/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php on line 34
-[09-Apr-2025 13:14:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php:34
-Stack trace:
-#0 /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php(43): NS_MM_Plugin->__construct()
-#1 /wordpress/wp-content/plugins/mailman-widget/mailman-widget.php(33): NS_MM_Plugin::get_instance()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mailman-widget/...')
-#4 /internal/eval.php(20): activate_plugin('mailman-widget/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/mailman-widget/lib/ns_mm_plugin.class.php on line 34
-[09-Apr-2025 13:14:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:14:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:14:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:14:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:15:34 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:15:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:15:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:15:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:15:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_m2_floor_calc_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_m2_floor_calc_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_m2_floor...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_m2_floor...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_m2_floor_calc_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:16:04 UTC] PHP Fatal error:  Uncaught Error: Non-static method MemberAccess::run() cannot be called statically in /wordpress/wp-content/plugins/member-access/member_access.php:40
+Error: [11-Apr-2025 01:49:44 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSTP_TABLE" in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php:26
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('member-access/m...')
-#2 /internal/eval.php(20): activate_plugin('member-access/m...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mysearchtermspr...')
+#2 /internal/eval.php(20): activate_plugin('mysearchtermspr...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/member-access/member_access.php on line 40
-[09-Apr-2025 13:16:13 UTC] PHP Fatal error:  Uncaught Error: Non-static method MemberAccess::run() cannot be called statically in /wordpress/wp-content/plugins/member-access/member_access.php:40
+  thrown in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php on line 26
+[11-Apr-2025 01:49:51 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSTP_TABLE" in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php:26
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('member-access/m...')
-#2 /internal/eval.php(20): activate_plugin('member-access/m...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mysearchtermspr...')
+#2 /internal/eval.php(20): activate_plugin('mysearchtermspr...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/member-access/member_access.php on line 40
-[09-Apr-2025 13:16:21 UTC] PHP Fatal error:  Uncaught Error: Non-static method MemberAccess::run() cannot be called statically in /wordpress/wp-content/plugins/member-access/member_access.php:40
+  thrown in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php on line 26
+[11-Apr-2025 01:49:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSTP_TABLE" in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php:26
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('member-access/m...')
-#2 /internal/eval.php(20): activate_plugin('member-access/m...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mysearchtermspr...')
+#2 /internal/eval.php(20): activate_plugin('mysearchtermspr...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/member-access/member_access.php on line 40
-[09-Apr-2025 13:16:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:16:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:16:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:16:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:17:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:17:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:17:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:17:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:17:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mobile_contact_bar', 'a:3:{s:8:\"settings\";a:4:{s:3:\"bar\";a:15:{s:6:\"device\";s:4:\"none\";s:10:\"is_new_tab\";i:0;s:5:\"color\";s:7:\"#3cc391\";s:7:\"opacity\";i:1;s:6:\"height\";i:50;s:5:\"width\";i:100;s:19:\"horizontal_position\";s:6:\"center\";s:17:\"vertical_position\";s:6:\"bottom\";s:8:\"is_fixed\";i:1;s:12:\"space_height\";i:0;s:18:\"placeholder_height\";i:50;s:17:\"placeholder_color\";s:7:\"#ff647d\";s:9:\"is_border\";s:4:\"none\";s:12:\"border_color\";s:7:\"#174b38\";s:12:\"border_width\";i:1;}s:5:\"icons\";a:7:{s:4:\"size\";s:2:\"lg\";s:5:\"color\";s:7:\"#ffffff\";s:9:\"alignment\";s:9:\"justified\";s:5:\"width\";i:70;s:9:\"is_border\";s:4:\"none\";s:12:\"border_color\";s:7:\"#ffffff\";s:12:\"border_width\";i:1;}s:6:\"badges\";a:4:{s:16:\"background_color\";s:7:\"#c86414\";s:10:\"font_color\";s:7:\"#ffffff\";s:4:\"size\";d:0.5;s:5:\"place\";s:9:\"top-right\";}s:6:\"toggle\";a:7:{s:9:\"is_render\";i:0;s:9:\"is_cookie\";i:0;s:5:\"shape\";s:7:\"rounded\";s:5:\"color\";s:7:\"#2a8966\";s:5:\"label\";s:10:\"Contact Us\";s:4:\"size\";d:0.9;s:12:\"is_animation\";i:1;}}s:8:\"contacts\";a:17:{i:0;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:12:\"fas fa-phone\";s:5:\"title\";s:24:\"Phone Number for calling\";s:11:\"placeholder\";s:16:\"tel:+15417543010\";s:3:\"uri\";s:0:\"\";}i:1;a:7:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:14:\"far fa-comment\";s:5:\"title\";s:24:\"Phone Number for texting\";s:11:\"placeholder\";s:16:\"sms:+15417543010\";s:3:\"uri\";s:0:\"\";s:10:\"parameters\";a:1:{i:0;a:4:{s:3:\"key\";s:4:\"body\";s:4:\"type\";s:4:\"text\";s:11:\"placeholder\";s:11:\"Message ...\";s:5:\"value\";s:0:\"\";}}}i:2;a:7:{s:7:\"checked\";i:1;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:15:\"far fa-envelope\";s:5:\"title\";s:13:\"Email Address\";s:11:\"placeholder\";s:27:\"mailto:username@example.com\";s:3:\"uri\";s:26:\"mailto:admin@localhost.com\";s:10:\"parameters\";a:4:{i:0;a:4:{s:3:\"key\";s:7:\"subject\";s:4:\"type\";s:4:\"text\";s:11:\"placeholder\";s:11:\"Subject ...\";s:5:\"value\";s:0:\"\";}i:1;a:4:{s:3:\"key\";s:4:\"body\";s:4:\"type\";s:8:\"textarea\";s:11:\"placeholder\";s:8:\"Text ...\";s:5:\"value\";s:0:\"\";}i:2;a:4:{s:3:\"key\";s:2:\"cc\";s:4:\"type\";s:5:\"email\";s:11:\"placeholder\";s:18:\"example@domain.com\";s:5:\"value\";s:0:\"\";}i:3;a:4:{s:3:\"key\";s:3:\"bcc\";s:4:\"type\";s:5:\"email\";s:11:\"placeholder\";s:39:\"example1@domain.com,example2@domain.net\";s:5:\"value\";s:0:\"\";}}}i:3;a:7:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:15:\"fab fa-whatsapp\";s:5:\"title\";s:8:\"WhatsApp\";s:11:\"placeholder\";s:0:\"\";s:3:\"uri\";s:29:\"https://api.whatsapp.com/send\";s:10:\"parameters\";a:2:{i:0;a:4:{s:3:\"key\";s:5:\"phone\";s:4:\"type\";s:4:\"text\";s:11:\"placeholder\";s:11:\"15417543010\";s:5:\"value\";s:0:\"\";}i:1;a:4:{s:3:\"key\";s:4:\"text\";s:4:\"type\";s:4:\"text\";s:11:\"placeholder\";s:11:\"Message ...\";s:5:\"value\";s:0:\"\";}}}i:4;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:19:\"fas fa-location-dot\";s:5:\"title\";s:11:\"Google Maps\";s:11:\"placeholder\";s:50:\"https://google.com/maps/place/Dacre+St,+London+UK/\";s:3:\"uri\";s:0:\"\";}i:5;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:17:\"fab fa-facebook-f\";s:5:\"title\";s:8:\"Facebook\";s:11:\"placeholder\";s:33:\"https://www.facebook.com/username\";s:3:\"uri\";s:0:\"\";}i:6;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:18:\"fab fa-linkedin-in\";s:5:\"title\";s:8:\"LinkedIn\";s:11:\"placeholder\";s:36:\"https://www.linkedin.com/in/username\";s:3:\"uri\";s:0:\"\";}i:7;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:16:\"fab fa-x-twitter\";s:5:\"title\";s:7:\"Twitter\";s:11:\"placeholder\";s:28:\"https://twitter.com/username\";s:3:\"uri\";s:0:\"\";}i:8;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:20:\"fab fa-google-plus-g\";s:5:\"title\";s:7:\"Google+\";s:11:\"placeholder\";s:32:\"https://plus.google.com/username\";s:3:\"uri\";s:0:\"\";}i:9;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:16:\"fab fa-instagram\";s:5:\"title\";s:9:\"Instagram\";s:11:\"placeholder\";s:34:\"https://www.instagram.com/username\";s:3:\"uri\";s:0:\"\";}i:10;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:14:\"fab fa-youtube\";s:5:\"title\";s:7:\"YouTube\";s:11:\"placeholder\";s:37:\"https://www.youtube.com/user/username\";s:3:\"uri\";s:0:\"\";}i:11;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:18:\"fab fa-pinterest-p\";s:5:\"title\";s:9:\"Pinterest\";s:11:\"placeholder\";s:34:\"https://www.pinterest.com/username\";s:3:\"uri\";s:0:\"\";}i:12;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:13:\"fab fa-tumblr\";s:5:\"title\";s:6:\"Tumblr\";s:11:\"placeholder\";s:27:\"https://username.tumblr.com\";s:3:\"uri\";s:0:\"\";}i:13;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:14:\"fab fa-vimeo-v\";s:5:\"title\";s:5:\"Vimeo\";s:11:\"placeholder\";s:26:\"https://vimeo.com/username\";s:3:\"uri\";s:0:\"\";}i:14;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:13:\"fab fa-flickr\";s:5:\"title\";s:6:\"Flickr\";s:11:\"placeholder\";s:38:\"https://www.flickr.com/people/username\";s:3:\"uri\";s:0:\"\";}i:15;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:12:\"fab fa-skype\";s:5:\"title\";s:17:\"Skype for calling\";s:11:\"placeholder\";s:19:\"skype:username?call\";s:3:\"uri\";s:0:\"\";}i:16;a:6:{s:7:\"checked\";i:0;s:4:\"type\";s:6:\"Sample\";s:4:\"icon\";s:12:\"fab fa-skype\";s:5:\"title\";s:18:\"Skype for chatting\";s:11:\"placeholder\";s:19:\"skype:username?chat\";s:3:\"uri\";s:0:\"\";}}s:6:\"styles\";s:1327:\"#mobile-contact-bar{box-sizing:border-box;display:block;font-size:100%;font-size:1rem;opacity:1;position:relative;width:100%;z-index:9998;}#mobile-contact-bar:before,#mobile-contact-bar:after{content:\"\";display:table;}#mobile-contact-bar:after{clear:both;}#mobile-contact-bar-outer{background-color:#3cc391;box-sizing:border-box;height:50px;overflow:hidden;width:100%;}#mobile-contact-bar ul{box-sizing:border-box;line-height:0;list-style-type:none;margin:0;padding:0;position:relative;text-align:center;width:100%;}#mobile-contact-bar ul li{box-sizing:border-box;display:inline-block;height:50px;margin:0;padding:0;text-align:center;height:50px;width:100%;}#mobile-contact-bar ul li a{color:#ffffff;cursor:pointer;display: block;height:100%;position:relative;z-index:9998;}#mobile-contact-bar ul li a:active,#mobile-contact-bar ul li a:focus{outline:none;}.fa-stack{height:2em;line-height:2em;width:2em;position:relative;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);}.mobile-contact-bar-badge{background-color:#c86414;border-radius:100%;color:#ffffff;display:block;font-size:0.5em;height:1.5em;width:1.5em;line-height:1.5;position:absolute;top:0;right:0;text-indent:0;}body{border-bottom:50px solid #ff647d!important;}#mobile-contact-bar{position:fixed;left:0;bottom:0;}\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mobile_contact_bar' , 'a:3:{s:8:&quot;settings&quot;;a:4:{s:3:&quot;bar&quot;;a:15:{s:6:&quot;device&quot;;s:4:&quot;none&quot;;s:10:&quot;is_new_tab&quot;;i:0;s:5:&quot;color&quot;;s:7:&quot;#3cc391&quot;;s:7:&quot;opacity&quot;;i:1;s:6:&quot;height&quot;;i:50;s:5:&quot;width&quot;;i:100;s:19:&quot;horizontal_position&quot;;s:6:&quot;center&quot;;s:17:&quot;vertical_position&quot;;s:6:&quot;bottom&quot;;s:8:&quot;is_fixed&quot;;i:1;s:12:&quot;space_height&quot;;i:0;s:18:&quot;placeholder_height&quot;;i:50;s:17:&quot;placeholder_color&quot;;s:7:&quot;#ff647d&quot;;s:9:&quot;is_border&quot;;s:4:&quot;none&quot;;s:12:&quot;border_color&quot;;s:7:&quot;#174b38&quot;;s:12:&quot;border_width&quot;;i:1;}s:5:&quot;icons&quot;;a:7:{s:4:&quot;size&quot;;s:2:&quot;lg&quot;;s:5:&quot;color&quot;;s:7:&quot;#ffffff&quot;;s:9:&quot;alignment&quot;;s:9:&quot;justified&quot;;s:5:&quot;width&quot;;i:70;s:9:&quot;is_border&quot;;s:4:&quot;none&quot;;s:12:&quot;border_color&quot;;s:7:&quot;#ffffff&quot;;s:12:&quot;border_width&quot;;i:1;}s:6:&quot;badges&quot;;a:4:{s:16:&quot;background_color&quot;;s:7:&quot;#c86414&quot;;s:10:&quot;font_color&quot;;s:7:&quot;#ffffff&quot;;s:4:&quot;size&quot;;d:0.5;s:5:&quot;place&quot;;s:9:&quot;top-right&quot;;}s:6:&quot;toggle&quot;;a:7:{s:9:&quot;is_render&quot;;i:0;s:9:&quot;is_cookie&quot;;i:0;s:5:&quot;shape&quot;;s:7:&quot;rounded&quot;;s:5:&quot;color&quot;;s:7:&quot;#2a8966&quot;;s:5:&quot;label&quot;;s:10:&quot;Contact Us&quot;;s:4:&quot;size&quot;;d:0.9;s:12:&quot;is_animation&quot;;i:1;}}s:8:&quot;contacts&quot;;a:17:{i:0;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:12:&quot;fas fa-phone&quot;;s:5:&quot;title&quot;;s:24:&quot;Phone Number for calling&quot;;s:11:&quot;placeholder&quot;;s:16:&quot;tel:+15417543010&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:1;a:7:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:14:&quot;far fa-comment&quot;;s:5:&quot;title&quot;;s:24:&quot;Phone Number for texting&quot;;s:11:&quot;placeholder&quot;;s:16:&quot;sms:+15417543010&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;s:10:&quot;parameters&quot;;a:1:{i:0;a:4:{s:3:&quot;key&quot;;s:4:&quot;body&quot;;s:4:&quot;type&quot;;s:4:&quot;text&quot;;s:11:&quot;placeholder&quot;;s:11:&quot;Message ...&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}}}i:2;a:7:{s:7:&quot;checked&quot;;i:1;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:15:&quot;far fa-envelope&quot;;s:5:&quot;title&quot;;s:13:&quot;Email Address&quot;;s:11:&quot;placeholder&quot;;s:27:&quot;mailto:username@example.com&quot;;s:3:&quot;uri&quot;;s:26:&quot;mailto:admin@localhost.com&quot;;s:10:&quot;parameters&quot;;a:4:{i:0;a:4:{s:3:&quot;key&quot;;s:7:&quot;subject&quot;;s:4:&quot;type&quot;;s:4:&quot;text&quot;;s:11:&quot;placeholder&quot;;s:11:&quot;Subject ...&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}i:1;a:4:{s:3:&quot;key&quot;;s:4:&quot;body&quot;;s:4:&quot;type&quot;;s:8:&quot;textarea&quot;;s:11:&quot;placeholder&quot;;s:8:&quot;Text ...&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}i:2;a:4:{s:3:&quot;key&quot;;s:2:&quot;cc&quot;;s:4:&quot;type&quot;;s:5:&quot;email&quot;;s:11:&quot;placeholder&quot;;s:18:&quot;example@domain.com&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}i:3;a:4:{s:3:&quot;key&quot;;s:3:&quot;bcc&quot;;s:4:&quot;type&quot;;s:5:&quot;email&quot;;s:11:&quot;placeholder&quot;;s:39:&quot;example1@domain.com,example2@domain.net&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}}}i:3;a:7:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:15:&quot;fab fa-whatsapp&quot;;s:5:&quot;title&quot;;s:8:&quot;WhatsApp&quot;;s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:3:&quot;uri&quot;;s:29:&quot;https://api.whatsapp.com/send&quot;;s:10:&quot;parameters&quot;;a:2:{i:0;a:4:{s:3:&quot;key&quot;;s:5:&quot;phone&quot;;s:4:&quot;type&quot;;s:4:&quot;text&quot;;s:11:&quot;placeholder&quot;;s:11:&quot;15417543010&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}i:1;a:4:{s:3:&quot;key&quot;;s:4:&quot;text&quot;;s:4:&quot;type&quot;;s:4:&quot;text&quot;;s:11:&quot;placeholder&quot;;s:11:&quot;Message ...&quot;;s:5:&quot;value&quot;;s:0:&quot;&quot;;}}}i:4;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:19:&quot;fas fa-location-dot&quot;;s:5:&quot;title&quot;;s:11:&quot;Google Maps&quot;;s:11:&quot;placeholder&quot;;s:50:&quot;https://google.com/maps/place/Dacre+St,+London+UK/&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:5;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:17:&quot;fab fa-facebook-f&quot;;s:5:&quot;title&quot;;s:8:&quot;Facebook&quot;;s:11:&quot;placeholder&quot;;s:33:&quot;https://www.facebook.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:6;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:18:&quot;fab fa-linkedin-in&quot;;s:5:&quot;title&quot;;s:8:&quot;LinkedIn&quot;;s:11:&quot;placeholder&quot;;s:36:&quot;https://www.linkedin.com/in/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:7;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:16:&quot;fab fa-x-twitter&quot;;s:5:&quot;title&quot;;s:7:&quot;Twitter&quot;;s:11:&quot;placeholder&quot;;s:28:&quot;https://twitter.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:8;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:20:&quot;fab fa-google-plus-g&quot;;s:5:&quot;title&quot;;s:7:&quot;Google+&quot;;s:11:&quot;placeholder&quot;;s:32:&quot;https://plus.google.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:9;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:16:&quot;fab fa-instagram&quot;;s:5:&quot;title&quot;;s:9:&quot;Instagram&quot;;s:11:&quot;placeholder&quot;;s:34:&quot;https://www.instagram.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:10;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:14:&quot;fab fa-youtube&quot;;s:5:&quot;title&quot;;s:7:&quot;YouTube&quot;;s:11:&quot;placeholder&quot;;s:37:&quot;https://www.youtube.com/user/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:11;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:18:&quot;fab fa-pinterest-p&quot;;s:5:&quot;title&quot;;s:9:&quot;Pinterest&quot;;s:11:&quot;placeholder&quot;;s:34:&quot;https://www.pinterest.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:12;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:13:&quot;fab fa-tumblr&quot;;s:5:&quot;title&quot;;s:6:&quot;Tumblr&quot;;s:11:&quot;placeholder&quot;;s:27:&quot;https://username.tumblr.com&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:13;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:14:&quot;fab fa-vimeo-v&quot;;s:5:&quot;title&quot;;s:5:&quot;Vimeo&quot;;s:11:&quot;placeholder&quot;;s:26:&quot;https://vimeo.com/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:14;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:13:&quot;fab fa-flickr&quot;;s:5:&quot;title&quot;;s:6:&quot;Flickr&quot;;s:11:&quot;placeholder&quot;;s:38:&quot;https://www.flickr.com/people/username&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:15;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:12:&quot;fab fa-skype&quot;;s:5:&quot;title&quot;;s:17:&quot;Skype for calling&quot;;s:11:&quot;placeholder&quot;;s:19:&quot;skype:username?call&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}i:16;a:6:{s:7:&quot;checked&quot;;i:0;s:4:&quot;type&quot;;s:6:&quot;Sample&quot;;s:4:&quot;icon&quot;;s:12:&quot;fab fa-skype&quot;;s:5:&quot;title&quot;;s:18:&quot;Skype for chatting&quot;;s:11:&quot;placeholder&quot;;s:19:&quot;skype:username?chat&quot;;s:3:&quot;uri&quot;;s:0:&quot;&quot;;}}s:6:&quot;styles&quot;;s:1327:&quot;#mobile-contact-bar{box-sizing:border-box;display:block;font-size:100%;font-size:1rem;opacity:1;position:relative;width:100%;z-index:9998;}#mobile-contact-bar:before,#mobile-contact-bar:after{content:&quot;&quot;;display:table;}#mobile-contact-bar:after{clear:both;}#mobile-contact-bar-outer{background-color:#3cc391;box-sizing:border-box;height:50px;overflow:hidden;width:100%;}#mobile-contact-bar ul{box-sizing:border-box;line-height:0;list-style-type:none;margin:0;padding:0;position:relative;text-align:center;width:100%;}#mobile-contact-bar ul li{box-sizing:border-box;display:inline-block;height:50px;margin:0;padding:0;text-align:center;height:50px;width:100%;}#mobile-contact-bar ul li a{color:#ffffff;cursor:pointer;display: block;height:100%;position:relative;z-index:9998;}#mobile-contact-bar ul li a:active,#mobile-contact-bar ul li a:focus{outline:none;}.fa-stack{height:2em;line-height:2em;width:2em;position:relative;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);}.mobile-contact-bar-badge{background-color:#c86414;border-radius:100%;color:#ffffff;display:block;font-size:0.5em;height:1.5em;width:1.5em;line-height:1.5;position:absolute;top:0;right:0;text-indent:0;}body{border-bottom:50px solid #ff647d!important;}#mobile-contact-bar{position:fixed;left:0;bottom:0;}&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded
+  thrown in /wordpress/wp-content/plugins/mysearchtermspresenter/mysearchtermspresenter.php on line 26
+[11-Apr-2025 01:50:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/magic-touch/magictouch/plugin.php on line 198
+[11-Apr-2025 01:50:14 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/magic-touch/magictouch/plugin.php on line 198
+[11-Apr-2025 01:50:22 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/magic-touch/magictouch/plugin.php on line 198
+[11-Apr-2025 01:52:21 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method myScoop::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_myscoo...', false)
+#3 /internal/eval.php(20): activate_plugin('myscoop-rank-di...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"myscoop-rank-display"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
