@@ -2,552 +2,25 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 01:47:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:47:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_kiip_moment_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_kiip_moment_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_kiip_mom...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_kiip_mom...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_kiip_moment_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_invoice_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_document_invoice_increment_id' , '100000000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('kiwiz_document_...', 100000000, '', 'auto')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(126): update_option('kiwiz_document_...', 100000000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->init_options('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#11 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#14 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_invoice_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->init_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_refund_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_document_refund_increment_id' , '100000000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('kiwiz_document_...', 100000000, '', 'auto')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(126): update_option('kiwiz_document_...', 100000000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->init_options('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#11 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#14 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_refund_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->init_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_update_increment_id', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_update_increment_id' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(159): add_option('kiwiz_update_in...', '1')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#13 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_update_increment_id', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_kiwiz-notice-install', '1744249739', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_kiwiz-notice-install' , '1744249739' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744249739, '', 'off')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(97): set_transient('kiwiz-notice-in...', true, 10)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): KIWIZ_Wocommerce_PDF_certificate->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kiwiz-...', false)
-#10 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_kiwiz-notice-install', '1744249739', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), WP_Hook->do_action, WP_Hook->apply_filters, KIWIZ_Wocommerce_PDF_certificate->activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_kiwiz-notice-install', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_kiwiz-notice-install' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_kiwi...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(97): set_transient('kiwiz-notice-in...', true, 10)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): KIWIZ_Wocommerce_PDF_certificate->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_kiwiz-...', false)
-#10 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_kiwiz-notice-install', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), WP_Hook->do_action, WP_Hook->apply_filters, KIWIZ_Wocommerce_PDF_certificate->activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:49 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:50 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_invoice_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_document_invoice_increment_id' , '100000000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('kiwiz_document_...', 100000000, '', 'auto')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(126): update_option('kiwiz_document_...', 100000000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->init_options('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#11 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#12 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_invoice_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->init_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_refund_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_document_refund_increment_id' , '100000000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('kiwiz_document_...', 100000000, '', 'auto')
-#5 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(126): update_option('kiwiz_document_...', 100000000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->init_options('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#11 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#12 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_document_refund_increment_id', '100000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->init_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_update_increment_id', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kiwiz_update_increment_id' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(159): add_option('kiwiz_update_in...', '1')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#9 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#10 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kiwiz_update_increment_id', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:49:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_invoice_increment_id' FOR UPDATE</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT option_value FROM wp_options WHERE option_name = :param0  FOR UPDATE | parameters: kiwiz_document_invoice_increment_id</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "FOR": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT option_v...')
-#2 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(145): wpdb->get_results('SELECT option_v...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#7 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#11 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#12 {main}</pre>
- for query SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_invoice_increment_id' FOR UPDATE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:49:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_refund_increment_id' FOR UPDATE</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT option_value FROM wp_options WHERE option_name = :param0  FOR UPDATE | parameters: kiwiz_document_refund_increment_id</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "FOR": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT option_v...')
-#2 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(146): wpdb->get_results('SELECT option_v...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#7 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#11 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#12 {main}</pre>
- for query SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_refund_increment_id' FOR UPDATE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:49:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_invoice_increment_id' FOR UPDATE</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT option_value FROM wp_options WHERE option_name = :param0  FOR UPDATE | parameters: kiwiz_document_invoice_increment_id</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "FOR": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT option_v...')
-#2 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(145): wpdb->get_results('SELECT option_v...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#7 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#11 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#12 {main}</pre>
- for query SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_invoice_increment_id' FOR UPDATE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:49:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_refund_increment_id' FOR UPDATE</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT option_value FROM wp_options WHERE option_name = :param0  FOR UPDATE | parameters: kiwiz_document_refund_increment_id</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "FOR": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT option_v...')
-#2 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz-init.php(146): wpdb->get_results('SELECT option_v...', 'ARRAY_A')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Kiwiz_Init->update_increment_id('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/includes/class-kiwiz.php(44): do_action('kiwiz_loaded')
-#7 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(82): Kiwiz->__construct()
-#8 /wordpress/wp-content/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php(170): KIWIZ_Wocommerce_PDF_certificate->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('kiwiz-invoices-...')
-#11 /internal/eval.php(20): activate_plugin('kiwiz-invoices-...')
-#12 {main}</pre>
- for query SELECT option_value FROM wp_options WHERE option_name = 'kiwiz_document_refund_increment_id' FOR UPDATE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/kiwiz-invoices-certification-pdf-file/woocommerce-gateway-certification-de-facture-et-gestion-de-pdf-kiwiz.php'), KIWIZ_Wocommerce_PDF_certificate->__construct, Kiwiz->__construct, do_action('kiwiz_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kiwiz_Init->update_increment_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:49:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:49:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:49:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:49:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:49:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:49:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:49:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:49:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:50:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:50:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:50:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:50:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:51:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kr_custom_user_table_mapping', 'a:6:{s:10:\"table_name\";b:0;s:7:\"user_id\";b:0;s:8:\"username\";b:0;s:5:\"email\";b:0;s:10:\"full_names\";b:0;s:6:\"avatar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'kr_custom_user_table_mapping' , 'a:6:{s:10:&quot;table_name&quot;;b:0;s:7:&quot;user_id&quot;;b:0;s:8:&quot;username&quot;;b:0;s:5:&quot;email&quot;;b:0;s:10:&quot;full_names&quot;;b:0;s:6:&quot;avatar&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('kr_custom_user_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1524): update_option('kr_custom_user_...', Array)
-#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1534): set_custom_user_table_mapping_kr(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('katorymnd-react...')
-#9 /internal/eval.php(20): activate_plugin('katorymnd-react...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('kr_custom_user_table_mapping', 'a:6:{s:10:\"table_name\";b:0;s:7:\"user_id\";b:0;s:8:\"username\";b:0;s:5:\"email\";b:0;s:10:\"full_names\";b:0;s:6:\"avatar\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php'), set_custom_user_table_mapping_kr, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:51:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 12:50:45 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:50:45 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:50:45 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:50:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:50:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:50:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:50:55 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:50:55 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:50:55 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:50:57 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:50:57 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:50:57 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:51:05 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:51:05 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:51:05 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:51:06 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_LocationController.php on line 38
+[11-Apr-2025 12:51:06 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_SermonController.php on line 76
+[11-Apr-2025 12:51:06 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/k7-church/inc/controller/Church_EventController.php on line 526
+[11-Apr-2025 12:51:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE IF NOT EXISTS wp_katorymnd_kr_comments (
@@ -602,4 +75,651 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
 #3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
 #4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(299): dbDelta(Array)
-#5 /wordpress/wp-include
+#5 /wordpress/wp-includes/class-wp-hook.php(324): katorymnd_create_tables(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#9 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_katorymnd_kr_comments (
+                id VARCHAR(255) PRIMARY KEY,
+                userName VARCHAR(255) NOT NULL,
+                content TEXT NOT NULL,
+                parent_id VARCHAR(255),
+                timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (parent_id) REFERENCES wp_katorymnd_kr_comments(id)
+            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, katorymnd_create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_katorymnd_kr_reactions (
+                comment_id VARCHAR(255),
+                user_name VARCHAR(255),
+                reaction_type VARCHAR(255),
+                PRIMARY KEY (comment_id, user_name, reaction_type),
+                FOREIGN KEY (comment_id) REFERENCES wp_katorymnd_kr_comments(id)
+            ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_katorymnd_kr_reactions</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, comment_id, 1, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, user_name, 2, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, reaction_type, 3, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?,?,?)
+				 | parameters: database_name_here, wp_katorymnd_kr_reactions, comment_id, user_name, reaction_type</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, 0, database_name_here, PRIMARY, 1, comment_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, 0, database_name_here, PRIMARY, 2, user_name, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, 0, database_name_here, PRIMARY, 3, reaction_type, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_katorymnd_kr_reactions, database_name_here, wp_katorymnd_kr_reactions</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(299): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): katorymnd_create_tables(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#9 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#10 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_katorymnd_kr_reactions (
+                comment_id VARCHAR(255),
+                user_name VARCHAR(255),
+                reaction_type VARCHAR(255),
+                PRIMARY KEY (comment_id, user_name, reaction_type),
+                FOREIGN KEY (comment_id) REFERENCES wp_katorymnd_kr_comments(id)
+            ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, katorymnd_create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1315): add_kr_demo_Comment('PC1', 'User1', 'This is User1's...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1', 'User1', 'This is User1\'s primary comment.', NULL)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1' , 'User1' , 'This is User1''s primary comment.' , NULL )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1315): add_kr_demo_Comment('PC1', 'User1', 'This is User1's...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1', 'User1', 'This is User1\'s primary comment.', NULL) made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1316): add_kr_demo_Comment('PC2', 'User4', 'This is User4's...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC2' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC2', 'User4', 'This is User4\'s standalone comment.', NULL)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC2' , 'User4' , 'This is User4''s standalone comment.' , NULL )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1316): add_kr_demo_Comment('PC2', 'User4', 'This is User4's...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC2', 'User4', 'This is User4\'s standalone comment.', NULL) made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1319): add_kr_demo_Comment('PC1R1', 'User2A', 'This is a respo...', 'PC1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1', 'User2A', 'This is a response from User2A to User1.', 'PC1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R1' , 'User2A' , 'This is a response from User2A to User1.' , 'PC1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1319): add_kr_demo_Comment('PC1R1', 'User2A', 'This is a respo...', 'PC1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1', 'User2A', 'This is a response from User2A to User1.', 'PC1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1320): add_kr_demo_Comment('PC1R2', 'User6', 'This is a respo...', 'PC1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R2' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R2', 'User6', 'This is a response from User6 to User1.', 'PC1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R2' , 'User6' , 'This is a response from User6 to User1.' , 'PC1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1320): add_kr_demo_Comment('PC1R2', 'User6', 'This is a respo...', 'PC1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R2', 'User6', 'This is a response from User6 to User1.', 'PC1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1SR1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1323): add_kr_demo_Comment('PC1R1SR1', 'User3B', 'This is User3B ...', 'PC1R1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1', 'User3B', 'This is User3B also replying to User2A.', 'PC1R1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R1SR1' , 'User3B' , 'This is User3B also replying to User2A.' , 'PC1R1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1323): add_kr_demo_Comment('PC1R1SR1', 'User3B', 'This is User3B ...', 'PC1R1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1', 'User3B', 'This is User3B also replying to User2A.', 'PC1R1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1SR2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1324): add_kr_demo_Comment('PC1R1SR2', 'User8', 'This is User8 a...', 'PC1R1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR2' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR2', 'User8', 'This is User8 also responding to User2A.', 'PC1R1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R1SR2' , 'User8' , 'This is User8 also responding to User2A.' , 'PC1R1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1324): add_kr_demo_Comment('PC1R1SR2', 'User8', 'This is User8 a...', 'PC1R1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR2', 'User8', 'This is User8 also responding to User2A.', 'PC1R1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1SSR1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1SR1SSR1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1327): add_kr_demo_Comment('PC1R1SR1SSR1', 'User4C', 'User4C here, ad...', 'PC1R1SR1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1SSR1' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1SSR1', 'User4C', 'User4C here, adding my thoughts to what User3B said.', 'PC1R1SR1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R1SR1SSR1' , 'User4C' , 'User4C here, adding my thoughts to what User3B said.' , 'PC1R1SR1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1327): add_kr_demo_Comment('PC1R1SR1SSR1', 'User4C', 'User4C here, ad...', 'PC1R1SR1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1SSR1', 'User4C', 'User4C here, adding my thoughts to what User3B said.', 'PC1R1SR1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1SSR2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1SR1SSR2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1293): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1328): add_kr_demo_Comment('PC1R1SR1SSR2', 'User5D', 'And this is Use...', 'PC1R1SR1')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#10 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#11 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR1SSR2' made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1SSR2', 'User5D', 'And this is User5D, chiming in after User4C\'s comments.', 'PC1R1SR1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_katorymnd_kr_comments</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_katorymnd_kr_comments</li>
+<li>Executing: INSERT INTO `wp_katorymnd_kr_comments` () SELECT  FROM (VALUES ( 'PC1R1SR1SSR2' , 'User5D' , 'And this is User5D, chiming in after User4C''s comments.' , 'PC1R1SR1' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_katorymnd_kr...', Array, Array, 'INSERT')
+#5 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1305): wpdb->insert('wp_katorymnd_kr...', Array, Array)
+#6 /wordpress/wp-content/plugins/katorymnd-reaction-process/katorymnd-reaction-process.php(1328): add_kr_demo_Comment('PC1R1SR1SSR2', 'User5D', 'And this is Use...', 'PC1R1SR1')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): populate_kr_Comments(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katory...', false)
+#11 /internal/eval.php(20): activate_plugin('katorymnd-react...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_katorymnd_kr_comments` (`id`, `userName`, `content`, `parent_id`) VALUES ('PC1R1SR1SSR2', 'User5D', 'And this is User5D, chiming in after User4C\'s comments.', 'PC1R1SR1') made by activate_plugin, do_action('activate_katorymnd-reaction-process/katorymnd-reaction-process.php'), WP_Hook->do_action, WP_Hook->apply_filters, populate_kr_Comments, add_kr_demo_Comment, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:51:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_katorymnd_kr_comments WHERE id = 'PC1R1SR2SSR1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_katorymnd_kr_comments` WHERE `id` = 'PC1R1SR2SSR1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_katorymnd_kr_comments
+</div>
+<p>Ba
+Node.js v23.11.0
