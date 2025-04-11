@@ -2,571 +2,257 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 23:25:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:25:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:25:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:25:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:25:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bpmoregisterpageurl', 'http://127.0.0.1:9404/wp-login.php', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bpmoregisterpageurl' , 'http://127.0.0.1:9404/wp-login.php' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bpmoregisterpag...', 'http://127.0.0....', '', 'auto')
-#5 /wordpress/wp-content/plugins/buddypress-members-only/rules/bpmoinit.php(26): update_option('bpmoregisterpag...', 'http://127.0.0....')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): bpmoinit('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bpmoregisterpageurl', 'http://127.0.0.1:9404/wp-login.php', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, bpmoinit, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:25:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('saved_open_page_url', 'http://127.0.0.1:9404/wp-login.php', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'saved_open_page_url' , 'http://127.0.0.1:9404/wp-login.php' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('saved_open_page...', 'http://127.0.0....', '', 'auto')
-#5 /wordpress/wp-content/plugins/buddypress-members-only/rules/bpmoinit.php(33): update_option('saved_open_page...', 'http://127.0.0....')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): bpmoinit('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('saved_open_page_url', 'http://127.0.0.1:9404/wp-login.php', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, bpmoinit, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:25:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bprestrictsbuddypresssection', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bprestrictsbuddypresssection' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bprestrictsbudd...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/buddypress-members-only/rules/bpmoinit.php(37): update_option('bprestrictsbudd...', 'yes')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): bpmoinit('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bprestrictsbuddypresssection', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, bpmoinit, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:25:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bpmoinitsetup', '1744241138', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bpmoinitsetup' , '1744241138' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bpmoinitsetup', 1744241138, '', 'auto')
-#5 /wordpress/wp-content/plugins/buddypress-members-only/rules/bpmoinit.php(39): update_option('bpmoinitsetup', 1744241138)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): bpmoinit('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bpmoinitsetup', '1744241138', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, bpmoinit, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php:65
+Error: [11-Apr-2025 08:53:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>buy-now-button</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>buy-now-button</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>buy-now-button</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BATDU_TRACKER_VERSION_PLUGIN" in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php:61
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bangla-radio-ab...')
-#2 /internal/eval.php(20): activate_plugin('bangla-radio-ab...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('baidu-tracker-g...')
+#2 /internal/eval.php(20): activate_plugin('baidu-tracker-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php on line 65
-[09-Apr-2025 23:26:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php:65
+  thrown in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php on line 61
+[11-Apr-2025 08:54:08 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BATDU_TRACKER_VERSION_PLUGIN" in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php:61
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bangla-radio-ab...')
-#2 /internal/eval.php(20): activate_plugin('bangla-radio-ab...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('baidu-tracker-g...')
+#2 /internal/eval.php(20): activate_plugin('baidu-tracker-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php on line 65
-[09-Apr-2025 23:26:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php:65
+  thrown in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php on line 61
+[11-Apr-2025 08:54:16 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BATDU_TRACKER_VERSION_PLUGIN" in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php:61
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bangla-radio-ab...')
-#2 /internal/eval.php(20): activate_plugin('bangla-radio-ab...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('baidu-tracker-g...')
+#2 /internal/eval.php(20): activate_plugin('baidu-tracker-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/bangla-radio-abirvab/radio-abirvab.php on line 65
-[09-Apr-2025 23:26:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:26:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+  thrown in /wordpress/wp-content/plugins/baidu-tracker-generator/baidu-tracker.php on line 61
+[11-Apr-2025 08:54:27 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:27 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:27 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:27 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:28 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:28 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:28 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:28 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_bf2s</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:28 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:28 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:36 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:36 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:36 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:36 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:37 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:37 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:37 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:37 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_bf2s</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:45 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:45 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:45 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:45 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:46 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:46 UTC] PHP Warning:  Undefined array key "newpid" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 126
+[11-Apr-2025 08:54:46 UTC] PHP Warning:  Undefined array key "clearlog" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 141
+[11-Apr-2025 08:54:46 UTC] PHP Warning:  Undefined array key "hidebf2supdate" in /wordpress/wp-content/plugins/battlefield-2-stats/wp_bf2s.php on line 237
+[11-Apr-2025 08:54:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp_bf2s</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:46 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:57 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361695.237)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:57:25 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361842.263)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:59:12 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_crowdox_project_tracker', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>TRUNCATE TABLE wp_blakelt_messages</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_crowdox_project_tracker' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: DELETE FROM `wp_blakelt_messages` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_blakelt_messages
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_crowdox_...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_crowdox_...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_crowdox_project_tracker', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:27:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:28:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:28:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('TRUNCATE TABLE ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('TRUNCATE TABLE ...')
+#3 /wordpress/wp-content/plugins/blakelt-wordpress-integration/blakelt-wordpress-integration.php(133): WP_SQLite_DB->query('TRUNCATE TABLE ...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): blake->install_on_activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blakel...', false)
+#8 /internal/eval.php(20): activate_plugin('blakelt-wordpre...')
+#9 {main}</pre>
+ for query TRUNCATE TABLE wp_blakelt_messages made by activate_plugin, do_action('activate_blakelt-wordpress-integration/blakelt-wordpress-integration.php'), WP_Hook->do_action, WP_Hook->apply_filters, blake->install_on_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:59:13 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:13 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:20 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_lightning_deals', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>TRUNCATE TABLE wp_blakelt_messages</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_lightning_deals' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing:  DELETE FROM wp_blakelt_messages | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_blakelt_messages.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_lightnin...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_lightnin...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_lightning_deals', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/blakelt-wordpress-integration/blakelt-wordpress-integration.php(133): WP_SQLite_DB->query('TRUNCATE TABLE ...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): blake->install_on_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blakel...', false)
+#6 /internal/eval.php(20): activate_plugin('blakelt-wordpre...')
+#7 {main}</pre>
+ for query TRUNCATE TABLE wp_blakelt_messages made by activate_plugin, do_action('activate_blakelt-wordpress-integration/blakelt-wordpress-integration.php'), WP_Hook->do_action, WP_Hook->apply_filters, blake->install_on_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:59:22 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:22 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:22 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_settings', 'a:1:{s:7:\"library\";a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";s:9:\"2.13.15.0\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>TRUNCATE TABLE wp_blakelt_messages</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'boldgrid_settings' , 'a:1:{s:7:&quot;library&quot;;a:1:{s:35:&quot;boldgrid-backup/boldgrid-backup.php&quot;;s:9:&quot;2.13.15.0&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing:  DELETE FROM wp_blakelt_messages | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_blakelt_messages.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('boldgrid_settin...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Option.php(74): update_option('boldgrid_settin...', Array)
-#6 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Registration.php(65): Boldgrid\Library\Util\Option::set('boldgrid-backup...', '2.13.15.0')
-#7 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Registration.php(89): Boldgrid\Library\Util\Registration->register()
-#8 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Registration.php(51): Boldgrid\Library\Util\Registration->verify()
-#9 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Registration/Plugin.php(34): Boldgrid\Library\Util\Registration->init('boldgrid-backup...')
-#10 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Load.php(69): Boldgrid\Library\Util\Registration\Plugin->__construct('boldgrid-backup...')
-#11 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(115): Boldgrid\Library\Util\Load->__construct(Array)
-#12 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(147): load_boldgrid_backup()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#15 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_settings', 'a:1:{s:7:\"library\";a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";s:9:\"2.13.15.0\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), load_boldgrid_backup, Boldgrid\Library\Util\Load->__construct, Boldgrid\Library\Util\Registration\Plugin->__construct, Boldgrid\Library\Util\Registration->init, Boldgrid\Library\Util\Registration->verify, Boldgrid\Library\Util\Registration->register, Boldgrid\Library\Util\Option::set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_boldgrid_plugins_filtered', 'a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";a:15:{s:4:\"Name\";s:12:\"Total Upkeep\";s:9:\"PluginURI\";s:41:\"https://www.boldgrid.com/boldgrid-backup/\";s:7:\"Version\";s:6:\"1.17.0\";s:11:\"Description\";s:159:\"Automated backups, remote backup to Amazon S3 and Google Drive, stop website crashes before they happen and more. Total Upkeep is the backup solution you need.\";s:6:\"Author\";s:8:\"BoldGrid\";s:9:\"AuthorURI\";s:25:\"https://www.boldgrid.com/\";s:10:\"TextDomain\";s:15:\"boldgrid-backup\";s:10:\"DomainPath\";s:10:\"/languages\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:12:\"Total Upkeep\";s:10:\"AuthorName\";s:8:\"BoldGrid\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_site_transient_boldgrid_plugins_filtered' , 'a:1:{s:35:&quot;boldgrid-backup/boldgrid-backup.php&quot;;a:15:{s:4:&quot;Name&quot;;s:12:&quot;Total Upkeep&quot;;s:9:&quot;PluginURI&quot;;s:41:&quot;https://www.boldgrid.com/boldgrid-backup/&quot;;s:7:&quot;Version&quot;;s:6:&quot;1.17.0&quot;;s:11:&quot;Description&quot;;s:159:&quot;Automated backups, remote backup to Amazon S3 and Google Drive, stop website crashes before they happen and more. Total Upkeep is the backup solution you need.&quot;;s:6:&quot;Author&quot;;s:8:&quot;BoldGrid&quot;;s:9:&quot;AuthorURI&quot;;s:25:&quot;https://www.boldgrid.com/&quot;;s:10:&quot;TextDomain&quot;;s:15:&quot;boldgrid-backup&quot;;s:10:&quot;DomainPath&quot;;s:10:&quot;/languages&quot;;s:7:&quot;Network&quot;;b:0;s:10:&quot;RequiresWP&quot;;s:0:&quot;&quot;;s:11:&quot;RequiresPHP&quot;;s:0:&quot;&quot;;s:9:&quot;UpdateURI&quot;;s:0:&quot;&quot;;s:15:&quot;RequiresPlugins&quot;;s:0:&quot;&quot;;s:5:&quot;Title&quot;;s:12:&quot;Total Upkeep&quot;;s:10:&quot;AuthorName&quot;;s:8:&quot;BoldGrid&quot;;}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('_site_transient...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, '_site_transient...', Array)
-#6 /wordpress/wp-includes/option.php(2638): add_site_option('_site_transient...', Array)
-#7 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Plugin/Checker.php(97): set_site_transient('boldgrid_plugin...', Array)
-#8 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Plugin/Checker.php(59): Boldgrid\Library\Library\Plugin\Checker->findUpdated()
-#9 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Start.php(132): Boldgrid\Library\Library\Plugin\Checker->run()
-#10 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Load.php(237): Boldgrid\Library\Library\Start->init()
-#11 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Load.php(87): Boldgrid\Library\Util\Load->load(Object(Composer\Autoload\ClassLoader))
-#12 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(115): Boldgrid\Library\Util\Load->__construct(Array)
-#13 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(147): load_boldgrid_backup()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#16 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_boldgrid_plugins_filtered', 'a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";a:15:{s:4:\"Name\";s:12:\"Total Upkeep\";s:9:\"PluginURI\";s:41:\"https://www.boldgrid.com/boldgrid-backup/\";s:7:\"Version\";s:6:\"1.17.0\";s:11:\"Description\";s:159:\"Automated backups, remote backup to Amazon S3 and Google Drive, stop website crashes before they happen and more. Total Upkeep is the backup solution you need.\";s:6:\"Author\";s:8:\"BoldGrid\";s:9:\"AuthorURI\";s:25:\"https://www.boldgrid.com/\";s:10:\"TextDomain\";s:15:\"boldgrid-backup\";s:10:\"DomainPath\";s:10:\"/languages\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:12:\"Total Upkeep\";s:10:\"AuthorName\";s:8:\"BoldGrid\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), load_boldgrid_backup, Boldgrid\Library\Util\Load->__construct, Boldgrid\Library\Util\Load->load, Boldgrid\Library\Library\Start->init, Boldgrid\Library\Library\Plugin\Checker->run, Boldgrid\Library\Library\Plugin\Checker->findUpdated, set_site_transient, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_settings', 'a:1:{s:15:\"plugins_checked\";a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";a:1:{s:6:\"1.17.0\";i:1744241313;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'boldgrid_settings' , 'a:1:{s:15:&quot;plugins_checked&quot;;a:1:{s:35:&quot;boldgrid-backup/boldgrid-backup.php&quot;;a:1:{s:6:&quot;1.17.0&quot;;i:1744241313;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('boldgrid_settin...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Plugin/Checker.php(136): update_option('boldgrid_settin...', Array)
-#6 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Plugin/Checker.php(59): Boldgrid\Library\Library\Plugin\Checker->findUpdated()
-#7 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Library/Start.php(132): Boldgrid\Library\Library\Plugin\Checker->run()
-#8 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Load.php(237): Boldgrid\Library\Library\Start->init()
-#9 /wordpress/wp-content/plugins/boldgrid-backup/vendor/boldgrid/library/src/Util/Load.php(87): Boldgrid\Library\Util\Load->load(Object(Composer\Autoload\ClassLoader))
-#10 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(115): Boldgrid\Library\Util\Load->__construct(Array)
-#11 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(147): load_boldgrid_backup()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#14 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_settings', 'a:1:{s:15:\"plugins_checked\";a:1:{s:35:\"boldgrid-backup/boldgrid-backup.php\";a:1:{s:6:\"1.17.0\";i:1744241313;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), load_boldgrid_backup, Boldgrid\Library\Util\Load->__construct, Boldgrid\Library\Util\Load->load, Boldgrid\Library\Library\Start->init, Boldgrid\Library\Library\Plugin\Checker->run, Boldgrid\Library\Library\Plugin\Checker->findUpdated, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_backup_id', '7641d095', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'boldgrid_backup_id' , '7641d095' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('boldgrid_backup...', '7641d095', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'boldgrid_backup...', '7641d095')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'boldgrid_backup...', '7641d095')
-#7 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-core.php(881): update_site_option('boldgrid_backup...', '7641d095')
-#8 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(273): Boldgrid_Backup_Admin_Core->get_backup_identifier()
-#9 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(100): Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir('/home/web_user/...')
-#10 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(419): Boldgrid_Backup_Admin_Backup_Dir->create('/home/web_user/...')
-#11 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(256): Boldgrid_Backup_Admin_Backup_Dir->guess_and_set()
-#12 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(268): Boldgrid_Backup_Admin_Backup_Dir->get()
-#13 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-log.php(179): Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir()
-#14 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-log.php(221): Boldgrid_Backup_Admin_Log->clean_up()
-#15 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-jobs.php(80): Boldgrid_Backup_Admin_Log->init('jobs-queue')
-#16 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-core.php(756): Boldgrid_Backup_Admin_Jobs->__construct(Object(Boldgrid_Backup_Admin_Core))
-#17 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(377): Boldgrid_Backup_Admin_Core->__construct()
-#18 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(72): Boldgrid_Backup->define_admin_hooks()
-#19 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(83): Boldgrid_Backup->__construct()
-#20 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(149): run_boldgrid_backup()
-#21 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#22 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#23 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#24 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_backup_id', '7641d095', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), run_boldgrid_backup, Boldgrid_Backup->__construct, Boldgrid_Backup->define_admin_hooks, Boldgrid_Backup_Admin_Core->__construct, Boldgrid_Backup_Admin_Jobs->__construct, Boldgrid_Backup_Admin_Log->init, Boldgrid_Backup_Admin_Log->clean_up, Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir, Boldgrid_Backup_Admin_Backup_Dir->get, Boldgrid_Backup_Admin_Backup_Dir->guess_and_set, Boldgrid_Backup_Admin_Backup_Dir->create, Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir, Boldgrid_Backup_Admin_Core->get_backup_identifier, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_backup_settings', 'a:14:{s:8:\"schedule\";a:10:{s:10:\"dow_sunday\";i:0;s:10:\"dow_monday\";i:0;s:11:\"dow_tuesday\";i:0;s:13:\"dow_wednesday\";i:0;s:12:\"dow_thursday\";i:0;s:10:\"dow_friday\";i:0;s:12:\"dow_saturday\";i:0;s:5:\"tod_h\";i:2;s:5:\"tod_m\";i:57;s:5:\"tod_a\";s:2:\"AM\";}s:15:\"retention_count\";i:5;s:18:\"notification_email\";s:19:\"admin@localhost.com\";s:13:\"notifications\";a:3:{s:6:\"backup\";i:1;s:7:\"restore\";i:1;s:10:\"site_check\";b:1;}s:11:\"auto_backup\";i:1;s:13:\"auto_rollback\";i:1;s:6:\"remote\";a:1:{s:5:\"local\";a:1:{s:7:\"enabled\";b:1;}}s:14:\"exclude_tables\";a:0:{}s:24:\"folder_exclusion_include\";s:18:\"WPCORE,/wp-content\";s:24:\"folder_exclusion_exclude\";s:34:\".git,node_modules,wp-content/cache\";s:10:\"site_check\";a:4:{s:7:\"enabled\";b:1;s:6:\"logger\";b:1;s:13:\"auto_recovery\";b:0;s:8:\"interval\";i:15;}s:10:\"encrypt_db\";b:0;s:11:\"auto_update\";a:3:{s:4:\"days\";i:0;s:7:\"plugins\";a:1:{s:7:\"default\";s:1:\"0\";}s:6:\"themes\";a:1:{s:7:\"default\";s:1:\"0\";}}s:16:\"backup_directory\";s:30:\"/home/web_user/boldgrid_backup\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'boldgrid_backup_settings' , 'a:14:{s:8:&quot;schedule&quot;;a:10:{s:10:&quot;dow_sunday&quot;;i:0;s:10:&quot;dow_monday&quot;;i:0;s:11:&quot;dow_tuesday&quot;;i:0;s:13:&quot;dow_wednesday&quot;;i:0;s:12:&quot;dow_thursday&quot;;i:0;s:10:&quot;dow_friday&quot;;i:0;s:12:&quot;dow_saturday&quot;;i:0;s:5:&quot;tod_h&quot;;i:2;s:5:&quot;tod_m&quot;;i:57;s:5:&quot;tod_a&quot;;s:2:&quot;AM&quot;;}s:15:&quot;retention_count&quot;;i:5;s:18:&quot;notification_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:13:&quot;notifications&quot;;a:3:{s:6:&quot;backup&quot;;i:1;s:7:&quot;restore&quot;;i:1;s:10:&quot;site_check&quot;;b:1;}s:11:&quot;auto_backup&quot;;i:1;s:13:&quot;auto_rollback&quot;;i:1;s:6:&quot;remote&quot;;a:1:{s:5:&quot;local&quot;;a:1:{s:7:&quot;enabled&quot;;b:1;}}s:14:&quot;exclude_tables&quot;;a:0:{}s:24:&quot;folder_exclusion_include&quot;;s:18:&quot;WPCORE,/wp-content&quot;;s:24:&quot;folder_exclusion_exclude&quot;;s:34:&quot;.git,node_modules,wp-content/cache&quot;;s:10:&quot;site_check&quot;;a:4:{s:7:&quot;enabled&quot;;b:1;s:6:&quot;logger&quot;;b:1;s:13:&quot;auto_recovery&quot;;b:0;s:8:&quot;interval&quot;;i:15;}s:10:&quot;encrypt_db&quot;;b:0;s:11:&quot;auto_update&quot;;a:3:{s:4:&quot;days&quot;;i:0;s:7:&quot;plugins&quot;;a:1:{s:7:&quot;default&quot;;s:1:&quot;0&quot;;}s:6:&quot;themes&quot;;a:1:{s:7:&quot;default&quot;;s:1:&quot;0&quot;;}}s:16:&quot;backup_directory&quot;;s:30:&quot;/home/web_user/boldgrid_backup&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('boldgrid_backup...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'boldgrid_backup...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'boldgrid_backup...', Array)
-#7 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-settings.php(1118): update_site_option('boldgrid_backup...', Array)
-#8 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(445): Boldgrid_Backup_Admin_Settings->save(Array)
-#9 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(256): Boldgrid_Backup_Admin_Backup_Dir->guess_and_set()
-#10 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-backup-dir.php(268): Boldgrid_Backup_Admin_Backup_Dir->get()
-#11 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-log.php(179): Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir()
-#12 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-log.php(221): Boldgrid_Backup_Admin_Log->clean_up()
-#13 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-jobs.php(80): Boldgrid_Backup_Admin_Log->init('jobs-queue')
-#14 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-core.php(756): Boldgrid_Backup_Admin_Jobs->__construct(Object(Boldgrid_Backup_Admin_Core))
-#15 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(377): Boldgrid_Backup_Admin_Core->__construct()
-#16 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(72): Boldgrid_Backup->define_admin_hooks()
-#17 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(83): Boldgrid_Backup->__construct()
-#18 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(149): run_boldgrid_backup()
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#21 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('boldgrid_backup_settings', 'a:14:{s:8:\"schedule\";a:10:{s:10:\"dow_sunday\";i:0;s:10:\"dow_monday\";i:0;s:11:\"dow_tuesday\";i:0;s:13:\"dow_wednesday\";i:0;s:12:\"dow_thursday\";i:0;s:10:\"dow_friday\";i:0;s:12:\"dow_saturday\";i:0;s:5:\"tod_h\";i:2;s:5:\"tod_m\";i:57;s:5:\"tod_a\";s:2:\"AM\";}s:15:\"retention_count\";i:5;s:18:\"notification_email\";s:19:\"admin@localhost.com\";s:13:\"notifications\";a:3:{s:6:\"backup\";i:1;s:7:\"restore\";i:1;s:10:\"site_check\";b:1;}s:11:\"auto_backup\";i:1;s:13:\"auto_rollback\";i:1;s:6:\"remote\";a:1:{s:5:\"local\";a:1:{s:7:\"enabled\";b:1;}}s:14:\"exclude_tables\";a:0:{}s:24:\"folder_exclusion_include\";s:18:\"WPCORE,/wp-content\";s:24:\"folder_exclusion_exclude\";s:34:\".git,node_modules,wp-content/cache\";s:10:\"site_check\";a:4:{s:7:\"enabled\";b:1;s:6:\"logger\";b:1;s:13:\"auto_recovery\";b:0;s:8:\"interval\";i:15;}s:10:\"encrypt_db\";b:0;s:11:\"auto_update\";a:3:{s:4:\"days\";i:0;s:7:\"plugins\";a:1:{s:7:\"default\";s:1:\"0\";}s:6:\"themes\";a:1:{s:7:\"default\";s:1:\"0\";}}s:16:\"backup_directory\";s:30:\"/home/web_user/boldgrid_backup\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), run_boldgrid_backup, Boldgrid_Backup->__construct, Boldgrid_Backup->define_admin_hooks, Boldgrid_Backup_Admin_Core->__construct, Boldgrid_Backup_Admin_Jobs->__construct, Boldgrid_Backup_Admin_Log->init, Boldgrid_Backup_Admin_Log->clean_up, Boldgrid_Backup_Admin_Backup_Dir->get_logs_dir, Boldgrid_Backup_Admin_Backup_Dir->get, Boldgrid_Backup_Admin_Backup_Dir->guess_and_set, Boldgrid_Backup_Admin_Settings->save, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_boldgrid_backup_system_zip_test', '1744327713', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_boldgrid_backup_system_zip_test' , '1744327713' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744327713, '', 'off')
-#5 /wordpress/wp-content/plugins/boldgrid-backup/admin/compressor/class-boldgrid-backup-admin-compressor-system-zip-test.php(299): set_transient('boldgrid_backup...', 0, 86400)
-#6 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-config.php(492): Boldgrid_Backup_Admin_Compressor_System_Zip_Test->run()
-#7 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-test.php(598): Boldgrid_Backup_Admin_Config->get_available_compressors()
-#8 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(442): Boldgrid_Backup_Admin_Test->run_functionality_tests()
-#9 /wordpress/wp-content/plugins/boldgrid-backup/includes/class-boldgrid-backup.php(72): Boldgrid_Backup->define_admin_hooks()
-#10 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(83): Boldgrid_Backup->__construct()
-#11 /wordpress/wp-content/plugins/boldgrid-backup/boldgrid-backup.php(149): run_boldgrid_backup()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boldgrid-backup...')
-#14 /internal/eval.php(20): activate_plugin('boldgrid-backup...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_boldgrid_backup_system_zip_test', '1744327713', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boldgrid-backup/boldgrid-backup.php'), run_boldgrid_backup, Boldgrid_Backup->__construct, Boldgrid_Backup->define_admin_hooks, Boldgrid_Backup_Admin_Test->run_functionality_tests, Boldgrid_Backup_Admin_Config->get_available_compressors, Boldgrid_Backup_Admin_Compressor_System_Zip_Test->run, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_boldgrid_backup_system_zip_test', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_boldgrid_backup_system_zip_test' , '0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_bold...', 0, '', 'off')
-#5 /wordpress/wp-content/plugins/boldgrid-backup/admin/compressor/class-boldgrid-backup-admin-compressor-system-zip-test.php(299): set_transient('boldgrid_backup...', 0, 86400)
-#6 /wordpress/wp-content/plugins/boldgrid-backup/admin/class-boldgrid-backup-admin-config.php(492): Boldgr
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/blakelt-wordpress-integration/blakelt-wordpress-integration.php(133): WP_SQLite_DB->query('TRUNCATE TABLE ...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): blake->install_on_activation(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_blakel...', false)
+#6 /internal/eval.php(20): activate_plugin('blakelt-wordpre...')
+#7 {main}</pre>
+ for query TRUNCATE TABLE wp_blakelt_messages made by activate_plugin, do_action('activate_blakelt-wordpress-integration/blakelt-wordpress-integration.php'), WP_Hook->do_action, WP_Hook->apply_filters, blake->install_on_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:59:30 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:30 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:30 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:00:51 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('BodyMass')
+#2 /wordpress/wp-content/plugins/body-mass-widget/body-mass-widget.php(29): register_widget('BodyMass')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): bodycalculater_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 09:00:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('BodyMass')
+#2 /wordpress/wp-content/plugins/body-mass-widget/body-mass-widget.php(29): register_widget('BodyMass')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): bodycalculater_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"body-mass-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
