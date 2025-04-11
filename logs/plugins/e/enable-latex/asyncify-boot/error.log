@@ -2,181 +2,81 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:22:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:22:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:22:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:22:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:23:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_etd_defined_shortcodes', '1744312996', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_etd_defined_shortcodes' , '1744312996' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744312996, '', 'off')
-#5 /wordpress/wp-content/plugins/etd-dynamic-shortcodes/includes/class-etd-dynamic-shortcodes.php(180): set_transient('etd_defined_sho...', false, 86400)
-#6 /wordpress/wp-content/plugins/etd-dynamic-shortcodes/includes/class-etd-dynamic-shortcodes.php(194): ETD_Dynamic_Shortcodes->get_shortcodes()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ETD_Dynamic_Shortcodes->define_shortcodes('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_etd_defined_shortcodes', '1744312996', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ETD_Dynamic_Shortcodes->define_shortcodes, ETD_Dynamic_Shortcodes->get_shortcodes, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_etd_defined_shortcodes', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_etd_defined_shortcodes' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_etd_...', false, '', 'off')
-#5 /wordpress/wp-content/plugins/etd-dynamic-shortcodes/includes/class-etd-dynamic-shortcodes.php(180): set_transient('etd_defined_sho...', false, 86400)
-#6 /wordpress/wp-content/plugins/etd-dynamic-shortcodes/includes/class-etd-dynamic-shortcodes.php(194): ETD_Dynamic_Shortcodes->get_shortcodes()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ETD_Dynamic_Shortcodes->define_shortcodes('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_etd_defined_shortcodes', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ETD_Dynamic_Shortcodes->define_shortcodes, ETD_Dynamic_Shortcodes->get_shortcodes, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method evoca_browser_mic::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [11-Apr-2025 08:56:16 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_evoca-...', false)
-#3 /internal/eval.php(20): activate_plugin('evoca-audio-rec...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 19:23:49 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method evoca_browser_mic::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_evoca-...', false)
-#3 /internal/eval.php(20): activate_plugin('evoca-audio-rec...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 19:23:57 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method evoca_browser_mic::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_evoca-...', false)
-#3 /internal/eval.php(20): activate_plugin('evoca-audio-rec...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 19:24:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extrablocks_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'extrablocks_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/extra-blocks/includes/class-extrablocks-activator.php(47): add_option('extrablocks_ver...', '1.0')
-#5 /wordpress/wp-content/plugins/extra-blocks/includes/class-extrablocks.php(120): ExtraBlocksActivator::activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ExtraBlocks::extrablocks_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361774.511)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_extra-...', false)
-#10 /internal/eval.php(20): activate_plugin('extra-blocks/ex...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('extrablocks_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_extra-blocks/extra-blocks.php'), WP_Hook->do_action, WP_Hook->apply_filters, ExtraBlocks::extrablocks_activate, ExtraBlocksActivator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:24:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:24:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>extra-blocks</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:24:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>extra-blocks</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:24:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>extra-blocks</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:25:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:26:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:26:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:26:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:26:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:27:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:27:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:27:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:27:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:27:48 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/enable-latex/core/utils.class.php on line 102
-[09-Apr-2025 19:27:57 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/enable-latex/core/utils.class.php on line 102
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:59:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-taxonomy-support/admin/easy-taxonomy-support-admin.php on line 25
+[11-Apr-2025 08:59:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-taxonomy-support/admin/easy-taxonomy-support-admin.php on line 25
+[11-Apr-2025 09:00:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-taxonomy-support/admin/easy-taxonomy-support-admin.php on line 25
+[11-Apr-2025 09:00:18 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Eatly_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eatly-...', false)
+#3 /internal/eval.php(20): activate_plugin('eatly-widget/ea...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 09:00:26 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Eatly_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eatly-...', false)
+#3 /internal/eval.php(20): activate_plugin('eatly-widget/ea...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 09:00:34 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Eatly_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_eatly-...', false)
+#3 /internal/eval.php(20): activate_plugin('eatly-widget/ea...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 09:00:47 UTC] PHP Fatal error:  Uncaught Error: Class "EddBtcAltGateWayCoreLib\admin\functions\CsWapgNotice" not found in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php:169
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): EDD_Bitcoin_Altcoin_Payment_Gateway::ebapg_init_gateway('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php on line 169
+[11-Apr-2025 09:00:56 UTC] PHP Fatal error:  Uncaught Error: Class "EddBtcAltGateWayCoreLib\admin\functions\CsWapgNotice" not found in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php:169
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): EDD_Bitcoin_Altcoin_Payment_Gateway::ebapg_init_gateway('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php on line 169
+[11-Apr-2025 09:01:05 UTC] PHP Fatal error:  Uncaught Error: Class "EddBtcAltGateWayCoreLib\admin\functions\CsWapgNotice" not found in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php:169
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): EDD_Bitcoin_Altcoin_Payment_Gateway::ebapg_init_gateway('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/edd-bitcoin-altcoin-payment-gateway/edd-bitcoin-altcoin-payment-gateway.php on line 169
+[11-Apr-2025 09:02:56 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/enable-latex/core/utils.class.php on line 102
+[11-Apr-2025 09:03:04 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/enable-latex/core/utils.class.php on line 102
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
