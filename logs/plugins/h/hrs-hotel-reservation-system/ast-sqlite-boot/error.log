@@ -2,351 +2,175 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 13:56:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hide-admin-notices-options', 'a:1:{s:22:\"compatibility_requests\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hide-admin-notices-options' , 'a:1:{s:22:&quot;compatibility_requests&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hide-admin-notices/includes/Context.php(12): add_option('hide-admin-noti...', Array)
-#5 /wordpress/wp-content/plugins/hide-admin-notices/includes/HideAdminNotices.php(37): Pontet_Labs\Hide_Admin_Notices\Context->__construct(Array)
-#6 /wordpress/wp-content/plugins/hide-admin-notices/hide-admin-notices.php(67): Pontet_Labs\Hide_Admin_Notices\Hide_Admin_Notices->__construct()
-#7 /wordpress/wp-content/plugins/hide-admin-notices/hide-admin-notices.php(73): hide_admin_notices()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hide-admin-noti...')
-#10 /internal/eval.php(20): activate_plugin('hide-admin-noti...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hide-admin-notices-options', 'a:1:{s:22:\"compatibility_requests\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hide-admin-notices/hide-admin-notices.php'), hide_admin_notices, Pontet_Labs\Hide_Admin_Notices\Hide_Admin_Notices->__construct, Pontet_Labs\Hide_Admin_Notices\Context->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:56:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:56:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:56:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:56:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:56:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hide-admin-notices-options', 'a:1:{s:22:\"compatibility_requests\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hide-admin-notices-options' , 'a:1:{s:22:&quot;compatibility_requests&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hide-admin-notices/includes/Context.php(12): add_option('hide-admin-noti...', Array)
-#5 /wordpress/wp-content/plugins/hide-admin-notices/includes/HideAdminNotices.php(37): Pontet_Labs\Hide_Admin_Notices\Context->__construct(Array)
-#6 /wordpress/wp-content/plugins/hide-admin-notices/hide-admin-notices.php(67): Pontet_Labs\Hide_Admin_Notices\Hide_Admin_Notices->__construct()
-#7 /wordpress/wp-content/plugins/hide-admin-notices/hide-admin-notices.php(73): hide_admin_notices()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hide-admin-notices-options', 'a:1:{s:22:\"compatibility_requests\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/hide-admin-notices/hide-admin-notices.php'), hide_admin_notices, Pontet_Labs\Hide_Admin_Notices\Hide_Admin_Notices->__construct, Pontet_Labs\Hide_Admin_Notices\Context->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:56:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:56:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:56:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:56:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:57:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:57:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:57:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:57:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:57:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:57:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:57:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:57:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:57:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method HackadelicSliders::start() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [11-Apr-2025 03:44:09 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fullsize</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:44:18 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fullsize</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:44:27 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>fullsize</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:47:44 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 13:58:03 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method HackadelicSliders::start() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744343262.524)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:47:53 UTC] PHP Fatal error:  Uncaught Error: Class 'WC_Settings_API' not found in /wordpress/wp-content/plugins/holded-integration/src/Services/Settings.php:7
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 13:58:12 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method HackadelicSliders::start() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/holded-integration/vendor/composer/ClassLoader.php(576): include()
+#1 /wordpress/wp-content/plugins/holded-integration/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/wordpress/wp-c...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Holded\\Woocomme...')
+#3 /wordpress/wp-content/plugins/holded-integration/holded-integration.php(57): spl_autoload_call('Holded\\Woocomme...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): holdedWC_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_holded...', false)
+#8 /internal/eval.php(20): activate_plugin('holded-integrat...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/holded-integration/src/Services/Settings.php on line 7
+[11-Apr-2025 03:48:02 UTC] PHP Fatal error:  Uncaught Error: Class 'WC_Settings_API' not found in /wordpress/wp-content/plugins/holded-integration/src/Services/Settings.php:7
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 13:58:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:58:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:58:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:58:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:58:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:58:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:58:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:58:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:59:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:59:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:59:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:59:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:59:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:00:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hindsight', 's:72:\"a:1:{s:6:\"pixels\";a:2:{s:8:\"allpages\";s:0:\"\";s:10:\"conversion\";s:0:\"\";}}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hindsight' , 's:72:&quot;a:1:{s:6:&quot;pixels&quot;;a:2:{s:8:&quot;allpages&quot;;s:0:&quot;&quot;;s:10:&quot;conversion&quot;;s:0:&quot;&quot;;}}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hindsight/admin/class-hindsight-admin.php(63): add_option('hindsight', 'a:1:{s:6:"pixel...')
-#5 /wordpress/wp-content/plugins/hindsight/includes/class-hindsight.php(152): Hindsight_Admin->__construct('hindsight', '1.0.0')
-#6 /wordpress/wp-content/plugins/hindsight/includes/class-hindsight.php(76): Hindsight->define_admin_hooks()
-#7 /wordpress/wp-content/plugins/hindsight/hindsight.php(71): Hindsight->__construct()
-#8 /wordpress/wp-content/plugins/hindsight/hindsight.php(75): run_hindsight()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hindsight/hinds...')
-#11 /internal/eval.php(20): activate_plugin('hindsight/hinds...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hindsight', 's:72:\"a:1:{s:6:\"pixels\";a:2:{s:8:\"allpages\";s:0:\"\";s:10:\"conversion\";s:0:\"\";}}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hindsight/hindsight.php'), run_hindsight, Hindsight->__construct, Hindsight->define_admin_hooks, Hindsight_Admin->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:00:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:00:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:00:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:00:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:00:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hindsight', 's:72:\"a:1:{s:6:\"pixels\";a:2:{s:8:\"allpages\";s:0:\"\";s:10:\"conversion\";s:0:\"\";}}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hindsight' , 's:72:&quot;a:1:{s:6:&quot;pixels&quot;;a:2:{s:8:&quot;allpages&quot;;s:0:&quot;&quot;;s:10:&quot;conversion&quot;;s:0:&quot;&quot;;}}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hindsight/admin/class-hindsight-admin.php(63): add_option('hindsight', 'a:1:{s:6:"pixel...')
-#5 /wordpress/wp-content/plugins/hindsight/includes/class-hindsight.php(152): Hindsight_Admin->__construct('hindsight', '1.0.0')
-#6 /wordpress/wp-content/plugins/hindsight/includes/class-hindsight.php(76): Hindsight->define_admin_hooks()
-#7 /wordpress/wp-content/plugins/hindsight/hindsight.php(71): Hindsight->__construct()
-#8 /wordpress/wp-content/plugins/hindsight/hindsight.php(75): run_hindsight()
-#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hindsight', 's:72:\"a:1:{s:6:\"pixels\";a:2:{s:8:\"allpages\";s:0:\"\";s:10:\"conversion\";s:0:\"\";}}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/hindsight/hindsight.php'), run_hindsight, Hindsight->__construct, Hindsight->define_admin_hooks, Hindsight_Admin->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:01:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:01:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:01:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:01:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:12 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 286
-[09-Apr-2025 14:01:21 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hiweb-lightbox/include/modules/path.php on line 287
-[09-Apr-2025 14:01:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:01:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:01:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:01:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:01:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/holded-integration/vendor/composer/ClassLoader.php(576): include()
+#1 /wordpress/wp-content/plugins/holded-integration/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/wordpress/wp-c...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('Holded\\Woocomme...')
+#3 /wordpress/wp-content/plugins/holded-integration/holded-integration.php(57): spl_autoload_call('Holded\\Woocomme...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): holdedWC_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_holded...', false)
+#8 /internal/eval.php(20): activate_plugin('holded-integrat...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/holded-integration/src/Services/Settings.php on line 7
+[11-Apr-2025 03:50:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php:104
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Horariodeapertu...')
-#2 /wordpress/wp-content/plugins/horariodeapertura24/wp-horariodeapertura24.php(67): register_widget('Horariodeapertu...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_Horariodeapertura24_Script::load_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 14:01:41 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hetjens-registe...')
+#2 /internal/eval.php(20): activate_plugin('hetjens-registe...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php on line 104
+[11-Apr-2025 03:50:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php:104
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Horariodeapertu...')
-#2 /wordpress/wp-content/plugins/horariodeapertura24/wp-horariodeapertura24.php(67): register_widget('Horariodeapertu...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_Horariodeapertura24_Script::load_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 14:01:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hetjens-registe...')
+#2 /internal/eval.php(20): activate_plugin('hetjens-registe...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php on line 104
+[11-Apr-2025 03:50:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php:104
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Horariodeapertu...')
-#2 /wordpress/wp-content/plugins/horariodeapertura24/wp-horariodeapertura24.php(67): register_widget('Horariodeapertu...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_Horariodeapertura24_Script::load_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 14:01:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:01:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:01:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:01:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:02:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method MHRS_Init::on_plugin_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hetjens-registe...')
+#2 /internal/eval.php(20): activate_plugin('hetjens-registe...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/hetjens-registered-only/Hetjens_Registered_Only.php on line 104
+[11-Apr-2025 03:53:07 UTC] PHP Deprecated:  Function global_terms_enabled is <strong>deprecated</strong> since version 6.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:34 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:35 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:53:36 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:53:56 UTC] PHP Deprecated:  Function global_terms_enabled is <strong>deprecated</strong> since version 6.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:23 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:24 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:54:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:54:45 UTC] PHP Deprecated:  Function global_terms_enabled is <strong>deprecated</strong> since version 6.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:55:09 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:09 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:09 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:09 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:10 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:11 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Undefined variable $term in /internal/eval.php on line 22
+[11-Apr-2025 03:55:12 UTC] PHP Warning:  Trying to access array offset on null in /internal/eval.php on line 22
+[11-Apr-2025 03:55:31 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method MHRS_Init::on_plugin_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -356,29 +180,34 @@ Stack trace:
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"hrs-hotel-reservation-system"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'set-cookie': [ 'PHPSESSID=eef86d3aa92caac79849493ac924ec89; path=/' ],
+          'set-cookie': [ 'PHPSESSID=370f205f731a65d36806344ff555238c; path=/' ],
           expires: [ 'Thu, 19 Nov 1981 08:52:00 GMT' ],
           'cache-control': [ 'no-store, no-cache, must-revalidate' ],
           pragma: [ 'no-cache' ],
