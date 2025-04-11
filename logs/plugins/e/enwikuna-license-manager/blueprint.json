@@ -1,1 +1,112 @@
-{"$schema":"https:\/\/playground.wordpress.net\/blueprint-schema.json","landingPage":"\/wp-admin\/admin.php?page=elm-licenses","preferredVersions":{"php":"7.4","wp":"6.5"},"steps":[{"step":"login","username":"admin","password":"password"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"woocommerce"},"options":{"activate":true}},{"step":"setSiteOptions","options":{"blogname":"Enwikuna License Manager Live Preview","woocommerce_enable_guest_checkout":"no","woocommerce_enable_signup_and_login_from_checkout":"yes","woocommerce_store_address":"Enwikuna Street 1","woocommerce_store_address_2":"","woocommerce_store_city":"M\u00fcnchen","woocommerce_default_country":"DE:DE-BY","woocommerce_store_postalcode":"81373","woocommerce_currency":"EUR","woocommerce_product_type":"virtual","woocommerce_allow_tracking":"no","_transient__wc_activation_redirect":false}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"enwikuna-license-manager"},"options":{"activate":true}},{"step":"setSiteOptions","options":{"elm_admin_setup_wizard_redirect":false,"elm_general_display_setup_wizard_update_mode":"no","elm_my_account_activate_licenses_mode":"yes","elm_my_account_deactivate_licenses_mode":"yes","elm_my_account_licenses_renewal_mode":"yes","elm_product_automatic_stock_management_mode":"yes"}},{"step":"installTheme","themeZipFile":{"resource":"wordpress.org\/themes","slug":"storefront"},"options":{"activate":true}},{"step":"runSql","sql":{"resource":"literal","name":"schema.sql","contents":"INSERT INTO `wp_elm_generators` (`id`, `name`, `charset`, `chunks`, `chunk_length`, `allowed_activations`, `block_separator`, `prefix`, `suffix`, `source`, `valid_for`, `created_by`) VALUES (1, 'Testgenerator', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789', 4, 4, 1, '-', 'PRE', 'SUF', 'dashboard', 365, 1)"}},{"step":"wp-cli","command":"wp wc --user=1 payment_gateway update bacs --enabled=true"},{"step":"wp-cli","command":"wp wc --user=1 tool run install_pages"},{"step":"wp-cli","command":"wp wc product create --user=1 --name='Enwikuna License Manager License Product' --type=simple --regular_price=10 --description='This is a test product for Enwikuna License Manager.' --short_description='This is a test product for Enwikuna License Manager.' --meta_data='[{\"key\":\"_enwikuna_license_manager\",\"value\":\"yes\"},{\"key\":\"_elm_product_use_generator\",\"value\":\"yes\"},{\"key\":\"_elm_product_assigned_generator\",\"value\":\"1\"},{\"key\":\"_elm_product_uuid\",\"value\":\"f200b966-53eb-4fd3-b548-09f18a11d75c\"}]'"},{"step":"wp-cli","command":"wp wc shop_order create --user=1 --status=completed --customer_id=1 --line_items='[{\"product_id\":10, \"quantity\":1}]'"},{"step":"runSql","sql":{"resource":"literal","name":"schema.sql","contents":"INSERT INTO `wp_elm_license_activations` (`license_id`, `label`, `source`, `created_by`) VALUES (1, 'MacBook Pro from Johannes', 'dashboard', 1)"}}]}
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/admin.php?page=elm-licenses",
+  "preferredVersions": {
+    "php": "7.4",
+    "wp": "6.5"
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Enwikuna License Manager Live Preview",
+        "woocommerce_enable_guest_checkout": "no",
+        "woocommerce_enable_signup_and_login_from_checkout": "yes",
+        "woocommerce_store_address": "Enwikuna Street 1",
+        "woocommerce_store_address_2": "",
+        "woocommerce_store_city": "München",
+        "woocommerce_default_country": "DE:DE-BY",
+        "woocommerce_store_postalcode": "81373",
+        "woocommerce_currency": "EUR",
+        "woocommerce_product_type": "virtual",
+        "woocommerce_allow_tracking": "no",
+        "_transient__wc_activation_redirect": false
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "enwikuna-license-manager"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "elm_admin_setup_wizard_redirect": false,
+        "elm_general_display_setup_wizard_update_mode": "no",
+        "elm_my_account_activate_licenses_mode": "yes",
+        "elm_my_account_deactivate_licenses_mode": "yes",
+        "elm_my_account_licenses_renewal_mode": "yes",
+        "elm_product_automatic_stock_management_mode": "yes"
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "wordpress.org/themes",
+        "slug": "storefront"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runSql",
+      "sql": {
+        "resource": "literal",
+        "name": "schema.sql",
+        "contents": "INSERT INTO `wp_elm_generators` (`id`, `name`, `charset`, `chunks`, `chunk_length`, `allowed_activations`, `block_separator`, `prefix`, `suffix`, `source`, `valid_for`, `created_by`) VALUES (1, 'Testgenerator', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789', 4, 4, 1, '-', 'PRE', 'SUF', 'dashboard', 365, 1)"
+      }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp wc --user=1 payment_gateway update bacs --enabled=true"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp wc --user=1 tool run install_pages"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp wc product create --user=1 --name='Enwikuna License Manager License Product' --type=simple --regular_price=10 --description='This is a test product for Enwikuna License Manager.' --short_description='This is a test product for Enwikuna License Manager.' --meta_data='[{\"key\":\"_enwikuna_license_manager\",\"value\":\"yes\"},{\"key\":\"_elm_product_use_generator\",\"value\":\"yes\"},{\"key\":\"_elm_product_assigned_generator\",\"value\":\"1\"},{\"key\":\"_elm_product_uuid\",\"value\":\"f200b966-53eb-4fd3-b548-09f18a11d75c\"}]'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp wc shop_order create --user=1 --status=completed --customer_id=1 --line_items='[{\"product_id\":10, \"quantity\":1}]'"
+    },
+    {
+      "step": "runSql",
+      "sql": {
+        "resource": "literal",
+        "name": "schema.sql",
+        "contents": "INSERT INTO `wp_elm_license_activations` (`license_id`, `label`, `source`, `created_by`) VALUES (1, 'MacBook Pro from Johannes', 'dashboard', 1)"
+      }
+    }
+  ]
+}
