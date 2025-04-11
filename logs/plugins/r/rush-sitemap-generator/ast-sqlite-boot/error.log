@@ -2,660 +2,155 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:49:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:49:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpwox_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpwox_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/responsive-css-editor/index.php(121): add_option('wpwox_db_versio...', '1.0')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wpwox_install_database(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_respon...', false)
-#9 /internal/eval.php(20): activate_plugin('responsive-css-...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpwox_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_responsive-css-editor/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpwox_install_database, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:34 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'n6MjnCuvOWI$H+Ho<,7B2aL)aj?&4t7%p& x*<JgUgy.K2qZatln{ozAfnS??V>S', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'n6MjnCuvOWI$H+Ho&lt;,7B2aL)aj?&amp;4t7%p&amp; x*&lt;JgUgy.K2qZatln{ozAfnS??V&gt;S' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'n6MjnCuvOWI$H+H...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'n6MjnCuvOWI$H+H...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'n6MjnCuvOWI$H+H...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'n6MjnCuvOWI$H+H...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'n6MjnCuvOWI$H+Ho<,7B2aL)aj?&4t7%p& x*<JgUgy.K2qZatln{ozAfnS??V>S', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '.aNQtS;|(V#I,XYV&98O*0gxz5no7TlJbR^@{nzbZZbzn+O6>tku9eMX%C@fm:Hi', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '.aNQtS;|(V#I,XYV&amp;98O*0gxz5no7TlJbR^@{nzbZZbzn+O6&gt;tku9eMX%C@fm:Hi' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '.aNQtS;|(V#I,XY...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '.aNQtS;|(V#I,XY...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '.aNQtS;|(V#I,XY...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '.aNQtS;|(V#I,XY...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '.aNQtS;|(V#I,XYV&98O*0gxz5no7TlJbR^@{nzbZZbzn+O6>tku9eMX%C@fm:Hi', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j._c.-TJjLxU<T;(s$*1!JDC8@5oml3)c}GdG&2[B+4/X5:4xUHPQ?TpI<R4.?E/', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'j._c.-TJjLxU&lt;T;(s$*1!JDC8@5oml3)c}GdG&amp;2[B+4/X5:4xUHPQ?TpI&lt;R4.?E/' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'j._c.-TJjLxU<T;...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'j._c.-TJjLxU<T;...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'j._c.-TJjLxU<T;...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'j._c.-TJjLxU<T;...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j._c.-TJjLxU<T;(s$*1!JDC8@5oml3)c}GdG&2[B+4/X5:4xUHPQ?TpI<R4.?E/', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'itIpn_MH#(z}}dLgetU_e@AO,5 x;Y/7 ?8vK1<?2#ZoUwIE !f4K><hb^Fkt2jC', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'itIpn_MH#(z}}dLgetU_e@AO,5 x;Y/7 ?8vK1&lt;?2#ZoUwIE !f4K&gt;&lt;hb^Fkt2jC' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'itIpn_MH#(z}}dL...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'itIpn_MH#(z}}dL...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'itIpn_MH#(z}}dL...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'itIpn_MH#(z}}dL...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'itIpn_MH#(z}}dLgetU_e@AO,5 x;Y/7 ?8vK1<?2#ZoUwIE !f4K><hb^Fkt2jC', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:36 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j`Z_t_FTvw@1chKK)5,k%(.}91~B* 78rY048(1(&jNEz-Xvm/@)5|@R_].^;3fo', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'j`Z_t_FTvw@1chKK)5,k%(.}91~B* 78rY048(1(&amp;jNEz-Xvm/@)5|@R_].^;3fo' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'j`Z_t_FTvw@1chK...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'j`Z_t_FTvw@1chK...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'j`Z_t_FTvw@1chK...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'j`Z_t_FTvw@1chK...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j`Z_t_FTvw@1chKK)5,k%(.}91~B* 78rY048(1(&jNEz-Xvm/@)5|@R_].^;3fo', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'H_f8>ps`MJ}]H_B;;LE|_^i**tN0v~@H([h t{^^8OVtpPu0BP9=k&F>9Dc_oR&w', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'H_f8&gt;ps`MJ}]H_B;;LE|_^i**tN0v~@H([h t{^^8OVtpPu0BP9=k&amp;F&gt;9Dc_oR&amp;w' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'H_f8>ps`MJ}]H_B...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'H_f8>ps`MJ}]H_B...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'H_f8>ps`MJ}]H_B...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'H_f8>ps`MJ}]H_B...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'H_f8>ps`MJ}]H_B;;LE|_^i**tN0v~@H([h t{^^8OVtpPu0BP9=k&F>9Dc_oR&w', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 's)(H>IEMCi)i|[qO}Cj@.i`[@q@gKiWWN,+?>293,=ky)|m[NF-Rmamp#>$ ?I,:', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 's)(H&gt;IEMCi)i|[qO}Cj@.i`[@q@gKiWWN,+?&gt;293,=ky)|m[NF-Rmamp#&gt;$ ?I,:' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 's)(H>IEMCi)i|[q...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 's)(H>IEMCi)i|[q...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 's)(H>IEMCi)i|[q...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 's)(H>IEMCi)i|[q...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(2): require('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 's)(H>IEMCi)i|[qO}Cj@.i`[@q@gKiWWN,+?>293,=ky)|m[NF-Rmamp#>$ ?I,:', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qH#TlUL3{e-<YCl,89MSb[)X8! $K4U_elG^btb7lzr%c5%XWlDoBR.7LeY*O=K;', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'qH#TlUL3{e-&lt;YCl,89MSb[)X8! $K4U_elG^btb7lzr%c5%XWlDoBR.7LeY*O=K;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'qH#TlUL3{e-<YCl...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'qH#TlUL3{e-<YCl...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'qH#TlUL3{e-<YCl...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'qH#TlUL3{e-<YCl...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('tenup-winamp-bl...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/retro-winamp-block/retro-webamp-block.php(83): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): RetroWinampBlock\{closure}('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('init')
-#26 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#27 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#28 /internal/eval.php(2): require('/wordpress/wp-l...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qH#TlUL3{e-<YCl,89MSb[)X8! $K4U_elG^btb7lzr%c5%XWlDoBR.7LeY*O=K;', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RetroWinampBlock\{closure}, register_block_type, register_block_type_from_metadata, register_block_script_handle, wp_script_is, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('twentytwentyfour', 'twentytwentyfour', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'twentytwentyfour' , 'twentytwentyfour' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
-#6 /wordpress/wp-content/plugins/WordPress-Importer-master/class-wxr-importer.php(1708): wp_insert_term('twentytwentyfou...', 'wp_theme', Array)
-#7 /wordpress/wp-content/plugins/WordPress-Importer-master/class-wxr-importer.php(458): WXR_Importer->process_term(Array, Array)
-#8 /internal/eval.php(37): WXR_Importer->import('/tmp/import.wxr')
-#9 {main}</pre>
- for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('twentytwentyfour', 'twentytwentyfour', 0) made by WXR_Importer->import, WXR_Importer->process_term, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2023-12-18 00:02:26', '2023-12-18 00:02:26', '<!-- wp:paragraph -->
-<p>This is a demo of the Winamp Block. The following audio files are used:</p>
-<!-- /wp:paragraph -->
+Error: [11-Apr-2025 04:53:34 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744347212.497)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:54:33 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744347270.666)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:55:03 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744347301.105)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:56:02 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744347360.237)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:56:15 UTC] PHP Notice:  Undefined variable: term in /internal/eval.php on line 22
+[11-Apr-2025 04:56:15 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/eval.php on line 22
+[11-Apr-2025 04:56:28 UTC] PHP Notice:  Undefined variable: term in /internal/eval.php on line 22
+[11-Apr-2025 04:56:28 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/eval.php on line 22
+[11-Apr-2025 04:56:40 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Rinf_RSS_Widget')
+#2 /wordpress/wp-content/plugins/rinf-news-ticker/rinfeedwidget.php(145): register_widget('Rinf_RSS_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rinfnews_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 04:56:48 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Rinf_RSS_Widget')
+#2 /wordpress/wp-content/plugins/rinf-news-ticker/rinfeedwidget.php(145): register_widget('Rinf_RSS_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rinfnews_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 04:56:57 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Rinf_RSS_Widget')
+#2 /wordpress/wp-content/plugins/rinf-news-ticker/rinfeedwidget.php(145): register_widget('Rinf_RSS_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): rinfnews_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 04:57:35 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/rush-sitemap-generator/sitemap-generator.php on line 737
 
-<!-- wp:list -->
-<ul><!-- wp:list-item -->
-<li><a href=\"https://freesound.org/people/B_Lamerichs/sounds/266751\" target=\"_blank\" rel=\"noreferrer noopener\">short-loops-12-03-2015-5.mp3</a> by <a href=\"https://freesound.org/people/B_Lamerichs\" data-type=\"link\" data-id=\"https://freesound.org/people/B_Lamerichs\" target=\"_blank\" rel=\"noreferrer noopener\">B_Lamerichs</a> is licensed under <a href=\"https://creativecommons.org/licenses/by/3.0/?ref=openverse\" target=\"_blank\" rel=\"noreferrer noopener\">CC BY 3.0</a></li>
-<!-- /wp:list-item -->
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"rush-sitemap-generator"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
 
-<!-- wp:list-item -->
-<li><a href=\"https://freesound.org/people/B_Lamerichs/sounds/264764\" target=\"_blank\" rel=\"noreferrer noopener\">short-loops-21-02-2015-4.mp3</a> by <a href=\"https://freesound.org/people/B_Lamerichs\" target=\"_blank\" rel=\"noreferrer noopener\">B_Lamerichs</a> is licensed under <a href=\"https://creativecommons.org/licenses/by/3.0/?ref=openverse\" target=\"_blank\" rel=\"noreferrer noopener\">CC BY 3.0</a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-
-<!-- wp:spacer {\"height\":\"25px\"} -->
-<div style=\"height:25px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:tenup/winamp-block -->
-<figure class=\"wp-block-tenup-winamp-block\" data-skin=\"\"><!-- wp:audio {\"id\":4} -->
-<figure class=\"wp-block-audio\"><audio controls src=\"https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-12-03-2015-5.mp3\"></audio></figure>
-<!-- /wp:audio -->
-
-<!-- wp:audio {\"id\":4} -->
-<figure class=\"wp-block-audio\"><audio controls src=\"https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-21-02-2015-4.mp3\"></audio></figure>
-<!-- /wp:audio --></figure>
-<!-- /wp:tenup/winamp-block -->', '', 'Winamp Block Demo Post', '', 'publish', 'post', 'open', 'open', '', 'winamp-block-demo-post', '', '', '2023-12-18 00:02:26', '2023-12-18 00:02:26', 0, 0, '', 'http://xu-osp-plugins.local/?p=2')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2023-12-18 00:02:26' , '2023-12-18 00:02:26' , '&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;This is a demo of the Winamp Block. The following audio files are used:&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:list --&gt;
-&lt;ul&gt;&lt;!-- wp:list-item --&gt;
-&lt;li&gt;&lt;a href=&quot;https://freesound.org/people/B_Lamerichs/sounds/266751&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;short-loops-12-03-2015-5.mp3&lt;/a&gt; by &lt;a href=&quot;https://freesound.org/people/B_Lamerichs&quot; data-type=&quot;link&quot; data-id=&quot;https://freesound.org/people/B_Lamerichs&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;B_Lamerichs&lt;/a&gt; is licensed under &lt;a href=&quot;https://creativecommons.org/licenses/by/3.0/?ref=openverse&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;CC BY 3.0&lt;/a&gt;&lt;/li&gt;
-&lt;!-- /wp:list-item --&gt;
-
-&lt;!-- wp:list-item --&gt;
-&lt;li&gt;&lt;a href=&quot;https://freesound.org/people/B_Lamerichs/sounds/264764&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;short-loops-21-02-2015-4.mp3&lt;/a&gt; by &lt;a href=&quot;https://freesound.org/people/B_Lamerichs&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;B_Lamerichs&lt;/a&gt; is licensed under &lt;a href=&quot;https://creativecommons.org/licenses/by/3.0/?ref=openverse&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;CC BY 3.0&lt;/a&gt;&lt;/li&gt;
-&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
-&lt;!-- /wp:list --&gt;
-
-&lt;!-- wp:spacer {&quot;height&quot;:&quot;25px&quot;} --&gt;
-&lt;div style=&quot;height:25px&quot; aria-hidden=&quot;true&quot; class=&quot;wp-block-spacer&quot;&gt;&lt;/div&gt;
-&lt;!-- /wp:spacer --&gt;
-
-&lt;!-- wp:tenup/winamp-block --&gt;
-&lt;figure class=&quot;wp-block-tenup-winamp-block&quot; data-skin=&quot;&quot;&gt;&lt;!-- wp:audio {&quot;id&quot;:4} --&gt;
-&lt;figure class=&quot;wp-block-audio&quot;&gt;&lt;audio controls src=&quot;https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-12-03-2015-5.mp3&quot;&gt;&lt;/audio&gt;&lt;/figure&gt;
-&lt;!-- /wp:audio --&gt;
-
-&lt;!-- wp:audio {&quot;id&quot;:4} --&gt;
-&lt;figure class=&quot;wp-block-audio&quot;&gt;&lt;audio controls src=&quot;https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-21-02-2015-4.mp3&quot;&gt;&lt;/audio&gt;&lt;/figure&gt;
-&lt;!-- /wp:audio --&gt;&lt;/figure&gt;
-&lt;!-- /wp:tenup/winamp-block --&gt;' , '' , 'Winamp Block Demo Post' , '' , 'publish' , 'post' , 'open' , 'open' , '' , 'winamp-block-demo-post' , '' , '' , '2023-12-18 00:02:26' , '2023-12-18 00:02:26' , 0 , 0 , '' , 'http://xu-osp-plugins.local/?p=2' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/WordPress-Importer-master/class-wxr-importer.php(863): wp_insert_post(Array, true)
-#7 /wordpress/wp-content/plugins/WordPress-Importer-master/class-wxr-importer.php(383): WXR_Importer->process_post(Array, Array, Array, Array)
-#8 /internal/eval.php(37): WXR_Importer->import('/tmp/import.wxr')
-#9 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2023-12-18 00:02:26', '2023-12-18 00:02:26', '<!-- wp:paragraph -->
-<p>This is a demo of the Winamp Block. The following audio files are used:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
-<ul><!-- wp:list-item -->
-<li><a href=\"https://freesound.org/people/B_Lamerichs/sounds/266751\" target=\"_blank\" rel=\"noreferrer noopener\">short-loops-12-03-2015-5.mp3</a> by <a href=\"https://freesound.org/people/B_Lamerichs\" data-type=\"link\" data-id=\"https://freesound.org/people/B_Lamerichs\" target=\"_blank\" rel=\"noreferrer noopener\">B_Lamerichs</a> is licensed under <a href=\"https://creativecommons.org/licenses/by/3.0/?ref=openverse\" target=\"_blank\" rel=\"noreferrer noopener\">CC BY 3.0</a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li><a href=\"https://freesound.org/people/B_Lamerichs/sounds/264764\" target=\"_blank\" rel=\"noreferrer noopener\">short-loops-21-02-2015-4.mp3</a> by <a href=\"https://freesound.org/people/B_Lamerichs\" target=\"_blank\" rel=\"noreferrer noopener\">B_Lamerichs</a> is licensed under <a href=\"https://creativecommons.org/licenses/by/3.0/?ref=openverse\" target=\"_blank\" rel=\"noreferrer noopener\">CC BY 3.0</a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-
-<!-- wp:spacer {\"height\":\"25px\"} -->
-<div style=\"height:25px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>
-<!-- /wp:spacer -->
-
-<!-- wp:tenup/winamp-block -->
-<figure class=\"wp-block-tenup-winamp-block\" data-skin=\"\"><!-- wp:audio {\"id\":4} -->
-<figure class=\"wp-block-audio\"><audio controls src=\"https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-12-03-2015-5.mp3\"></audio></figure>
-<!-- /wp:audio -->
-
-<!-- wp:audio {\"id\":4} -->
-<figure class=\"wp-block-audio\"><audio controls src=\"https://raw.githubusercontent.com/10up/retro-winamp-block/1e6483db128ebc100249e09db62ad8148d155d7d/.wordpress-org/blueprints/short-loops-21-02-2015-4.mp3\"></audio></figure>
-<!-- /wp:audio --></figure>
-<!-- /wp:tenup/winamp-block -->', '', 'Winamp Block Demo Post', '', 'publish', 'post', 'open', 'open', '', 'winamp-block-demo-post', '', '', '2023-12-18 00:02:26', '2023-12-18 00:02:26', 0, 0, '', 'http://xu-osp-plugins.local/?p=2') made by WXR_Importer->import, WXR_Importer->process_post, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:50:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('category_children', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'category_children' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...'
+Node.js v23.11.0
