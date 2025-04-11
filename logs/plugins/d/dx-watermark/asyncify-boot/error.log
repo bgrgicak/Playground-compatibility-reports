@@ -2,249 +2,172 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 01:48:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:48:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dplctp_activated_on', '1744249717', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dplctp_activated_on' , '1744249717' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dplctp_activate...', 1744249717, '', 'on')
-#5 /wordpress/wp-content/plugins/duplicate-post-littlebizzy/admin-notices.php(494): update_option('dplctp_activate...', 1744249717, true)
-#6 /wordpress/wp-content/plugins/duplicate-post-littlebizzy/admin-notices.php(160): DPLCTP_Admin_Notices->update_activation_timestamp()
-#7 /wordpress/wp-content/plugins/duplicate-post-littlebizzy/admin-notices.php(141): DPLCTP_Admin_Notices->check_timestamps()
-#8 /wordpress/wp-content/plugins/duplicate-post-littlebizzy/admin-notices.php(116): DPLCTP_Admin_Notices->__construct('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/duplicate-post-littlebizzy/duplicate-post.php(18): DPLCTP_Admin_Notices::instance('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('duplicate-post-...')
-#12 /internal/eval.php(20): activate_plugin('duplicate-post-...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dplctp_activated_on', '1744249717', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/duplicate-post-littlebizzy/duplicate-post.php'), DPLCTP_Admin_Notices::instance, DPLCTP_Admin_Notices->__construct, DPLCTP_Admin_Notices->check_timestamps, DPLCTP_Admin_Notices->update_activation_timestamp, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:48:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:49:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:49:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:49:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:49:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 21
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:34 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_functions.php on line 54
-[10-Apr-2025 01:49:34 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php:29
+Error: [11-Apr-2025 07:46:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
-#1 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
-#2 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/dashboard-quick-actions/dashboard-quick-actions.php(20): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dashboard-quick...')
-#6 /internal/eval.php(20): activate_plugin('dashboard-quick...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php on line 29
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 21
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:44 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_functions.php on line 54
-[10-Apr-2025 01:49:44 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php:29
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
+#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:46:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
-#1 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
-#2 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/dashboard-quick-actions/dashboard-quick-actions.php(20): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dashboard-quick...')
-#6 /internal/eval.php(20): activate_plugin('dashboard-quick...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php on line 29
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 21
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_cdn.php on line 100
-[10-Apr-2025 01:49:55 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_functions.php on line 54
-[10-Apr-2025 01:49:55 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php:29
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
+#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:46:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
-#1 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
-#2 /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/framework.php(51): require_once('/wordpress/wp-c...')
-#3 /wordpress/wp-content/plugins/dashboard-quick-actions/dashboard-quick-actions.php(20): require_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dashboard-quick...')
-#6 /internal/eval.php(20): activate_plugin('dashboard-quick...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/dashboard-quick-actions/assets/admin/redux-framework/inc/class.redux_filesystem.php on line 29
-[10-Apr-2025 01:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('whb_data_editor_components', 'a:4:{s:12:\"desktop-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"tablets-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"mobiles-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:11:\"sticky-view\";a:3:{s:5:\"srow1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c448logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c830text\";}}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:18:\"67f723d27c060srow1\";}}s:5:\"srow2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow2\";}}s:5:\"srow3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow3\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'whb_data_editor_components' , 'a:4:{s:12:&quot;desktop-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:12:&quot;tablets-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:12:&quot;mobiles-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:11:&quot;sticky-view&quot;;a:3:{s:5:&quot;srow1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c448logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c830text&quot;;}}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow1&quot;;}}s:5:&quot;srow2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow2&quot;;}}s:5:&quot;srow3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow3&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('whb_data_editor...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/includes/whb-class-helper.php(341): update_option('whb_data_editor...', Array)
-#6 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(106): WHB_Helper::setHeaderDefaultData()
-#7 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(83): Webnus_Header_Builder->__construct()
-#8 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(139): Webnus_Header_Builder::get_instance()
-#9 /wordpress/wp-content/plugins/deep-free-plus/deep-free-plus.php(81): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('deep-free-plus/...')
-#12 /internal/eval.php(20): activate_plugin('deep-free-plus/...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('whb_data_editor_components', 'a:4:{s:12:\"desktop-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"tablets-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"mobiles-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:11:\"sticky-view\";a:3:{s:5:\"srow1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c448logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c830text\";}}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:18:\"67f723d27c060srow1\";}}s:5:\"srow2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow2\";}}s:5:\"srow3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow3\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/deep-free-plus/deep-free-plus.php'), include_once('/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php'), Webnus_Header_Builder::get_instance, Webnus_Header_Builder->__construct, WHB_Helper::setHeaderDefaultData, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('whb_data_frontend_components', 'a:4:{s:12:\"desktop-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"tablets-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"mobiles-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:11:\"sticky-view\";a:3:{s:5:\"srow1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c448logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c830text\";}}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:18:\"67f723d27c060srow1\";}}s:5:\"srow2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow2\";}}s:5:\"srow3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow3\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'whb_data_frontend_components' , 'a:4:{s:12:&quot;desktop-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:12:&quot;tablets-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:12:&quot;mobiles-view&quot;;a:4:{s:6:&quot;topbar&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:19:&quot;67f723d27c060tapbar&quot;;}}s:4:&quot;row1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060text&quot;;}}s:8:&quot;settings&quot;;a:4:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row1&quot;;s:11:&quot;header_type&quot;;s:10:&quot;horizontal&quot;;}}s:4:&quot;row2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row2&quot;;}}s:4:&quot;row3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;header-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c060row3&quot;;}}}s:11:&quot;sticky-view&quot;;a:3:{s:5:&quot;srow1&quot;;a:4:{s:4:&quot;left&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:8:&quot;ti-image&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;logo&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c448logo&quot;;}}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:1:{i:0;a:4:{s:11:&quot;editor_icon&quot;;s:11:&quot;ti-smallcap&quot;;s:14:&quot;hidden_element&quot;;b:0;s:4:&quot;name&quot;;s:4:&quot;text&quot;;s:8:&quot;uniqueId&quot;;s:17:&quot;67f723d27c830text&quot;;}}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:0;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow1&quot;;}}s:5:&quot;srow2&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow2&quot;;}}s:5:&quot;srow3&quot;;a:4:{s:4:&quot;left&quot;;a:0:{}s:6:&quot;center&quot;;a:0:{}s:5:&quot;right&quot;;a:0:{}s:8:&quot;settings&quot;;a:3:{s:7:&quot;element&quot;;s:11:&quot;sticky-area&quot;;s:14:&quot;hidden_element&quot;;b:1;s:8:&quot;uniqueId&quot;;s:18:&quot;67f723d27c060srow3&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('whb_data_fronte...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/includes/whb-class-helper.php(342): update_option('whb_data_fronte...', Array)
-#6 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(106): WHB_Helper::setHeaderDefaultData()
-#7 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(83): Webnus_Header_Builder->__construct()
-#8 /wordpress/wp-content/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php(139): Webnus_Header_Builder::get_instance()
-#9 /wordpress/wp-content/plugins/deep-free-plus/deep-free-plus.php(81): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('deep-free-plus/...')
-#12 /internal/eval.php(20): activate_plugin('deep-free-plus/...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('whb_data_frontend_components', 'a:4:{s:12:\"desktop-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"tablets-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:12:\"mobiles-view\";a:4:{s:6:\"topbar\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:19:\"67f723d27c060tapbar\";}}s:4:\"row1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c060logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c060text\";}}s:8:\"settings\";a:4:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:17:\"67f723d27c060row1\";s:11:\"header_type\";s:10:\"horizontal\";}}s:4:\"row2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row2\";}}s:4:\"row3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"header-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:17:\"67f723d27c060row3\";}}}s:11:\"sticky-view\";a:3:{s:5:\"srow1\";a:4:{s:4:\"left\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:8:\"ti-image\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"logo\";s:8:\"uniqueId\";s:17:\"67f723d27c448logo\";}}s:6:\"center\";a:0:{}s:5:\"right\";a:1:{i:0;a:4:{s:11:\"editor_icon\";s:11:\"ti-smallcap\";s:14:\"hidden_element\";b:0;s:4:\"name\";s:4:\"text\";s:8:\"uniqueId\";s:17:\"67f723d27c830text\";}}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:0;s:8:\"uniqueId\";s:18:\"67f723d27c060srow1\";}}s:5:\"srow2\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow2\";}}s:5:\"srow3\";a:4:{s:4:\"left\";a:0:{}s:6:\"center\";a:0:{}s:5:\"right\";a:0:{}s:8:\"settings\";a:3:{s:7:\"element\";s:11:\"sticky-area\";s:14:\"hidden_element\";b:1;s:8:\"uniqueId\";s:18:\"67f723d27c060srow3\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/deep-free-plus/deep-free-plus.php'), include_once('/plugins/deep-free-plus/admin/header-builder/webnus-header-builder.php'), Webnus_Header_Builder::get_instance, Webnus_Header_Builder->__construct, WHB_Helper::setHeaderDefaultData, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 21
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 45
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 104
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 104
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 104
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 104
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_cdn.php on line 104
-[10-Apr-2025 01:50:10 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/deep-free-plus/admin/theme-options/ReduxCore/inc/class.redux_functions.php on line 54
-[10-Apr-2025 01:50:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('deep_free_save_dyn_styles', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'deep_free_save_dyn_styles' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/deep-free-plus/functions/functions-general.php(574): add_option('deep_free_save_...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/deep-free-plus/deep-free-plus.php(86): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('deep-free-plus/...')
-#8 /internal/eval.php(20): activate_plugin('deep-free-plus/...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('deep_free_save_dyn_styles', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/deep-free-plus/deep-free-plus.php'), require_once('/plugins/deep-free-plus/functions/functions-general.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 01:50:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 01:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 01:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 01:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 01:50:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>meta-box</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Image_Cube_Widg...')
+#2 /wordpress/wp-content/plugins/dynamicwp-image-cube/dynamicwp-image-cube.php(111): register_widget('Image_Cube_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): init_image_cube('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:53:51 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:53:51 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:53:51 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:53:52 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:53:52 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:53:52 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:53:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(1211): require_once()
+#1 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(54): DukaGate->load_plugins('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(38): DukaGate->set_up()
+#3 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(2447): DukaGate->__construct()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dukagate_action_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php on line 5
+[11-Apr-2025 07:54:01 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:54:01 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:01 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:02 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:54:02 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:02 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(1211): require_once()
+#1 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(54): DukaGate->load_plugins('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(38): DukaGate->set_up()
+#3 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(2447): DukaGate->__construct()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dukagate_action_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php on line 5
+[11-Apr-2025 07:54:12 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:54:12 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:12 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:13 UTC] PHP Deprecated:  Required parameter $action follows optional parameter $meta_value in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 684
+[11-Apr-2025 07:54:13 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:13 UTC] PHP Deprecated:  Required parameter $height follows optional parameter $attach_id in /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php on line 2259
+[11-Apr-2025 07:54:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(1211): require_once()
+#1 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(54): DukaGate->load_plugins('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(38): DukaGate->set_up()
+#3 /wordpress/wp-content/plugins/dukagate/dukagate/dukagate-init.php(2447): DukaGate->__construct()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dukagate_action_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/dukagate/dukagate/widgets/dukagate-cart-widget.php on line 5
+[11-Apr-2025 07:54:26 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method DX_Watermark::make_dir() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dx-wat...', false)
+#3 /internal/eval.php(20): activate_plugin('dx-watermark/dx...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 07:54:34 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method DX_Watermark::make_dir() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dx-wat...', false)
+#3 /internal/eval.php(20): activate_plugin('dx-watermark/dx...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"dx-watermark"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
