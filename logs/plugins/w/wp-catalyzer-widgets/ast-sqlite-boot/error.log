@@ -2,581 +2,88 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 18:54:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:54:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:54:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wotd_promotion_simplebanenr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_wotd_promotion_simplebanenr_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_wotd_pro...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_wotd_pro...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wotd_promotion_simplebanenr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:55:19 UTC] PHP Fatal error:  Method wp_load_inifile_class::__set_state() must take exactly 1 argument in /wordpress/wp-content/plugins/wp-inifileload/wp-IniFileLoad.php on line 65
-[09-Apr-2025 18:55:27 UTC] PHP Fatal error:  Method wp_load_inifile_class::__set_state() must take exactly 1 argument in /wordpress/wp-content/plugins/wp-inifileload/wp-IniFileLoad.php on line 65
-[09-Apr-2025 18:55:35 UTC] PHP Fatal error:  Method wp_load_inifile_class::__set_state() must take exactly 1 argument in /wordpress/wp-content/plugins/wp-inifileload/wp-IniFileLoad.php on line 65
-[09-Apr-2025 18:55:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:55:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:55:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:55:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:55:45 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 52
-[09-Apr-2025 18:55:45 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:55:45 UTC] PHP Warning:  The magic method WPMN\Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:55:53 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 52
-[09-Apr-2025 18:55:53 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:55:53 UTC] PHP Warning:  The magic method WPMN\Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:56:01 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 52
-[09-Apr-2025 18:56:01 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:56:01 UTC] PHP Warning:  The magic method WPMN\Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/wp-margin-notes/classes/singleton.php on line 60
-[09-Apr-2025 18:56:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:56:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:56:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:56:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:56:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_termmeta (
-				meta_id bigint(20) unsigned NOT NULL auto_increment,
-				term_id bigint(20) unsigned NOT NULL default '0',
-				meta_key varchar(255) default NULL,
-				meta_value longtext,
-				PRIMARY KEY	(meta_id),
-				KEY term_key (term_id),
-				KEY meta_key (meta_key)
-			) DEFAULT CHARACTER SET utf8mb4;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_id, 1, , NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, term_id, 2, 0, NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_key, 3, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_value, 4, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, meta_id</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 0, database_name_here, PRIMARY, 1, meta_id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, term_id</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 1, database_name_here, term_key, 1, term_id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, meta_key</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 1, database_name_here, meta_key, 1, meta_key, A, 0, , , YES, BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: CREATE TABLE `wp_termmeta` (
-  `meta_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `term_id` INTEGER NOT NULL DEFAULT '0',
-  `meta_key` TEXT COLLATE NOCASE,
-  `meta_value` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 table `wp_termmeta` already exists
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-content/plugins/wp-term-metadata/wp-term-metadata.php(77): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/wp-term-metadata/wp-term-metadata.php(33): wp_term_metadata_setup_blog()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_term_metadata_activation_hook(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ter...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-term-metadat...')
-#10 {main}</pre>
- for query CREATE TABLE wp_termmeta (
-				meta_id bigint(20) unsigned NOT NULL auto_increment,
-				term_id bigint(20) unsigned NOT NULL default '0',
-				meta_key varchar(255) default NULL,
-				meta_value longtext,
-				PRIMARY KEY	(meta_id),
-				KEY term_key (term_id),
-				KEY meta_key (meta_key)
-			) DEFAULT CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_wp-term-metadata/wp-term-metadata.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_term_metadata_activation_hook, wp_term_metadata_setup_blog, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:56:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:56:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:56:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:56:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:57:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcmp_legacy_settings_name', 'a:23:{s:19:\"enable_registration\";s:6:\"Enable\";s:16:\"is_university_on\";s:6:\"Enable\";s:17:\"enable_vendor_tab\";s:6:\"Enable\";s:12:\"sold_by_text\";s:7:\"Sold by\";s:17:\"show_report_abuse\";s:20:\"only_vendor_products\";s:17:\"report_abuse_text\";s:12:\"Report Abuse\";s:9:\"inventory\";s:6:\"Enable\";s:8:\"shipping\";s:6:\"Enable\";s:15:\"linked_products\";s:6:\"Enable\";s:9:\"attribute\";s:6:\"Enable\";s:8:\"advanced\";s:6:\"Enable\";s:22:\"is_vendor_view_comment\";s:6:\"Enable\";s:24:\"is_vendor_submit_comment\";s:6:\"Enable\";s:19:\"is_order_csv_export\";s:6:\"Enable\";s:24:\"show_customer_dtl_export\";s:6:\"Enable\";s:28:\"show_customer_billing_export\";s:6:\"Enable\";s:29:\"show_customer_shipping_export\";s:6:\"Enable\";s:19:\"show_cust_dtl_email\";s:6:\"Enable\";s:23:\"show_cust_billing_email\";s:6:\"Enable\";s:24:\"show_cust_shipping_email\";s:6:\"Enable\";s:27:\"show_cust_order_calulations\";s:6:\"Enable\";s:49:\"can_vendor_add_message_on_email_and_thankyou_page\";s:6:\"Enable\";s:26:\"is_vendor_add_external_url\";s:6:\"Enable\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcmp_legacy_settings_name' , 'a:23:{s:19:&quot;enable_registration&quot;;s:6:&quot;Enable&quot;;s:16:&quot;is_university_on&quot;;s:6:&quot;Enable&quot;;s:17:&quot;enable_vendor_tab&quot;;s:6:&quot;Enable&quot;;s:12:&quot;sold_by_text&quot;;s:7:&quot;Sold by&quot;;s:17:&quot;show_report_abuse&quot;;s:20:&quot;only_vendor_products&quot;;s:17:&quot;report_abuse_text&quot;;s:12:&quot;Report Abuse&quot;;s:9:&quot;inventory&quot;;s:6:&quot;Enable&quot;;s:8:&quot;shipping&quot;;s:6:&quot;Enable&quot;;s:15:&quot;linked_products&quot;;s:6:&quot;Enable&quot;;s:9:&quot;attribute&quot;;s:6:&quot;Enable&quot;;s:8:&quot;advanced&quot;;s:6:&quot;Enable&quot;;s:22:&quot;is_vendor_view_comment&quot;;s:6:&quot;Enable&quot;;s:24:&quot;is_vendor_submit_comment&quot;;s:6:&quot;Enable&quot;;s:19:&quot;is_order_csv_export&quot;;s:6:&quot;Enable&quot;;s:24:&quot;show_customer_dtl_export&quot;;s:6:&quot;Enable&quot;;s:28:&quot;show_customer_billing_export&quot;;s:6:&quot;Enable&quot;;s:29:&quot;show_customer_shipping_export&quot;;s:6:&quot;Enable&quot;;s:19:&quot;show_cust_dtl_email&quot;;s:6:&quot;Enable&quot;;s:23:&quot;show_cust_billing_email&quot;;s:6:&quot;Enable&quot;;s:24:&quot;show_cust_shipping_email&quot;;s:6:&quot;Enable&quot;;s:27:&quot;show_cust_order_calulations&quot;;s:6:&quot;Enable&quot;;s:49:&quot;can_vendor_add_message_on_email_and_thankyou_page&quot;;s:6:&quot;Enable&quot;;s:26:&quot;is_vendor_add_external_url&quot;;s:6:&quot;Enable&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcmp_legacy_set...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wcmp-legacy/includes/wcmp-legacy-core-functions.php(51): update_option('wcmp_legacy_set...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wcmp_legacy_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 09:47:40 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744364857.807)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wcmp-l...', false)
-#10 /internal/eval.php(20): activate_plugin('wcmp-legacy/wcm...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcmp_legacy_settings_name', 'a:23:{s:19:\"enable_registration\";s:6:\"Enable\";s:16:\"is_university_on\";s:6:\"Enable\";s:17:\"enable_vendor_tab\";s:6:\"Enable\";s:12:\"sold_by_text\";s:7:\"Sold by\";s:17:\"show_report_abuse\";s:20:\"only_vendor_products\";s:17:\"report_abuse_text\";s:12:\"Report Abuse\";s:9:\"inventory\";s:6:\"Enable\";s:8:\"shipping\";s:6:\"Enable\";s:15:\"linked_products\";s:6:\"Enable\";s:9:\"attribute\";s:6:\"Enable\";s:8:\"advanced\";s:6:\"Enable\";s:22:\"is_vendor_view_comment\";s:6:\"Enable\";s:24:\"is_vendor_submit_comment\";s:6:\"Enable\";s:19:\"is_order_csv_export\";s:6:\"Enable\";s:24:\"show_customer_dtl_export\";s:6:\"Enable\";s:28:\"show_customer_billing_export\";s:6:\"Enable\";s:29:\"show_customer_shipping_export\";s:6:\"Enable\";s:19:\"show_cust_dtl_email\";s:6:\"Enable\";s:23:\"show_cust_billing_email\";s:6:\"Enable\";s:24:\"show_cust_shipping_email\";s:6:\"Enable\";s:27:\"show_cust_order_calulations\";s:6:\"Enable\";s:49:\"can_vendor_add_message_on_email_and_thankyou_page\";s:6:\"Enable\";s:26:\"is_vendor_add_external_url\";s:6:\"Enable\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wcmp-legacy/wcmp-legacy.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wcmp_legacy_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcmp_legacy_plugin_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcmp_legacy_plugin_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcmp_legacy_plu...', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/wcmp-legacy/includes/wcmp-legacy-core-functions.php(53): update_option('wcmp_legacy_plu...', 1)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_wcmp_legacy_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wcmp-l...', false)
-#10 /internal/eval.php(20): activate_plugin('wcmp-legacy/wcm...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcmp_legacy_plugin_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wcmp-legacy/wcmp-legacy.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wcmp_legacy_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:57:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:57:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:57:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:31:\"widgets-for-siteorigin/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.2\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744225052;s:11:\"plugin_path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";s:8:\"sdk_path\";s:31:\"widgets-for-siteorigin/freemius\";s:7:\"version\";s:5:\"2.3.2\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744225052;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:31:&quot;widgets-for-siteorigin/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.3.2&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744225052;s:11:&quot;plugin_path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;s:8:&quot;sdk_path&quot;;s:31:&quot;widgets-for-siteorigin/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.3.2&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744225052;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/fs-essential-functions.php(366): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(158): fs_update_sdk_newest_version('widgets-for-sit...', 'widgets-for-sit...')
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(39): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#11 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:31:\"widgets-for-siteorigin/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.2\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744225052;s:11:\"plugin_path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";s:8:\"sdk_path\";s:31:\"widgets-for-siteorigin/freemius\";s:7:\"version\";s:5:\"2.3.2\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744225052;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, require_once('/plugins/widgets-for-siteorigin/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(474): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(39): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#11 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, require_once('/plugins/widgets-for-siteorigin/freemius/start.php'), require_once('/plugins/widgets-for-siteorigin/freemius/require.php'), require_once('/plugins/widgets-for-siteorigin/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:32 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-fs-logger.php on line 145
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:2753;a:3:{s:4:&quot;slug&quot;;s:22:&quot;widgets-for-siteorigin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2213): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(389): Freemius->store_id_slug_type_path_map('2753', 'widgets-for-sit...')
-#10 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2784): Freemius->__construct('2753', 'widgets-for-sit...', true)
-#11 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(513): Freemius::instance('2753', 'widgets-for-sit...', true)
-#12 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(41): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#16 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:2753;a:3:{s:4:&quot;slug&quot;;s:22:&quot;widgets-for-siteorigin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:22:&quot;widgets-for-siteorigin&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2110): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(404): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2784): Freemius->__construct('2753', 'widgets-for-sit...', true)
-#13 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(513): Freemius::instance('2753', 'widgets-for-sit...', true)
-#14 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(41): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#18 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:2753;a:3:{s:4:&quot;slug&quot;;s:22:&quot;widgets-for-siteorigin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:22:&quot;widgets-for-siteorigin&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(432): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2784): Freemius->__construct('2753', 'widgets-for-sit...', true)
-#12 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(513): Freemius::instance('2753', 'widgets-for-sit...', true)
-#13 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(41): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#17 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:57:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";s:22:\"widgets-for-siteorigin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:2753;a:3:{s:4:&quot;slug&quot;;s:22:&quot;widgets-for-siteorigin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:22:&quot;widgets-for-siteorigin&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:49:&quot;widgets-for-siteorigin/widgets-for-siteorigin.php&quot;;s:22:&quot;widgets-for-siteorigin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(9994): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(479): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/includes/class-freemius.php(2784): Freemius->__construct('2753', 'widgets-for-sit...', true)
-#11 /wordpress/wp-content/plugins/widgets-for-siteorigin/freemius/start.php(513): Freemius::instance('2753', 'widgets-for-sit...', true)
-#12 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(41): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php(64): wfs_fs_wpinked_widgets_so()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widgets-for-sit...')
-#16 /internal/eval.php(20): activate_plugin('widgets-for-sit...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:2753;a:3:{s:4:\"slug\";s:22:\"widgets-for-siteorigin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}}s:11:\"plugin_data\";a:1:{s:22:\"widgets-for-siteorigin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:49:\"widgets-for-siteorigin/widgets-for-siteorigin.php\";s:22:\"widgets-for-siteorigin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/widgets-for-siteorigin/widgets-for-siteorigin.php'), wfs_fs_wpinked_widgets_so, fs_dynamic_init, Freemius::i
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:49:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Catalyzer_Fa...')
+#2 /wordpress/wp-content/plugins/wp-catalyzer-widgets/inc/widgets/facebook-like-widget.php(12): register_widget('WP_Catalyzer_Fa...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpcatalyzer_facebook_like_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-catalyzer-widgets"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
 Node.js v23.11.0
