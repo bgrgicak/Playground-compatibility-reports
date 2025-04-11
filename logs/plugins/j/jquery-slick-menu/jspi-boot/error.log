@@ -2,89 +2,77 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 23:25:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:25:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jqs_random', 'a:3:{s:7:\"version\";s:5:\"0.0.1\";s:6:\"random\";a:1:{i:0;s:27:\"Are you feeling lucky punk?\";}s:8:\"defaults\";a:3:{s:15:\"stripwhitespace\";i:0;s:10:\"addslashes\";i:0;s:16:\"htmlspecialchars\";i:0;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jqs_random' , 'a:3:{s:7:&quot;version&quot;;s:5:&quot;0.0.1&quot;;s:6:&quot;random&quot;;a:1:{i:0;s:27:&quot;Are you feeling lucky punk?&quot;;}s:8:&quot;defaults&quot;;a:3:{s:15:&quot;stripwhitespace&quot;;i:0;s:10:&quot;addslashes&quot;;i:0;s:16:&quot;htmlspecialchars&quot;;i:0;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jqs_random', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/jqs-random/jqs-random.php(51): update_option('jqs_random', Array)
-#6 /wordpress/wp-content/plugins/jqs-random/jqs-random.php(29): jqs_random_class->setDefaultOptions()
-#7 /wordpress/wp-content/plugins/jqs-random/jqs-random.php(12): jqs_random_class->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jqs-random/jqs-...')
-#10 /internal/eval.php(20): activate_plugin('jqs-random/jqs-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jqs_random', 'a:3:{s:7:\"version\";s:5:\"0.0.1\";s:6:\"random\";a:1:{i:0;s:27:\"Are you feeling lucky punk?\";}s:8:\"defaults\";a:3:{s:15:\"stripwhitespace\";i:0;s:10:\"addslashes\";i:0;s:16:\"htmlspecialchars\";i:0;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/jqs-random/jqs-random.php'), jqs_random_class->__construct, jqs_random_class->setDefaultOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:25:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class jqs_random_class does not have a method "activate_plugin" in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [11-Apr-2025 11:24:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jonradio-private-site</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:24:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jonradio-private-site</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:24:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>jonradio-private-site</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:25:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php:215
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_jqs-ra...', false)
-#3 /internal/eval.php(20): activate_plugin('jqs-random/jqs-...')
+#0 /wordpress/wp-content/plugins/jquery-banner-rotate/jquery-banner-rotate.php(31): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-banner-r...')
+#3 /internal/eval.php(20): activate_plugin('jquery-banner-r...')
 #4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 23:26:01 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class jqs_random_class does not have a method "activate_plugin" in /wordpress/wp-includes/class-wp-hook.php:324
+  thrown in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php on line 215
+[11-Apr-2025 11:25:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php:215
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_jqs-ra...', false)
-#3 /internal/eval.php(20): activate_plugin('jqs-random/jqs-...')
+#0 /wordpress/wp-content/plugins/jquery-banner-rotate/jquery-banner-rotate.php(31): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-banner-r...')
+#3 /internal/eval.php(20): activate_plugin('jquery-banner-r...')
 #4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 23:26:08 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class jqs_random_class does not have a method "activate_plugin" in /wordpress/wp-includes/class-wp-hook.php:324
+  thrown in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php on line 215
+[11-Apr-2025 11:25:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php:215
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_jqs-ra...', false)
-#3 /internal/eval.php(20): activate_plugin('jqs-random/jqs-...')
+#0 /wordpress/wp-content/plugins/jquery-banner-rotate/jquery-banner-rotate.php(31): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-banner-r...')
+#3 /internal/eval.php(20): activate_plugin('jquery-banner-r...')
 #4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 23:26:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:26:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:26:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:26:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:26:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
+  thrown in /wordpress/wp-content/plugins/jquery-banner-rotate/jbr-widget.php on line 215
+[11-Apr-2025 11:27:33 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744370850.786)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 11:28:00 UTC] PHP Warning:  Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13
+[11-Apr-2025 11:28:09 UTC] PHP Warning:  Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13
+[11-Apr-2025 11:28:18 UTC] PHP Warning:  Undefined array key "license" in /wordpress/wp-content/plugins/jam/jam-admin.php on line 13
+[11-Apr-2025 11:28:58 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744370936.38)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 11:31:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-slick-me...')
 #2 /internal/eval.php(20): activate_plugin('jquery-slick-me...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php on line 56
-[09-Apr-2025 23:26:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
+[11-Apr-2025 11:32:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-slick-me...')
 #2 /internal/eval.php(20): activate_plugin('jquery-slick-me...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php on line 56
-[09-Apr-2025 23:27:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
+[11-Apr-2025 11:32:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-slick-menu/dcwp_jquery_slick_menu.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-slick-me...')
