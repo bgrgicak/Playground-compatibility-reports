@@ -2,634 +2,130 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 15:32:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-basic', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-basic' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-basic', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-basic', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-basic.php(380): wpjam_register_option('wpjam-basic', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-basic', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-basic.php', 3)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpjam-basic/wpj...')
-#17 /internal/eval.php(20): activate_plugin('wpjam-basic/wpj...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-basic', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-basic.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-cdn', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-cdn' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-cdn', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-cdn', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-cdn.php(462): wpjam_register_option('wpjam-cdn', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-cdn', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-cdn.php', 4)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpjam-basic/wpj...')
-#17 /internal/eval.php(20): activate_plugin('wpjam-basic/wpj...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-cdn', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-cdn.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-custom', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-custom' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-custom', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-custom', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-custom.php(204): wpjam_register_option('wpjam-custom', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-custom', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-custom.ph...', 6)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpjam-basic/wpj...')
-#17 /internal/eval.php(20): activate_plugin('wpjam-basic/wpj...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-custom', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-custom.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-thumbnail', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-thumbnail' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-thumbnail', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-thumbnail', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-thumbnail.php(152): wpjam_register_option('wpjam-thumbnail', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-thumbnail', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-thumbnail...', 8)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpjam-basic/wpj...')
-#17 /internal/eval.php(20): activate_plugin('wpjam-basic/wpj...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-thumbnail', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-thumbnail.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-extends', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-extends' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-extends', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-extends', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(496): wpjam_register_option('wpjam-extends', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(10): WPJAM_Extend->load()
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(594): wpjam_load(Array, Array, 1)
-#9 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...', Array)
-#10 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(737): wpjam_load_extends('/wordpress/wp-c...', Array)
-#11 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpjam-basic/wpj...')
-#14 /internal/eval.php(20): activate_plugin('wpjam-basic/wpj...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-extends', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, wpjam_load, WPJAM_Extend->load, wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:19 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:32:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:32:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:32:19 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:32:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-basic', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-basic' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-basic', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-basic', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-basic.php(380): wpjam_register_option('wpjam-basic', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-basic', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-basic.php', 3)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-basic', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-basic.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-cdn', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-cdn' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-cdn', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-cdn', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-cdn.php(462): wpjam_register_option('wpjam-cdn', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-cdn', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-cdn.php', 4)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-cdn', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-cdn.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-custom', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-custom' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-custom', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-custom', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-custom.php(204): wpjam_register_option('wpjam-custom', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-custom', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-custom.ph...', 6)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-custom', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-custom.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-thumbnail', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-thumbnail' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-thumbnail', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-thumbnail', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/components/wpjam-thumbnail.php(152): wpjam_register_option('wpjam-thumbnail', Array)
-#7 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(529): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): WPJAM_Extend->handle('wpjam-thumbnail', 'include')
-#9 [internal function]: WPJAM_Extend->{closure}('wpjam-thumbnail...', 8)
-#10 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(504): array_walk(Array, Object(Closure))
-#11 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(596): WPJAM_Extend->load()
-#12 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(576): WPJAM_Extend::create('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-route.php(735): wpjam_load_extends('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/wpjam-basic/wpjam-basic.php(34): include('/wordpress/wp-c...')
-#15 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-thumbnail', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpjam-basic/wpjam-basic.php'), include('/plugins/wpjam-basic/public/wpjam-route.php'), wpjam_load_extends, WPJAM_Extend::create, WPJAM_Extend->load, array_walk, WPJAM_Extend->{closure}, WPJAM_Extend->handle, include_once('/plugins/wpjam-basic/components/wpjam-thumbnail.php'), wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-extends', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpjam-extends' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-setting.php(378): add_option('wpjam-extends', Array)
-#5 /wordpress/wp-content/plugins/wpjam-basic/public/wpjam-functions.php(260): WPJAM_Option_Setting::create('wpjam-extends', Array)
-#6 /wordpress/wp-content/plugins/wpjam-basic/includes/class-wpjam-api.php(496): wpjam_register_option('wpjam-extends', Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WPJAM_Extend->load('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpjam-extends', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPJAM_Extend->load, wpjam_register_option, WPJAM_Option_Setting::create, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:32:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:32:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:32:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:32:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 15:32:50', '2025-04-09 15:32:50', '[wcfm_vendor_membership]', '', 'Vendor Membership', '', 'publish', 'page', 'closed', 'closed', '', 'vendor-membership', '', '', '2025-04-09 15:32:50', '2025-04-09 15:32:50', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 15:32:50' , '2025-04-09 15:32:50' , '[wcfm_vendor_membership]' , '' , 'Vendor Membership' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'vendor-membership' , '' , '' , '2025-04-09 15:32:50' , '2025-04-09 15:32:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(84): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(98): WCFMvm_Install->wcfmvm_create_page('vendor-membersh...', 'wcfm_vendor_mem...', 'Vendor Membersh...', '[wcfm_vendor_me...')
-#8 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(31): WCFMvm_Install->wcfmvm_create_pages()
-#9 /wordpress/wp-content/plugins/wc-multivendor-membership/core/class-wcfmvm.php(253): WCFMvm_Install->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WCFMvm::activate_wcfmvm(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-mul...', false)
-#14 /internal/eval.php(20): activate_plugin('wc-multivendor-...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 15:32:50', '2025-04-09 15:32:50', '[wcfm_vendor_membership]', '', 'Vendor Membership', '', 'publish', 'page', 'closed', 'closed', '', 'vendor-membership', '', '', '2025-04-09 15:32:50', '2025-04-09 15:32:50', 0, 0, '', '') made by activate_plugin, do_action('activate_wc-multivendor-membership/wc-multivendor-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, WCFMvm::activate_wcfmvm, WCFMvm_Install->__construct, WCFMvm_Install->wcfmvm_create_pages, WCFMvm_Install->wcfmvm_create_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_vendor_membership_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcfm_vendor_membership_page_id' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcfm_vendor_mem...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(85): update_option('wcfm_vendor_mem...', 0)
-#6 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(98): WCFMvm_Install->wcfmvm_create_page('vendor-membersh...', 'wcfm_vendor_mem...', 'Vendor Membersh...', '[wcfm_vendor_me...')
-#7 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(31): WCFMvm_Install->wcfmvm_create_pages()
-#8 /wordpress/wp-content/plugins/wc-multivendor-membership/core/class-wcfmvm.php(253): WCFMvm_Install->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WCFMvm::activate_wcfmvm(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-mul...', false)
-#13 /internal/eval.php(20): activate_plugin('wc-multivendor-...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_vendor_membership_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-multivendor-membership/wc-multivendor-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, WCFMvm::activate_wcfmvm, WCFMvm_Install->__construct, WCFMvm_Install->wcfmvm_create_pages, WCFMvm_Install->wcfmvm_create_page, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 15:32:50', '2025-04-09 15:32:50', '[wcfm_vendor_registration]', '', 'Vendor Registration', '', 'publish', 'page', 'closed', 'closed', '', 'vendor-register', '', '', '2025-04-09 15:32:50', '2025-04-09 15:32:50', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 15:32:50' , '2025-04-09 15:32:50' , '[wcfm_vendor_registration]' , '' , 'Vendor Registration' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'vendor-register' , '' , '' , '2025-04-09 15:32:50' , '2025-04-09 15:32:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(84): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(99): WCFMvm_Install->wcfmvm_create_page('vendor-register', 'wcfm_vendor_reg...', 'Vendor Registra...', '[wcfm_vendor_re...')
-#8 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(31): WCFMvm_Install->wcfmvm_create_pages()
-#9 /wordpress/wp-content/plugins/wc-multivendor-membership/core/class-wcfmvm.php(253): WCFMvm_Install->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WCFMvm::activate_wcfmvm(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-mul...', false)
-#14 /internal/eval.php(20): activate_plugin('wc-multivendor-...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 15:32:50', '2025-04-09 15:32:50', '[wcfm_vendor_registration]', '', 'Vendor Registration', '', 'publish', 'page', 'closed', 'closed', '', 'vendor-register', '', '', '2025-04-09 15:32:50', '2025-04-09 15:32:50', 0, 0, '', '') made by activate_plugin, do_action('activate_wc-multivendor-membership/wc-multivendor-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, WCFMvm::activate_wcfmvm, WCFMvm_Install->__construct, WCFMvm_Install->wcfmvm_create_pages, WCFMvm_Install->wcfmvm_create_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_vendor_registration_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcfm_vendor_registration_page_id' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcfm_vendor_reg...', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(85): update_option('wcfm_vendor_reg...', 0)
-#6 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(99): WCFMvm_Install->wcfmvm_create_page('vendor-register', 'wcfm_vendor_reg...', 'Vendor Registra...', '[wcfm_vendor_re...')
-#7 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(31): WCFMvm_Install->wcfmvm_create_pages()
-#8 /wordpress/wp-content/plugins/wc-multivendor-membership/core/class-wcfmvm.php(253): WCFMvm_Install->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WCFMvm::activate_wcfmvm(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-mul...', false)
-#13 /internal/eval.php(20): activate_plugin('wc-multivendor-...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_vendor_registration_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-multivendor-membership/wc-multivendor-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, WCFMvm::activate_wcfmvm, WCFMvm_Install->__construct, WCFMvm_Install->wcfmvm_create_pages, WCFMvm_Install->wcfmvm_create_page, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_page_options', 'a:2:{s:30:\"wcfm_vendor_membership_page_id\";b:0;s:32:\"wcfm_vendor_registration_page_id\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcfm_page_options' , 'a:2:{s:30:&quot;wcfm_vendor_membership_page_id&quot;;b:0;s:32:&quot;wcfm_vendor_registration_page_id&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcfm_page_optio...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(105): update_option('wcfm_page_optio...', Array)
-#6 /wordpress/wp-content/plugins/wc-multivendor-membership/helpers/class-wcfmvm-install.php(31): WCFMvm_Install->wcfmvm_create_pages()
-#7 /wordpress/wp-content/plugins/wc-multivendor-membership/core/class-wcfmvm.php(253): WCFMvm_Install->__construct()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): WCFMvm::activate_wcfmvm(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-mul...', false)
-#12 /internal/eval.php(20): activate_plugin('wc-multivendor-...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcfm_page_options', 'a:2:{s:30:\"wcfm_vendor_membership_page_id\";b:0;s:32:\"w
+Error: [11-Apr-2025 06:37:26 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744353444.152)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:37:59 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:37:59 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:37:59 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:37:59 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:37:59 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:38:00 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:38:00 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:38:00 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:38:00 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:38:00 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:38:08 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:38:08 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:38:08 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:38:08 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:38:08 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:38:09 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:38:09 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:38:09 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:38:09 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:38:09 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:38:17 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:38:17 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:38:17 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:38:17 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:38:17 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:38:19 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/Concept.php on line 176
+[11-Apr-2025 06:38:19 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $page in /wordpress/wp-content/plugins/woo-contabilium/classes/Customer.php on line 45
+[11-Apr-2025 06:38:19 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_country in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 25
+[11-Apr-2025 06:38:19 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $id_state in /wordpress/wp-content/plugins/woo-contabilium/classes/Helper.php on line 41
+[11-Apr-2025 06:38:19 UTC] PHP Deprecated:  Required parameter $token follows optional parameter $from in /wordpress/wp-content/plugins/woo-contabilium/classes/SaleVoucher.php on line 13
+[11-Apr-2025 06:42:51 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:42:51 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:42:52 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:42:52 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:43:01 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:43:01 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:43:01 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:43:01 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:43:10 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:43:10 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:43:11 UTC] PHP Warning:  Undefined property: MixedTape::$localizationName in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 197
+[11-Apr-2025 06:43:11 UTC] PHP Warning:  Undefined property: MixedTape::$localizationDomain in /wordpress/wp-content/plugins/wp-mixed-tape/mixed-tape.php on line 198
+[11-Apr-2025 06:45:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 63
+[11-Apr-2025 06:45:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 130
+[11-Apr-2025 06:45:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 143
+[11-Apr-2025 06:45:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 165
+[11-Apr-2025 06:45:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "end" in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php:167
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imovel/wp-imovel.php(39): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imovel/wp-im...')
+#3 /internal/eval.php(20): activate_plugin('wp-imovel/wp-im...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 167
+[11-Apr-2025 06:45:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 63
+[11-Apr-2025 06:45:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 130
+[11-Apr-2025 06:45:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 143
+[11-Apr-2025 06:45:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 165
+[11-Apr-2025 06:45:49 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "end" in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php:167
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imovel/wp-imovel.php(39): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imovel/wp-im...')
+#3 /internal/eval.php(20): activate_plugin('wp-imovel/wp-im...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 167
+[11-Apr-2025 06:45:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 63
+[11-Apr-2025 06:45:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 130
+[11-Apr-2025 06:45:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 143
+[11-Apr-2025 06:45:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 165
+[11-Apr-2025 06:45:57 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "end" in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php:167
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imovel/wp-imovel.php(39): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imovel/wp-im...')
+#3 /internal/eval.php(20): activate_plugin('wp-imovel/wp-im...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imovel/action_hooks.php on line 167
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-imovel"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
