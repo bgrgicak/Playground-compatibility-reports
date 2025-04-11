@@ -2,145 +2,28 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 10:53:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
-			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
-			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
-			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
-			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
-			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
-			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
-			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
-			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
-			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
-			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
-			INDEX ( `i_datetime_created` )
-		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
-		</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: i_for_site_admin.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Base_Global_News.php(147): wpdb->get_results('CREATE TABLE IF...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Global_News.php(61): ThreeWP_Base_Global_News->query('CREATE TABLE IF...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Global_News->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-global-...')
-#9 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
-			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
-			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
-			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
-			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
-			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
-			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
-			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
-			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
-			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
-			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
-			INDEX ( `i_datetime_created` )
-		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
-		 made by activate_plugin, do_action('activate_threewp-global-news/ThreeWP_Global_News.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Global_News->activate, ThreeWP_Base_Global_News->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
-			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
-			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
-			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
-			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
-			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
-			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
-			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
-			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
-			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
-			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
-			INDEX ( `i_datetime_created` )
-		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
-		</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: i_for_site_admin.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Base_Global_News.php(147): wpdb->get_results('CREATE TABLE IF...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Global_News.php(61): ThreeWP_Base_Global_News->query('CREATE TABLE IF...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Global_News->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-global-...')
-#9 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
-			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
-			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
-			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
-			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
-			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
-			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
-			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
-			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
-			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
-			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
-			INDEX ( `i_datetime_created` )
-		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
-		 made by activate_plugin, do_action('activate_threewp-global-news/ThreeWP_Global_News.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Global_News->activate, ThreeWP_Base_Global_News->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:50 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:53:50 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 80
-[10-Apr-2025 10:53:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:53:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:53:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php:59
+Error: [11-Apr-2025 11:46:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tim-widget/tim-widget.php:115
 Stack trace:
-#0 /wordpress/wp-settings.php(526): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 59
-[10-Apr-2025 10:53:59 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:53:59 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 80
-[10-Apr-2025 10:53:59 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:53:59 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:54:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php:59
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tim-widget/tim-...')
+#2 /internal/eval.php(20): activate_plugin('tim-widget/tim-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/tim-widget/tim-widget.php on line 115
+[11-Apr-2025 11:46:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tim-widget/tim-widget.php:115
 Stack trace:
-#0 /wordpress/wp-settings.php(526): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 59
-[10-Apr-2025 10:54:08 UTC] PHP Deprecated:  Function get_currentuserinfo is <strong>deprecated</strong> since version 4.5.0! Use wp_get_current_user() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:54:08 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 80
-[10-Apr-2025 10:54:08 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:54:08 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 10:54:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_currentuserinfo() in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php:59
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tim-widget/tim-...')
+#2 /internal/eval.php(20): activate_plugin('tim-widget/tim-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/tim-widget/tim-widget.php on line 115
+[11-Apr-2025 11:46:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tim-widget/tim-widget.php:115
 Stack trace:
-#0 /wordpress/wp-settings.php(526): include_once()
-#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tierra-audio-with-autoresume/audio-playlist-manager.php on line 59
-[10-Apr-2025 10:54:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-givewp/includes/admin/tbexgive-settings.php:128
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tim-widget/tim-...')
+#2 /internal/eval.php(20): activate_plugin('tim-widget/tim-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/tim-widget/tim-widget.php on line 115
+[11-Apr-2025 11:48:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-givewp/includes/admin/tbexgive-settings.php:128
 Stack trace:
 #0 /wordpress/wp-content/plugins/toolbar-extras-givewp/toolbar-extras-givewp.php(367): ddw_tbexgive_register_settings_givewp()
 #1 /wordpress/wp-content/plugins/toolbar-extras-givewp/toolbar-extras-givewp.php(407): ddw_tbexgive_addon_activation_routine()
@@ -153,29 +36,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/toolbar-extras-givewp/includes/admin/tbexgive-settings.php on line 128
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at processTicksAndRejections (node:internal/process/task_queues:105:5)
-    ... 2 lines matching cause stack trace ...
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
     at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"toolbar-extras-givewp"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at processTicksAndRejections (node:internal/process/task_queues:105:5)
-      ... 2 lines matching cause stack trace ...
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
       at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at runNextTicks (node:internal/process/task_queues:69:3)
+        at runNextTicks (node:internal/process/task_queues:65:5)
         at listOnTimeout (node:internal/timers:569:9)
         at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {

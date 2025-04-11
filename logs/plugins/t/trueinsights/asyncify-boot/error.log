@@ -2,533 +2,60 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_log` ADD `type` VARCHAR( 32 ) NOT NULL COMMENT 'Type of message' AFTER `datetime`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_log, `TYPE`, varchar(32)</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_log ADD `type`   text NOT NULL COMMENT 'Type of message'   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(165): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_log` ADD `type` VARCHAR( 32 ) NOT NULL COMMENT 'Type of message' AFTER `datetime` made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_log` DROP INDEX `datetime`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP INDEX &quot;wp_3wp_email_reflector_log__datetime&quot; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such index: wp_3wp_email_reflector_log__datetime.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(167): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_log` DROP INDEX `datetime` made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `mail_data_id` INT NOT NULL COMMENT 'ID of mail data this queue item belongs to' AFTER `message_id` , ADD INDEX ( `mail_data_id` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `MAIL_DATA_ID`, int</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `mail_data_id` integer NOT NULL COMMENT 'ID of mail data this queue item belongs to'    | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(182): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `mail_data_id` INT NOT NULL COMMENT 'ID of mail data this queue item belongs to' AFTER `message_id` , ADD INDEX ( `mail_data_id` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `to` VARCHAR( 1024 ) NOT NULL COMMENT 'Recipient address'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `TO`, varchar(1024)</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `to`   text NOT NULL COMMENT 'Recipient address' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(183): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `to` VARCHAR( 1024 ) NOT NULL COMMENT 'Recipient address' made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD INDEX ( `failures` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, wp_3wp_email_reflector_queue__(, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_3wp_email_reflector_queue__(&quot; ON &quot;wp_3wp_email_reflector_queue&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(189): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD INDEX ( `failures` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `priority` INT NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal' AFTER `datetime_added` , ADD INDEX ( `priority` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `PRIORITY`, int</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `priority` integer NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal'    | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(190): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `priority` INT NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal' AFTER `datetime_added` , ADD INDEX ( `priority` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_log` ADD `type` VARCHAR( 32 ) NOT NULL COMMENT 'Type of message' AFTER `datetime`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_log, `TYPE`, varchar(32)</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_log ADD `type`   text NOT NULL COMMENT 'Type of message'   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(165): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_log` ADD `type` VARCHAR( 32 ) NOT NULL COMMENT 'Type of message' AFTER `datetime` made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_log` DROP INDEX `datetime`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DROP INDEX &quot;wp_3wp_email_reflector_log__datetime&quot; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such index: wp_3wp_email_reflector_log__datetime.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(167): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_log` DROP INDEX `datetime` made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `mail_data_id` INT NOT NULL COMMENT 'ID of mail data this queue item belongs to' AFTER `message_id` , ADD INDEX ( `mail_data_id` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `MAIL_DATA_ID`, int</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `mail_data_id` integer NOT NULL COMMENT 'ID of mail data this queue item belongs to'    | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(182): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `mail_data_id` INT NOT NULL COMMENT 'ID of mail data this queue item belongs to' AFTER `message_id` , ADD INDEX ( `mail_data_id` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `to` VARCHAR( 1024 ) NOT NULL COMMENT 'Recipient address'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `TO`, varchar(1024)</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `to`   text NOT NULL COMMENT 'Recipient address' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(183): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `to` VARCHAR( 1024 ) NOT NULL COMMENT 'Recipient address' made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD INDEX ( `failures` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, wp_3wp_email_reflector_queue__(, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_3wp_email_reflector_queue__(&quot; ON &quot;wp_3wp_email_reflector_queue&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(189): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD INDEX ( `failures` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_email_reflector_queue` ADD `priority` INT NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal' AFTER `datetime_added` , ADD INDEX ( `priority` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_3wp_email_reflector_queue, `PRIORITY`, int</li>
-<li>Executing: ALTER TABLE wp_3wp_email_reflector_queue ADD `priority` integer NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal'    | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "COMMENT": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector_Base.php(336): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/threewp-email-reflector/ThreeWP_Email_Reflector.php(190): ThreeWP_Email_Reflector_Base->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Email_Reflector->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#8 /internal/eval.php(20): activate_plugin('threewp-email-r...')
-#9 {main}</pre>
- for query ALTER TABLE `wp_3wp_email_reflector_queue` ADD `priority` INT NOT NULL DEFAULT '100' COMMENT 'Priority 100 is normal' AFTER `datetime_added` , ADD INDEX ( `priority` ) made by activate_plugin, do_action('activate_threewp-email-reflector/ThreeWP_Email_Reflector.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Email_Reflector->activate, ThreeWP_Email_Reflector_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 10:53:44 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:53:46 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:53:53 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:53:55 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:54:02 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:54:03 UTC] PHP Warning:  The magic method Ticketea_Singleton::__wakeup() must have public visibility in /wordpress/wp-content/plugins/ticketea/includes/class-ticketea-singleton.php on line 64
-[10-Apr-2025 10:55:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "jme_tc_activate" in /wordpress/wp-content/plugins/top-contributors/top-contributors.php:629
+Error: [11-Apr-2025 11:47:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php:260
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-contributor...')
-#2 /internal/eval.php(20): activate_plugin('top-contributor...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tipit-suite/tip...')
+#2 /internal/eval.php(20): activate_plugin('tipit-suite/tip...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/top-contributors/top-contributors.php on line 629
-[10-Apr-2025 10:55:12 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "jme_tc_activate" in /wordpress/wp-content/plugins/top-contributors/top-contributors.php:629
+  thrown in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php on line 260
+[11-Apr-2025 11:47:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php:260
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-contributor...')
-#2 /internal/eval.php(20): activate_plugin('top-contributor...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tipit-suite/tip...')
+#2 /internal/eval.php(20): activate_plugin('tipit-suite/tip...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/top-contributors/top-contributors.php on line 629
-[10-Apr-2025 10:55:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "jme_tc_activate" in /wordpress/wp-content/plugins/top-contributors/top-contributors.php:629
+  thrown in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php on line 260
+[11-Apr-2025 11:47:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php:260
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-contributor...')
-#2 /internal/eval.php(20): activate_plugin('top-contributor...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tipit-suite/tip...')
+#2 /internal/eval.php(20): activate_plugin('tipit-suite/tip...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/top-contributors/top-contributors.php on line 629
-[10-Apr-2025 10:56:28 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+  thrown in /wordpress/wp-content/plugins/tipit-suite/tipit-suite.php on line 260
+[11-Apr-2025 11:50:46 UTC] PHP Parse error:  syntax error, unexpected token "-", expecting "(" in /wordpress/wp-content/plugins/translate-with-google-and-bing-pro/translate-with-google-and-bing-pro.php on line 12
+[11-Apr-2025 11:50:53 UTC] PHP Parse error:  syntax error, unexpected token "-", expecting "(" in /wordpress/wp-content/plugins/translate-with-google-and-bing-pro/translate-with-google-and-bing-pro.php on line 12
+[11-Apr-2025 11:51:01 UTC] PHP Parse error:  syntax error, unexpected token "-", expecting "(" in /wordpress/wp-content/plugins/translate-with-google-and-bing-pro/translate-with-google-and-bing-pro.php on line 12
+[11-Apr-2025 11:51:42 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
 #0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
 #1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
 #2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
 #3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
 #4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744282586.734)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744372299.489)
 #6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
 #10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[10-Apr-2025 11:00:00 UTC] PHP Fatal error:  Declaration of tutor_pricing_widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/tutor-pricing-calculator/tutor-pricing-calculator.php on line 65
-[10-Apr-2025 11:00:08 UTC] PHP Fatal error:  Declaration of tutor_pricing_widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/tutor-pricing-calculator/tutor-pricing-calculator.php on line 65
-[10-Apr-2025 11:00:16 UTC] PHP Fatal error:  Declaration of tutor_pricing_widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/tutor-pricing-calculator/tutor-pricing-calculator.php on line 65
-[10-Apr-2025 11:00:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1 </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
-#4 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(49): wpdb->get_var('SELECT ID\n     ...')
-#5 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(8): twpeet_opt_tweet_old_post()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): twpeet_tweet_old_post('')
+[11-Apr-2025 11:53:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/twitter-follow-button-plugin/twitter-follow-button-plugin.php on line 76
+[11-Apr-2025 11:53:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/twitter-follow-button-plugin/twitter-follow-button-plugin.php on line 76
+[11-Apr-2025 11:53:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/twitter-follow-button-plugin/twitter-follow-button-plugin.php on line 76
+[11-Apr-2025 11:53:41 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744372419.031)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, twpeet_tweet_old_post, twpeet_opt_tweet_old_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 11:00:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1 </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT ID
-            FROM wp_posts
-            WHERE post_type = :param0 
-                  AND post_status = :param1 
-                  AND post_date &lt; curdate( ) -    '+day AND' post_date &gt; curdate( ) -   
-            '+day ORDER BY' RAND() 
-            LIMIT 1  | parameters: post, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "post_date": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
-#2 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(49): wpdb->get_var('SELECT ID\n     ...')
-#3 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(8): twpeet_opt_tweet_old_post()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): twpeet_tweet_old_post('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, twpeet_tweet_old_post, twpeet_opt_tweet_old_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 11:01:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1 </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT ID
-            FROM wp_posts
-            WHERE post_type = :param0 
-                  AND post_status = :param1 
-                  AND post_date &lt; curdate( ) -    '+day AND' post_date &gt; curdate( ) -   
-            '+day ORDER BY' RAND() 
-            LIMIT 1  | parameters: post, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "post_date": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
-#2 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(49): wpdb->get_var('SELECT ID\n     ...')
-#3 /wordpress/wp-content/plugins/twittersifu/twpeet.inc.php(8): twpeet_opt_tweet_old_post()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): twpeet_tweet_old_post('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query SELECT ID
-            FROM wp_posts
-            WHERE post_type = 'post'
-                  AND post_status = 'publish'
-                  AND post_date < curdate( ) - INTERVAL  day AND post_date > curdate( ) - INTERVAL  day
-            ORDER BY RAND() 
-            LIMIT 1  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, twpeet_tweet_old_post, twpeet_opt_tweet_old_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 11:02:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_menu_page() in /wordpress/wp-content/plugins/trueinsights/trueinsights.php:45
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 11:54:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_menu_page() in /wordpress/wp-content/plugins/trueinsights/trueinsights.php:45
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -539,7 +66,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/trueinsights/trueinsights.php on line 45
-[10-Apr-2025 11:02:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_menu_page() in /wordpress/wp-content/plugins/trueinsights/trueinsights.php:45
+[11-Apr-2025 11:54:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_menu_page() in /wordpress/wp-content/plugins/trueinsights/trueinsights.php:45
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
