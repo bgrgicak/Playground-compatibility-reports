@@ -1,287 +1,908 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 05:47:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:48:08 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:48:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:48:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:48:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:48:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awrpg_plugin_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_arca_pg_idram_config WHERE id = 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awrpg_plugin_version' , '1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_arca_pg_idram_config` WHERE `id` = 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_arca_pg_idram_config
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('awrpg_plugin_ve...', '1.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/awesome-responsive-photo-gallery/awesome-gallery.php(78): update_option('awrpg_plugin_ve...', '1.2')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Awesome_Responsive_Photo_Gallery->check_and_migrate_options('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awrpg_plugin_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Awesome_Responsive_Photo_Gallery->check_and_migrate_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:49:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:49:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:49:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:49:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:49:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:49:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:49:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:49:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:49:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:50:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:50:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 129
-[10-Apr-2025 05:50:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 130
-[10-Apr-2025 05:50:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 131
-[10-Apr-2025 05:50:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 129
-[10-Apr-2025 05:50:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 130
-[10-Apr-2025 05:50:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 131
-[10-Apr-2025 05:50:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 129
-[10-Apr-2025 05:50:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 130
-[10-Apr-2025 05:50:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/advanced-hotjar/advanced-hotjar.php on line 131
-[10-Apr-2025 05:50:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:50:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:50:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:50:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:50:51 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/agile-cash/src/AGC_Util.php on line 38
-[10-Apr-2025 05:50:59 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/agile-cash/src/AGC_Util.php on line 38
-[10-Apr-2025 05:51:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/agile-cash/src/AGC_Util.php on line 38
-[10-Apr-2025 05:51:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(30): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('arca-payment-ga...')
+#7 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#8 {main}</pre>
+ for query SELECT * FROM wp_arca_pg_idram_config WHERE id = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/arca-payment-gateway/arca-payment-gateway.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] PHP Notice:  Trying to get property 'idramEnabled' of non-object in /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php on line 118
+[11-Apr-2025 14:26:09 UTC] PHP Notice:  Trying to get property 'idramEnabled' of non-object in /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php on line 158
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aiocb_db_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `bankId` int(11) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aiocb_db_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, bankId, 20, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f92681c7b50` (
+  `rest_serverID` INT NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: bankId
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/all-in-one-custom-backgrounds-lite/all-in-one-custom-backgrounds-lite.php(40): add_option('aiocb_db_versio...', 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): All_In_One_Custom_Backgrounds_Lite->table_update(false)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(344): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_all-in...', false)
-#9 /internal/eval.php(20): activate_plugin('all-in-one-cust...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aiocb_db_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_all-in-one-custom-backgrounds-lite/all-in-one-custom-backgrounds-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, All_In_One_Custom_Backgrounds_Lite->table_update, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Undefined array key "meta_key" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:51:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:51:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:51:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:51:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:52:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:52:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:52:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:52:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:52:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:52:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:52:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:52:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `bankId` int(11) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'OKNctP$ZKFpX)C%7!c;h5n1K4t4>g0&?MHfed$E+3cc9Ew0m9]=)pX.jOJv<_U:s', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `ameriabankClientID` varchar(50) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;nonce_key&#039; , &#039;OKNctP$ZKFpX)C%7!c;h5n1K4t4&gt;g0&amp;?MHfed$E+3cc9Ew0m9]=)pX.jOJv&lt;_U:s&#039; , &#039;off&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, ameriabankClientID, 20, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f92681c9e78` (
+  `rest_serverID` INT NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: ameriabankClientID
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'OKNctP$ZKFpX)C%...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'OKNctP$ZKFpX)C%...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'OKNctP$ZKFpX)C%...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'OKNctP$ZKFpX)C%...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/animations-for-blocks/animations-for-blocks.php(220): wp_register_script('animate-on-scro...', 'http://127.0.0....', Array, 'ae78f0b967c6b12...', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): wsd\anfb\register_assets('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'OKNctP$ZKFpX)C%7!c;h5n1K4t4>g0&?MHfed$E+3cc9Ew0m9]=)pX.jOJv<_U:s', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wsd\anfb\register_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(345): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `ameriabankClientID` varchar(50) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'tlImP;yF%JP`_8JLul)7,*6bbr#4sd)![#2B4slC6}E=Eia)Mz3BzN?krbT6Z%0I', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `ameriabankMinTestOrderId` int(11) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;nonce_salt&#039; , &#039;tlImP;yF%JP`_8JLul)7,*6bbr#4sd)![#2B4slC6}E=Eia)Mz3BzN?krbT6Z%0I&#039; , &#039;off&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, ameriabankMinTestOrderId, 20, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f92681cd528` (
+  `rest_serverID` INT NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: ameriabankMinTestOrderId
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'tlImP;yF%JP`_8J...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'tlImP;yF%JP`_8J...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'tlImP;yF%JP`_8J...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'tlImP;yF%JP`_8J...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/animations-for-blocks/animations-for-blocks.php(220): wp_register_script('animate-on-scro...', 'http://127.0.0....', Array, 'ae78f0b967c6b12...', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): wsd\anfb\register_assets('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'tlImP;yF%JP`_8JLul)7,*6bbr#4sd)![#2B4slC6}E=Eia)Mz3BzN?krbT6Z%0I', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wsd\anfb\register_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:52:59 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class Appboy\Plugin\Appboy does not have a method "on_activate_appboy" in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_appboy...', false)
-#3 /internal/eval.php(20): activate_plugin('appboy-web-sdk/...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"appboy-web-sdk"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(346): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `ameriabankMinTestOrderId` int(11) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `ameriabankMaxTestOrderId` int(11) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, ameriabankMaxTestOrderId, 20, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f92681d13a8` (
+  `rest_serverID` INT NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: ameriabankMaxTestOrderId
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(347): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `ameriabankMaxTestOrderId` int(11) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_orders` ADD `wc_orderId` int(11) DEFAULT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_orders</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_orders</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_orders</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_orders</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_orders, wc_orderId, 15, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_orders</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_orders</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_orders</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_orders_67f92681d2f00` (
+  `orderNumber` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `orderId` TEXT COLLATE NOCASE,
+  `productId` INTEGER,
+  `wc_orderId` INTEGER,
+  `amount` REAL,
+  `currency` TEXT COLLATE NOCASE,
+  `errorCode` TEXT COLLATE NOCASE,
+  `paymentState` TEXT COLLATE NOCASE,
+  `OrderStatusExtended` TEXT COLLATE NOCASE,
+  `orderDetails` TEXT COLLATE NOCASE,
+  `orderDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `mailSent` INTEGER NOT NULL,
+  `rest_serverID` INTEGER NOT NULL,
+  `bankId` INTEGER,
+  `wc_orderId` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: wc_orderId
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(349): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_orders` ADD `wc_orderId` int(11) DEFAULT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `privacyPolicyPage` varchar(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, privacyPolicyPage, 20, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f92681ee098` (
+  `rest_serverID` INTEGER NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: privacyPolicyPage
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(358): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `privacyPolicyPage` varchar(255) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `wc_order_status` varchar(10) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, wc_order_status, 20, , NO, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f9268200000` (
+  `rest_serverID` INTEGER NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: wc_order_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(365): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `wc_order_status` varchar(10) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_idram_config` ADD `wc_order_status` varchar(10) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_idram_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_idram_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_idram_config, wc_order_status, 11, , NO, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_idram_config_67f9268204650` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `idramID` TEXT COLLATE NOCASE NOT NULL,
+  `idramKey` TEXT COLLATE NOCASE NOT NULL,
+  `idramTestID` TEXT COLLATE NOCASE NOT NULL,
+  `idramTestKey` TEXT COLLATE NOCASE NOT NULL,
+  `rocketLine` INTEGER NOT NULL,
+  `testMode` INTEGER NOT NULL,
+  `idramEnabled` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: wc_order_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(372): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_idram_config` ADD `wc_order_status` varchar(10) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_idram_config` ADD `default_language` varchar(2) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_idram_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_idram_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_idram_config, default_language, 11, , NO, varchar, 2, 8, , , , utf8mb4, utf8mb4_general_ci, varchar(2), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_idram_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_idram_config_67f92682088b8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `idramID` TEXT COLLATE NOCASE NOT NULL,
+  `idramKey` TEXT COLLATE NOCASE NOT NULL,
+  `idramTestID` TEXT COLLATE NOCASE NOT NULL,
+  `idramTestKey` TEXT COLLATE NOCASE NOT NULL,
+  `rocketLine` INTEGER NOT NULL,
+  `testMode` INTEGER NOT NULL,
+  `idramEnabled` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: default_language
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(379): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_idram_config` ADD `default_language` varchar(2) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `vpos_accuonts` longtext NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, vpos_accuonts, 20, , NO, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f926820b3b0` (
+  `rest_serverID` INTEGER NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: vpos_accuonts
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(386): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `vpos_accuonts` longtext NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `arca_test_api_port` int(11) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_arca_pg_config</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_arca_pg_config, arca_test_api_port, 20, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_arca_pg_config</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_arca_pg_config_67f926820f230` (
+  `rest_serverID` INTEGER NOT NULL,
+  `bankId` INTEGER NOT NULL,
+  `rest_serverName` TEXT COLLATE NOCASE NOT NULL,
+  `vpos_accuonts` TEXT COLLATE NOCASE NOT NULL,
+  `default_language` TEXT COLLATE NOCASE NOT NULL,
+  `default_currency` TEXT COLLATE NOCASE NOT NULL,
+  `orderNumberPrefix` TEXT COLLATE NOCASE NOT NULL,
+  `startOrderNumber` INTEGER NOT NULL,
+  `checkoutFormPage` TEXT COLLATE NOCASE NOT NULL,
+  `privacyPolicyPage` TEXT COLLATE NOCASE NOT NULL,
+  `checkoutFormElements` TEXT COLLATE NOCASE NOT NULL,
+  `mailFrom` TEXT COLLATE NOCASE NOT NULL,
+  `adminLastVisitDate` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` INTEGER NOT NULL,
+  `ameriabankClientID` TEXT COLLATE NOCASE NOT NULL,
+  `ameriabankMinTestOrderId` INTEGER NOT NULL,
+  `ameriabankMaxTestOrderId` INTEGER NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  `wc_order_status` TEXT COLLATE NOCASE NOT NULL,
+  `arca_test_api_port` INTEGER NOT NULL,
+  PRIMARY KEY (`rest_serverID`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: arca_test_api_port
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(387): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#9 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `arca_test_api_port` int(11) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:10 UTC] PHP Notice:  Undefined property: stdClass::$api_userName in /wordpress/wp-content/plugins/arca-payment-gateway/insert.php on line 393
+[11-Apr-2025 14:26:10 UTC] PHP Notice:  Undefined property: stdClass::$api_password in /wordpress/wp-content/plugins/arca-payment-gateway/insert.php on line 394
+[11-Apr-2025 14:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_arca_pg_idram_config WHERE id = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_arca_pg_idram_config WHERE id = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_arca_pg_idram_config.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(30): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('arca-payment-ga...')
+#5 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#6 {main}</pre>
+ for query SELECT * FROM wp_arca_pg_idram_config WHERE id = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/arca-payment-gateway/arca-payment-gateway.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:19 UTC] PHP Notice:  Trying to get property 'idramEnabled' of non-object in /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php on line 118
+[11-Apr-2025 14:26:19 UTC] PHP Notice:  Trying to get property 'idramEnabled' of non-object in /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php on line 158
+[11-Apr-2025 14:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `bankId` int(11) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_arca_pg_config, `BANKID`, int(11)</li>
+<li>Executing: ALTER TABLE wp_arca_pg_config ADD `bankId` integer NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: bankId.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(344): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#7 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#8 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `bankId` int(11) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `ameriabankClientID` varchar(50) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_arca_pg_config, `AMERIABANKCLIENTID`, varchar(50)</li>
+<li>Executing: ALTER TABLE wp_arca_pg_config ADD `ameriabankClientID` text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: ameriabankClientID.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/arca-payment-gateway/insert.php(345): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/arca-payment-gateway/arca-payment-gateway.php(199): arcapgInsert::arca_pg_tables()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): arca_pg_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_arca-p...', false)
+#7 /internal/eval.php(20): activate_plugin('arca-payment-ga...')
+#8 {main}</pre>
+ for query ALTER TABLE `wp_arca_pg_config` ADD `ameriabankClientID` varchar(50) NOT NULL made by activate_plugin, do_action('activate_arca-payment-gateway/arca-payment-gateway.php'), WP_Hook->do_action, WP_Hook->apply_filters, arca_pg_activate, arcapgInsert::arca_pg_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_arca_pg_config` ADD `ameriabankMinTestOrderId` int(11) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_arca_pg_config, `AMERIABANKMINTESTORDERID`, int(11)</li>
+<li>Executing: ALTER TABLE wp_arca_pg_config ADD `ameriabankMinTestOrderId` integer NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</d
