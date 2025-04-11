@@ -1,17 +1,41 @@
 {
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/admin.php?page=ultimate-cursor",
   "preferredVersions": {
-    "php": "7.4",
+    "php": "8.0",
     "wp": "latest"
+  },
+  "features": {
+    "networking": true
   },
   "steps": [
     {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
       "step": "installPlugin",
-      "pluginData": {
+      "pluginZipFile": {
         "resource": "wordpress.org/plugins",
         "slug": "ultimate-cursor"
       },
       "options": {
         "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Ultimate Cursor",
+        "blogdescription": "Ultimate Cursor is a WordPress plugin that allows you to add custom cursors to your website."
       }
     }
   ]
