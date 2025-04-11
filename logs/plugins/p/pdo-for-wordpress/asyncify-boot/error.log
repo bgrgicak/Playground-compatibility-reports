@@ -2,471 +2,373 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 07:44:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:44:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:44:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:44:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:44:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:44:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:44:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:44:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:44:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'DqzmJ3IL+nf!s&A=h)Yv[ l@bjd8p{gPr>3?!sG!OLMPkDqBf`YrgRVUj+y$SlR%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'DqzmJ3IL+nf!s&amp;A=h)Yv[ l@bjd8p{gPr&gt;3?!sG!OLMPkDqBf`YrgRVUj+y$SlR%' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'DqzmJ3IL+nf!s&A...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'DqzmJ3IL+nf!s&A...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'DqzmJ3IL+nf!s&A...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'DqzmJ3IL+nf!s&A...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/puretheme-slide-social-tabs/plugins-main.php(56): wp_enqueue_script('pure_slide_soci...', 'http://127.0.0....', Array)
-#19 /wordpress/wp-content/plugins/puretheme-slide-social-tabs/plugins-main.php(121): PTSSTTest->__construct()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('puretheme-slide...')
-#22 /internal/eval.php(20): activate_plugin('puretheme-slide...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'DqzmJ3IL+nf!s&A=h)Yv[ l@bjd8p{gPr>3?!sG!OLMPkDqBf`YrgRVUj+y$SlR%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/puretheme-slide-social-tabs/plugins-main.php'), PTSSTTest->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:44:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'k;sEGw{v7C1`gI*?J>WQ,_&0Qof,[<%U l4+AP28V/HSN,At8vA <&d:<-S-?wrI', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'k;sEGw{v7C1`gI*?J&gt;WQ,_&amp;0Qof,[&lt;%U l4+AP28V/HSN,At8vA &lt;&amp;d:&lt;-S-?wrI' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'k;sEGw{v7C1`gI*...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'k;sEGw{v7C1`gI*...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'k;sEGw{v7C1`gI*...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'k;sEGw{v7C1`gI*...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/puretheme-slide-social-tabs/plugins-main.php(56): wp_enqueue_script('pure_slide_soci...', 'http://127.0.0....', Array)
-#19 /wordpress/wp-content/plugins/puretheme-slide-social-tabs/plugins-main.php(121): PTSSTTest->__construct()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('puretheme-slide...')
-#22 /internal/eval.php(20): activate_plugin('puretheme-slide...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'k;sEGw{v7C1`gI*?J>WQ,_&0Qof,[<%U l4+AP28V/HSN,At8vA <&d:<-S-?wrI', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/puretheme-slide-social-tabs/plugins-main.php'), PTSSTTest->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:44:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:44:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:44:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:44:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:44:50 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_active</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:50 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:50 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '_V|_H4nSR57PpzL^JQ=G,#,>&2=o43(%YhmxS64iXzVVd-`m+O`v<*p(s}_rREa=', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '_V|_H4nSR57PpzL^JQ=G,#,&gt;&amp;2=o43(%YhmxS64iXzVVd-`m+O`v&lt;*p(s}_rREa=' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '_V|_H4nSR57PpzL...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '_V|_H4nSR57PpzL...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '_V|_H4nSR57PpzL...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '_V|_H4nSR57PpzL...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '_V|_H4nSR57PpzL^JQ=G,#,>&2=o43(%YhmxS64iXzVVd-`m+O`v<*p(s}_rREa=', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:44:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'g[]WksjC_^<$6(s!Z@%[?]8t!X&`f>-jG5$r 2 ,T}H4;PXMy6:^1HV[$Bm5;&=J', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'g[]WksjC_^&lt;$6(s!Z@%[?]8t!X&amp;`f&gt;-jG5$r 2 ,T}H4;PXMy6:^1HV[$Bm5;&amp;=J' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'g[]WksjC_^<$6(s...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'g[]WksjC_^<$6(s...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'g[]WksjC_^<$6(s...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'g[]WksjC_^<$6(s...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'g[]WksjC_^<$6(s!Z@%[?]8t!X&`f>-jG5$r 2 ,T}H4;PXMy6:^1HV[$Bm5;&=J', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:44:53 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_active</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:53 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:53 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:55 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_active</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:55 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>pure_slide_social_tab_css</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:44:55 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 07:45:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('purify_wp_menu_options_set', 'a:36:{s:45:\"pwpm_backward_compatibility_with_wp_page_menu\";i:0;s:36:\"pwpm_do_not_print_parent_as_ancestor\";i:0;s:32:\"pwpm_print_current_menu_ancestor\";i:0;s:28:\"pwpm_print_current_menu_item\";i:1;s:30:\"pwpm_print_current_menu_parent\";i:0;s:38:\"pwpm_print_current_object_any_ancestor\";i:0;s:36:\"pwpm_print_current_object_any_parent\";i:0;s:32:\"pwpm_print_current_page_ancestor\";i:0;s:28:\"pwpm_print_current_page_item\";i:1;s:30:\"pwpm_print_current_page_parent\";i:0;s:36:\"pwpm_print_current_taxonomy_ancestor\";i:0;s:36:\"pwpm_print_current_type_any_ancestor\";i:0;s:34:\"pwpm_print_current_type_any_parent\";i:0;s:20:\"pwpm_print_menu_item\";i:0;s:33:\"pwpm_print_menu_item_has_children\";i:0;s:25:\"pwpm_print_menu_item_home\";i:0;s:23:\"pwpm_print_menu_item_id\";i:0;s:32:\"pwpm_print_menu_item_id_as_class\";i:0;s:31:\"pwpm_print_menu_item_object_any\";i:0;s:36:\"pwpm_print_menu_item_object_category\";i:0;s:34:\"pwpm_print_menu_item_object_custom\";i:0;s:32:\"pwpm_print_menu_item_object_page\";i:0;s:31:\"pwpm_print_menu_item_object_tag\";i:0;s:35:\"pwpm_print_menu_item_privacy-policy\";i:0;s:29:\"pwpm_print_menu_item_type_any\";i:0;s:35:\"pwpm_print_menu_item_type_post_type\";i:0;s:34:\"pwpm_print_menu_item_type_taxonomy\";i:0;s:20:\"pwpm_print_page_item\";i:0;s:33:\"pwpm_print_page_item_has_children\";i:0;s:23:\"pwpm_print_page_item_id\";i:0;s:19:\"pwpm_print_cat_item\";i:0;s:22:\"pwpm_print_cat_item_id\";i:0;s:22:\"pwpm_print_current_cat\";i:1;s:29:\"pwpm_print_current_cat_parent\";i:0;s:31:\"pwpm_print_current_cat_ancestor\";i:0;s:40:\"pwpm_do_not_print_cat_parent_as_ancestor\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'purify_wp_menu_options_set' , 'a:36:{s:45:&quot;pwpm_backward_compatibility_with_wp_page_menu&quot;;i:0;s:36:&quot;pwpm_do_not_print_parent_as_ancestor&quot;;i:0;s:32:&quot;pwpm_print_current_menu_ancestor&quot;;i:0;s:28:&quot;pwpm_print_current_menu_item&quot;;i:1;s:30:&quot;pwpm_print_current_menu_parent&quot;;i:0;s:38:&quot;pwpm_print_current_object_any_ancestor&quot;;i:0;s:36:&quot;pwpm_print_current_object_any_parent&quot;;i:0;s:32:&quot;pwpm_print_current_page_ancestor&quot;;i:0;s:28:&quot;pwpm_print_current_page_item&quot;;i:1;s:30:&quot;pwpm_print_current_page_parent&quot;;i:0;s:36:&quot;pwpm_print_current_taxonomy_ancestor&quot;;i:0;s:36:&quot;pwpm_print_current_type_any_ancestor&quot;;i:0;s:34:&quot;pwpm_print_current_type_any_parent&quot;;i:0;s:20:&quot;pwpm_print_menu_item&quot;;i:0;s:33:&quot;pwpm_print_menu_item_has_children&quot;;i:0;s:25:&quot;pwpm_print_menu_item_home&quot;;i:0;s:23:&quot;pwpm_print_menu_item_id&quot;;i:0;s:32:&quot;pwpm_print_menu_item_id_as_class&quot;;i:0;s:31:&quot;pwpm_print_menu_item_object_any&quot;;i:0;s:36:&quot;pwpm_print_menu_item_object_category&quot;;i:0;s:34:&quot;pwpm_print_menu_item_object_custom&quot;;i:0;s:32:&quot;pwpm_print_menu_item_object_page&quot;;i:0;s:31:&quot;pwpm_print_menu_item_object_tag&quot;;i:0;s:35:&quot;pwpm_print_menu_item_privacy-policy&quot;;i:0;s:29:&quot;pwpm_print_menu_item_type_any&quot;;i:0;s:35:&quot;pwpm_print_menu_item_type_post_type&quot;;i:0;s:34:&quot;pwpm_print_menu_item_type_taxonomy&quot;;i:0;s:20:&quot;pwpm_print_page_item&quot;;i:0;s:33:&quot;pwpm_print_page_item_has_children&quot;;i:0;s:23:&quot;pwpm_print_page_item_id&quot;;i:0;s:19:&quot;pwpm_print_cat_item&quot;;i:0;s:22:&quot;pwpm_print_cat_item_id&quot;;i:0;s:22:&quot;pwpm_print_current_cat&quot;;i:1;s:29:&quot;pwpm_print_current_cat_parent&quot;;i:0;s:31:&quot;pwpm_print_current_cat_ancestor&quot;;i:0;s:40:&quot;pwpm_do_not_print_cat_parent_as_ancestor&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Default.php(296): add_option('purify_wp_menu_...', Array)
-#5 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Default.php(141): PWM_Default->get_stored_settings()
-#6 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(69): PWM_Default->__construct()
-#7 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(73): run_hinjipwpm()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('purify-wp-menue...')
-#10 /internal/eval.php(20): activate_plugin('purify-wp-menue...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('purify_wp_menu_options_set', 'a:36:{s:45:\"pwpm_backward_compatibility_with_wp_page_menu\";i:0;s:36:\"pwpm_do_not_print_parent_as_ancestor\";i:0;s:32:\"pwpm_print_current_menu_ancestor\";i:0;s:28:\"pwpm_print_current_menu_item\";i:1;s:30:\"pwpm_print_current_menu_parent\";i:0;s:38:\"pwpm_print_current_object_any_ancestor\";i:0;s:36:\"pwpm_print_current_object_any_parent\";i:0;s:32:\"pwpm_print_current_page_ancestor\";i:0;s:28:\"pwpm_print_current_page_item\";i:1;s:30:\"pwpm_print_current_page_parent\";i:0;s:36:\"pwpm_print_current_taxonomy_ancestor\";i:0;s:36:\"pwpm_print_current_type_any_ancestor\";i:0;s:34:\"pwpm_print_current_type_any_parent\";i:0;s:20:\"pwpm_print_menu_item\";i:0;s:33:\"pwpm_print_menu_item_has_children\";i:0;s:25:\"pwpm_print_menu_item_home\";i:0;s:23:\"pwpm_print_menu_item_id\";i:0;s:32:\"pwpm_print_menu_item_id_as_class\";i:0;s:31:\"pwpm_print_menu_item_object_any\";i:0;s:36:\"pwpm_print_menu_item_object_category\";i:0;s:34:\"pwpm_print_menu_item_object_custom\";i:0;s:32:\"pwpm_print_menu_item_object_page\";i:0;s:31:\"pwpm_print_menu_item_object_tag\";i:0;s:35:\"pwpm_print_menu_item_privacy-policy\";i:0;s:29:\"pwpm_print_menu_item_type_any\";i:0;s:35:\"pwpm_print_menu_item_type_post_type\";i:0;s:34:\"pwpm_print_menu_item_type_taxonomy\";i:0;s:20:\"pwpm_print_page_item\";i:0;s:33:\"pwpm_print_page_item_has_children\";i:0;s:23:\"pwpm_print_page_item_id\";i:0;s:19:\"pwpm_print_cat_item\";i:0;s:22:\"pwpm_print_cat_item_id\";i:0;s:22:\"pwpm_print_current_cat\";i:1;s:29:\"pwpm_print_current_cat_parent\";i:0;s:31:\"pwpm_print_current_cat_ancestor\";i:0;s:40:\"pwpm_do_not_print_cat_parent_as_ancestor\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/purify-wp-menues/purify-wp-menues.php'), run_hinjipwpm, PWM_Default->__construct, PWM_Default->get_stored_settings, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:45:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_purify_wp_menues', '1743839162', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_purify_wp_menues' , '1743839162' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743839162, '', 'off')
-#5 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Activator.php(32): set_transient('purify_wp_menue...', '1', 60)
-#6 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(44): PWM_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_hinjipwpm(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_purify...', false)
-#11 /internal/eval.php(20): activate_plugin('purify-wp-menue...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_purify_wp_menues', '1743839162', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_purify-wp-menues/purify-wp-menues.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_hinjipwpm, PWM_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:45:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_purify_wp_menues', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_purify_wp_menues' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_puri...', '1', '', 'off')
-#5 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Activator.php(32): set_transient('purify_wp_menue...', '1', 60)
-#6 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(44): PWM_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_hinjipwpm(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_purify...', false)
-#11 /internal/eval.php(20): activate_plugin('purify-wp-menue...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_purify_wp_menues', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_purify-wp-menues/purify-wp-menues.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_hinjipwpm, PWM_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:45:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:45:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:45:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:45:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:45:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('purify_wp_menu_options_set', 'a:36:{s:45:\"pwpm_backward_compatibility_with_wp_page_menu\";i:0;s:36:\"pwpm_do_not_print_parent_as_ancestor\";i:0;s:32:\"pwpm_print_current_menu_ancestor\";i:0;s:28:\"pwpm_print_current_menu_item\";i:1;s:30:\"pwpm_print_current_menu_parent\";i:0;s:38:\"pwpm_print_current_object_any_ancestor\";i:0;s:36:\"pwpm_print_current_object_any_parent\";i:0;s:32:\"pwpm_print_current_page_ancestor\";i:0;s:28:\"pwpm_print_current_page_item\";i:1;s:30:\"pwpm_print_current_page_parent\";i:0;s:36:\"pwpm_print_current_taxonomy_ancestor\";i:0;s:36:\"pwpm_print_current_type_any_ancestor\";i:0;s:34:\"pwpm_print_current_type_any_parent\";i:0;s:20:\"pwpm_print_menu_item\";i:0;s:33:\"pwpm_print_menu_item_has_children\";i:0;s:25:\"pwpm_print_menu_item_home\";i:0;s:23:\"pwpm_print_menu_item_id\";i:0;s:32:\"pwpm_print_menu_item_id_as_class\";i:0;s:31:\"pwpm_print_menu_item_object_any\";i:0;s:36:\"pwpm_print_menu_item_object_category\";i:0;s:34:\"pwpm_print_menu_item_object_custom\";i:0;s:32:\"pwpm_print_menu_item_object_page\";i:0;s:31:\"pwpm_print_menu_item_object_tag\";i:0;s:35:\"pwpm_print_menu_item_privacy-policy\";i:0;s:29:\"pwpm_print_menu_item_type_any\";i:0;s:35:\"pwpm_print_menu_item_type_post_type\";i:0;s:34:\"pwpm_print_menu_item_type_taxonomy\";i:0;s:20:\"pwpm_print_page_item\";i:0;s:33:\"pwpm_print_page_item_has_children\";i:0;s:23:\"pwpm_print_page_item_id\";i:0;s:19:\"pwpm_print_cat_item\";i:0;s:22:\"pwpm_print_cat_item_id\";i:0;s:22:\"pwpm_print_current_cat\";i:1;s:29:\"pwpm_print_current_cat_parent\";i:0;s:31:\"pwpm_print_current_cat_ancestor\";i:0;s:40:\"pwpm_do_not_print_cat_parent_as_ancestor\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'purify_wp_menu_options_set' , 'a:36:{s:45:&quot;pwpm_backward_compatibility_with_wp_page_menu&quot;;i:0;s:36:&quot;pwpm_do_not_print_parent_as_ancestor&quot;;i:0;s:32:&quot;pwpm_print_current_menu_ancestor&quot;;i:0;s:28:&quot;pwpm_print_current_menu_item&quot;;i:1;s:30:&quot;pwpm_print_current_menu_parent&quot;;i:0;s:38:&quot;pwpm_print_current_object_any_ancestor&quot;;i:0;s:36:&quot;pwpm_print_current_object_any_parent&quot;;i:0;s:32:&quot;pwpm_print_current_page_ancestor&quot;;i:0;s:28:&quot;pwpm_print_current_page_item&quot;;i:1;s:30:&quot;pwpm_print_current_page_parent&quot;;i:0;s:36:&quot;pwpm_print_current_taxonomy_ancestor&quot;;i:0;s:36:&quot;pwpm_print_current_type_any_ancestor&quot;;i:0;s:34:&quot;pwpm_print_current_type_any_parent&quot;;i:0;s:20:&quot;pwpm_print_menu_item&quot;;i:0;s:33:&quot;pwpm_print_menu_item_has_children&quot;;i:0;s:25:&quot;pwpm_print_menu_item_home&quot;;i:0;s:23:&quot;pwpm_print_menu_item_id&quot;;i:0;s:32:&quot;pwpm_print_menu_item_id_as_class&quot;;i:0;s:31:&quot;pwpm_print_menu_item_object_any&quot;;i:0;s:36:&quot;pwpm_print_menu_item_object_category&quot;;i:0;s:34:&quot;pwpm_print_menu_item_object_custom&quot;;i:0;s:32:&quot;pwpm_print_menu_item_object_page&quot;;i:0;s:31:&quot;pwpm_print_menu_item_object_tag&quot;;i:0;s:35:&quot;pwpm_print_menu_item_privacy-policy&quot;;i:0;s:29:&quot;pwpm_print_menu_item_type_any&quot;;i:0;s:35:&quot;pwpm_print_menu_item_type_post_type&quot;;i:0;s:34:&quot;pwpm_print_menu_item_type_taxonomy&quot;;i:0;s:20:&quot;pwpm_print_page_item&quot;;i:0;s:33:&quot;pwpm_print_page_item_has_children&quot;;i:0;s:23:&quot;pwpm_print_page_item_id&quot;;i:0;s:19:&quot;pwpm_print_cat_item&quot;;i:0;s:22:&quot;pwpm_print_cat_item_id&quot;;i:0;s:22:&quot;pwpm_print_current_cat&quot;;i:1;s:29:&quot;pwpm_print_current_cat_parent&quot;;i:0;s:31:&quot;pwpm_print_current_cat_ancestor&quot;;i:0;s:40:&quot;pwpm_do_not_print_cat_parent_as_ancestor&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Default.php(296): add_option('purify_wp_menu_...', Array)
-#5 /wordpress/wp-content/plugins/purify-wp-menues/includes/class-PWM_Default.php(141): PWM_Default->get_stored_settings()
-#6 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(69): PWM_Default->__construct()
-#7 /wordpress/wp-content/plugins/purify-wp-menues/purify-wp-menues.php(73): run_hinjipwpm()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('purify_wp_menu_options_set', 'a:36:{s:45:\"pwpm_backward_compatibility_with_wp_page_menu\";i:0;s:36:\"pwpm_do_not_print_parent_as_ancestor\";i:0;s:32:\"pwpm_print_current_menu_ancestor\";i:0;s:28:\"pwpm_print_current_menu_item\";i:1;s:30:\"pwpm_print_current_menu_parent\";i:0;s:38:\"pwpm_print_current_object_any_ancestor\";i:0;s:36:\"pwpm_print_current_object_any_parent\";i:0;s:32:\"pwpm_print_current_page_ancestor\";i:0;s:28:\"pwpm_print_current_page_item\";i:1;s:30:\"pwpm_print_current_page_parent\";i:0;s:36:\"pwpm_print_current_taxonomy_ancestor\";i:0;s:36:\"pwpm_print_current_type_any_ancestor\";i:0;s:34:\"pwpm_print_current_type_any_parent\";i:0;s:20:\"pwpm_print_menu_item\";i:0;s:33:\"pwpm_print_menu_item_has_children\";i:0;s:25:\"pwpm_print_menu_item_home\";i:0;s:23:\"pwpm_print_menu_item_id\";i:0;s:32:\"pwpm_print_menu_item_id_as_class\";i:0;s:31:\"pwpm_print_menu_item_object_any\";i:0;s:36:\"pwpm_print_menu_item_object_category\";i:0;s:34:\"pwpm_print_menu_item_object_custom\";i:0;s:32:\"pwpm_print_menu_item_object_page\";i:0;s:31:\"pwpm_print_menu_item_object_tag\";i:0;s:35:\"pwpm_print_menu_item_privacy-policy\";i:0;s:29:\"pwpm_print_menu_item_type_any\";i:0;s:35:\"pwpm_print_menu_item_type_post_type\";i:0;s:34:\"pwpm_print_menu_item_type_taxonomy\";i:0;s:20:\"pwpm_print_page_item\";i:0;s:33:\"pwpm_print_page_item_has_children\";i:0;s:23:\"pwpm_print_page_item_id\";i:0;s:19:\"pwpm_print_cat_item\";i:0;s:22:\"pwpm_print_cat_item_id\";i:0;s:22:\"pwpm_print_current_cat\";i:1;s:29:\"pwpm_print_current_cat_parent\";i:0;s:31:\"pwpm_print_current_cat_ancestor\";i:0;s:40:\"pwpm_do_not_print_cat_parent_as_ancestor\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/purify-wp-menues/purify-wp-menues.php'), run_hinjipwpm, PWM_Default->__construct, PWM_Default->get_stored_settings, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:45:13 UTC] PHP Warning:  Undefined array key "REQUEST_SCHEME" in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.activation.php on line 25
-[05-Apr-2025 07:45:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.pushflew.php on line 14
-[05-Apr-2025 07:45:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:45:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:45:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:45:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:45:16 UTC] PHP Warning:  Undefined array key "REQUEST_SCHEME" in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.activation.php on line 25
-[05-Apr-2025 07:45:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.pushflew.php on line 14
-[05-Apr-2025 07:45:30 UTC] PHP Warning:  Undefined array key "REQUEST_SCHEME" in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.activation.php on line 25
-[05-Apr-2025 07:45:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/pushflew-push-notification/classes/class.pushflew.php on line 14
-[05-Apr-2025 07:45:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:45:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:45:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:45:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:45:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:45:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:46:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:46:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:46:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:46:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:46:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:46:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:46:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:46:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:46:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:46:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:46:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:46:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:46:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 07:46:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 07:46:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 07:46:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 07:46:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'AN~*{#m!5Kd8nD^ls)dQRP,f! @fNJPa}H|{}l:4^)=:K5!ce`+<gF`Shnqts--s', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'AN~*{#m!5Kd8nD^ls)dQRP,f! @fNJPa}H|{}l:4^)=:K5!ce`+&lt;gF`Shnqts--s' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'AN~*{#m!5Kd8nD^...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'AN~*{#m!5Kd8nD^...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'AN~*{#m!5Kd8nD^...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'AN~*{#m!5Kd8nD^...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/page-editor/lib/Enqueue.php(198): wp_enqueue_script('jquery')
-#19 /wordpress/wp-content/plugins/page-editor/lib/Renderer.php(22): PageEditor_Enqueue::jquery()
-#20 /wordpress/wp-content/plugins/page-editor/page-editor.php(267): PageEditor_Renderer->__construct(Object(PageEditor_Model_Module_ModuleManager), Object(PageEditor_Model_Module_AssetLoader))
-#21 /wordpress/wp-content/plugins/page-editor/page-editor.php(241): PageEditor_WordPressPlugin::boot_as_rendering_a_page()
-#22 /wordpress/wp-content/plugins/page-editor/page-editor.php(383): PageEditor_WordPressPlugin::boot()
-#23 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#24 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('page-editor/pag...')
-#25 /internal/eval.php(20): activate_plugin('page-editor/pag...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'AN~*{#m!5Kd8nD^ls)dQRP,f! @fNJPa}H|{}l:4^)=:K5!ce`+<gF`Shnqts--s', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/page-editor/page-editor.php'), PageEditor_WordPressPlugin::boot, PageEditor_WordPressPlugin::boot_as_rendering_a_page, PageEditor_Renderer->__construct, PageEditor_Enqueue::jquery, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 07:46:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Vt(2k%=<^g5i YZyNK<A+S?UPoX6C<ya@GrO^L^M?.-Z<y7AYp,NZ`2*-HtAPB-n', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'Vt(2k%=&lt;^g5i YZyNK&lt;A+S?UPoX6C&lt;ya@GrO^L^M?.-Z&lt;y7AYp,NZ`2*-HtAPB-n' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[H
+Error: [11-Apr-2025 11:24:12 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:19 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>posterno</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:24:33 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:38 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>posterno</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:24:53 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:59 UTC] PHP Deprecated:  Required parameter $increment follows optional parameter $hash in /wordpress/wp-content/plugins/posterno/includes/functions.php on line 746
+[11-Apr-2025 11:24:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>posterno</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:27:34 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:34 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:34 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror-css" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:35 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:35 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror-css" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:36 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $new_image in /wordpress/wp-content/plugins/placester/lib/smallprint/image-util.php on line 88
+[11-Apr-2025 11:27:36 UTC] PHP Deprecated:  Required parameter $polygon follows optional parameter $listings in /wordpress/wp-content/plugins/placester/placester-maps/lib/maps-util.php on line 210
+[11-Apr-2025 11:27:36 UTC] PHP Deprecated:  Required parameter $polygon follows optional parameter $listings in /wordpress/wp-content/plugins/placester/placester-maps/lib/neighborhood.php on line 5
+[11-Apr-2025 11:27:36 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in PLS_Widget_Office is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:27:36 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Placester_Contact_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:27:45 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:45 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:45 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:45 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror-css" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror-css" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $new_image in /wordpress/wp-content/plugins/placester/lib/smallprint/image-util.php on line 88
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $polygon follows optional parameter $listings in /wordpress/wp-content/plugins/placester/placester-maps/lib/maps-util.php on line 210
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  Required parameter $polygon follows optional parameter $listings in /wordpress/wp-content/plugins/placester/placester-maps/lib/neighborhood.php on line 5
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in PLS_Widget_Office is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:27:47 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Placester_Contact_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 11:27:57 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:57 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:57 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror-css" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Undefined array key "shortcode-edit" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Deprecated:  Required parameter $file_name follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:58 UTC] PHP Deprecated:  Required parameter $file_mime_type follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:58 UTC] PHP Deprecated:  Required parameter $file_tmpname follows optional parameter $args in /wordpress/wp-content/plugins/placester/api/listing.php on line 58
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "settings-all" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 101
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "jquery-fileupload" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "add-listing" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "location-map" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-search/lib/search-permalinks.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "google-maps" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "text-overlay" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "polygons" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "logo_img" in /wordpress/wp-content/plugins/placester/placester-leads/lib/CRM/controller.php on line 72
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 63
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 68
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcode-cpt.php on line 770
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/placester/placester-shortcodes/lib/shortcodes/search_listings.php on line 168
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror-foldcode" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror-foldgutter" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror-brace-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror-xml-fold" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemirror-xml" in /wordpress/wp-content/plugins/placester/admin/admin-page.php on line 74
+[11-Apr-2025 11:27:58 UTC] PHP Warning:  Undefined array key "codemir
