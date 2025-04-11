@@ -1,13 +1,231 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function r(n,o){const s=new h(await e.createPhpRuntime());return e.sapiName&&s.setSapiName(e.sapiName),n&&(s.requestHandler=n),e.phpIniEntries&&w(s,e.phpIniEntries),o?(await T(s),await m(s,"/",e.createFiles||{}),await L(s,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await n.getPrimaryPhp(),s,["/tmp",n.documentRoot,"/internal/shared"]),e.spawnHandler&&await s.setSpawnHandler(e.spawnHandler(n.processManager)),y({php:s,cwd:n.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),s}const i=new g({phpFactory:async({isPrimary:n})=>r(i,n),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E}),t=await i.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const n in e.constants)t.defineConstant(n,e.constants[n]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return i}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1536)
-    at runNextTicks (node:internal/process/task_queues:65:5)
-    at listOnTimeout (node:internal/timers:569:9)
-    at process.processTimers (node:internal/timers:543:7)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:811)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+Error: [11-Apr-2025 23:46:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>show tables like wp_AD_CLICK</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('show tables lik...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('show tables lik...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('show tables lik...')
+#4 /wordpress/wp-content/plugins/cbprotect/cbprotect.php(34): wpdb->get_var('show tables lik...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): createtable_adclick(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cbprot...', false)
+#9 /internal/eval.php(20): activate_plugin('cbprotect/cbpro...')
+#10 {main}</pre>
+ for query show tables like wp_AD_CLICK made by activate_plugin, do_action('activate_cbprotect/cbprotect.php'), WP_Hook->do_action, WP_Hook->apply_filters, createtable_adclick, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 23:47:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:47:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:47:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:47:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:29 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:47:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:47:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 67
+[11-Apr-2025 23:47:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/centrex-smart-web-form-builder/core/includes/classes/debt-pay-pro-api.php on line 68
+[11-Apr-2025 23:48:44 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPClickmeter::add_pixel_status() cannot be called statically in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php:90
+Stack trace:
+#0 /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php(37): WPClickmeter::on_load()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): wpclickmeter_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(704): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php on line 90
+[11-Apr-2025 23:48:53 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPClickmeter::add_pixel_status() cannot be called statically in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php:90
+Stack trace:
+#0 /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php(37): WPClickmeter::on_load()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): wpclickmeter_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(704): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php on line 90
+[11-Apr-2025 23:49:02 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPClickmeter::add_pixel_status() cannot be called statically in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php:90
+Stack trace:
+#0 /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php(37): WPClickmeter::on_load()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): wpclickmeter_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(704): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/clickmeter-link-shortener-and-analytics/clickmeter.php on line 90
+[11-Apr-2025 23:49:40 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:49:41 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:49:49 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:49:50 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:49:58 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:49:59 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $object in /wordpress/wp-content/plugins/connections-business-directory-offers/connections-business-directory-offers.php on line 166
+[11-Apr-2025 23:50:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('countdown_clock')
+#2 /wordpress/wp-content/plugins/countdown-clock/countdown-clock.php(23): register_widget('countdown_clock')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_countdown_clock('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 23:50:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('countdown_clock')
+#2 /wordpress/wp-content/plugins/countdown-clock/countdown-clock.php(23): register_widget('countdown_clock')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_countdown_clock('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 23:50:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('countdown_clock')
+#2 /wordpress/wp-content/plugins/countdown-clock/countdown-clock.php(23): register_widget('countdown_clock')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_countdown_clock('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 23:51:00 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "csj_width" on bool in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php:145
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): thisismyurl_wp_crossslide_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_crosss...', false)
+#4 /internal/eval.php(20): activate_plugin('crossslide-jque...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php on line 145
+[11-Apr-2025 23:51:08 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "csj_width" on bool in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php:145
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): thisismyurl_wp_crossslide_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_crosss...', false)
+#4 /internal/eval.php(20): activate_plugin('crossslide-jque...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php on line 145
+[11-Apr-2025 23:51:16 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "csj_width" on bool in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php:145
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): thisismyurl_wp_crossslide_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_crosss...', false)
+#4 /internal/eval.php(20): activate_plugin('crossslide-jque...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/crossslide-jquery-plugin-for-wordpress/crossslide-jquery-plugin-for-wordpress.php on line 145
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"custom-admin-layout"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/custom-admin-layout.latest-stable.zip".
+  				Check if the URL is correct and the server is reachable.
+  				If it is reachable, the server might be blocking the request.
+  				Check the browser console and network tabs for more information.
+  
+  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+  
+  				This means the server that hosts your file does not allow requests from other sites
+  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+  				cross-origin file downloads. Learn more about CORS at
+  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+  
+  				If your file is on GitHub, load it from "raw.githubusercontent.com".
+  				Here's how to do that:
+  
+  				1. Start with the original GitHub URL of the file. For example:
+  				https://github.com/username/repository/blob/branch/filename.
+  				2. Replace "github.com" with "raw.githubusercontent.com".
+  				3. Remove the "/blob/" part of the URL.
+  
+  				The resulting URL should look like this:
+  				https://raw.githubusercontent.com/username/repository/branch/filename
+  
+  				Error:
+  				Error: Could not download "https://downloads.wordpress.org/plugin/custom-admin-layout.latest-stable.zip"
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/custom-admin-layout.latest-stable.zip".
+    				Check if the URL is correct and the server is reachable.
+    				If it is reachable, the server might be blocking the request.
+    				Check the browser console and network tabs for more information.
+    
+    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+    
+    				This means the server that hosts your file does not allow requests from other sites
+    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+    				cross-origin file downloads. Learn more about CORS at
+    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+    
+    				If your file is on GitHub, load it from "raw.githubusercontent.com".
+    				Here's how to do that:
+    
+    				1. Start with the original GitHub URL of the file. For example:
+    				https://github.com/username/repository/blob/branch/filename.
+    				2. Replace "github.com" with "raw.githubusercontent.com".
+    				3. Remove the "/blob/" part of the URL.
+    
+    				The resulting URL should look like this:
+    				https://raw.githubusercontent.com/username/repository/branch/filename
+    
+    				Error:
+    				Error: Could not download "https://downloads.wordpress.org/plugin/custom-admin-layout.latest-stable.zip"
+        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
+  }
+}
 
 Node.js v23.11.0
