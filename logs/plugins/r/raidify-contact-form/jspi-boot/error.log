@@ -2,91 +2,57 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
-[09-Apr-2025 18:53:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('myplugin_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'myplugin_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(42): add_option('myplugin_versio...', '1.0.0')
-#5 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(198): Raidify_Contact_Form->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('raidify-contact...')
-#8 /internal/eval.php(20): activate_plugin('raidify-contact...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('myplugin_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/raidify-contact-form/raidify-contact-form.php'), Raidify_Contact_Form->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:53:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rcf_admin_settings', 'a:9:{s:14:\"input-elements\";a:3:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";}s:18:\"text-area-elements\";a:1:{i:0;s:7:\"message\";}s:8:\"required\";a:4:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";i:3;s:7:\"message\";}s:14:\"required-label\";s:10:\"(required)\";s:11:\"placeholder\";a:4:{s:4:\"name\";s:0:\"\";s:7:\"subject\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"message\";s:0:\"\";}s:6:\"sendto\";a:2:{s:4:\"user\";s:10:\"rcf-wpuser\";s:10:\"user-email\";s:0:\"\";}s:6:\"mailer\";s:7:\"phpmail\";s:11:\"smtp-option\";a:8:{s:14:\"authentication\";s:0:\"\";s:11:\"host-server\";s:0:\"\";s:11:\"port-number\";s:0:\"\";s:10:\"encryption\";s:12:\"noencryption\";s:4:\"from\";s:0:\"\";s:9:\"from-name\";s:0:\"\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";}s:16:\"google-recaptcha\";a:3:{s:24:\"rcf_use_google_recaptcha\";s:0:\"\";s:14:\"rcf_gr_sitekey\";s:0:\"\";s:16:\"rcf_gr_secretkey\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rcf_admin_settings' , 'a:9:{s:14:&quot;input-elements&quot;;a:3:{i:0;s:4:&quot;name&quot;;i:1;s:7:&quot;subject&quot;;i:2;s:5:&quot;email&quot;;}s:18:&quot;text-area-elements&quot;;a:1:{i:0;s:7:&quot;message&quot;;}s:8:&quot;required&quot;;a:4:{i:0;s:4:&quot;name&quot;;i:1;s:7:&quot;subject&quot;;i:2;s:5:&quot;email&quot;;i:3;s:7:&quot;message&quot;;}s:14:&quot;required-label&quot;;s:10:&quot;(required)&quot;;s:11:&quot;placeholder&quot;;a:4:{s:4:&quot;name&quot;;s:0:&quot;&quot;;s:7:&quot;subject&quot;;s:0:&quot;&quot;;s:5:&quot;email&quot;;s:0:&quot;&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}s:6:&quot;sendto&quot;;a:2:{s:4:&quot;user&quot;;s:10:&quot;rcf-wpuser&quot;;s:10:&quot;user-email&quot;;s:0:&quot;&quot;;}s:6:&quot;mailer&quot;;s:7:&quot;phpmail&quot;;s:11:&quot;smtp-option&quot;;a:8:{s:14:&quot;authentication&quot;;s:0:&quot;&quot;;s:11:&quot;host-server&quot;;s:0:&quot;&quot;;s:11:&quot;port-number&quot;;s:0:&quot;&quot;;s:10:&quot;encryption&quot;;s:12:&quot;noencryption&quot;;s:4:&quot;from&quot;;s:0:&quot;&quot;;s:9:&quot;from-name&quot;;s:0:&quot;&quot;;s:8:&quot;username&quot;;s:0:&quot;&quot;;s:8:&quot;password&quot;;s:0:&quot;&quot;;}s:16:&quot;google-recaptcha&quot;;a:3:{s:24:&quot;rcf_use_google_recaptcha&quot;;s:0:&quot;&quot;;s:14:&quot;rcf_gr_sitekey&quot;;s:0:&quot;&quot;;s:16:&quot;rcf_gr_secretkey&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(181): add_option('rcf_admin_setti...', Array)
-#5 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(65): Raidify_Contact_Form->rcf_init_settings()
-#6 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(198): Raidify_Contact_Form->__construct()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('raidify-contact...')
-#9 /internal/eval.php(20): activate_plugin('raidify-contact...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rcf_admin_settings', 'a:9:{s:14:\"input-elements\";a:3:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";}s:18:\"text-area-elements\";a:1:{i:0;s:7:\"message\";}s:8:\"required\";a:4:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";i:3;s:7:\"message\";}s:14:\"required-label\";s:10:\"(required)\";s:11:\"placeholder\";a:4:{s:4:\"name\";s:0:\"\";s:7:\"subject\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"message\";s:0:\"\";}s:6:\"sendto\";a:2:{s:4:\"user\";s:10:\"rcf-wpuser\";s:10:\"user-email\";s:0:\"\";}s:6:\"mailer\";s:7:\"phpmail\";s:11:\"smtp-option\";a:8:{s:14:\"authentication\";s:0:\"\";s:11:\"host-server\";s:0:\"\";s:11:\"port-number\";s:0:\"\";s:10:\"encryption\";s:12:\"noencryption\";s:4:\"from\";s:0:\"\";s:9:\"from-name\";s:0:\"\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";}s:16:\"google-recaptcha\";a:3:{s:24:\"rcf_use_google_recaptcha\";s:0:\"\";s:14:\"rcf_gr_sitekey\";s:0:\"\";s:16:\"rcf_gr_secretkey\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/raidify-contact-form/raidify-contact-form.php'), Raidify_Contact_Form->__construct, Raidify_Contact_Form->rcf_init_settings, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
-[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
-[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
-[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
-[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+Error: [11-Apr-2025 05:50:41 UTC] PHP Fatal error:  Uncaught TypeError: Return value of RY_Toolkit::get_option() must be an instance of mixed, bool returned in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php:83
+Stack trace:
+#0 /wordpress/wp-content/plugins/ry-toolkit/includes/update.php(7): RY_Toolkit::get_option('version')
+#1 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(37): RY_Toolkit_Update::update()
+#2 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(22): RY_Toolkit->do_init()
+#3 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(28): RY_Toolkit::instance()
+#4 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(31): RY_Toolkit()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ry-toolkit/ry-t...')
+#7 /internal/eval.php(20): activate_plugin('ry-toolkit/ry-t...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php on line 83
+[11-Apr-2025 05:50:49 UTC] PHP Fatal error:  Uncaught TypeError: Return value of RY_Toolkit::get_option() must be an instance of mixed, bool returned in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php:83
+Stack trace:
+#0 /wordpress/wp-content/plugins/ry-toolkit/includes/update.php(7): RY_Toolkit::get_option('version')
+#1 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(37): RY_Toolkit_Update::update()
+#2 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(22): RY_Toolkit->do_init()
+#3 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(28): RY_Toolkit::instance()
+#4 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(31): RY_Toolkit()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ry-toolkit/ry-t...')
+#7 /internal/eval.php(20): activate_plugin('ry-toolkit/ry-t...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php on line 83
+[11-Apr-2025 05:50:56 UTC] PHP Fatal error:  Uncaught TypeError: Return value of RY_Toolkit::get_option() must be an instance of mixed, bool returned in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php:83
+Stack trace:
+#0 /wordpress/wp-content/plugins/ry-toolkit/includes/update.php(7): RY_Toolkit::get_option('version')
+#1 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(37): RY_Toolkit_Update::update()
+#2 /wordpress/wp-content/plugins/ry-toolkit/includes/main.php(22): RY_Toolkit->do_init()
+#3 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(28): RY_Toolkit::instance()
+#4 /wordpress/wp-content/plugins/ry-toolkit/ry-toolkit.php(31): RY_Toolkit()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ry-toolkit/ry-t...')
+#7 /internal/eval.php(20): activate_plugin('ry-toolkit/ry-t...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ry-toolkit/includes/main.php on line 83
+[11-Apr-2025 05:52:51 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>reorderGallery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:52:59 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>reorderGallery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:53:07 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>reorderGallery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:55:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:55:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:55:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[11-Apr-2025 05:55:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[11-Apr-2025 05:55:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:55:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:55:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[11-Apr-2025 05:55:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[11-Apr-2025 05:56:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:56:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[11-Apr-2025 05:56:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[11-Apr-2025 05:56:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
