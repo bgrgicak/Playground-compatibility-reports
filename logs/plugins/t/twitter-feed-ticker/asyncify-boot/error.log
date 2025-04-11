@@ -1,10 +1,605 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function r(n,o){const s=new h(await e.createPhpRuntime());return e.sapiName&&s.setSapiName(e.sapiName),n&&(s.requestHandler=n),e.phpIniEntries&&w(s,e.phpIniEntries),o?(await T(s),await m(s,"/",e.createFiles||{}),await L(s,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await n.getPrimaryPhp(),s,["/tmp",n.documentRoot,"/internal/shared"]),e.spawnHandler&&await s.setSpawnHandler(e.spawnHandler(n.processManager)),y({php:s,cwd:n.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),s}const i=new g({phpFactory:async({isPrimary:n})=>r(i,n),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E}),t=await i.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const n in e.constants)t.defineConstant(n,e.constants[n]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return i}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1536)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:811)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+Error: [11-Apr-2025 02:22:07 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method LadderDisplayer::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 02:22:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method LadderDisplayer::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 02:22:25 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method LadderDisplayer::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 02:23:09 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php:745
+Stack trace:
+#0 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/twigify/lib/meta-boxes.php(112): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cmb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php on line 745
+[11-Apr-2025 02:23:20 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php:745
+Stack trace:
+#0 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/twigify/lib/meta-boxes.php(112): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cmb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php on line 745
+[11-Apr-2025 02:23:30 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php:745
+Stack trace:
+#0 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/twigify/lib/meta-boxes.php(112): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cmb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/twigify/vendor/Custom-Metaboxes-and-Fields-for-WordPress-master/init.php on line 745
+[11-Apr-2025 02:25:13 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744338311.679)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 02:27:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php:1040
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-social-stor...')
+#2 /internal/eval.php(20): activate_plugin('top-social-stor...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php on line 1040
+[11-Apr-2025 02:27:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php:1040
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-social-stor...')
+#2 /internal/eval.php(20): activate_plugin('top-social-stor...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php on line 1040
+[11-Apr-2025 02:27:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php:1040
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('top-social-stor...')
+#2 /internal/eval.php(20): activate_plugin('top-social-stor...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/top-social-stories-free/top-stories.php on line 1040
+[11-Apr-2025 02:27:42 UTC] Invalid trp_settings: "not_set"
+[11-Apr-2025 02:27:43 UTC] Automatic updates starting...
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE INDEX in...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE INDEX in...')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(63): WP_SQLite_DB->query('CREATE INDEX in...')
+#4 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#5 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE FULLTEXT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE FULLTEXT...')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(67): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#4 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#5 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(97): WP_SQLite_DB->query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(160): TRP_Gettext_Table_Creation->check_gettext_original_table()
+#5 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 02:27:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(126): WP_SQLite_DB->query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#5 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE INDEX ge...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE INDEX ge...')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(128): WP_SQLite_DB->query('CREATE INDEX ge...')
+#4 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#5 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:53 UTC] Invalid trp_settings: "not_set"
+[11-Apr-2025 02:27:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(63): WP_SQLite_DB->query('CREATE INDEX in...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(67): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(97): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(160): TRP_Gettext_Table_Creation->check_gettext_original_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(126): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:27:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(128): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:03 UTC] Invalid trp_settings: "not_set"
+[11-Apr-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(63): WP_SQLite_DB->query('CREATE INDEX in...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX index_name ON `wp_trp_gettext_en_us` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FULLTEXT INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(67): WP_SQLite_DB->query('CREATE FULLTEXT...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(157): TRP_Gettext_Table_Creation->check_gettext_table('en_US')
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE FULLTEXT INDEX original_fulltext ON `wp_trp_gettext_en_us`(original); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100));</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(97): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(160): TRP_Gettext_Table_Creation->check_gettext_original_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original ON `wp_trp_gettext_original_strings` (original(100)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(126): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_index_original_id ON `wp_trp_gettext_original_meta` (original_id); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/translatepress-multilingual/includes/queries/class-gettext-table-creation.php(128): WP_SQLite_DB->query('CREATE INDEX ge...')
+#2 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(161): TRP_Gettext_Table_Creation->check_gettext_original_meta_table()
+#3 /wordpress/wp-content/plugins/translatepress-multilingual/includes/class-upgrade.php(57): TRP_Upgrade->check_if_gettext_tables_exist()
+#4 /wordpress/wp-includes/class-wp-hook.php(322): TRP_Upgrade->check_for_necessary_updates()
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE INDEX gettext_meta_key ON `wp_trp_gettext_original_meta`(meta_key); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TRP_Upgrade->check_for_necessary_updates, TRP_Upgrade->check_if_gettext_tables_exist, TRP_Gettext_Table_Creation->check_gettext_original_meta_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:28:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php on line 111 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php(111): WP_Widget->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twitter-feed-ti...')
+#3 /internal/eval.php(20): activate_plugin('twitter-feed-ti...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 02:28:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php on line 111 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php(111): WP_Widget->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twitter-feed-ti...')
+#3 /internal/eval.php(20): activate_plugin('twitter-feed-ti...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"twitter-feed-ticker"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
 
 Node.js v23.11.0
