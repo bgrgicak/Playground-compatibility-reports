@@ -2,666 +2,378 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 23:46:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:46:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'ZANJmxP6{-x%|?8nrM_!^$b~_ybi}z3wZ{5*UW<({~5B<Ea0@HN;{b#u;Ln9]-eB', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'ZANJmxP6{-x%|?8nrM_!^$b~_ybi}z3wZ{5*UW&lt;({~5B&lt;Ea0@HN;{b#u;Ln9]-eB' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'ZANJmxP6{-x%|?8...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'ZANJmxP6{-x%|?8...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'ZANJmxP6{-x%|?8...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'ZANJmxP6{-x%|?8...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/dropit/lib/i18n-script.php(46): wp_register_script('dropit-i18n', 'http://127.0.0....', Array, 1533840144)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): dropit_i18n_register('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'ZANJmxP6{-x%|?8nrM_!^$b~_ybi}z3wZ{5*UW<({~5B<Ea0@HN;{b#u;Ln9]-eB', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, dropit_i18n_register, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:46:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '#XEG#ZNTVS^uyCZ$C**OW,X!cx@^,!aN^4Ozt`mZX<fl,beEIEEdF{LZv@UPy wZ', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '#XEG#ZNTVS^uyCZ$C**OW,X!cx@^,!aN^4Ozt`mZX&lt;fl,beEIEEdF{LZv@UPy wZ' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '#XEG#ZNTVS^uyCZ...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '#XEG#ZNTVS^uyCZ...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '#XEG#ZNTVS^uyCZ...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '#XEG#ZNTVS^uyCZ...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/dropit/lib/i18n-script.php(46): wp_register_script('dropit-i18n', 'http://127.0.0....', Array, 1533840144)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): dropit_i18n_register('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '#XEG#ZNTVS^uyCZ$C**OW,X!cx@^,!aN^4Ozt`mZX<fl,beEIEEdF{LZv@UPy wZ', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, dropit_i18n_register, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Undefined array key "deleteOverFlow" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 34
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Undefined array key "updateList" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 36
-[09-Apr-2025 23:47:24 UTC] PHP Warning:  Undefined array key "activate" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 39
-[09-Apr-2025 23:47:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'w:Thfya/[w$;d)D}@vgLL$mO.N`ZLbO9/|iN; lW_V:@b1s$J^X( r$M/SiOS4[h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'w:Thfya/[w$;d)D}@vgLL$mO.N`ZLbO9/|iN; lW_V:@b1s$J^X( r$M/SiOS4[h' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'w:Thfya/[w$;d)D...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'w:Thfya/[w$;d)D...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'w:Thfya/[w$;d)D...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'w:Thfya/[w$;d)D...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php(44): wp_enqueue_script('jquery')
-#19 /wordpress/wp-content/plugins/datasheet/datasheet.php(40): DataSheet->__construct()
-#20 /wordpress/wp-includes/class-wp-hook.php(324): ds_class_init('')
-#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#23 /wordpress/wp-settings.php(704): do_action('init')
-#24 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#25 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#26 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'w:Thfya/[w$;d)D}@vgLL$mO.N`ZLbO9/|iN; lW_V:@b1s$J^X( r$M/SiOS4[h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ds_class_init, DataSheet->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:47:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=Q0%PrCE~>DYvBl/NBC?r[XhF]9fu*,E%~bJ|t([cwN_O#MSjL8g(t$6vz6a$Y)N', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '=Q0%PrCE~&gt;DYvBl/NBC?r[XhF]9fu*,E%~bJ|t([cwN_O#MSjL8g(t$6vz6a$Y)N' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '=Q0%PrCE~>DYvBl...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '=Q0%PrCE~>DYvBl...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '=Q0%PrCE~>DYvBl...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '=Q0%PrCE~>DYvBl...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php(44): wp_enqueue_script('jquery')
-#19 /wordpress/wp-content/plugins/datasheet/datasheet.php(40): DataSheet->__construct()
-#20 /wordpress/wp-includes/class-wp-hook.php(324): ds_class_init('')
-#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#23 /wordpress/wp-settings.php(704): do_action('init')
-#24 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#25 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#26 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=Q0%PrCE~>DYvBl/NBC?r[XhF]9fu*,E%~bJ|t([cwN_O#MSjL8g(t$6vz6a$Y)N', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ds_class_init, DataSheet->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:47:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php:68
+Error: [11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:02 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:11 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:11 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:11 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:11 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:12 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:12 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:12 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:12 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:20 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:20 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:20 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:20 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:21 UTC] PHP Warning:  include_once(source/setting.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:21 UTC] PHP Warning:  include_once(): Failed opening 'source/setting.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 23
+[11-Apr-2025 07:27:21 UTC] PHP Warning:  include_once(source/builder.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:27:21 UTC] PHP Warning:  include_once(): Failed opening 'source/builder.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/db-error-customizer/db-error-customizer.php on line 24
+[11-Apr-2025 07:28:03 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php(46): DataSheet->inc()
-#1 /wordpress/wp-content/plugins/datasheet/datasheet.php(40): DataSheet->__construct()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): ds_class_init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(704): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 68
-[09-Apr-2025 23:47:34 UTC] PHP Warning:  Undefined array key "deleteOverFlow" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 34
-[09-Apr-2025 23:47:34 UTC] PHP Warning:  Undefined array key "updateList" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 36
-[09-Apr-2025 23:47:34 UTC] PHP Warning:  Undefined array key "activate" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 39
-[09-Apr-2025 23:47:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php:68
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744356481.206)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 07:29:05 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php(46): DataSheet->inc()
-#1 /wordpress/wp-content/plugins/datasheet/datasheet.php(40): DataSheet->__construct()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): ds_class_init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(704): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 68
-[09-Apr-2025 23:47:43 UTC] PHP Warning:  Undefined array key "deleteOverFlow" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 34
-[09-Apr-2025 23:47:43 UTC] PHP Warning:  Undefined array key "updateList" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 36
-[09-Apr-2025 23:47:43 UTC] PHP Warning:  Undefined array key "activate" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 39
-[09-Apr-2025 23:47:44 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php:68
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744356542.839)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 07:33:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php:311
 Stack trace:
-#0 /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php(46): DataSheet->inc()
-#1 /wordpress/wp-content/plugins/datasheet/datasheet.php(40): DataSheet->__construct()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): ds_class_init('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(704): do_action('init')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/datasheet/class/datasheet.class.php on line 68
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:48:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:48:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:48:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:48:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:48:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:49:14 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_version', '0.4', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_version' , '0.4' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(438): add_option('dge_ss_version', 0.4, 'Version', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_version', '0.4', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_timeout', '60', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_def_timeout' , '60' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(447): add_option('dge_ss_def_time...', 60, 'Default timeout', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_timeout', '60', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_inc_css', '1', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_inc_css' , '1' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(448): add_option('dge_ss_inc_css', 1, 'Include CSS', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_inc_css', '1', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_mo_snip', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_mo_snip' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(449): add_option('dge_ss_mo_snip', 1, 'Standard image', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_mo_snip', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_presets', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_presets' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(450): add_option('dge_ss_presets', Array, 'Presets', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_presets', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_delay', '4', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_def_delay' , '4' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(454): add_option('dge_ss_def_dela...', 4, 'Default play de...', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_delay', '4', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_thumbs', '5', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_def_thumbs' , '5' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(455): add_option('dge_ss_def_thum...', 5, 'Default thumbna...', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_thumbs', '5', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_play', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_def_play' , '0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(456): add_option('dge_ss_def_play', 0, 'Default autopla...', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_play', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_repeat', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dge_ss_def_repeat' , '0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php(457): add_option('dge_ss_def_repe...', 0, 'Default repeat', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#9 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dge_ss_def_repeat', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dge-slideshow/dge-slideshow.php'), WP_Hook->do_action, WP_Hook->apply_filters, dge_ss_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:49:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 462
-[09-Apr-2025 23:49:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dge_irss_explodeParams() in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php:463
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dental-optimize...')
+#2 /internal/eval.php(20): activate_plugin('dental-optimize...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php on line 311
+[11-Apr-2025 07:33:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php:311
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#4 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 463
-[09-Apr-2025 23:49:22 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 23:49:22 UTC] PHP Warning:  Undefined array key "flickrfaves" in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 462
-[09-Apr-2025 23:49:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dge_irss_explodeParams() in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php:463
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dental-optimize...')
+#2 /internal/eval.php(20): activate_plugin('dental-optimize...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php on line 311
+[11-Apr-2025 07:33:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php:311
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#4 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 463
-[09-Apr-2025 23:49:30 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 23:49:31 UTC] PHP Warning:  Undefined array key "flickrfaves" in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 462
-[09-Apr-2025 23:49:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dge_irss_explodeParams() in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php:463
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): dge_ss_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dge-sl...', false)
-#4 /internal/eval.php(20): activate_plugin('dge-slideshow/d...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/dge-slideshow/dge-slideshow.php on line 463
-[09-Apr-2025 23:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('dental-optimize...')
+#2 /internal/eval.php(20): activate_plugin('dental-optimize...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/dental-optimizer-patient-generator-app/dental-patient-generator-app.php on line 311
+[11-Apr-2025 07:34:42 UTC] PHP Deprecated:  Required parameter $theme_settings follows optional parameter $load in /wordpress/wp-content/plugins/directory-builder/directory-builder.php on line 4982
+[11-Apr-2025 07:34:44 UTC] PHP Deprecated:  Required parameter $theme_settings follows optional parameter $load in /wordpress/wp-content/plugins/directory-builder/directory-builder.php on line 4982
+[11-Apr-2025 07:34:58 UTC] PHP Deprecated:  Required parameter $theme_settings follows optional parameter $load in /wordpress/wp-content/plugins/directory-builder/directory-builder.php on line 4982
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dam_settings_options', 'a:5:{s:26:\"asset_post_type_capability\";s:4:\"page\";s:26:\"asset_post_type_visibility\";s:6:\"public\";s:22:\"asset_post_type_fields\";a:6:{s:5:\"title\";s:5:\"title\";s:11:\"description\";s:11:\"description\";s:14:\"version_number\";s:14:\"version_number\";s:8:\"live_url\";s:8:\"live_url\";s:14:\"featured_image\";s:14:\"featured_image\";s:21:\"associated_asset_type\";s:21:\"associated_asset_type\";}s:30:\"asset_type_taxonomy_visibility\";s:6:\"public\";s:30:\"asset_tags_taxonomy_visibility\";s:6:\"public\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address\",\"admin_title\":\"Address\",\"frontend_title\":\"Address\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"yes\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"false\",\"disabled\":\"delete,field_active\",\"field_icon\":\"wl-location\"}")</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dam_settings_options' , 'a:5:{s:26:&quot;asset_post_type_capability&quot;;s:4:&quot;page&quot;;s:26:&quot;asset_post_type_visibility&quot;;s:6:&quot;public&quot;;s:22:&quot;asset_post_type_fields&quot;;a:6:{s:5:&quot;title&quot;;s:5:&quot;title&quot;;s:11:&quot;description&quot;;s:11:&quot;description&quot;;s:14:&quot;version_number&quot;;s:14:&quot;version_number&quot;;s:8:&quot;live_url&quot;;s:8:&quot;live_url&quot;;s:14:&quot;featured_image&quot;;s:14:&quot;featured_image&quot;;s:21:&quot;associated_asset_type&quot;;s:21:&quot;associated_asset_type&quot;;}s:30:&quot;asset_type_taxonomy_visibility&quot;;s:6:&quot;public&quot;;s:30:&quot;asset_tags_taxonomy_visibility&quot;;s:6:&quot;public&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_address\&quot;,\&quot;admin_title\&quot;:\&quot;Address\&quot;,\&quot;frontend_title\&quot;:\&quot;Address\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;yes\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;yes\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;false\&quot;,\&quot;disabled\&quot;:\&quot;delete,field_active\&quot;,\&quot;field_icon\&quot;:\&quot;wl-location\&quot;}&quot;) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dam_settings_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/digital-asset-manager/includes/class-digital-asset-manager-activator.php(35): update_option('dam_settings_op...', Array)
-#6 /wordpress/wp-content/plugins/digital-asset-manager/digital-asset-manager.php(77): Digital_Asset_Manager_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_digital_asset_manager(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
-#11 /internal/eval.php(20): activate_plugin('digital-asset-m...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dam_settings_options', 'a:5:{s:26:\"asset_post_type_capability\";s:4:\"page\";s:26:\"asset_post_type_visibility\";s:6:\"public\";s:22:\"asset_post_type_fields\";a:6:{s:5:\"title\";s:5:\"title\";s:11:\"description\";s:11:\"description\";s:14:\"version_number\";s:14:\"version_number\";s:8:\"live_url\";s:8:\"live_url\";s:14:\"featured_image\";s:14:\"featured_image\";s:21:\"associa
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address\",\"admin_title\":\"Address\",\"frontend_title\":\"Address\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"yes\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"false\",\"disabled\":\"delete,field_active\",\"field_icon\":\"wl-location\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_city\",\"admin_title\":\"City\",\"frontend_title\":\"City\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_city\&quot;,\&quot;admin_title\&quot;:\&quot;City\&quot;,\&quot;frontend_title\&quot;:\&quot;City\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_city\",\"admin_title\":\"City\",\"frontend_title\":\"City\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_neighborhood\",\"admin_title\":\"Neighborhood\",\"frontend_title\":\"Neighborhood\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_neighborhood\&quot;,\&quot;admin_title\&quot;:\&quot;Neighborhood\&quot;,\&quot;frontend_title\&quot;:\&quot;Neighborhood\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_neighborhood\",\"admin_title\":\"Neighborhood\",\"frontend_title\":\"Neighborhood\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_zip\",\"admin_title\":\"Postal code \\/ Zip\",\"frontend_title\":\"Postal code \\/ Zip\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_zip\&quot;,\&quot;admin_title\&quot;:\&quot;Postal code \\/ Zip\&quot;,\&quot;frontend_title\&quot;:\&quot;Postal code \\/ Zip\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_zip\",\"admin_title\":\"Postal code \\/ Zip\",\"frontend_title\":\"Postal code \\/ Zip\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_state\",\"admin_title\":\"County \\/ State\",\"frontend_title\":\"County \\/ State\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_state\&quot;,\&quot;admin_title\&quot;:\&quot;County \\/ State\&quot;,\&quot;frontend_title\&quot;:\&quot;County \\/ State\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_state\",\"admin_title\":\"County \\/ State\",\"frontend_title\":\"County \\/ State\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_country\",\"admin_title\":\"Country\",\"frontend_title\":\"Country\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"select\",\"select_options\":\"Afghanistan,Albania,Algeria,Andorra,Angola,Antigua and Barbuda,Argentina,Armenia,Aruba,Australia,Austria,Azerbaijan,The Bahamas,Bahrain,Bangladesh,Barbados,Belarus,Belgium,Belize,Benin,Bhutan,Bolivia,Bosnia and Herzegovina,Botswana,Brazil,Brunei ,Bulgaria,Burkina Faso,Burma,Burundi,Cambodia,Cameroon,Canada,Cabo Verde,Central African Republic,Chad,Chile,China,Colombia,Comoros,Democratic Republic of the Congo,Republic of the Congo,Costa Rica,Cote d\'Ivoire,Croatia,Cuba,Curacao,Cyprus,Czech Republic,Denmark,Djibouti,Dominica,Dominican Republic,East Timor (see Timor-Leste),Ecuador,Egypt,El Salvador,Equatorial Guinea,Eritrea,Estonia,Ethiopia,Fiji,Finland,France,Gabon,The Gambia,Georgia,Germany,Ghana,Greece,Grenada,Guatemala,Guinea,Guinea-Bissau,Guyana,Haiti,Holy See,Honduras,Hong Kong,Hungary,Iceland,India,Indonesia,Iran,Iraq,Ireland,Israel,Italy,Jamaica,Japan,Jordan,Kazakhstan,Kenya,Kiribati,North Korea,South Korea,Kosovo,Kuwait,Kyrgyzstan,Laos,Latvia,Lebanon,Lesotho,Liberia,Libya,Liechtenstein,Lithuania,Luxembourg,Macau,Macedonia,Madagascar,Malawi,Malaysia,Maldives,Mali,Malta,Marshall Islands,Mauritania,Mauritius,Mexico,Micronesia,Moldova,Monaco,Mongolia,Montenegro,Morocco,Mozambique,Namibia,Nauru,Nepal,Netherlands,New Zealand,Nicaragua,Niger,Nigeria,North Korea,Norway,Oman,Pakistan,Palau,Palestinian Territories,Panama,Papua New Guinea,Paraguay,Peru,Philippines,Poland,Portugal,Qatar,Romania,Russia,Rwanda,Saint Kitts and Nevis,Saint Lucia,Saint Vincent and the Grenadines,Samoa ,San Marino,Sao Tome and Principe,Saudi Arabia,Senegal,Serbia,Seychelles,Sierra Leone,Singapore,Sint Maarten,Slovakia,Slovenia,Solomon Islands,Somalia,South Africa,South Korea,South Sudan,Spain ,Sri Lanka,Sudan,Suriname,Swaziland ,Sweden,Switzerland,Syria,Taiwan,Tajikistan,Tanzania,Thailand ,Timor-Leste,Togo,Tonga,Trinidad and Tobago,Tunisia,Turkey,Turkmenistan,Tuvalu,Uganda,Ukraine,United Arab Emirates,United Kingdom,Uruguay,Uzbekistan,Vanuatu,Venezuela,Vietnam,Yemen,Zambia,Zimbabwe\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_country\&quot;,\&quot;admin_title\&quot;:\&quot;Country\&quot;,\&quot;frontend_title\&quot;:\&quot;Country\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;select\&quot;,\&quot;select_options\&quot;:\&quot;Afghanistan,Albania,Algeria,Andorra,Angola,Antigua and Barbuda,Argentina,Armenia,Aruba,Australia,Austria,Azerbaijan,The Bahamas,Bahrain,Bangladesh,Barbados,Belarus,Belgium,Belize,Benin,Bhutan,Bolivia,Bosnia and Herzegovina,Botswana,Brazil,Brunei ,Bulgaria,Burkina Faso,Burma,Burundi,Cambodia,Cameroon,Canada,Cabo Verde,Central African Republic,Chad,Chile,China,Colombia,Comoros,Democratic Republic of the Congo,Republic of the Congo,Costa Rica,Cote d\'Ivoire,Croatia,Cuba,Curacao,Cyprus,Czech Republic,Denmark,Djibouti,Dominica,Dominican Republic,East Timor (see Timor-Leste),Ecuador,Egypt,El Salvador,Equatorial Guinea,Eritrea,Estonia,Ethiopia,Fiji,Finland,France,Gabon,The Gambia,Georgia,Germany,Ghana,Greece,Grenada,Guatemala,Guinea,Guinea-Bissau,Guyana,Haiti,Holy See,Honduras,Hong Kong,Hungary,Iceland,India,Indonesia,Iran,Iraq,Ireland,Israel,Italy,Jamaica,Japan,Jordan,Kazakhstan,Kenya,Kiribati,North Korea,South Korea,Kosovo,Kuwait,Kyrgyzstan,Laos,Latvia,Lebanon,Lesotho,Liberia,Libya,Liechtenstein,Lithuania,Luxembourg,Macau,Macedonia,Madagascar,Malawi,Malaysia,Maldives,Mali,Malta,Marshall Islands,Mauritania,Mauritius,Mexico,Micronesia,Moldova,Monaco,Mongolia,Montenegro,Morocco,Mozambique,Namibia,Nauru,Nepal,Netherlands,New Zealand,Nicaragua,Niger,Nigeria,North Korea,Norway,Oman,Pakistan,Palau,Palestinian Territories,Panama,Papua New Guinea,Paraguay,Peru,Philippines,Poland,Portugal,Qatar,Romania,Russia,Rwanda,Saint Kitts and Nevis,Saint Lucia,Saint Vincent and the Grenadines,Samoa ,San Marino,Sao Tome and Principe,Saudi Arabia,Senegal,Serbia,Seychelles,Sierra Leone,Singapore,Sint Maarten,Slovakia,Slovenia,Solomon Islands,Somalia,South Africa,South Korea,South Sudan,Spain ,Sri Lanka,Sudan,Suriname,Swaziland ,Sweden,Switzerland,Syria,Taiwan,Tajikistan,Tanzania,Thailand ,Timor-Leste,Togo,Tonga,Trinidad and Tobago,Tunisia,Turkey,Turkmenistan,Tuvalu,Uganda,Ukraine,United Arab Emirates,United Kingdom,Uruguay,Uzbekistan,Vanuatu,Venezuela,Vietnam,Yemen,Zambia,Zimbabwe\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_country\",\"admin_title\":\"Country\",\"frontend_title\":\"Country\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"select\",\"select_options\":\"Afghanistan,Albania,Algeria,Andorra,Angola,Antigua and Barbuda,Argentina,Armenia,Aruba,Australia,Austria,Azerbaijan,The Bahamas,Bahrain,Bangladesh,Barbados,Belarus,Belgium,Belize,Benin,Bhutan,Bolivia,Bosnia and Herzegovina,Botswana,Brazil,Brunei ,Bulgaria,Burkina Faso,Burma,Burundi,Cambodia,Cameroon,Canada,Cabo Verde,Central African Republic,Chad,Chile,China,Colombia,Comoros,Democratic Republic of the Congo,Republic of the Congo,Costa Rica,Cote d\'Ivoire,Croatia,Cuba,Curacao,Cyprus,Czech Republic,Denmark,Djibouti,Dominica,Dominican Republic,East Timor (see Timor-Leste),Ecuador,Egypt,El Salvador,Equatorial Guinea,Eritrea,Estonia,Ethiopia,Fiji,Finland,France,Gabon,The Gambia,Georgia,Germany,Ghana,Greece,Grenada,Guatemala,Guinea,Guinea-Bissau,Guyana,Haiti,Holy See,Honduras,Hong Kong,Hungary,Iceland,India,Indonesia,Iran,Iraq,Ireland,Israel,Italy,Jamaica,Japan,Jordan,Kazakhstan,Kenya,Kiribati,North Korea,South Korea,Kosovo,Kuwait,Kyrgyzstan,Laos,Latvia,Lebanon,Lesotho,Liberia,Libya,Liechtenstein,Lithuania,Luxembourg,Macau,Macedonia,Madagascar,Malawi,Malaysia,Maldives,Mali,Malta,Marshall Islands,Mauritania,Mauritius,Mexico,Micronesia,Moldova,Monaco,Mongolia,Montenegro,Morocco,Mozambique,Namibia,Nauru,Nepal,Netherlands,New Zealand,Nicaragua,Niger,Nigeria,North Korea,Norway,Oman,Pakistan,Palau,Palestinian Territories,Panama,Papua New Guinea,Paraguay,Peru,Philippines,Poland,Portugal,Qatar,Romania,Russia,Rwanda,Saint Kitts and Nevis,Saint Lucia,Saint Vincent and the Grenadines,Samoa ,San Marino,Sao Tome and Principe,Saudi Arabia,Senegal,Serbia,Seychelles,Sierra Leone,Singapore,Sint Maarten,Slovakia,Slovenia,Solomon Islands,Somalia,South Africa,South Korea,South Sudan,Spain ,Sri Lanka,Sudan,Suriname,Swaziland ,Sweden,Switzerland,Syria,Taiwan,Tajikistan,Tanzania,Thailand ,Timor-Leste,Togo,Tonga,Trinidad and Tobago,Tunisia,Turkey,Turkmenistan,Tuvalu,Uganda,Ukraine,United Arab Emirates,United Kingdom,Uruguay,Uzbekistan,Vanuatu,Venezuela,Vietnam,Yemen,Zambia,Zimbabwe\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address_lat\",\"admin_title\":\"Latitude\",\"frontend_title\":\"Latitude\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_address_lat\&quot;,\&quot;admin_title\&quot;:\&quot;Latitude\&quot;,\&quot;frontend_title\&quot;:\&quot;Latitude\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address_lat\",\"admin_title\":\"Latitude\",\"frontend_title\":\"Latitude\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address_lng\",\"admin_title\":\"Longitude\",\"frontend_title\":\"Longitude\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;1&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listing_address_lng\&quot;,\&quot;admin_title\&quot;:\&quot;Longitude\&quot;,\&quot;frontend_title\&quot;:\&quot;Longitude\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;1\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;child\&quot;:\&quot;true\&quot;,\&quot;disabled\&quot;:\&quot;delete,display_order\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("1", "yes", "{\"field_name\":\"listing_address_lng\",\"admin_title\":\"Longitude\",\"frontend_title\":\"Longitude\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"1\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"child\":\"true\",\"disabled\":\"delete,display_order\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("2", "yes", "{\"field_name\":\"listingcontact\",\"admin_title\":\"Contact e-mail\",\"frontend_title\":\"Contact e-mail\",\"frontend_description\":\"Email address users might use to contact listing owner!\",\"default_value\":\"\",\"display_order\":\"2\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"email\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;2&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listingcontact\&quot;,\&quot;admin_title\&quot;:\&quot;Contact e-mail\&quot;,\&quot;frontend_title\&quot;:\&quot;Contact e-mail\&quot;,\&quot;frontend_description\&quot;:\&quot;Email address users might use to contact listing owner!\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;2\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;email\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("2", "yes", "{\"field_name\":\"listingcontact\",\"admin_title\":\"Contact e-mail\",\"frontend_title\":\"Contact e-mail\",\"frontend_description\":\"Email address users might use to contact listing owner!\",\"default_value\":\"\",\"display_order\":\"2\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"no\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"email\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("4", "yes", "{\"field_name\":\"listingphone\",\"admin_title\":\"Phone number\",\"frontend_title\":\"Phone number\",\"frontend_description\":\"Listing phone number\",\"default_value\":\"\",\"display_order\":\"4\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"yes\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"field_icon\":\"wl-phone\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;4&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listingphone\&quot;,\&quot;admin_title\&quot;:\&quot;Phone number\&quot;,\&quot;frontend_title\&quot;:\&quot;Phone number\&quot;,\&quot;frontend_description\&quot;:\&quot;Listing phone number\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;4\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;yes\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;yes\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;field_icon\&quot;:\&quot;wl-phone\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("4", "yes", "{\"field_name\":\"listingphone\",\"admin_title\":\"Phone number\",\"frontend_title\":\"Phone number\",\"frontend_description\":\"Listing phone number\",\"default_value\":\"\",\"display_order\":\"4\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"yes\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"text\",\"field_icon\":\"wl-phone\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("5", "yes", "{\"field_name\":\"listingwebsite\",\"admin_title\":\"Website\",\"frontend_title\":\"Website\",\"frontend_description\":\"Listing website\",\"default_value\":\"\",\"display_order\":\"5\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"url\",\"field_icon\":\"wl-link\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;5&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;listingwebsite\&quot;,\&quot;admin_title\&quot;:\&quot;Website\&quot;,\&quot;frontend_title\&quot;:\&quot;Website\&quot;,\&quot;frontend_description\&quot;:\&quot;Listing website\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;5\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;no\&quot;,\&quot;on_contact\&quot;:\&quot;yes\&quot;,\&quot;data_type\&quot;:\&quot;text\&quot;,\&quot;validation_pattern\&quot;:\&quot;\&quot;,\&quot;validation_pattern-message\&quot;:\&quot;\&quot;,\&quot;field_type\&quot;:\&quot;url\&quot;,\&quot;field_icon\&quot;:\&quot;wl-link\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("5", "yes", "{\"field_name\":\"listingwebsite\",\"admin_title\":\"Website\",\"frontend_title\":\"Website\",\"frontend_description\":\"Listing website\",\"default_value\":\"\",\"display_order\":\"5\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"no\",\"on_contact\":\"yes\",\"data_type\":\"text\",\"validation_pattern\":\"\",\"validation_pattern-message\":\"\",\"field_type\":\"url\",\"field_icon\":\"wl-link\"}") made by activate_plugin, do_action('activate_directory-builder/directory-builder.php'), WP_Hook->do_action, WP_Hook->apply_filters, db_activate_db_func, db_func_Activator::db_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:34:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("6", "yes", "{\"field_name\":\"amenities\",\"admin_title\":\"Amenities\",\"frontend_title\":\"Amenities\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"6\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"yes\",\"on_contact\":\"no\",\"multiselect_type\":\"select\",\"select_options\":\"wheelchair:Wheelchair access\\naccepts-creditcards:Accept credit cards\\nkids-corder:Kids corner\\ncar-parking:Car parking\\npet-friendly:Pets friendly\\ngift-wrapping:Gift wrapping\\nbike-parking:Bike parking\\nfree-wifi:Free Wi-Fi\",\"field_type\":\"multi-select\"}")</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES (&quot;6&quot;, &quot;yes&quot;, &quot;{\&quot;field_name\&quot;:\&quot;amenities\&quot;,\&quot;admin_title\&quot;:\&quot;Amenities\&quot;,\&quot;frontend_title\&quot;:\&quot;Amenities\&quot;,\&quot;frontend_description\&quot;:\&quot;\&quot;,\&quot;default_value\&quot;:\&quot;\&quot;,\&quot;display_order\&quot;:\&quot;6\&quot;,\&quot;field_active\&quot;:\&quot;yes\&quot;,\&quot;for_admins\&quot;:\&quot;no\&quot;,\&quot;required\&quot;:\&quot;no\&quot;,\&quot;required_message\&quot;:\&quot;\&quot;,\&quot;on_listing\&quot;:\&quot;no\&quot;,\&quot;on_detail\&quot;:\&quot;yes\&quot;,\&quot;on_contact\&quot;:\&quot;no\&quot;,\&quot;multiselect_type\&quot;:\&quot;select\&quot;,\&quot;select_options\&quot;:\&quot;wheelchair:Wheelchair access\\naccepts-creditcards:Accept credit cards\\nkids-corder:Kids corner\\ncar-parking:Car parking\\npet-friendly:Pets friendly\\ngift-wrapping:Gift wrapping\\nbike-parking:Bike parking\\nfree-wifi:Free Wi-Fi\&quot;,\&quot;field_type\&quot;:\&quot;multi-select\&quot;}&quot;) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "field_name": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/directory-builder/includes/class-db-functionality-activator.php(395): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/directory-builder/directory-builder.php(38): db_func_Activator::db_activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): db_activate_db_func(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_direct...', false)
+#7 /internal/eval.php(20): activate_plugin('directory-build...')
+#8 {main}</pre>
+ for query INSERT INTO wp_directory_fields (`field_order`, `field_active`, `field_settings`) VALUES ("6", "yes", "{\"field_name\":\"amenities\",\"admin_title\":\"Amenities\",\"frontend_title\":\"Amenities\",\"frontend_description\":\"\",\"default_value\":\"\",\"display_order\":\"6\",\"field_active\":\"yes\",\"for_admins\":\"no\",\"required\":\"no\",\"required_message\":\"\",\"on_listing\":\"no\",\"on_detail\":\"yes\",\"on_contact\":\"no\",\"multiselect_type\":\"select\",\"select_options\":\"wheel
+Node.js v23.11.0
