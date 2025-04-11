@@ -2,232 +2,140 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:45:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-v', '1.8.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Flip-Boxes-v' , '1.8.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Flip-Boxes-v', '1.8.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/flip-boxes/flipboxes.php(84): update_option('Flip-Boxes-v', '1.8.3')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CflipBoxes::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flip-b...', false)
-#10 /internal/eval.php(20): activate_plugin('flip-boxes/flip...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-v', '1.8.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_flip-boxes/flipboxes.php'), WP_Hook->do_action, WP_Hook->apply_filters, CflipBoxes::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-type', 'FREE', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Flip-Boxes-type' , 'FREE' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Flip-Boxes-type', 'FREE', '', 'auto')
-#5 /wordpress/wp-content/plugins/flip-boxes/flipboxes.php(85): update_option('Flip-Boxes-type', 'FREE')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CflipBoxes::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flip-b...', false)
-#10 /internal/eval.php(20): activate_plugin('flip-boxes/flip...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-type', 'FREE', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_flip-boxes/flipboxes.php'), WP_Hook->do_action, WP_Hook->apply_filters, CflipBoxes::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-installDate', '2025-04-09 11:45:58', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Flip-Boxes-installDate' , '2025-04-09 11:45:58' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Flip-Boxes-inst...', '2025-04-09 11:4...', '', 'auto')
-#5 /wordpress/wp-content/plugins/flip-boxes/flipboxes.php(86): update_option('Flip-Boxes-inst...', '2025-04-09 11:4...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CflipBoxes::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flip-b...', false)
-#10 /internal/eval.php(20): activate_plugin('flip-boxes/flip...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-installDate', '2025-04-09 11:45:58', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_flip-boxes/flipboxes.php'), WP_Hook->do_action, WP_Hook->apply_filters, CflipBoxes::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-ratingDiv', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Flip-Boxes-ratingDiv' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('Flip-Boxes-rati...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/flip-boxes/flipboxes.php(88): update_option('Flip-Boxes-rati...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CflipBoxes::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_flip-b...', false)
-#10 /internal/eval.php(20): activate_plugin('flip-boxes/flip...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Flip-Boxes-ratingDiv', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_flip-boxes/flipboxes.php'), WP_Hook->do_action, WP_Hook->apply_filters, CflipBoxes::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:59 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:59 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:59 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:59 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:47:12 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:47:12 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:47:12 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:47:12 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:47:42 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "Funny_photos_TITLE" in /wordpress/wp-content/plugins/funny-photos/funny-photos.php:11
+Error: [11-Apr-2025 01:49:30 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('funny-photos/fu...')
-#2 /internal/eval.php(20): activate_plugin('funny-photos/fu...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/funny-photos/funny-photos.php on line 11
-[09-Apr-2025 11:47:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "Funny_photos_TITLE" in /wordpress/wp-content/plugins/funny-photos/funny-photos.php:11
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 01:49:39 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('funny-photos/fu...')
-#2 /internal/eval.php(20): activate_plugin('funny-photos/fu...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/funny-photos/funny-photos.php on line 11
-[09-Apr-2025 11:47:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "Funny_photos_TITLE" in /wordpress/wp-content/plugins/funny-photos/funny-photos.php:11
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 01:49:48 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('funny-photos/fu...')
-#2 /internal/eval.php(20): activate_plugin('funny-photos/fu...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/funny-photos/funny-photos.php on line 11
-[09-Apr-2025 11:48:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:48:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:48:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 01:50:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:50:58 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:50:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:50:58 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:50:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select `auto_refresh` from `wp_dfp_group` limit 1</p>
+<p>DESC </p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `auto_refresh` from `wp_dfp_group` limit 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: auto_refresh
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('select `auto_re...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('select `auto_re...')
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(629): WP_SQLite_DB->query('select `auto_re...')
-#4 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#5 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query select `auto_refresh` from `wp_dfp_group` limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DESC ')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DESC ')
+#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#4 /wordpress/wp-content/plugins/favatars/favatars.php(115): wpdb->get_col('DESC ', 0)
+#5 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#8 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#9 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:50:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists `wp_dfp_group` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`name` varchar(30),
-					`showname` varchar(50),
-					`dirpath` varchar(4000),
-					`restricted` tinyint not null default 0,
-					primary key (`id`)
-				)</p>
+<p>ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, , comment_favicon_url, 1, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table '' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table '' doesn'...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `` ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `` ...')
+#3 /wordpress/wp-content/plugins/favatars/favatars.php(121): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#4 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#7 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#8 {main}</pre>
+ for query ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:50:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DESC ')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DESC ')
+#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#4 /wordpress/wp-content/plugins/favatars/favatars.php(124): wpdb->get_col('DESC ', 0)
+#5 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#8 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#9 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:07 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:07 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:07 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:07 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -235,139 +143,49 @@ SQLSTATE[HY000]: General error: 1 no such column: auto_refresh
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(625): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query create table if not exists `wp_dfp_group` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`name` varchar(30),
-					`showname` varchar(50),
-					`dirpath` varchar(4000),
-					`restricted` tinyint not null default 0,
-					primary key (`id`)
-				) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(115): wpdb->get_col('DESC ', 0)
+#3 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#6 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#7 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists `wp_dfp_files` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`dfp_group_id` int(11),
-					`filepath` varchar(4000),
-					`descr` varchar(4000),
-					primary key (`id`)
-				)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(626): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query create table if not exists `wp_dfp_files` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`dfp_group_id` int(11),
-					`filepath` varchar(4000),
-					`descr` varchar(4000),
-					primary key (`id`)
-				) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select `auto_refresh` from `wp_dfp_group` limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `auto_refresh` from `wp_dfp_group` limit 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dfp_group.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(629): WP_SQLite_DB->query('select `auto_re...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query select `auto_refresh` from `wp_dfp_group` limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_dfp_group` add `auto_refresh` tinyint not null default 1</p>
+<p>ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_dfp_group, `AUTO_REFRESH`, tinyint</li>
-<li>Executing: ALTER TABLE wp_dfp_group add `auto_refresh` integer not null default 1 | (no parameters)</li>
+			 | parameters: , `COMMENT_FAVICON_URL`, text</li>
+<li>Executing: ALTER TABLE  ADD `comment_favicon_url` text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dfp_group.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ADD": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(631): WP_SQLite_DB->query('alter table `wp...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query alter table `wp_dfp_group` add `auto_refresh` tinyint not null default 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/favatars/favatars.php(121): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#5 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#6 {main}</pre>
+ for query ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists `wp_dfp_group` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`name` varchar(30),
-					`showname` varchar(50),
-					`dirpath` varchar(4000),
-					`restricted` tinyint not null default 0,
-					primary key (`id`)
-				)</p>
+<p>DESC </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -375,39 +193,26 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(625): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query create table if not exists `wp_dfp_group` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`name` varchar(30),
-					`showname` varchar(50),
-					`dirpath` varchar(4000),
-					`restricted` tinyint not null default 0,
-					primary key (`id`)
-				) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(124): wpdb->get_col('DESC ', 0)
+#3 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#6 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#7 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:15 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:15 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:15 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:15 UTC] PHP Warning:  Attempt to read property "comments" on null in /wordpress/wp-content/plugins/favatars/favatars.php on line 14
+[11-Apr-2025 01:51:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists `wp_dfp_files` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`dfp_group_id` int(11),
-					`filepath` varchar(4000),
-					`descr` varchar(4000),
-					primary key (`id`)
-				)</p>
+<p>DESC </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -415,291 +220,191 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(626): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query create table if not exists `wp_dfp_files` (
-					`id` int(11) unsigned NOT NULL auto_increment,
-					`dfp_group_id` int(11),
-					`filepath` varchar(4000),
-					`descr` varchar(4000),
-					primary key (`id`)
-				) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(115): wpdb->get_col('DESC ', 0)
+#3 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#6 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#7 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select `auto_refresh` from `wp_dfp_group` limit 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select `auto_refresh` from `wp_dfp_group` limit 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dfp_group.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(629): WP_SQLite_DB->query('select `auto_re...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query select `auto_refresh` from `wp_dfp_group` limit 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:48:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table `wp_dfp_group` add `auto_refresh` tinyint not null default 1</p>
+<p>ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_dfp_group, `AUTO_REFRESH`, tinyint</li>
-<li>Executing: ALTER TABLE wp_dfp_group add `auto_refresh` integer not null default 1 | (no parameters)</li>
+			 | parameters: , `COMMENT_FAVICON_URL`, text</li>
+<li>Executing: ALTER TABLE  ADD `comment_favicon_url` text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dfp_group.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ADD": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/file-provider/file-provider.php(631): WP_SQLite_DB->query('alter table `wp...')
-#2 /wordpress/wp-content/plugins/file-provider/file-provider.php(38): DimdavidFileProvider->check_database()
-#3 /wordpress/wp-content/plugins/file-provider/file-provider.php(72): DimdavidFileProvider->__construct()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): DimdavidFileProvider::get_instance('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query alter table `wp_dfp_group` add `auto_refresh` tinyint not null default 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DimdavidFileProvider::get_instance, DimdavidFileProvider->__construct, DimdavidFileProvider->check_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:49:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/favatars/favatars.php(121): WP_SQLite_DB->query('ALTER TABLE `` ...')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#5 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#6 {main}</pre>
+ for query ALTER TABLE `` ADD `comment_favicon_url` TEXT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:51:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_sls_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>DESC </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_sls_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_sls_widg...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_sls_widg...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_sls_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:49:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('milos_1_2', 'a:11:{s:14:\"active_buttons\";a:6:{s:8:\"facebook\";b:0;s:7:\"twitter\";b:1;s:4:\"buzz\";b:0;s:13:\"facebook_like\";b:1;s:5:\"hyves\";b:0;s:7:\"google1\";b:0;}s:8:\"position\";s:5:\"above\";s:7:\"show_in\";a:8:{s:5:\"posts\";b:1;s:5:\"pages\";b:1;s:9:\"home_page\";b:1;s:4:\"tags\";b:1;s:10:\"categories\";b:1;s:5:\"dates\";b:1;s:7:\"authors\";b:1;s:6:\"search\";b:1;}s:18:\"facebook_like_text\";s:4:\"like\";s:18:\"facebook_like_send\";b:0;s:19:\"facebook_like_width\";s:3:\"100\";s:13:\"google1_count\";b:1;s:13:\"google1_width\";s:2:\"90\";s:13:\"twitter_count\";b:1;s:12:\"twitter_text\";s:0:\"\";s:13:\"twitter_width\";s:3:\"110\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'milos_1_2' , 'a:11:{s:14:&quot;active_buttons&quot;;a:6:{s:8:&quot;facebook&quot;;b:0;s:7:&quot;twitter&quot;;b:1;s:4:&quot;buzz&quot;;b:0;s:13:&quot;facebook_like&quot;;b:1;s:5:&quot;hyves&quot;;b:0;s:7:&quot;google1&quot;;b:0;}s:8:&quot;position&quot;;s:5:&quot;above&quot;;s:7:&quot;show_in&quot;;a:8:{s:5:&quot;posts&quot;;b:1;s:5:&quot;pages&quot;;b:1;s:9:&quot;home_page&quot;;b:1;s:4:&quot;tags&quot;;b:1;s:10:&quot;categories&quot;;b:1;s:5:&quot;dates&quot;;b:1;s:7:&quot;authors&quot;;b:1;s:6:&quot;search&quot;;b:1;}s:18:&quot;facebook_like_text&quot;;s:4:&quot;like&quot;;s:18:&quot;facebook_like_send&quot;;b:0;s:19:&quot;facebook_like_width&quot;;s:3:&quot;100&quot;;s:13:&quot;google1_count&quot;;b:1;s:13:&quot;google1_width&quot;;s:2:&quot;90&quot;;s:13:&quot;twitter_count&quot;;b:1;s:12:&quot;twitter_text&quot;;s:0:&quot;&quot;;s:13:&quot;twitter_width&quot;;s:3:&quot;110&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/facebook-like-and-sharetwittergoogle-1google-buzz-buttons-new/facebook-google.php(475): add_option('milos_1_2', Array)
-#5 /wordpress/wp-content/plugins/facebook-like-and-sharetwittergoogle-1google-buzz-buttons-new/facebook-google.php(46): milos_1_2_get_options_stored()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): milos_1_2_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('milos_1_2', 'a:11:{s:14:\"active_buttons\";a:6:{s:8:\"facebook\";b:0;s:7:\"twitter\";b:1;s:4:\"buzz\";b:0;s:13:\"facebook_like\";b:1;s:5:\"hyves\";b:0;s:7:\"google1\";b:0;}s:8:\"position\";s:5:\"above\";s:7:\"show_in\";a:8:{s:5:\"posts\";b:1;s:5:\"pages\";b:1;s:9:\"home_page\";b:1;s:4:\"tags\";b:1;s:10:\"categories\";b:1;s:5:\"dates\";b:1;s:7:\"authors\";b:1;s:6:\"search\";b:1;}s:18:\"facebook_like_text\";s:4:\"like\";s:18:\"facebook_like_send\";b:0;s:19:\"facebook_like_width\";s:3:\"100\";s:13:\"google1_count\";b:1;s:13:\"google1_width\";s:2:\"90\";s:13:\"twitter_count\";b:1;s:12:\"twitter_text\";s:0:\"\";s:13:\"twitter_width\";s:3:\"110\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, milos_1_2_init, milos_1_2_get_options_stored, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'sY!/F/1Q]EcLWCp*G$T.Mu$9m5XD6#R 2AVRhcJG^-HEM05BQl)-7P].|I8-xG.;', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'sY!/F/1Q]EcLWCp*G$T.Mu$9m5XD6#R 2AVRhcJG^-HEM05BQl)-7P].|I8-xG.;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'sY!/F/1Q]EcLWCp...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'sY!/F/1Q]EcLWCp...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'sY!/F/1Q]EcLWCp...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'sY!/F/1Q]EcLWCp...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/facebook-like-and-sharetwittergoogle-1google-buzz-buttons-new/facebook-google.php(58): wp_enqueue_script('milos_1_2_twitt...', 'http://platform...')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): milos_1_2_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'sY!/F/1Q]EcLWCp*G$T.Mu$9m5XD6#R 2AVRhcJG^-HEM05BQl)-7P].|I8-xG.;', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, milos_1_2_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '357C4voI [8b1KCU,cW]~Cj(|4PLXjQW:;sko(7Za`50s.?RU iTDJd_75ik-?&G', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '357C4voI [8b1KCU,cW]~Cj(|4PLXjQW:;sko(7Za`50s.?RU iTDJd_75ik-?&amp;G' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '357C4voI [8b1KC...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '357C4voI [8b1KC...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '357C4voI [8b1KC...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '357C4voI [8b1KC...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/facebook-like-and-sharetwittergoogle-1google-buzz-buttons-new/facebook-google.php(58): wp_enqueue_script('milos_1_2_twitt...', 'http://platform...')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): milos_1_2_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '357C4voI [8b1KCU,cW]~Cj(|4PLXjQW:;sko(7Za`50s.?RU iTDJd_75ik-?&G', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, milos_1_2_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 21
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
-[09-Apr-2025 11:50:03 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_functions.php on line 54
-[09-Apr-2025 1
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC ')
+#2 /wordpress/wp-content/plugins/favatars/favatars.php(124): wpdb->get_col('DESC ', 0)
+#3 /wordpress/wp-content/plugins/favatars/favatars.php(14): fav_maybe_add_column(NULL, 'comment_favicon...', 'ALTER TABLE `` ...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('favatars/favata...')
+#6 /internal/eval.php(20): activate_plugin('favatars/favata...')
+#7 {main}</pre>
+ for query DESC  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/favatars/favatars.php'), fav_maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 01:52:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "THIS_PLUGIN_NAME" in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php:27
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fotomoto-album-...')
+#2 /internal/eval.php(20): activate_plugin('fotomoto-album-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php on line 27
+[11-Apr-2025 01:52:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "THIS_PLUGIN_NAME" in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php:27
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fotomoto-album-...')
+#2 /internal/eval.php(20): activate_plugin('fotomoto-album-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php on line 27
+[11-Apr-2025 01:52:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "THIS_PLUGIN_NAME" in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php:27
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fotomoto-album-...')
+#2 /internal/eval.php(20): activate_plugin('fotomoto-album-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/fotomoto-album-connect/fotomoto_album_connect.php on line 27
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:53:55 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 01:53:55 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/fairplayer-sms-gateway/fairplayer-sms-gateway.php(44): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fairplayer-sms-...')
+#6 /internal/eval.php(20): activate_plugin('fairplayer-sms-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php on line 29
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:04 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 01:54:04 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/fairplayer-sms-gateway/fairplayer-sms-gateway.php(44): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fairplayer-sms-...')
+#6 /internal/eval.php(20): activate_plugin('fairplayer-sms-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php on line 29
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_cdn.php on line 100
+[11-Apr-2025 01:54:13 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 01:54:13 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "admin_notices" on null in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php:29
+Stack trace:
+#0 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(47): Redux_Filesystem->__construct()
+#1 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php(285): Redux_Filesystem::get_instance()
+#2 /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/framework.php(51): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-content/plugins/fairplayer-sms-gateway/fairplayer-sms-gateway.php(44): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fairplayer-sms-...')
+#6 /internal/eval.php(20): activate_plugin('fairplayer-sms-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/fairplayer-sms-gateway/admin/redux-framework/ReduxCore/inc/class.redux_filesystem.php on line 29
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"fairplayer-sms-gateway"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
