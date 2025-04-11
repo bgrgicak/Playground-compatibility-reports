@@ -2,1189 +2,853 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 18:35:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 02:20:06 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/d4rss/d4rss.php on line 217
+[11-Apr-2025 02:20:14 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/d4rss/d4rss.php on line 217
+[11-Apr-2025 02:20:21 UTC] PHP Parse error:  syntax error, unexpected token "&", expecting ")" in /wordpress/wp-content/plugins/d4rss/d4rss.php on line 217
+[11-Apr-2025 02:22:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rd_dynamic_404_page', '-1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Dashboard'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Dashboard')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Dashboard'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Services'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Services')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Services'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Orders'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Orders')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Orders'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Thank You'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Thank You')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Thank You'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Order'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Single Order')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Order'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Invoices'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Invoices')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Invoices'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Invoice'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Single Invoice')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Invoice'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Generate Invoice'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Generate Invoic...')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Generate Invoice'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Profile'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Profile')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Profile'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Cart'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Cart')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Cart'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Payment'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Payment')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Payment'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Payment Processor'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Payment Process...')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Payment Processor'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Checkout'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Checkout')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Checkout'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Login'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Login')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Login'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Register'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Register')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Register'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Forgot Password'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID\n     ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID\n     ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Forgot Password')
+#6 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#7 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#12 /internal/eval.php(20): activate_plugin('digital-service...')
+#13 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Forgot Password'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Dashboard'
+                AND post_type = 'page'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rd_dynamic_404_page' , '-1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Dashboard, page</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('rd_dynamic_404_...', -1, '', 'auto')
-#5 /wordpress/wp-content/plugins/dynamic-404-page/Dynamic_404.php(48): update_option('rd_dynamic_404_...', -1)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): rd_dynamic_set_option(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Dashboard')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dynami...', false)
-#10 /internal/eval.php(20): activate_plugin('dynamic-404-pag...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rd_dynamic_404_page', '-1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_dynamic-404-page/Dynamic_404.php'), WP_Hook->do_action, WP_Hook->apply_filters, rd_dynamic_set_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DAKNETCORP_FILTERED_POST" in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category.php(11): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('daknetcorp-auto...')
-#3 /internal/eval.php(20): activate_plugin('daknetcorp-auto...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php on line 3
-[09-Apr-2025 18:36:18 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DAKNETCORP_FILTERED_POST" in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category.php(11): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('daknetcorp-auto...')
-#3 /internal/eval.php(20): activate_plugin('daknetcorp-auto...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php on line 3
-[09-Apr-2025 18:36:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DAKNETCORP_FILTERED_POST" in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category.php(11): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('daknetcorp-auto...')
-#3 /internal/eval.php(20): activate_plugin('daknetcorp-auto...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/daknetcorp-auto-tag-category/daknetcorp-auto-tag-category-admin.php on line 3
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:36 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('DfrAds_Widget')
-#2 /wordpress/wp-content/plugins/datafeedr-ads/datafeedr-ads.php(414): register_widget('DfrAds_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): example_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 18:36:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('DfrAds_Widget')
-#2 /wordpress/wp-content/plugins/datafeedr-ads/datafeedr-ads.php(414): register_widget('DfrAds_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): example_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 18:36:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('DfrAds_Widget')
-#2 /wordpress/wp-content/plugins/datafeedr-ads/datafeedr-ads.php(414): register_widget('DfrAds_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): example_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 18:37:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:37:31 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:37:58 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:37:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Dashboard'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_status', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Services'
+                AND post_type = 'page'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'diag_status' , 'disabled' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Services, page</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php(24): add_option('diag_status', 'disabled', 'If Diagonal Ban...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('diagonal-advert...')
-#7 /internal/eval.php(20): activate_plugin('diagonal-advert...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_status', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_project', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'diag_project' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php(25): add_option('diag_project', '0', 'Your Diagonal B...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('diagonal-advert...')
-#7 /internal/eval.php(20): activate_plugin('diagonal-advert...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_project', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:38:00 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:38:00 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_status', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'diag_status' , 'disabled' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php(24): add_option('diag_status', 'disabled', 'If Diagonal Ban...')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_status', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_project', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'diag_project' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php(25): add_option('diag_project', '0', 'Your Diagonal B...')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('diag_project', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:38:08 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:38:08 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:38:09 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:38:09 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:38:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:38:17 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 12
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 13
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 16
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 17
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 19
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 20
-[09-Apr-2025 18:38:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/diagonal-advertising-banner-plugin/diagonalbanner.php on line 21
-[09-Apr-2025 18:38:18 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 18:39:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:39:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:39:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:39:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:39:55 UTC] PHP Fatal error:  Declaration of domaincheck\widget\DomainCheckWidget::form(array $instance) must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/domaincheck/src/widget/DomainCheckWidget.php on line 63
-[09-Apr-2025 18:40:03 UTC] PHP Fatal error:  Declaration of domaincheck\widget\DomainCheckWidget::form(array $instance) must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/domaincheck/src/widget/DomainCheckWidget.php on line 63
-[09-Apr-2025 18:40:11 UTC] PHP Fatal error:  Declaration of domaincheck\widget\DomainCheckWidget::form(array $instance) must be compatible with WP_Widget::form($instance) in /wordpress/wp-content/plugins/domaincheck/src/widget/DomainCheckWidget.php on line 63
-[09-Apr-2025 18:40:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:40:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:40:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:40:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_return_email', 'noreply@127.0.0.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_return_email' , 'noreply@127.0.0.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(128): add_option('bq_download_ret...', 'noreply@127.0.0...')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(42): BQDownloadUtil::bq_add_option('bq_download_ret...', 'noreply@127.0.0...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Services')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_return_email', 'noreply@127.0.0.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadUtil::bq_add_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(128): add_option('bq_download_db_...', '1.0')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(66): BQDownloadUtil::bq_add_option('bq_download_db_...', '1.0', 1)
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_add_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.1', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.1')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.1', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.2')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.2', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.3')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.3', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.4', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.4')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.4', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.5' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.5', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.5')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.5', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.6', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.6' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.6', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.6')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.6', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.6', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.7', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.7' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.7', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.7')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.7', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.7', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.8' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.8', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.8')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.8', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.9' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.9', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.9')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.9', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.10', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.10')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.10', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.11')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.11', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.12', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.12' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.12', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.12')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.12', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.12', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.13', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.13' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.13', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.13')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.13', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.13', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'bq_download_db_version' , '1.14' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('bq_download_db_...', '1.14', '', 'auto')
-#5 /wordpress/wp-content/plugins/download-manager-ms/bq-download-util.php(139): update_option('bq_download_db_...', '1.14')
-#6 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(68): BQDownloadUtil::bq_update_option('bq_download_db_...', '1.14', 1)
-#7 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('bq_download_db_version', '1.14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, BQDownloadUtil::bq_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table if not exists `bq_download_file` (`id` int primary key auto_increment, `name` varchar(128) unique not null)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(57): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query create table if not exists `bq_download_file` (`id` int primary key auto_increment, `name` varchar(128) unique not null) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select count(id) from bq_download_file where deleted = false and isnull(blog_id)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select count(id) from bq_download_file where deleted = false and isnull(blog_id) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "isnull": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('select count(id...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(331): wpdb->get_var('select count(id...')
-#3 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(67): BQDownloadModel::get_file_count()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
 #11 {main}</pre>
- for query select count(id) from bq_download_file where deleted = false and isnull(blog_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_init, BQDownloadModel::get_file_count, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Services'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id)</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Orders'
+                AND post_type = 'page'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id) | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Orders, page</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "isnull": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('select count(di...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(618): wpdb->get_var('select count(di...')
-#3 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(68): BQDownloadModel::get_user_count()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Orders')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
 #11 {main}</pre>
- for query select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_init, BQDownloadModel::get_user_count, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Orders'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table if not exists `bq_download_file` (`id` int primary key auto_increment, `name` varchar(128) unique not null)</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Thank You'
+                AND post_type = 'page'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Thank You, page</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(57): WP_SQLite_DB->query('create table if...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(46): BQDownloadModel::update_database()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query create table if not exists `bq_download_file` (`id` int primary key auto_increment, `name` varchar(128) unique not null) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_load, BQDownloadModel::update_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>select count(id) from bq_download_file where deleted = false and isnull(blog_id)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select count(id) from bq_download_file where deleted = false and isnull(blog_id) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "isnull": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('select count(id...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(331): wpdb->get_var('select count(id...')
-#3 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(67): BQDownloadModel::get_file_count()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Thank You')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
 #11 {main}</pre>
- for query select count(id) from bq_download_file where deleted = false and isnull(blog_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_init, BQDownloadModel::get_file_count, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Thank You'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id)</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Order'
+                AND post_type = 'page'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id) | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Single Order, page</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "isnull": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('select count(di...')
-#2 /wordpress/wp-content/plugins/download-manager-ms/bq-download-model.php(618): wpdb->get_var('select count(di...')
-#3 /wordpress/wp-content/plugins/download-manager-ms/bq-download.php(68): BQDownloadModel::get_user_count()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BQDownload::on_init('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(704): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Single Order')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
 #11 {main}</pre>
- for query select count(distinct user_id) from bq_download inner join bq_download_file on bq_download_file.id = bq_download.file_id where not isnull(bq_download.user_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, BQDownload::on_init, BQDownloadModel::get_user_count, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:40:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:40:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:40:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:40:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:41:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:41:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:41:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:41:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:41:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/daily-free-kindle-books/daily-free-kindle-books.php:123
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('daily-free-kind...')
-#2 /internal/eval.php(20): activate_plugin('daily-free-kind...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/daily-free-kindle-books/daily-free-kindle-books.php on line 123
-[09-Apr-2025 18:41:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/daily-free-kindle-books/daily-free-kindle-books.php:123
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('daily-free-kind...')
-#2 /internal/eval.php(20): activate_plugin('daily-free-kind...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/daily-free-kindle-books/daily-free-kindle-books.php on line 123
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"daily-free-kindle-books"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Order'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Invoices'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Invoices, page</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Invoices')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
+#11 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Invoices'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Invoice'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Single Invoice, page</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Single Invoice')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
+#11 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Single Invoice'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Generate Invoice'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Generate Invoice, page</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT ID\n     ...')
+#2 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/menu-functions.php(38): wpdb->get_var('SELECT ID\n     ...')
+#3 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(159): dspp_get_page_by_title_custom('Generate Invoic...')
+#4 /wordpress/wp-content/plugins/digital-service-provider-crm/includes/class-spp-crm-activator.php(35): Dspp_Crm_Activator->dspp_create_pages()
+#5 /wordpress/wp-content/plugins/digital-service-provider-crm/dspp-crm.php(39): Dspp_Crm_Activator::dspp_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): dspp_activate_spp_crm(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_digita...', false)
+#10 /internal/eval.php(20): activate_plugin('digital-service...')
+#11 {main}</pre>
+ for query SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Generate Invoice'
+                AND post_type = 'page' made by activate_plugin, do_action('activate_digital-service-provider-crm/dspp-crm.php'), WP_Hook->do_action, WP_Hook->apply_filters, dspp_activate_spp_crm, Dspp_Crm_Activator::dspp_activate, Dspp_Crm_Activator->dspp_create_pages, dspp_get_page_by_title_custom, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 02:22:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID
+                FROM 'wp_posts'
+                WHERE post_title = 'Profile'
+                AND post_type = 'page'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID
+                FROM :param0 
+                WHERE post_title = :param1 
+                AND post_type = :param2  | parameters: wp_posts, Profile, page</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLit

@@ -2,497 +2,70 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 18:35:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:35:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:36:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:36:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:36:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_sgi_dpw_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_sgi_dpw_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_sgi_dpw_...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_sgi_dpw_...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_sgi_dpw_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:36:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:37:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php:409
+Error: [11-Apr-2025 02:21:34 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/delivery-woo/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 02:21:35 UTC] Automatic updates starting...
+[11-Apr-2025 02:21:45 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/delivery-woo/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 02:21:57 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/delivery-woo/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 02:23:09 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPZpbwComments::GetInstance() cannot be called statically in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php:34
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('degree3-qa/degr...')
-#2 /internal/eval.php(20): activate_plugin('degree3-qa/degr...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php on line 409
-[09-Apr-2025 18:37:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php:409
+#0 /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php(50): wp_zpbw_comments_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discussit-comme...')
+#3 /internal/eval.php(20): activate_plugin('discussit-comme...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php on line 34
+[11-Apr-2025 02:23:17 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPZpbwComments::GetInstance() cannot be called statically in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php:34
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('degree3-qa/degr...')
-#2 /internal/eval.php(20): activate_plugin('degree3-qa/degr...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php on line 409
-[09-Apr-2025 18:37:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php:409
+#0 /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php(50): wp_zpbw_comments_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discussit-comme...')
+#3 /internal/eval.php(20): activate_plugin('discussit-comme...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php on line 34
+[11-Apr-2025 02:23:25 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPZpbwComments::GetInstance() cannot be called statically in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php:34
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('degree3-qa/degr...')
-#2 /internal/eval.php(20): activate_plugin('degree3-qa/degr...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/degree3-qa/degree3qna.php on line 409
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":2:{s:7:\"plugins\";a:1:{s:35:\"demomentsomtres-categories/freemius\";O:8:\"stdClass\":3:{s:7:\"version\";s:5:\"1.2.1\";s:9:\"timestamp\";i:1744223850;s:11:\"plugin_path\";s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";}}s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:8:\"sdk_path\";s:35:\"demomentsomtres-categories/freemius\";s:7:\"version\";s:5:\"1.2.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744223850;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:2:{s:7:&quot;plugins&quot;;a:1:{s:35:&quot;demomentsomtres-categories/freemius&quot;;O:8:&quot;stdClass&quot;:3:{s:7:&quot;version&quot;;s:5:&quot;1.2.1&quot;;s:9:&quot;timestamp&quot;;i:1744223850;s:11:&quot;plugin_path&quot;;s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;}}s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:8:&quot;sdk_path&quot;;s:35:&quot;demomentsomtres-categories/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;1.2.1&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744223850;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/fs-essential-functions.php(313): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(69): fs_update_sdk_newest_version('demomentsomtres...', 'demomentsomtres...')
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#11 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":2:{s:7:\"plugins\";a:1:{s:35:\"demomentsomtres-categories/freemius\";O:8:\"stdClass\":3:{s:7:\"version\";s:5:\"1.2.1\";s:9:\"timestamp\";i:1744223850;s:11:\"plugin_path\";s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";}}s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:8:\"sdk_path\";s:35:\"demomentsomtres-categories/freemius\";s:7:\"version\";s:5:\"1.2.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744223850;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, require_once('/plugins/demomentsomtres-categories/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/config.php(271): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(264): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(19): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#11 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, require_once('/plugins/demomentsomtres-categories/freemius/start.php'), require_once('/plugins/demomentsomtres-categories/freemius/require.php'), require_once('/plugins/demomentsomtres-categories/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-fs-logger.php on line 97
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(625): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(269): Freemius->_find_caller_plugin_file(true)
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(4613): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(286): Freemius->store_file_slug_map()
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#15 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('install_timesta...', 1744223850)
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(290): FS_Key_Value_Storage->__set('install_timesta...', 1744223850)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#16 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(320): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(310): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;1.2.1&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('sdk_version', '1.2.1')
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(321): FS_Key_Value_Storage->__set('sdk_version', '1.2.1')
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(310): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;1.2.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(326): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(310): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;1.2.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(327): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(310): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/demomentsomtres-categories/demomentsomtres-categories.php'), dms3categories_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"1.2.1\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:57:\"demomentsomtres-categories/demomentsomtres-categories.php\";s:26:\"demomentsomtres-categories\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:11:&quot;plugin_data&quot;;a:1:{s:26:&quot;demomentsomtres-categories&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:87:&quot;/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744223850;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;1.2.1&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:57:&quot;demomentsomtres-categories/demomentsomtres-categories.php&quot;;s:26:&quot;demomentsomtres-categories&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(296): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-option-manager.php(244): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(136): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/managers/class-fs-key-value-storage.php(220): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(340): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(310): Freemius->_version_updates_handler()
-#11 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/includes/class-freemius.php(906): Freemius->__construct('demomentsomtres...', true)
-#12 /wordpress/wp-content/plugins/demomentsomtres-categories/freemius/start.php(303): Freemius::instance('demomentsomtres...', true)
-#13 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(22): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php(42): dms3categories_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('demomentsomtres...')
-#17 /internal/eval.php(20): activate_plugin('demomentsomtres...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:11:\"plugin_data\";a:1:{s:26:\"demomentsomtres-categories\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:87:\"/wordpress/wp-content/plugins/demomentsomtres-categories/demomentsomtres-categories.php\";}s:17:\"install_timestamp\";i:1744223850;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5
+#0 /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php(50): wp_zpbw_comments_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('discussit-comme...')
+#3 /internal/eval.php(20): activate_plugin('discussit-comme...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discussit-comments/wp_zpbw_comments.php on line 34
+[11-Apr-2025 02:24:06 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/dokuwiki-markup/utf8.php on line 51
+[11-Apr-2025 02:24:14 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/dokuwiki-markup/utf8.php on line 51
+[11-Apr-2025 02:24:23 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/dokuwiki-markup/utf8.php on line 51
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"dokuwiki-markup"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
