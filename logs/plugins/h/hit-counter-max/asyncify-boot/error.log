@@ -2,502 +2,203 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 18:36:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:36:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:36:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:36:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:31 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:36:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:36:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:36:31 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:36:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'PYVl-6A`^a%C}pfES;fxu~:7`98fdyg>gs:a_Yv55u`Jdc9ejkg-cc~F YKY*lLg', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'PYVl-6A`^a%C}pfES;fxu~:7`98fdyg&gt;gs:a_Yv55u`Jdc9ejkg-cc~F YKY*lLg' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'PYVl-6A`^a%C}pf...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'PYVl-6A`^a%C}pf...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'PYVl-6A`^a%C}pf...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'PYVl-6A`^a%C}pf...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/html-block-with-highlighting/index.php(23): wp_register_script('html-block-with...', 'http://127.0.0....', Array, '27594635ed44a0f...')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): html_block_with_highlighting_register_block('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'PYVl-6A`^a%C}pfES;fxu~:7`98fdyg>gs:a_Yv55u`Jdc9ejkg-cc~F YKY*lLg', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, html_block_with_highlighting_register_block, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:36:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'mKU]~#s;P?~53V},HvL>V-,q}gi>gs: _bbF4.<.NXp5f+WK+e#E+hk[RVZay8#_', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'mKU]~#s;P?~53V},HvL&gt;V-,q}gi&gt;gs: _bbF4.&lt;.NXp5f+WK+e#E+hk[RVZay8#_' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'mKU]~#s;P?~53V}...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'mKU]~#s;P?~53V}...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'mKU]~#s;P?~53V}...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'mKU]~#s;P?~53V}...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/html-block-with-highlighting/index.php(23): wp_register_script('html-block-with...', 'http://127.0.0....', Array, '27594635ed44a0f...')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): html_block_with_highlighting_register_block('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'mKU]~#s;P?~53V},HvL>V-,q}gi>gs: _bbF4.<.NXp5f+WK+e#E+hk[RVZay8#_', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, html_block_with_highlighting_register_block, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:37:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:37:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:37:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:37:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:37:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:37:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:39:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('htp-smtp', 'a:10:{s:4:\"from\";s:19:\"admin@localhost.com\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:9:\"smtp_host\";s:0:\"\";s:11:\"smtp_secure\";s:3:\"tls\";s:9:\"smtp_port\";i:587;s:9:\"smtp_auth\";s:3:\"yes\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";s:4:\"html\";s:3:\"yes\";s:14:\"delete_options\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'htp-smtp' , 'a:10:{s:4:&quot;from&quot;;s:19:&quot;admin@localhost.com&quot;;s:9:&quot;from_name&quot;;s:20:&quot;My WordPress Website&quot;;s:9:&quot;smtp_host&quot;;s:0:&quot;&quot;;s:11:&quot;smtp_secure&quot;;s:3:&quot;tls&quot;;s:9:&quot;smtp_port&quot;;i:587;s:9:&quot;smtp_auth&quot;;s:3:&quot;yes&quot;;s:8:&quot;username&quot;;s:0:&quot;&quot;;s:8:&quot;password&quot;;s:0:&quot;&quot;;s:4:&quot;html&quot;;s:3:&quot;yes&quot;;s:14:&quot;delete_options&quot;;s:3:&quot;yes&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('htp-smtp', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/htp-smtp/inc/Setup.php(61): update_option('htp-smtp', Array)
-#6 /wordpress/wp-content/plugins/htp-smtp/inc/Setup.php(11): HTP_SMTP\Setup::default_settings()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): HTP_SMTP\Setup::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_htp-sm...', false)
-#11 /internal/eval.php(20): activate_plugin('htp-smtp/htp-sm...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('htp-smtp', 'a:10:{s:4:\"from\";s:19:\"admin@localhost.com\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:9:\"smtp_host\";s:0:\"\";s:11:\"smtp_secure\";s:3:\"tls\";s:9:\"smtp_port\";i:587;s:9:\"smtp_auth\";s:3:\"yes\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";s:4:\"html\";s:3:\"yes\";s:14:\"delete_options\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_htp-smtp/htp-smtp.php'), WP_Hook->do_action, WP_Hook->apply_filters, HTP_SMTP\Setup::install, HTP_SMTP\Setup::default_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:39:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:39:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:39:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:39:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:39:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:40:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:40:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:40:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:40:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:40:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:40:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:40:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:40:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:41:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:41:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:41:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:41:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:41:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:41:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:41:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:41:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:42:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:42:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:42:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:42:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:42:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:42:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:42:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:42:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'happycaptcha_options' , 'a:16:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:21:&quot;HappyCaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:2:&quot;bg&quot;;N;s:2:&quot;fg&quot;;N;s:17:&quot;no_response_error&quot;;s:61:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the HappyCaptcha form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:65:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That HappyCaptcha response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/happycaptcha/wp-plugin.php(111): add_option('happycaptcha_op...', Array)
-#5 /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php(155): WPPlugin::add_options('happycaptcha_op...', Array)
-#6 /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php(20): HappyCaptcha->register_default_options()
-#7 /wordpress/wp-content/plugins/happycaptcha/wp-happycaptcha.php(18): HappyCaptcha->__construct('happycaptcha_op...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('happycaptcha/wp...')
-#10 /internal/eval.php(20): activate_plugin('happycaptcha/wp...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/happycaptcha/wp-happycaptcha.php'), HappyCaptcha->__construct, HappyCaptcha->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 36
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 44
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 53
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 73
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'happycaptcha_options' , 'a:16:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:21:&quot;HappyCaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:2:&quot;bg&quot;;N;s:2:&quot;fg&quot;;N;s:17:&quot;no_response_error&quot;;s:61:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the HappyCaptcha form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:65:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That HappyCaptcha response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/happycaptcha/wp-plugin.php(111): add_option('happycaptcha_op...', Array)
-#5 /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php(155): WPPlugin::add_options('happycaptcha_op...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): HappyCaptcha->register_default_options(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 07:46:03 UTC] PHP Fatal error:  Uncaught Error: Non-static method HMG::cleanOptions() cannot be called statically in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php:54
+Stack trace:
+#0 /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php(271): _HOWTOTIPS->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hmg-how-to-tips...')
+#3 /internal/eval.php(20): activate_plugin('hmg-how-to-tips...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php on line 54
+[11-Apr-2025 07:46:12 UTC] PHP Fatal error:  Uncaught Error: Non-static method HMG::cleanOptions() cannot be called statically in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php:54
+Stack trace:
+#0 /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php(271): _HOWTOTIPS->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hmg-how-to-tips...')
+#3 /internal/eval.php(20): activate_plugin('hmg-how-to-tips...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php on line 54
+[11-Apr-2025 07:46:19 UTC] PHP Fatal error:  Uncaught Error: Non-static method HMG::cleanOptions() cannot be called statically in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php:54
+Stack trace:
+#0 /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php(271): _HOWTOTIPS->__construct()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hmg-how-to-tips...')
+#3 /internal/eval.php(20): activate_plugin('hmg-how-to-tips...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/hmg-how-to-tips/hmg-how-to-tips.php on line 54
+[11-Apr-2025 07:47:49 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744357666.852)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_happyc...', false)
-#10 /internal/eval.php(20): activate_plugin('happycaptcha/wp...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_happycaptcha/wp-happycaptcha.php'), WP_Hook->do_action, WP_Hook->apply_filters, HappyCaptcha->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:43:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 07:51:50 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 45
+[11-Apr-2025 07:51:50 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 46
+[11-Apr-2025 07:51:59 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 45
+[11-Apr-2025 07:51:59 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 46
+[11-Apr-2025 07:52:08 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 45
+[11-Apr-2025 07:52:08 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/hatena-bookmark-comment/hatena-bookmark-comment.php on line 46
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 33
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 34
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/heypublisher-sub-mgr.php on line 235
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:54:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/HeyPublisherXML/HeyPublisherXML.class.php on line 58
+[11-Apr-2025 07:54:56 UTC] PHP Warning:  Attempt to read property "query_vars" on null in /wordpress/wp-includes/template.php on line 781
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 33
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 34
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/heypublisher-sub-mgr.php on line 235
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/HeyPublisherXML/HeyPublisherXML.class.php on line 58
+[11-Apr-2025 07:55:04 UTC] PHP Warning:  Attempt to read property "query_vars" on null in /wordpress/wp-includes/template.php on line 781
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 33
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 34
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/heypublisher-sub-mgr.php on line 235
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "city" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "state" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "zipcode" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "country" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 75
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "simu_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "multi_subs" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Undefined array key "turn_off_tidy" in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/classes/HeyPublisher/Config.class.php on line 88
+[11-Apr-2025 07:55:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/heypublisher-submission-manager/include/HeyPublisherXML/HeyPublisherXML.class.php on line 58
+[11-Apr-2025 07:55:14 UTC] PHP Warning:  Attempt to read property "query_vars" on null in /wordpress/wp-includes/template.php on line 781
+[11-Apr-2025 07:57:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'happycaptcha_options' , 'a:16:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:21:&quot;HappyCaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:2:&quot;bg&quot;;N;s:2:&quot;fg&quot;;N;s:17:&quot;no_response_error&quot;;s:61:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the HappyCaptcha form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:65:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That HappyCaptcha response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `hitcounter` , `imagename` , `flag` FROM `wp_imagecounter` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/happycaptcha/wp-plugin.php(111): add_option('happycaptcha_op...', Array)
-#5 /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php(155): WPPlugin::add_options('happycaptcha_op...', Array)
-#6 /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php(20): HappyCaptcha->register_default_options()
-#7 /wordpress/wp-content/plugins/happycaptcha/wp-happycaptcha.php(18): HappyCaptcha->__construct('happycaptcha_op...')
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('happycaptcha_options', 'a:16:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:21:\"HappyCaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:2:\"bg\";N;s:2:\"fg\";N;s:17:\"no_response_error\";s:61:\"<strong>ERROR</strong>: Please fill in the HappyCaptcha form.\";s:24:\"incorrect_response_error\";s:65:\"<strong>ERROR</strong>: That HappyCaptcha response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/happycaptcha/wp-happycaptcha.php'), HappyCaptcha->__construct, HappyCaptcha->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 36
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 44
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 53
-[09-Apr-2025 18:43:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 73
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 36
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 44
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 53
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 73
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 36
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 44
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 53
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 73
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 146
-[09-Apr-2025 18:43:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/happycaptcha/happycaptcha.php on line 147
-[09-Apr-2025 18:43:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:43:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:43:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:43:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:43:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT hitcount...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT hitcount...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT hitcount...')
+#4 /wordpress/wp-content/plugins/hit-counter-max/image.php(102): wpdb->get_row('SELECT hitcount...')
+#5 /wordpress/wp-content/plugins/hit-counter-max/image.php(27): perform_install()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hit-counter-max...')
+#8 /internal/eval.php(20): activate_plugin('hit-counter-max...')
+#9 {main}</pre>
+ for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hit-counter-max/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:57:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/hit-counter-max/image.php:186
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hit-counter-max...')
+#2 /internal/eval.php(20): activate_plugin('hit-counter-max...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/hit-counter-max/image.php on line 186
+[11-Apr-2025 07:58:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '{<,t`>O(xLQ^o?X4g;XQ|0Y.?M{WIr:A)coj%L#U*n?+~Z8LVe`;Jg5yYfPm{tkN', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT hitcounter, imagename, flag FROM wp_imagecounter</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '{&lt;,t`&gt;O(xLQ^o?X4g;XQ|0Y.?M{WIr:A)coj%L#U*n?+~Z8LVe`;Jg5yYfPm{tkN' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT hitcounter, imagename, flag FROM wp_imagecounter | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '{<,t`>O(xLQ^o?X...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '{<,t`>O(xLQ^o?X...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '{<,t`>O(xLQ^o?X...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '{<,t`>O(xLQ^o?X...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/headlineenvy/components/class-headline-envy.php(105): wp_register_script('headline-envy-a...', 'http://127.0.0....', Array, 1, Array)
-#19 /wordpress/wp-content/plugins/headlineenvy/components/class-headline-envy.php(67): Headline_Envy->register_resources(Array)
-#20 /wordpress/wp-includes/class-wp-hook.php(324): Headline_Envy->init('')
-#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#23 /wordpress/wp-settings.php(704): do_action('init')
-#24 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#25 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#26 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '{<,t`>O(xLQ^o?X4g;XQ|0Y.?M{WIr:A)coj%L#U*n?+~Z8LVe`;Jg5yYfPm{tkN', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Headline_Envy->init, Headline_Envy->register_resources, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:43:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'ZrtB~6[LpCDd0%9/!8?a:g5myf.Qgu^89K;~5`lRE[yq`(pr(~>-Mb9k<Ai&C]o)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'ZrtB~6[LpCDd0%9/!8?a:g5myf.Qgu^89K;~5`lRE[yq`(pr(~&gt;-Mb9k&lt;Ai&amp;C]o)' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'ZrtB~6[LpCDd0%9...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'ZrtB~6[LpCDd0%9...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'ZrtB~6[LpCDd0%9...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'ZrtB~6[LpCDd0%9...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/headlineenvy/components/class-headline-envy.php(105): wp_register_script('headline-envy-a...', 'http://127.0.0....', Array, 1, Array)
-#19 /wordpress/wp-content/plugins/headlineenvy/components/class-headline-envy.php(67): Headline_Envy->register_resources(Array)
-#20 /wordpress/wp-includes/class-wp-hook.php(324): Headline_Envy->init('')
-#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#23 /wordpress/wp-settings.php(704): do_action('init')
-#24 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#25 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#26 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'ZrtB~6[LpCDd0%9/!8?a:g5myf.Qgu^89K;~5`lRE[yq`(pr(~>-Mb9k<Ai&C]o)', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Headline_Envy->init, Headline_Envy->register_resources, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 18:44:08 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 18:44:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 18:44:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 18:44:08 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 18:44:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'h@x.i%CCmKoNgZO^=+6nX/J.6nObtH_1D0/g,yA#;)<]p8VY/YN0Q>Ts# Z+ZO^5', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'h@x.i%CCmKoNgZO^=+6nX/J.6nObtH_1D0/g,yA#;)&lt;]p8VY/YN0Q&gt;Ts# Z+ZO^5' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'h@x.i%CCmKoNgZO...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'h@x.i%CCmKoNgZO...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'h@x.i%CCmKoNgZO...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'h@x.i%CCmKoNgZO...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
-#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('hello-lyrics-he...', 'registered')
-#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
-#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', Array)
-#21 /wordpress/wp-content/plugins/hello-lyrics/block/index.php(25): register_block_type('/wordpress/wp-c...', Array)
-#22 /wordpress/wp-includes/class-wp-hook.php(324): create_block_hello_lyrics_block_block_init('')
-#23 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#24 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#25 /wordpress/wp-settings.php(704): do_action('ini
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT hitcount...')
+#2 /wordpress/wp-content/plugins/hit-counter-max/image.php(102): wpdb->get_row('SELECT hitcount...')
+#3 /wordpress/wp-content/plugins/hit-counter-max/image.php(27): perform_install()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hit-counter-max...')
+#6 /internal/eval.php(20): activate_plugin('hit-counter-max...')
+#7 {main}</pre>
+ for query SELECT hitcounter, imagename, flag FROM wp_imagecounter made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hit-counter-max/image.php'), perform_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:58:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/hit-counter-max/image.php:186
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hit-counter-max...')
+#2 /internal/eval.php(20): activate_plugin('hit-counter-max...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/hit-counter-max/image.php on line 186
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"hit-counter-max"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
