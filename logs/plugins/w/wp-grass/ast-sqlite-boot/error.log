@@ -2,781 +2,125 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 10:31:13 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:31:13 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:31:13 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:31:13 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 29
-[09-Apr-2025 10:31:39 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpaciversioncur', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpaciversioncur' , '1.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(29): add_option('wpaciversioncur', '1.1', 'Set current ver...', 'auto')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-ajax-...')
-#7 /internal/eval.php(20): activate_plugin('wordpress-ajax-...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpaciversioncur', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:39 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentorder', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacicommentorder' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(34): add_option('wpacicommentord...', '0', 'Whether to disp...', 'auto')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-ajax-...')
-#7 /internal/eval.php(20): activate_plugin('wordpress-ajax-...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentorder', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 37
-[09-Apr-2025 10:31:39 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentnum', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacicommentnum' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(37): add_option('wpacicommentnum', '10', 'Number of comme...', 'auto')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-ajax-...')
-#7 /internal/eval.php(20): activate_plugin('wordpress-ajax-...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentnum', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:39 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacigooglejq', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacigooglejq' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(40): add_option('wpacigooglejq', '0', 'Whether to use ...', 'auto')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-ajax-...')
-#7 /internal/eval.php(20): activate_plugin('wordpress-ajax-...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacigooglejq', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:31:40 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 29
-[09-Apr-2025 10:31:40 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpaciversioncur', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpaciversioncur' , '1.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(29): add_option('wpaciversioncur', '1.1', 'Set current ver...', 'auto')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpaciversioncur', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:40 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:40 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentorder', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacicommentorder' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(34): add_option('wpacicommentord...', '0', 'Whether to disp...', 'auto')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentorder', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:40 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 37
-[09-Apr-2025 10:31:40 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentnum', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacicommentnum' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(37): add_option('wpacicommentnum', '10', 'Number of comme...', 'auto')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacicommentnum', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:40 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:40 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacigooglejq', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpacigooglejq' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(40): add_option('wpacigooglejq', '0', 'Whether to use ...', 'auto')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpacigooglejq', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '<GYIf=L:j[?-n$=;$/I1de:6~7&n6<x7:]L0eFiMqtzR^mjJttX}ryNY`2#8]4~p', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '&lt;GYIf=L:j[?-n$=;$/I1de:6~7&amp;n6&lt;x7:]L0eFiMqtzR^mjJttX}ryNY`2#8]4~p' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '<GYIf=L:j[?-n$=...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '<GYIf=L:j[?-n$=...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '<GYIf=L:j[?-n$=...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '<GYIf=L:j[?-n$=...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(328): wp_scripts()
-#18 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(121): wp_deregister_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): jquery_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '<GYIf=L:j[?-n$=;$/I1de:6~7&n6<x7:]L0eFiMqtzR^mjJttX}ryNY`2#8]4~p', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, jquery_init, wp_deregister_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'W:C/X3N^|pu*^2FV<MiEeTVucU($5DW1T&?g3?5tS*rLfYYnp#v-Eo_D0LF|a`bX', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'W:C/X3N^|pu*^2FV&lt;MiEeTVucU($5DW1T&amp;?g3?5tS*rLfYYnp#v-Eo_D0LF|a`bX' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'W:C/X3N^|pu*^2F...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'W:C/X3N^|pu*^2F...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'W:C/X3N^|pu*^2F...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'W:C/X3N^|pu*^2F...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(328): wp_scripts()
-#18 /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php(121): wp_deregister_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): jquery_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'W:C/X3N^|pu*^2FV<MiEeTVucU($5DW1T&?g3?5tS*rLfYYnp#v-Eo_D0LF|a`bX', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, jquery_init, wp_deregister_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 29
-[09-Apr-2025 10:31:48 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:48 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 37
-[09-Apr-2025 10:31:48 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:48 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:48 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:49 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:49 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:49 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:49 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 29
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 37
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 34
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:31:57 UTC] PHP Warning:  Undefined variable $autoload in /wordpress/wp-content/plugins/wordpress-ajax-comments-inline/ajax-comments-inline.php on line 40
-[09-Apr-2025 10:31:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:32:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:32:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:32:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:32:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:32:33 UTC] PHP Fatal error:  Uncaught Error: Non-static method Click2call::init() cannot be called statically in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php:221
+Error: [11-Apr-2025 01:48:28 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php(224): wp_c2c_main()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-click2call/w...')
-#3 /internal/eval.php(20): activate_plugin('wp-click2call/w...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php on line 221
-[09-Apr-2025 10:32:40 UTC] PHP Fatal error:  Uncaught Error: Non-static method Click2call::init() cannot be called statically in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php:221
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744336105.949)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 01:49:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php:187
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php(224): wp_c2c_main()
+#0 /wordpress/wp-content/plugins/wp-bannerize/main.php(20): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-click2call/w...')
-#3 /internal/eval.php(20): activate_plugin('wp-click2call/w...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bannerize/ma...')
+#3 /internal/eval.php(20): activate_plugin('wp-bannerize/ma...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php on line 221
-[09-Apr-2025 10:32:48 UTC] PHP Fatal error:  Uncaught Error: Non-static method Click2call::init() cannot be called statically in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php:221
+  thrown in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php on line 187
+[11-Apr-2025 01:50:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php:187
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php(224): wp_c2c_main()
+#0 /wordpress/wp-content/plugins/wp-bannerize/main.php(20): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-click2call/w...')
-#3 /internal/eval.php(20): activate_plugin('wp-click2call/w...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bannerize/ma...')
+#3 /internal/eval.php(20): activate_plugin('wp-bannerize/ma...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/wp-click2call/wp-click2call.php on line 221
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Undefined array key "has_regions" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:32:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpsc_currency_list</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, data_type, column_default
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_wpsc_currency_list</li>
-<li>Executing: UPDATE `wp_wpsc_currency_list` SET `has_regions` = '1' WHERE `wp_wpsc_currency_list`.`country` = 'Australia' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_currency_list
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE  `wp_wps...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE  `wp_wps...')
-#3 /wordpress/wp-content/plugins/wp-e-commerce-region-based-shipping-for-australia-states/crikey.php(272): WP_SQLite_DB->query('UPDATE  `wp_wps...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): crikey_install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-e-c...', false)
-#8 /internal/eval.php(20): activate_plugin('wp-e-commerce-r...')
-#9 {main}</pre>
- for query UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia' made by activate_plugin, do_action('activate_wp-e-commerce-region-based-shipping-for-australia-states/crikey.php'), WP_Hook->do_action, WP_Hook->apply_filters, crikey_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:32:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-'1000' ,  '137',  'Australian Capital Territory',  'AC',  '0'
-), (
-'1001' ,  '137',  'New South Wales',  'NS',  '0'
-)
-, (
-'1002' ,  '137',  'Northern Territory',  'NT',  '0'
-)
-, (
-'1003' ,  '137',  'Queensland',  'QL',  '0'
-)
-, (
-'1004' ,  '137',  'South Australia',  'SA',  '0'
-)
-, (
-'1005' ,  '137',  'Tasmania',  'TM',  '0'
-)
-, (
-'1006' ,  '137',  'Victoria',  'VI',  '0'
-)
-, (
-'1007' ,  '137',  'Western Australia',  'WA',  '0'
-)
-;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpsc_region_tax</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_wpsc_region_tax</li>
-<li>Executing: INSERT INTO `wp_wpsc_region_tax` () SELECT  FROM (VALUES ( '1000' , '137' , 'Australian Capital Territory' , 'AC' , '0' ) , ( '1001' , '137' , 'New South Wales' , 'NS' , '0' ) , ( '1002' , '137' , 'Northern Territory' , 'NT' , '0' ) , ( '1003' , '137' , 'Queensland' , 'QL' , '0' ) , ( '1004' , '137' , 'South Australia' , 'SA' , '0' ) , ( '1005' , '137' , 'Tasmania' , 'TM' , '0' ) , ( '1006' , '137' , 'Victoria' , 'VI' , '0' ) , ( '1007' , '137' , 'Western Australia' , 'WA' , '0' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO  `w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO  `w...')
-#3 /wordpress/wp-content/plugins/wp-e-commerce-region-based-shipping-for-australia-states/crikey.php(275): WP_SQLite_DB->query('INSERT INTO  `w...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): crikey_install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-e-c...', false)
-#8 /internal/eval.php(20): activate_plugin('wp-e-commerce-r...')
-#9 {main}</pre>
- for query INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-'1000' ,  '137',  'Australian Capital Territory',  'AC',  '0'
-), (
-'1001' ,  '137',  'New South Wales',  'NS',  '0'
-)
-, (
-'1002' ,  '137',  'Northern Territory',  'NT',  '0'
-)
-, (
-'1003' ,  '137',  'Queensland',  'QL',  '0'
-)
-, (
-'1004' ,  '137',  'South Australia',  'SA',  '0'
-)
-, (
-'1005' ,  '137',  'Tasmania',  'TM',  '0'
-)
-, (
-'1006' ,  '137',  'Victoria',  'VI',  '0'
-)
-, (
-'1007' ,  '137',  'Western Australia',  'WA',  '0'
-)
-; made by activate_plugin, do_action('activate_wp-e-commerce-region-based-shipping-for-australia-states/crikey.php'), WP_Hook->do_action, WP_Hook->apply_filters, crikey_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:32:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:33:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  :param0  WHERE rowid IN (SELECT rowid FROM wp_wpsc_currency_list WHERE  `wp_wpsc_currency_list`.`country` =:param1 ) | parameters: 1, Australia</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_currency_list.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-e-commerce-region-based-shipping-for-australia-states/crikey.php(272): WP_SQLite_DB->query('UPDATE  `wp_wps...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): crikey_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-e-c...', false)
-#6 /internal/eval.php(20): activate_plugin('wp-e-commerce-r...')
-#7 {main}</pre>
- for query UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia' made by activate_plugin, do_action('activate_wp-e-commerce-region-based-shipping-for-australia-states/crikey.php'), WP_Hook->do_action, WP_Hook->apply_filters, crikey_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:33:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-'1000' ,  '137',  'Australian Capital Territory',  'AC',  '0'
-), (
-'1001' ,  '137',  'New South Wales',  'NS',  '0'
-)
-, (
-'1002' ,  '137',  'Northern Territory',  'NT',  '0'
-)
-, (
-'1003' ,  '137',  'Queensland',  'QL',  '0'
-)
-, (
-'1004' ,  '137',  'South Australia',  'SA',  '0'
-)
-, (
-'1005' ,  '137',  'Tasmania',  'TM',  '0'
-)
-, (
-'1006' ,  '137',  'Victoria',  'VI',  '0'
-)
-, (
-'1007' ,  '137',  'Western Australia',  'WA',  '0'
-)
-;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-:param0  ,  :param1 ,  :param2 ,  :param3 ,  :param4 
-), (
-:param5  ,  :param6 ,  :param7 ,  :param8 ,  :param9 
-)
-, (
-:param10  ,  :param11 ,  :param12 ,  :param13 ,  :param14 
-)
-, (
-:param15  ,  :param16 ,  :param17 ,  :param18 ,  :param19 
-)
-, (
-:param20  ,  :param21 ,  :param22 ,  :param23 ,  :param24 
-)
-, (
-:param25  ,  :param26 ,  :param27 ,  :param28 ,  :param29 
-)
-, (
-:param30  ,  :param31 ,  :param32 ,  :param33 ,  :param34 
-)
-, (
-:param35  ,  :param36 ,  :param37 ,  :param38 ,  :param39 
-)
-; | parameters: 1000, 137, Australian Capital Territory, AC, 0, 1001, 137, New South Wales, NS, 0, 1002, 137, Northern Territory, NT, 0, 1003, 137, Queensland, QL, 0, 1004, 137, South Australia, SA, 0, 1005, 137, Tasmania, TM, 0, 1006, 137, Victoria, VI, 0, 1007, 137, Western Australia, WA, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_region_tax.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-e-commerce-region-based-shipping-for-australia-states/crikey.php(275): WP_SQLite_DB->query('INSERT INTO  `w...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): crikey_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-e-c...', false)
-#6 /internal/eval.php(20): activate_plugin('wp-e-commerce-r...')
-#7 {main}</pre>
- for query INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-'1000' ,  '137',  'Australian Capital Territory',  'AC',  '0'
-), (
-'1001' ,  '137',  'New South Wales',  'NS',  '0'
-)
-, (
-'1002' ,  '137',  'Northern Territory',  'NT',  '0'
-)
-, (
-'1003' ,  '137',  'Queensland',  'QL',  '0'
-)
-, (
-'1004' ,  '137',  'South Australia',  'SA',  '0'
-)
-, (
-'1005' ,  '137',  'Tasmania',  'TM',  '0'
-)
-, (
-'1006' ,  '137',  'Victoria',  'VI',  '0'
-)
-, (
-'1007' ,  '137',  'Western Australia',  'WA',  '0'
-)
-; made by activate_plugin, do_action('activate_wp-e-commerce-region-based-shipping-for-australia-states/crikey.php'), WP_Hook->do_action, WP_Hook->apply_filters, crikey_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:33:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  :param0  WHERE rowid IN (SELECT rowid FROM wp_wpsc_currency_list WHERE  `wp_wpsc_currency_list`.`country` =:param1 ) | parameters: 1, Australia</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_currency_list.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-e-commerce-region-based-shipping-for-australia-states/crikey.php(272): WP_SQLite_DB->query('UPDATE  `wp_wps...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): crikey_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-e-c...', false)
-#6 /internal/eval.php(20): activate_plugin('wp-e-commerce-r...')
-#7 {main}</pre>
- for query UPDATE  `wp_wpsc_currency_list` SET  `has_regions` =  '1' WHERE  `wp_wpsc_currency_list`.`country` ='Australia' made by activate_plugin, do_action('activate_wp-e-commerce-region-based-shipping-for-australia-states/crikey.php'), WP_Hook->do_action, WP_Hook->apply_filters, crikey_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:33:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-'1000' ,  '137',  'Australian Capital Territory',  'AC',  '0'
-), (
-'1001' ,  '137',  'New South Wales',  'NS',  '0'
-)
-, (
-'1002' ,  '137',  'Northern Territory',  'NT',  '0'
-)
-, (
-'1003' ,  '137',  'Queensland',  'QL',  '0'
-)
-, (
-'1004' ,  '137',  'South Australia',  'SA',  '0'
-)
-, (
-'1005' ,  '137',  'Tasmania',  'TM',  '0'
-)
-, (
-'1006' ,  '137',  'Victoria',  'VI',  '0'
-)
-, (
-'1007' ,  '137',  'Western Australia',  'WA',  '0'
-)
-;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO  `wp_wpsc_region_tax` (`id` ,`country_id` ,`name` ,`code` ,`tax`)
-VALUES (
-:param0  ,  :param1 ,  :param2 ,  :param3 ,  :param4 
-), (
-:param5  ,  :param6 ,  :param7 ,  :param8 ,  :param9 
-)
-, (
-:param10  ,  :param11 ,  :param12 ,  :param13 ,  :param14 
-)
-, (
-:param15  ,  :param16 ,  :param17 ,  :param18 ,  :param19 
-)
-, (
-:param20  ,  :param21 ,  :param22 ,  :param23 ,  :param24 
-)
-, (
-:param25  ,  :param26 ,  :param27 ,  :param28 ,  :param29 
-)
-, (
-:param30  ,  :param31 ,  :param32 ,  :param33 ,  :param34 
-)
-, (
-:param35  ,  :param36 ,  :param37 ,  :param38 ,  :param39 
-)
-; | parameters: 1000, 137, Australian Capital Territory, AC, 0, 1001, 137, New South Wales, NS, 0, 1002, 137, Northern Territory, NT, 0, 1003, 137, Queensland, QL, 0, 1004, 137, South Australia, SA, 0, 1005, 137, Tasmania, TM, 0, 1006, 137, Victoria, VI, 0, 1007, 137, Western Australia, WA, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_region_tax.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp
+  thrown in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php on line 187
+[11-Apr-2025 01:50:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php:187
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-bannerize/main.php(20): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-bannerize/ma...')
+#3 /internal/eval.php(20): activate_plugin('wp-bannerize/ma...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-bannerize/Classes/wpBannerizeClass.php on line 187
+[11-Apr-2025 01:50:50 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wc-cross-seller/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 01:50:51 UTC] Automatic updates starting...
+[11-Apr-2025 01:51:02 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wc-cross-seller/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 01:51:12 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wc-cross-seller/freemius/includes/class-fs-logger.php on line 145
+[11-Apr-2025 01:52:56 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-bliss-gallery/bliss.php on line 745
+[11-Apr-2025 01:53:03 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-bliss-gallery/bliss.php on line 745
+[11-Apr-2025 01:53:12 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-bliss-gallery/bliss.php on line 745
+[11-Apr-2025 01:54:13 UTC] PHP Warning:  Undefined array key "form_method" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/yd-widget-framework.inc.php on line 97
+[11-Apr-2025 01:54:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpcuWPFnProPlugin" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php:171
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-frontpage-news/wp-frontpage-news.php(107): wpcuWPFnPlugin->__construct(Array)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-frontpage-ne...')
+#3 /internal/eval.php(20): activate_plugin('wp-frontpage-ne...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php on line 171
+[11-Apr-2025 01:54:20 UTC] PHP Warning:  Undefined array key "form_method" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/yd-widget-framework.inc.php on line 97
+[11-Apr-2025 01:54:20 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpcuWPFnProPlugin" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php:171
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-frontpage-news/wp-frontpage-news.php(107): wpcuWPFnPlugin->__construct(Array)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-frontpage-ne...')
+#3 /internal/eval.php(20): activate_plugin('wp-frontpage-ne...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php on line 171
+[11-Apr-2025 01:54:28 UTC] PHP Warning:  Undefined array key "form_method" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/yd-widget-framework.inc.php on line 97
+[11-Apr-2025 01:54:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpcuWPFnProPlugin" in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php:171
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-frontpage-news/wp-frontpage-news.php(107): wpcuWPFnPlugin->__construct(Array)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-frontpage-ne...')
+#3 /internal/eval.php(20): activate_plugin('wp-frontpage-ne...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-frontpage-news/inc/wp-fpn-main.inc.php on line 171
+[11-Apr-2025 01:54:38 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/wp-grass/WpGrass_Plugin.php:36
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-grass/WpGrass_LifeCycle.php(11): WpGrass_Plugin->initOptions()
+#1 /wordpress/wp-content/plugins/wp-grass/wp-grass_init.php(16): WpGrass_LifeCycle->install()
+#2 /wordpress/wp-content/plugins/wp-grass/wp-grass.php(66): WpGrass_init('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-grass/wp-gra...')
+#5 /internal/eval.php(20): activate_plugin('wp-grass/wp-gra...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wp-grass/WpGrass_Plugin.php on line 36
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-grass"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
