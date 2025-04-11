@@ -2,476 +2,130 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 20:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_espresso_activation', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ee_espresso_activation' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ee_espresso_act...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/espresso.php(116): update_option('ee_espresso_act...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): espresso_plugin_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 10:31:24 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744367482.544)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#10 /internal/eval.php(20): activate_plugin('event-espresso-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_espresso_activation', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-decaf/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_plugin_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('event-espresso-core_allow_tracking', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'event-espresso-core_allow_tracking' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('event-espresso-...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/espresso.php(117): update_option('event-espresso-...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): espresso_plugin_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#10 /internal/eval.php(20): activate_plugin('event-espresso-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('event-espresso-core_allow_tracking', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-decaf/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_plugin_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('event-espresso-core_tracking_notice', 'hide', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'event-espresso-core_tracking_notice' , 'hide' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('event-espresso-...', 'hide', '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/espresso.php(118): update_option('event-espresso-...', 'hide')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): espresso_plugin_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#10 /internal/eval.php(20): activate_plugin('event-espresso-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('event-espresso-core_tracking_notice', 'hide', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-decaf/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_plugin_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_graphql_version', '1.27.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_graphql_version' , '1.27.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_graphql_vers...', '1.27.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/vendor/wp-graphql/wp-graphql/activation.php(16): update_option('wp_graphql_vers...', '1.27.2')
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/espresso.php(121): graphql_activation_callback()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): espresso_plugin_activation(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#11 /internal/eval.php(20): activate_plugin('event-espresso-...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_graphql_version', '1.27.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-decaf/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_plugin_activation, graphql_activation_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:15 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:49:15 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:49:15 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:49:15 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee-graphql-endpoint', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ee-graphql-endpoint' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ee-graphql-endp...', NULL, '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/OptionEngine.php(66): update_option('ee-graphql-endp...', NULL)
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(147): EventEspresso\core\services\database\OptionEngine->updateOption('ee-graphql-endp...', NULL)
-#7 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(128): EventEspresso\core\services\database\WordPressOption->updateOption('graphql', true)
-#8 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/graphql/GraphQLEndpoint.php(57): EventEspresso\core\services\database\WordPressOption->loadOption()
-#9 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/graphql/GraphQLEndpoint.php(68): EventEspresso\core\services\graphql\GraphQLEndpoint->getEndpoint()
-#10 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/contexts/RequestTypeContextDetector.php(232): EventEspresso\core\services\graphql\GraphQLEndpoint->isGraphqlRequest()
-#11 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/contexts/RequestTypeContextDetector.php(92): EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->isEspressoGraphQLRequest()
-#12 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/SetRequestTypeContextChecker.php(56): EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->detectRequestTypeContext()
-#13 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStack.php(46): EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#14 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(180): EventEspresso\core\services\request\RequestStack->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#15 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(101): EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack()
-#16 /wordpress/wp-includes/class-wp-hook.php(324): EventEspresso\core\services\bootstrap\BootstrapCore->initialize('')
-#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#19 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#20 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#21 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#22 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee-graphql-endpoint', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EventEspresso\core\services\bootstrap\BootstrapCore->initialize, EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack, EventEspresso\core\services\request\RequestStack->handleRequest, EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest, EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->detectRequestTypeContext, EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->isEspressoGraphQLRequest, EventEspresso\core\services\graphql\GraphQLEndpoint->isGraphqlRequest, EventEspresso\core\services\graphql\GraphQLEndpoint->getEndpoint, EventEspresso\core\services\database\WordPressOption->loadOption, EventEspresso\core\services\database\WordPressOption->updateOption, EventEspresso\core\services\database\OptionEngine->updateOption, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee-graphql-endpoint', 'graphql', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ee-graphql-endpoint' , 'graphql' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/OptionEngine.php(53): add_option('ee-graphql-endp...', 'graphql', '', 'on')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(154): EventEspresso\core\services\database\OptionEngine->addOption('ee-graphql-endp...', 'graphql', 'yes')
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(128): EventEspresso\core\services\database\WordPressOption->updateOption('graphql', true)
-#7 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/graphql/GraphQLEndpoint.php(57): EventEspresso\core\services\database\WordPressOption->loadOption()
-#8 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/graphql/GraphQLEndpoint.php(68): EventEspresso\core\services\graphql\GraphQLEndpoint->getEndpoint()
-#9 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/contexts/RequestTypeContextDetector.php(232): EventEspresso\core\services\graphql\GraphQLEndpoint->isGraphqlRequest()
-#10 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/contexts/RequestTypeContextDetector.php(92): EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->isEspressoGraphQLRequest()
-#11 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/SetRequestTypeContextChecker.php(56): EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->detectRequestTypeContext()
-#12 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStack.php(46): EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#13 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(180): EventEspresso\core\services\request\RequestStack->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#14 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(101): EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack()
-#15 /wordpress/wp-includes/class-wp-hook.php(324): EventEspresso\core\services\bootstrap\BootstrapCore->initialize('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee-graphql-endpoint', 'graphql', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EventEspresso\core\services\bootstrap\BootstrapCore->initialize, EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack, EventEspresso\core\services\request\RequestStack->handleRequest, EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest, EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->detectRequestTypeContext, EventEspresso\core\domain\services\contexts\RequestTypeContextDetector->isEspressoGraphQLRequest, EventEspresso\core\services\graphql\GraphQLEndpoint->isGraphqlRequest, EventEspresso\core\services\graphql\GraphQLEndpoint->getEndpoint, EventEspresso\core\services\database\WordPressOption->loadOption, EventEspresso\core\services\database\WordPressOption->updateOption, EventEspresso\core\services\database\OptionEngine->addOption, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_feature_flags', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ee_feature_flags' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ee_feature_flag...', NULL, '', 'auto')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/OptionEngine.php(66): update_option('ee_feature_flag...', NULL)
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(147): EventEspresso\core\services\database\OptionEngine->updateOption('ee_feature_flag...', NULL)
-#7 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/json/JsonDataWordpressOption.php(54): EventEspresso\core\services\database\WordPressOption->updateOption('{"use_datetime_...', true)
-#8 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(128): EventEspresso\core\services\json\JsonDataWordpressOption->updateOption(Object(stdClass), true)
-#9 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/json/JsonDataWordpressOption.php(92): EventEspresso\core\services\database\WordPressOption->loadOption()
-#10 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/capabilities/FeatureFlagsConfig.php(108): EventEspresso\core\services\json\JsonDataWordpressOption->getAll()
-#11 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/capabilities/FeatureFlags.php(47): EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig->getFeatureFlags()
-#12 [internal function]: EventEspresso\core\domain\services\capabilities\FeatureFlags->__construct(Object(EventEspresso\core\domain\services\capabilities\CapabilitiesChecker), Object(EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig))
-#13 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1267): ReflectionClass->newInstanceArgs(Array)
-#14 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(759): EE_Registry->_create_object('EventEspresso\\c...', Array, '', false)
-#15 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CoreLoader.php(110): EE_Registry->create('EventEspresso\\c...', Array, true, false, false, '')
-#16 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CachingLoader.php(156): EventEspresso\core\services\loaders\CoreLoader->load('EventEspresso\\c...', Array, true)
-#17 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(72): EventEspresso\core\services\loaders\CachingLoader->load('EventEspresso\\c...', Array, true)
-#18 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1436): EventEspresso\core\services\loaders\Loader->load('EventEspresso\\c...', Array, true)
-#19 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1370): EE_Registry->_resolve_dependency('EE_System', 'EventEspresso\\c...', Array, 5)
-#20 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1220): EE_Registry->_resolve_dependencies(Object(ReflectionClass), 'EE_System', Array)
-#21 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(888): EE_Registry->_create_object('EE_System', Array, 'core', false)
-#22 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(350): EE_Registry->_load(Array, 'EE_', 'EE_System', 'core', Array, false, true, false)
-#23 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(757): EE_Registry->load_core('EE_System', Array)
-#24 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CoreLoader.php(110): EE_Registry->create('EE_System', Array, true, false, false, '')
-#25 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CachingLoader.php(156): EventEspresso\core\services\loaders\CoreLoader->load('EE_System', Array, true)
-#26 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(72): EventEspresso\core\services\loaders\CachingLoader->load('EE_System', Array, true)
-#27 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(95): EventEspresso\core\services\loaders\Loader->load('EE_System', Array)
-#28 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/LoaderFactory.php(138): EventEspresso\core\services\loaders\Loader->getShared('EE_System', Array)
-#29 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStackCoreApp.php(71): EventEspresso\core\services\loaders\LoaderFactory::getShared('EE_System')
-#30 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\RequestStackCoreApp->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#31 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/BotDetector.php(36): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#32 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\BotDetector->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#33 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/DetectFileEditorRequest.php(35): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#34 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\DetectFileEditorRequest->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#35 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/PreProductionVersionWarning.php(33): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#36 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\PreProductionVersionWarning->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#37 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/RecommendedVersions.php(51): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#38 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\RecommendedVersions->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#39 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/DetectLogin.php(41): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#40 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\DetectLogin->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#41 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/SetRequestTypeContextChecker.php(72): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#42 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStack.php(46): EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#43 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(180): EventEspresso\core\services\request\RequestStack->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#44 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(101): EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack()
-#45 /wordpress/wp-includes/class-wp-hook.php(324): EventEspresso\core\services\bootstrap\BootstrapCore->initialize('')
-#46 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#47 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#48 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#49 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#50 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#51 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#52 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_feature_flags', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EventEspresso\core\services\bootstrap\BootstrapCore->initialize, EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack, EventEspresso\core\services\request\RequestStack->handleRequest, EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\DetectLogin->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\RecommendedVersions->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\PreProductionVersionWarning->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\DetectFileEditorRequest->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\BotDetector->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\RequestStackCoreApp->handleRequest, EventEspresso\core\services\loaders\LoaderFactory::getShared, EventEspresso\core\services\loaders\Loader->getShared, EventEspresso\core\services\loaders\Loader->load, EventEspresso\core\services\loaders\CachingLoader->load, EventEspresso\core\services\loaders\CoreLoader->load, EE_Registry->create, EE_Registry->load_core, EE_Registry->_load, EE_Registry->_create_object, EE_Registry->_resolve_dependencies, EE_Registry->_resolve_dependency, EventEspresso\core\services\loaders\Loader->load, EventEspresso\core\services\loaders\CachingLoader->load, EventEspresso\core\services\loaders\CoreLoader->load, EE_Registry->create, EE_Registry->_create_object, ReflectionClass->newInstanceArgs, EventEspresso\core\domain\services\capabilities\FeatureFlags->__construct, EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig->getFeatureFlags, EventEspresso\core\services\json\JsonDataWordpressOption->getAll, EventEspresso\core\services\database\WordPressOption->loadOption, EventEspresso\core\services\json\JsonDataWordpressOption->updateOption, EventEspresso\core\services\database\WordPressOption->updateOption, EventEspresso\core\services\database\OptionEngine->updateOption, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_feature_flags', '{\"use_datetime_status_controls\":false,\"use_default_ticket_manager\":true,\"use_edd_plugin_licensing\":false,\"use_event_description_rte\":false,\"ee_event_editor_bulk_edit\":false,\"use_experimental_rte\":false,\"use_payment_processor_fees\":true,\"use_reg_form_builder\":false,\"use_reg_form_ticket_questions\":false,\"use_reg_options_meta_box\":false,\"use_spco_form_refactor\":false}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ee_feature_flags' , '{&quot;use_datetime_status_controls&quot;:false,&quot;use_default_ticket_manager&quot;:true,&quot;use_edd_plugin_licensing&quot;:false,&quot;use_event_description_rte&quot;:false,&quot;ee_event_editor_bulk_edit&quot;:false,&quot;use_experimental_rte&quot;:false,&quot;use_payment_processor_fees&quot;:true,&quot;use_reg_form_builder&quot;:false,&quot;use_reg_form_ticket_questions&quot;:false,&quot;use_reg_options_meta_box&quot;:false,&quot;use_spco_form_refactor&quot;:false}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/OptionEngine.php(53): add_option('ee_feature_flag...', '{"use_datetime_...', '', 'off')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(154): EventEspresso\core\services\database\OptionEngine->addOption('ee_feature_flag...', '{"use_datetime_...', 'no')
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/json/JsonDataWordpressOption.php(54): EventEspresso\core\services\database\WordPressOption->updateOption('{"use_datetime_...', true)
-#7 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/database/WordPressOption.php(128): EventEspresso\core\services\json\JsonDataWordpressOption->updateOption(Object(stdClass), true)
-#8 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/json/JsonDataWordpressOption.php(92): EventEspresso\core\services\database\WordPressOption->loadOption()
-#9 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/capabilities/FeatureFlagsConfig.php(108): EventEspresso\core\services\json\JsonDataWordpressOption->getAll()
-#10 /wordpress/wp-content/plugins/event-espresso-decaf/core/domain/services/capabilities/FeatureFlags.php(47): EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig->getFeatureFlags()
-#11 [internal function]: EventEspresso\core\domain\services\capabilities\FeatureFlags->__construct(Object(EventEspresso\core\domain\services\capabilities\CapabilitiesChecker), Object(EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig))
-#12 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1267): ReflectionClass->newInstanceArgs(Array)
-#13 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(759): EE_Registry->_create_object('EventEspresso\\c...', Array, '', false)
-#14 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CoreLoader.php(110): EE_Registry->create('EventEspresso\\c...', Array, true, false, false, '')
-#15 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CachingLoader.php(156): EventEspresso\core\services\loaders\CoreLoader->load('EventEspresso\\c...', Array, true)
-#16 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(72): EventEspresso\core\services\loaders\CachingLoader->load('EventEspresso\\c...', Array, true)
-#17 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1436): EventEspresso\core\services\loaders\Loader->load('EventEspresso\\c...', Array, true)
-#18 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1370): EE_Registry->_resolve_dependency('EE_System', 'EventEspresso\\c...', Array, 5)
-#19 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(1220): EE_Registry->_resolve_dependencies(Object(ReflectionClass), 'EE_System', Array)
-#20 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(888): EE_Registry->_create_object('EE_System', Array, 'core', false)
-#21 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(350): EE_Registry->_load(Array, 'EE_', 'EE_System', 'core', Array, false, true, false)
-#22 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Registry.core.php(757): EE_Registry->load_core('EE_System', Array)
-#23 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CoreLoader.php(110): EE_Registry->create('EE_System', Array, true, false, false, '')
-#24 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/CachingLoader.php(156): EventEspresso\core\services\loaders\CoreLoader->load('EE_System', Array, true)
-#25 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(72): EventEspresso\core\services\loaders\CachingLoader->load('EE_System', Array, true)
-#26 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/Loader.php(95): EventEspresso\core\services\loaders\Loader->load('EE_System', Array)
-#27 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/loaders/LoaderFactory.php(138): EventEspresso\core\services\loaders\Loader->getShared('EE_System', Array)
-#28 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStackCoreApp.php(71): EventEspresso\core\services\loaders\LoaderFactory::getShared('EE_System')
-#29 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\RequestStackCoreApp->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#30 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/BotDetector.php(36): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#31 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\BotDetector->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#32 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/DetectFileEditorRequest.php(35): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#33 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\DetectFileEditorRequest->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#34 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/PreProductionVersionWarning.php(33): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#35 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\PreProductionVersionWarning->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#36 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/RecommendedVersions.php(51): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#37 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\RecommendedVersions->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#38 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/DetectLogin.php(41): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#39 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/Middleware.php(59): EventEspresso\core\services\request\middleware\DetectLogin->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#40 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/middleware/SetRequestTypeContextChecker.php(72): EventEspresso\core\services\request\middleware\Middleware->processRequestStack(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#41 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/request/RequestStack.php(46): EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#42 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(180): EventEspresso\core\services\request\RequestStack->handleRequest(Object(EventEspresso\core\services\request\Request), Object(EventEspresso\core\services\request\Response))
-#43 /wordpress/wp-content/plugins/event-espresso-decaf/core/services/bootstrap/BootstrapCore.php(101): EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack()
-#44 /wordpress/wp-includes/class-wp-hook.php(324): EventEspresso\core\services\bootstrap\BootstrapCore->initialize('')
-#45 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#46 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#47 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#48 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#49 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#50 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#51 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ee_feature_flags', '{\"use_datetime_status_controls\":false,\"use_default_ticket_manager\":true,\"use_edd_plugin_licensing\":false,\"use_event_description_rte\":false,\"ee_event_editor_bulk_edit\":false,\"use_experimental_rte\":false,\"use_payment_processor_fees\":true,\"use_reg_form_builder\":false,\"use_reg_form_ticket_questions\":false,\"use_reg_options_meta_box\":false,\"use_spco_form_refactor\":false}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EventEspresso\core\services\bootstrap\BootstrapCore->initialize, EventEspresso\core\services\bootstrap\BootstrapCore->runRequestStack, EventEspresso\core\services\request\RequestStack->handleRequest, EventEspresso\core\services\request\middleware\SetRequestTypeContextChecker->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\DetectLogin->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\RecommendedVersions->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\PreProductionVersionWarning->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\DetectFileEditorRequest->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\middleware\BotDetector->handleRequest, EventEspresso\core\services\request\middleware\Middleware->processRequestStack, EventEspresso\core\services\request\RequestStackCoreApp->handleRequest, EventEspresso\core\services\loaders\LoaderFactory::getShared, EventEspresso\core\services\loaders\Loader->getShared, EventEspresso\core\services\loaders\Loader->load, EventEspresso\core\services\loaders\CachingLoader->load, EventEspresso\core\services\loaders\CoreLoader->load, EE_Registry->create, EE_Registry->load_core, EE_Registry->_load, EE_Registry->_create_object, EE_Registry->_resolve_dependencies, EE_Registry->_resolve_dependency, EventEspresso\core\services\loaders\Loader->load, EventEspresso\core\services\loaders\CachingLoader->load, EventEspresso\core\services\loaders\CoreLoader->load, EE_Registry->create, EE_Registry->_create_object, ReflectionClass->newInstanceArgs, EventEspresso\core\domain\services\capabilities\FeatureFlags->__construct, EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig->getFeatureFlags, EventEspresso\core\services\json\JsonDataWordpressOption->getAll, EventEspresso\core\services\database\WordPressOption->loadOption, EventEspresso\core\services\json\JsonDataWordpressOption->updateOption, EventEspresso\core\services\database\WordPressOption->updateOption, EventEspresso\core\services\database\OptionEngine->addOption, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:16 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-graphql</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_db_update' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(499): add_option('espresso_db_upd...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(430): EE_System->fix_espresso_db_upgrade_option()
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(408): EE_System->detect_if_activation_or_upgrade()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): EE_System->detect_activations_or_upgrades('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_Bootstrap.core.php(35): do_action('AHEE__EE_Bootst...')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): EE_Bootstrap::detect_activations_or_upgrades('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EE_Bootstrap::detect_activations_or_upgrades, do_action('AHEE__EE_Bootstrap__detect_activations_or_upgrades'), WP_Hook->do_action, WP_Hook->apply_filters, EE_System->detect_activations_or_upgrades, EE_System->detect_if_activation_or_upgrade, EE_System->fix_espresso_db_upgrade_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_db_update' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(499): add_option('espresso_db_upd...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(633): EE_System->fix_espresso_db_upgrade_option()
-#6 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(431): EE_System->detect_req_type(Array)
-#7 /wordpress/wp-content/plugins/event-espresso-decaf/core/EE_System.core.php(408): EE_System->detect_if_activation_or_upgrade()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): EE_System->detect_activations
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 10:33:23 UTC] Automatic updates starting...
+[11-Apr-2025 10:33:24 UTC]   Automatic plugin updates starting...
+[11-Apr-2025 10:33:24 UTC]   Automatic plugin updates complete.
+[11-Apr-2025 10:37:29 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "page" on null in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/event-notifier/classes/event-notifier.php(235): evenote\ui->add('page', 'event-notifier', Array)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Event_Notifier->register_admin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(evenote\ui), Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php on line 123
+[11-Apr-2025 10:37:38 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "page" on null in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/event-notifier/classes/event-notifier.php(235): evenote\ui->add('page', 'event-notifier', Array)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Event_Notifier->register_admin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(evenote\ui), Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php on line 123
+[11-Apr-2025 10:37:47 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "page" on null in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php:123
+Stack trace:
+#0 /wordpress/wp-content/plugins/event-notifier/classes/event-notifier.php(235): evenote\ui->add('page', 'event-notifier', Array)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Event_Notifier->register_admin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(Object(evenote\ui), Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/event-notifier/classes/evenote/ui.php on line 123
+[11-Apr-2025 10:38:25 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:25 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:38:26 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:26 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:38:33 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:33 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:38:34 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:34 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:38:41 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:41 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:38:42 UTC] PHP Warning:  Undefined variable $blockq_dirname in /wordpress/wp-content/plugins/export-opml/export-opml.php on line 76
+[11-Apr-2025 10:38:42 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:39:49 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in contextual_widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:39:57 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in contextual_widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:40:05 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in contextual_widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:40:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php:208
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/index.php(13): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('easy-bitcoin-do...')
+#3 /internal/eval.php(20): activate_plugin('easy-bitcoin-do...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php on line 208
+[11-Apr-2025 10:40:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php:208
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/index.php(13): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('easy-bitcoin-do...')
+#3 /internal/eval.php(20): activate_plugin('easy-bitcoin-do...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php on line 208
+[11-Apr-2025 10:40:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php:208
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/index.php(13): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('easy-bitcoin-do...')
+#3 /internal/eval.php(20): activate_plugin('easy-bitcoin-do...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/easy-bitcoin-donation-widget/widgets.php on line 208
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"easy-bitcoin-donation-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
