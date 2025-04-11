@@ -2,552 +2,84 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 21:45:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-image-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pagecdn-image-cache' , '[]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pagecdn-image-c...', '[]', '', 'off')
-#5 /wordpress/wp-content/plugins/pagecdn/pagecdn.php(83): update_option('pagecdn-image-c...', '[]', false)
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pagecdn/pagecdn...')
-#8 /internal/eval.php(20): activate_plugin('pagecdn/pagecdn...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-image-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pagecdn/pagecdn.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-webp-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pagecdn-webp-cache' , '[]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pagecdn-webp-ca...', '[]', '', 'off')
-#5 /wordpress/wp-content/plugins/pagecdn/pagecdn.php(85): update_option('pagecdn-webp-ca...', '[]', false)
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pagecdn/pagecdn...')
-#8 /internal/eval.php(20): activate_plugin('pagecdn/pagecdn...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-webp-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pagecdn/pagecdn.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:45:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn', 'a:18:{s:3:\"url\";s:0:\"\";s:4:\"dirs\";s:26:\"wp-content,wp-includes,min\";s:8:\"excludes\";s:14:\".php,.xml,.txt\";s:15:\"pagecdn_api_key\";s:0:\"\";s:5:\"fonts\";i:1;s:12:\"replace_cdns\";i:1;s:10:\"reuse_libs\";i:1;s:8:\"relative\";i:1;s:5:\"https\";i:1;s:15:\"optimize_images\";i:0;s:9:\"min_files\";i:0;s:16:\"preconnect_hosts\";i:1;s:21:\"preconnect_hosts_list\";s:19:\"https://pagecdn.io
-\";s:17:\"compression_level\";i:0;s:17:\"http2_server_push\";i:0;s:16:\"update_css_paths\";i:0;s:14:\"http_cache_ttl\";i:0;s:13:\"cache_control\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pagecdn' , 'a:18:{s:3:&quot;url&quot;;s:0:&quot;&quot;;s:4:&quot;dirs&quot;;s:26:&quot;wp-content,wp-includes,min&quot;;s:8:&quot;excludes&quot;;s:14:&quot;.php,.xml,.txt&quot;;s:15:&quot;pagecdn_api_key&quot;;s:0:&quot;&quot;;s:5:&quot;fonts&quot;;i:1;s:12:&quot;replace_cdns&quot;;i:1;s:10:&quot;reuse_libs&quot;;i:1;s:8:&quot;relative&quot;;i:1;s:5:&quot;https&quot;;i:1;s:15:&quot;optimize_images&quot;;i:0;s:9:&quot;min_files&quot;;i:0;s:16:&quot;preconnect_hosts&quot;;i:1;s:21:&quot;preconnect_hosts_list&quot;;s:19:&quot;https://pagecdn.io
-&quot;;s:17:&quot;compression_level&quot;;i:0;s:17:&quot;http2_server_push&quot;;i:0;s:16:&quot;update_css_paths&quot;;i:0;s:14:&quot;http_cache_ttl&quot;;i:0;s:13:&quot;cache_control&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pagecdn/init-functions.php(138): add_option('pagecdn', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): PageCDN_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pagecd...', false)
-#9 /internal/eval.php(20): activate_plugin('pagecdn/pagecdn...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn', 'a:18:{s:3:\"url\";s:0:\"\";s:4:\"dirs\";s:26:\"wp-content,wp-includes,min\";s:8:\"excludes\";s:14:\".php,.xml,.txt\";s:15:\"pagecdn_api_key\";s:0:\"\";s:5:\"fonts\";i:1;s:12:\"replace_cdns\";i:1;s:10:\"reuse_libs\";i:1;s:8:\"relative\";i:1;s:5:\"https\";i:1;s:15:\"optimize_images\";i:0;s:9:\"min_files\";i:0;s:16:\"preconnect_hosts\";i:1;s:21:\"preconnect_hosts_list\";s:19:\"https://pagecdn.io
-\";s:17:\"compression_level\";i:0;s:17:\"http2_server_push\";i:0;s:16:\"update_css_paths\";i:0;s:14:\"http_cache_ttl\";i:0;s:13:\"cache_control\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pagecdn/pagecdn.php'), WP_Hook->do_action, WP_Hook->apply_filters, PageCDN_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-image-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pagecdn-image-cache' , '[]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pagecdn-image-c...', '[]', '', 'off')
-#5 /wordpress/wp-content/plugins/pagecdn/pagecdn.php(83): update_option('pagecdn-image-c...', '[]', false)
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-image-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/pagecdn/pagecdn.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-webp-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pagecdn-webp-cache' , '[]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pagecdn-webp-ca...', '[]', '', 'off')
-#5 /wordpress/wp-content/plugins/pagecdn/pagecdn.php(85): update_option('pagecdn-webp-ca...', '[]', false)
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pagecdn-webp-cache', '[]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/pagecdn/pagecdn.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:46:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/perfit-signup-form/lib/Perfit.php on line 99
-[09-Apr-2025 21:46:24 UTC] PHP Warning:  Undefined array key "login" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 26
-[09-Apr-2025 21:46:24 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 42
-[09-Apr-2025 21:46:24 UTC] PHP Warning:  Undefined array key "colors" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 49
-[09-Apr-2025 21:46:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php:178
+Error: [11-Apr-2025 09:48:13 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:14 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:22 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:23 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:31 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:32 UTC] PHP Deprecated:  Required parameter $pce_contributors_or_moderators follows optional parameter $pce_existingmoderators in /wordpress/wp-content/plugins/peters-collaboration-e-mails/peters_collaboration_emails.php on line 421
+[11-Apr-2025 09:48:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pinit/public/class-pinit.php:94
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('perfit-signup-f...')
-#2 /internal/eval.php(20): activate_plugin('perfit-signup-f...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 178
-[09-Apr-2025 21:46:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/perfit-signup-form/lib/Perfit.php on line 99
-[09-Apr-2025 21:46:32 UTC] PHP Warning:  Undefined array key "login" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 26
-[09-Apr-2025 21:46:32 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 42
-[09-Apr-2025 21:46:32 UTC] PHP Warning:  Undefined array key "colors" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 49
-[09-Apr-2025 21:46:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php:178
+#0 /wordpress/wp-content/plugins/pinit/public/class-pinit.php(140): Pinit->__construct()
+#1 /wordpress/wp-content/plugins/pinit/includes/load_textdomain.php(9): Pinit::get_instance()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): p_load_plugin_textdomain('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/pinit/public/class-pinit.php on line 94
+[11-Apr-2025 09:49:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pinit/public/class-pinit.php:94
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('perfit-signup-f...')
-#2 /internal/eval.php(20): activate_plugin('perfit-signup-f...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 178
-[09-Apr-2025 21:46:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/perfit-signup-form/lib/Perfit.php on line 99
-[09-Apr-2025 21:46:39 UTC] PHP Warning:  Undefined array key "login" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 26
-[09-Apr-2025 21:46:39 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 42
-[09-Apr-2025 21:46:39 UTC] PHP Warning:  Undefined array key "colors" in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 49
-[09-Apr-2025 21:46:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php:178
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('perfit-signup-f...')
-#2 /internal/eval.php(20): activate_plugin('perfit-signup-f...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/perfit-signup-form/perfit_optin.php on line 178
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:46:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mitt_pw_ping_errors', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mitt_pw_ping_errors' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ping-watcher/pingwatcher.php(87): add_option('mitt_pw_ping_er...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mitt_pw_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ping-w...', false)
-#9 /internal/eval.php(20): activate_plugin('ping-watcher/pi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mitt_pw_ping_errors', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ping-watcher/pingwatcher.php'), WP_Hook->do_action, WP_Hook->apply_filters, mitt_pw_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:46:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mitt_pw_ping_error_length', '25', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mitt_pw_ping_error_length' , '25' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ping-watcher/pingwatcher.php(89): add_option('mitt_pw_ping_er...', 25)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mitt_pw_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ping-w...', false)
-#9 /internal/eval.php(20): activate_plugin('ping-watcher/pi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mitt_pw_ping_error_length', '25', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ping-watcher/pingwatcher.php'), WP_Hook->do_action, WP_Hook->apply_filters, mitt_pw_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:46:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:47:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_upgraded_1_x', '2', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pods_framework_upgraded_1_x' , '2' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(133): add_option('pods_framework_...', 2, '', 'on')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(106): PodsInit->__construct()
-#6 /wordpress/wp-content/plugins/pods/includes/classes.php(187): PodsInit::init()
-#7 /wordpress/wp-content/plugins/pods/init.php(133): pods_init()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pods/init.php')
-#10 /internal/eval.php(20): activate_plugin('pods/init.php')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_upgraded_1_x', '2', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pods/init.php'), pods_init, PodsInit::init, PodsInit->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:47:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:47:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:47:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:47:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_upgraded_1_x', '2', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pods_framework_upgraded_1_x' , '2' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(133): add_option('pods_framework_...', 2, '', 'on')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(106): PodsInit->__construct()
-#6 /wordpress/wp-content/plugins/pods/includes/classes.php(187): PodsInit::init()
-#7 /wordpress/wp-content/plugins/pods/init.php(133): pods_init()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_upgraded_1_x', '2', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/pods/init.php'), pods_init, PodsInit::init, PodsInit->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_version_first', '3.2.8.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pods_framework_version_first' , '3.2.8.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2240): add_option('pods_framework_...', '3.2.8.2')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2115): PodsInit->setup()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PodsInit->activate_install('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pods_framework_version_first', '3.2.8.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, PodsInit->activate_install, PodsInit->setup, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_pods_pods_components_refresh-3282', '1744278441', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_pods_pods_components_refresh-3282' , '1744278441' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744278441, '', 'off')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsView.php(566): set_transient('pods_pods_compo...', 1, 43200)
-#6 /wordpress/wp-content/plugins/pods/includes/general.php(3052): PodsView::set('pods_components...', 1, 43200, 'transient', '')
-#7 /wordpress/wp-content/plugins/pods/includes/general.php(3155): pods_view_set('pods_components...', 1, 43200, 'transient')
-#8 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(519): pods_transient_set('pods_components...', 1, 43200)
-#9 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(638): PodsComponents->get_components()
-#10 /wordpress/wp-content/plugins/pods/sql/upgrade/PodsUpgrade.php(99): PodsComponents->activate_component('templates')
-#11 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2246): PodsUpgrade->install(NULL)
-#12 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2115): PodsInit->setup()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PodsInit->activate_install('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_pods_pods_components_refresh-3282', '1744278441', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, PodsInit->activate_install, PodsInit->setup, PodsUpgrade->install, PodsComponents->activate_component, PodsComponents->get_components, pods_transient_set, pods_view_set, PodsView::set, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_pods_pods_components_refresh-3282', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_pods_pods_components_refresh-3282' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_pods...', 1, '', 'off')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsView.php(566): set_transient('pods_pods_compo...', 1, 43200)
-#6 /wordpress/wp-content/plugins/pods/includes/general.php(3052): PodsView::set('pods_components...', 1, 43200, 'transient', '')
-#7 /wordpress/wp-content/plugins/pods/includes/general.php(3155): pods_view_set('pods_components...', 1, 43200, 'transient')
-#8 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(519): pods_transient_set('pods_components...', 1, 43200)
-#9 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(638): PodsComponents->get_components()
-#10 /wordpress/wp-content/plugins/pods/sql/upgrade/PodsUpgrade.php(99): PodsComponents->activate_component('templates')
-#11 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2246): PodsUpgrade->install(NULL)
-#12 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2115): PodsInit->setup()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PodsInit->activate_install('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_pods_pods_components_refresh-3282', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, PodsInit->activate_install, PodsInit->setup, PodsUpgrade->install, PodsComponents->activate_component, PodsComponents->get_components, pods_transient_set, pods_view_set, PodsView::set, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_pods_pods_components-3282', '1744840042', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_pods_pods_components-3282' , '1744840042' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744840042, '', 'off')
-#5 /wordpress/wp-content/plugins/pods/classes/PodsView.php(566): set_transient('pods_pods_compo...', Array, 604800)
-#6 /wordpress/wp-content/plugins/pods/includes/general.php(3052): PodsView::set('pods_components...', Array, 604800, 'transient', '')
-#7 /wordpress/wp-content/plugins/pods/includes/general.php(3155): pods_view_set('pods_components', Array, 604800, 'transient')
-#8 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(521): pods_transient_set('pods_components', Array, 604800)
-#9 /wordpress/wp-content/plugins/pods/classes/PodsComponents.php(638): PodsComponents->get_components()
-#10 /wordpress/wp-content/plugins/pods/sql/upgrade/PodsUpgrade.php(99): PodsComponents->activate_component('templates')
-#11 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2246): PodsUpgrade->install(NULL)
-#12 /wordpress/wp-content/plugins/pods/classes/PodsInit.php(2115): PodsInit->setup()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PodsInit->activate_install('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_pods_pods_components-3282', '1744840042', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, PodsInit->activate_install, PodsInit->setup, PodsUpgrade->install, PodsComponents->activate_component, PodsComponents->get_components, pods_transient_set, pods_view_set, PodsView::set, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:47:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_pods_pods_components-3282', 'a:13:{s:22:\"advanced-content-types\";a:28:{s:2:\"ID\";s:22:\"advanced-content-types\";s:4:\"Name\";s:22:\"Advanced Content Types\";s:9:\"ShortName\";s:22:\"Advanced Content Types\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:22:\"Advanced Content Types\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:252:\"A content type that exists outside of the WordPress post and postmeta table and uses custom tables instead. You most likely don\'t need these and we strongly recommend that you use Custom Post Types or Custom Taxonomies instead. FOR ADVANCED USERS ONLY.\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"2.3\";s:8:\"Category\";s:8:\"Advanced\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:27:\"Pods_Advanced_Content_Types\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:0:\"\";s:8:\"External\";b:0;s:4:\"File\";s:26:\"Advanced-Content-Types.php\";}s:22:\"advanced-relationships\";a:28:{s:2:\"ID\";s:22:\"advanced-relationships\";s:4:\"Name\";s:22:\"Advanced Relationships\";s:9:\"ShortName\";s:22:\"Advanced Relationships\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:22:\"Advanced Relationships\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:187:\"Add advanced relationship objects for relating to including Database Tables, Multisite Networks, Multisite Sites, Themes, Page Templates, Sidebars, Post Type Objects, and Taxonomy Objects\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"2.3\";s:8:\"Category\";s:8:\"Advanced\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:27:\"Pods_Advanced_Relationships\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:0:\"\";s:8:\"External\";b:0;s:4:\"File\";s:26:\"Advanced-Relationships.php\";}s:19:\"builder-integration\";a:28:{s:2:\"ID\";s:19:\"builder-integration\";s:4:\"Name\";s:19:\"Builder Integration\";s:9:\"ShortName\";s:19:\"Builder Integration\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:19:\"Builder Integration\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:169:\"Integration with the <a href=\"http://ithemes.com/\">Builder</a> theme / child themes from <a href=\"http://ithemes.com/\">iThemes</a>; Adds new modules to the Layout engine\";s:10:\"Deprecated\";s:3:\"Yes\";s:19:\"DeprecatedInVersion\";s:6:\"2.9.13\";s:24:\"DeprecatedRemovalVersion\";s:3:\"3.1\";s:7:\"Version\";s:3:\"1.0\";s:8:\"Category\";s:11:\"Integration\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:12:\"Pods_Builder\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:29:\"pods-builder/pods-builder.php\";s:8:\"External\";b:0;s:4:\"File\";s:19:\"Builder/Builder.php\";}s:15:\"markdown-syntax\";a:28:{s:2:\"ID\";s:15:\"markdown-syntax\";s:4:\"Name\";s:15:\"Markdown Syntax\";s:9:\"ShortName\";s:15:\"Markdown Syntax\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:15:\"Markdown Syntax\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:158:\"Integration with Markdown (via Parsedown https://github.com/erusev/parsedown); Adds an option to enable Markdown syntax for Paragraph Text and WYSIWYG fields.\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"2.0\";s:8:\"Category\";s:11:\"Field Types\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:13:\"Pods_Markdown\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:0:\"\";s:8:\"External\";b:0;s:4:\"File\";s:12:\"Markdown.php\";}s:53:\"migrate-import-from-the-advanced-custom-fields-plugin\";a:28:{s:2:\"ID\";s:53:\"migrate-import-from-the-advanced-custom-fields-plugin\";s:4:\"Name\";s:54:\"Migrate: Import from the Advanced Custom Fields plugin\";s:9:\"ShortName\";s:54:\"Migrate: Import from the Advanced Custom Fields plugin\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:11:\"Migrate ACF\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:258:\"Import Custom Post Types and Taxonomies from the Advanced Custom Fields (<a href=\"https://wordpress.org/plugins/advanced-custom-fields/\">https://wordpress.org/plugins/advanced-custom-fields/</a>). This does NOT migrate custom fields or field groups from ACF.\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"1.0\";s:8:\"Category\";s:9:\"Migration\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:16:\"Pods_Migrate_ACF\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:37:\"pods-migrate-acf/pods-migrate-acf.php\";s:8:\"External\";b:0;s:4:\"File\";s:27:\"Migrate-ACF/Migrate-ACF.php\";}s:50:\"migrate-import-from-the-custom-post-type-ui-plugin\";a:28:{s:2:\"ID\";s:50:\"migrate-import-from-the-custom-post-type-ui-plugin\";s:4:\"Name\";s:51:\"Migrate: Import from the Custom Post Type UI plugin\";s:9:\"ShortName\";s:51:\"Migrate: Import from the Custom Post Type UI plugin\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:14:\"Migrate CPT UI\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:182:\"Import Custom Post Types and Taxonomies from Custom Post Type UI (<a href=\"https://wordpress.org/plugins/custom-post-type-ui/\">https://wordpress.org/plugins/custom-post-type-ui/</a>)\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"1.0\";s:8:\"Category\";s:9:\"Migration\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:18:\"Pods_Migrate_CPTUI\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:69:\"pods-migrate-custom-post-type-ui/pods-migrate-custom-post-type-ui.php\";s:8:\"External\";b:0;s:4:\"File\";s:31:\"Migrate-CPTUI/Migrate-CPTUI.php\";}s:16:\"migrate-packages\";a:28:{s:2:\"ID\";s:16:\"migrate-packages\";s:4:\"Name\";s:22:\"Import/Export Packages\";s:9:\"ShortName\";s:22:\"Import/Export Packages\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:22:\"Import/Export Packages\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:121:\"Import/Export your Pods, Fields, and other settings from any Pods site; Includes an API to Import/Export Packages via PHP\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"2.0\";s:8:\"Category\";s:9:\"Migration\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:21:\"Pods_Migrate_Packages\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:47:\"pods-migrate-packages/pods-migrate-packages.php\";s:8:\"External\";b:0;s:4:\"File\";s:37:\"Migrate-Packages/Migrate-Packages.php\";}s:63:\"migrate-pod-page-and-pod-template-php-into-file-based-templates\";a:28:{s:2:\"ID\";s:63:\"migrate-pod-page-and-pod-template-php-into-file-based-templates\";s:4:\"Name\";s:64:\"Migrate: Pod Page and Pod Template PHP into File-based templates\";s:9:\"ShortName\";s:64:\"Migrate: Pod Page and Pod Template PHP into File-based templates\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\"MenuName\";s:21:\"Migrate PHP Templates\";s:8:\"MenuPage\";s:0:\"\";s:11:\"MenuAddPage\";s:0:\"\";s:7:\"MustUse\";b:0;s:11:\"Description\";s:510:\"Pod Pages and Pod Templates will be migrated into their corresponding file-based locations in the theme. This will overwrite existing files and this is one-way. After migrating the files it will clear the PHP code from the DB content. <a href=\"https://docs.pods.io/displaying-pods/pod-page-template-hierarchy-for-themes/\">More information about Pod Page template hierarchy</a> | <a href=\"https://docs.pods.io/displaying-pods/pod-template-hierarchy-for-themes/\">More information about Pod Template hierarchy</a>\";s:10:\"Deprecated\";s:0:\"\";s:19:\"DeprecatedInVersion\";s:0:\"\";s:24:\"DeprecatedRemovalVersion\";s:0:\"\";s:7:\"Version\";s:3:\"1.0\";s:8:\"Category\";s:9:\"Migration\";s:6:\"Author\";s:0:\"\";s:9:\"AuthorURI\";s:0:\"\";s:5:\"Class\";s:16:\"Pods_Migrate_PHP\";s:4:\"Hide\";s:0:\"\";s:16:\"PluginDependency\";s:0:\"\";s:15:\"ThemeDependency\";s:0:\"\";s:13:\"DeveloperMode\";b:0;s:13:\"TablelessMode\";b:0;s:10:\"Capability\";s:0:\"\";s:6:\"Plugin\";s:37:\"pods-migrate-php/pods-migrate-php.php\";s:8:\"External\";b:0;s:4:\"File\";s:27:\"Migrate-PHP/Migrate-PHP.php\";}s:5:\"pages\";a:28:{s:2:\"ID\";s:5:\"pages\";s:4:\"Name\";s:5:\"Pages\";s:9:\"ShortName\";s:5:\"Pages\";s:10:\"PluginName\";s:0:\"\";s:13:\"ComponentName\";s:0:\"\";s:3:\"URI\";s:0:\"\";s:8:\
+#0 /wordpress/wp-content/plugins/pinit/public/class-pinit.php(140): Pinit->__construct()
+#1 /wordpress/wp-content/plugins/pinit/includes/load_textdomain.php(9): Pinit::get_instance()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): p_load_plugin_textdomain('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/pinit/public/class-pinit.php on line 94
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"pinit"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
