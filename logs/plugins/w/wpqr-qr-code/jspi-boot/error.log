@@ -2,150 +2,179 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 20:27:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:27:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rpbc', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_rpbc' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_rpbc', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_rpbc', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rpbc', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sc_wpun_settings', 'a:13:{s:9:\"frequency\";s:6:\"hourly\";s:19:\"email_notifications\";i:1;s:9:\"notify_to\";s:19:\"admin@localhost.com\";s:11:\"notify_from\";s:19:\"admin@localhost.com\";s:19:\"slack_notifications\";i:0;s:17:\"slack_webhook_url\";s:0:\"\";s:22:\"slack_channel_override\";s:0:\"\";s:14:\"notify_plugins\";i:1;s:13:\"notify_themes\";i:1;s:16:\"notify_automatic\";i:1;s:12:\"hide_updates\";i:1;s:8:\"notified\";a:3:{s:4:\"core\";s:0:\"\";s:6:\"plugin\";a:0:{}s:5:\"theme\";a:0:{}}s:15:\"last_check_time\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sc_wpun_settings' , 'a:13:{s:9:&quot;frequency&quot;;s:6:&quot;hourly&quot;;s:19:&quot;email_notifications&quot;;i:1;s:9:&quot;notify_to&quot;;s:19:&quot;admin@localhost.com&quot;;s:11:&quot;notify_from&quot;;s:19:&quot;admin@localhost.com&quot;;s:19:&quot;slack_notifications&quot;;i:0;s:17:&quot;slack_webhook_url&quot;;s:0:&quot;&quot;;s:22:&quot;slack_channel_override&quot;;s:0:&quot;&quot;;s:14:&quot;notify_plugins&quot;;i:1;s:13:&quot;notify_themes&quot;;i:1;s:16:&quot;notify_automatic&quot;;i:1;s:12:&quot;hide_updates&quot;;i:1;s:8:&quot;notified&quot;;a:3:{s:4:&quot;core&quot;;s:0:&quot;&quot;;s:6:&quot;plugin&quot;;a:0:{}s:5:&quot;theme&quot;;a:0:{}}s:15:&quot;last_check_time&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sc_wpun_setting...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(150): update_option('sc_wpun_setting...', Array)
-#6 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(131): SC_WP_Updates_Notifier->get_set_options('sc_wpun_setting...', Array)
-#7 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(71): SC_WP_Updates_Notifier->settings_up_to_date()
-#8 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(64): SC_WP_Updates_Notifier->init()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): SC_WP_Updates_Notifier->run_init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sc_wpun_settings', 'a:13:{s:9:\"frequency\";s:6:\"hourly\";s:19:\"email_notifications\";i:1;s:9:\"notify_to\";s:19:\"admin@localhost.com\";s:11:\"notify_from\";s:19:\"admin@localhost.com\";s:19:\"slack_notifications\";i:0;s:17:\"slack_webhook_url\";s:0:\"\";s:22:\"slack_channel_override\";s:0:\"\";s:14:\"notify_plugins\";i:1;s:13:\"notify_themes\";i:1;s:16:\"notify_automatic\";i:1;s:12:\"hide_updates\";i:1;s:8:\"notified\";a:3:{s:4:\"core\";s:0:\"\";s:6:\"plugin\";a:0:{}s:5:\"theme\";a:0:{}}s:15:\"last_check_time\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, SC_WP_Updates_Notifier->run_init, SC_WP_Updates_Notifier->init, SC_WP_Updates_Notifier->settings_up_to_date, SC_WP_Updates_Notifier->get_set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sc_wpun_settings_ver', '7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sc_wpun_settings_ver' , '7.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sc_wpun_setting...', '7.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(150): update_option('sc_wpun_setting...', '7.0')
-#6 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(132): SC_WP_Updates_Notifier->get_set_options('sc_wpun_setting...', '7.0')
-#7 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(71): SC_WP_Updates_Notifier->settings_up_to_date()
-#8 /wordpress/wp-content/plugins/wp-updates-notifier/class-sc-wp-updates-notifier.php(64): SC_WP_Updates_Notifier->init()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): SC_WP_Updates_Notifier->run_init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sc_wpun_settings_ver', '7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, SC_WP_Updates_Notifier->run_init, SC_WP_Updates_Notifier->init, SC_WP_Updates_Notifier->settings_up_to_date, SC_WP_Updates_Notifier->get_set_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:28:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:28:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [11-Apr-2025 10:49:55 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:49:56 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:49:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php:616
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(202): ldap_get_connection()
+#1 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(37): ldap_admin_warnings()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ldap_init('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php on line 616
+[11-Apr-2025 10:50:05 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:06 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php:616
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(202): ldap_get_connection()
+#1 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(37): ldap_admin_warnings()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ldap_init('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php on line 616
+[11-Apr-2025 10:50:15 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:16 UTC] PHP Deprecated:  File registration.php is <strong>deprecated</strong> since version 3.1.0 with no alternative available. This file no longer needs to be included. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:50:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php:616
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(202): ldap_get_connection()
+#1 /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php(37): ldap_admin_warnings()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ldap_init('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wp-ldap-auth/wp-ldap-auth.php on line 616
+[11-Apr-2025 10:50:27 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/wp-pagenavi-lightword/scb/Forms.php on line 86
+[11-Apr-2025 10:50:27 UTC] PHP Fatal error:  Uncaught Error: Non-static method PageNavi_Core::init() cannot be called statically in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php:246
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php(253): _pagenavi_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-pagenavi-lig...')
+#3 /internal/eval.php(20): activate_plugin('wp-pagenavi-lig...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php on line 246
+[11-Apr-2025 10:50:35 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/wp-pagenavi-lightword/scb/Forms.php on line 86
+[11-Apr-2025 10:50:35 UTC] PHP Fatal error:  Uncaught Error: Non-static method PageNavi_Core::init() cannot be called statically in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php:246
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php(253): _pagenavi_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-pagenavi-lig...')
+#3 /internal/eval.php(20): activate_plugin('wp-pagenavi-lig...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php on line 246
+[11-Apr-2025 10:50:42 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/wp-pagenavi-lightword/scb/Forms.php on line 86
+[11-Apr-2025 10:50:42 UTC] PHP Fatal error:  Uncaught Error: Non-static method PageNavi_Core::init() cannot be called statically in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php:246
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php(253): _pagenavi_init()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-pagenavi-lig...')
+#3 /internal/eval.php(20): activate_plugin('wp-pagenavi-lig...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-pagenavi-lightword/wp-pagenavi-lightword.php on line 246
+[11-Apr-2025 10:52:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpaffi/wpaffi.php:20
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpaffi/wpaffi.p...')
+#2 /internal/eval.php(20): activate_plugin('wpaffi/wpaffi.p...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpaffi/wpaffi.php on line 20
+[11-Apr-2025 10:52:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpaffi/wpaffi.php:20
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpaffi/wpaffi.p...')
+#2 /internal/eval.php(20): activate_plugin('wpaffi/wpaffi.p...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpaffi/wpaffi.php on line 20
+[11-Apr-2025 10:52:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpaffi/wpaffi.php:20
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpaffi/wpaffi.p...')
+#2 /internal/eval.php(20): activate_plugin('wpaffi/wpaffi.p...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpaffi/wpaffi.php on line 20
+[11-Apr-2025 10:53:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-server-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:53:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-server-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:54:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-server-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:56:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:56:50 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-crm/lib/class_default_api.php on line 693
+[11-Apr-2025 10:57:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:57:02 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-crm/lib/class_default_api.php on line 693
+[11-Apr-2025 10:57:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-crm</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 10:57:13 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/wp-crm/lib/class_default_api.php on line 693
+[11-Apr-2025 10:57:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(71): osc_db_connect('localhost', 'username_here', 'password_here')
+#1 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(37): generate_config()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-online-store...')
+#4 /internal/eval.php(20): activate_plugin('wp-online-store...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php on line 23
+[11-Apr-2025 10:57:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(71): osc_db_connect('localhost', 'username_here', 'password_here')
+#1 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(37): generate_config()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-online-store...')
+#4 /internal/eval.php(20): activate_plugin('wp-online-store...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php on line 23
+[11-Apr-2025 10:57:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(71): osc_db_connect('localhost', 'username_here', 'password_here')
+#1 /wordpress/wp-content/plugins/wp-online-store-beta/WP_online_store.php(37): generate_config()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-online-store...')
+#4 /internal/eval.php(20): activate_plugin('wp-online-store...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-online-store-beta/functions/database.php on line 23
+[11-Apr-2025 10:58:21 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744369098.548)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 10:59:11 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
+#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
+[11-Apr-2025 10:59:19 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
+#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
+[11-Apr-2025 10:59:28 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
+#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
+[11-Apr-2025 10:59:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpqr_qr_code_Wi...')
@@ -163,7 +192,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 20:29:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[11-Apr-2025 10:59:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpqr_qr_code_Wi...')
@@ -181,7 +210,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 20:29:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[11-Apr-2025 10:59:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wpqr_qr_code_Wi...')

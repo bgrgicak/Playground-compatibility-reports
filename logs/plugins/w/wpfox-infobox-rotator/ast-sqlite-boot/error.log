@@ -2,470 +2,447 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 20:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_cronjob_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pipes_cronjob_active' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-pipes/pipes.php(93): add_option('pipes_cronjob_a...', '1')
-#5 /wordpress/wp-content/plugins/wp-pipes/pipes.php(144): PIPES->pipes_default_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 10:52:48 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744368766.253)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_cronjob_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, PIPES->pipes_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_active', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pipes_active' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-pipes/pipes.php(93): add_option('pipes_active', '0')
-#5 /wordpress/wp-content/plugins/wp-pipes/pipes.php(144): PIPES->pipes_default_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_active', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, PIPES->pipes_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_schedule', 'h3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pipes_schedule' , 'h3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-pipes/pipes.php(93): add_option('pipes_schedule', 'h3')
-#5 /wordpress/wp-content/plugins/wp-pipes/pipes.php(144): PIPES->pipes_default_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_schedule', 'h3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, PIPES->pipes_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_not_use_cache', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pipes_not_use_cache' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-pipes/pipes.php(93): add_option('pipes_not_use_c...', '0')
-#5 /wordpress/wp-content/plugins/wp-pipes/pipes.php(144): PIPES->pipes_default_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_not_use_cache', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, PIPES->pipes_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_start_at', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pipes_start_at' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-pipes/pipes.php(93): add_option('pipes_start_at', '')
-#5 /wordpress/wp-content/plugins/wp-pipes/pipes.php(144): PIPES->pipes_default_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pipes_start_at', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, PIPES->pipes_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'pipes_help_box', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_usermeta</li>
-<li>Executing: INSERT INTO `wp_usermeta` () SELECT  FROM (VALUES ( 1 , 'pipes_help_box' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_usermeta', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/meta.php(124): wpdb->insert('wp_usermeta', Array)
-#6 /wordpress/wp-includes/meta.php(252): add_metadata('user', 1, 'pipes_help_box', 1)
-#7 /wordpress/wp-includes/user.php(1231): update_metadata('user', 1, 'pipes_help_box', 1, '')
-#8 /wordpress/wp-content/plugins/wp-pipes/install.pipes.php(24): update_user_meta(1, 'pipes_help_box', 1)
-#9 /wordpress/wp-content/plugins/wp-pipes/pipes.php(145): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#15 {main}</pre>
- for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'pipes_help_box', '1') made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, require_once('/plugins/wp-pipes/install.pipes.php'), update_user_meta, update_metadata, add_metadata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'pipes_per_page', '20')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_usermeta</li>
-<li>Executing: INSERT INTO `wp_usermeta` () SELECT  FROM (VALUES ( 1 , 'pipes_per_page' , '20' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_usermeta', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/meta.php(124): wpdb->insert('wp_usermeta', Array)
-#6 /wordpress/wp-includes/meta.php(252): add_metadata('user', 1, 'pipes_per_page', 20)
-#7 /wordpress/wp-includes/user.php(1231): update_metadata('user', 1, 'pipes_per_page', 20, '')
-#8 /wordpress/wp-content/plugins/wp-pipes/install.pipes.php(24): update_user_meta(1, 'pipes_per_page', 20)
-#9 /wordpress/wp-content/plugins/wp-pipes/pipes.php(145): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#15 {main}</pre>
- for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'pipes_per_page', '20') made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, require_once('/plugins/wp-pipes/install.pipes.php'), update_user_meta, update_metadata, add_metadata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'addons_per_page', '20')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_usermeta</li>
-<li>Executing: INSERT INTO `wp_usermeta` () SELECT  FROM (VALUES ( 1 , 'addons_per_page' , '20' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_usermeta', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/meta.php(124): wpdb->insert('wp_usermeta', Array)
-#6 /wordpress/wp-includes/meta.php(252): add_metadata('user', 1, 'addons_per_page', 20)
-#7 /wordpress/wp-includes/user.php(1231): update_metadata('user', 1, 'addons_per_page', 20, '')
-#8 /wordpress/wp-content/plugins/wp-pipes/install.pipes.php(24): update_user_meta(1, 'addons_per_page', 20)
-#9 /wordpress/wp-content/plugins/wp-pipes/pipes.php(145): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): PIPES->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pip...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-pipes/pipes....')
-#15 {main}</pre>
- for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'addons_per_page', '20') made by activate_plugin, do_action('activate_wp-pipes/pipes.php'), WP_Hook->do_action, WP_Hook->apply_filters, PIPES->install, require_once('/plugins/wp-pipes/install.pipes.php'), update_user_meta, update_metadata, add_metadata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 57
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 72
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:27:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:27:27 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 57
-[09-Apr-2025 20:27:27 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 72
-[09-Apr-2025 20:27:38 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 57
-[09-Apr-2025 20:27:38 UTC] PHP Notice:  Undefined variable: collation in /wordpress/wp-content/plugins/wp-pipes/install.pipes.php on line 72
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 478
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 691
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 703
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 716
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 802
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 807
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 478
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 691
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 703
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 716
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 802
-[09-Apr-2025 20:27:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php on line 807
-[09-Apr-2025 20:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_language3', 'a:35:{s:11:\"applescript\";a:2:{i:0;s:11:\"AppleScript\";i:1;s:4:\"true\";}s:13:\"actionscript3\";a:2:{i:0;s:13:\"Actionscript3\";i:1;s:4:\"true\";}s:4:\"bash\";a:2:{i:0;s:10:\"Bash shell\";i:1;s:4:\"true\";}s:10:\"coldfusion\";a:2:{i:0;s:10:\"ColdFusion\";i:1;s:4:\"true\";}s:1:\"c\";a:2:{i:0;s:1:\"C\";i:1;s:4:\"true\";}s:3:\"cpp\";a:2:{i:0;s:3:\"C++\";i:1;s:4:\"true\";}s:6:\"csharp\";a:2:{i:0;s:2:\"C#\";i:1;s:4:\"true\";}s:3:\"css\";a:2:{i:0;s:3:\"CSS\";i:1;s:4:\"true\";}s:6:\"delphi\";a:2:{i:0;s:6:\"Delphi\";i:1;s:4:\"true\";}s:4:\"diff\";a:2:{i:0;s:4:\"Diff\";i:1;s:4:\"true\";}s:6:\"erlang\";a:2:{i:0;s:6:\"Erlang\";i:1;s:4:\"true\";}s:6:\"groovy\";a:2:{i:0;s:6:\"Groovy\";i:1;s:4:\"true\";}s:4:\"html\";a:2:{i:0;s:4:\"HTML\";i:1;s:4:\"true\";}s:4:\"java\";a:2:{i:0;s:4:\"Java\";i:1;s:4:\"true\";}s:6:\"javafx\";a:2:{i:0;s:6:\"JavaFX\";i:1;s:4:\"true\";}s:10:\"javascript\";a:2:{i:0;s:10:\"JavaScript\";i:1;s:4:\"true\";}s:6:\"pascal\";a:2:{i:0;s:6:\"Pascal\";i:1;s:4:\"true\";}s:5:\"patch\";a:2:{i:0;s:5:\"Patch\";i:1;s:4:\"true\";}s:4:\"perl\";a:2:{i:0;s:4:\"Perl\";i:1;s:4:\"true\";}s:3:\"php\";a:2:{i:0;s:3:\"PHP\";i:1;s:4:\"true\";}s:4:\"text\";a:2:{i:0;s:10:\"Plain Text\";i:1;s:4:\"true\";}s:10:\"powershell\";a:2:{i:0;s:10:\"PowerShell\";i:1;s:4:\"true\";}s:6:\"python\";a:2:{i:0;s:6:\"Python\";i:1;s:4:\"true\";}s:4:\"ruby\";a:2:{i:0;s:4:\"Ruby\";i:1;s:4:\"true\";}s:5:\"rails\";a:2:{i:0;s:13:\"Ruby on Rails\";i:1;s:4:\"true\";}s:4:\"sass\";a:2:{i:0;s:4:\"Sass\";i:1;s:4:\"true\";}s:5:\"scala\";a:2:{i:0;s:5:\"Scala\";i:1;s:4:\"true\";}s:4:\"scss\";a:2:{i:0;s:4:\"Scss\";i:1;s:4:\"true\";}s:5:\"shell\";a:2:{i:0;s:5:\"Shell\";i:1;s:4:\"true\";}s:3:\"sql\";a:2:{i:0;s:3:\"SQL\";i:1;s:4:\"true\";}s:2:\"vb\";a:2:{i:0;s:12:\"Visual Basic\";i:1;s:4:\"true\";}s:5:\"vbnet\";a:2:{i:0;s:17:\"Visual Basic .NET\";i:1;s:4:\"true\";}s:5:\"xhtml\";a:2:{i:0;s:5:\"XHTML\";i:1;s:4:\"true\";}s:3:\"xml\";a:2:{i:0;s:3:\"XML\";i:1;s:4:\"true\";}s:4:\"xslt\";a:2:{i:0;s:4:\"XSLT\";i:1;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sh_language3' , 'a:35:{s:11:&quot;applescript&quot;;a:2:{i:0;s:11:&quot;AppleScript&quot;;i:1;s:4:&quot;true&quot;;}s:13:&quot;actionscript3&quot;;a:2:{i:0;s:13:&quot;Actionscript3&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;bash&quot;;a:2:{i:0;s:10:&quot;Bash shell&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;coldfusion&quot;;a:2:{i:0;s:10:&quot;ColdFusion&quot;;i:1;s:4:&quot;true&quot;;}s:1:&quot;c&quot;;a:2:{i:0;s:1:&quot;C&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;cpp&quot;;a:2:{i:0;s:3:&quot;C++&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;csharp&quot;;a:2:{i:0;s:2:&quot;C#&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;css&quot;;a:2:{i:0;s:3:&quot;CSS&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;delphi&quot;;a:2:{i:0;s:6:&quot;Delphi&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;diff&quot;;a:2:{i:0;s:4:&quot;Diff&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;erlang&quot;;a:2:{i:0;s:6:&quot;Erlang&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;groovy&quot;;a:2:{i:0;s:6:&quot;Groovy&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;html&quot;;a:2:{i:0;s:4:&quot;HTML&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;java&quot;;a:2:{i:0;s:4:&quot;Java&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;javafx&quot;;a:2:{i:0;s:6:&quot;JavaFX&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;javascript&quot;;a:2:{i:0;s:10:&quot;JavaScript&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;pascal&quot;;a:2:{i:0;s:6:&quot;Pascal&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;patch&quot;;a:2:{i:0;s:5:&quot;Patch&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;perl&quot;;a:2:{i:0;s:4:&quot;Perl&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;php&quot;;a:2:{i:0;s:3:&quot;PHP&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;text&quot;;a:2:{i:0;s:10:&quot;Plain Text&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;powershell&quot;;a:2:{i:0;s:10:&quot;PowerShell&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;python&quot;;a:2:{i:0;s:6:&quot;Python&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;ruby&quot;;a:2:{i:0;s:4:&quot;Ruby&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;rails&quot;;a:2:{i:0;s:13:&quot;Ruby on Rails&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;sass&quot;;a:2:{i:0;s:4:&quot;Sass&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;scala&quot;;a:2:{i:0;s:5:&quot;Scala&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;scss&quot;;a:2:{i:0;s:4:&quot;Scss&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;shell&quot;;a:2:{i:0;s:5:&quot;Shell&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;sql&quot;;a:2:{i:0;s:3:&quot;SQL&quot;;i:1;s:4:&quot;true&quot;;}s:2:&quot;vb&quot;;a:2:{i:0;s:12:&quot;Visual Basic&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;vbnet&quot;;a:2:{i:0;s:17:&quot;Visual Basic .NET&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;xhtml&quot;;a:2:{i:0;s:5:&quot;XHTML&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;xml&quot;;a:2:{i:0;s:3:&quot;XML&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;xslt&quot;;a:2:{i:0;s:4:&quot;XSLT&quot;;i:1;s:4:&quot;true&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_sh_language3', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(259): update_option('wp_sh_language3', Array)
-#6 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(353): wp_sh_language_array()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_sh_check_db_ver('')
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 12:53:47 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wptg_monthwidge...')
+#2 /wordpress/wp-content/plugins/wptermingermany/controller/wptg_PluginController.class.php(401): register_widget('wptg_monthwidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wptg_PluginController->widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_language3', 'a:35:{s:11:\"applescript\";a:2:{i:0;s:11:\"AppleScript\";i:1;s:4:\"true\";}s:13:\"actionscript3\";a:2:{i:0;s:13:\"Actionscript3\";i:1;s:4:\"true\";}s:4:\"bash\";a:2:{i:0;s:10:\"Bash shell\";i:1;s:4:\"true\";}s:10:\"coldfusion\";a:2:{i:0;s:10:\"ColdFusion\";i:1;s:4:\"true\";}s:1:\"c\";a:2:{i:0;s:1:\"C\";i:1;s:4:\"true\";}s:3:\"cpp\";a:2:{i:0;s:3:\"C++\";i:1;s:4:\"true\";}s:6:\"csharp\";a:2:{i:0;s:2:\"C#\";i:1;s:4:\"true\";}s:3:\"css\";a:2:{i:0;s:3:\"CSS\";i:1;s:4:\"true\";}s:6:\"delphi\";a:2:{i:0;s:6:\"Delphi\";i:1;s:4:\"true\";}s:4:\"diff\";a:2:{i:0;s:4:\"Diff\";i:1;s:4:\"true\";}s:6:\"erlang\";a:2:{i:0;s:6:\"Erlang\";i:1;s:4:\"true\";}s:6:\"groovy\";a:2:{i:0;s:6:\"Groovy\";i:1;s:4:\"true\";}s:4:\"html\";a:2:{i:0;s:4:\"HTML\";i:1;s:4:\"true\";}s:4:\"java\";a:2:{i:0;s:4:\"Java\";i:1;s:4:\"true\";}s:6:\"javafx\";a:2:{i:0;s:6:\"JavaFX\";i:1;s:4:\"true\";}s:10:\"javascript\";a:2:{i:0;s:10:\"JavaScript\";i:1;s:4:\"true\";}s:6:\"pascal\";a:2:{i:0;s:6:\"Pascal\";i:1;s:4:\"true\";}s:5:\"patch\";a:2:{i:0;s:5:\"Patch\";i:1;s:4:\"true\";}s:4:\"perl\";a:2:{i:0;s:4:\"Perl\";i:1;s:4:\"true\";}s:3:\"php\";a:2:{i:0;s:3:\"PHP\";i:1;s:4:\"true\";}s:4:\"text\";a:2:{i:0;s:10:\"Plain Text\";i:1;s:4:\"true\";}s:10:\"powershell\";a:2:{i:0;s:10:\"PowerShell\";i:1;s:4:\"true\";}s:6:\"python\";a:2:{i:0;s:6:\"Python\";i:1;s:4:\"true\";}s:4:\"ruby\";a:2:{i:0;s:4:\"Ruby\";i:1;s:4:\"true\";}s:5:\"rails\";a:2:{i:0;s:13:\"Ruby on Rails\";i:1;s:4:\"true\";}s:4:\"sass\";a:2:{i:0;s:4:\"Sass\";i:1;s:4:\"true\";}s:5:\"scala\";a:2:{i:0;s:5:\"Scala\";i:1;s:4:\"true\";}s:4:\"scss\";a:2:{i:0;s:4:\"Scss\";i:1;s:4:\"true\";}s:5:\"shell\";a:2:{i:0;s:5:\"Shell\";i:1;s:4:\"true\";}s:3:\"sql\";a:2:{i:0;s:3:\"SQL\";i:1;s:4:\"true\";}s:2:\"vb\";a:2:{i:0;s:12:\"Visual Basic\";i:1;s:4:\"true\";}s:5:\"vbnet\";a:2:{i:0;s:17:\"Visual Basic .NET\";i:1;s:4:\"true\";}s:5:\"xhtml\";a:2:{i:0;s:5:\"XHTML\";i:1;s:4:\"true\";}s:3:\"xml\";a:2:{i:0;s:3:\"XML\";i:1;s:4:\"true\";}s:4:\"xslt\";a:2:{i:0;s:4:\"XSLT\";i:1;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_sh_check_db_ver, wp_sh_language_array, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 12:53:54 Europe/Berlin] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_language2', 'a:32:{s:13:\"actionscript3\";a:2:{i:0;s:13:\"Actionscript3\";i:1;s:4:\"true\";}s:4:\"bash\";a:2:{i:0;s:10:\"Bash shell\";i:1;s:4:\"true\";}s:10:\"coldfusion\";a:2:{i:0;s:10:\"ColdFusion\";i:1;s:4:\"true\";}s:1:\"c\";a:2:{i:0;s:1:\"C\";i:1;s:4:\"true\";}s:3:\"cpp\";a:2:{i:0;s:3:\"C++\";i:1;s:4:\"true\";}s:6:\"csharp\";a:2:{i:0;s:2:\"C#\";i:1;s:4:\"true\";}s:3:\"css\";a:2:{i:0;s:3:\"CSS\";i:1;s:4:\"true\";}s:6:\"delphi\";a:2:{i:0;s:6:\"Delphi\";i:1;s:4:\"true\";}s:4:\"diff\";a:2:{i:0;s:4:\"Diff\";i:1;s:4:\"true\";}s:6:\"erlang\";a:2:{i:0;s:6:\"Erlang\";i:1;s:4:\"true\";}s:6:\"groovy\";a:2:{i:0;s:6:\"Groovy\";i:1;s:4:\"true\";}s:4:\"html\";a:2:{i:0;s:4:\"HTML\";i:1;s:4:\"true\";}s:4:\"java\";a:2:{i:0;s:4:\"Java\";i:1;s:4:\"true\";}s:6:\"javafx\";a:2:{i:0;s:6:\"JavaFX\";i:1;s:4:\"true\";}s:10:\"javascript\";a:2:{i:0;s:10:\"JavaScript\";i:1;s:4:\"true\";}s:6:\"pascal\";a:2:{i:0;s:6:\"Pascal\";i:1;s:4:\"true\";}s:5:\"patch\";a:2:{i:0;s:5:\"Patch\";i:1;s:4:\"true\";}s:4:\"perl\";a:2:{i:0;s:4:\"Perl\";i:1;s:4:\"true\";}s:3:\"php\";a:2:{i:0;s:3:\"PHP\";i:1;s:4:\"true\";}s:4:\"text\";a:2:{i:0;s:10:\"Plain Text\";i:1;s:4:\"true\";}s:10:\"powershell\";a:2:{i:0;s:10:\"PowerShell\";i:1;s:4:\"true\";}s:6:\"python\";a:2:{i:0;s:6:\"Python\";i:1;s:4:\"true\";}s:4:\"ruby\";a:2:{i:0;s:4:\"Ruby\";i:1;s:4:\"true\";}s:5:\"rails\";a:2:{i:0;s:13:\"Ruby on Rails\";i:1;s:4:\"true\";}s:5:\"scala\";a:2:{i:0;s:5:\"Scala\";i:1;s:4:\"true\";}s:5:\"shell\";a:2:{i:0;s:5:\"Shell\";i:1;s:4:\"true\";}s:3:\"sql\";a:2:{i:0;s:3:\"SQL\";i:1;s:4:\"true\";}s:2:\"vb\";a:2:{i:0;s:12:\"Visual Basic\";i:1;s:4:\"true\";}s:5:\"vbnet\";a:2:{i:0;s:17:\"Visual Basic .NET\";i:1;s:4:\"true\";}s:5:\"xhtml\";a:2:{i:0;s:5:\"XHTML\";i:1;s:4:\"true\";}s:3:\"xml\";a:2:{i:0;s:3:\"XML\";i:1;s:4:\"true\";}s:4:\"xslt\";a:2:{i:0;s:4:\"XSLT\";i:1;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_wptg_import (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				cdate datetime NOT NULL,
+				filename VARCHAR(500) NOT NULL,
+				event_count int(11) NOT NULL,				 
+				PRIMARY KEY  id (id)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sh_language2' , 'a:32:{s:13:&quot;actionscript3&quot;;a:2:{i:0;s:13:&quot;Actionscript3&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;bash&quot;;a:2:{i:0;s:10:&quot;Bash shell&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;coldfusion&quot;;a:2:{i:0;s:10:&quot;ColdFusion&quot;;i:1;s:4:&quot;true&quot;;}s:1:&quot;c&quot;;a:2:{i:0;s:1:&quot;C&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;cpp&quot;;a:2:{i:0;s:3:&quot;C++&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;csharp&quot;;a:2:{i:0;s:2:&quot;C#&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;css&quot;;a:2:{i:0;s:3:&quot;CSS&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;delphi&quot;;a:2:{i:0;s:6:&quot;Delphi&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;diff&quot;;a:2:{i:0;s:4:&quot;Diff&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;erlang&quot;;a:2:{i:0;s:6:&quot;Erlang&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;groovy&quot;;a:2:{i:0;s:6:&quot;Groovy&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;html&quot;;a:2:{i:0;s:4:&quot;HTML&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;java&quot;;a:2:{i:0;s:4:&quot;Java&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;javafx&quot;;a:2:{i:0;s:6:&quot;JavaFX&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;javascript&quot;;a:2:{i:0;s:10:&quot;JavaScript&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;pascal&quot;;a:2:{i:0;s:6:&quot;Pascal&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;patch&quot;;a:2:{i:0;s:5:&quot;Patch&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;perl&quot;;a:2:{i:0;s:4:&quot;Perl&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;php&quot;;a:2:{i:0;s:3:&quot;PHP&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;text&quot;;a:2:{i:0;s:10:&quot;Plain Text&quot;;i:1;s:4:&quot;true&quot;;}s:10:&quot;powershell&quot;;a:2:{i:0;s:10:&quot;PowerShell&quot;;i:1;s:4:&quot;true&quot;;}s:6:&quot;python&quot;;a:2:{i:0;s:6:&quot;Python&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;ruby&quot;;a:2:{i:0;s:4:&quot;Ruby&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;rails&quot;;a:2:{i:0;s:13:&quot;Ruby on Rails&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;scala&quot;;a:2:{i:0;s:5:&quot;Scala&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;shell&quot;;a:2:{i:0;s:5:&quot;Shell&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;sql&quot;;a:2:{i:0;s:3:&quot;SQL&quot;;i:1;s:4:&quot;true&quot;;}s:2:&quot;vb&quot;;a:2:{i:0;s:12:&quot;Visual Basic&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;vbnet&quot;;a:2:{i:0;s:17:&quot;Visual Basic .NET&quot;;i:1;s:4:&quot;true&quot;;}s:5:&quot;xhtml&quot;;a:2:{i:0;s:5:&quot;XHTML&quot;;i:1;s:4:&quot;true&quot;;}s:3:&quot;xml&quot;;a:2:{i:0;s:3:&quot;XML&quot;;i:1;s:4:&quot;true&quot;;}s:4:&quot;xslt&quot;;a:2:{i:0;s:4:&quot;XSLT&quot;;i:1;s:4:&quot;true&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_sh_language2', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(260): update_option('wp_sh_language2', Array)
-#6 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(353): wp_sh_language_array()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_sh_check_db_ver('')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wptermingermany/controller/wptg_PluginController.class.php(108): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wptg_PluginController->activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpterm...', false)
+#7 /internal/eval.php(20): activate_plugin('wptermingermany...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wptg_import (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				cdate datetime NOT NULL,
+				filename VARCHAR(500) NOT NULL,
+				event_count int(11) NOT NULL,				 
+				PRIMARY KEY  id (id)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 made by activate_plugin, do_action('activate_wptermingermany/wptermingermany.php'), WP_Hook->do_action, WP_Hook->apply_filters, wptg_PluginController->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:53:55 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wptg_monthwidge...')
+#2 /wordpress/wp-content/plugins/wptermingermany/controller/wptg_PluginController.class.php(401): register_widget('wptg_monthwidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wptg_PluginController->widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_language2', 'a:32:{s:13:\"actionscript3\";a:2:{i:0;s:13:\"Actionscript3\";i:1;s:4:\"true\";}s:4:\"bash\";a:2:{i:0;s:10:\"Bash shell\";i:1;s:4:\"true\";}s:10:\"coldfusion\";a:2:{i:0;s:10:\"ColdFusion\";i:1;s:4:\"true\";}s:1:\"c\";a:2:{i:0;s:1:\"C\";i:1;s:4:\"true\";}s:3:\"cpp\";a:2:{i:0;s:3:\"C++\";i:1;s:4:\"true\";}s:6:\"csharp\";a:2:{i:0;s:2:\"C#\";i:1;s:4:\"true\";}s:3:\"css\";a:2:{i:0;s:3:\"CSS\";i:1;s:4:\"true\";}s:6:\"delphi\";a:2:{i:0;s:6:\"Delphi\";i:1;s:4:\"true\";}s:4:\"diff\";a:2:{i:0;s:4:\"Diff\";i:1;s:4:\"true\";}s:6:\"erlang\";a:2:{i:0;s:6:\"Erlang\";i:1;s:4:\"true\";}s:6:\"groovy\";a:2:{i:0;s:6:\"Groovy\";i:1;s:4:\"true\";}s:4:\"html\";a:2:{i:0;s:4:\"HTML\";i:1;s:4:\"true\";}s:4:\"java\";a:2:{i:0;s:4:\"Java\";i:1;s:4:\"true\";}s:6:\"javafx\";a:2:{i:0;s:6:\"JavaFX\";i:1;s:4:\"true\";}s:10:\"javascript\";a:2:{i:0;s:10:\"JavaScript\";i:1;s:4:\"true\";}s:6:\"pascal\";a:2:{i:0;s:6:\"Pascal\";i:1;s:4:\"true\";}s:5:\"patch\";a:2:{i:0;s:5:\"Patch\";i:1;s:4:\"true\";}s:4:\"perl\";a:2:{i:0;s:4:\"Perl\";i:1;s:4:\"true\";}s:3:\"php\";a:2:{i:0;s:3:\"PHP\";i:1;s:4:\"true\";}s:4:\"text\";a:2:{i:0;s:10:\"Plain Text\";i:1;s:4:\"true\";}s:10:\"powershell\";a:2:{i:0;s:10:\"PowerShell\";i:1;s:4:\"true\";}s:6:\"python\";a:2:{i:0;s:6:\"Python\";i:1;s:4:\"true\";}s:4:\"ruby\";a:2:{i:0;s:4:\"Ruby\";i:1;s:4:\"true\";}s:5:\"rails\";a:2:{i:0;s:13:\"Ruby on Rails\";i:1;s:4:\"true\";}s:5:\"scala\";a:2:{i:0;s:5:\"Scala\";i:1;s:4:\"true\";}s:5:\"shell\";a:2:{i:0;s:5:\"Shell\";i:1;s:4:\"true\";}s:3:\"sql\";a:2:{i:0;s:3:\"SQL\";i:1;s:4:\"true\";}s:2:\"vb\";a:2:{i:0;s:12:\"Visual Basic\";i:1;s:4:\"true\";}s:5:\"vbnet\";a:2:{i:0;s:17:\"Visual Basic .NET\";i:1;s:4:\"true\";}s:5:\"xhtml\";a:2:{i:0;s:5:\"XHTML\";i:1;s:4:\"true\";}s:3:\"xml\";a:2:{i:0;s:3:\"XML\";i:1;s:4:\"true\";}s:4:\"xslt\";a:2:{i:0;s:4:\"XSLT\";i:1;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_sh_check_db_ver, wp_sh_language_array, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 12:54:02 Europe/Berlin] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_brush_files', 'a:25:{s:11:\"AppleScript\";a:4:{i:0;s:21:\"shBrushAppleScript.js\";i:1;s:11:\"applescript\";i:2;s:3:\"3.0\";i:3;s:4:\"true\";}s:13:\"ActionScript3\";a:4:{i:0;s:13:\"shBrushAS3.js\";i:1;s:17:\"as3 actionscript3\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:4:\"Bash\";a:4:{i:0;s:14:\"shBrushBash.js\";i:1;s:10:\"bash shell\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"ColdFusion\";a:4:{i:0;s:20:\"shBrushColdFusion.js\";i:1;s:13:\"cf coldfusion\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"C++\";a:4:{i:0;s:13:\"shBrushCpp.js\";i:1;s:5:\"cpp c\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:2:\"C#\";a:4:{i:0;s:16:\"shBrushCSharp.js\";i:1;s:17:\"c# c-sharp csharp\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:3:\"CSS\";a:4:{i:0;s:13:\"shBrushCss.js\";i:1;s:3:\"css\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:6:\"Delphi\";a:4:{i:0;s:16:\"shBrushDelphi.js\";i:1;s:17:\"delphi pas pascal\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Diff\";a:4:{i:0;s:14:\"shBrushDiff.js\";i:1;s:10:\"diff patch\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Erlang\";a:4:{i:0;s:16:\"shBrushErlang.js\";i:1;s:10:\"erl erlang\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Groovy\";a:4:{i:0;s:16:\"shBrushGroovy.js\";i:1;s:6:\"groovy\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:4:\"Java\";a:4:{i:0;s:14:\"shBrushJava.js\";i:1;s:4:\"java\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:6:\"JavaFX\";a:4:{i:0;s:16:\"shBrushJavaFX.js\";i:1;s:10:\"jfx javafx\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"JavaScript\";a:4:{i:0;s:17:\"shBrushJScript.js\";i:1;s:21:\"js jscript javascript\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Perl\";a:4:{i:0;s:14:\"shBrushPerl.js\";i:1;s:7:\"perl pl\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"PHP\";a:4:{i:0;s:13:\"shBrushPhp.js\";i:1;s:3:\"php\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:9:\"PlainText\";a:4:{i:0;s:15:\"shBrushPlain.js\";i:1;s:10:\"plain text\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"PowerShell\";a:4:{i:0;s:20:\"shBrushPowerShell.js\";i:1;s:13:\"ps powershell\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Python\";a:4:{i:0;s:16:\"shBrushPython.js\";i:1;s:9:\"py python\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Ruby\";a:4:{i:0;s:14:\"shBrushRuby.js\";i:1;s:17:\"rails ror ruby rb\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Sass\";a:4:{i:0;s:14:\"shBrushSass.js\";i:1;s:9:\"sass scss\";i:2;s:3:\"3.0\";i:3;s:4:\"true\";}s:5:\"Scala\";a:4:{i:0;s:15:\"shBrushScala.js\";i:1;s:5:\"scala\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"SQL\";a:4:{i:0;s:13:\"shBrushSql.js\";i:1;s:3:\"sql\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:11:\"VisualBasic\";a:4:{i:0;s:12:\"shBrushVb.js\";i:1;s:8:\"vb vbnet\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:3:\"XML\";a:4:{i:0;s:13:\"shBrushXml.js\";i:1;s:19:\"xml xhtml xslt html\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_wptg_import (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				cdate datetime NOT NULL,
+				filename VARCHAR(500) NOT NULL,
+				event_count int(11) NOT NULL,				 
+				PRIMARY KEY  id (id)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sh_brush_files' , 'a:25:{s:11:&quot;AppleScript&quot;;a:4:{i:0;s:21:&quot;shBrushAppleScript.js&quot;;i:1;s:11:&quot;applescript&quot;;i:2;s:3:&quot;3.0&quot;;i:3;s:4:&quot;true&quot;;}s:13:&quot;ActionScript3&quot;;a:4:{i:0;s:13:&quot;shBrushAS3.js&quot;;i:1;s:17:&quot;as3 actionscript3&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Bash&quot;;a:4:{i:0;s:14:&quot;shBrushBash.js&quot;;i:1;s:10:&quot;bash shell&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:10:&quot;ColdFusion&quot;;a:4:{i:0;s:20:&quot;shBrushColdFusion.js&quot;;i:1;s:13:&quot;cf coldfusion&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:3:&quot;C++&quot;;a:4:{i:0;s:13:&quot;shBrushCpp.js&quot;;i:1;s:5:&quot;cpp c&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:2:&quot;C#&quot;;a:4:{i:0;s:16:&quot;shBrushCSharp.js&quot;;i:1;s:17:&quot;c# c-sharp csharp&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:3:&quot;CSS&quot;;a:4:{i:0;s:13:&quot;shBrushCss.js&quot;;i:1;s:3:&quot;css&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:6:&quot;Delphi&quot;;a:4:{i:0;s:16:&quot;shBrushDelphi.js&quot;;i:1;s:17:&quot;delphi pas pascal&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Diff&quot;;a:4:{i:0;s:14:&quot;shBrushDiff.js&quot;;i:1;s:10:&quot;diff patch&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:6:&quot;Erlang&quot;;a:4:{i:0;s:16:&quot;shBrushErlang.js&quot;;i:1;s:10:&quot;erl erlang&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:6:&quot;Groovy&quot;;a:4:{i:0;s:16:&quot;shBrushGroovy.js&quot;;i:1;s:6:&quot;groovy&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Java&quot;;a:4:{i:0;s:14:&quot;shBrushJava.js&quot;;i:1;s:4:&quot;java&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:6:&quot;JavaFX&quot;;a:4:{i:0;s:16:&quot;shBrushJavaFX.js&quot;;i:1;s:10:&quot;jfx javafx&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:10:&quot;JavaScript&quot;;a:4:{i:0;s:17:&quot;shBrushJScript.js&quot;;i:1;s:21:&quot;js jscript javascript&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Perl&quot;;a:4:{i:0;s:14:&quot;shBrushPerl.js&quot;;i:1;s:7:&quot;perl pl&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:3:&quot;PHP&quot;;a:4:{i:0;s:13:&quot;shBrushPhp.js&quot;;i:1;s:3:&quot;php&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:9:&quot;PlainText&quot;;a:4:{i:0;s:15:&quot;shBrushPlain.js&quot;;i:1;s:10:&quot;plain text&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:10:&quot;PowerShell&quot;;a:4:{i:0;s:20:&quot;shBrushPowerShell.js&quot;;i:1;s:13:&quot;ps powershell&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:6:&quot;Python&quot;;a:4:{i:0;s:16:&quot;shBrushPython.js&quot;;i:1;s:9:&quot;py python&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Ruby&quot;;a:4:{i:0;s:14:&quot;shBrushRuby.js&quot;;i:1;s:17:&quot;rails ror ruby rb&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:4:&quot;Sass&quot;;a:4:{i:0;s:14:&quot;shBrushSass.js&quot;;i:1;s:9:&quot;sass scss&quot;;i:2;s:3:&quot;3.0&quot;;i:3;s:4:&quot;true&quot;;}s:5:&quot;Scala&quot;;a:4:{i:0;s:15:&quot;shBrushScala.js&quot;;i:1;s:5:&quot;scala&quot;;i:2;s:3:&quot;2.1&quot;;i:3;s:4:&quot;true&quot;;}s:3:&quot;SQL&quot;;a:4:{i:0;s:13:&quot;shBrushSql.js&quot;;i:1;s:3:&quot;sql&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:11:&quot;VisualBasic&quot;;a:4:{i:0;s:12:&quot;shBrushVb.js&quot;;i:1;s:8:&quot;vb vbnet&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}s:3:&quot;XML&quot;;a:4:{i:0;s:13:&quot;shBrushXml.js&quot;;i:1;s:19:&quot;xml xhtml xslt html&quot;;i:2;s:3:&quot;1.5&quot;;i:3;s:4:&quot;true&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_sh_brush_fil...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(261): update_option('wp_sh_brush_fil...', Array)
-#6 /wordpress/wp-content/plugins/wp-syntaxhighlighter/wp-syntaxhighlighter.php(353): wp_sh_language_array()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_sh_check_db_ver('')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wptermingermany/controller/wptg_PluginController.class.php(108): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wptg_PluginController->activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpterm...', false)
+#7 /internal/eval.php(20): activate_plugin('wptermingermany...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wptg_import (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				cdate datetime NOT NULL,
+				filename VARCHAR(500) NOT NULL,
+				event_count int(11) NOT NULL,				 
+				PRIMARY KEY  id (id)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 made by activate_plugin, do_action('activate_wptermingermany/wptermingermany.php'), WP_Hook->do_action, WP_Hook->apply_filters, wptg_PluginController->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 12:54:03 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wptg_monthwidge...')
+#2 /wordpress/wp-content/plugins/wptermingermany/controller/wptg_PluginController.class.php(401): register_widget('wptg_monthwidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wptg_PluginController->widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_brush_files', 'a:25:{s:11:\"AppleScript\";a:4:{i:0;s:21:\"shBrushAppleScript.js\";i:1;s:11:\"applescript\";i:2;s:3:\"3.0\";i:3;s:4:\"true\";}s:13:\"ActionScript3\";a:4:{i:0;s:13:\"shBrushAS3.js\";i:1;s:17:\"as3 actionscript3\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:4:\"Bash\";a:4:{i:0;s:14:\"shBrushBash.js\";i:1;s:10:\"bash shell\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"ColdFusion\";a:4:{i:0;s:20:\"shBrushColdFusion.js\";i:1;s:13:\"cf coldfusion\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"C++\";a:4:{i:0;s:13:\"shBrushCpp.js\";i:1;s:5:\"cpp c\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:2:\"C#\";a:4:{i:0;s:16:\"shBrushCSharp.js\";i:1;s:17:\"c# c-sharp csharp\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:3:\"CSS\";a:4:{i:0;s:13:\"shBrushCss.js\";i:1;s:3:\"css\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:6:\"Delphi\";a:4:{i:0;s:16:\"shBrushDelphi.js\";i:1;s:17:\"delphi pas pascal\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Diff\";a:4:{i:0;s:14:\"shBrushDiff.js\";i:1;s:10:\"diff patch\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Erlang\";a:4:{i:0;s:16:\"shBrushErlang.js\";i:1;s:10:\"erl erlang\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Groovy\";a:4:{i:0;s:16:\"shBrushGroovy.js\";i:1;s:6:\"groovy\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:4:\"Java\";a:4:{i:0;s:14:\"shBrushJava.js\";i:1;s:4:\"java\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:6:\"JavaFX\";a:4:{i:0;s:16:\"shBrushJavaFX.js\";i:1;s:10:\"jfx javafx\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"JavaScript\";a:4:{i:0;s:17:\"shBrushJScript.js\";i:1;s:21:\"js jscript javascript\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Perl\";a:4:{i:0;s:14:\"shBrushPerl.js\";i:1;s:7:\"perl pl\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"PHP\";a:4:{i:0;s:13:\"shBrushPhp.js\";i:1;s:3:\"php\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:9:\"PlainText\";a:4:{i:0;s:15:\"shBrushPlain.js\";i:1;s:10:\"plain text\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:10:\"PowerShell\";a:4:{i:0;s:20:\"shBrushPowerShell.js\";i:1;s:13:\"ps powershell\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:6:\"Python\";a:4:{i:0;s:16:\"shBrushPython.js\";i:1;s:9:\"py python\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Ruby\";a:4:{i:0;s:14:\"shBrushRuby.js\";i:1;s:17:\"rails ror ruby rb\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:4:\"Sass\";a:4:{i:0;s:14:\"shBrushSass.js\";i:1;s:9:\"sass scss\";i:2;s:3:\"3.0\";i:3;s:4:\"true\";}s:5:\"Scala\";a:4:{i:0;s:15:\"shBrushScala.js\";i:1;s:5:\"scala\";i:2;s:3:\"2.1\";i:3;s:4:\"true\";}s:3:\"SQL\";a:4:{i:0;s:13:\"shBrushSql.js\";i:1;s:3:\"sql\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:11:\"VisualBasic\";a:4:{i:0;s:12:\"shBrushVb.js\";i:1;s:8:\"vb vbnet\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}s:3:\"XML\";a:4:{i:0;s:13:\"shBrushXml.js\";i:1;s:19:\"xml xhtml xslt html\";i:2;s:3:\"1.5\";i:3;s:4:\"true\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_sh_check_db_ver, wp_sh_language_array, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 10:54:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 44
+[11-Apr-2025 10:54:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 47
+[11-Apr-2025 10:54:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 44
+[11-Apr-2025 10:54:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 47
+[11-Apr-2025 10:54:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 44
+[11-Apr-2025 10:54:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/widgets-on-pages/includes/class-widgets-on-pages-activator.php on line 47
+[11-Apr-2025 10:58:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sh_version', '3.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT COUNT(*) FROM wp_sm_sync</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sh_version' , '3.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT COUNT ( * ) FROM `wp_sm_sync` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-inc
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
+#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
+#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#15 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
+#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#14 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
+#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#14 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_sm_sync</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_sm_sync | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#12 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#13 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#12 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#12 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_sm_sync</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_sm_sync | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#12 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#13 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#12 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 10:58:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
+#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
+#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
+#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
+#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
+#12 {main}</pre>
+ for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wpfox-infobox-rotator"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/wpfox-infobox-rotator could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/wpfox-infobox-rotator could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+  }
+}
+
+Node.js v23.11.0
