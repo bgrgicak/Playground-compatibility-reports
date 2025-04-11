@@ -1,567 +1,825 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 16:32:22 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 16:32:22 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 16:32:22 UTC] PHP Warning:  Undefined array key 2 in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 16:32:22 UTC] PHP Warning:  Attempt to read property "id" on null in /internal/shared/sqlite-database-integration/wp-includes/parser/class-wp-parser.php on line 55
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the funds listing page.', '', 'Funds Listing', '', 'publish', 'page', 'closed', 'closed', '', 'cp-funds-listing-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the funds listing page.' , '' , 'Funds Listing' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-funds-listing-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(16): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the funds listing page.', '', 'Funds Listing', '', 'publish', 'page', 'closed', 'closed', '', 'cp-funds-listing-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(898): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'title', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the my offering cart page.', '', 'My Offering Cart', '', 'publish', 'page', 'closed', 'closed', '', 'cp-cart-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `title` MEDIUMTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the my offering cart page.' , '' , 'My Offering Cart' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-cart-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `TITLE`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `title` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: title.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(28): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the my offering cart page.', '', 'My Offering Cart', '', 'publish', 'page', 'closed', 'closed', '', 'cp-cart-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(898): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'title', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `title` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the confirm my offering page.', '', 'Confirm My Offering', '', 'publish', 'page', 'closed', 'closed', '', 'cp-confirm-offering-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the confirm my offering page.' , '' , 'Confirm My Offering' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-confirm-offering-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(40): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the confirm my offering page.', '', 'Confirm My Offering', '', 'publish', 'page', 'closed', 'closed', '', 'cp-confirm-offering-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(899): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'description', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the process payment page.', '', 'Process Payment', '', 'publish', 'page', 'closed', 'closed', '', 'cp-process-payment-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `description` MEDIUMTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the process payment page.' , '' , 'Process Payment' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-process-payment-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `DESCRIPTION`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `description` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: description.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(52): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the process payment page.', '', 'Process Payment', '', 'publish', 'page', 'closed', 'closed', '', 'cp-process-payment-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(899): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'description', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `description` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the receipt page.', '', 'Receipt', '', 'publish', 'page', 'closed', 'closed', '', 'cp-receipt-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the receipt page.' , '' , 'Receipt' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-receipt-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(64): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the receipt page.', '', 'Receipt', '', 'publish', 'page', 'closed', 'closed', '', 'cp-receipt-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(900): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'mail_to', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the process payment page.', '', 'Create Account', '', 'publish', 'page', 'closed', 'closed', '', 'cp-create-account-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `mail_to` MEDIUMTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the process payment page.' , '' , 'Create Account' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-create-account-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `MAIL_TO`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `mail_to` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: mail_to.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(76): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the process payment page.', '', 'Create Account', '', 'publish', 'page', 'closed', 'closed', '', 'cp-create-account-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(900): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'mail_to', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `mail_to` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the login page.', '', 'Login', '', 'publish', 'page', 'closed', 'closed', '', 'cp-login-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '')</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 2 , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 'This is the login page.' , '' , 'Login' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cp-login-page' , '' , '' , '2012-08-20 15:10:30' , '2012-08-20 15:10:30' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/Pages.inc(89): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/ncs-e-giving-custom-payment-platform/CustomPayment.php(43): CreateNewPages()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): custom_payment_plugin_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ncs-e-...', false)
-#12 /internal/eval.php(20): activate_plugin('ncs-e-giving-cu...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (2, '2012-08-20 15:10:30', '2012-08-20 15:10:30', 'This is the login page.', '', 'Login', '', 'publish', 'page', 'closed', 'closed', '', 'cp-login-page', '', '', '2012-08-20 15:10:30', '2012-08-20 15:10:30', 0, 0, '', '') made by activate_plugin, do_action('activate_ncs-e-giving-custom-payment-platform/CustomPayment.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_payment_plugin_activate, CreateNewPages, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:48:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:48:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 05:48:32 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 05:48:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 05:49:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(901): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_ma...', 'longtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:4:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_mail_body` LONGTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nxt-build-get-data' , 'a:4:{s:5:&quot;saved&quot;;i:1744264174;s:16:&quot;singular_updated&quot;;s:0:&quot;&quot;;s:16:&quot;archives_updated&quot;;s:0:&quot;&quot;;s:16:&quot;sections_updated&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `CONFIRMATION_MAIL_BODY`, longtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `confirmation_mail_body` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: confirmation_mail_body.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(421): add_option('nxt-build-get-d...', Array)
-#5 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(42): Nexter_Extensions_Load->nexter_code_php_snippets_actions()
-#6 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(23): Nexter_Extensions_Load->__construct()
-#7 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(550): Nexter_Extensions_Load::get_instance()
-#8 /wordpress/wp-content/plugins/nexter-extension/nexter-extension.php(42): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): nexter_extension_plugins_loaded('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:4:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, nexter_extension_plugins_loaded, require_once('/plugins/nexter-extension/include/class-nexter-load-ext.php'), Nexter_Extensions_Load::get_instance, Nexter_Extensions_Load->__construct, Nexter_Extensions_Load->nexter_code_php_snippets_actions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(901): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_ma...', 'longtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_mail_body` LONGTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:5:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";i:1744264174;s:12:\"code_snippet\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nxt-build-get-data' , 'a:5:{s:5:&quot;saved&quot;;i:1744264174;s:16:&quot;singular_updated&quot;;s:0:&quot;&quot;;s:16:&quot;archives_updated&quot;;s:0:&quot;&quot;;s:16:&quot;sections_updated&quot;;i:1744264174;s:12:&quot;code_snippet&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nxt-build-get-d...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(435): update_option('nxt-build-get-d...', Array)
-#6 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(42): Nexter_Extensions_Load->nexter_code_php_snippets_actions()
-#7 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(23): Nexter_Extensions_Load->__construct()
-#8 /wordpress/wp-content/plugins/nexter-extension/include/class-nexter-load-ext.php(550): Nexter_Extensions_Load::get_instance()
-#9 /wordpress/wp-content/plugins/nexter-extension/nexter-extension.php(42): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): nexter_extension_plugins_loaded('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:5:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";i:1744264174;s:12:\"code_snippet\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, nexter_extension_plugins_loaded, require_once('/plugins/nexter-extension/include/class-nexter-load-ext.php'), Nexter_Extensions_Load::get_instance, Nexter_Extensions_Load->__construct, Nexter_Extensions_Load->nexter_code_php_snippets_actions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(902): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'admin_email_bod...', 'longtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:5:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";s:12:\"code_updated\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `admin_email_body` LONGTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nxt-build-get-data' , 'a:5:{s:5:&quot;saved&quot;;i:1744264174;s:16:&quot;singular_updated&quot;;s:0:&quot;&quot;;s:16:&quot;archives_updated&quot;;s:0:&quot;&quot;;s:16:&quot;sections_updated&quot;;s:0:&quot;&quot;;s:12:&quot;code_updated&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `ADMIN_EMAIL_BODY`, longtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `admin_email_body` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: admin_email_body.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(869): add_option('nxt-build-get-d...', Array)
-#5 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(47): Nexter_Builder_Code_Snippets_Render->nexter_code_php_snippets_actions()
-#6 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(30): Nexter_Builder_Code_Snippets_Render->__construct()
-#7 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(930): Nexter_Builder_Code_Snippets_Render::get_instance()
-#8 /wordpress/wp-content/plugins/nexter-extension/include/classes/nexter-class-load.php(76): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): Nexter_Class_Load->theme_after_setup('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:5:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";s:12:\"code_updated\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, Nexter_Class_Load->theme_after_setup, require_once('/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php'), Nexter_Builder_Code_Snippets_Render::get_instance, Nexter_Builder_Code_Snippets_Render->__construct, Nexter_Builder_Code_Snippets_Render->nexter_code_php_snippets_actions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:49:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(902): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'admin_email_bod...', 'longtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `admin_email_body` LONGTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:6:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";s:12:\"code_updated\";i:1744264174;s:12:\"code_snippet\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nxt-build-get-data' , 'a:6:{s:5:&quot;saved&quot;;i:1744264174;s:16:&quot;singular_updated&quot;;s:0:&quot;&quot;;s:16:&quot;archives_updated&quot;;s:0:&quot;&quot;;s:16:&quot;sections_updated&quot;;s:0:&quot;&quot;;s:12:&quot;code_updated&quot;;i:1744264174;s:12:&quot;code_snippet&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nxt-build-get-d...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(883): update_option('nxt-build-get-d...', Array)
-#6 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(47): Nexter_Builder_Code_Snippets_Render->nexter_code_php_snippets_actions()
-#7 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(30): Nexter_Builder_Code_Snippets_Render->__construct()
-#8 /wordpress/wp-content/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php(930): Nexter_Builder_Code_Snippets_Render::get_instance()
-#9 /wordpress/wp-content/plugins/nexter-extension/include/classes/nexter-class-load.php(76): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): Nexter_Class_Load->theme_after_setup('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nxt-build-get-data', 'a:6:{s:5:\"saved\";i:1744264174;s:16:\"singular_updated\";s:0:\"\";s:16:\"archives_updated\";s:0:\"\";s:16:\"sections_updated\";s:0:\"\";s:12:\"code_updated\";i:1744264174;s:12:\"code_snippet\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, Nexter_Class_Load->theme_after_setup, require_once('/plugins/nexter-extension/include/classes/load-code-snippet/nexter-code-snippet-render.php'), Nexter_Builder_Code_Snippets_Render::get_instance, Nexter_Builder_Code_Snippets_Render->__construct, Nexter_Builder_Code_Snippets_Render->nexter_code_php_snippets_actions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:50:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:50:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:50:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:50:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(903): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_ma...', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'ERGa9p&ov}H4]bDo,I;sNeg@V14b-I2D:~gA)9pM[.Q{HoFECG_H3xP1I$o=[ztx', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_mail_subject` MEDIUMTEXT</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'ERGa9p&amp;ov}H4]bDo,I;sNeg@V14b-I2D:~gA)9pM[.Q{HoFECG_H3xP1I$o=[ztx' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `CONFIRMATION_MAIL_SUBJECT`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `confirmation_mail_subject` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: confirmation_mail_subject.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'ERGa9p&ov}H4]bD...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'ERGa9p&ov}H4]bD...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'ERGa9p&ov}H4]bD...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'ERGa9p&ov}H4]bD...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/nice-animation-progressbar/main-function.php(13): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): progressbar_wp_latest_jquery('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'ERGa9p&ov}H4]bDo,I;sNeg@V14b-I2D:~gA)9pM[.Q{HoFECG_H3xP1I$o=[ztx', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, progressbar_wp_latest_jquery, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(903): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_ma...', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_mail_subject` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Xd2;X~Ieo<nIp;PUe`%=1rw_B>8{O>7HK>yHa&ySv03/0_Adl, P>^]K*~SdU.#H', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'Xd2;X~Ieo&lt;nIp;PUe`%=1rw_B&gt;8{O&gt;7HK&gt;yHa&amp;ySv03/0_Adl, P&gt;^]K*~SdU.#H' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'Xd2;X~Ieo<nIp;P...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'Xd2;X~Ieo<nIp;P...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'Xd2;X~Ieo<nIp;P...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'Xd2;X~Ieo<nIp;P...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/nice-animation-progressbar/main-function.php(13): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): progressbar_wp_latest_jquery('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Xd2;X~Ieo<nIp;PUe`%=1rw_B>8{O>7HK>yHa&ySv03/0_Adl, P>^]K*~SdU.#H', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, progressbar_wp_latest_jquery, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 05:50:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:50:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:50:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:50:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:50:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:51:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:51:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 05:51:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 05:51:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 05:51:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 05:51:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-inc
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(904): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'user_confirmati...', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `user_confirmation_mail_subject` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `USER_CONFIRMATION_MAIL_SUBJECT`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `user_confirmation_mail_subject` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: user_confirmation_mail_subject.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(904): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'user_confirmati...', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `user_confirmation_mail_subject` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(905): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'from_address', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `from_address` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `FROM_ADDRESS`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `from_address` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: from_address.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(905): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'from_address', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `from_address` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(906): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'from_name', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `from_name` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `FROM_NAME`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `from_name` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: from_name.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(906): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'from_name', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `from_name` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(907): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'on_screen_confi...', 'longtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `on_screen_confirmation_message` LONGTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `ON_SCREEN_CONFIRMATION_MESSAGE`, longtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `on_screen_confirmation_message` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: on_screen_confirmation_message.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(907): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'on_screen_confi...', 'longtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `on_screen_confirmation_message` LONGTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(908): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_pa...', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_page` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `CONFIRMATION_PAGE`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `confirmation_page` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: confirmation_page.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(908): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'confirmation_pa...', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `confirmation_page` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(909): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'form_fields', 'longtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `form_fields` LONGTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `FORM_FIELDS`, longtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `form_fields` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: form_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(909): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'form_fields', 'longtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `form_fields` LONGTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(910): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'clean_html', 'longtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `clean_html` LONGTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `CLEAN_HTML`, longtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `clean_html` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: clean_html.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(910): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'clean_html', 'longtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `clean_html` LONGTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(911): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'visual_settings', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `visual_settings` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `VISUAL_SETTINGS`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `visual_settings` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: visual_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(911): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'visual_settings', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `visual_settings` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(912): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'google_analytic...', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `google_analytics_conversion_code` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `GOOGLE_ANALYTICS_CONVERSION_CODE`, mediumtext</li>
+<li>Executing: ALTER TABLE wp_wap_nex_forms ADD `google_analytics_conversion_code` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: google_analytics_conversion_code.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(942): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(912): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'google_analytic...', 'mediumtext')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#6 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#7 {main}</pre>
+ for query ALTER TABLE `wp_wap_nex_forms` ADD `google_analytics_conversion_code` MEDIUMTEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_wap_nex_forms`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/includes/classes/class.db.php(935): wpdb->get_results('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(913): NEXForms_Database_Actions->alter_plugin_table('wap_nex_forms', 'colour_scheme', 'mediumtext')
+#4 /wordpress/wp-content/plugins/nex-forms-express-wp-form-builder/main.php(712): NEXForms5_run_instalation()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nex-forms-expre...')
+#7 /internal/eval.php(20): activate_plugin('nex-forms-expre...')
+#8 {main}</pre>
+ for query SHOW FIELDS FROM `wp_wap_nex_forms` made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/nex-forms-express-wp-form-builder/main.php'), NEXForms5_run_instalation, NEXForms_Database_Actions->alter_plugin_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 16:33:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_wap_nex_forms` ADD `colour_scheme` MEDIUMTEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wap_nex_forms, `COLOUR_SCHEME`, mediumtext</li>
+<li>Executing: ALTER TA
+Node.js v23.11.0
