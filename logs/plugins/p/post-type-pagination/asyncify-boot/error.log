@@ -2,141 +2,40 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 22:47:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:48:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pd_android_fcm_db_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pd_android_fcm_db_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pd-android-fcm/db.php(43): add_option('pd_android_fcm_...', '1.0.0')
-#5 /wordpress/wp-content/plugins/pd-android-fcm/pd-android-fcm.php(215): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/pd-android-fcm/pd-android-fcm.php(71): PDANDROIDFCM->create_pdandroidfcm_table()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): PDANDROIDFCM->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pd-and...', false)
-#11 /internal/eval.php(20): activate_plugin('pd-android-fcm/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pd_android_fcm_db_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pd-android-fcm/pd-android-fcm.php'), WP_Hook->do_action, WP_Hook->apply_filters, PDANDROIDFCM->activate, PDANDROIDFCM->create_pdandroidfcm_table, require_once('/plugins/pd-android-fcm/db.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:49:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:49:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:49:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:50:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:50:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:50:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:50:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:50:31 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php:29
+Error: [11-Apr-2025 10:50:54 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method cm_pun::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/pleenq/Pleenq_LifeCycle.php(38): Pleenq_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/pleenq/pleenq_init.php(43): Pleenq_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/pleenq/pleenq.php(94): Pleenq_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pleenq/pleenq.p...')
-#5 /internal/eval.php(20): activate_plugin('pleenq/pleenq.p...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php on line 29
-[09-Apr-2025 22:50:38 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php:29
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#3 /internal/eval.php(20): activate_plugin('plugin-update-n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:51:02 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method cm_pun::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/pleenq/Pleenq_LifeCycle.php(38): Pleenq_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/pleenq/pleenq_init.php(43): Pleenq_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/pleenq/pleenq.php(94): Pleenq_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pleenq/pleenq.p...')
-#5 /internal/eval.php(20): activate_plugin('pleenq/pleenq.p...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php on line 29
-[09-Apr-2025 22:50:47 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php:29
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#3 /internal/eval.php(20): activate_plugin('plugin-update-n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:51:10 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method cm_pun::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/pleenq/Pleenq_LifeCycle.php(38): Pleenq_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/pleenq/pleenq_init.php(43): Pleenq_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/pleenq/pleenq.php(94): Pleenq_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pleenq/pleenq.p...')
-#5 /internal/eval.php(20): activate_plugin('pleenq/pleenq.p...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/pleenq/Pleenq_Plugin.php on line 29
-[09-Apr-2025 22:50:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 22:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 22:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 22:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 22:51:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_paginate_options', 'a:21:{s:5:\"title\";s:6:\"Pages:\";s:8:\"nextpage\";s:7:\"&raquo;\";s:12:\"previouspage\";s:7:\"&laquo;\";s:3:\"css\";b:1;s:5:\"slash\";b:0;s:6:\"before\";s:24:\"<div class=\"navigation\">\";s:5:\"after\";s:6:\"</div>\";s:5:\"empty\";b:1;s:5:\"range\";i:3;s:6:\"anchor\";i:1;s:3:\"gap\";i:3;s:10:\"everywhere\";b:0;s:9:\"home-page\";b:0;s:9:\"blog-page\";b:0;s:11:\"search-page\";b:0;s:13:\"category-page\";b:0;s:12:\"archive-page\";b:0;s:8:\"position\";s:4:\"none\";s:24:\"hide-standard-pagination\";b:0;s:4:\"font\";s:12:\"font-inherit\";s:6:\"preset\";s:7:\"default\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_paginate_options' , 'a:21:{s:5:&quot;title&quot;;s:6:&quot;Pages:&quot;;s:8:&quot;nextpage&quot;;s:7:&quot;&amp;raquo;&quot;;s:12:&quot;previouspage&quot;;s:7:&quot;&amp;laquo;&quot;;s:3:&quot;css&quot;;b:1;s:5:&quot;slash&quot;;b:0;s:6:&quot;before&quot;;s:24:&quot;&lt;div class=&quot;navigation&quot;&gt;&quot;;s:5:&quot;after&quot;;s:6:&quot;&lt;/div&gt;&quot;;s:5:&quot;empty&quot;;b:1;s:5:&quot;range&quot;;i:3;s:6:&quot;anchor&quot;;i:1;s:3:&quot;gap&quot;;i:3;s:10:&quot;everywhere&quot;;b:0;s:9:&quot;home-page&quot;;b:0;s:9:&quot;blog-page&quot;;b:0;s:11:&quot;search-page&quot;;b:0;s:13:&quot;category-page&quot;;b:0;s:12:&quot;archive-page&quot;;b:0;s:8:&quot;position&quot;;s:4:&quot;none&quot;;s:24:&quot;hide-standard-pagination&quot;;b:0;s:4:&quot;font&quot;;s:12:&quot;font-inherit&quot;;s:6:&quot;preset&quot;;s:7:&quot;default&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_paginate_opt...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php(493): update_option('wp_paginate_opt...', Array)
-#6 /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php(117): WPPaginate->get_options()
-#7 /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php(1215): WPPaginate->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('post-type-pagin...')
-#10 /internal/eval.php(20): activate_plugin('post-type-pagin...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_paginate_options', 'a:21:{s:5:\"title\";s:6:\"Pages:\";s:8:\"nextpage\";s:7:\"&raquo;\";s:12:\"previouspage\";s:7:\"&laquo;\";s:3:\"css\";b:1;s:5:\"slash\";b:0;s:6:\"before\";s:24:\"<div class=\"navigation\">\";s:5:\"after\";s:6:\"</div>\";s:5:\"empty\";b:1;s:5:\"range\";i:3;s:6:\"anchor\";i:1;s:3:\"gap\";i:3;s:10:\"everywhere\";b:0;s:9:\"home-page\";b:0;s:9:\"blog-page\";b:0;s:11:\"search-page\";b:0;s:13:\"category-page\";b:0;s:12:\"archive-page\";b:0;s:8:\"position\";s:4:\"none\";s:24:\"hide-standard-pagination\";b:0;s:4:\"font\";s:12:\"font-inherit\";s:6:\"preset\";s:7:\"default\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/post-type-pagination/wp-paginate.php'), WPPaginate->__construct, WPPaginate->get_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 22:51:26 UTC] PHP Warning:  mysqli::__construct(): Error while reading greeting packet. PID=42 in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
-[09-Apr-2025 22:51:26 UTC] PHP Warning:  mysqli::__construct(): (HY000/2006): MySQL server has gone away in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
-[09-Apr-2025 22:51:34 UTC] PHP Warning:  mysqli::__construct(): Error while reading greeting packet. PID=42 in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
-[09-Apr-2025 22:51:34 UTC] PHP Warning:  mysqli::__construct(): (HY000/2006): MySQL server has gone away in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plugin...', false)
+#3 /internal/eval.php(20): activate_plugin('plugin-update-n...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[11-Apr-2025 10:52:42 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:52:44 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:52:51 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:52:52 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:53:00 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:53:01 UTC] PHP Deprecated:  Required parameter $pluginDir follows optional parameter $fileUploadSubmit in /wordpress/wp-content/plugins/post-recommendation/database/install.php on line 41
+[11-Apr-2025 10:53:12 UTC] PHP Warning:  mysqli::__construct(): Error while reading greeting packet. PID=42 in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
+[11-Apr-2025 10:53:12 UTC] PHP Warning:  mysqli::__construct(): (HY000/2006): MySQL server has gone away in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
+[11-Apr-2025 10:53:21 UTC] PHP Warning:  mysqli::__construct(): Error while reading greeting packet. PID=42 in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
+[11-Apr-2025 10:53:21 UTC] PHP Warning:  mysqli::__construct(): (HY000/2006): MySQL server has gone away in /wordpress/wp-content/plugins/post-type-pagination/wp-paginate.php on line 17
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
