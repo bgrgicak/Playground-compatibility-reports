@@ -1,495 +1,742 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 04:31:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:31:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:31:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:31:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:32:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:32:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:32:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:32:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:32:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 14:27:58 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterkeycontroller.php on line 272
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_simple_youtube_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamip</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_simple_youtube_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_simple_y...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_simple_y...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_simple_youtube_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:32:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('suwcsms_db_version', '1.73', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'suwcsms_db_version' , '1.73' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('suwcsms_db_vers...', 1.73, '', 'auto')
-#5 /wordpress/wp-content/plugins/sms-notifications-for-woocommerce/su-wc-sms-notifications.php(105): update_option('suwcsms_db_vers...', 1.73)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): suwcsms_db_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sms-no...', false)
-#10 /internal/eval.php(20): activate_plugin('sms-notificatio...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('suwcsms_db_version', '1.73', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_sms-notifications-for-woocommerce/su-wc-sms-notifications.php'), WP_Hook->do_action, WP_Hook->apply_filters, suwcsms_db_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:33:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:33:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:33:45 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:45 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:53 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:53 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:54 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:33:54 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:34:02 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:34:02 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:34:03 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:34:03 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/sbita//includes/sbita-ajax.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/sbita/main.php on line 24
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"seo-checklist/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744259652;s:11:\"plugin_path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:31:\"seo-checklist/seo-checklist.php\";s:8:\"sdk_path\";s:22:\"seo-checklist/freemius\";s:7:\"version\";s:5:\"2.3.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744259652;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:22:&quot;seo-checklist/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.3.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744259652;s:11:&quot;plugin_path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;s:8:&quot;sdk_path&quot;;s:22:&quot;seo-checklist/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.3.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744259652;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/fs-essential-functions.php(362): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(158): fs_update_sdk_newest_version('seo-checklist/f...', 'seo-checklist/s...')
-#7 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(34): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#11 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(89): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"seo-checklist/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744259652;s:11:\"plugin_path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:31:\"seo-checklist/seo-checklist.php\";s:8:\"sdk_path\";s:22:\"seo-checklist/freemius\";s:7:\"version\";s:5:\"2.3.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744259652;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, require_once('/plugins/seo-checklist/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamip made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/seo-checklist/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(474): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(34): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#11 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(91): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, require_once('/plugins/seo-checklist/freemius/start.php'), require_once('/plugins/seo-checklist/freemius/require.php'), require_once('/plugins/seo-checklist/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-logger.php on line 145
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(93): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamcou</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(95): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamcou made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamrefe</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(97): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamrefe made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamdest</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(99): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamdest made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamagen</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(101): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamagen made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamuser</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(103): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamuser made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:00 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-7-0.php on line 599
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 125
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 126
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 126
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 135
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 136
+[11-Apr-2025 14:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 136
+[11-Apr-2025 14:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id FROM wp_spam_master_keys WHERE spamkey = 'System' AND spamtype = 'Key Email: Key Email Sent to admin@localhost.com' AND spamy = 'I ' AND time >= NOW() - INTERVAL '24' HOUR</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `id` FROM `wp_spam_master_keys` WHERE `spamkey` = 'System' AND `spamtype` = 'Key Email: Key Email Sent to admin@localhost.com' AND `spamy` = 'I ' AND `time` &gt;= CURRENT_TIMESTAMP - INTERVAL '24' HOUR | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 near "'24'": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2115): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(372): Freemius->store_id_slug_type_path_map('4022', 'seo_checklist')
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#12 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#16 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#4 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterlogcontroller.php(131): wpdb->get_var('SELECT id FROM ...')
+#5 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasteremailcontroller.php(878): SpamMasterLogController->spammasterlog('I ', 'localhost', 'localhost', 'localhost', 'localhost', '{"ID":"none"}', 'Key Email', 'Key Email Sent ...', '1D')
+#6 /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php(301): SpamMasterEmailController->spammasterautofree(true)
+#7 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(424): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT id FROM wp_spam_master_keys WHERE spamkey = 'System' AND spamtype = 'Key Email: Key Email Sent to admin@localhost.com' AND spamy = 'I ' AND time >= NOW() - INTERVAL '24' HOUR made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php'), SpamMasterEmailController->spammasterautofree, SpamMasterLogController->spammasterlog, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT spamvalue FROM wp_spam_master_keys WHERE spamkey = 'Option' AND spamtype = 'exempt-value' AND POSITION(spamvalue IN 'localhost') > '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `spamvalue` FROM `wp_spam_master_keys` WHERE `spamkey` = 'Option' AND `spamtype` = 'exempt-value' AND POSITION ( `spamvalue` IN 'localhost' ) &gt; '0' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: localhost
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-storage.php(501): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2012): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(387): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#13 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#14 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#18 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT spamvalu...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT spamvalu...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT spamvalu...')
+#4 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterlogcontroller.php(150): wpdb->get_var('SELECT spamvalu...')
+#5 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasteremailcontroller.php(878): SpamMasterLogController->spammasterlog('I ', 'localhost', 'localhost', 'localhost', 'localhost', '{"ID":"none"}', 'Key Email', 'Key Email Sent ...', '1D')
+#6 /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php(301): SpamMasterEmailController->spammasterautofree(true)
+#7 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(424): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT spamvalue FROM wp_spam_master_keys WHERE spamkey = 'Option' AND spamtype = 'exempt-value' AND POSITION(spamvalue IN 'localhost') > '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php'), SpamMasterEmailController->spammasterautofree, SpamMasterLogController->spammasterlog, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT id FROM wp_spam_master_keys WHERE spamkey = 'System' AND spamtype = 'Connection: Successfully run with status: VALID' AND spamy = '' AND time >= NOW() - INTERVAL '8784' HOUR</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `id` FROM `wp_spam_master_keys` WHERE `spamkey` = 'System' AND `spamtype` = 'Connection: Successfully run with status: VALID' AND `spamy` = '' AND `time` &gt;= CURRENT_TIMESTAMP - INTERVAL '8784' HOUR | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 near "'8784'": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-storage.php(501): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(415): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#12 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#13 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#17 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
+#4 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterlogcontroller.php(131): wpdb->get_var('SELECT id FROM ...')
+#5 /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php(384): SpamMasterLogController->spammasterlog('', 'localhost', 'localhost', 'localhost', 'localhost', '{"ID":"none"}', 'Connection', 'Successfully ru...', '12M')
+#6 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(424): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT id FROM wp_spam_master_keys WHERE spamkey = 'System' AND spamtype = 'Connection: Successfully run with status: VALID' AND spamy = '' AND time >= NOW() - INTERVAL '8784' HOUR made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php'), SpamMasterLogController->spammasterlog, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT spamvalue FROM wp_spam_master_keys WHERE spamkey = 'Option' AND spamtype = 'exempt-value' AND POSITION(spamvalue IN 'localhost') > '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;seo-checklist/seo-checklist.php&quot;;s:13:&quot;seo_checklist&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `spamvalue` FROM `wp_spam_master_keys` WHERE `spamkey` = 'Option' AND `spamtype` = 'exempt-value' AND POSITION ( `spamvalue` IN 'localhost' ) &gt; '0' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: localhost
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(9751): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(462): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#12 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#16 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT spamvalu...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT spamvalu...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT spamvalu...')
+#4 /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterlogcontroller.php(150): wpdb->get_var('SELECT spamvalu...')
+#5 /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php(384): SpamMasterLogController->spammasterlog('', 'localhost', 'localhost', 'localhost', 'localhost', '{"ID":"none"}', 'Connection', 'Successfully ru...', '12M')
+#6 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(424): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT spamvalue FROM wp_spam_master_keys WHERE spamkey = 'Option' AND spamtype = 'exempt-value' AND POSITION(spamvalue IN 'localhost') > '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php'), SpamMasterLogController->spammasterlog, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:15 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterkeycontroller.php on line 272
+[11-Apr-2025 14:28:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744259652;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_firewall_ip%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_firewall_ip%');</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744259652;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;seo-checklist/seo-checklist.php&quot;;s:13:&quot;seo_checklist&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, :param0 , :param1 )
+										where (t1.option_name like :param2  ESCAPE ''  or t1.option_name like :param3  ESCAPE '' ); | parameters: _timeout, , _transient_timeout_spam_master_firewall_ip%, _site_transient_timeout_spam_master_firewall_ip%</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744259652)
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-storage.php(501): FS_Key_Value_Storage->__set('install_timesta...', 1744259652)
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(466): FS_Storage->__set('install_timesta...', 1744259652)
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#12 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#13 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#17 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744259652;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php(60): WP_SQLite_DB->query('delete from t1,...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(331): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_firewall_ip%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_firewall_ip%'); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744259652;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_invalid_email%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_invalid_email%');</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744259652;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;seo-checklist/seo-checklist.php&quot;;s:13:&quot;seo_checklist&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, :param0 , :param1 )
+										where (t1.option_name like :param2  ESCAPE ''  or t1.option_name like :param3  ESCAPE '' ); | parameters: _timeout, , _transient_timeout_spam_master_invalid_email%, _site_transient_timeout_spam_master_invalid_email%</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-storage.php(501): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(793): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(506): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-freemius.php(2682): Freemius->__construct('4022', 'seo_checklist', true)
-#13 /wordpress/wp-content/plugins/seo-checklist/freemius/start.php(513): Freemius::instance('4022', 'seo_checklist', true)
-#14 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(37): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/seo-checklist/seo-checklist.php(63): seochecklist_seo_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-checklist/s...')
-#18 /internal/eval.php(20): activate_plugin('seo-checklist/s...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744259652;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/seo-checklist/seo-checklist.php'), seochecklist_seo_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:34:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php(75): WP_SQLite_DB->query('delete from t1,...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(331): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_invalid_email%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_invalid_email%'); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:4022;a:3:{s:4:\"slug\";s:13:\"seo_checklist\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"seo_checklist\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"seo-checklist/seo-checklist.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744259652;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.3.0\";}}s:13:\"file_slug_map\";a:1:{s:31:\"seo-checklist/seo-checklist.php\";s:13:\"seo_checklist\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamip</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4022;a:3:{s:4:&quot;slug&quot;;s:13:&quot;seo_checklist&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;seo_checklist&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;seo-checklist/seo-checklist.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744259652;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.3.0&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;seo-checklist/seo-checklist.php&quot;;s:13:&quot;seo_checklist&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamip | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(413): update_option('fs_accounts', Array)
-#6 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-option-manager.php(356): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.3.0')
-#9 /wordpress/wp-content/plugins/seo-checklist/freemius/includes/class-fs-storage.php(501): FS_Key_Value_Storage->__set('sdk_v
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(89): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamip made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(91): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(93): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamco made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamcou</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamcou | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(95): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamcou made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamrefe</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamrefe | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(97): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamrefe made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamdest</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamdest | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(99): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamdest made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamagen</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamagen | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(101): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamagen made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamuser</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamuser | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "EXISTS": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(103): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys DROP COLUMN IF EXISTS spamuser made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_spam_master_keys MODIFY spamvalue LONGTEXT NOT NULL AFTER spamy</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php(105): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(338): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_spam_master_keys MODIFY spamvalue LONGTEXT NOT NULL AFTER spamy made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-6-1.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:18 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6-7-0.php on line 599
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 125
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 126
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 126
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 135
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 136
+[11-Apr-2025 14:28:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/spam-master/includes/admin/spam-master-admin-connection-sender.php on line 136
+[11-Apr-2025 14:28:22 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. Unsupported value type (array). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.2.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 14:28:31 UTC] PHP Warning:  dns_get_record(): dns_get_record() always returns an empty array in PHP.wasm. in /wordpress/wp-content/plugins/spam-master/includes/controllers/class-spammasterkeycontroller.php on line 272
+[11-Apr-2025 14:28:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_firewall_ip%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_firewall_ip%');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, :param0 , :param1 )
+										where (t1.option_name like :param2  ESCAPE ''  or t1.option_name like :param3  ESCAPE '' ); | parameters: _timeout, , _transient_timeout_spam_master_firewall_ip%, _site_transient_timeout_spam_master_firewall_ip%</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php(60): WP_SQLite_DB->query('delete from t1,...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(331): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_firewall_ip%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_firewall_ip%'); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, spam_master_activate_upgrade, require_once('/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 14:28:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_invalid_email%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_invalid_email%');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, :param0 , :param1 )
+										where (t1.option_name like :param2  ESCAPE ''  or t1.option_name like :param3  ESCAPE '' ); | parameters: _timeout, , _transient_timeout_spam_master_invalid_email%, _site_transient_timeout_spam_master_invalid_email%</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/spam-master/includes/admin/upgrade/spam-master-admin-upgrade-to-6.php(75): WP_SQLite_DB->query('delete from t1,...')
+#2 /wordpress/wp-content/plugins/spam-master/class-spammaster.php(331): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): spam_master_activate_upgrade('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query delete from t1, t2
+										using wp_options t1
+										join wp_options t2 on t2.option_name = replace(t1.option_name, '_timeout', '')
+										where (t1.option_name like '\_transient\_timeout\_spam_master_invalid_email%' or t1.option_name like '\_site\_transient\_timeout\_spam_master_invalid_email%'); made by require_once('wp-loa
