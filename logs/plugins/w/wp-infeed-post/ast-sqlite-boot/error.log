@@ -2,1351 +2,384 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 20:27:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:27:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:27:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:27:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:27:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 11:23:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>
+CREATE TABLE wp_pmxe_exports (
+	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	parent_id BIGINT(20) NOT NULL DEFAULT 0,
+	attch_id BIGINT(20) NOT NULL DEFAULT 0,
+	options LONGTEXT,
+	scheduled VARCHAR(64) NOT NULL DEFAULT '',
+	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',	
+	friendly_name TEXT NOT NULL DEFAULT '',	
+	exported BIGINT(20) NOT NULL DEFAULT 0,
+	canceled BOOL NOT NULL DEFAULT 0,  	
+  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	processing BOOL NOT NULL DEFAULT 0,
+  	executing BOOL NOT NULL DEFAULT 0,
+  	triggered BOOL NOT NULL DEFAULT 0,
+  	iteration BIGINT(20) NOT NULL DEFAULT 0,
+  	export_post_type TEXT NOT NULL DEFAULT '',
+	PRIMARY KEY  (id)
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_db_version' , '1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_db_version', '1.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-db.php(209): update_option('sm_db_version', '1.2')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1714): wpCloud\StatelessMedia\DB->create_db()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\DB->create_db, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM wp_sm_sync</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM `wp_sm_sync` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#15 {main}</pre>
- for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#14 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#14 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_migrations', 'a:2:{s:14:\"20240423174109\";a:5:{s:11:\"description\";s:28:\"Optimize Compatibility Files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}s:14:\"20240219175240\";a:5:{s:11:\"description\";s:34:\"Update data for Google Cloud files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_migrations' , 'a:2:{s:14:&quot;20240423174109&quot;;a:5:{s:11:&quot;description&quot;;s:28:&quot;Optimize Compatibility Files&quot;;s:7:&quot;started&quot;;s:0:&quot;&quot;;s:8:&quot;finished&quot;;s:0:&quot;&quot;;s:6:&quot;status&quot;;s:7:&quot;skipped&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}s:14:&quot;20240219175240&quot;;a:5:{s:11:&quot;description&quot;;s:34:&quot;Update data for Google Cloud files&quot;;s:7:&quot;started&quot;;s:0:&quot;&quot;;s:8:&quot;finished&quot;;s:0:&quot;&quot;;s:6:&quot;status&quot;;s:7:&quot;skipped&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_migrations', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(223): update_option('sm_migrations', Array)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_migrations', 'a:2:{s:14:\"20240423174109\";a:5:{s:11:\"description\";s:28:\"Optimize Compatibility Files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}s:14:\"20240219175240\";a:5:{s:11:\"description\";s:34:\"Update data for Google Cloud files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_mode', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_mode' , 'disabled' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_mode', 'disabled', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(68): update_option('sm_mode', 'disabled')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_mode', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dismissed_notice_stateless_cache_busting', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dismissed_notice_stateless_cache_busting' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dismissed_notic...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(93): update_option('dismissed_notic...', true)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dismissed_notice_stateless_cache_busting', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sm_version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sm_version' , '4.1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_sm_version', '4.1.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(123): update_option('wp_sm_version', '4.1.3')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#14 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sm_version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:27:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_db_version' , '1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_db_version', '1.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-db.php(209): update_option('sm_db_version', '1.2')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1714): wpCloud\StatelessMedia\DB->create_db()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_db_version', '1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\DB->create_db, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM wp_sm_sync</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM `wp_sm_sync` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query SELECT COUNT(*) FROM wp_sm_sync made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_sm_sync` LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_migrations', 'a:2:{s:14:\"20240423174109\";a:5:{s:11:\"description\";s:28:\"Optimize Compatibility Files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}s:14:\"20240219175240\";a:5:{s:11:\"description\";s:34:\"Update data for Google Cloud files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_migrations' , 'a:2:{s:14:&quot;20240423174109&quot;;a:5:{s:11:&quot;description&quot;;s:28:&quot;Optimize Compatibility Files&quot;;s:7:&quot;started&quot;;s:0:&quot;&quot;;s:8:&quot;finished&quot;;s:0:&quot;&quot;;s:6:&quot;status&quot;;s:7:&quot;skipped&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}s:14:&quot;20240219175240&quot;;a:5:{s:11:&quot;description&quot;;s:34:&quot;Update data for Google Cloud files&quot;;s:7:&quot;started&quot;;s:0:&quot;&quot;;s:8:&quot;finished&quot;;s:0:&quot;&quot;;s:6:&quot;status&quot;;s:7:&quot;skipped&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_migrations', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(223): update_option('sm_migrations', Array)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#8 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_migrations', 'a:2:{s:14:\"20240423174109\";a:5:{s:11:\"description\";s:28:\"Optimize Compatibility Files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}s:14:\"20240219175240\";a:5:{s:11:\"description\";s:34:\"Update data for Google Cloud files\";s:7:\"started\";s:0:\"\";s:8:\"finished\";s:0:\"\";s:6:\"status\";s:7:\"skipped\";s:7:\"message\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_mode', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sm_mode' , 'disabled' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sm_mode', 'disabled', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(68): update_option('sm_mode', 'disabled')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sm_mode', 'disabled', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dismissed_notice_stateless_cache_busting', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dismissed_notice_stateless_cache_busting' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dismissed_notic...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(93): update_option('dismissed_notic...', true)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dismissed_notice_stateless_cache_busting', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sm_version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_sm_version' , '4.1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_sm_version', '4.1.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(123): update_option('wp_sm_version', '4.1.3')
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-upgrader.php(40): wpCloud\StatelessMedia\Upgrader::upgrade()
-#7 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1721): wpCloud\StatelessMedia\Upgrader::call('4.1.3')
-#8 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1702): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#9 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(240): wpCloud\StatelessMedia\Bootstrap->run_install_process()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->_run_install_process('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_sm_version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->_run_install_process, wpCloud\StatelessMedia\Bootstrap->run_install_process, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Upgrader::call, wpCloud\StatelessMedia\Upgrader::upgrade, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-stateless-current-version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-stateless-current-version' , '4.1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp-stateless-cu...', '4.1.3', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap.php(228): update_option('wp-stateless-cu...', '4.1.3')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap->save_version_no('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-stateless-current-version', '4.1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap->save_version_no, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_sm::is_connected_to_gs', '1744244868', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_sm::is_connected_to_gs' , '1744244868' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744244868, '', 'off')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1666): set_transient('sm::is_connecte...', Array, 14400)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(213): wpCloud\StatelessMedia\Bootstrap->is_connected_to_gs()
-#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(56): wpCloud\StatelessMedia\Bootstrap->init()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->pre_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_sm::is_connected_to_gs', '1744244868', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->pre_init, wpCloud\StatelessMedia\Bootstrap->init, wpCloud\StatelessMedia\Bootstrap->is_connected_to_gs, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_sm::is_connected_to_gs', 'a:3:{s:7:\"success\";s:5:\"false\";s:5:\"error\";s:41:\"<b>Bucket</b> parameter must be provided.\";s:4:\"hash\";s:32:\"cde4e2ce7b499860b2ffb15062bc881b\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_sm::is_connected_to_gs' , 'a:3:{s:7:&quot;success&quot;;s:5:&quot;false&quot;;s:5:&quot;error&quot;;s:41:&quot;&lt;b&gt;Bucket&lt;/b&gt; parameter must be provided.&quot;;s:4:&quot;hash&quot;;s:32:&quot;cde4e2ce7b499860b2ffb15062bc881b&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_sm::...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1666): set_transient('sm::is_connecte...', Array, 14400)
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(213): wpCloud\StatelessMedia\Bootstrap->is_connected_to_gs()
-#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(56): wpCloud\StatelessMedia\Bootstrap->init()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->pre_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_sm::is_connected_to_gs', 'a:3:{s:7:\"success\";s:5:\"false\";s:5:\"error\";s:41:\"<b>Bucket</b> parameter must be provided.\";s:4:\"hash\";s:32:\"cde4e2ce7b499860b2ffb15062bc881b\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->pre_init, wpCloud\StatelessMedia\Bootstrap->init, wpCloud\StatelessMedia\Bootstrap->is_connected_to_gs, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM wp_sm_sync</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(*) FROM wp_sm_sync | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: canceled.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#12 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#13 {main}</pre>
- for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\nCREATE TABLE w...')
+#2 /wordpress/wp-content/plugins/wp-all-export/wp-all-export.php(751): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXE_Plugin->activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-all-export/w...')
+#8 {main}</pre>
+ for query 
+CREATE TABLE wp_pmxe_exports (
+	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	parent_id BIGINT(20) NOT NULL DEFAULT 0,
+	attch_id BIGINT(20) NOT NULL DEFAULT 0,
+	options LONGTEXT,
+	scheduled VARCHAR(64) NOT NULL DEFAULT '',
+	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',	
+	friendly_name TEXT NOT NULL DEFAULT '',	
+	exported BIGINT(20) NOT NULL DEFAULT 0,
+	canceled BOOL NOT NULL DEFAULT 0,  	
+  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	processing BOOL NOT NULL DEFAULT 0,
+  	executing BOOL NOT NULL DEFAULT 0,
+  	triggered BOOL NOT NULL DEFAULT 0,
+  	iteration BIGINT(20) NOT NULL DEFAULT 0,
+  	export_post_type TEXT NOT NULL DEFAULT '',
+	PRIMARY KEY  (id)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-export/wp-all-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXE_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>
+CREATE TABLE wp_pmxe_exports (
+	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	parent_id BIGINT(20) NOT NULL DEFAULT 0,
+	attch_id BIGINT(20) NOT NULL DEFAULT 0,
+	options LONGTEXT,
+	scheduled VARCHAR(64) NOT NULL DEFAULT '',
+	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',	
+	friendly_name TEXT NOT NULL DEFAULT '',	
+	exported BIGINT(20) NOT NULL DEFAULT 0,
+	canceled BOOL NOT NULL DEFAULT 0,  	
+  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	processing BOOL NOT NULL DEFAULT 0,
+  	executing BOOL NOT NULL DEFAULT 0,
+  	triggered BOOL NOT NULL DEFAULT 0,
+  	iteration BIGINT(20) NOT NULL DEFAULT 0,
+  	export_post_type TEXT NOT NULL DEFAULT '',
+	PRIMARY KEY  (id)
+) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: canceled.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#12 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\nCREATE TABLE w...')
+#2 /wordpress/wp-content/plugins/wp-all-export/wp-all-export.php(751): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PMXE_Plugin->activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-all...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-all-export/w...')
+#8 {main}</pre>
+ for query 
+CREATE TABLE wp_pmxe_exports (
+	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	parent_id BIGINT(20) NOT NULL DEFAULT 0,
+	attch_id BIGINT(20) NOT NULL DEFAULT 0,
+	options LONGTEXT,
+	scheduled VARCHAR(64) NOT NULL DEFAULT '',
+	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',	
+	friendly_name TEXT NOT NULL DEFAULT '',	
+	exported BIGINT(20) NOT NULL DEFAULT 0,
+	canceled BOOL NOT NULL DEFAULT 0,  	
+  	canceled_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	settings_update_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	last_activity DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  	processing BOOL NOT NULL DEFAULT 0,
+  	executing BOOL NOT NULL DEFAULT 0,
+  	triggered BOOL NOT NULL DEFAULT 0,
+  	iteration BIGINT(20) NOT NULL DEFAULT 0,
+  	export_post_type TEXT NOT NULL DEFAULT '',
+	PRIMARY KEY  (id)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-all-export/wp-all-export.php'), WP_Hook->do_action, WP_Hook->apply_filters, PMXE_Plugin->activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
+<li>Executing: insert into `wp_wmail_newsletter` set `wmail_subject` = 'Sample Subject' , `wmail_content` = 'This is sample mail content, Can add HTML content here.' , `wmail_status` = 'YES' , `wmail_date` = CURDATE ( ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+SQLSTATE[HY000]: General error: 1 near "set": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#12 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('insert into wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('insert into wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#4 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(106): wpdb->get_results('insert into wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#10 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM wp_sm_sync</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(*) FROM wp_sm_sync | (no parameters)</li>
+<li>Executing: insert into `wp_wmail_newsletter` set `wmail_subject` = 'Sample HTML Mail' , `wmail_content` = '&lt;strong style=&quot;color: #990000&quot;&gt; Email newsletter&lt;/strong&gt;&lt;p&gt;Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.&lt;/p&gt; &lt;strong style=&quot;color: #990000&quot;&gt;Advantage of this plugin&lt;/strong&gt;&lt;ol&gt; &lt;li&gt;No coding knowledge required to setup this plugin.&lt;/li&gt; &lt;li&gt;Very easy installation and setup.&lt;/li&gt;&lt;li&gt;Option to send email newsletter to registered user.&lt;/li&gt; &lt;li&gt;Option to setup email subscription box and option to send email newsletter to subscriber.&lt;/li&gt; &lt;li&gt;Automatic welcome email to new subscriber.&lt;/li&gt;&lt;li&gt;Admin email notification for every new subscriber.&lt;/li&gt; &lt;/ol&gt;&lt;strong style=&quot;color: #990000&quot;&gt;&lt;/strong&gt;&lt;br&gt;.' , `wmail_status` = 'YES' , `wmail_date` = CURDATE ( ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
+SQLSTATE[HY000]: General error: 1 near "set": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(43): wpdb->get_var('SELECT COUNT(*)...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(142): Migration_20240423174109->init_state()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(205): wpCloud\StatelessMedia\Migrator->_get_object('20240423174109')
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#6 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#7 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#12 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#13 {main}</pre>
- for query SELECT COUNT(*) FROM wp_sm_sync made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, wpCloud\StatelessMedia\Migrator->_get_object, Migration_20240423174109->init_state, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(206): Migration_20240423174109->should_run()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#12 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_sm_sync LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id FROM wp_sm_sync LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sm_sync.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT id FROM ...')
-#2 /wordpress/wp-content/plugins/wp-stateless/static/migrations/20240423174109.php(20): wpdb->get_var('SELECT id FROM ...')
-#3 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-migrator.php(212): Migration_20240423174109->should_run()
-#4 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1716): wpCloud\StatelessMedia\Migrator->migrate()
-#5 /wordpress/wp-content/plugins/wp-stateless/lib/classes/class-bootstrap.php(1690): wpCloud\StatelessMedia\Bootstrap->run_upgrade_process()
-#6 /wordpress/wp-content/plugins/wp-stateless/vendor/udx/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php(153): wpCloud\StatelessMedia\Bootstrap->activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): UsabilityDynamics\WP\Bootstrap_Plugin->_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sta...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-stateless/wp...')
-#12 {main}</pre>
- for query SELECT id FROM wp_sm_sync LIMIT 1 made by activate_plugin, do_action('activate_wp-stateless/wp-stateless-media.php'), WP_Hook->do_action, WP_Hook->apply_filters, UsabilityDynamics\WP\Bootstrap_Plugin->_activate, wpCloud\StatelessMedia\Bootstrap->activate, wpCloud\StatelessMedia\Bootstrap->run_upgrade_process, wpCloud\StatelessMedia\Migrator->migrate, Migration_20240423174109->should_run, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:28:30 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('insert into wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('insert into wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#4 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(122): wpdb->get_results('insert into wp_...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#10 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:46 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "mail_plugin_url" in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php:135
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
-#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
-[09-Apr-2025 20:28:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php on line 135
+[11-Apr-2025 11:23:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: insert into wp_wmail_newsletter set `wmail_subject` = :param0 , `wmail_content` = :param1 , `wmail_status` = :param2 , `wmail_date` = CURDATE() | parameters: Sample Subject, This is sample mail content, Can add HTML content here., YES</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#2 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(106): wpdb->get_results('insert into wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#8 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: insert into wp_wmail_newsletter set `wmail_subject` = :param0 , `wmail_content` = :param1 , `wmail_status` = :param2 , `wmail_date` = CURDATE() | parameters: Sample HTML Mail, &lt;strong style=&quot;color: #990000&quot;&gt; Email newsletter&lt;/strong&gt;&lt;p&gt;Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.&lt;/p&gt; &lt;strong style=&quot;color: #990000&quot;&gt;Advantage of this plugin&lt;/strong&gt;&lt;ol&gt; &lt;li&gt;No coding knowledge required to setup this plugin.&lt;/li&gt; &lt;li&gt;Very easy installation and setup.&lt;/li&gt;&lt;li&gt;Option to send email newsletter to registered user.&lt;/li&gt; &lt;li&gt;Option to setup email subscription box and option to send email newsletter to subscriber.&lt;/li&gt; &lt;li&gt;Automatic welcome email to new subscriber.&lt;/li&gt;&lt;li&gt;Admin email notification for every new subscriber.&lt;/li&gt; &lt;/ol&gt;&lt;strong style=&quot;color: #990000&quot;&gt;&lt;/strong&gt;&lt;br&gt;., YES</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#2 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(122): wpdb->get_results('insert into wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#8 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:23:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "mail_plugin_url" in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php:135
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
-#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
-[09-Apr-2025 20:28:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method WPdrift_IO_Activator::setup() cannot be called statically in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php:34
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php on line 135
+[11-Apr-2025 11:24:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: insert into wp_wmail_newsletter set `wmail_subject` = :param0 , `wmail_content` = :param1 , `wmail_status` = :param2 , `wmail_date` = CURDATE() | parameters: Sample Subject, This is sample mail content, Can add HTML content here., YES</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#2 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(106): wpdb->get_results('insert into wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#8 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample Subject', `wmail_content` = 'This is sample mail content, Can add HTML content here.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:24:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE()</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: insert into wp_wmail_newsletter set `wmail_subject` = :param0 , `wmail_content` = :param1 , `wmail_status` = :param2 , `wmail_date` = CURDATE() | parameters: Sample HTML Mail, &lt;strong style=&quot;color: #990000&quot;&gt; Email newsletter&lt;/strong&gt;&lt;p&gt;Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.&lt;/p&gt; &lt;strong style=&quot;color: #990000&quot;&gt;Advantage of this plugin&lt;/strong&gt;&lt;ol&gt; &lt;li&gt;No coding knowledge required to setup this plugin.&lt;/li&gt; &lt;li&gt;Very easy installation and setup.&lt;/li&gt;&lt;li&gt;Option to send email newsletter to registered user.&lt;/li&gt; &lt;li&gt;Option to setup email subscription box and option to send email newsletter to subscriber.&lt;/li&gt; &lt;li&gt;Automatic welcome email to new subscriber.&lt;/li&gt;&lt;li&gt;Admin email notification for every new subscriber.&lt;/li&gt; &lt;/ol&gt;&lt;strong style=&quot;color: #990000&quot;&gt;&lt;/strong&gt;&lt;br&gt;., YES</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "set": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('insert into wp_...')
+#2 /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php(122): wpdb->get_results('insert into wp_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#8 {main}</pre>
+ for query insert into wp_wmail_newsletter set `wmail_subject` = 'Sample HTML Mail', `wmail_content` = '<strong style="color: #990000"> Email newsletter</strong><p>Email newsletter plugin have option to send HTML Mails/Newsletters to registered user, Comment author, Subscriber and Users who contacted you. Sending email is much cheaper than most other forms of communication. Email marketing has proven very successful for those who do it right. This plugin is very useful those who need to send Newsletters to users who subscribed to your blogs.</p> <strong style="color: #990000">Advantage of this plugin</strong><ol> <li>No coding knowledge required to setup this plugin.</li> <li>Very easy installation and setup.</li><li>Option to send email newsletter to registered user.</li> <li>Option to setup email subscription box and option to send email newsletter to subscriber.</li> <li>Automatic welcome email to new subscriber.</li><li>Admin email notification for every new subscriber.</li> </ol><strong style="color: #990000"></strong><br>.', `wmail_status` = 'YES', `wmail_date` = CURDATE() made by activate_plugin, do_action('activate_wp-email-newsletter/wpm_functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, wmail_mail_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 11:24:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "mail_plugin_url" in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php:135
 Stack trace:
-#0 /wordpress/wp-content/plugins/wpdrift-io-worker/wpdrift-worker.php(43): WPdrift_IO_Activator::activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_wpdrift_worker(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdrif...', false)
-#5 /internal/eval.php(20): activate_plugin('wpdrift-io-work...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wpdrift-io-worker/includes/class-wpdrift-worker-activator.php on line 34
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_nickx-plugin_setting_notice', '1', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_nickx-plugin_setting_notice' , '1' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_nick...', true, '', 'on')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(37): set_transient('nickx-plugin_se...', true, 0)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_nickx-plugin_setting_notice', '1', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_slider_layout', 'horizontal', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_slider_layout' , 'horizontal' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_slider_la...', 'horizontal', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(39): update_option('nickx_slider_la...', 'horizontal')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_slider_layout', 'horizontal', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_sliderautoplay', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_sliderautoplay' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_slideraut...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(40): update_option('nickx_slideraut...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_sliderautoplay', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrowinfinite', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_arrowinfinite' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_arrowinfi...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(41): update_option('nickx_arrowinfi...', 'yes')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrowinfinite', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrowdisable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_arrowdisable' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_arrowdisa...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(42): update_option('nickx_arrowdisa...', 'yes')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrowdisable', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrow_thumb', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_arrow_thumb' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_arrow_thu...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(43): update_option('nickx_arrow_thu...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_arrow_thumb', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_hide_thumbnails', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_hide_thumbnails' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_hide_thum...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(44): update_option('nickx_hide_thum...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_hide_thumbnails', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_gallery_action', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_gallery_action' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_gallery_a...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(45): update_option('nickx_gallery_a...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_gallery_action', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_adaptive_height', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_adaptive_height' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_adaptive_...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(46): update_option('nickx_adaptive_...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_adaptive_height', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_place_of_the_video', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_place_of_the_video' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_place_of_...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(47): update_option('nickx_place_of_...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_place_of_the_video', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_rtl', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_rtl' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nickx_rtl', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php(48): update_option('nickx_rtl', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nickx_activation_hook_callback(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-pro...', false)
-#10 /internal/eval.php(20): activate_plugin('wc-product-3d-v...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_rtl', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wc-product-3d-viewer/3D-product-viewer-and-webAR-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, nickx_activation_hook_callback, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nickx_videoloop', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nickx_videoloop' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wmail_mail_activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ema...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-email-newsle...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-email-newsletter/wpm_functions.php on line 135
+[11-Apr-2025 11:24:42 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Infeed_Post_...')
+#2 /wordpress/wp-content/plugins/wp-infeed-post/wp-infeed-post.php(180): register_widget('WP_Infeed_Post_...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-infeed-post"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
