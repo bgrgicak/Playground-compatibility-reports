@@ -2,113 +2,211 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 20:49:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('businesspress', 'a:1:{s:17:\"core_auto_updates\";s:5:\"minor\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'businesspress' , 'a:1:{s:17:&quot;core_auto_updates&quot;;s:5:&quot;minor&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_places</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_places</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_places</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('businesspress', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/businesspress/businesspress.php(237): update_option('businesspress', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): BusinessPress->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(614): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#6 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#7 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_carts</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_carts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_carts</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(626): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#6 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#7 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_events</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_events</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_events</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(672): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#6 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#7 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_places</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_places</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_places</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(614): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_busine...', false)
-#10 /internal/eval.php(20): activate_plugin('businesspress/b...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('businesspress', 'a:1:{s:17:\"core_auto_updates\";s:5:\"minor\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_businesspress/businesspress.php'), WP_Hook->do_action, WP_Hook->apply_filters, BusinessPress->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:49:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:49:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:50:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:50:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:50:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:50:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:50:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_bamboo_tweets', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_bamboo_tweets' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_carts</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_carts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_carts</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_bamboo_t...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_bamboo_t...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_bamboo_tweets', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:50:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:50:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:50:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:50:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:51:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(626): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_bb_edition_control (
-            `id` int(9) NOT NULL AUTO_INCREMENT,
-            `date` date NOT NULL,
-            `number` int(9) NOT NULL,
-            `name` varchar(255) NOT NULL,
-            `slug` varchar(255) NOT NULL,
-            `status` int(1) NOT NULL DEFAULT '0',
-            `description` text NOT NULL,
-            PRIMARY KEY (`number`),
-            UNIQUE KEY `id` (`id`)
-            );</p>
+<p>ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_events</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_bap_events</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bap_events</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(672): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#10 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#11 {main}</pre>
+ for query ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -120,40 +218,41 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControlDb.php(390): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControl.php(312): BbEditionControlDb->createTable()
-#3 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControl.php(206): BbEditionControl::single_activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BbEditionControl::activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bb-edi...', false)
-#8 /internal/eval.php(20): activate_plugin('bb-edition-cont...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(595): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
 #9 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_bb_edition_control (
-            `id` int(9) NOT NULL AUTO_INCREMENT,
-            `date` date NOT NULL,
-            `number` int(9) NOT NULL,
-            `name` varchar(255) NOT NULL,
-            `slug` varchar(255) NOT NULL,
-            `status` int(1) NOT NULL DEFAULT '0',
-            `description` text NOT NULL,
-            PRIMARY KEY (`number`),
-            UNIQUE KEY `id` (`id`)
-            ); made by activate_plugin, do_action('activate_bb-edition-control/bb-edition-control.php'), WP_Hook->do_action, WP_Hook->apply_filters, BbEditionControl::activate, BbEditionControl::single_activate, BbEditionControlDb->createTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:51:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_bb_edition_control (
-            `id` int(9) NOT NULL AUTO_INCREMENT,
-            `date` date NOT NULL,
-            `number` int(9) NOT NULL,
-            `name` varchar(255) NOT NULL,
-            `slug` varchar(255) NOT NULL,
-            `status` int(1) NOT NULL DEFAULT '0',
-            `description` text NOT NULL,
-            PRIMARY KEY (`number`),
-            UNIQUE KEY `id` (`id`)
-            );</p>
+<p>CREATE TABLE `wp_bap_places` (
+                                  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `type` int(11) NOT NULL DEFAULT '0',
+                                  `cells` text NOT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `price` float NOT NULL DEFAULT '0',
+                                  `scheme_id` int(11) NOT NULL,
+                                  `status_id` int(11) NOT NULL,
+                                  `color` varchar(255) DEFAULT NULL,
+                                  PRIMARY  KEY (`place_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -165,357 +264,563 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControlDb.php(390): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControl.php(312): BbEditionControlDb->createTable()
-#3 /wordpress/wp-content/plugins/bb-edition-control/public/BbEditionControl.php(206): BbEditionControl::single_activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): BbEditionControl::activate(false)
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(611): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_places` (
+                                  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `type` int(11) NOT NULL DEFAULT '0',
+                                  `cells` text NOT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `price` float NOT NULL DEFAULT '0',
+                                  `scheme_id` int(11) NOT NULL,
+                                  `status_id` int(11) NOT NULL,
+                                  `color` varchar(255) DEFAULT NULL,
+                                  PRIMARY  KEY (`place_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_places_ibfk_1.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(614): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_carts_ibfk_1.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(626): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_orders` (
+                                  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `first_name` varchar(255) DEFAULT NULL,
+                                  `last_name` varchar(255) DEFAULT NULL,
+                                  `email` varchar(255) DEFAULT NULL,
+                                  `phone` varchar(255) DEFAULT NULL,
+                                  `notes` text,
+                                  `date` datetime DEFAULT NULL,
+                                  `code` varchar(255) DEFAULT NULL,
+                                  `places` text,
+                                  `total_price` float NOT NULL DEFAULT '0',
+                                  `status_id` int(11) NOT NULL DEFAULT '0',
+                                  `admin_notes` text,
+                                  `scheme_id` int(11) NOT NULL DEFAULT '0',
+                                  `event_id` int(11) DEFAULT NULL,
+                                  `event_name` varchar(255) DEFAULT NULL,
+                                  `event` text,
+                                  PRIMARY  KEY (`order_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(648): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_orders` (
+                                  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `first_name` varchar(255) DEFAULT NULL,
+                                  `last_name` varchar(255) DEFAULT NULL,
+                                  `email` varchar(255) DEFAULT NULL,
+                                  `phone` varchar(255) DEFAULT NULL,
+                                  `notes` text,
+                                  `date` datetime DEFAULT NULL,
+                                  `code` varchar(255) DEFAULT NULL,
+                                  `places` text,
+                                  `total_price` float NOT NULL DEFAULT '0',
+                                  `status_id` int(11) NOT NULL DEFAULT '0',
+                                  `admin_notes` text,
+                                  `scheme_id` int(11) NOT NULL DEFAULT '0',
+                                  `event_id` int(11) DEFAULT NULL,
+                                  `event_name` varchar(255) DEFAULT NULL,
+                                  `event` text,
+                                  PRIMARY  KEY (`order_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_events` (
+                                  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `scheme_id` int(11) DEFAULT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `url` varchar(255) DEFAULT NULL,
+                                  `hours` float NOT NULL DEFAULT '0',
+                                  `background_color` varchar(255) DEFAULT NULL,
+                                  `border_color` varchar(255) DEFAULT NULL,
+                                  `text_color` varchar(255) DEFAULT NULL,
+                                  `start` datetime NOT NULL,
+                                  `end` datetime NOT NULL,
+                                  `timezone_offset` float NOT NULL DEFAULT '0',
+                                  `all_day` int(11) NOT NULL DEFAULT '1',
+                                  `status_id` int(11) NOT NULL,
+                                  PRIMARY  KEY (`event_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(669): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_events` (
+                                  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `scheme_id` int(11) DEFAULT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `url` varchar(255) DEFAULT NULL,
+                                  `hours` float NOT NULL DEFAULT '0',
+                                  `background_color` varchar(255) DEFAULT NULL,
+                                  `border_color` varchar(255) DEFAULT NULL,
+                                  `text_color` varchar(255) DEFAULT NULL,
+                                  `start` datetime NOT NULL,
+                                  `end` datetime NOT NULL,
+                                  `timezone_offset` float NOT NULL DEFAULT '0',
+                                  `all_day` int(11) NOT NULL DEFAULT '1',
+                                  `status_id` int(11) NOT NULL,
+                                  PRIMARY  KEY (`event_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_events_ibfk_1.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(672): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(595): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bb-edi...', false)
-#8 /internal/eval.php(20): activate_plugin('bb-edition-cont...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
 #9 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_bb_edition_control (
-            `id` int(9) NOT NULL AUTO_INCREMENT,
-            `date` date NOT NULL,
-            `number` int(9) NOT NULL,
-            `name` varchar(255) NOT NULL,
-            `slug` varchar(255) NOT NULL,
-            `status` int(1) NOT NULL DEFAULT '0',
-            `description` text NOT NULL,
-            PRIMARY KEY (`number`),
-            UNIQUE KEY `id` (`id`)
-            ); made by activate_plugin, do_action('activate_bb-edition-control/bb-edition-control.php'), WP_Hook->do_action, WP_Hook->apply_filters, BbEditionControl::activate, BbEditionControl::single_activate, BbEditionControlDb->createTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:51:18 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[09-Apr-2025 20:51:18 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[09-Apr-2025 20:51:18 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[09-Apr-2025 20:51:18 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[09-Apr-2025 20:51:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:51:19 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:51:19 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:51:19 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:51:19 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[09-Apr-2025 20:51:19 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[09-Apr-2025 20:51:19 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[09-Apr-2025 20:51:19 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[09-Apr-2025 20:51:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('twp_be_options_settings', 'a:31:{s:12:\"social_share\";a:6:{s:8:\"facebook\";i:1;s:7:\"twitter\";i:1;s:9:\"pinterest\";i:1;s:8:\"linkedin\";i:1;s:5:\"email\";i:0;s:2:\"vk\";i:0;}s:24:\"twp_be_show_author_title\";s:17:\"About Post Author\";s:28:\"twp_be_show_author_alignmrnt\";s:4:\"left\";s:31:\"twp_be_show_author_image_layout\";s:6:\"square\";s:20:\"social_share_ed_post\";i:1;s:23:\"social_share_ed_archive\";i:1;s:30:\"social_share_ed_socila_counter\";i:1;s:24:\"twp_be_show_author_email\";i:0;s:22:\"twp_be_show_author_url\";i:1;s:22:\"twp_be_show_author_box\";i:1;s:23:\"twp_be_show_author_role\";s:0:\"\";s:21:\"twp_be_open_link_type\";s:10:\"new-window\";s:26:\"social_share_email_subject\";s:0:\"\";s:23:\"social_share_email_body\";s:27:\"Hey I Got Something For You\";s:33:\"twp_be_enable_like_dislike_button\";i:1;s:39:\"twp_be_show_like_dislike_on_single_post\";i:1;s:22:\"social_share_fb_app_id\";s:0:\"\";s:26:\"social_share_fb_secret_key\";s:0:\"\";s:18:\"social_share_title\";s:5:\"Share\";s:35:\"twp_be_show_like_dislike_on_archive\";i:1;s:23:\"twp_be_enable_read_time\";i:1;s:31:\"twp_be_readtime_word_per_minute\";s:3:\"200\";s:23:\"twp_be_like_icon_layout\";s:8:\"layout-1\";s:27:\"twp_be_enable_post_reaction\";i:1;s:20:\"twp_be_enable_second\";i:1;s:22:\"twp_enable_post_rating\";i:1;s:26:\"twp_be_react_percent_count\";s:7:\"percent\";s:21:\"twp_be_readtime_label\";s:10:\"Read Time:\";s:19:\"twp_be_minute_label\";s:6:\"Minute\";s:19:\"twp_be_second_label\";s:6:\"Second\";s:18:\"twp_be_views_label\";s:6:\"Views:\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE `wp_bap_places` (
+                                  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `type` int(11) NOT NULL DEFAULT '0',
+                                  `cells` text NOT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `price` float NOT NULL DEFAULT '0',
+                                  `scheme_id` int(11) NOT NULL,
+                                  `status_id` int(11) NOT NULL,
+                                  `color` varchar(255) DEFAULT NULL,
+                                  PRIMARY  KEY (`place_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'twp_be_options_settings' , 'a:31:{s:12:&quot;social_share&quot;;a:6:{s:8:&quot;facebook&quot;;i:1;s:7:&quot;twitter&quot;;i:1;s:9:&quot;pinterest&quot;;i:1;s:8:&quot;linkedin&quot;;i:1;s:5:&quot;email&quot;;i:0;s:2:&quot;vk&quot;;i:0;}s:24:&quot;twp_be_show_author_title&quot;;s:17:&quot;About Post Author&quot;;s:28:&quot;twp_be_show_author_alignmrnt&quot;;s:4:&quot;left&quot;;s:31:&quot;twp_be_show_author_image_layout&quot;;s:6:&quot;square&quot;;s:20:&quot;social_share_ed_post&quot;;i:1;s:23:&quot;social_share_ed_archive&quot;;i:1;s:30:&quot;social_share_ed_socila_counter&quot;;i:1;s:24:&quot;twp_be_show_author_email&quot;;i:0;s:22:&quot;twp_be_show_author_url&quot;;i:1;s:22:&quot;twp_be_show_author_box&quot;;i:1;s:23:&quot;twp_be_show_author_role&quot;;s:0:&quot;&quot;;s:21:&quot;twp_be_open_link_type&quot;;s:10:&quot;new-window&quot;;s:26:&quot;social_share_email_subject&quot;;s:0:&quot;&quot;;s:23:&quot;social_share_email_body&quot;;s:27:&quot;Hey I Got Something For You&quot;;s:33:&quot;twp_be_enable_like_dislike_button&quot;;i:1;s:39:&quot;twp_be_show_like_dislike_on_single_post&quot;;i:1;s:22:&quot;social_share_fb_app_id&quot;;s:0:&quot;&quot;;s:26:&quot;social_share_fb_secret_key&quot;;s:0:&quot;&quot;;s:18:&quot;social_share_title&quot;;s:5:&quot;Share&quot;;s:35:&quot;twp_be_show_like_dislike_on_archive&quot;;i:1;s:23:&quot;twp_be_enable_read_time&quot;;i:1;s:31:&quot;twp_be_readtime_word_per_minute&quot;;s:3:&quot;200&quot;;s:23:&quot;twp_be_like_icon_layout&quot;;s:8:&quot;layout-1&quot;;s:27:&quot;twp_be_enable_post_reaction&quot;;i:1;s:20:&quot;twp_be_enable_second&quot;;i:1;s:22:&quot;twp_enable_post_rating&quot;;i:1;s:26:&quot;twp_be_react_percent_count&quot;;s:7:&quot;percent&quot;;s:21:&quot;twp_be_readtime_label&quot;;s:10:&quot;Read Time:&quot;;s:19:&quot;twp_be_minute_label&quot;;s:6:&quot;Minute&quot;;s:19:&quot;twp_be_second_label&quot;;s:6:&quot;Second&quot;;s:18:&quot;twp_be_views_label&quot;;s:6:&quot;Views:&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('twp_be_options_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/booster-extension/inc/backend/activation.php(36): update_option('twp_be_options_...', Array)
-#6 /wordpress/wp-content/plugins/booster-extension/booster-extension.php(228): include('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Booster_Extension_Class->twp_activation_default_value(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_booste...', false)
-#11 /internal/eval.php(20): activate_plugin('booster-extensi...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('twp_be_options_settings', 'a:31:{s:12:\"social_share\";a:6:{s:8:\"facebook\";i:1;s:7:\"twitter\";i:1;s:9:\"pinterest\";i:1;s:8:\"linkedin\";i:1;s:5:\"email\";i:0;s:2:\"vk\";i:0;}s:24:\"twp_be_show_author_title\";s:17:\"About Post Author\";s:28:\"twp_be_show_author_alignmrnt\";s:4:\"left\";s:31:\"twp_be_show_author_image_layout\";s:6:\"square\";s:20:\"social_share_ed_post\";i:1;s:23:\"social_share_ed_archive\";i:1;s:30:\"social_share_ed_socila_counter\";i:1;s:24:\"twp_be_show_author_email\";i:0;s:22:\"twp_be_show_author_url\";i:1;s:22:\"twp_be_show_author_box\";i:1;s:23:\"twp_be_show_author_role\";s:0:\"\";s:21:\"twp_be_open_link_type\";s:10:\"new-window\";s:26:\"social_share_email_subject\";s:0:\"\";s:23:\"social_share_email_body\";s:27:\"Hey I Got Something For You\";s:33:\"twp_be_enable_like_dislike_button\";i:1;s:39:\"twp_be_show_like_dislike_on_single_post\";i:1;s:22:\"social_share_fb_app_id\";s:0:\"\";s:26:\"social_share_fb_secret_key\";s:0:\"\";s:18:\"social_share_title\";s:5:\"Share\";s:35:\"twp_be_show_like_dislike_on_archive\";i:1;s:23:\"twp_be_enable_read_time\";i:1;s:31:\"twp_be_readtime_word_per_minute\";s:3:\"200\";s:23:\"twp_be_like_icon_layout\";s:8:\"layout-1\";s:27:\"twp_be_enable_post_reaction\";i:1;s:20:\"twp_be_enable_second\";i:1;s:22:\"twp_enable_post_rating\";i:1;s:26:\"twp_be_react_percent_count\";s:7:\"percent\";s:21:\"twp_be_readtime_label\";s:10:\"Read Time:\";s:19:\"twp_be_minute_label\";s:6:\"Minute\";s:19:\"twp_be_second_label\";s:6:\"Second\";s:18:\"twp_be_views_label\";s:6:\"Views:\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_booster-extension/booster-extension.php'), WP_Hook->do_action, WP_Hook->apply_filters, Booster_Extension_Class->twp_activation_default_value, include('/plugins/booster-extension/inc/backend/activation.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:51:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 20:51:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 20:51:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 20:51:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 20:51:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(611): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_places` (
+                                  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `type` int(11) NOT NULL DEFAULT '0',
+                                  `cells` text NOT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `price` float NOT NULL DEFAULT '0',
+                                  `scheme_id` int(11) NOT NULL,
+                                  `status_id` int(11) NOT NULL,
+                                  `color` varchar(255) DEFAULT NULL,
+                                  PRIMARY  KEY (`place_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:51:48', '2025-04-09 20:51:48', '[be-booster-favourites]', '', 'Pin Posts', '', 'publish', 'page', 'closed', 'closed', '', 'be-pin-posts', '', '', '2025-04-09 20:51:48', '2025-04-09 20:51:48', 0, 0, '', '')</p>
+<p>ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 20:51:48' , '2025-04-09 20:51:48' , '[be-booster-favourites]' , '' , 'Pin Posts' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'be-pin-posts' , '' , '' , '2025-04-09 20:51:48' , '2025-04-09 20:51:48' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_places_ibfk_1.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/booster-extension/inc/frontend/read-later.php(156): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): booster_extension_create_post('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:51:48', '2025-04-09 20:51:48', '[be-booster-favourites]', '', 'Pin Posts', '', 'publish', 'page', 'closed', 'closed', '', 'be-pin-posts', '', '', '2025-04-09 20:51:48', '2025-04-09 20:51:48', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, booster_extension_create_post, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:51:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(614): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_places`
+                                    ADD CONSTRAINT `wp_bap_places_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_booster-extension-author-layout', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_booster-extension-author-layout' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_carts_ibfk_1.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_booster-...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_booster-...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_booster-extension-author-layout', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:52:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(626): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_carts`
+                                    ADD CONSTRAINT `wp_bap_carts_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `wp_bap_places` (`place_id`) ON DELETE CASCADE ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_bfs_options', 'a:1:{s:7:\"default\";s:7:\"options\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE `wp_bap_orders` (
+                                  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `first_name` varchar(255) DEFAULT NULL,
+                                  `last_name` varchar(255) DEFAULT NULL,
+                                  `email` varchar(255) DEFAULT NULL,
+                                  `phone` varchar(255) DEFAULT NULL,
+                                  `notes` text,
+                                  `date` datetime DEFAULT NULL,
+                                  `code` varchar(255) DEFAULT NULL,
+                                  `places` text,
+                                  `total_price` float NOT NULL DEFAULT '0',
+                                  `status_id` int(11) NOT NULL DEFAULT '0',
+                                  `admin_notes` text,
+                                  `scheme_id` int(11) NOT NULL DEFAULT '0',
+                                  `event_id` int(11) DEFAULT NULL,
+                                  `event_name` varchar(255) DEFAULT NULL,
+                                  `event` text,
+                                  PRIMARY  KEY (`order_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_bfs_options' , 'a:1:{s:7:&quot;default&quot;;s:7:&quot;options&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_bfs...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php(166): update_option('woocommerce_bfs...', Array)
-#6 /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php(54): woocommerce_bfs->getOptions()
-#7 /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php(391): woocommerce_bfs->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('boxtons-woocomm...')
-#10 /internal/eval.php(20): activate_plugin('boxtons-woocomm...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_bfs_options', 'a:1:{s:7:\"default\";s:7:\"options\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php'), woocommerce_bfs->__construct, woocommerce_bfs->getOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 20:52:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php on line 64
-[09-Apr-2025 20:52:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php on line 65
-[09-Apr-2025 20:52:23 UTC] PHP Warning:  Undefined array key "bfs_APIKey" in /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php on line 64
-[09-Apr-2025 20:52:23 UTC] PHP Warning:  Undefined array key "bfs_APISecret" in /wordpress/wp-content/plugins/boxtons-woocommerce-order-fullfilment/boxtons-woocommerce-fulfillment.php on line 65
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"boxtons-woocommerce-order-fullfilment"},"options":{"activate":true}}) : 
-  "unreachable" WASM instruction executed.
-  
-  The typical reason is a PHP function missing from the ASYNCIFY_ONLY
-  list when building PHP.wasm.
-  
-  You will need to file a new issue in the WordPress Playground repository
-  and paste this error message there:
-  
-  https://github.com/WordPress/wordpress-playground/issues/new
-  
-  If you're a core developer, the typical fix is to:
-  
-  * Isolate a minimal reproduction of the error
-  * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
-  * Run 'npm run fix-asyncify'
-  * Commit the changes, push to the repo, release updated NPM packages
-  
-  Below is a list of all the PHP functions found in the stack trace to
-  help with the minimal reproduction. If they're all already listed in
-  the Dockerfile, you'll need to trigger this error again with long stack
-  traces enabled. In node.js, you can do it using the --stack-trace-limit=100
-  CLI option: 
-  
-      * php.wasm.__wrap_select
-      * php.wasm.RAND_poll
-      * php.wasm.rand_status
-      * php.wasm.RAND_status
-      * php.wasm.Curl_ossl_seed
-      * php.wasm.Curl_ossl_random
-      * php.wasm.Curl_rand
-      * php.wasm.Curl_rand_hex
-  
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: Error: 
-    "unreachable" WASM instruction executed.
-    
-    The typical reason is a PHP function missing from the ASYNCIFY_ONLY
-    list when building PHP.wasm.
-    
-    You will need to file a new issue in the WordPress Playground repository
-    and paste this error message there:
-    
-    https://github.com/WordPress/wordpress-playground/issues/new
-    
-    If you're a core developer, the typical fix is to:
-    
-    * Isolate a minimal reproduction of the error
-    * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
-    * Run 'npm run fix-asyncify'
-    * Commit the changes, push to the repo, release updated NPM packages
-    
-    Below is a list of all the PHP functions found in the stack trace to
-    help with the minimal reproduction. If they're all already listed in
-    the Dockerfile, you'll need to trigger this error again with long stack
-    traces enabled. In node.js, you can do it using the --stack-trace-limit=100
-    CLI option: 
-    
-        * php.wasm.__wrap_select
-        * php.wasm.RAND_poll
-        * php.wasm.rand_status
-        * php.wasm.RAND_status
-        * php.wasm.Curl_ossl_seed
-        * php.wasm.Curl_ossl_random
-        * php.wasm.Curl_rand
-        * php.wasm.Curl_rand_hex
-    
-        at PHP.ae (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1446:78)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:981:17)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      cause: Error: Rethrown
-          at UnhandledRejectionsTarget.e (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1423:19)
-          at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
-          at UnhandledRejectionsTarget.dispatchEvent (node:internal/event_target:762:26)
-          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:565:15)
-          at invoke_iiiii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109620:14)
-          at php.wasm.php_execute_script (wasm://wasm/php.wasm-0372e072:wasm-function[11032]:0x5fcfba)
-          at php.wasm.dynCall_ii (wasm://wasm/php.wasm-0372e072:wasm-function[12823]:0x6c1791)
-          at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109067:22)
-          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18)
-          at invoke_ii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109631:14) {
-        cause: RuntimeError: unreachable
-            at php.wasm.RAND_bytes (wasm://wasm/php.wasm-0372e072:wasm-function[457]:0x32de0)
-            at php.wasm.Curl_ossl_random (wasm://wasm/php.wasm-0372e072:wasm-function[14872]:0x76af86)
-            at php.wasm.Curl_rand (wasm://wasm/php.wasm-0372e072:wasm-function[3344]:0x225b82)
-            at php.wasm.Curl_rand_hex (wasm://wasm/php.wasm-0372e072:wasm-function[4354]:0x2de8b4)
-            at php.wasm.Curl_flush_cookies (wasm://wasm/php.wasm-0372e072:wasm-function[6716]:0x46b70f)
-            at php.wasm.Curl_close (wasm://wasm/php.wasm-0372e072:wasm-function[1476]:0xd9df5)
-            at php.wasm.curl_free_obj (wasm://wasm/php.wasm-0372e072:wasm-function[13115]:0x6d865e)
-            at php.wasm.zend_objects_store_del (wasm://wasm/php.wasm-0372e072:wasm-function[229]:0x157ef)
-            at php.wasm.zend_leave_helper_SPEC (wasm://wasm/php.wasm-0372e072:wasm-function[699]:0x53f62)
-            at php.wasm.ZEND_RETURN_SPEC_CONST_HANDLER (wasm://wasm/php.wasm-0372e072:wasm-function[13701]:0x701f7f) {
-          cause: Error
-              at Asyncify.handleSleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109868:45)
-              at _emscripten_sleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:107828:44)
-              at php.wasm.__wrap_select (wasm://wasm/php.wasm-0372e072:wasm-function[1345]:0xc6766)
-              at php.wasm.RAND_poll (wasm://wasm/php.wasm-0372e072:wasm-function[6548]:0x457ab8)
-              at php.wasm.rand_status (wasm://wasm/php.wasm-0372e072:wasm-function[10454]:0x5c51e3)
-              at php.wasm.RAND_status (wasm://wasm/php.wasm-0372e072:wasm-function[1783]:0x109352)
-              at php.wasm.Curl_ossl_seed (wasm://wasm/php.wasm-0372e072:wasm-function[6690]:0x4687a9)
-              at php.wasm.Curl_ossl_random (wasm://wasm/php.wasm-0372e072:wasm-function[14872]:0x76af69)
-              at php.wasm.Curl_rand (wasm://wasm/php.wasm-0372e072:wasm-function[3344]:0x225b82)
-              at php.wasm.Curl_rand_hex (wasm://wasm/php.wasm-0372e072:wasm-function[4354]:0x2de8b4)
-        },
-        betterMessage: '\n' +
-          '"unreachable" WASM instruction executed.\n' +
-          '\n' +
-          'The typical reason is a PHP function missing from the ASYNCIFY_ONLY\n' +
-          'list when building PHP.wasm.\n' +
-          '\n' +
-          'You will need to file a new issue in the WordPress Playground repository\n' +
-          'and paste this error message there:\n' +
-          '\n' +
-          'https://github.com/WordPress/wordpress-playground/issues/new\n' +
-          '\n' +
-          "If you're a core developer, the typical fix is to:\n" +
-          '\n' +
-          '* Isolate a minimal reproduction of the error\n' +
-          '* Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository\n' +
-          "* Run 'npm run fix-asyncify'\n" +
-          '* Commit the changes, push to the repo, release updated NPM packages\n' +
-          '\n' +
-          'Below is a list of all the PHP functions found in the stack trace to\n' +
-          "help with the minimal reproduction. If they're all already listed in\n" +
-          "the Dockerfile, you'll need to trigger this error again with long stack\n" +
-          'traces enabled. In node.js, you can do it using the --stack-trace-limit=100\n' +
-          'CLI option: \n' +
-          '\n' +
-          '    * php.wasm.__wrap_select\n' +
-          '    * php.wasm.RAND_poll\n' +
-          '    * php.wasm.rand_status\n' +
-          '    * php.wasm.RAND_status\n' +
-          '    * php.wasm.Curl_ossl_seed\n' +
-          '    * php.wasm.Curl_ossl_random\n' +
-          '    * php.wasm.Curl_rand\n' +
-          '    * php.wasm.Curl_rand_hex\n'
-      }
-    }
-  }
-}
-
-Node.js v23.11.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(648): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_orders` (
+                                  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `first_name` varchar(255) DEFAULT NULL,
+                                  `last_name` varchar(255) DEFAULT NULL,
+                                  `email` varchar(255) DEFAULT NULL,
+                                  `phone` varchar(255) DEFAULT NULL,
+                                  `notes` text,
+                                  `date` datetime DEFAULT NULL,
+                                  `code` varchar(255) DEFAULT NULL,
+                                  `places` text,
+                                  `total_price` float NOT NULL DEFAULT '0',
+                                  `status_id` int(11) NOT NULL DEFAULT '0',
+                                  `admin_notes` text,
+                                  `scheme_id` int(11) NOT NULL DEFAULT '0',
+                                  `event_id` int(11) DEFAULT NULL,
+                                  `event_name` varchar(255) DEFAULT NULL,
+                                  `event` text,
+                                  PRIMARY  KEY (`order_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_events` (
+                                  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `scheme_id` int(11) DEFAULT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `url` varchar(255) DEFAULT NULL,
+                                  `hours` float NOT NULL DEFAULT '0',
+                                  `background_color` varchar(255) DEFAULT NULL,
+                                  `border_color` varchar(255) DEFAULT NULL,
+                                  `text_color` varchar(255) DEFAULT NULL,
+                                  `start` datetime NOT NULL,
+                                  `end` datetime NOT NULL,
+                                  `timezone_offset` float NOT NULL DEFAULT '0',
+                                  `all_day` int(11) NOT NULL DEFAULT '1',
+                                  `status_id` int(11) NOT NULL,
+                                  PRIMARY  KEY (`event_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(669): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_events` (
+                                  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `scheme_id` int(11) DEFAULT NULL,
+                                  `name` varchar(255) NOT NULL,
+                                  `description` varchar(255) DEFAULT NULL,
+                                  `url` varchar(255) DEFAULT NULL,
+                                  `hours` float NOT NULL DEFAULT '0',
+                                  `background_color` varchar(255) DEFAULT NULL,
+                                  `border_color` varchar(255) DEFAULT NULL,
+                                  `text_color` varchar(255) DEFAULT NULL,
+                                  `start` datetime NOT NULL,
+                                  `end` datetime NOT NULL,
+                                  `timezone_offset` float NOT NULL DEFAULT '0',
+                                  `all_day` int(11) NOT NULL DEFAULT '1',
+                                  `status_id` int(11) NOT NULL,
+                                  PRIMARY  KEY (`event_id`),
+                                  KEY `scheme_id` (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:36:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: wp_bap_events_ibfk_1.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(672): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(317): Book_A_Place::create_tables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Book_A_Place::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_book-a...', false)
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query ALTER TABLE `wp_bap_events`
+                                    ADD CONSTRAINT `wp_bap_events_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `wp_bap_schemes` (`scheme_id`) ON DELETE SET NULL ON UPDATE CASCADE made by activate_plugin, do_action('activate_book-a-place/book-a-place.php'), WP_Hook->do_action, WP_Hook->apply_filters, Book_A_Place::activate, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 06:37:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(595): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(125): Book_A_Place::create_tables()
+#4 /wordpress/wp-content/plugins/book-a-place/class-book-a-place.php(296): Book_A_Place->__construct()
+#5 /wordpress/wp-content/plugins/book-a-place/book-a-place.php(53): Book_A_Place::get_instance()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('book-a-place/bo...')
+#8 /internal/eval.php(20): activate_plugin('book-a-place/bo...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_bap_schemes` (
+                                  `scheme_id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `name` varchar(255) NOT NULL,
+                                  `width` int(11) NOT NULL,
+                                  `height` int(11) NOT NULL,
+                                  `is_hidden` tinyint(1) NOT NULL DEFAULT '0',
+                                  `description` text NOT NULL,
+                                  `purchase_limit` int(11) NOT NULL,                                  
+                                  PRIMARY  KEY (`scheme_id`)
+                                ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/book-a-place/book-a-place.php'), Book_A_Place::get_instance, Book_A_Place->__construct, Book_A_Place::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 
