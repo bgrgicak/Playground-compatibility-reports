@@ -2,533 +2,175 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 21:44:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ram108-sape', 'a:5:{i:0;b:0;s:3:\"ver\";s:3:\"0.5\";s:4:\"user\";s:0:\"\";s:7:\"context\";i:1;s:14:\"context_except\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ram108-sape' , 'a:5:{i:0;b:0;s:3:&quot;ver&quot;;s:3:&quot;0.5&quot;;s:4:&quot;user&quot;;s:0:&quot;&quot;;s:7:&quot;context&quot;;i:1;s:14:&quot;context_except&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ram108-sape', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/ram108-sape/library/settings.php(19): update_option('ram108-sape', Array)
-#6 /wordpress/wp-content/plugins/ram108-sape/library/settings.php(32): ram108_sape_settings->save(Array)
-#7 /wordpress/wp-content/plugins/ram108-sape/library/settings.php(25): ram108_sape_settings->_create_data()
-#8 /wordpress/wp-content/plugins/ram108-sape/library/settings.php(13): ram108_sape_settings->_get_data()
-#9 /wordpress/wp-content/plugins/ram108-sape/library/plugin.php(15): ram108_sape_settings->__construct()
-#10 /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape.php(99): ram108_sape_plugin->__construct()
-#11 /wordpress/wp-content/plugins/ram108-sape/plugin.php(28): require('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ram108-sape/plu...')
-#14 /internal/eval.php(20): activate_plugin('ram108-sape/plu...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ram108-sape', 'a:5:{i:0;b:0;s:3:\"ver\";s:3:\"0.5\";s:4:\"user\";s:0:\"\";s:7:\"context\";i:1;s:14:\"context_except\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ram108-sape/plugin.php'), require('/plugins/ram108-sape/include/ram108_sape.php'), ram108_sape_plugin->__construct, ram108_sape_settings->__construct, ram108_sape_settings->_get_data, ram108_sape_settings->_create_data, ram108_sape_settings->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:44:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php:66
+Error: [11-Apr-2025 08:53:17 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:26 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:35 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php:217
 Stack trace:
-#0 /wordpress/wp-content/plugins/ram108-sape/plugin.php(29): require()
+#0 /wordpress/wp-content/plugins/responsive-video/responsive-video.php(31): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ram108-sape/plu...')
-#3 /internal/eval.php(20): activate_plugin('ram108-sape/plu...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('responsive-vide...')
+#3 /internal/eval.php(20): activate_plugin('responsive-vide...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php on line 66
-[09-Apr-2025 21:44:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php:66
+  thrown in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php on line 217
+[11-Apr-2025 08:53:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php:217
 Stack trace:
-#0 /wordpress/wp-content/plugins/ram108-sape/plugin.php(29): require()
+#0 /wordpress/wp-content/plugins/responsive-video/responsive-video.php(31): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ram108-sape/plu...')
-#3 /internal/eval.php(20): activate_plugin('ram108-sape/plu...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('responsive-vide...')
+#3 /internal/eval.php(20): activate_plugin('responsive-vide...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php on line 66
-[09-Apr-2025 21:44:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php:66
+  thrown in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php on line 217
+[11-Apr-2025 08:54:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php:217
 Stack trace:
-#0 /wordpress/wp-content/plugins/ram108-sape/plugin.php(29): require()
+#0 /wordpress/wp-content/plugins/responsive-video/responsive-video.php(31): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ram108-sape/plu...')
-#3 /internal/eval.php(20): activate_plugin('ram108-sape/plu...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('responsive-vide...')
+#3 /internal/eval.php(20): activate_plugin('responsive-vide...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/ram108-sape/include/ram108_sape_widget.php on line 66
-[09-Apr-2025 21:45:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:45:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:45:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:45:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:45:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rapid-twitter', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_rapid-twitter' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_rapid-tw...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_rapid-tw...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rapid-twitter', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:45:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:45:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '?0=e@_#oj!Nu]pPmOok=)ug1=V8s`hZYgav:L R>oB(/m43+B0sk9:x9<XHK{1QF', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '?0=e@_#oj!Nu]pPmOok=)ug1=V8s`hZYgav:L R&gt;oB(/m43+B0sk9:x9&lt;XHK{1QF' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '?0=e@_#oj!Nu]pP...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '?0=e@_#oj!Nu]pP...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '?0=e@_#oj!Nu]pP...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '?0=e@_#oj!Nu]pP...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/react/lib/class-react.php(72): wp_enqueue_script('react-emoji', 'http://127.0.0....', Array, false, true)
-#19 /wordpress/wp-content/plugins/react/lib/class-react.php(27): React->enqueue()
-#20 /wordpress/wp-content/plugins/react/lib/class-react.php(44): React->__construct()
-#21 /wordpress/wp-includes/class-wp-hook.php(324): React::init('')
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-settings.php(704): do_action('init')
-#25 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#26 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#27 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#28 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '?0=e@_#oj!Nu]pPmOok=)ug1=V8s`hZYgav:L R>oB(/m43+B0sk9:x9<XHK{1QF', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, React::init, React->__construct, React->enqueue, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:45:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Pp+%4w*/4k2T9<rEO:[~+/3*&7sfa/?~ILV/)9uQU5D/~R6i4@v?GgG<$r=H$2J-', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'Pp+%4w*/4k2T9&lt;rEO:[~+/3*&amp;7sfa/?~ILV/)9uQU5D/~R6i4@v?GgG&lt;$r=H$2J-' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'Pp+%4w*/4k2T9<r...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'Pp+%4w*/4k2T9<r...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'Pp+%4w*/4k2T9<r...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'Pp+%4w*/4k2T9<r...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/react/lib/class-react.php(72): wp_enqueue_script('react-emoji', 'http://127.0.0....', Array, false, true)
-#19 /wordpress/wp-content/plugins/react/lib/class-react.php(27): React->enqueue()
-#20 /wordpress/wp-content/plugins/react/lib/class-react.php(44): React->__construct()
-#21 /wordpress/wp-includes/class-wp-hook.php(324): React::init('')
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-settings.php(704): do_action('init')
-#25 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#26 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#27 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#28 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Pp+%4w*/4k2T9<rEO:[~+/3*&7sfa/?~ILV/)9uQU5D/~R6i4@v?GgG<$r=H$2J-', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, React::init, React->__construct, React->enqueue, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:46:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:46:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:46:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:46:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:46:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('refiral', 'a:2:{s:11:\"refiral_key\";s:0:\"\";s:14:\"refiral_enable\";s:2:\"on\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'refiral' , 'a:2:{s:11:&quot;refiral_key&quot;;s:0:&quot;&quot;;s:14:&quot;refiral_enable&quot;;s:2:&quot;on&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('refiral', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/refiral/refiral.php(63): update_option('refiral', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Refiral->update_refiral_options(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+  thrown in /wordpress/wp-content/plugins/responsive-video/video-widget/video-widget.php on line 217
+[11-Apr-2025 08:57:45 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361863.489)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_refira...', false)
-#10 /internal/eval.php(20): activate_plugin('refiral/refiral...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('refiral', 'a:2:{s:11:\"refiral_key\";s:0:\"\";s:14:\"refiral_enable\";s:2:\"on\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_refiral/refiral.php'), WP_Hook->do_action, WP_Hook->apply_filters, Refiral->update_refiral_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:46:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:46:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:46:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:46:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:46:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:46:58 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:16 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 9
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 20
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Attempt to read property "term_id" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 21
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Attempt to read property "count" on null in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/the_globals.php on line 22
-[09-Apr-2025 21:47:17 UTC] PHP Warning:  Undefined variable $default_thumb in /wordpress/wp-content/plugins/related-posts-list-grid-and-slider-all-in-one/related.php on line 261
-[09-Apr-2025 21:47:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:47:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:47:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:47:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:47:53 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:47:53 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:48:02 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:48:02 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:48:03 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:48:03 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:48:12 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:48:12 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:48:13 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
-[09-Apr-2025 21:48:13 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
-[09-Apr-2025 21:48:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:48:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:48:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:48:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:48:23 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php:21
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:58:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/radio-islam/includes/widget.php:210
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): ringgitpay_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php on line 21
-[09-Apr-2025 21:48:32 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php:21
+#0 /wordpress/wp-content/plugins/radio-islam/radio-islam.php(23): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('radio-islam/rad...')
+#3 /internal/eval.php(20): activate_plugin('radio-islam/rad...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/radio-islam/includes/widget.php on line 210
+[11-Apr-2025 08:58:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/radio-islam/includes/widget.php:210
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): ringgitpay_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php on line 21
-[09-Apr-2025 21:48:41 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php:21
+#0 /wordpress/wp-content/plugins/radio-islam/radio-islam.php(23): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('radio-islam/rad...')
+#3 /internal/eval.php(20): activate_plugin('radio-islam/rad...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/radio-islam/includes/widget.php on line 210
+[11-Apr-2025 08:58:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/radio-islam/includes/widget.php:210
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): ringgitpay_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/ringgitpay/class-wc-ringgitpay-gateway.php on line 21
-[09-Apr-2025 21:48:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:48:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:48:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:48:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:49:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:49:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:49:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:49:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:50:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:50:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:50:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:50:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:51:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/rbs-remote-dashboard-welcome/rbs-remote-dashboard-welcome.php on line 70
-[09-Apr-2025 21:51:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:37:\"really-simple-featured-video/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744235513;s:11:\"plugin_path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";s:8:\"sdk_path\";s:37:\"really-simple-featured-video/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744235513;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:37:&quot;really-simple-featured-video/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744235513;s:11:&quot;plugin_path&quot;;s:61:&quot;really-simple-featured-video/really-simple-featured-video.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:61:&quot;really-simple-featured-video/really-simple-featured-video.php&quot;;s:8:&quot;sdk_path&quot;;s:37:&quot;really-simple-featured-video/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744235513;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/start.php(242): fs_update_sdk_newest_version('really-simple-f...', 'really-simple-f...')
-#7 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(37): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(64): rsfv_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('really-simple-f...')
-#11 /internal/eval.php(20): activate_plugin('really-simple-f...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:37:\"really-simple-featured-video/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744235513;s:11:\"plugin_path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";s:8:\"sdk_path\";s:37:\"really-simple-featured-video/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744235513;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/really-simple-featured-video/really-simple-featured-video.php'), rsfv_fs, require_once('/plugins/really-simple-featured-video/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:51:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(37): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(64): rsfv_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('really-simple-f...')
-#11 /internal/eval.php(20): activate_plugin('really-simple-f...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/really-simple-featured-video/really-simple-featured-video.php'), rsfv_fs, require_once('/plugins/really-simple-featured-video/freemius/start.php'), require_once('/plugins/really-simple-featured-video/freemius/require.php'), require_once('/plugins/really-simple-featured-video/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:51:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:7560;a:3:{s:4:\"slug\";s:28:\"really-simple-featured-video\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7560;a:3:{s:4:&quot;slug&quot;;s:28:&quot;really-simple-featured-video&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:61:&quot;really-simple-featured-video/really-simple-featured-video.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('7560', 'really-simple-f...')
-#10 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/includes/class-freemius.php(2868): Freemius->__construct('7560', 'really-simple-f...', true)
-#11 /wordpress/wp-content/plugins/really-simple-featured-video/freemius/start.php(615): Freemius::instance('7560', 'really-simple-f...', true)
-#12 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(41): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/really-simple-featured-video/really-simple-featured-video.php(64): rsfv_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('really-simple-f...')
-#16 /internal/eval.php(20): activate_plugin('really-simple-f...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:7560;a:3:{s:4:\"slug\";s:28:\"really-simple-featured-video\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/really-simple-featured-video/really-simple-featured-video.php'), rsfv_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:51:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7560;a:3:{s:4:\"slug\";s:28:\"really-simple-featured-video\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:61:\"really-simple-featured-video/really-simple-featured-video.php\";}}s:11:\"plugin_data\";a:1:{s:28:\"really-simple-featured-video\";a:1:{s:19:\"last_load_timestamp\";i:1744235514;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7560;a:3:{s:4:&quot;slug&quot;;s:28:&quot;really-simple-featured-video&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;
+#0 /wordpress/wp-content/plugins/radio-islam/radio-islam.php(23): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('radio-islam/rad...')
+#3 /internal/eval.php(20): activate_plugin('radio-islam/rad...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/radio-islam/includes/widget.php on line 210
+[11-Apr-2025 08:59:11 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:11 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:11 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-bootstrap</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:21 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:21 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:21 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-bootstrap</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:30 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:30 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:30 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>rce-event-bootstrap</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:59:41 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 08:59:42 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 08:59:52 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 08:59:53 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 09:00:08 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 09:00:09 UTC] PHP Deprecated:  Required parameter $form_field_callback follows optional parameter $name in /wordpress/wp-content/plugins/realty-portal/includes/shortcodes/builder/functions/class-nsparams.php on line 27
+[11-Apr-2025 09:00:21 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744362018.335)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:00:30 UTC] Event init: activated
+[11-Apr-2025 09:00:30 UTC] Empty private key
+[11-Apr-2025 09:00:40 UTC] Event init: activated
+[11-Apr-2025 09:00:40 UTC] Empty private key
+[11-Apr-2025 09:01:50 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:01:50 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:01:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:01:52 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:02:00 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:02:00 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:02:00 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:02:00 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:02:08 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:02:08 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:02:09 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 292
+[11-Apr-2025 09:02:09 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/responsive-tabs-for-wpbakery/plugin.class.php on line 364
+[11-Apr-2025 09:02:19 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $method in /wordpress/wp-content/plugins/rafflys-lucky-wheel/class.rafflys-api.php on line 26
+[11-Apr-2025 09:02:28 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $method in /wordpress/wp-content/plugins/rafflys-lucky-wheel/class.rafflys-api.php on line 26
+[11-Apr-2025 09:02:37 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $method in /wordpress/wp-content/plugins/rafflys-lucky-wheel/class.rafflys-api.php on line 26
+[11-Apr-2025 09:02:49 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744362167.067)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:03:46 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:03:47 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:03:56 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:03:57 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:04:06 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:04:08 UTC] PHP Warning:  Undefined array key "rex-filter" in /wordpress/wp-content/plugins/realtor-express/includes/RexApp.php on line 65
+[11-Apr-2025 09:04:19 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/referrer-detector/rd.class.php on line 567
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"referrer-detector"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
