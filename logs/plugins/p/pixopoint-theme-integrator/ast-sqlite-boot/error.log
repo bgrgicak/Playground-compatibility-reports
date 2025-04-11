@@ -2,852 +2,159 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:23:\"padma-advanced/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.4.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744233803;s:11:\"plugin_path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"padma-advanced/padma-advanced.php\";s:8:\"sdk_path\";s:23:\"padma-advanced/freemius\";s:7:\"version\";s:5:\"2.4.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744233803;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:23:&quot;padma-advanced/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.4.3&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744233803;s:11:&quot;plugin_path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:8:&quot;sdk_path&quot;;s:23:&quot;padma-advanced/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.4.3&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744233803;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/fs-essential-functions.php(366): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(166): fs_update_sdk_newest_version('padma-advanced/...', 'padma-advanced/...')
-#7 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(26): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#9 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#12 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:23:\"padma-advanced/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.4.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744233803;s:11:\"plugin_path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"padma-advanced/padma-advanced.php\";s:8:\"sdk_path\";s:23:\"padma-advanced/freemius\";s:7:\"version\";s:5:\"2.4.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744233803;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, require_once('/plugins/padma-advanced/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/padma-advanced/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(482): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(26): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#9 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#12 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, require_once('/plugins/padma-advanced/freemius/start.php'), require_once('/plugins/padma-advanced/freemius/require.php'), require_once('/plugins/padma-advanced/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2261): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(412): Freemius->store_id_slug_type_path_map('6000', 'padma-advanced')
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#12 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#14 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#17 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2152): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(427): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(455): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#15 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#18 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(10364): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(502): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#12 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#14 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#17 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744233803)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('install_timesta...', 1744233803)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(506): FS_Storage->__set('install_timesta...', 1744233803)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#15 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#18 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(1473): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(1625): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(533): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#17 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#20 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(1487): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(1625): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(533): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#17 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#20 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(882): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.4.3')
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_version', '2.4.3')
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(883): FS_Storage->__set('sdk_version', '2.4.3')
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:8:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(888): FS_Storage->__set('sdk_upgrade_mod...', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:9:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(889): FS_Storage->__set('sdk_downgrade_m...', false)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:10:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(902): FS_Storage->__set('plugin_last_ver...', NULL)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:11:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;0.0.17&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '0.0.17')
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_version', '0.0.17')
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(903): FS_Storage->__set('plugin_version', '0.0.17')
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:12:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;0.0.17&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(908): FS_Storage->__set('plugin_upgrade_...', true)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:13:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;0.0.17&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_downgrad...', false)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-storage.php(507): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(909): FS_Storage->__set('plugin_downgrad...', false)
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(546): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(2832): Freemius->__construct('6000', 'padma-advanced', true)
-#13 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(521): Freemius::instance('6000', 'padma-advanced', true)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#16 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#19 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}s:7:\"plugins\";a:1:{s:14:\"padma-advanced\";O:9:\"FS_Plugin\":23:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:14:\"Padma Advanced\";s:4:\"slug\";s:14:\"padma-advanced\";s:12:\"premium_slug\";s:22:\"padma-advanced-premium\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:33:\"padma-advanced/padma-advanced.php\";s:7:\"version\";s:6:\"0.0.17\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:3:\"Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:10:\"public_key\";s:32:\"pk_9a02d186951e1b14dbdca97e1a78c\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"6000\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:13:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;0.0.17&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}s:7:&quot;plugins&quot;;a:1:{s:14:&quot;padma-advanced&quot;;O:9:&quot;FS_Plugin&quot;:23:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:14:&quot;Padma Advanced&quot;;s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:12:&quot;premium_slug&quot;;s:22:&quot;padma-advanced-premium&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:20:&quot;affiliate_moderation&quot;;b:0;s:19:&quot;is_wp_org_compliant&quot;;b:1;s:22:&quot;premium_releases_count&quot;;N;s:4:&quot;file&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:7:&quot;version&quot;;s:6:&quot;0.0.17&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:14:&quot;premium_suffix&quot;;s:3:&quot;Pro&quot;;s:7:&quot;is_live&quot;;b:1;s:9:&quot;bundle_id&quot;;N;s:17:&quot;bundle_public_key&quot;;N;s:10:&quot;public_key&quot;;s:32:&quot;pk_9a02d186951e1b14dbdca97e1a78c&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:4:&quot;6000&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-plugin-manager.php(160): FS_Option_Manager->set_option('plugins', Array, true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(5650): FS_Plugin_Manager->store(Object(FS_Plugin))
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(4804): Freemius->parse_settings(Array)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(522): Freemius->dynamic_init(Array)
-#11 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#13 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#16 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}s:7:\"plugins\";a:1:{s:14:\"padma-advanced\";O:9:\"FS_Plugin\":23:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:14:\"Padma Advanced\";s:4:\"slug\";s:14:\"padma-advanced\";s:12:\"premium_slug\";s:22:\"padma-advanced-premium\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:33:\"padma-advanced/padma-advanced.php\";s:7:\"version\";s:6:\"0.0.17\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:3:\"Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:10:\"public_key\";s:32:\"pk_9a02d186951e1b14dbdca97e1a78c\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"6000\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius->dynamic_init, Freemius->parse_settings, FS_Plugin_Manager->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:5:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}s:7:\"plugins\";a:1:{s:14:\"padma-advanced\";O:9:\"FS_Plugin\":23:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:14:\"Padma Advanced\";s:4:\"slug\";s:14:\"padma-advanced\";s:12:\"premium_slug\";s:22:\"padma-advanced-premium\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:33:\"padma-advanced/padma-advanced.php\";s:7:\"version\";s:6:\"0.0.17\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:3:\"Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:10:\"public_key\";s:32:\"pk_9a02d186951e1b14dbdca97e1a78c\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"6000\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}s:9:\"unique_id\";s:32:\"7ff3c633bc9e12e7325a97b963ca94ea\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:5:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6000;a:3:{s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;padma-advanced&quot;;a:13:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744233803;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.4.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;0.0.17&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:14:&quot;padma-advanced&quot;;}s:7:&quot;plugins&quot;;a:1:{s:14:&quot;padma-advanced&quot;;O:9:&quot;FS_Plugin&quot;:23:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:14:&quot;Padma Advanced&quot;;s:4:&quot;slug&quot;;s:14:&quot;padma-advanced&quot;;s:12:&quot;premium_slug&quot;;s:22:&quot;padma-advanced-premium&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:20:&quot;affiliate_moderation&quot;;b:0;s:19:&quot;is_wp_org_compliant&quot;;b:1;s:22:&quot;premium_releases_count&quot;;N;s:4:&quot;file&quot;;s:33:&quot;padma-advanced/padma-advanced.php&quot;;s:7:&quot;version&quot;;s:6:&quot;0.0.17&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:14:&quot;premium_suffix&quot;;s:3:&quot;Pro&quot;;s:7:&quot;is_live&quot;;b:1;s:9:&quot;bundle_id&quot;;N;s:17:&quot;bundle_public_key&quot;;N;s:10:&quot;public_key&quot;;s:32:&quot;pk_9a02d186951e1b14dbdca97e1a78c&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:4:&quot;6000&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}s:9:&quot;unique_id&quot;;s:32:&quot;7ff3c633bc9e12e7325a97b963ca94ea&quot;;}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('unique_id', '7ff3c633bc9e12e...', true)
-#8 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(4080): FS_Options->set_option('unique_id', '7ff3c633bc9e12e...', true, NULL)
-#9 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(3912): Freemius->get_anonymous_id(NULL)
-#10 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(3964): Freemius->ping()
-#11 /wordpress/wp-content/plugins/padma-advanced/freemius/includes/class-freemius.php(4818): Freemius->has_api_connectivity()
-#12 /wordpress/wp-content/plugins/padma-advanced/freemius/start.php(522): Freemius->dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(28): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/padma-advanced/load-freemius.php(55): padma_advanced_fs()
-#15 /wordpress/wp-content/plugins/padma-advanced/padma-advanced.php(52): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('padma-advanced/...')
-#18 /internal/eval.php(20): activate_plugin('padma-advanced/...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:5:{s:21:\"id_slug_type_path_map\";a:1:{i:6000;a:3:{s:4:\"slug\";s:14:\"padma-advanced\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"padma-advanced\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"padma-advanced/padma-advanced.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744233803;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.4.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"0.0.17\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"padma-advanced/padma-advanced.php\";s:14:\"padma-advanced\";}s:7:\"plugins\";a:1:{s:14:\"padma-advanced\";O:9:\"FS_Plugin\":23:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:14:\"Padma Advanced\";s:4:\"slug\";s:14:\"padma-advanced\";s:12:\"premium_slug\";s:22:\"padma-advanced-premium\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:33:\"padma-advanced/padma-advanced.php\";s:7:\"version\";s:6:\"0.0.17\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:3:\"Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:10:\"public_key\";s:32:\"pk_9a02d186951e1b14dbdca97e1a78c\";s:10:\"secret_key\";N;s:2:\"id\";s:4:\"6000\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}s:9:\"unique_id\";s:32:\"7ff3c633bc9e12e7325a97b963ca94ea\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/padma-advanced/padma-advanced.php'), require_once('/plugins/padma-advanced/load-freemius.php'), padma_advanced_fs, fs_dynamic_init, Freemius->dynamic_init, Freemius->has_api_connectivity, Freemius->ping, Freemius->get_anonymous_id, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:23:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_gdpr', 'a:1:{s:2:\"u1\";a:1:{s:8:\"required\";b:0;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_gdpr' , 'a:1:{s:2:&quot;u1&quot;;a:1:{s:8:&quot;required&quot;;b:0;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameter
+Error: [11-Apr-2025 08:57:29 UTC] PHP Warning:  Undefined variable $jal_db_version in /wordpress/wp-content/plugins/postpoll/post_poll.php on line 75
+[11-Apr-2025 08:57:37 UTC] PHP Warning:  Undefined variable $jal_db_version in /wordpress/wp-content/plugins/postpoll/post_poll.php on line 75
+[11-Apr-2025 08:57:46 UTC] PHP Warning:  Undefined variable $jal_db_version in /wordpress/wp-content/plugins/postpoll/post_poll.php on line 75
+[11-Apr-2025 08:57:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:57:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:57:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:57:57 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:57:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:57:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:57:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:57:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:58:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:58:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:58:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:58:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:58:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 15
+[11-Apr-2025 08:58:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 16
+[11-Apr-2025 08:58:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 17
+[11-Apr-2025 08:58:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/powerpress-posts-from-mysql/includes/class.local-podcast.php on line 19
+[11-Apr-2025 08:58:25 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:25 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:25 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:25 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 61
+[11-Apr-2025 08:58:25 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:26 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:26 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:34 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:34 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:34 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:34 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 61
+[11-Apr-2025 08:58:34 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:35 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:35 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:42 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:42 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:42 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:42 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 61
+[11-Apr-2025 08:58:42 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 21
+[11-Apr-2025 08:58:43 UTC] PHP Warning:  Undefined variable $current_blog in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:58:43 UTC] PHP Warning:  Attempt to read property "blog_id" on null in /wordpress/wp-content/plugins/pre-date-future-post/pre-date-future-post.php on line 45
+[11-Apr-2025 08:59:24 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361961.837)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:59:53 UTC] Automatic updates starting...
+[11-Apr-2025 09:00:26 UTC] PHP Fatal error:  Uncaught Error: Non-static method PukiWiki_for_WordPress::getInstance() cannot be called statically in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php:94
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): pukiwiki_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php on line 94
+[11-Apr-2025 09:00:36 UTC] PHP Fatal error:  Uncaught Error: Non-static method PukiWiki_for_WordPress::getInstance() cannot be called statically in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php:94
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): pukiwiki_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php on line 94
+[11-Apr-2025 09:00:46 UTC] PHP Fatal error:  Uncaught Error: Non-static method PukiWiki_for_WordPress::getInstance() cannot be called statically in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php:94
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): pukiwiki_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/pukiwiki-for-wordpress/pukiwiki.php on line 94
+[11-Apr-2025 09:01:28 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744362085.771)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:05:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "THEME_INTEGRATION_DIR" in /wordpress/wp-content/plugins/pixopoint-theme-integrator/index.php:26
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pixopoint-theme...')
+#2 /internal/eval.php(20): activate_plugin('pixopoint-theme...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/pixopoint-theme-integrator/index.php on line 26
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"pixopoint-theme-integrator"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0

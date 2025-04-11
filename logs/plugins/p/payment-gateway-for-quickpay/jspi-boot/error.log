@@ -2,558 +2,175 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 21:23:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:24:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '', '', 'Causes Listing', '', 'publish', 'pfund_cause_list', 'closed', 'closed', '', '_causes_listing', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , '' , '' , 'Causes Listing' , '' , 'publish' , 'pfund_cause_list' , 'closed' , 'closed' , '' , '_causes_listing' , '' , '' , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(92): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): pfund_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_person...', false)
-#11 /internal/eval.php(20): activate_plugin('personal-fundra...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '', '', 'Causes Listing', '', 'publish', 'pfund_cause_list', 'closed', 'closed', '', '_causes_listing', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '') made by activate_plugin, do_action('activate_personal-fundraiser/personal-fundraiser.php'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '', '', 'Campaign Listing', '', 'publish', 'pfund_campaign_list', 'closed', 'closed', '', '_campaign_listing', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , '' , '' , 'Campaign Listing' , '' , 'publish' , 'pfund_campaign_list' , 'closed' , 'closed' , '' , '_campaign_listing' , '' , '' , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(107): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): pfund_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_person...', false)
-#11 /internal/eval.php(20): activate_plugin('personal-fundra...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '', '', 'Campaign Listing', '', 'publish', 'pfund_campaign_list', 'closed', 'closed', '', '_campaign_listing', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '') made by activate_plugin, do_action('activate_personal-fundraiser/personal-fundraiser.php'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '<ul><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-goal]</span>funding goal</li><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-tally]</span>raised</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-giver-tally]</span>givers</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-days-left]</span>days left</li></ul><div style=\"clear: both;\">	<p>I have an event on [pfund-end-date] that I am involved with for my cause.</p>	<p>I am hoping to raise $[pfund-gift-goal] for my cause.</p>	<p>So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:</p>	<p>[pfund-donate]<p></div>[pfund-edit]', '', 'Help Raise Money For My Cause', '', 'publish', 'pfund_cause', 'closed', 'closed', '', 'sample-cause', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , '&lt;ul&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;$[pfund-gift-goal]&lt;/span&gt;funding goal&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;$[pfund-gift-tally]&lt;/span&gt;raised&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;[pfund-giver-tally]&lt;/span&gt;givers&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;[pfund-days-left]&lt;/span&gt;days left&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;clear: both;&quot;&gt;	&lt;p&gt;I have an event on [pfund-end-date] that I am involved with for my cause.&lt;/p&gt;	&lt;p&gt;I am hoping to raise $[pfund-gift-goal] for my cause.&lt;/p&gt;	&lt;p&gt;So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:&lt;/p&gt;	&lt;p&gt;[pfund-donate]&lt;p&gt;&lt;/div&gt;[pfund-edit]' , '' , 'Help Raise Money For My Cause' , '' , 'publish' , 'pfund_cause' , 'closed' , 'closed' , '' , 'sample-cause' , '' , '' , '2025-04-09 21:24:07' , '2025-04-09 21:24:07' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(384): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(217): _pfund_add_sample_cause()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): pfund_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_person...', false)
-#12 /internal/eval.php(20): activate_plugin('personal-fundra...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 21:24:07', '2025-04-09 21:24:07', '<ul><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-goal]</span>funding goal</li><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-tally]</span>raised</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-giver-tally]</span>givers</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-days-left]</span>days left</li></ul><div style=\"clear: both;\">	<p>I have an event on [pfund-end-date] that I am involved with for my cause.</p>	<p>I am hoping to raise $[pfund-gift-goal] for my cause.</p>	<p>So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:</p>	<p>[pfund-donate]<p></div>[pfund-edit]', '', 'Help Raise Money For My Cause', '', 'publish', 'pfund_cause', 'closed', 'closed', '', 'sample-cause', '', '', '2025-04-09 21:24:07', '2025-04-09 21:24:07', 0, 0, '', '') made by activate_plugin, do_action('activate_personal-fundraiser/personal-fundraiser.php'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_activate, _pfund_add_sample_cause, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pfund_options', 'a:25:{s:18:\"allow_registration\";b:0;s:13:\"campaign_slug\";s:4:\"give\";s:10:\"cause_slug\";s:6:\"causes\";s:15:\"currency_symbol\";s:1:\"$\";s:11:\"date_format\";s:5:\"m/d/y\";s:14:\"login_required\";b:1;s:8:\"mandrill\";b:0;s:7:\"use_ssl\";b:0;s:23:\"authorize_net_test_mode\";b:0;s:11:\"submit_role\";a:1:{i:0;s:13:\"administrator\";}s:6:\"fields\";a:6:{s:10:\"camp-title\";a:5:{s:5:\"label\";s:5:\"Title\";s:4:\"desc\";s:26:\"The title of your campaign\";s:4:\"type\";s:10:\"camp_title\";s:8:\"required\";b:1;s:9:\"sortorder\";i:0;}s:13:\"camp-location\";a:5:{s:5:\"label\";s:3:\"URL\";s:4:\"desc\";s:25:\"The URL for your campaign\";s:4:\"type\";s:13:\"camp_location\";s:8:\"required\";b:1;s:9:\"sortorder\";i:1;}s:8:\"end-date\";a:5:{s:5:\"label\";s:8:\"End Date\";s:4:\"desc\";s:27:\"The date your campaign ends\";s:4:\"type\";s:8:\"end_date\";s:8:\"required\";b:0;s:9:\"sortorder\";i:2;}s:9:\"gift-goal\";a:5:{s:5:\"label\";s:4:\"Goal\";s:4:\"desc\";s:28:\"The amount you hope to raise\";s:4:\"type\";s:9:\"user_goal\";s:8:\"required\";b:1;s:9:\"sortorder\";i:3;}s:10:\"gift-tally\";a:5:{s:5:\"label\";s:12:\"Total Raised\";s:4:\"desc\";s:24:\"Total donations received\";s:4:\"type\";s:10:\"gift_tally\";s:8:\"required\";b:1;s:9:\"sortorder\";i:4;}s:11:\"giver-tally\";a:5:{s:5:\"label\";s:11:\"Giver Tally\";s:4:\"desc\";s:45:\"The number of unique givers for the campaign.\";s:4:\"type\";s:11:\"giver_tally\";s:8:\"required\";b:1;s:9:\"sortorder\";i:5;}}s:10:\"cause_root\";i:0;s:13:\"campaign_root\";i:0;s:14:\"paypal_sandbox\";b:0;s:16:\"campaign_listing\";b:1;s:13:\"cause_listing\";b:1;s:27:\"mandrill_email_publish_html\";s:171:\"<h1>Your campaign has been approved</h1>
-Dear *|NAME|*,<br/><br/>
-
-Your campaign, *|CAMP_TITLE|* has been approved.<br/>
-You can view your campaign at: *|CAMP_URL|*.<br/>
-\";s:27:\"mandrill_email_publish_text\";s:109:\"Dear *|NAME|*
-
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-\";s:26:\"mandrill_email_donate_html\";s:429:\"<h1>Your fundraiser received a donation!</h1>
-Dear *|NAME|*,<br/><br/>
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.<br/>
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, <a href=\"*|CAMP_URL|*\">*|CAMP_TITLE|*</a>.<br/>
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.<br/>
-*|END:IF|*
-\";s:26:\"mandrill_email_donate_text\";s:378:\"Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-\";s:24:\"mandrill_email_goal_html\";s:197:\"<h1>Your fundraiser has reached its goal!</h1>
-Dear *|NAME|*,<br/><br/>
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!<br/>
-
-You can view your campaign at: *|CAMP_URL|*.<br/>
-
-\";s:24:\"mandrill_email_goal_text\";s:128:\"Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-\";s:17:\"paypal_donate_btn\";s:420:\"<form action=\"\" method=\"post\"><input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" onclick=\"alert(\'This is a test button.  Please view the readme to setup your PayPal donate button.\');return false;\"><img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"></form>\";s:7:\"version\";s:5:\"0.8.3\";s:17:\"approval_required\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pfund_options' , 'a:25:{s:18:&quot;allow_registration&quot;;b:0;s:13:&quot;campaign_slug&quot;;s:4:&quot;give&quot;;s:10:&quot;cause_slug&quot;;s:6:&quot;causes&quot;;s:15:&quot;currency_symbol&quot;;s:1:&quot;$&quot;;s:11:&quot;date_format&quot;;s:5:&quot;m/d/y&quot;;s:14:&quot;login_required&quot;;b:1;s:8:&quot;mandrill&quot;;b:0;s:7:&quot;use_ssl&quot;;b:0;s:23:&quot;authorize_net_test_mode&quot;;b:0;s:11:&quot;submit_role&quot;;a:1:{i:0;s:13:&quot;administrator&quot;;}s:6:&quot;fields&quot;;a:6:{s:10:&quot;camp-title&quot;;a:5:{s:5:&quot;label&quot;;s:5:&quot;Title&quot;;s:4:&quot;desc&quot;;s:26:&quot;The title of your campaign&quot;;s:4:&quot;type&quot;;s:10:&quot;camp_title&quot;;s:8:&quot;required&quot;;b:1;s:9:&quot;sortorder&quot;;i:0;}s:13:&quot;camp-location&quot;;a:5:{s:5:&quot;label&quot;;s:3:&quot;URL&quot;;s:4:&quot;desc&quot;;s:25:&quot;The URL for your campaign&quot;;s:4:&quot;type&quot;;s:13:&quot;camp_location&quot;;s:8:&quot;required&quot;;b:1;s:9:&quot;sortorder&quot;;i:1;}s:8:&quot;end-date&quot;;a:5:{s:5:&quot;label&quot;;s:8:&quot;End Date&quot;;s:4:&quot;desc&quot;;s:27:&quot;The date your campaign ends&quot;;s:4:&quot;type&quot;;s:8:&quot;end_date&quot;;s:8:&quot;required&quot;;b:0;s:9:&quot;sortorder&quot;;i:2;}s:9:&quot;gift-goal&quot;;a:5:{s:5:&quot;label&quot;;s:4:&quot;Goal&quot;;s:4:&quot;desc&quot;;s:28:&quot;The amount you hope to raise&quot;;s:4:&quot;type&quot;;s:9:&quot;user_goal&quot;;s:8:&quot;required&quot;;b:1;s:9:&quot;sortorder&quot;;i:3;}s:10:&quot;gift-tally&quot;;a:5:{s:5:&quot;label&quot;;s:12:&quot;Total Raised&quot;;s:4:&quot;desc&quot;;s:24:&quot;Total donations received&quot;;s:4:&quot;type&quot;;s:10:&quot;gift_tally&quot;;s:8:&quot;required&quot;;b:1;s:9:&quot;sortorder&quot;;i:4;}s:11:&quot;giver-tally&quot;;a:5:{s:5:&quot;label&quot;;s:11:&quot;Giver Tally&quot;;s:4:&quot;desc&quot;;s:45:&quot;The number of unique givers for the campaign.&quot;;s:4:&quot;type&quot;;s:11:&quot;giver_tally&quot;;s:8:&quot;required&quot;;b:1;s:9:&quot;sortorder&quot;;i:5;}}s:10:&quot;cause_root&quot;;i:0;s:13:&quot;campaign_root&quot;;i:0;s:14:&quot;paypal_sandbox&quot;;b:0;s:16:&quot;campaign_listing&quot;;b:1;s:13:&quot;cause_listing&quot;;b:1;s:27:&quot;mandrill_email_publish_html&quot;;s:171:&quot;&lt;h1&gt;Your campaign has been approved&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-Your campaign, *|CAMP_TITLE|* has been approved.&lt;br/&gt;
-You can view your campaign at: *|CAMP_URL|*.&lt;br/&gt;
-&quot;;s:27:&quot;mandrill_email_publish_text&quot;;s:109:&quot;Dear *|NAME|*
-
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-&quot;;s:26:&quot;mandrill_email_donate_html&quot;;s:429:&quot;&lt;h1&gt;Your fundraiser received a donation!&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.&lt;br/&gt;
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, &lt;a href=&quot;*|CAMP_URL|*&quot;&gt;*|CAMP_TITLE|*&lt;/a&gt;.&lt;br/&gt;
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.&lt;br/&gt;
-*|END:IF|*
-&quot;;s:26:&quot;mandrill_email_donate_text&quot;;s:378:&quot;Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-&quot;;s:24:&quot;mandrill_email_goal_html&quot;;s:197:&quot;&lt;h1&gt;Your fundraiser has reached its goal!&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!&lt;br/&gt;
-
-You can view your campaign at: *|CAMP_URL|*.&lt;br/&gt;
-
-&quot;;s:24:&quot;mandrill_email_goal_text&quot;;s:128:&quot;Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-&quot;;s:17:&quot;paypal_donate_btn&quot;;s:420:&quot;&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&lt;input type=&quot;image&quot; src=&quot;https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif&quot; border=&quot;0&quot; name=&quot;submit&quot; alt=&quot;PayPal - The safer, easier way to pay online!&quot; onclick=&quot;alert(''This is a test button.  Please view the readme to setup your PayPal donate button.'');return false;&quot;&gt;&lt;img alt=&quot;&quot; border=&quot;0&quot; src=&quot;https://www.paypalobjects.com/en_US/i/scr/pixel.gif&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;&lt;/form&gt;&quot;;s:7:&quot;version&quot;;s:5:&quot;0.8.3&quot;;s:17:&quot;approval_required&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pfund_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(238): update_option('pfund_options', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): pfund_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 08:54:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PassByME\Plugin\Admin\MCRYPT_RIJNDAEL_128" in /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Admin/Functions.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Loader.php(25): PassByME\Plugin\Admin\Functions->__construct()
+#1 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Loader.php(21): PassByME\Plugin\Loader->loadPBMConfig()
+#2 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Core.php(21): PassByME\Plugin\Loader->__construct()
+#3 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/passbyme-2factor-authentication.php(24): PassByME\Plugin\Core->__construct('1.0.1')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('passbyme-two-fa...')
+#6 /internal/eval.php(20): activate_plugin('passbyme-two-fa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Admin/Functions.php on line 23
+[11-Apr-2025 08:54:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PassByME\Plugin\Admin\MCRYPT_RIJNDAEL_128" in /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Admin/Functions.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Loader.php(25): PassByME\Plugin\Admin\Functions->__construct()
+#1 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Loader.php(21): PassByME\Plugin\Loader->loadPBMConfig()
+#2 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Core.php(21): PassByME\Plugin\Loader->__construct()
+#3 /wordpress/wp-content/plugins/passbyme-two-factor-authentication/passbyme-2factor-authentication.php(24): PassByME\Plugin\Core->__construct('1.0.1')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('passbyme-two-fa...')
+#6 /internal/eval.php(20): activate_plugin('passbyme-two-fa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/passbyme-two-factor-authentication/src/Microsec/PassByME/Plugin/Admin/Functions.php on line 23
+[11-Apr-2025 08:55:24 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:25 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:33 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:34 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:42 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:43 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:56:33 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744361791.481)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_person...', false)
-#10 /internal/eval.php(20): activate_plugin('personal-fundra...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pfund_options', 'a:25:{s:18:\"allow_registration\";b:0;s:13:\"campaign_slug\";s:4:\"give\";s:10:\"cause_slug\";s:6:\"causes\";s:15:\"currency_symbol\";s:1:\"$\";s:11:\"date_format\";s:5:\"m/d/y\";s:14:\"login_required\";b:1;s:8:\"mandrill\";b:0;s:7:\"use_ssl\";b:0;s:23:\"authorize_net_test_mode\";b:0;s:11:\"submit_role\";a:1:{i:0;s:13:\"administrator\";}s:6:\"fields\";a:6:{s:10:\"camp-title\";a:5:{s:5:\"label\";s:5:\"Title\";s:4:\"desc\";s:26:\"The title of your campaign\";s:4:\"type\";s:10:\"camp_title\";s:8:\"required\";b:1;s:9:\"sortorder\";i:0;}s:13:\"camp-location\";a:5:{s:5:\"label\";s:3:\"URL\";s:4:\"desc\";s:25:\"The URL for your campaign\";s:4:\"type\";s:13:\"camp_location\";s:8:\"required\";b:1;s:9:\"sortorder\";i:1;}s:8:\"end-date\";a:5:{s:5:\"label\";s:8:\"End Date\";s:4:\"desc\";s:27:\"The date your campaign ends\";s:4:\"type\";s:8:\"end_date\";s:8:\"required\";b:0;s:9:\"sortorder\";i:2;}s:9:\"gift-goal\";a:5:{s:5:\"label\";s:4:\"Goal\";s:4:\"desc\";s:28:\"The amount you hope to raise\";s:4:\"type\";s:9:\"user_goal\";s:8:\"required\";b:1;s:9:\"sortorder\";i:3;}s:10:\"gift-tally\";a:5:{s:5:\"label\";s:12:\"Total Raised\";s:4:\"desc\";s:24:\"Total donations received\";s:4:\"type\";s:10:\"gift_tally\";s:8:\"required\";b:1;s:9:\"sortorder\";i:4;}s:11:\"giver-tally\";a:5:{s:5:\"label\";s:11:\"Giver Tally\";s:4:\"desc\";s:45:\"The number of unique givers for the campaign.\";s:4:\"type\";s:11:\"giver_tally\";s:8:\"required\";b:1;s:9:\"sortorder\";i:5;}}s:10:\"cause_root\";i:0;s:13:\"campaign_root\";i:0;s:14:\"paypal_sandbox\";b:0;s:16:\"campaign_listing\";b:1;s:13:\"cause_listing\";b:1;s:27:\"mandrill_email_publish_html\";s:171:\"<h1>Your campaign has been approved</h1>
-Dear *|NAME|*,<br/><br/>
-
-Your campaign, *|CAMP_TITLE|* has been approved.<br/>
-You can view your campaign at: *|CAMP_URL|*.<br/>
-\";s:27:\"mandrill_email_publish_text\";s:109:\"Dear *|NAME|*
-
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-\";s:26:\"mandrill_email_donate_html\";s:429:\"<h1>Your fundraiser received a donation!</h1>
-Dear *|NAME|*,<br/><br/>
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.<br/>
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, <a href=\"*|CAMP_URL|*\">*|CAMP_TITLE|*</a>.<br/>
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.<br/>
-*|END:IF|*
-\";s:26:\"mandrill_email_donate_text\";s:378:\"Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-\";s:24:\"mandrill_email_goal_html\";s:197:\"<h1>Your fundraiser has reached its goal!</h1>
-Dear *|NAME|*,<br/><br/>
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!<br/>
-
-You can view your campaign at: *|CAMP_URL|*.<br/>
-
-\";s:24:\"mandrill_email_goal_text\";s:128:\"Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-\";s:17:\"paypal_donate_btn\";s:420:\"<form action=\"\" method=\"post\"><input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" onclick=\"alert(\'This is a test button.  Please view the readme to setup your PayPal donate button.\');return false;\"><img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"></form>\";s:7:\"version\";s:5:\"0.8.3\";s:17:\"approval_required\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_personal-fundraiser/personal-fundraiser.php'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 403
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 426
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 256
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 257
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 258
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php on line 262
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 21:24:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 21:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '', '', 'Causes Listing', '', 'publish', 'pfund_cause_list', 'closed', 'closed', '', '_causes_listing', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , '' , '' , 'Causes Listing' , '' , 'publish' , 'pfund_cause_list' , 'closed' , 'closed' , '' , '_causes_listing' , '' , '' , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(92): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(279): pfund_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): pfund_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '', '', 'Causes Listing', '', 'publish', 'pfund_cause_list', 'closed', 'closed', '', '_causes_listing', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_init, pfund_activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '', '', 'Campaign Listing', '', 'publish', 'pfund_campaign_list', 'closed', 'closed', '', '_campaign_listing', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , '' , '' , 'Campaign Listing' , '' , 'publish' , 'pfund_campaign_list' , 'closed' , 'closed' , '' , '_campaign_listing' , '' , '' , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(107): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(279): pfund_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(324): pfund_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '', '', 'Campaign Listing', '', 'publish', 'pfund_campaign_list', 'closed', 'closed', '', '_campaign_listing', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_init, pfund_activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '<ul><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-goal]</span>funding goal</li><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-tally]</span>raised</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-giver-tally]</span>givers</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-days-left]</span>days left</li></ul><div style=\"clear: both\">	<p>I have an event on [pfund-end-date] that I am involved with for my cause.</p>	<p>I am hoping to raise $[pfund-gift-goal] for my cause.</p>	<p>So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:</p>	<p>[pfund-donate]<p></div>[pfund-edit]', '', 'Help Raise Money For My Cause', '', 'publish', 'pfund_cause', 'closed', 'closed', '', 'sample-cause', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , '&lt;ul&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;$[pfund-gift-goal]&lt;/span&gt;funding goal&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;$[pfund-gift-tally]&lt;/span&gt;raised&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;[pfund-giver-tally]&lt;/span&gt;givers&lt;/li&gt;&lt;li class=&quot;pfund-stat&quot;&gt;&lt;span class=&quot;highlight&quot;&gt;[pfund-days-left]&lt;/span&gt;days left&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;clear: both&quot;&gt;	&lt;p&gt;I have an event on [pfund-end-date] that I am involved with for my cause.&lt;/p&gt;	&lt;p&gt;I am hoping to raise $[pfund-gift-goal] for my cause.&lt;/p&gt;	&lt;p&gt;So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:&lt;/p&gt;	&lt;p&gt;[pfund-donate]&lt;p&gt;&lt;/div&gt;[pfund-edit]' , '' , 'Help Raise Money For My Cause' , '' , 'publish' , 'pfund_cause' , 'closed' , 'closed' , '' , 'sample-cause' , '' , '' , '2025-04-09 21:24:09' , '2025-04-09 21:24:09' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(384): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(217): _pfund_add_sample_cause()
-#8 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(279): pfund_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): pfund_init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(704): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-09 21:24:09', '2025-04-09 21:24:09', '<ul><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-goal]</span>funding goal</li><li class=\"pfund-stat\"><span class=\"highlight\">$[pfund-gift-tally]</span>raised</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-giver-tally]</span>givers</li><li class=\"pfund-stat\"><span class=\"highlight\">[pfund-days-left]</span>days left</li></ul><div style=\"clear: both\">	<p>I have an event on [pfund-end-date] that I am involved with for my cause.</p>	<p>I am hoping to raise $[pfund-gift-goal] for my cause.</p>	<p>So far I have raised $[pfund-gift-tally].  If you would like to contribute to my cause, click on the donate button below:</p>	<p>[pfund-donate]<p></div>[pfund-edit]', '', 'Help Raise Money For My Cause', '', 'publish', 'pfund_cause', 'closed', 'closed', '', 'sample-cause', '', '', '2025-04-09 21:24:09', '2025-04-09 21:24:09', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pfund_init, pfund_activate, _pfund_add_sample_cause, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 21:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pfund_options', 'a:24:{s:18:\"allow_registration\";b:0;s:13:\"campaign_slug\";s:4:\"give\";s:10:\"cause_slug\";s:6:\"causes\";s:15:\"currency_symbol\";s:1:\"$\";s:11:\"date_format\";s:5:\"m/d/y\";s:14:\"login_required\";b:1;s:8:\"mandrill\";b:0;s:7:\"use_ssl\";b:0;s:23:\"authorize_net_test_mode\";b:0;s:11:\"submit_role\";a:1:{i:0;s:13:\"administrator\";}s:6:\"fields\";a:6:{s:10:\"camp-title\";a:4:{s:5:\"label\";s:5:\"Title\";s:4:\"desc\";s:26:\"The title of your campaign\";s:4:\"type\";s:10:\"camp_title\";s:8:\"required\";b:1;}s:13:\"camp-location\";a:4:{s:5:\"label\";s:3:\"URL\";s:4:\"desc\";s:25:\"The URL for your campaign\";s:4:\"type\";s:13:\"camp_location\";s:8:\"required\";b:1;}s:8:\"end-date\";a:4:{s:5:\"label\";s:8:\"End Date\";s:4:\"desc\";s:27:\"The date your campaign ends\";s:4:\"type\";s:8:\"end_date\";s:8:\"required\";b:0;}s:9:\"gift-goal\";a:4:{s:5:\"label\";s:4:\"Goal\";s:4:\"desc\";s:28:\"The amount you hope to raise\";s:4:\"type\";s:9:\"user_goal\";s:8:\"required\";b:1;}s:10:\"gift-tally\";a:4:{s:5:\"label\";s:12:\"Total Raised\";s:4:\"desc\";s:24:\"Total donations received\";s:4:\"type\";s:10:\"gift_tally\";s:8:\"required\";b:1;}s:11:\"giver-tally\";a:4:{s:5:\"label\";s:11:\"Giver Tally\";s:4:\"desc\";s:45:\"The number of unique givers for the campaign.\";s:4:\"type\";s:11:\"giver_tally\";s:8:\"required\";b:1;}}s:10:\"cause_root\";i:0;s:13:\"campaign_root\";i:0;s:14:\"paypal_sandbox\";b:0;s:16:\"campaign_listing\";b:1;s:13:\"cause_listing\";b:1;s:27:\"mandrill_email_publish_html\";s:171:\"<h1>Your campaign has been approved</h1>
-Dear *|NAME|*,<br/><br/>
-
-Your campaign, *|CAMP_TITLE|* has been approved.<br/>
-You can view your campaign at: *|CAMP_URL|*.<br/>
-\";s:27:\"mandrill_email_publish_text\";s:109:\"Dear *|NAME|*
-
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-\";s:26:\"mandrill_email_donate_html\";s:429:\"<h1>Your fundraiser received a donation!</h1>
-Dear *|NAME|*,<br/><br/>
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.<br/>
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, <a href=\"*|CAMP_URL|*\">*|CAMP_TITLE|*</a>.<br/>
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.<br/>
-*|END:IF|*
-\";s:26:\"mandrill_email_donate_text\";s:378:\"Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-\";s:24:\"mandrill_email_goal_html\";s:197:\"<h1>Your fundraiser has reached its goal!</h1>
-Dear *|NAME|*,<br/><br/>
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!<br/>
-
-You can view your campaign at: *|CAMP_URL|*.<br/>
-
-\";s:24:\"mandrill_email_goal_text\";s:128:\"Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-\";s:17:\"paypal_donate_btn\";s:420:\"<form action=\"\" method=\"post\"><input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" onclick=\"alert(\'This is a test button.  Please view the readme to setup your PayPal donate button.\');return false;\"><img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"></form>\";s:7:\"version\";s:5:\"0.8.3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pfund_options' , 'a:24:{s:18:&quot;allow_registration&quot;;b:0;s:13:&quot;campaign_slug&quot;;s:4:&quot;give&quot;;s:10:&quot;cause_slug&quot;;s:6:&quot;causes&quot;;s:15:&quot;currency_symbol&quot;;s:1:&quot;$&quot;;s:11:&quot;date_format&quot;;s:5:&quot;m/d/y&quot;;s:14:&quot;login_required&quot;;b:1;s:8:&quot;mandrill&quot;;b:0;s:7:&quot;use_ssl&quot;;b:0;s:23:&quot;authorize_net_test_mode&quot;;b:0;s:11:&quot;submit_role&quot;;a:1:{i:0;s:13:&quot;administrator&quot;;}s:6:&quot;fields&quot;;a:6:{s:10:&quot;camp-title&quot;;a:4:{s:5:&quot;label&quot;;s:5:&quot;Title&quot;;s:4:&quot;desc&quot;;s:26:&quot;The title of your campaign&quot;;s:4:&quot;type&quot;;s:10:&quot;camp_title&quot;;s:8:&quot;required&quot;;b:1;}s:13:&quot;camp-location&quot;;a:4:{s:5:&quot;label&quot;;s:3:&quot;URL&quot;;s:4:&quot;desc&quot;;s:25:&quot;The URL for your campaign&quot;;s:4:&quot;type&quot;;s:13:&quot;camp_location&quot;;s:8:&quot;required&quot;;b:1;}s:8:&quot;end-date&quot;;a:4:{s:5:&quot;label&quot;;s:8:&quot;End Date&quot;;s:4:&quot;desc&quot;;s:27:&quot;The date your campaign ends&quot;;s:4:&quot;type&quot;;s:8:&quot;end_date&quot;;s:8:&quot;required&quot;;b:0;}s:9:&quot;gift-goal&quot;;a:4:{s:5:&quot;label&quot;;s:4:&quot;Goal&quot;;s:4:&quot;desc&quot;;s:28:&quot;The amount you hope to raise&quot;;s:4:&quot;type&quot;;s:9:&quot;user_goal&quot;;s:8:&quot;required&quot;;b:1;}s:10:&quot;gift-tally&quot;;a:4:{s:5:&quot;label&quot;;s:12:&quot;Total Raised&quot;;s:4:&quot;desc&quot;;s:24:&quot;Total donations received&quot;;s:4:&quot;type&quot;;s:10:&quot;gift_tally&quot;;s:8:&quot;required&quot;;b:1;}s:11:&quot;giver-tally&quot;;a:4:{s:5:&quot;label&quot;;s:11:&quot;Giver Tally&quot;;s:4:&quot;desc&quot;;s:45:&quot;The number of unique givers for the campaign.&quot;;s:4:&quot;type&quot;;s:11:&quot;giver_tally&quot;;s:8:&quot;required&quot;;b:1;}}s:10:&quot;cause_root&quot;;i:0;s:13:&quot;campaign_root&quot;;i:0;s:14:&quot;paypal_sandbox&quot;;b:0;s:16:&quot;campaign_listing&quot;;b:1;s:13:&quot;cause_listing&quot;;b:1;s:27:&quot;mandrill_email_publish_html&quot;;s:171:&quot;&lt;h1&gt;Your campaign has been approved&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-Your campaign, *|CAMP_TITLE|* has been approved.&lt;br/&gt;
-You can view your campaign at: *|CAMP_URL|*.&lt;br/&gt;
-&quot;;s:27:&quot;mandrill_email_publish_text&quot;;s:109:&quot;Dear *|NAME|*
-
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-&quot;;s:26:&quot;mandrill_email_donate_html&quot;;s:429:&quot;&lt;h1&gt;Your fundraiser received a donation!&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.&lt;br/&gt;
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, &lt;a href=&quot;*|CAMP_URL|*&quot;&gt;*|CAMP_TITLE|*&lt;/a&gt;.&lt;br/&gt;
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.&lt;br/&gt;
-*|END:IF|*
-&quot;;s:26:&quot;mandrill_email_donate_text&quot;;s:378:&quot;Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-&quot;;s:24:&quot;mandrill_email_goal_html&quot;;s:197:&quot;&lt;h1&gt;Your fundraiser has reached its goal!&lt;/h1&gt;
-Dear *|NAME|*,&lt;br/&gt;&lt;br/&gt;
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!&lt;br/&gt;
-
-You can view your campaign at: *|CAMP_URL|*.&lt;br/&gt;
-
-&quot;;s:24:&quot;mandrill_email_goal_text&quot;;s:128:&quot;Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-&quot;;s:17:&quot;paypal_donate_btn&quot;;s:420:&quot;&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&lt;input type=&quot;image&quot; src=&quot;https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif&quot; border=&quot;0&quot; name=&quot;submit&quot; alt=&quot;PayPal - The safer, easier way to pay online!&quot; onclick=&quot;alert(''This is a test button.  Please view the readme to setup your PayPal donate button.'');return false;&quot;&gt;&lt;img alt=&quot;&quot; border=&quot;0&quot; src=&quot;https://www.paypalobjects.com/en_US/i/scr/pixel.gif&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;&lt;/form&gt;&quot;;s:7:&quot;version&quot;;s:5:&quot;0.8.3&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pfund_options', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(238): update_option('pfund_options', Array)
-#6 /wordpress/wp-content/plugins/personal-fundraiser/includes/setup.php(279): pfund_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): pfund_init('')
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 08:57:51 UTC] PHP Warning:  require_once(BlogCopyright.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:57:51 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'BlogCopyright.php' (include_path='.:') in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/powerful-blog-copyright/blogcopyright.php(28): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('powerful-blog-c...')
+#3 /internal/eval.php(20): activate_plugin('powerful-blog-c...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:57:58 UTC] PHP Warning:  require_once(BlogCopyright.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:57:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'BlogCopyright.php' (include_path='.:') in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/powerful-blog-copyright/blogcopyright.php(28): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('powerful-blog-c...')
+#3 /internal/eval.php(20): activate_plugin('powerful-blog-c...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:58:06 UTC] PHP Warning:  require_once(BlogCopyright.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:58:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'BlogCopyright.php' (include_path='.:') in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/powerful-blog-copyright/blogcopyright.php(28): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('powerful-blog-c...')
+#3 /internal/eval.php(20): activate_plugin('powerful-blog-c...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/powerful-blog-copyright/BTE_BC_admin.php on line 17
+[11-Apr-2025 08:58:46 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:58:47 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:58:47 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 08:58:47 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 08:58:57 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:58:59 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:58:59 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 08:58:59 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 08:59:09 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:59:10 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/class.redux_functions.php on line 54
+[11-Apr-2025 08:59:10 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 08:59:10 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/preloader-for-divi/divipreloader_options/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 08:59:41 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 08:59:43 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 08:59:51 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 08:59:53 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 09:00:01 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 09:00:02 UTC] PHP Deprecated:  Required parameter $videoId follows optional parameter $videoSource in /wordpress/wp-content/plugins/proplayer/utils.php on line 21
+[11-Apr-2025 09:01:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('class_widget_PA...')
+#2 /wordpress/wp-content/plugins/pad-article/index.php(34): register_widget('class_widget_PA...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_widget_PAD_a('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #10 /wordpress/wp-settings.php(704): do_action('init')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pfund_options', 'a:24:{s:18:\"allow_registration\";b:0;s:13:\"campaign_slug\";s:4:\"give\";s:10:\"cause_slug\";s:6:\"causes\";s:15:\"currency_symbol\";s:1:\"$\";s:11:\"date_format\";s:5:\"m/d/y\";s:14:\"login_required\";b:1;s:8:\"mandrill\";b:0;s:7:\"use_ssl\";b:0;s:23:\"authorize_net_test_mode\";b:0;s:11:\"submit_role\";a:1:{i:0;s:13:\"administrator\";}s:6:\"fields\";a:6:{s:10:\"camp-title\";a:4:{s:5:\"label\";s:5:\"Title\";s:4:\"desc\";s:26:\"The title of your campaign\";s:4:\"type\";s:10:\"camp_title\";s:8:\"required\";b:1;}s:13:\"camp-location\";a:4:{s:5:\"label\";s:3:\"URL\";s:4:\"desc\";s:25:\"The URL for your campaign\";s:4:\"type\";s:13:\"camp_location\";s:8:\"required\";b:1;}s:8:\"end-date\";a:4:{s:5:\"label\";s:8:\"End Date\";s:4:\"desc\";s:27:\"The date your campaign ends\";s:4:\"type\";s:8:\"end_date\";s:8:\"required\";b:0;}s:9:\"gift-goal\";a:4:{s:5:\"label\";s:4:\"Goal\";s:4:\"desc\";s:28:\"The amount you hope to raise\";s:4:\"type\";s:9:\"user_goal\";s:8:\"required\";b:1;}s:10:\"gift-tally\";a:4:{s:5:\"label\";s:12:\"Total Raised\";s:4:\"desc\";s:24:\"Total donations received\";s:4:\"type\";s:10:\"gift_tally\";s:8:\"required\";b:1;}s:11:\"giver-tally\";a:4:{s:5:\"label\";s:11:\"Giver Tally\";s:4:\"desc\";s:45:\"The number of unique givers for the campaign.\";s:4:\"type\";s:11:\"giver_tally\";s:8:\"required\";b:1;}}s:10:\"cause_root\";i:0;s:13:\"campaign_root\";i:0;s:14:\"paypal_sandbox\";b:0;s:16:\"campaign_listing\";b:1;s:13:\"cause_listing\";b:1;s:27:\"mandrill_email_publish_html\";s:171:\"<h1>Your campaign has been approved</h1>
-Dear *|NAME|*,<br/><br/>
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 09:01:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('class_widget_PA...')
+#2 /wordpress/wp-content/plugins/pad-article/index.php(34): register_widget('class_widget_PA...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_widget_PAD_a('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 09:01:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('class_widget_PA...')
+#2 /wordpress/wp-content/plugins/pad-article/index.php(34): register_widget('class_widget_PA...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_widget_PAD_a('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 09:01:51 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:01:52 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:02:00 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:02:01 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:02:09 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:02:10 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:02:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/pawnbat-module/pawnbat-module.php on line 78
+[11-Apr-2025 09:02:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/pawnbat-module/pawnbat-module.php on line 78
+[11-Apr-2025 09:02:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/pawnbat-module/pawnbat-module.php on line 78
 
-Your campaign, *|CAMP_TITLE|* has been approved.<br/>
-You can view your campaign at: *|CAMP_URL|*.<br/>
-\";s:27:\"mandrill_email_publish_text\";s:109:\"Dear *|NAME|*
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"payment-gateway-for-quickpay"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/payment-gateway-for-quickpay could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/payment-gateway-for-quickpay could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
 
-Your campaign, *|CAMP_TITLE|* has been approved.
-You can view your campaign at: *|CAMP_URL|*.
-\";s:26:\"mandrill_email_donate_html\";s:429:\"<h1>Your fundraiser received a donation!</h1>
-Dear *|NAME|*,<br/><br/>
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.<br/>
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, <a href=\"*|CAMP_URL|*\">*|CAMP_TITLE|*</a>.<br/>
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.<br/>
-*|END:IF|*
-\";s:26:\"mandrill_email_donate_text\";s:378:\"Dear *|NAME|*,
-
-*|IF:DONOR_ANON=true|*
-An anonymous gift of *|DONATE_AMT|* has been received for your fundraiser, *|CAMP_TITLE|*.
-*|ELSE:|*
-*|DONOR_FNAM|* *|DONOR_LNAM|* donated *|DONATE_AMT|* to your fundraiser, *|CAMP_TITLE|*.
-If you would like to thank *|DONOR_FNAM|*, you can email *|DONOR_FNAM|* at *|DONOR_EMAL|*.
-*|END:IF|*
-You can view your fundraiser at: *|CAMP_URL|*.
-\";s:24:\"mandrill_email_goal_html\";s:197:\"<h1>Your fundraiser has reached its goal!</h1>
-Dear *|NAME|*,<br/><br/>
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!<br/>
-
-You can view your campaign at: *|CAMP_URL|*.<br/>
-
-\";s:24:\"mandrill_email_goal_text\";s:128:\"Dear *|NAME|*,
-
-Congratulations!  Your campaign goal of *|GOAL_AMT|* has been met!
-You can view your campaign at: *|CAMP_URL|*.
-\";s:17:\"paypal_donate_btn\";s:420:\"<form action=\"\" method=\"post\"><input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" onclick=\"alert(\'This is a test button.  Please view the readme to setup your PayPal donate button.\');return false;\"><img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"></form>\";s:7:\"version\";s:5:\"0.8.3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), re
 Node.js v23.11.0
