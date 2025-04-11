@@ -2,193 +2,103 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 13:38:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:38:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:38:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:38:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:38:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:38:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:38:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:38:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:39:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fpsml_plugin_install_date', '2025-04-09', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fpsml_plugin_install_date' , '2025-04-09' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fpsml_plugin_in...', '2025-04-09', '', 'auto')
-#5 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(130): update_option('fpsml_plugin_in...', '2025-04-09')
-#6 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(16): FPSML_Activation->update_install_date()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#11 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fpsml_plugin_install_date', '2025-04-09', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->update_install_date, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:39:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:39:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:39:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:39:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_fpsm_forms (
-						form_id mediumint(9) NOT NULL AUTO_INCREMENT,
-						form_title varchar(255),
-						form_alias varchar(255),
-						form_details longtext,
-                                                post_type varchar(255),
-                                                form_type varchar(255),
-						form_status mediumint(9) NOT NULL DEFAULT 1,
-						PRIMARY KEY form_id (form_id)
-					  ) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(72): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#8 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#9 {main}</pre>
- for query CREATE TABLE wp_fpsm_forms (
-						form_id mediumint(9) NOT NULL AUTO_INCREMENT,
-						form_title varchar(255),
-						form_alias varchar(255),
-						form_details longtext,
-                                                post_type varchar(255),
-                                                form_type varchar(255),
-						form_status mediumint(9) NOT NULL DEFAULT 1,
-						PRIMARY KEY form_id (form_id)
-					  ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT count(*) from wp_fpsm_forms</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT count(*) from wp_fpsm_forms | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT count(*)...')
-#2 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(73): wpdb->get_var('SELECT count(*)...')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#8 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#9 {main}</pre>
- for query SELECT count(*) from wp_fpsm_forms made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Login Require Form', 'login_require_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:6:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'login_require', 'post')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES (:param0 , :param1 , :param2 , 1, :param3 , :param4 ) | parameters: Login Require Form, login_require_form, a:1:{s:4:&quot;form&quot;;a:1:{s:6:&quot;fields&quot;;a:6:{s:10:&quot;post_title&quot;;a:2:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:10:&quot;Post Title&quot;;}s:12:&quot;post_content&quot;;a:3:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:12:&quot;Post Content&quot;;s:11:&quot;editor_type&quot;;s:6:&quot;simple&quot;;}s:10:&quot;post_image&quot;;a:0:{}s:12:&quot;post_excerpt&quot;;a:0:{}s:18:&quot;_taxonomy|category&quot;;a:0:{}s:18:&quot;_taxonomy|post_tag&quot;;a:0:{}}}}, login_require, post</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_fpsm_forms', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(105): wpdb->insert('wp_fpsm_forms', Array, Array)
-#4 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(75): FPSML_Activation->insert_default_forms('wp_fpsm_forms')
-#5 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 03:29:11 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/filepress/filepress.php on line 52
+[11-Apr-2025 03:29:20 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/filepress/filepress.php on line 52
+[11-Apr-2025 03:29:29 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/filepress/filepress.php on line 52
+[11-Apr-2025 03:30:12 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744342210.008)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#10 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#11 {main}</pre>
- for query INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Login Require Form', 'login_require_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:6:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'login_require', 'post') made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, FPSML_Activation->insert_default_forms, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Guest Post Form', 'guest_post_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:8:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:11:\"author_name\";a:0:{}s:12:\"author_email\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'guest', 'post')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES (:param0 , :param1 , :param2 , 1, :param3 , :param4 ) | parameters: Guest Post Form, guest_post_form, a:1:{s:4:&quot;form&quot;;a:1:{s:6:&quot;fields&quot;;a:8:{s:10:&quot;post_title&quot;;a:2:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:10:&quot;Post Title&quot;;}s:12:&quot;post_content&quot;;a:3:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:12:&quot;Post Content&quot;;s:11:&quot;editor_type&quot;;s:6:&quot;simple&quot;;}s:10:&quot;post_image&quot;;a:0:{}s:12:&quot;post_excerpt&quot;;a:0:{}s:11:&quot;author_name&quot;;a:0:{}s:12:&quot;author_email&quot;;a:0:{}s:18:&quot;_taxonomy|category&quot;;a:0:{}s:18:&quot;_taxonomy|post_tag&quot;;a:0:{}}}}, guest, post</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_fpsm_forms', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(124): wpdb->insert('wp_fpsm_forms', Array, Array)
-#4 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(75): FPSML_Activation->insert_default_forms('wp_fpsm_forms')
-#5 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:30:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "facebook_url" in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php:173
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-live-l...')
+#2 /internal/eval.php(20): activate_plugin('facebook-live-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php on line 173
+[11-Apr-2025 03:30:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "facebook_url" in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php:173
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-live-l...')
+#2 /internal/eval.php(20): activate_plugin('facebook-live-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php on line 173
+[11-Apr-2025 03:31:06 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "facebook_url" in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php:173
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-live-l...')
+#2 /internal/eval.php(20): activate_plugin('facebook-live-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-live-like-counter/pluginhook.php on line 173
+[11-Apr-2025 03:31:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:31:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:31:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:31:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:31:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:31:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:31:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:31:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:31:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:31:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:31:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:31:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:31:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:31:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:31:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:32:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:32:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:32:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:32:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:32:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:32:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:32:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:32:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:32:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:32:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:32:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 94
+[11-Apr-2025 03:32:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 98
+[11-Apr-2025 03:32:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 102
+[11-Apr-2025 03:32:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 106
+[11-Apr-2025 03:32:10 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/fb-save-button-for-wp/assets/class-fbs.php on line 110
+[11-Apr-2025 03:33:42 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744342420.227)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#10 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#11 {main}</pre>
- for query INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Guest Post Form', 'guest_post_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:8:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:11:\"author_name\";a:0:{}s:12:\"author_email\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'guest', 'post') made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, FPSML_Activation->insert_default_forms, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:33:50 UTC] PHP Parse error:  syntax error, unexpected 'int' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/fluentc-translation/src/services/class-cache.php on line 28
+[11-Apr-2025 03:33:59 UTC] PHP Parse error:  syntax error, unexpected 'int' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /wordpress/wp-content/plugins/fluentc-translation/src/services/class-cache.php on line 28
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_fpsm_forms (
-						form_id mediumint(9) NOT NULL AUTO_INCREMENT,
-						form_title varchar(255),
-						form_alias varchar(255),
-						form_details longtext,
-                                                post_type varchar(255),
-                                                form_type varchar(255),
-						form_status mediumint(9) NOT NULL DEFAULT 1,
-						PRIMARY KEY form_id (form_id)
-					  ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>
+			CREATE TABLE wp_followize_fields (
+				field_name VARCHAR(30) NOT NULL,
+				field_type VARCHAR(10) NOT NULL,
+				field_limit INT NOT NULL,
+				label VARCHAR(255),
+				required BOOL not null,
+				enabled BOOL not null,
+				description VARCHAR(255),
+				mask VARCHAR(255),
+				PRIMARY KEY  (field_name)
+			)  ENGINE = MYISAM</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -196,387 +106,567 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: required.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(72): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#8 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#9 {main}</pre>
- for query CREATE TABLE wp_fpsm_forms (
-						form_id mediumint(9) NOT NULL AUTO_INCREMENT,
-						form_title varchar(255),
-						form_alias varchar(255),
-						form_details longtext,
-                                                post_type varchar(255),
-                                                form_type varchar(255),
-						form_status mediumint(9) NOT NULL DEFAULT 1,
-						PRIMARY KEY form_id (form_id)
-					  ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\n\t\t\tCREATE TABL...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(127): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(51): Followize\Table::create_table('\n\t\t\tCREATE TABL...')
+#4 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#5 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#12 /internal/eval.php(20): activate_plugin('followize/follo...')
+#13 {main}</pre>
+ for query 
+			CREATE TABLE wp_followize_fields (
+				field_name VARCHAR(30) NOT NULL,
+				field_type VARCHAR(10) NOT NULL,
+				field_limit INT NOT NULL,
+				label VARCHAR(255),
+				required BOOL not null,
+				enabled BOOL not null,
+				description VARCHAR(255),
+				mask VARCHAR(255),
+				PRIMARY KEY  (field_name)
+			)  ENGINE = MYISAM made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Table::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT count(*) from wp_fpsm_forms</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'name'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT count(*) from wp_fpsm_forms | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: name</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT count(*)...')
-#2 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(73): wpdb->get_var('SELECT count(*)...')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#8 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#9 {main}</pre>
- for query SELECT count(*) from wp_fpsm_forms made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Login Require Form', 'login_require_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:6:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'login_require', 'post')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES (:param0 , :param1 , :param2 , 1, :param3 , :param4 ) | parameters: Login Require Form, login_require_form, a:1:{s:4:&quot;form&quot;;a:1:{s:6:&quot;fields&quot;;a:6:{s:10:&quot;post_title&quot;;a:2:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:10:&quot;Post Title&quot;;}s:12:&quot;post_content&quot;;a:3:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:12:&quot;Post Content&quot;;s:11:&quot;editor_type&quot;;s:6:&quot;simple&quot;;}s:10:&quot;post_image&quot;;a:0:{}s:12:&quot;post_excerpt&quot;;a:0:{}s:18:&quot;_taxonomy|category&quot;;a:0:{}s:18:&quot;_taxonomy|post_tag&quot;;a:0:{}}}}, login_require, post</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_fpsm_forms', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(105): wpdb->insert('wp_fpsm_forms', Array, Array)
-#4 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(75): FPSML_Activation->insert_default_forms('wp_fpsm_forms')
-#5 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#10 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#11 {main}</pre>
- for query INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Login Require Form', 'login_require_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:6:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'login_require', 'post') made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, FPSML_Activation->insert_default_forms, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Guest Post Form', 'guest_post_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:8:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:11:\"author_name\";a:0:{}s:12:\"author_email\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'guest', 'post')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES (:param0 , :param1 , :param2 , 1, :param3 , :param4 ) | parameters: Guest Post Form, guest_post_form, a:1:{s:4:&quot;form&quot;;a:1:{s:6:&quot;fields&quot;;a:8:{s:10:&quot;post_title&quot;;a:2:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:10:&quot;Post Title&quot;;}s:12:&quot;post_content&quot;;a:3:{s:12:&quot;show_on_form&quot;;i:1;s:11:&quot;field_label&quot;;s:12:&quot;Post Content&quot;;s:11:&quot;editor_type&quot;;s:6:&quot;simple&quot;;}s:10:&quot;post_image&quot;;a:0:{}s:12:&quot;post_excerpt&quot;;a:0:{}s:11:&quot;author_name&quot;;a:0:{}s:12:&quot;author_email&quot;;a:0:{}s:18:&quot;_taxonomy|category&quot;;a:0:{}s:18:&quot;_taxonomy|post_tag&quot;;a:0:{}}}}, guest, post</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_fpsm_forms.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_fpsm_forms', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(124): wpdb->insert('wp_fpsm_forms', Array, Array)
-#4 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(75): FPSML_Activation->insert_default_forms('wp_fpsm_forms')
-#5 /wordpress/wp-content/plugins/frontend-post-submission-manager-lite/includes/classes/admin/class-fpsml-activation.php(15): FPSML_Activation->create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FPSML_Activation->activation_tasks(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fronte...', false)
-#10 /internal/eval.php(20): activate_plugin('frontend-post-s...')
-#11 {main}</pre>
- for query INSERT INTO `wp_fpsm_forms` (`form_title`, `form_alias`, `form_details`, `form_status`, `form_type`, `post_type`) VALUES ('Guest Post Form', 'guest_post_form', 'a:1:{s:4:\"form\";a:1:{s:6:\"fields\";a:8:{s:10:\"post_title\";a:2:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:10:\"Post Title\";}s:12:\"post_content\";a:3:{s:12:\"show_on_form\";i:1;s:11:\"field_label\";s:12:\"Post Content\";s:11:\"editor_type\";s:6:\"simple\";}s:10:\"post_image\";a:0:{}s:12:\"post_excerpt\";a:0:{}s:11:\"author_name\";a:0:{}s:12:\"author_email\";a:0:{}s:18:\"_taxonomy|category\";a:0:{}s:18:\"_taxonomy|post_tag\";a:0:{}}}}', 1, 'guest', 'post') made by activate_plugin, do_action('activate_frontend-post-submission-manager-lite/frontend-post-submission-manager-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, FPSML_Activation->activation_tasks, FPSML_Activation->create_tables, FPSML_Activation->insert_default_forms, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:39:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:39:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:39:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:39:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:40:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:40:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:40:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:40:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:40:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_farsi_verse_ofthe_daywidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_farsi_verse_ofthe_daywidget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_farsi_ve...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_farsi_ve...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('name')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_farsi_verse_ofthe_daywidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:40:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'name' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_farsiverse_ofthedaywidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('name', 'text', '100', 'Nome', '1', '1', 'Nome do cliente.')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_farsiverse_ofthedaywidget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: name, text, 100, Nome, 1, 1, Nome do cliente.</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_farsiver...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_farsiver...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('name', 'text', '100', 'Nome', '1', '1', 'Nome do cliente.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'email'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: email</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('email')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_farsiverse_ofthedaywidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:40:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:40:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:40:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:40:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:41:06 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:14 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:15 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:23 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:24 UTC] PHP Warning:  Undefined array key "post_type" in /wordpress/wp-content/plugins/filter-pages-by-parent-in-admin/filter-pages-by-parent-in-admin.php on line 81
-[09-Apr-2025 13:41:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:41:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:41:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:41:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:42:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:42:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:42:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:42:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:42:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:42:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:42:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:42:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:43:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:43:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:43:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:43:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:43:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:43:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:43:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:43:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:44:41 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:44:41 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:44:41 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:44:41 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:45:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'email' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fw_tabbed_sidebars', 'a:1:{s:6:\"number\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('email', 'email', '150', 'E-mail', '1', '1', 'E-mail do cliente.')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fw_tabbed_sidebars' , 'a:1:{s:6:&quot;number&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: email, email, 150, E-mail, 1, 1, E-mail do cliente.</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fw_tabbed_sideb...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/fun-with-sidebar-tabs/fun_with_sidebar_tabs.php(349): update_option('fw_tabbed_sideb...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): fw_tabbed_sidebars->on_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fun-wi...', false)
-#10 /internal/eval.php(20): activate_plugin('fun-with-sideba...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fw_tabbed_sidebars', 'a:1:{s:6:\"number\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_fun-with-sidebar-tabs/fun_with_sidebar_tabs.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_tabbed_sidebars->on_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:45:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:45:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:45:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:45:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:45:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('email', 'email', '150', 'E-mail', '1', '1', 'E-mail do cliente.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '!&Ry{eVhlNHr5aNhsWUSac#|5gcdQy<8]rSmr(UnN#;t%%MczgHiO@*ULQGmK67r', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'message'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '!&amp;Ry{eVhlNHr5aNhsWUSac#|5gcdQy&lt;8]rSmr(UnN#;t%%MczgHiO@*ULQGmK67r' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: message</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '!&Ry{eVhlNHr5aN...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '!&Ry{eVhlNHr5aN...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '!&Ry{eVhlNHr5aN...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '!&Ry{eVhlNHr5aN...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/fun-with-sidebar-tabs/fun_with_sidebar_tabs.php(432): wp_enqueue_script('fun_with_sideba...', '/wp-content/plu...', Array, 0.1)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): fw_tabbed_sidebars->add_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '!&Ry{eVhlNHr5aNhsWUSac#|5gcdQy<8]rSmr(UnN#;t%%MczgHiO@*ULQGmK67r', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, fw_tabbed_sidebars->add_scripts, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:45:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('message')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'message' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '/Kfqqt&d^zQQi{q]Kp0nstsh[DVk(FPX#^P`>ySpnM&f->(Va-]Ou{r&_IO`Y60l', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('message', 'text', '-1', 'Mensagem', '0', '0', 'Mensagem.')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '/Kfqqt&amp;d^zQQi{q]Kp0nstsh[DVk(FPX#^P`&gt;ySpnM&amp;f-&gt;(Va-]Ou{r&amp;_IO`Y60l' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: message, text, -1, Mensagem, 0, 0, Mensagem.</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '/Kfqqt&d^zQQi{q...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '/Kfqqt&d^zQQi{q...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '/Kfqqt&d^zQQi{q...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '/Kfqqt&d^zQQi{q...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/fun-with-sidebar-tabs/fun_with_sidebar_tabs.php(432): wp_enqueue_script('fun_with_sideba...', '/wp-content/plu...', Array, 0.1)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): fw_tabbed_sidebars->add_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `w
-Node.js v23.11.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('message', 'text', '-1', 'Mensagem', '0', '0', 'Mensagem.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'phone'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: phone</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('phone')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'phone' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES ('phone', 'text', '40', 'Telefone', '0', '0', 'Telefone do cliente.', '(00) 0000-00009')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: phone, text, 40, Telefone, 0, 0, Telefone do cliente., (00) 0000-00009</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES ('phone', 'text', '40', 'Telefone', '0', '0', 'Telefone do cliente.', '(00) 0000-00009') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'cellPhone'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: cellPhone</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('cellPhone')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'cellPhone' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES ('cellPhone', 'text', '40', 'Celular', '0', '0', 'Celular do cliente.', '(00) 0000-00009')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: cellPhone, text, 40, Celular, 0, 0, Celular do cliente., (00) 0000-00009</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`, `mask`) VALUES ('cellPhone', 'text', '40', 'Celular', '0', '0', 'Celular do cliente.', '(00) 0000-00009') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'addressLine1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: addressLine1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('addressLine1')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'addressLine1' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('addressLine1', 'text', '200', 'Endereço', '0', '0', 'Endereço do cliente.')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: addressLine1, text, 200, Endereço, 0, 0, Endereço do cliente.</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('addressLine1', 'text', '200', 'Endereço', '0', '0', 'Endereço do cliente.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'addressLine2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: addressLine2</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('addressLine2')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'addressLine2' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('addressLine2', 'text', '20', 'Complemento', '0', '0', 'Complemento do endereço do cliente.')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: addressLine2, text, 20, Complemento, 0, 0, Complemento do endereço do cliente.</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('addressLine2', 'text', '20', 'Complemento', '0', '0', 'Complemento do endereço do cliente.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'neighborhood'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: neighborhood</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('neighborhood')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'neighborhood' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('neighborhood', 'text', '50', 'Bairro', '0', '0', 'Bairro do cliente.')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: neighborhood, text, 50, Bairro, 0, 0, Bairro do cliente.</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_followize_fi...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/followize/Model/base/table.php(60): wpdb->insert('wp_followize_fi...', Array)
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(79): Followize\Table::insert(Array)
+#5 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#6 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#9 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#14 /internal/eval.php(20): activate_plugin('followize/follo...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_followize_fields` (`field_name`, `field_type`, `field_limit`, `label`, `required`, `enabled`, `description`) VALUES ('neighborhood', 'text', '50', 'Bairro', '0', '0', 'Bairro do cliente.') made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->activate, Followize\Core->update_db_check, Followize\Core->update_db_version, Followize\Forms_Controller::create_tables, Followize\Field::maybe_create_table, Followize\Field::_maybe_insert_field, Followize\Table::insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 03:34:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_followize_fields WHERE field_name = 'city'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_followize_fields WHERE field_name = :param0  | parameters: city</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_followize_fields.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/followize/Model/base/table.php(22): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/followize/Model/field.php(76): Followize\Table::get('city')
+#4 /wordpress/wp-content/plugins/followize/Model/field.php(52): Followize\Field::_maybe_insert_field()
+#5 /wordpress/wp-content/plugins/followize/Controller/forms.controller.php(424): Followize\Field::maybe_create_table()
+#6 /wordpress/wp-content/plugins/followize/Config/core.php(64): Followize\Forms_Controller::create_tables()
+#7 /wordpress/wp-content/plugins/followize/Config/core.php(58): Followize\Core->update_db_version()
+#8 /wordpress/wp-content/plugins/followize/Config/core.php(70): Followize\Core->update_db_check()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Followize\Core->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_follow...', false)
+#13 /internal/eval.php(20): activate_plugin('followize/follo...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_followize_fields WHERE field_name = 'city' made by activate_plugin, do_action('activate_followize/followize.php'), WP_Hook->do_action, WP_Hook->apply_filters, Followize\Core->act

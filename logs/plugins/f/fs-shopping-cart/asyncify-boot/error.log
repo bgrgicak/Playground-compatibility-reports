@@ -2,774 +2,152 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 13:38:26 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:38:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('formmem_settings', 'a:3:{s:7:\"enabled\";b:0;s:14:\"insert_infobox\";b:1;s:7:\"clearup\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'formmem_settings' , 'a:3:{s:7:&quot;enabled&quot;;b:0;s:14:&quot;insert_infobox&quot;;b:1;s:7:&quot;clearup&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/formmemory/formmemory.php(34): add_option('formmem_setting...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): formmem_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_formme...', false)
-#9 /internal/eval.php(20): activate_plugin('formmemory/form...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('formmem_settings', 'a:3:{s:7:\"enabled\";b:0;s:14:\"insert_infobox\";b:1;s:7:\"clearup\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_formmemory/formmemory.php'), WP_Hook->do_action, WP_Hook->apply_filters, formmem_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:38:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:38:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_instal.php(42): add_option('fq_db_version', '1.11')
-#5 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(32): require('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_DB_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 03:32:00 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744342317.906)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_free-q...', false)
-#10 /internal/eval.php(20): activate_plugin('free-quotation/...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_free-quotation/Free_Quotation_main.php'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_DB_install, require('/plugins/free-quotation/incloudes/Free_Quotation_instal.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 13:38:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 13:38:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 13:38:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column adding_date int(2) NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, adding_date, 12, , NO, int, , , 10, 0, , , , int(2), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f7a120` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `adding_date` INTEGER NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: adding_date
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(11): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column adding_date int(2) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fq_db_version', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(13): update_option('fq_db_version', '1.11')
-#6 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column week_no int(2) NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, week_no, 12, , NO, int, , , 10, 0, , , , int(2), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f7fee0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `week_no` INTEGER NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: week_no
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(17): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column week_no int(2) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fq_db_version', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(19): update_option('fq_db_version', '1.11')
-#6 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column week_day int(1) NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, week_day, 12, , NO, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f83590` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `week_day` INTEGER NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: week_day
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(34): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column week_day int(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fq_db_version', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(36): update_option('fq_db_version', '1.11')
-#6 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column quote_group varchar(10) NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, quote_group, 12, , NO, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f88f68` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: quote_group
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(50): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column quote_group varchar(10) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fq_db_version', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(52): update_option('fq_db_version', '1.11')
-#6 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column birth_year  varchar(14)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, birth_year, 12, , YES, varchar, 14, 56, , , , utf8mb4, utf8mb4_general_ci, varchar(14), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f923d8` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `birth_year` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: birth_year
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(66): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column birth_year  varchar(14) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column death_year  varchar(14)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, death_year, 12, , YES, varchar, 14, 56, , , , utf8mb4, utf8mb4_general_ci, varchar(14), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f956a0` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: death_year
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(67): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column death_year  varchar(14) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>alter table wp_free_quotation_kris_IV add column job_position  varchar(50)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_free_quotation_kris_IV, job_position, 12, , YES, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_free_quotation_kris_IV</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_free_quotation_kris_IV_67f6786f9a0d8` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `quotation` TEXT COLLATE NOCASE NOT NULL,
-  `author` TEXT COLLATE NOCASE NOT NULL,
-  `display_date` TEXT COLLATE NOCASE NOT NULL,
-  `adding_date` TEXT COLLATE NOCASE NOT NULL,
-  `week_no` INTEGER NOT NULL,
-  `week_day` INTEGER NOT NULL,
-  `quote_group` TEXT COLLATE NOCASE NOT NULL,
-  `birth_year` TEXT COLLATE NOCASE,
-  `death_year` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE,
-  `job_position` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: job_position
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('alter table wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('alter table wp_...')
-#3 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(68): WP_SQLite_DB->query('alter table wp_...')
-#4 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query alter table wp_free_quotation_kris_IV add column job_position  varchar(50) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fq_db_version' , '1.11' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fq_db_version', '1.11', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-quotation/incloudes/Free_Quotation_update.php(81): update_option('fq_db_version', '1.11')
-#6 /wordpress/wp-content/plugins/free-quotation/Free_Quotation_main.php(40): require('/wordpress/wp-c...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Free_Quotation_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fq_db_version', '1.11', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Free_Quotation_update_db_check, require('/plugins/free-quotation/incloudes/Free_Quotation_update.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 13:38:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_foo_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_foo_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_foo_widg...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_foo_widg...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-wi
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:32:34 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744342351.12)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:33:25 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:33:25 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:33:34 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:33:34 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:33:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:33:43 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 03:35:25 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744342523.645)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 03:36:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 552
+[11-Apr-2025 03:36:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 553
+[11-Apr-2025 03:36:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 554
+[11-Apr-2025 03:36:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 555
+[11-Apr-2025 03:36:37 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 552
+[11-Apr-2025 03:36:37 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 553
+[11-Apr-2025 03:36:37 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 554
+[11-Apr-2025 03:36:37 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 555
+[11-Apr-2025 03:36:46 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 552
+[11-Apr-2025 03:36:46 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 553
+[11-Apr-2025 03:36:46 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 554
+[11-Apr-2025 03:36:46 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/free-counter/plugin.php on line 555
+[11-Apr-2025 03:37:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php:380
+Stack trace:
+#0 /wordpress/wp-content/plugins/friendly-responsiveslides-slider/friendly-responsiveslides-slider.php(122): require()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): friendly_rs_slider::load_shortcode_and_widget('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php on line 380
+[11-Apr-2025 03:37:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php:380
+Stack trace:
+#0 /wordpress/wp-content/plugins/friendly-responsiveslides-slider/friendly-responsiveslides-slider.php(122): require()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): friendly_rs_slider::load_shortcode_and_widget('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php on line 380
+[11-Apr-2025 03:37:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php:380
+Stack trace:
+#0 /wordpress/wp-content/plugins/friendly-responsiveslides-slider/friendly-responsiveslides-slider.php(122): require()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): friendly_rs_slider::load_shortcode_and_widget('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/friendly-responsiveslides-slider/_widget/class.friendly-responsiveslides-slider.php on line 380
+[11-Apr-2025 03:37:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fs-shopping-cart/widget_brands.php:67
+Stack trace:
+#0 /wordpress/wp-content/plugins/fs-shopping-cart/main.php(54): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fs-shopping-car...')
+#3 /internal/eval.php(20): activate_plugin('fs-shopping-car...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/fs-shopping-cart/widget_brands.php on line 67
+[11-Apr-2025 03:37:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fs-shopping-cart/widget_brands.php:67
+Stack trace:
+#0 /wordpress/wp-content/plugins/fs-shopping-cart/main.php(54): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fs-shopping-car...')
+#3 /internal/eval.php(20): activate_plugin('fs-shopping-car...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/fs-shopping-cart/widget_brands.php on line 67
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"fs-shopping-cart"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'set-cookie': [ 'PHPSESSID=bc7a2ccd4a6169c77d5fe24f1de112bd; path=/' ],
+          expires: [ 'Thu, 19 Nov 1981 08:52:00 GMT' ],
+          'cache-control': [ 'no-store, no-cache, must-revalidate' ],
+          pragma: [ 'no-cache' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
