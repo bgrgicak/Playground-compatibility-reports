@@ -2,155 +2,139 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 16:34:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:34:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:34:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:34:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:35:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:35:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:35:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:35:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:35:33 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-redmine-issues/includes/wpri_start.php on line 108
-[09-Apr-2025 16:35:41 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-redmine-issues/includes/wpri_start.php on line 108
-[09-Apr-2025 16:35:49 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/wp-redmine-issues/includes/wpri_start.php on line 108
-[09-Apr-2025 16:35:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 07:27:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime;</p>
+<p>DESC `wp_wp_phpmyadmin_extension__errors_log`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` , STRFTIME('%Y-%m-%d', `startTime`) as `startTime` , STRFTIME('%Y-%m-%d', `endTime`) as `endTime` , `cssFile` , `repeatYearly` FROM `wp_scheduledstyles` WHERE `status` = 'active' AND CURRENT_TIMESTAMP BETWEEN `startTime` AND `endTime` ORDER BY `startTime` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_scheduledstyles
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id,date_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id,date_...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id,date_...')
-#4 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(112): wpdb->get_results('SELECT id,date_...')
-#5 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(80): ScheduledStyles->read_schedule('current')
-#6 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(43): ScheduledStyles->determine_styles_to_include()
-#7 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(209): ScheduledStyles->__construct()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-scheduled-st...')
-#10 /internal/eval.php(20): activate_plugin('wp-scheduled-st...')
-#11 {main}</pre>
- for query SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-scheduled-styles/scheduledStyles.php'), ScheduledStyles->__construct, ScheduledStyles->determine_styles_to_include, ScheduledStyles->read_schedule, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:35:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC `wp_wp_php...')
+#2 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1103): wpdb->get_col('DESC `wp_wp_php...', 0)
+#3 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1058): Puvox\library_wp->db_table_columns('wp_wp_phpmyadmi...')
+#4 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1370): Puvox\library_wp->add_column_my('wp_wp_phpmyadmi...', 'function_name', 'longtext', 'gmdate')
+#5 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1712): Puvox\library_wp->create_log_table()
+#6 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1684): Puvox\wp_plugin->plugin_inits()
+#7 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/index.php(715): Puvox\wp_plugin->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC `wp_wp_phpmyadmin_extension__errors_log` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-phpmyadmin-extension/index.php'), Puvox\wp_plugin->__construct, Puvox\wp_plugin->plugin_inits, Puvox\library_wp->create_log_table, Puvox\library_wp->add_column_my, Puvox\library_wp->db_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:27:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scheduledstyles_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_wp_phpmyadmin_extension__errors_log` ADD `function_name` longtext NOT NULL AFTER gmdate</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'scheduledstyles_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wp_phpmyadmin_extension__errors_log, `FUNCTION_NAME`, longtext</li>
+<li>Executing: ALTER TABLE wp_wp_phpmyadmin_extension__errors_log ADD `function_name` text NOT NULL   | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: function_name.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(173): add_option('scheduledstyles...', '1.0')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ScheduledStyles->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sch...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-scheduled-st...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1063): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1370): Puvox\library_wp->add_column_my('wp_wp_phpmyadmi...', 'function_name', 'longtext', 'gmdate')
+#3 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1712): Puvox\library_wp->create_log_table()
+#4 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1684): Puvox\wp_plugin->plugin_inits()
+#5 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/index.php(715): Puvox\wp_plugin->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scheduledstyles_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-scheduled-styles/scheduledStyles.php'), WP_Hook->do_action, WP_Hook->apply_filters, ScheduledStyles->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:35:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:35:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:35:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:35:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:36:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_wp_phpmyadmin_extension__errors_log` ADD `function_name` longtext NOT NULL AFTER gmdate made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-phpmyadmin-extension/index.php'), Puvox\wp_plugin->__construct, Puvox\wp_plugin->plugin_inits, Puvox\library_wp->create_log_table, Puvox\library_wp->add_column_my, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime;</p>
+<p>DESC `wp_wp_phpmyadmin_extension__errors_log`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id,STRFTIME('%Y-%m-%d',startTime) as startTime,STRFTIME('%Y-%m-%d',endTime) as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status=:param0  AND now() BETWEEN startTime AND endTime  ORDER BY startTime; | parameters: active</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_scheduledstyles.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id,date_...')
-#2 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(112): wpdb->get_results('SELECT id,date_...')
-#3 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(80): ScheduledStyles->read_schedule('current')
-#4 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(43): ScheduledStyles->determine_styles_to_include()
-#5 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(209): ScheduledStyles->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-scheduled-st...')
-#8 /internal/eval.php(20): activate_plugin('wp-scheduled-st...')
-#9 {main}</pre>
- for query SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-scheduled-styles/scheduledStyles.php'), ScheduledStyles->__construct, ScheduledStyles->determine_styles_to_include, ScheduledStyles->read_schedule, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:36:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('DESC `wp_wp_php...')
+#2 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1103): wpdb->get_col('DESC `wp_wp_php...', 0)
+#3 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1058): Puvox\library_wp->db_table_columns('wp_wp_phpmyadmi...')
+#4 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1370): Puvox\library_wp->add_column_my('wp_wp_phpmyadmi...', 'function_name', 'longtext', 'gmdate')
+#5 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1712): Puvox\library_wp->create_log_table()
+#6 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1684): Puvox\wp_plugin->plugin_inits()
+#7 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/index.php(715): Puvox\wp_plugin->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC `wp_wp_phpmyadmin_extension__errors_log` made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-phpmyadmin-extension/index.php'), Puvox\wp_plugin->__construct, Puvox\wp_plugin->plugin_inits, Puvox\library_wp->create_log_table, Puvox\library_wp->add_column_my, Puvox\library_wp->db_table_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime;</p>
+<p>ALTER TABLE `wp_wp_phpmyadmin_extension__errors_log` ADD `function_name` longtext NOT NULL AFTER gmdate</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT id,STRFTIME('%Y-%m-%d',startTime) as startTime,STRFTIME('%Y-%m-%d',endTime) as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status=:param0  AND now() BETWEEN startTime AND endTime  ORDER BY startTime; | parameters: active</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wp_phpmyadmin_extension__errors_log, `FUNCTION_NAME`, longtext</li>
+<li>Executing: ALTER TABLE wp_wp_phpmyadmin_extension__errors_log ADD `function_name` text NOT NULL   | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_scheduledstyles.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: function_name.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id,date_...')
-#2 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(112): wpdb->get_results('SELECT id,date_...')
-#3 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(80): ScheduledStyles->read_schedule('current')
-#4 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(43): ScheduledStyles->determine_styles_to_include()
-#5 /wordpress/wp-content/plugins/wp-scheduled-styles/scheduledStyles.php(209): ScheduledStyles->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-scheduled-st...')
-#8 /internal/eval.php(20): activate_plugin('wp-scheduled-st...')
-#9 {main}</pre>
- for query SELECT id,date_format(startTime,'%Y-%m-%d') as startTime,date_format(endTime,'%Y-%m-%d') as endTime,cssFile,repeatYearly FROM wp_scheduledstyles WHERE status='active' AND now() BETWEEN startTime AND endTime  ORDER BY startTime; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-scheduled-styles/scheduledStyles.php'), ScheduledStyles->__construct, ScheduledStyles->determine_styles_to_include, ScheduledStyles->read_schedule, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 16:36:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 16:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 16:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 16:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 16:36:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
+#1 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1063): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1370): Puvox\library_wp->add_column_my('wp_wp_phpmyadmi...', 'function_name', 'longtext', 'gmdate')
+#3 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1712): Puvox\library_wp->create_log_table()
+#4 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/library_wp.php(1684): Puvox\wp_plugin->plugin_inits()
+#5 /wordpress/wp-content/plugins/wp-phpmyadmin-extension/index.php(715): Puvox\wp_plugin->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_wp_phpmyadmin_extension__errors_log` ADD `function_name` longtext NOT NULL AFTER gmdate made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-phpmyadmin-extension/index.php'), Puvox\wp_plugin->__construct, Puvox\wp_plugin->plugin_inits, Puvox\library_wp->create_log_table, Puvox\library_wp->add_column_my, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:29:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-vent-spy/wp-...')
 #2 /internal/eval.php(20): activate_plugin('wp-vent-spy/wp-...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php on line 221
-[09-Apr-2025 16:36:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
+[11-Apr-2025 07:29:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-vent-spy/wp-...')
 #2 /internal/eval.php(20): activate_plugin('wp-vent-spy/wp-...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php on line 221
-[09-Apr-2025 16:37:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
+[11-Apr-2025 07:29:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-vent-spy/wp-vent-spy.php:221
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-vent-spy/wp-...')
