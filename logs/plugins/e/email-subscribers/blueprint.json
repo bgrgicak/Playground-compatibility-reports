@@ -1,1 +1,54 @@
-{"landingPage":"\/wp-admin\/admin.php?page=es_dashboard","preferredVersions":{"php":"7.4","wp":"5.9"},"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"password"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"email-subscribers"},"options":{"activate":true}},{"step":"setSiteOptions","options":{"ig_es_onboarding_complete":"no"}},{"step":"mkdir","path":"wordpress\/wp-content\/mu-plugins"},{"step":"writeFile","path":"wordpress\/wp-content\/mu-plugins\/add-onboarding-tasks.php","data":"<?php function add_all_onboarding_tasks() {\nif ( get_option( 'ig_es_onboarding_complete' ) === 'yes' ) {\nreturn; \/\/ Onboarding already completed, skip the process\n}\n\n$onboarding_instance = IG_ES_Onboarding::instance();\n$onboarding_instance->set_settings();\n$onboarding_instance->create_default_lists();\n$onboarding_instance->create_contacts_and_add_to_list();\n$onboarding_instance->add_default_workflows();\n$onboarding_instance->create_default_newsletter_broadcast();\n$onboarding_instance->create_default_post_notification();\n$onboarding_instance->create_default_subscription_form();\n$onboarding_instance->add_widget_to_sidebar();\n\nupdate_option( 'ig_es_onboarding_complete', 'yes' );\n}\nadd_action( 'admin_init', 'add_all_onboarding_tasks', 20 ); ?>"},{"step":"writeFile","path":"wordpress\/wp-content\/mu-plugins\/feedback-form.php","data":"<?php\nfunction disable_ig_es_render_iges_merge_feedback() {\nremove_action( 'admin_footer', 'ig_es_render_iges_merge_feedback' );\n}\nadd_action( 'admin_init', 'disable_ig_es_render_iges_merge_feedback' );\n?>"}]}
+{
+  "landingPage": "/wp-admin/admin.php?page=es_dashboard",
+  "preferredVersions": {
+    "php": "7.4",
+    "wp": "5.9"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "email-subscribers"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "ig_es_onboarding_complete": "no"
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "wordpress/wp-content/mu-plugins"
+    },
+    {
+      "step": "writeFile",
+      "path": "wordpress/wp-content/mu-plugins/add-onboarding-tasks.php",
+      "data": "<?php function add_all_onboarding_tasks() {\nif ( get_option( 'ig_es_onboarding_complete' ) === 'yes' ) {\nreturn; // Onboarding already completed, skip the process\n}\n\n$onboarding_instance = IG_ES_Onboarding::instance();\n$onboarding_instance->set_settings();\n$onboarding_instance->create_default_lists();\n$onboarding_instance->create_contacts_and_add_to_list();\n$onboarding_instance->add_default_workflows();\n$onboarding_instance->create_default_newsletter_broadcast();\n$onboarding_instance->create_default_post_notification();\n$onboarding_instance->create_default_subscription_form();\n$onboarding_instance->add_widget_to_sidebar();\n\nupdate_option( 'ig_es_onboarding_complete', 'yes' );\n}\nadd_action( 'admin_init', 'add_all_onboarding_tasks', 20 ); ?>"
+    },
+    {
+      "step": "writeFile",
+      "path": "wordpress/wp-content/mu-plugins/feedback-form.php",
+      "data": "<?php\nfunction disable_ig_es_render_iges_merge_feedback() {\nremove_action( 'admin_footer', 'ig_es_render_iges_merge_feedback' );\n}\nadd_action( 'admin_init', 'disable_ig_es_render_iges_merge_feedback' );\n?>"
+    }
+  ]
+}
