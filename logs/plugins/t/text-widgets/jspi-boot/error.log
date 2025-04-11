@@ -2,668 +2,204 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 07:45:54 UTC] 
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 08:53:50 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:53:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT
-				COUNT(staff_id)
-				FROM wp_ts_staff
-				WHERE visibility = 'Visible'</p>
+<p>ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( `staff_id` ) FROM `wp_ts_staff` WHERE `visibility` = 'Visible' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_ts_staff
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT\r\n\t\t\t\tCOU...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT\r\n\t\t\t\tCOU...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT\r\n\t\t\t\tCOU...')
-#4 /wordpress/wp-content/plugins/timeslot/inc/src/CountStaff.php(28): wpdb->get_var('SELECT\r\n\t\t\t\tCOU...')
-#5 /wordpress/wp-content/plugins/timeslot/public/form/shortcode.php(21): TimeSlot\CountStaff->__construct()
-#6 /wordpress/wp-content/plugins/timeslot/timeslot.php(49): require('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('timeslot/timesl...')
-#9 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#10 {main}</pre>
- for query SELECT
-				COUNT(staff_id)
-				FROM wp_ts_staff
-				WHERE visibility = 'Visible' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/timeslot/timeslot.php'), require('/plugins/timeslot/public/form/shortcode.php'), TimeSlot\CountStaff->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_ts_appointments (
-		appt_id int(11) NOT NULL AUTO_INCREMENT,
-		created datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-		service_title varchar(55) NOT NULL,
-		staff varchar(55) NOT NULL,
-		start_appt datetime NOT NULL,
-		appt_status varchar(20) NOT NULL,
-		customer_name varchar(55) NOT NULL,
-		customer_id int(11) NOT NULL,
-		FOREIGN KEY  (customer_id) REFERENCES wp_ts_customers(customer_id) ON DELETE CASCADE,
-		PRIMARY KEY  (appt_id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ts_appointments</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
 <li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, appt_id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, created, 2, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, service_title, 3, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, staff, 4, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, start_appt, 5, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, appt_status, 6, , NO, varchar, 20, 80, , , , utf8mb4, utf8mb4_general_ci, varchar(20), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, customer_name, 7, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_appointments, customer_id, 8, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/timeslot/admin/init/timeslot-db.php(68): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tslot_create_db_tables(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#9 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_ts_appointments (
-		appt_id int(11) NOT NULL AUTO_INCREMENT,
-		created datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-		service_title varchar(55) NOT NULL,
-		staff varchar(55) NOT NULL,
-		start_appt datetime NOT NULL,
-		appt_status varchar(20) NOT NULL,
-		customer_name varchar(55) NOT NULL,
-		customer_id int(11) NOT NULL,
-		FOREIGN KEY  (customer_id) REFERENCES wp_ts_customers(customer_id) ON DELETE CASCADE,
-		PRIMARY KEY  (appt_id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_create_db_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_ts_staff_services (
-		staff_service_id int(11) NOT NULL AUTO_INCREMENT,
-		staff_id int(11) NOT NULL,
-		service_id int(11) NOT NULL,
-		service_title varchar(55) NOT NULL,
-		FOREIGN KEY  (staff_id) REFERENCES wp_ts_staff(staff_id) ON DELETE CASCADE,
-		FOREIGN KEY  (service_id) REFERENCES wp_ts_services(service_id) ON DELETE CASCADE,
-		PRIMARY KEY  (staff_service_id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ts_staff_services</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_staff_services, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_staff_services, staff_service_id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_staff_services, staff_id, 2, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_staff_services, service_id, 3, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_staff_services, service_title, 4, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/timeslot/admin/init/timeslot-db.php(114): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tslot_create_db_tables(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#9 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_ts_staff_services (
-		staff_service_id int(11) NOT NULL AUTO_INCREMENT,
-		staff_id int(11) NOT NULL,
-		service_id int(11) NOT NULL,
-		service_title varchar(55) NOT NULL,
-		FOREIGN KEY  (staff_id) REFERENCES wp_ts_staff(staff_id) ON DELETE CASCADE,
-		FOREIGN KEY  (service_id) REFERENCES wp_ts_services(service_id) ON DELETE CASCADE,
-		PRIMARY KEY  (staff_service_id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_create_db_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS wp_ts_payments (
-		payment_id int(11) NOT NULL AUTO_INCREMENT,
-		created datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-		customer_name varchar(55) NOT NULL,
-		source varchar(55) NOT NULL,
-		amount int(20) NOT NULL,
-		payment_status varchar(20) NOT NULL,
-		coupon varchar(55) NOT NULL,
-		capture_id varchar(50),
-		appt_id int(11),
-		customer_id int(11),
-		FOREIGN KEY  (appt_id) REFERENCES wp_ts_appointments(appt_id) ON DELETE SET NULL,
-		FOREIGN KEY  (customer_id) REFERENCES wp_ts_customers(customer_id) ON DELETE SET NULL,
-		PRIMARY KEY  (payment_id)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ts_payments</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, payment_id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, created, 2, CURRENT_TIMESTAMP, NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, customer_name, 3, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, source, 4, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, amount, 5, , NO, int, , , 10, 0, , , , int(20), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, payment_status, 6, , NO, varchar, 20, 80, , , , utf8mb4, utf8mb4_general_ci, varchar(20), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, coupon, 7, , NO, varchar, 55, 220, , , , utf8mb4, utf8mb4_general_ci, varchar(55), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, capture_id, 8, , YES, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, appt_id, 9, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_ts_payments, customer_id, 10, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/timeslot/admin/init/timeslot-db.php(134): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): tslot_create_db_tables(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#9 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS wp_ts_payments (
-		payment_id int(11) NOT NULL AUTO_INCREMENT,
-		created datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-		customer_name varchar(55) NOT NULL,
-		source varchar(55) NOT NULL,
-		amount int(20) NOT NULL,
-		payment_status varchar(20) NOT NULL,
-		coupon varchar(55) NOT NULL,
-		capture_id varchar(50),
-		appt_id int(11),
-		customer_id int(11),
-		FOREIGN KEY  (appt_id) REFERENCES wp_ts_appointments(appt_id) ON DELETE SET NULL,
-		FOREIGN KEY  (customer_id) REFERENCES wp_ts_customers(customer_id) ON DELETE SET NULL,
-		PRIMARY KEY  (payment_id)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_create_db_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot_db_version', '1.0.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'timeslot_db_version' , '1.0.5' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_posts, wpinc_update, 24, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_posts</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_posts</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_posts_67f8d89ebb030` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_author` INTEGER NOT NULL DEFAULT '0',
+  `post_date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_date_gmt` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content` TEXT COLLATE NOCASE NOT NULL,
+  `post_title` TEXT COLLATE NOCASE NOT NULL,
+  `post_excerpt` TEXT COLLATE NOCASE NOT NULL,
+  `post_status` TEXT COLLATE NOCASE NOT NULL DEFAULT 'publish',
+  `comment_status` TEXT COLLATE NOCASE NOT NULL DEFAULT 'open',
+  `ping_status` TEXT COLLATE NOCASE NOT NULL DEFAULT 'open',
+  `post_password` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `post_name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `to_ping` TEXT COLLATE NOCASE NOT NULL,
+  `pinged` TEXT COLLATE NOCASE NOT NULL,
+  `post_modified` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_modified_gmt` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content_filtered` TEXT COLLATE NOCASE NOT NULL,
+  `post_parent` INTEGER NOT NULL DEFAULT '0',
+  `guid` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `menu_order` INTEGER NOT NULL DEFAULT '0',
+  `post_type` TEXT COLLATE NOCASE NOT NULL DEFAULT 'post',
+  `post_mime_type` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `comment_count` INTEGER NOT NULL DEFAULT '0',
+  `wpinc_update` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_tmp_wp_posts_67f8d89ebb030` (`rowid`, `ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) SELECT `rowid`, `ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count` FROM `wp_posts` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _wp_sqlite_tmp_wp_posts_67f8d89ebb030.wpinc_update
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('timeslot_db_ver...', '1.0.5', '', 'auto')
-#5 /wordpress/wp-content/plugins/timeslot/admin/init/timeslot-db.php(151): update_option('timeslot_db_ver...', '1.0.5')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): tslot_create_db_tables(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#10 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot_db_version', '1.0.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_create_db_tables, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php(63): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): th_alter_table(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_templa...', false)
+#8 /internal/eval.php(20): activate_plugin('template-help-f...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL made by activate_plugin, do_action('activate_template-help-featured-templates/template-help_wordpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, th_alter_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:53:51 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:53:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:53:51 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:00 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:54:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:1:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'timeslot-email-tab' , 'a:1:{s:31:&quot;customer-email-approved-tinymce&quot;;s:936:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Thank you for booking with us&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[client_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [service_price]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_posts, `WPINC_UPDATE`, datetime</li>
+<li>Executing: ALTER TABLE wp_posts ADD `wpinc_update` text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('timeslot-email-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/timeslot/admin/pages/settings/email.php(286): update_option('timeslot-email-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): tslot_email_body_defaults(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#10 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:1:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_email_body_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php(63): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): th_alter_table(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_templa...', false)
+#6 /internal/eval.php(20): activate_plugin('template-help-f...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL made by activate_plugin, do_action('activate_template-help-featured-templates/template-help_wordpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, th_alter_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:54:01 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:54:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:01 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:10 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:54:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:2:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:31:\"customer-email-canceled-tinymce\";s:941:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'timeslot-email-tab' , 'a:2:{s:31:&quot;customer-email-approved-tinymce&quot;;s:936:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Thank you for booking with us&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[client_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [service_price]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;s:31:&quot;customer-email-canceled-tinymce&quot;;s:941:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Your appointment has been canceled&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[client_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [service_price]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_posts, `WPINC_UPDATE`, datetime</li>
+<li>Executing: ALTER TABLE wp_posts ADD `wpinc_update` text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('timeslot-email-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/timeslot/admin/pages/settings/email.php(286): update_option('timeslot-email-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): tslot_email_body_defaults(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#10 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:2:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:31:\"customer-email-canceled-tinymce\";s:941:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_email_body_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:3:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:31:\"customer-email-canceled-tinymce\";s:941:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:28:\"staff-email-approved-tinymce\";s:939:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been scheduled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[staff_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [client_name]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'timeslot-email-tab' , 'a:3:{s:31:&quot;customer-email-approved-tinymce&quot;;s:936:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Thank you for booking with us&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[client_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [service_price]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;s:31:&quot;customer-email-canceled-tinymce&quot;;s:941:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Your appointment has been canceled&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[client_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [service_price]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;s:28:&quot;staff-email-approved-tinymce&quot;;s:939:&quot;&lt;header style=&quot;padding: 5px 10px;&quot;&gt;
-				&lt;h1 style=&quot;text-align: center; font-size: 18px;&quot;&gt;Your appointment has been scheduled&lt;/h1&gt;
-				&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;&lt;/header&gt;
-				&lt;div style=&quot;padding: 20px;&quot;&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;[staff_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;margin-bottom: 0px; text-align: center;&quot;&gt;[appt_date] at [appt_time]&lt;/p&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;[service_name] for [client_name]&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;footer style=&quot;padding: 5px 10px;&quot;&gt;&lt;hr style=&quot;border: 1px solid #d9d9d9; background-color: #d9d9d9;&quot; /&gt;
-				&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Contact [company_name]&lt;/strong&gt;&lt;/p&gt;
-				&lt;p style=&quot;text-align: center; font-size: 1vw;&quot;&gt;&lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_phone]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_email]&lt;/span&gt; | &lt;span style=&quot;padding: 0 3px;&quot;&gt;[company_website]&lt;/span&gt;&lt;/p&gt;
-				&lt;/footer&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('timeslot-email-...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/timeslot/admin/pages/settings/email.php(286): update_option('timeslot-email-...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): tslot_email_body_defaults(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesl...', false)
-#10 /internal/eval.php(20): activate_plugin('timeslot/timesl...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:3:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:31:\"customer-email-canceled-tinymce\";s:941:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:28:\"staff-email-approved-tinymce\";s:939:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been scheduled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[staff_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [client_name]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timeslot/timeslot.php'), WP_Hook->do_action, WP_Hook->apply_filters, tslot_email_body_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:45:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('timeslot-email-tab', 'a:4:{s:31:\"customer-email-approved-tinymce\";s:936:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Thank you for booking with us</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:31:\"customer-email-canceled-tinymce\";s:941:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[client_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [service_price]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:28:\"staff-email-approved-tinymce\";s:939:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been scheduled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[staff_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_time]</p>
-				<p style=\"text-align: center;\">[service_name] for [client_name]</p>
-				</div>
-				<footer style=\"padding: 5px 10px;\"><hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" />
-				<p style=\"text-align: center;\"><strong style=\"font-size: 12px;\">Contact [company_name]</strong></p>
-				<p style=\"text-align: center; font-size: 1vw;\"><span style=\"padding: 0 3px;\">[company_phone]</span> | <span style=\"padding: 0 3px;\">[company_email]</span> | <span style=\"padding: 0 3px;\">[company_website]</span></p>
-				</footer>\";s:28:\"staff-email-canceled-tinymce\";s:938:\"<header style=\"padding: 5px 10px;\">
-				<h1 style=\"text-align: center; font-size: 18px;\">Your appointment has been canceled</h1>
-				<hr style=\"border: 1px solid #d9d9d9; background-color: #d9d9d9;\" /></header>
-				<div style=\"padding: 20px;\">
-				<p style=\"text-align: center;\"><strong>[staff_name]</strong></p>
-				<p style=\"margin-bottom: 0px; text-align: center;\">[appt_date] at [appt_ti
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php(63): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): th_alter_table(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_templa...', false)
+#6 /internal/eval.php(20): activate_plugin('template-help-f...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_posts ADD `wpinc_update` DATETIME NOT NULL made by activate_plugin, do_action('activate_template-help-featured-templates/template-help_wordpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, th_alter_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 08:54:11 UTC] PHP Warning:  Undefined array key "aff" in /wordpress/wp-content/plugins/template-help-featured-templates/template-help_wordpress.php on line 835
+[11-Apr-2025 08:54:11 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:54:11 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 08:55:19 UTC] PHP Fatal error:  Uncaught Error: Non-static method text_widgets::init() cannot be called statically in /wordpress/wp-content/plugins/text-widgets/text-widgets.php:93
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('text-widgets/te...')
+#2 /internal/eval.php(20): activate_plugin('text-widgets/te...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/text-widgets/text-widgets.php on line 93
+[11-Apr-2025 08:55:26 UTC] PHP Fatal error:  Uncaught Error: Non-static method text_widgets::init() cannot be called statically in /wordpress/wp-content/plugins/text-widgets/text-widgets.php:93
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('text-widgets/te...')
+#2 /internal/eval.php(20): activate_plugin('text-widgets/te...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/text-widgets/text-widgets.php on line 93
+[11-Apr-2025 08:55:34 UTC] PHP Fatal error:  Uncaught Error: Non-static method text_widgets::init() cannot be called statically in /wordpress/wp-content/plugins/text-widgets/text-widgets.php:93
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('text-widgets/te...')
+#2 /internal/eval.php(20): activate_plugin('text-widgets/te...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/text-widgets/text-widgets.php on line 93
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"text-widgets"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
