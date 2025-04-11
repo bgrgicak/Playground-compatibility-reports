@@ -2,605 +2,765 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 23:26:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_db_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_db_version' , '2.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_db_version', '2.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(63): update_option('dswr_db_version', '2.0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 06:56:56 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354613.743)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#10 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_db_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:57:24 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:24 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:24 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:24 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:24 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:24 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:57:25 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:25 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:25 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:25 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:25 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:25 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:57:33 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:33 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:33 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:33 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:33 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:33 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:57:35 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:35 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:35 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:35 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:35 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:35 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:57:43 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:43 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:43 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:43 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:43 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:43 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:57:44 UTC] PHP Deprecated:  Required parameter $seconds follows optional parameter $params in /wordpress/wp-content/plugins/default_library_puvox.php on line 567
+[11-Apr-2025 06:57:44 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $filepath in /wordpress/wp-content/plugins/default_library_puvox.php on line 1982
+[11-Apr-2025 06:57:44 UTC] PHP Deprecated:  Required parameter $filename follows optional parameter $allowed_directory in /wordpress/wp-content/plugins/default_library_puvox.php on line 2159
+[11-Apr-2025 06:57:44 UTC] PHP Deprecated:  Required parameter $termID follows optional parameter $TermName in /wordpress/wp-content/plugins/default_library_puvox.php on line 5325
+[11-Apr-2025 06:57:44 UTC] PHP Deprecated:  Required parameter $array follows optional parameter $table_name in /wordpress/wp-content/plugins/default_library_puvox.php on line 6012
+[11-Apr-2025 06:57:44 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/default_library_puvox.php on line 360
+[11-Apr-2025 06:59:29 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354767.14)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:59:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>night-mode-karen</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 06:59:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>night-mode-karen</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 07:01:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php:315
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('digicution-simp...')
+#2 /internal/eval.php(20): activate_plugin('digicution-simp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php on line 315
+[11-Apr-2025 07:01:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php:315
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('digicution-simp...')
+#2 /internal/eval.php(20): activate_plugin('digicution-simp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php on line 315
+[11-Apr-2025 07:01:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php:315
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('digicution-simp...')
+#2 /internal/eval.php(20): activate_plugin('digicution-simp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/digicution-simple-twitter-feed/digicution-twitter.php on line 315
+[11-Apr-2025 07:02:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php:12
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php on line 12
+[11-Apr-2025 07:02:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php:12
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php on line 12
+[11-Apr-2025 07:02:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php:12
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/discounts-marketpress/discounts-marketpress.php on line 12
+[11-Apr-2025 07:03:30 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 07:03:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_dmsguestbook ADD flag int(2) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_add_initial_list' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_add_initia...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(110): update_option('dswr_add_initia...', '1')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#11 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+			 | parameters: database_name_here, wp_dmsguestbook</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_version' , '0.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_version', '0.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(111): update_option('dswr_version', '0.2')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#11 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 23:26:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 23:26:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 23:26:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 23:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_db_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_dmsguestbook, flag, 13, , NO, int, , , 10, 0, , , , int(2), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_db_version' , '2.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_dmsguestbook_67f8bec28d9a0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `gravatar` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `date` INTEGER NOT NULL,
+  `ip` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `message` TEXT COLLATE NOCASE NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0',
+  `spam` INTEGER NOT NULL DEFAULT '0',
+  `additional` TEXT COLLATE NOCASE NOT NULL,
+  `flag` INTEGER NOT NULL,
+  `flag` INTEGER NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: flag
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_db_version', '2.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(63): update_option('dswr_db_version', '2.0')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(78): dswr_install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): dswr_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_db_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_update_db_check, dswr_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_add_initial_list' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_add_initia...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(110): update_option('dswr_add_initia...', '1')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#7 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(78): dswr_install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): dswr_update_db_check('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_update_db_check, dswr_install, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_version' , '0.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_version', '0.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(111): update_option('dswr_version', '0.2')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#7 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(78): dswr_install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): dswr_update_db_check('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_update_db_check, dswr_install, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_add_initial_list' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_add_initia...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(110): update_option('dswr_add_initia...', '1')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(81): dswr_add_initial_list()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): dswr_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_add_initial_list', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_update_db_check, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dswr_version' , '0.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('dswr_version', '0.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(111): update_option('dswr_version', '0.2')
-#6 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(81): dswr_add_initial_list()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): dswr_update_db_check('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dswr_version', '0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_update_db_check, dswr_add_initial_list, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_dswr_lists (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  name varchar(255) DEFAULT '',
-		  visible TINYINT(1) DEFAULT '1',
-		  created datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  PRIMARY KEY  id (id)
-		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(60): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#7 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#8 {main}</pre>
- for query CREATE TABLE wp_dswr_lists (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  name varchar(255) DEFAULT '',
-		  visible TINYINT(1) DEFAULT '1',
-		  created datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		  PRIMARY KEY  id (id)
-		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_dswr_words (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  word varchar(255) DEFAULT '',
-		  list bigint(20),
-		  PRIMARY KEY  id (id)
-		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(61): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#7 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#8 {main}</pre>
- for query CREATE TABLE wp_dswr_words (
-		  id bigint(20) NOT NULL AUTO_INCREMENT,
-		  word varchar(255) DEFAULT '',
-		  list bigint(20),
-		  PRIMARY KEY  id (id)
-		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'danish'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) FROM wp_dswr_lists WHERE name = :param0  | parameters: danish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(92): wpdb->get_var('SELECT COUNT(id...')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(104): dswr_list_name_exists('danish')
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3021): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#9 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#9 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
 #10 {main}</pre>
- for query SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'danish' made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_list_name_exists, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_dmsguestbook ADD flag int(2) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('danish', '2025-04-09 23:26:26')</p>
+<p>ALTER TABLE wp_dmsguestbook ADD gravatar varchar(32) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES (:param0 , :param1 ) | parameters: danish, 2025-04-09 23:26:26</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_dmsguestbook, gravatar, 13, , NO, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_dmsguestbook_67f8bec291820` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `gravatar` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `date` INTEGER NOT NULL,
+  `ip` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `message` TEXT COLLATE NOCASE NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0',
+  `spam` INTEGER NOT NULL DEFAULT '0',
+  `additional` TEXT COLLATE NOCASE NOT NULL,
+  `flag` INTEGER NOT NULL,
+  `gravatar` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
+SQLSTATE[HY000]: General error: 1 duplicate column name: gravatar
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_dswr_lists', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/inc/settings.php(225): wpdb->insert('wp_dswr_lists', Array)
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(105): dswr_add_new_list('danish')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#10 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#11 {main}</pre>
- for query INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('danish', '2025-04-09 23:26:26') made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_add_new_list, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3028): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#9 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD gravatar varchar(32) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_dswr_words (word,list) VALUES  ('af', '0'),  ('alle', '0'),  ('andet', '0'),  ('andre', '0'),  ('at', '0'),  ('begge', '0'),  ('da', '0'),  ('de', '0'),  ('den', '0'),  ('denne', '0'),  ('der', '0'),  ('deres', '0'),  ('det', '0'),  ('dette', '0'),  ('dig', '0'),  ('din', '0'),  ('dog', '0'),  ('du', '0'),  ('ej', '0'),  ('eller', '0'),  ('en', '0'),  ('end', '0'),  ('ene', '0'),  ('eneste', '0'),  ('enhver', '0'),  ('et', '0'),  ('fem', '0'),  ('fire', '0'),  ('flere', '0'),  ('fleste', '0'),  ('for', '0'),  ('fordi', '0'),  ('forrige', '0'),  ('fra', '0'),  ('fa', '0'),  ('for', '0'),  ('god', '0'),  ('han', '0'),  ('hans', '0'),  ('har', '0'),  ('hendes', '0'),  ('her', '0'),  ('hun', '0'),  ('hvad', '0'),  ('hvem', '0'),  ('hver', '0'),  ('hvilken', '0'),  ('hvis', '0'),  ('hvor', '0'),  ('hvordan', '0'),  ('hvorfor', '0'),  ('hvornår', '0'),  ('i', '0'),  ('ikke', '0'),  ('ind', '0'),  ('ingen', '0'),  ('intet', '0'),  ('jeg', '0'),  ('jeres', '0'),  ('kan', '0'),  ('kom', '0'),  ('kommer', '0'),  ('lav', '0'),  ('lidt', '0'),  ('lille', '0'),  ('man', '0'),  ('mand', '0'),  ('mangemed', '0'),  ('meget', '0'),  ('men', '0'),  ('mens', '0'),  ('mere', '0'),  ('mig', '0'),  ('ned', '0'),  ('ni', '0'),  ('nogen', '0'),  ('noget', '0'),  ('ny', '0'),  ('nyt', '0'),  ('nær', '0'),  ('naeste', '0'),  ('naesten', '0'),  ('og', '0'),  ('op', '0'),  ('otte', '0'),  ('over', '0'),  ('pa', '0'),  ('se', '0'),  ('seks', '0'),  ('ses', '0'),  ('som', '0'),  ('stor', '0'),  ('store', '0'),  ('syv', '0'),  ('ti', '0'),  ('til', '0'),  ('to', '0'),  ('tre', '0'),  ('ud', '0'),  ('var', '0')</p>
+<p>ALTER TABLE wp_dmsguestbook ADD guestbook int(2) DEFAULT '0' NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_dswr_words (word,list) VALUES  (:param0 , :param1 ),  (:param2 , :param3 ),  (:param4 , :param5 ),  (:param6 , :param7 ),  (:param8 , :param9 ),  (:param10 , :param11 ),  (:param12 , :param13 ),  (:param14 , :param15 ),  (:param16 , :param17 ),  (:param18 , :param19 ),  (:param20 , :param21 ),  (:param22 , :param23 ),  (:param24 , :param25 ),  (:param26 , :param27 ),  (:param28 , :param29 ),  (:param30 , :param31 ),  (:param32 , :param33 ),  (:param34 , :param35 ),  (:param36 , :param37 ),  (:param38 , :param39 ),  (:param40 , :param41 ),  (:param42 , :param43 ),  (:param44 , :param45 ),  (:param46 , :param47 ),  (:param48 , :param49 ),  (:param50 , :param51 ),  (:param52 , :param53 ),  (:param54 , :param55 ),  (:param56 , :param57 ),  (:param58 , :param59 ),  (:param60 , :param61 ),  (:param62 , :param63 ),  (:param64 , :param65 ),  (:param66 , :param67 ),  (:param68 , :param69 ),  (:param70 , :param71 ),  (:param72 , :param73 ),  (:param74 , :param75 ),  (:param76 , :param77 ),  (:param78 , :param79 ),  (:param80 , :param81 ),  (:param82 , :param83 ),  (:param84 , :param85 ),  (:param86 , :param87 ),  (:param88 , :param89 ),  (:param90 , :param91 ),  (:param92 , :param93 ),  (:param94 , :param95 ),  (:param96 , :param97 ),  (:param98 , :param99 ),  (:param100 , :param101 ),  (:param102 , :param103 ),  (:param104 , :param105 ),  (:param106 , :param107 ),  (:param108 , :param109 ),  (:param110 , :param111 ),  (:param112 , :param113 ),  (:param114 , :param115 ),  (:param116 , :param117 ),  (:param118 , :param119 ),  (:param120 , :param121 ),  (:param122 , :param123 ),  (:param124 , :param125 ),  (:param126 , :param127 ),  (:param128 , :param129 ),  (:param130 , :param131 ),  (:param132 , :param133 ),  (:param134 , :param135 ),  (:param136 , :param137 ),  (:param138 , :param139 ),  (:param140 , :param141 ),  (:param142 , :param143 ),  (:param144 , :param145 ),  (:param146 , :param147 ),  (:param148 , :param149 ),  (:param150 , :param151 ),  (:param152 , :param153 ),  (:param154 , :param155 ),  (:param156 , :param157 ),  (:param158 , :param159 ),  (:param160 , :param161 ),  (:param162 , :param163 ),  (:param164 , :param165 ),  (:param166 , :param167 ),  (:param168 , :param169 ),  (:param170 , :param171 ),  (:param172 , :param173 ),  (:param174 , :param175 ),  (:param176 , :param177 ),  (:param178 , :param179 ),  (:param180 , :param181 ),  (:param182 , :param183 ),  (:param184 , :param185 ),  (:param186 , :param187 ),  (:param188 , :param189 ),  (:param190 , :param191 ),  (:param192 , :param193 ),  (:param194 , :param195 ),  (:param196 , :param197 ),  (:param198 , :param199 ) | parameters: af, 0, alle, 0, andet, 0, andre, 0, at, 0, begge, 0, da, 0, de, 0, den, 0, denne, 0, der, 0, deres, 0, det, 0, dette, 0, dig, 0, din, 0, dog, 0, du, 0, ej, 0, eller, 0, en, 0, end, 0, ene, 0, eneste, 0, enhver, 0, et, 0, fem, 0, fire, 0, flere, 0, fleste, 0, for, 0, fordi, 0, forrige, 0, fra, 0, fa, 0, for, 0, god, 0, han, 0, hans, 0, har, 0, hendes, 0, her, 0, hun, 0, hvad, 0, hvem, 0, hver, 0, hvilken, 0, hvis, 0, hvor, 0, hvordan, 0, hvorfor, 0, hvornår, 0, i, 0, ikke, 0, ind, 0, ingen, 0, intet, 0, jeg, 0, jeres, 0, kan, 0, kom, 0, kommer, 0, lav, 0, lidt, 0, lille, 0, man, 0, mand, 0, mangemed, 0, meget, 0, men, 0, mens, 0, mere, 0, mig, 0, ned, 0, ni, 0, nogen, 0, noget, 0, ny, 0, nyt, 0, nær, 0, naeste, 0, naesten, 0, og, 0, op, 0, otte, 0, over, 0, pa, 0, se, 0, seks, 0, ses, 0, som, 0, stor, 0, store, 0, syv, 0, ti, 0, til, 0, to, 0, tre, 0, ud, 0, var, 0</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_dmsguestbook, guestbook, 13, 0, NO, int, , , 10, 0, , , , int(2), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_dmsguestbook_67f8bec293f30` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `gravatar` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `date` INTEGER NOT NULL,
+  `ip` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `message` TEXT COLLATE NOCASE NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0',
+  `spam` INTEGER NOT NULL DEFAULT '0',
+  `additional` TEXT COLLATE NOCASE NOT NULL,
+  `flag` INTEGER NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_words.
+SQLSTATE[HY000]: General error: 1 duplicate column name: guestbook
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3035): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#9 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD guestbook int(2) DEFAULT '0' NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_dmsguestbook ADD additional varchar(50) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_dmsguestbook, additional, 13, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_dmsguestbook_67f8bec297db0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `gravatar` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `date` INTEGER NOT NULL,
+  `ip` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `message` TEXT COLLATE NOCASE NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0',
+  `spam` INTEGER NOT NULL DEFAULT '0',
+  `additional` TEXT COLLATE NOCASE NOT NULL,
+  `flag` INTEGER NOT NULL,
+  `additional` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: additional
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3042): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#9 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD additional varchar(50) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_dmsguestbook ADD spam int(1) DEFAULT '0' NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_dmsguestbook</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_dmsguestbook, spam, 13, 0, NO, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_dmsguestbook</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_dmsguestbook_67f8bec29c018` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `gravatar` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `url` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `date` INTEGER NOT NULL,
+  `ip` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `message` TEXT COLLATE NOCASE NOT NULL,
+  `guestbook` INTEGER NOT NULL DEFAULT '0',
+  `spam` INTEGER NOT NULL DEFAULT '0',
+  `additional` TEXT COLLATE NOCASE NOT NULL,
+  `flag` INTEGER NOT NULL,
+  `spam` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: spam
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3049): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#9 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD spam int(1) DEFAULT '0' NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function each() in /wordpress/wp-content/plugins/dmsguestbook/admin.php:3062
+Stack trace:
+#0 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3012): initialize_option()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#5 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/dmsguestbook/admin.php on line 3062
+[11-Apr-2025 07:03:40 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM wp_dmsguestbook LIKE 'flag'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(158): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(107): dswr_add_words_array(Array, 0)
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3020): wpdb->get_var('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#8 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#8 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
 #9 {main}</pre>
- for query INSERT INTO wp_dswr_words (word,list) VALUES  ('af', '0'),  ('alle', '0'),  ('andet', '0'),  ('andre', '0'),  ('at', '0'),  ('begge', '0'),  ('da', '0'),  ('de', '0'),  ('den', '0'),  ('denne', '0'),  ('der', '0'),  ('deres', '0'),  ('det', '0'),  ('dette', '0'),  ('dig', '0'),  ('din', '0'),  ('dog', '0'),  ('du', '0'),  ('ej', '0'),  ('eller', '0'),  ('en', '0'),  ('end', '0'),  ('ene', '0'),  ('eneste', '0'),  ('enhver', '0'),  ('et', '0'),  ('fem', '0'),  ('fire', '0'),  ('flere', '0'),  ('fleste', '0'),  ('for', '0'),  ('fordi', '0'),  ('forrige', '0'),  ('fra', '0'),  ('fa', '0'),  ('for', '0'),  ('god', '0'),  ('han', '0'),  ('hans', '0'),  ('har', '0'),  ('hendes', '0'),  ('her', '0'),  ('hun', '0'),  ('hvad', '0'),  ('hvem', '0'),  ('hver', '0'),  ('hvilken', '0'),  ('hvis', '0'),  ('hvor', '0'),  ('hvordan', '0'),  ('hvorfor', '0'),  ('hvornår', '0'),  ('i', '0'),  ('ikke', '0'),  ('ind', '0'),  ('ingen', '0'),  ('intet', '0'),  ('jeg', '0'),  ('jeres', '0'),  ('kan', '0'),  ('kom', '0'),  ('kommer', '0'),  ('lav', '0'),  ('lidt', '0'),  ('lille', '0'),  ('man', '0'),  ('mand', '0'),  ('mangemed', '0'),  ('meget', '0'),  ('men', '0'),  ('mens', '0'),  ('mere', '0'),  ('mig', '0'),  ('ned', '0'),  ('ni', '0'),  ('nogen', '0'),  ('noget', '0'),  ('ny', '0'),  ('nyt', '0'),  ('nær', '0'),  ('naeste', '0'),  ('naesten', '0'),  ('og', '0'),  ('op', '0'),  ('otte', '0'),  ('over', '0'),  ('pa', '0'),  ('se', '0'),  ('seks', '0'),  ('ses', '0'),  ('som', '0'),  ('stor', '0'),  ('store', '0'),  ('syv', '0'),  ('ti', '0'),  ('til', '0'),  ('to', '0'),  ('tre', '0'),  ('ud', '0'),  ('var', '0') made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_add_words_array, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW FIELDS FROM wp_dmsguestbook LIKE 'flag' made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'dutch'</p>
+<p>ALTER TABLE wp_dmsguestbook ADD flag int(2) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) FROM wp_dswr_lists WHERE name = :param0  | parameters: dutch</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_dmsguestbook, FLAG, int(2)</li>
+<li>Executing: ALTER TABLE wp_dmsguestbook ADD flag integer NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: flag.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(92): wpdb->get_var('SELECT COUNT(id...')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(104): dswr_list_name_exists('dutch')
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#9 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#10 {main}</pre>
- for query SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'dutch' made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_list_name_exists, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3021): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#7 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD flag int(2) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('dutch', '2025-04-09 23:26:26')</p>
+<p>SHOW FIELDS FROM wp_dmsguestbook LIKE 'gravatar'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES (:param0 , :param1 ) | parameters: dutch, 2025-04-09 23:26:26</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_dswr_lists', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/inc/settings.php(225): wpdb->insert('wp_dswr_lists', Array)
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(105): dswr_add_new_list('dutch')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#10 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#11 {main}</pre>
- for query INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('dutch', '2025-04-09 23:26:26') made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_add_new_list, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_dswr_words (word,list) VALUES  ('aan', '0'),  ('af', '0'),  ('al', '0'),  ('als', '0'),  ('bij', '0'),  ('dan', '0'),  ('dat', '0'),  ('die', '0'),  ('dit', '0'),  ('een', '0'),  ('en', '0'),  ('er', '0'),  ('had', '0'),  ('heb', '0'),  ('hem', '0'),  ('het', '0'),  ('hij', '0'),  ('hoe', '0'),  ('hun', '0'),  ('ik', '0'),  ('in', '0'),  ('is', '0'),  ('je', '0'),  ('kan', '0'),  ('me', '0'),  ('men', '0'),  ('met', '0'),  ('mij', '0'),  ('nog', '0'),  ('nu', '0'),  ('of', '0'),  ('ons', '0'),  ('ook', '0'),  ('te', '0'),  ('tot', '0'),  ('uit', '0'),  ('van', '0'),  ('was', '0'),  ('wat', '0'),  ('we', '0'),  ('wel', '0'),  ('wij', '0'),  ('zal', '0'),  ('ze', '0'),  ('zei', '0'),  ('zij', '0'),  ('zo', '0'),  ('zou', '0')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_dswr_words (word,list) VALUES  (:param0 , :param1 ),  (:param2 , :param3 ),  (:param4 , :param5 ),  (:param6 , :param7 ),  (:param8 , :param9 ),  (:param10 , :param11 ),  (:param12 , :param13 ),  (:param14 , :param15 ),  (:param16 , :param17 ),  (:param18 , :param19 ),  (:param20 , :param21 ),  (:param22 , :param23 ),  (:param24 , :param25 ),  (:param26 , :param27 ),  (:param28 , :param29 ),  (:param30 , :param31 ),  (:param32 , :param33 ),  (:param34 , :param35 ),  (:param36 , :param37 ),  (:param38 , :param39 ),  (:param40 , :param41 ),  (:param42 , :param43 ),  (:param44 , :param45 ),  (:param46 , :param47 ),  (:param48 , :param49 ),  (:param50 , :param51 ),  (:param52 , :param53 ),  (:param54 , :param55 ),  (:param56 , :param57 ),  (:param58 , :param59 ),  (:param60 , :param61 ),  (:param62 , :param63 ),  (:param64 , :param65 ),  (:param66 , :param67 ),  (:param68 , :param69 ),  (:param70 , :param71 ),  (:param72 , :param73 ),  (:param74 , :param75 ),  (:param76 , :param77 ),  (:param78 , :param79 ),  (:param80 , :param81 ),  (:param82 , :param83 ),  (:param84 , :param85 ),  (:param86 , :param87 ),  (:param88 , :param89 ),  (:param90 , :param91 ),  (:param92 , :param93 ),  (:param94 , :param95 ) | parameters: aan, 0, af, 0, al, 0, als, 0, bij, 0, dan, 0, dat, 0, die, 0, dit, 0, een, 0, en, 0, er, 0, had, 0, heb, 0, hem, 0, het, 0, hij, 0, hoe, 0, hun, 0, ik, 0, in, 0, is, 0, je, 0, kan, 0, me, 0, men, 0, met, 0, mij, 0, nog, 0, nu, 0, of, 0, ons, 0, ook, 0, te, 0, tot, 0, uit, 0, van, 0, was, 0, wat, 0, we, 0, wel, 0, wij, 0, zal, 0, ze, 0, zei, 0, zij, 0, zo, 0, zou, 0</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_words.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(158): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(107): dswr_add_words_array(Array, 0)
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3027): wpdb->get_var('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#8 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#8 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
 #9 {main}</pre>
- for query INSERT INTO wp_dswr_words (word,list) VALUES  ('aan', '0'),  ('af', '0'),  ('al', '0'),  ('als', '0'),  ('bij', '0'),  ('dan', '0'),  ('dat', '0'),  ('die', '0'),  ('dit', '0'),  ('een', '0'),  ('en', '0'),  ('er', '0'),  ('had', '0'),  ('heb', '0'),  ('hem', '0'),  ('het', '0'),  ('hij', '0'),  ('hoe', '0'),  ('hun', '0'),  ('ik', '0'),  ('in', '0'),  ('is', '0'),  ('je', '0'),  ('kan', '0'),  ('me', '0'),  ('men', '0'),  ('met', '0'),  ('mij', '0'),  ('nog', '0'),  ('nu', '0'),  ('of', '0'),  ('ons', '0'),  ('ook', '0'),  ('te', '0'),  ('tot', '0'),  ('uit', '0'),  ('van', '0'),  ('was', '0'),  ('wat', '0'),  ('we', '0'),  ('wel', '0'),  ('wij', '0'),  ('zal', '0'),  ('ze', '0'),  ('zei', '0'),  ('zij', '0'),  ('zo', '0'),  ('zou', '0') made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_add_words_array, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW FIELDS FROM wp_dmsguestbook LIKE 'gravatar' made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'english'</p>
+<p>ALTER TABLE wp_dmsguestbook ADD gravatar varchar(32) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) FROM wp_dswr_lists WHERE name = :param0  | parameters: english</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_dmsguestbook, GRAVATAR, varchar(32)</li>
+<li>Executing: ALTER TABLE wp_dmsguestbook ADD gravatar text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: gravatar.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(92): wpdb->get_var('SELECT COUNT(id...')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(104): dswr_list_name_exists('english')
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#9 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#10 {main}</pre>
- for query SELECT COUNT(id) FROM wp_dswr_lists WHERE name = 'english' made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_list_name_exists, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3028): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#7 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD gravatar varchar(32) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('english', '2025-04-09 23:26:26')</p>
+<p>SHOW FIELDS FROM wp_dmsguestbook LIKE 'guestbook'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES (:param0 , :param1 ) | parameters: english, 2025-04-09 23:26:26</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_dswr_lists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_dswr_lists', Array, NULL, 'INSERT')
-#3 /wordpress/wp-content/plugins/da-stop-word-removal/inc/settings.php(225): wpdb->insert('wp_dswr_lists', Array)
-#4 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(105): dswr_add_new_list('english')
-#5 /wordpress/wp-content/plugins/da-stop-word-removal/da-stop-words-removal.php(66): dswr_add_initial_list()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): dswr_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_da-sto...', false)
-#10 /internal/eval.php(20): activate_plugin('da-stop-word-re...')
-#11 {main}</pre>
- for query INSERT INTO `wp_dswr_lists` (`name`, `created`) VALUES ('english', '2025-04-09 23:26:26') made by activate_plugin, do_action('activate_da-stop-word-removal/da-stop-words-removal.php'), WP_Hook->do_action, WP_Hook->apply_filters, dswr_install, dswr_add_initial_list, dswr_add_new_list, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 23:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3034): wpdb->get_var('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#8 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#9 {main}</pre>
+ for query SHOW FIELDS FROM wp_dmsguestbook LIKE 'guestbook' made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_dswr_words (word,list) VALUES  ('a\'s', '0'),  ('able', '0'),  ('about', '0'),  ('above', '0'),  ('according', '0'),  ('accordingly', '0'),  ('across', '0'),  ('actually', '0'),  ('after', '0'),  ('afterwards', '0'),  ('again', '0'),  ('against', '0'),  ('ain\'t', '0'),  ('all', '0'),  ('allow', '0'),  ('allows', '0'),  ('almost', '0'),  ('alone', '0'),  ('along', '0'),  ('already', '0'),  ('also', '0'),  ('although', '0'),  ('always', '0'),  ('am', '0'),  ('among', '0'),  ('amongst', '0'),  ('an', '0'),  ('and', '0'),  ('another', '0'),  ('any', '0'),  ('anybody', '0'),  ('anyhow', '0'),  ('anyone', '0'),  ('anything', '0'),  ('anyway', '0'),  ('anyways', '0'),  ('anywhere', '0'),  ('apart', '0'),  ('appear', '0'),  ('appreciate', '0'),  ('appropriate', '0'),  ('are', '0'),  ('aren\'t', '0'),  ('around', '0'),  ('as', '0'),  ('aside', '0'),  ('ask', '0'),  ('asking', '0'),  ('associated', '0'),  ('at', '0'),  ('available', '0'),  ('away', '0'),  ('awfully', '0'),  ('be', '0'),  ('became', '0'),  ('because', '0'),  ('become', '0'),  ('becomes', '0'),  ('becoming', '0'),  ('been', '0'),  ('before', '0'),  ('beforehand', '0'),  ('behind', '0'),  ('being', '0'),  ('believe', '0'),  ('below', '0'),  ('beside', '0'),  ('besides', '0'),  ('best', '0'),  ('better', '0'),  ('between', '0'),  ('beyond', '0'),  ('both', '0'),  ('brief', '0'),  ('but', '0'),  ('by', '0'),  ('c\'mon', '0'),  ('c\'s', '0'),  ('came', '0'),  ('can', '0'),  ('can\'t', '0'),  ('cannot', '0'),  ('cant', '0'),  ('cause', '0'),  ('causes', '0'),  ('certain', '0'),  ('certainly', '0'),  ('changes', '0'),  ('clearly', '0'),  ('co', '0'),  ('com', '0'),  ('come', '0'),  ('comes', '0'),  ('concerning', '0'),  ('consequently', '0'),  ('consider', '0'),  ('considering', '0'),  ('contain', '0'),  ('containing', '0'),  ('contains', '0'),  ('corresponding', '0'),  ('could', '0'),  ('couldn\'t', '0'),  ('course', '0'),  ('currently', '0'),  ('definitely', '0'),  ('described', '0'),  ('despite', '0'),  ('did', '0'),  ('didn\'t', '0'),  ('different', '0'),  ('do', '0'),  ('does', '0'),  ('doesn\'t', '0'),  ('doing', '0'),  ('don\'t', '0'),  ('done', '0'),  ('down', '0'),  ('downwards', '0'),  ('during', '0'),  ('each', '0'),  ('edu', '0'),  ('eg', '0'),  ('eight', '0'),  ('either', '0'),  ('else', '0'),  ('elsewhere', '0'),  ('enough', '0'),  ('entirely', '0'),  ('especially', '0'),  ('et', '0'),  ('etc', '0'),  ('even', '0'),  ('ever', '0'),  ('every', '0'),  ('everybody', '0'),  ('everyone', '0'),  ('everything', '0'),  ('everywhere', '0'),  ('ex', '0'),  ('exactly', '0'),  ('example', '0'),  ('except', '0'),  ('far', '0'),  ('few', '0'),  ('fifth', '0'),  ('first', '0'),  ('five', '0'),  ('followed', '0'),  ('following', '0'),  ('follows', '0'),  ('for', '0'),  ('former', '0'),  ('formerly', '0'),  ('forth', '0'),  ('four', '0'),  ('from', '0'),  ('further', '0'),  ('furthermore', '0'),  ('get', '0'),  ('gets', '0'),  ('getting', '0'),  ('given', '0'),  ('gives', '0'),  ('go', '0'),  ('goes', '0'),  ('going', '0'),  ('gone', '0'),  ('got', '0'),  ('gotten', '0'),  ('greetings', '0'),  ('had', '0'),  ('hadn\'t', '0'),  ('happens', '0'),  ('hardly', '0'),  ('has', '0'),  ('hasn\'t', '0'),  ('have', '0'),  ('haven\'t', '0'),  ('having', '0'),  ('he', '0'),  ('he\'s', '0'),  ('hello', '0'),  ('help', '0'),  ('hence', '0'),  ('her', '0'),  ('here', '0'),  ('here\'s', '0'),  ('hereafter', '0'),  ('hereby', '0'),  ('herein', '0'),  ('hereupon', '0'),  ('hers', '0'),  ('herself', '0'),  ('hi', '0'),  ('him', '0'),  ('himself', '0'),  ('his', '0'),  ('hither', '0'),  ('hopefully', '0'),  ('how', '0'),  ('howbeit', '0'),  ('however', '0'),  ('i\'d', '0'),  ('i\'ll', '0'),  ('i\'m', '0'),  ('i\'ve', '0'),  ('ie', '0'),  ('if', '0'),  ('ignored', '0'),  ('immediate', '0'),  ('in', '0'),  ('inasmuch', '0'),  ('inc', '0'),  ('indeed', '0'),  ('indicate', '0'),  ('indicated', '0'),  ('indicates', '0'),  ('inner', '0'),  ('insofar', '0'),  ('instead', '0'),  ('into', '0'),  ('inward', '0'),  ('is', '0'),  ('isn\'t', '0'),  ('it', '0'),  ('it\'d', '0'),  ('it\'ll', '0'),  ('it\'s', '0'),  ('its', '0'),  ('itself', '0'),  ('just', '0'),  ('keep', '0'),  ('keeps', '0'),  ('kept', '0'),  ('know', '0'),  ('knows', '0'),  ('known', '0'),  ('last', '0'),  ('lately', '0'),  ('later', '0'),  ('latter', '0'),  ('latterly', '0'),  ('leas
+<p>ALTER TABLE wp_dmsguestbook ADD guestbook int(2) DEFAULT '0' NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_dmsguestbook, GUESTBOOK, int(2)</li>
+<li>Executing: ALTER TABLE wp_dmsguestbook ADD guestbook integer DEFAULT '0' NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: guestbook.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3035): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#7 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD guestbook int(2) DEFAULT '0' NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM wp_dmsguestbook LIKE 'additional'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3041): wpdb->get_var('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#8 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#9 {main}</pre>
+ for query SHOW FIELDS FROM wp_dmsguestbook LIKE 'additional' made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_dmsguestbook ADD additional varchar(50) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_dmsguestbook, ADDITIONAL, varchar(50)</li>
+<li>Executing: ALTER TABLE wp_dmsguestbook ADD additional text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: additional.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3042): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#7 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD additional varchar(50) NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM wp_dmsguestbook LIKE 'spam'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3048): wpdb->get_var('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#8 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#9 {main}</pre>
+ for query SHOW FIELDS FROM wp_dmsguestbook LIKE 'spam' made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_dmsguestbook ADD spam int(1) DEFAULT '0' NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_dmsguestbook, SPAM, int(1)</li>
+<li>Executing: ALTER TABLE wp_dmsguestbook ADD spam integer DEFAULT '0' NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: spam.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3049): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3011): update_db_fields()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#7 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_dmsguestbook ADD spam int(1) DEFAULT '0' NOT NULL made by activate_plugin, do_action('activate_dmsguestbook/admin.php'), WP_Hook->do_action, WP_Hook->apply_filters, dmsguestbook_install, update_db_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 07:03:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function each() in /wordpress/wp-content/plugins/dmsguestbook/admin.php:3062
+Stack trace:
+#0 /wordpress/wp-content/plugins/dmsguestbook/admin.php(3012): initialize_option()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): dmsguestbook_install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_dmsgue...', false)
+#5 /internal/eval.php(20): activate_plugin('dmsguestbook/ad...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/dmsguestbook/admin.php on line 3062
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"dmsguestbook"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
