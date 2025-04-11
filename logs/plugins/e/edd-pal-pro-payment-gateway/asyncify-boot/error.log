@@ -2,212 +2,597 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:54:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:54:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:54:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:54:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:54:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:54:10 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:54:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:54:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('equalweb_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'equalweb_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/equalweb/equalweb.php(73): add_option('equalweb_activa...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): EqualWeb_Plugin->activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_equalw...', false)
-#9 /internal/eval.php(20): activate_plugin('equalweb/equalw...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('equalweb_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_equalweb/equalweb.php'), WP_Hook->do_action, WP_Hook->apply_filters, EqualWeb_Plugin->activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:54:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:54:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:54:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:54:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecwd_old_events', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ecwd_old_events' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(236): add_option('ecwd_old_events', 0)
-#5 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(375): ECWD_Admin::activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ECWD_Admin::global_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#10 /internal/eval.php(20): activate_plugin('event-calendar-...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecwd_old_events', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-calendar-wd/ecwd.php'), WP_Hook->do_action, WP_Hook->apply_filters, ECWD_Admin::global_activate, ECWD_Admin::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 19:55:08', '2025-04-09 19:55:08', '', '', 'Calendar', '', 'publish', 'ecwd_calendar', 'closed', 'closed', '', 'calendar', '', '', '2025-04-09 19:55:08', '2025-04-09 19:55:08', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 19:55:08' , '2025-04-09 19:55:08' , '' , '' , 'Calendar' , '' , 'publish' , 'ecwd_calendar' , 'closed' , 'closed' , '' , 'calendar' , '' , '' , '2025-04-09 19:55:08' , '2025-04-09 19:55:08' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(404): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(284): ECWD_Admin::update_to_95(Array)
-#8 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(375): ECWD_Admin::activate()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): ECWD_Admin::global_activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#13 /internal/eval.php(20): activate_plugin('event-calendar-...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 19:55:08', '2025-04-09 19:55:08', '', '', 'Calendar', '', 'publish', 'ecwd_calendar', 'closed', 'closed', '', 'calendar', '', '', '2025-04-09 19:55:08', '2025-04-09 19:55:08', 0, 0, '', '') made by activate_plugin, do_action('activate_event-calendar-wd/ecwd.php'), WP_Hook->do_action, WP_Hook->apply_filters, ECWD_Admin::global_activate, ECWD_Admin::activate, ECWD_Admin::update_to_95, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:55:08 UTC] PHP Fatal error:  Uncaught Error: Attempt to assign property "post_content" on null in /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php:407
+Error: [11-Apr-2025 09:29:31 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(284): ECWD_Admin::update_to_95(Array)
-#1 /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php(375): ECWD_Admin::activate()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): ECWD_Admin::global_activate(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744363768.656)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:30:03 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744363800.876)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:30:38 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744363835.109)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 09:30:45 UTC] PHP Notice:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php on line 1652
+[11-Apr-2025 09:30:55 UTC] PHP Notice:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php on line 1652
+[11-Apr-2025 09:33:03 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $boardId in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-userrole.php on line 6
+[11-Apr-2025 09:33:03 UTC] PHP Deprecated:  Required parameter $section follows optional parameter $board_id in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-controller.php on line 36
+[11-Apr-2025 09:33:03 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/e-bbsmate/include/htmlpurifier/HTMLPurifier.standalone.php on line 3908
+[11-Apr-2025 09:33:11 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $boardId in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-userrole.php on line 6
+[11-Apr-2025 09:33:11 UTC] PHP Deprecated:  Required parameter $section follows optional parameter $board_id in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-controller.php on line 36
+[11-Apr-2025 09:33:11 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/e-bbsmate/include/htmlpurifier/HTMLPurifier.standalone.php on line 3908
+[11-Apr-2025 09:33:19 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $boardId in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-userrole.php on line 6
+[11-Apr-2025 09:33:19 UTC] PHP Deprecated:  Required parameter $section follows optional parameter $board_id in /wordpress/wp-content/plugins/e-bbsmate/include/pavo-bbs-controller.php on line 36
+[11-Apr-2025 09:33:19 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/e-bbsmate/include/htmlpurifier/HTMLPurifier.standalone.php on line 3908
+[11-Apr-2025 09:33:32 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 47
+[11-Apr-2025 09:33:32 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 57
+[11-Apr-2025 09:33:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ease-framework/ease_framework.php:60
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ease-framework/...')
+#2 /internal/eval.php(20): activate_plugin('ease-framework/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 60
+[11-Apr-2025 09:33:42 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 47
+[11-Apr-2025 09:33:42 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 57
+[11-Apr-2025 09:33:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ease-framework/ease_framework.php:60
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ease-framework/...')
+#2 /internal/eval.php(20): activate_plugin('ease-framework/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 60
+[11-Apr-2025 09:33:53 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 47
+[11-Apr-2025 09:33:53 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 57
+[11-Apr-2025 09:33:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ease-framework/ease_framework.php:60
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ease-framework/...')
+#2 /internal/eval.php(20): activate_plugin('ease-framework/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ease-framework/ease_framework.php on line 60
+[11-Apr-2025 09:35:04 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:35:04 UTC] PHP Warning:  Undefined array key "sermonmeta_noncename" in /wordpress/wp-content/plugins/easy-sermon/backend.php on line 86
+[11-Apr-2025 09:35:14 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:35:14 UTC] PHP Warning:  Undefined array key "sermonmeta_noncename" in /wordpress/wp-content/plugins/easy-sermon/backend.php on line 86
+[11-Apr-2025 09:35:23 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 09:35:23 UTC] PHP Warning:  Undefined array key "sermonmeta_noncename" in /wordpress/wp-content/plugins/easy-sermon/backend.php on line 86
+[11-Apr-2025 09:36:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, ID, 1, , NO, bigint, , , 19, 0, , , , bigint(20), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, MapID, 2, , YES, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, CreatedByUserID, 3, , YES, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, LatLong, 4, , YES, varchar, 128, 512, , , , utf8mb4, utf8mb4_general_ci, varchar(128), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, Title, 5, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, PinImageURL, 6, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, Settings, 7, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, DetailsHTML, 8, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, DetailsText, 9, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, PinImageSmall, 10, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, PinImageMedium, 11, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, PinImageLarge, 12, , YES, varchar, 512, 2048, , , , utf8mb4, utf8mb4_general_ci, varchar(512), , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_easy2mapimg_map_points, ID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, 0, database_name_here, PRIMARY, 1, ID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, database_name_here, wp_easy2mapimg_map_points</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_easy2mapimg_map_points, ID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, 0, database_name_here, ID_UNIQUE, 1, ID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, database_name_here, wp_easy2mapimg_map_points</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_easy2mapimg_map_points, MapID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, 1, database_name_here, wp_easy2mapimg_map_points_MapID, 1, MapID, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_easy2mapimg_map_points, database_name_here, wp_easy2mapimg_map_points</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+FOREIGN KEY and CHECK constraints are not supported yet.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE `w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE `w...')
+#3 /wordpress/wp-content/plugins/easy2map-photos/includes/Easy2MapImg.php(123): WP_SQLite_DB->query('CREATE TABLE `w...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Easy2MapImg::create_admin_tables('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Easy2MapImg::create_admin_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 09:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, ID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, MapID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, CreatedByUserID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, LatLong, varchar(128)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, Title, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageURL, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, Settings, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, DetailsHTML, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, DetailsText, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageSmall, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageMedium, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageLarge, varchar(512)</li>
+<li>Executing: CREATE TABLE &quot;wp_easy2mapimg_map_points&quot; (
+&quot;ID&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;MapID&quot; integer DEFAULT NULL,
+&quot;CreatedByUserID&quot; integer DEFAULT NULL,
+&quot;LatLong&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;Title&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageURL&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;Settings&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;DetailsHTML&quot; text COLLATE NOCASE,
+&quot;DetailsText&quot; text COLLATE NOCASE,
+&quot;PinImageSmall&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageMedium&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageLarge&quot; text DEFAULT NULL COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE UNIQUE  INDEX  &quot;wp_easy2mapimg_map_points__ID_UNIQUE&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;ID&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__ID_UNIQUE, UNIQUE</li>
+<li>Executing: CREATE  INDEX  &quot;wp_easy2mapimg_map_points__wp_easy2mapimg_map_points_MapID&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;MapID&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__wp_easy2mapimg_map_points_MapID, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_easy2mapimg_map_points__&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/easy2map-photos/includes/Easy2MapImg.php(123): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Easy2MapImg::create_admin_tables('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
-#6 /internal/eval.php(20): activate_plugin('event-calendar-...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/event-calendar-wd/ecwd_admin_class.php on line 407
-[09-Apr-2025 20:55:19 Europe/London] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/event-calendar-wd/includes/ecwd-cpt-class.php on line 438
-[09-Apr-2025 20:55:30 Europe/London] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/event-calendar-wd/includes/ecwd-cpt-class.php on line 438
-[09-Apr-2025 19:55:40 UTC] PHP Notice:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php on line 1652
-[09-Apr-2025 19:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Easy2MapImg::create_admin_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 09:36:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecos_multiple_setting', 'a:119:{s:32:\"ecos_radio_default_setting_field\";s:2:\"no\";s:43:\"ecos_radio_delete_data_uninstallation_field\";s:2:\"no\";s:28:\"ecos_radio_shop_choice_field\";s:7:\"oceanwp\";s:50:\"ecos_woocommerce_error_border_top_color_text_field\";s:7:\"#000000\";s:58:\"ecos_woocommerce_error_opacity_border_top_color_text_field\";s:2:\"15\";s:39:\"ecos_woocommerce_error_border_top_color\";s:16:\"rgba(0,0,0,0.15)\";s:50:\"ecos_woocommerce_error_background_color_text_field\";s:7:\"#B81C23\";s:58:\"ecos_woocommerce_error_opacity_background_color_text_field\";s:2:\"80\";s:39:\"ecos_woocommerce_error_background_color\";s:19:\"rgba(184,28,35,0.8)\";s:44:\"ecos_woocommerce_error_text_color_text_field\";s:7:\"#FFFFFF\";s:49:\"ecos_remove_shop_sorting_drop_list_checkbox_field\";b:0;s:47:\"ecos_remove_shop_sorting_results_checkbox_field\";b:0;s:50:\"ecos_activate_products_per_row_page_checkbox_field\";b:0;s:39:\"ecos_select_field_number_of_column_shop\";s:1:\"4\";s:45:\"ecos_text_field_number_products_per_page_shop\";s:2:\"12\";s:43:\"ecos_show_product_stock_shop_checkbox_field\";b:0;s:48:\"ecos_show_prefix_variable_product_checkbox_field\";b:0;s:47:\"ecos_customizing_notify_customer_checkbox_field\";b:0;s:31:\"ecos_notify_customer_text_field\";s:22:\"Available on backorder\";s:40:\"ecos_show_sale_percentage_checkbox_field\";b:0;s:39:\"ecos_message_before_shop_textarea_field\";s:0:\"\";s:43:\"ecos_message_style_before_shop_select_field\";s:16:\"woocommerce-info\";s:29:\"ecos_disable_shop_radio_field\";s:2:\"no\";s:44:\"ecos_catalog_mode_administrators_radio_field\";s:2:\"no\";s:38:\"ecos_hide_shipping_methods_radio_field\";s:2:\"no\";s:39:\"ecos_title_click_and_collect_text_field\";s:15:\"Click & Collect\";s:44:\"ecos_enable_click_and_collect_checkbox_field\";b:0;s:47:\"ecos_enable_hide_payment_methods_checkbox_field\";b:0;s:21:\"ecos_radio_meta_field\";s:3:\"yes\";s:41:\"ecos_select_field_single_variable_product\";s:15:\"single-products\";s:40:\"ecos_radio_number_of_products_sold_field\";s:3:\"yes\";s:49:\"ecos_text_threshold_number_of_products_sold_field\";s:2:\"10\";s:34:\"ecos_radio_promotion_message_field\";s:3:\"yes\";s:33:\"ecos_text_promotion_message_field\";s:34:\"Enjoy while there is still stock !\";s:29:\"ecos_radio_credit_cards_field\";s:3:\"yes\";s:34:\"ecos_radio_description_block_field\";s:2:\"no\";s:46:\"ecos_radio_additionnal_information_block_field\";s:2:\"no\";s:30:\"ecos_radio_reviews_block_field\";s:2:\"no\";s:36:\"ecos_select_field_first_tabs_product\";s:11:\"description\";s:37:\"ecos_select_field_second_tabs_product\";s:11:\"information\";s:35:\"ecos_select_field_last_tabs_product\";s:7:\"reviews\";s:46:\"ecos_text_field_label_product_tabs_description\";s:0:\"\";s:42:\"ecos_text_field_label_product_tabs_reviews\";s:0:\"\";s:57:\"ecos_text_field_label_product_tabs_additional_information\";s:0:\"\";s:25:\"ecos_radio_sku_meta_field\";s:2:\"no\";s:31:\"ecos_radio_categorie_meta_field\";s:2:\"no\";s:49:\"ecos_activate_default_price_suffix_checkbox_field\";b:0;s:42:\"ecos_label_default_price_suffix_text_field\";s:9:\"Incl. VAT\";s:41:\"ecos_hide_related_products_checkbox_field\";b:0;s:47:\"ecos_edit_related_products_title_checkbox_field\";b:0;s:38:\"ecos_related_products_title_text_field\";s:16:\"Related products\";s:49:\"ecos_related_products_per_row_page_checkbox_field\";b:0;s:42:\"ecos_related_products_per_row_select_field\";s:1:\"4\";s:41:\"ecos_related_products_per_page_text_field\";s:1:\"4\";s:45:\"ecos_hide_recommended_products_checkbox_field\";b:0;s:51:\"ecos_edit_recommended_products_title_checkbox_field\";b:0;s:42:\"ecos_recommended_products_title_text_field\";s:20:\"You may also like…\";s:53:\"ecos_recommended_products_per_row_page_checkbox_field\";b:0;s:46:\"ecos_recommended_products_per_row_select_field\";s:1:\"4\";s:45:\"ecos_recommended_products_per_page_text_field\";s:1:\"4\";s:41:\"ecos_remove_category_count_checkbox_field\";b:0;s:46:\"ecos_remove_title_category_page_checkbox_field\";b:0;s:43:\"ecos_auto_update_cart_amount_checkbox_field\";b:0;s:39:\"ecos_remove_coupons_form_checkbox_field\";b:0;s:49:\"ecos_activate_changing_coupon_text_checkbox_field\";b:0;s:39:\"ecos_woocommerce_coupon_text_text_field\";s:11:\"client code\";s:39:\"ecos_back_to_shop_button_checkbox_field\";b:0;s:40:\"ecos_button_text_back_to_shop_text_field\";s:12:\"BACK TO SHOP\";s:46:\"ecos_position_back_to_shop_button_select_field\";s:32:\"after-proceed-to-checkout-button\";s:41:\"ecos_width_back_to_shop_button_text_field\";s:3:\"100\";s:30:\"ecos_radio_free_shipping_field\";s:2:\"no\";s:29:\"ecos_text_free_shipping_field\";s:28:\"Free Delivery From 120€ !\";s:36:\"ecos_radio_products_categories_field\";s:3:\"yes\";s:44:\"ecos_radio_normal_and_discounted_price_field\";s:3:\"yes\";s:47:\"ecos_activate_product_stock_cart_checkbox_field\";b:0;s:38:\"ecos_radio_hide_delivery_methods_field\";s:25:\"hide_except_free_shipping\";s:37:\"ecos_radio_field_change_shipping_text\";s:2:\"no\";s:36:\"ecos_text_field_change_shipping_text\";s:15:\"click & collect\";s:37:\"ecos_radio_cart_add_weight_cart_field\";s:2:\"no\";s:31:\"ecos_radio_fixed_fee_cart_field\";s:2:\"no\";s:33:\"ecos_text_label_fixed_costs_field\";s:10:\"Fixed fees\";s:32:\"ecos_text_fixed_fee_amount_field\";s:4:\"2.50\";s:25:\"ecos_text_vat_class_field\";s:8:\"VAT 5.5%\";s:39:\"ecos_radio_percentage_amount_cart_field\";s:2:\"no\";s:36:\"ecos_text_label_percentage_fee_field\";s:14:\"percentage fee\";s:32:\"ecos_text_percentage_value_field\";s:3:\"1.5\";s:36:\"ecos_text_percentage_vat_class_field\";s:8:\"VAT 5.5%\";s:42:\"ecos_enable_checkout_fee_for_gateway_field\";s:2:\"no\";s:33:\"ecos_payment_gateway_select_field\";s:6:\"paypal\";s:52:\"ecos_activate_hide_cross_selling_cart_checkbox_field\";b:0;s:36:\"ecos_move_cross_sells_checkbox_field\";b:0;s:44:\"ecos_edit_cross_selling_title_checkbox_field\";b:0;s:35:\"ecos_cross_selling_title_text_field\";s:25:\"You may be interested …\";s:46:\"ecos_cross_selling_per_row_page_checkbox_field\";b:0;s:39:\"ecos_cross_selling_per_row_select_field\";s:1:\"4\";s:38:\"ecos_cross_selling_per_page_text_field\";s:1:\"4\";s:49:\"ecos_activate_minimum_order_amount_checkbox_field\";b:0;s:36:\"ecos_minimum_order_amount_text_field\";s:3:\"120\";s:41:\"ecos_radio_checkout_add_weight_cart_field\";s:2:\"no\";s:31:\"ecos_select_field_company_field\";s:8:\"optional\";s:31:\"ecos_select_field_country_field\";s:8:\"required\";s:31:\"ecos_select_field_address_field\";s:8:\"required\";s:42:\"ecos_select_field_additional_address_field\";s:8:\"optional\";s:32:\"ecos_select_field_postcode_field\";s:8:\"required\";s:28:\"ecos_select_field_city_field\";s:8:\"required\";s:29:\"ecos_select_field_phone_field\";s:8:\"required\";s:29:\"ecos_select_field_email_field\";s:8:\"required\";s:39:\"ecos_select_field_shipping_address_form\";s:8:\"optional\";s:38:\"ecos_select_field_order_comments_field\";s:8:\"optional\";s:33:\"ecos_text_field_label_order_notes\";s:0:\"\";s:39:\"ecos_text_field_placeholder_order_notes\";s:0:\"\";s:43:\"ecos_textarea_field_message_before_checkout\";s:0:\"\";s:42:\"ecos_textarea_field_message_after_checkout\";s:0:\"\";s:43:\"ecos_edit_place_order_button_checkbox_field\";b:0;s:39:\"ecos_text_place_order_button_text_field\";s:11:\"PLACE ORDER\";s:47:\"ecos_activate_customize_headings_checkbox_field\";b:0;s:38:\"ecos_billing_detail_heading_text_field\";s:15:\"Billing details\";s:32:\"ecos_shipping_heading_text_field\";s:28:\"Ship to a different address?\";s:34:\"ecos_your_order_heading_text_field\";s:10:\"Your Order\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ecos_multiple_setting' , 'a:119:{s:32:&quot;ecos_radio_default_setting_field&quot;;s:2:&quot;no&quot;;s:43:&quot;ecos_radio_delete_data_uninstallation_field&quot;;s:2:&quot;no&quot;;s:28:&quot;ecos_radio_shop_choice_field&quot;;s:7:&quot;oceanwp&quot;;s:50:&quot;ecos_woocommerce_error_border_top_color_text_field&quot;;s:7:&quot;#000000&quot;;s:58:&quot;ecos_woocommerce_error_opacity_border_top_color_text_field&quot;;s:2:&quot;15&quot;;s:39:&quot;ecos_woocommerce_error_border_top_color&quot;;s:16:&quot;rgba(0,0,0,0.15)&quot;;s:50:&quot;ecos_woocommerce_error_background_color_text_field&quot;;s:7:&quot;#B81C23&quot;;s:58:&quot;ecos_woocommerce_error_opacity_background_color_text_field&quot;;s:2:&quot;80&quot;;s:39:&quot;ecos_woocommerce_error_background_color&quot;;s:19:&quot;rgba(184,28,35,0.8)&quot;;s:44:&quot;ecos_woocommerce_error_text_color_text_field&quot;;s:7:&quot;#FFFFFF&quot;;s:49:&quot;ecos_remove_shop_sorting_drop_list_checkbox_field&quot;;b:0;s:47:&quot;ecos_remove_shop_sorting_results_checkbox_field&quot;;b:0;s:50:&quot;ecos_activate_products_per_row_page_checkbox_field&quot;;b:0;s:39:&quot;ecos_select_field_number_of_column_shop&quot;;s:1:&quot;4&quot;;s:45:&quot;ecos_text_field_number_products_per_page_shop&quot;;s:2:&quot;12&quot;;s:43:&quot;ecos_show_product_stock_shop_checkbox_field&quot;;b:0;s:48:&quot;ecos_show_prefix_variable_product_checkbox_field&quot;;b:0;s:47:&quot;ecos_customizing_notify_customer_checkbox_field&quot;;b:0;s:31:&quot;ecos_notify_customer_text_field&quot;;s:22:&quot;Available on backorder&quot;;s:40:&quot;ecos_show_sale_percentage_checkbox_field&quot;;b:0;s:39:&quot;ecos_message_before_shop_textarea_field&quot;;s:0:&quot;&quot;;s:43:&quot;ecos_message_style_before_shop_select_field&quot;;s:16:&quot;woocommerce-info&quot;;s:29:&quot;ecos_disable_shop_radio_field&quot;;s:2:&quot;no&quot;;s:44:&quot;ecos_catalog_mode_administrators_radio_field&quot;;s:2:&quot;no&quot;;s:38:&quot;ecos_hide_shipping_methods_radio_field&quot;;s:2:&quot;no&quot;;s:39:&quot;ecos_title_click_and_collect_text_field&quot;;s:15:&quot;Click &amp; Collect&quot;;s:44:&quot;ecos_enable_click_and_collect_checkbox_field&quot;;b:0;s:47:&quot;ecos_enable_hide_payment_methods_checkbox_field&quot;;b:0;s:21:&quot;ecos_radio_meta_field&quot;;s:3:&quot;yes&quot;;s:41:&quot;ecos_select_field_single_variable_product&quot;;s:15:&quot;single-products&quot;;s:40:&quot;ecos_radio_number_of_products_sold_field&quot;;s:3:&quot;yes&quot;;s:49:&quot;ecos_text_threshold_number_of_products_sold_field&quot;;s:2:&quot;10&quot;;s:34:&quot;ecos_radio_promotion_message_field&quot;;s:3:&quot;yes&quot;;s:33:&quot;ecos_text_promotion_message_field&quot;;s:34:&quot;Enjoy while there is still stock !&quot;;s:29:&quot;ecos_radio_credit_cards_field&quot;;s:3:&quot;yes&quot;;s:34:&quot;ecos_radio_description_block_field&quot;;s:2:&quot;no&quot;;s:46:&quot;ecos_radio_additionnal_information_block_field&quot;;s:2:&quot;no&quot;;s:30:&quot;ecos_radio_reviews_block_field&quot;;s:2:&quot;no&quot;;s:36:&quot;ecos_select_field_first_tabs_product&quot;;s:11:&quot;description&quot;;s:37:&quot;ecos_select_field_second_tabs_product&quot;;s:11:&quot;information&quot;;s:35:&quot;ecos_select_field_last_tabs_product&quot;;s:7:&quot;reviews&quot;;s:46:&quot;ecos_text_field_label_product_tabs_description&quot;;s:0:&quot;&quot;;s:42:&quot;ecos_text_field_label_product_tabs_reviews&quot;;s:0:&quot;&quot;;s:57:&quot;ecos_text_field_label_product_tabs_additional_information&quot;;s:0:&quot;&quot;;s:25:&quot;ecos_radio_sku_meta_field&quot;;s:2:&quot;no&quot;;s:31:&quot;ecos_radio_categorie_meta_field&quot;;s:2:&quot;no&quot;;s:49:&quot;ecos_activate_default_price_suffix_checkbox_field&quot;;b:0;s:42:&quot;ecos_label_default_price_suffix_text_field&quot;;s:9:&quot;Incl. VAT&quot;;s:41:&quot;ecos_hide_related_products_checkbox_field&quot;;b:0;s:47:&quot;ecos_edit_related_products_title_checkbox_field&quot;;b:0;s:38:&quot;ecos_related_products_title_text_field&quot;;s:16:&quot;Related products&quot;;s:49:&quot;ecos_related_products_per_row_page_checkbox_field&quot;;b:0;s:42:&quot;ecos_related_products_per_row_select_field&quot;;s:1:&quot;4&quot;;s:41:&quot;ecos_related_products_per_page_text_field&quot;;s:1:&quot;4&quot;;s:45:&quot;ecos_hide_recommended_products_checkbox_field&quot;;b:0;s:51:&quot;ecos_edit_recommended_products_title_checkbox_field&quot;;b:0;s:42:&quot;ecos_recommended_products_title_text_field&quot;;s:20:&quot;You may also like…&quot;;s:53:&quot;ecos_recommended_products_per_row_page_checkbox_field&quot;;b:0;s:46:&quot;ecos_recommended_products_per_row_select_field&quot;;s:1:&quot;4&quot;;s:45:&quot;ecos_recommended_products_per_page_text_field&quot;;s:1:&quot;4&quot;;s:41:&quot;ecos_remove_category_count_checkbox_field&quot;;b:0;s:46:&quot;ecos_remove_title_category_page_checkbox_field&quot;;b:0;s:43:&quot;ecos_auto_update_cart_amount_checkbox_field&quot;;b:0;s:39:&quot;ecos_remove_coupons_form_checkbox_field&quot;;b:0;s:49:&quot;ecos_activate_changing_coupon_text_checkbox_field&quot;;b:0;s:39:&quot;ecos_woocommerce_coupon_text_text_field&quot;;s:11:&quot;client code&quot;;s:39:&quot;ecos_back_to_shop_button_checkbox_field&quot;;b:0;s:40:&quot;ecos_button_text_back_to_shop_text_field&quot;;s:12:&quot;BACK TO SHOP&quot;;s:46:&quot;ecos_position_back_to_shop_button_select_field&quot;;s:32:&quot;after-proceed-to-checkout-button&quot;;s:41:&quot;ecos_width_back_to_shop_button_text_field&quot;;s:3:&quot;100&quot;;s:30:&quot;ecos_radio_free_shipping_field&quot;;s:2:&quot;no&quot;;s:29:&quot;ecos_text_free_shipping_field&quot;;s:28:&quot;Free Delivery From 120€ !&quot;;s:36:&quot;ecos_radio_products_categories_field&quot;;s:3:&quot;yes&quot;;s:44:&quot;ecos_radio_normal_and_discounted_price_field&quot;;s:3:&quot;yes&quot;;s:47:&quot;ecos_activate_product_stock_cart_checkbox_field&quot;;b:0;s:38:&quot;ecos_radio_hide_delivery_methods_field&quot;;s:25:&quot;hide_except_free_shipping&quot;;s:37:&quot;ecos_radio_field_change_shipping_text&quot;;s:2:&quot;no&quot;;s:36:&quot;ecos_text_field_change_shipping_text&quot;;s:15:&quot;click &amp; collect&quot;;s:37:&quot;ecos_radio_cart_add_weight_cart_field&quot;;s:2:&quot;no&quot;;s:31:&quot;ecos_radio_fixed_fee_cart_field&quot;;s:2:&quot;no&quot;;s:33:&quot;ecos_text_label_fixed_costs_field&quot;;s:10:&quot;Fixed fees&quot;;s:32:&quot;ecos_text_fixed_fee_amount_field&quot;;s:4:&quot;2.50&quot;;s:25:&quot;ecos_text_vat_class_field&quot;;s:8:&quot;VAT 5.5%&quot;;s:39:&quot;ecos_radio_percentage_amount_cart_field&quot;;s:2:&quot;no&quot;;s:36:&quot;ecos_text_label_percentage_fee_field&quot;;s:14:&quot;percentage fee&quot;;s:32:&quot;ecos_text_percentage_value_field&quot;;s:3:&quot;1.5&quot;;s:36:&quot;ecos_text_percentage_vat_class_field&quot;;s:8:&quot;VAT 5.5%&quot;;s:42:&quot;ecos_enable_checkout_fee_for_gateway_field&quot;;s:2:&quot;no&quot;;s:33:&quot;ecos_payment_gateway_select_field&quot;;s:6:&quot;paypal&quot;;s:52:&quot;ecos_activate_hide_cross_selling_cart_checkbox_field&quot;;b:0;s:36:&quot;ecos_move_cross_sells_checkbox_field&quot;;b:0;s:44:&quot;ecos_edit_cross_selling_title_checkbox_field&quot;;b:0;s:35:&quot;ecos_cross_selling_title_text_field&quot;;s:25:&quot;You may be interested …&quot;;s:46:&quot;ecos_cross_selling_per_row_page_checkbox_field&quot;;b:0;s:39:&quot;ecos_cross_selling_per_row_select_field&quot;;s:1:&quot;4&quot;;s:38:&quot;ecos_cross_selling_per_page_text_field&quot;;s:1:&quot;4&quot;;s:49:&quot;ecos_activate_minimum_order_amount_checkbox_field&quot;;b:0;s:36:&quot;ecos_minimum_order_amount_text_field&quot;;s:3:&quot;120&quot;;s:41:&quot;ecos_radio_checkout_add_weight_cart_field&quot;;s:2:&quot;no&quot;;s:31:&quot;ecos_select_field_company_field&quot;;s:8:&quot;optional&quot;;s:31:&quot;ecos_select_field_country_field&quot;;s:8:&quot;required&quot;;s:31:&quot;ecos_select_field_address_field&quot;;s:8:&quot;required&quot;;s:42:&quot;ecos_select_field_additional_address_field&quot;;s:8:&quot;optional&quot;;s:32:&quot;ecos_select_field_postcode_field&quot;;s:8:&quot;required&quot;;s:28:&quot;ecos_select_field_city_field&quot;;s:8:&quot;required&quot;;s:29:&quot;ecos_select_field_phone_field&quot;;s:8:&quot;required&quot;;s:29:&quot;ecos_select_field_email_field&quot;;s:8:&quot;required&quot;;s:39:&quot;ecos_select_field_shipping_address_form&quot;;s:8:&quot;optional&quot;;s:38:&quot;ecos_select_field_order_comments_field&quot;;s:8:&quot;optional&quot;;s:33:&quot;ecos_text_field_label_order_notes&quot;;s:0:&quot;&quot;;s:39:&quot;ecos_text_field_placeholder_order_notes&quot;;s:0:&quot;&quot;;s:43:&quot;ecos_textarea_field_message_before_checkout&quot;;s:0:&quot;&quot;;s:42:&quot;ecos_textarea_field_message_after_checkout&quot;;s:0:&quot;&quot;;s:43:&quot;ecos_edit_place_order_button_checkbox_field&quot;;b:0;s:39:&quot;ecos_text_place_order_button_text_field&quot;;s:11:&quot;PLACE ORDER&quot;;s:47:&quot;ecos_activate_customize_headings_checkbox_field&quot;;b:0;s:38:&quot;ecos_billing_detail_heading_text_field&quot;;s:15:&quot;Billing details&quot;;s:32:&quot;ecos_shipping_heading_text_field&quot;;s:28:&quot;Ship to a different address?&quot;;s:34:&quot;ecos_your_order_heading_text_field&quot;;s:10:&quot;Your Order&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, ID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, MapID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, CreatedByUserID, bigint(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, LatLong, varchar(128)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, Title, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageURL, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, Settings, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, DetailsHTML, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, DetailsText, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageSmall, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageMedium, varchar(512)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, PinImageLarge, varchar(512)</li>
+<li>Executing: CREATE TABLE &quot;wp_easy2mapimg_map_points&quot; (
+&quot;ID&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;MapID&quot; integer DEFAULT NULL,
+&quot;CreatedByUserID&quot; integer DEFAULT NULL,
+&quot;LatLong&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;Title&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageURL&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;Settings&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;DetailsHTML&quot; text COLLATE NOCASE,
+&quot;DetailsText&quot; text COLLATE NOCASE,
+&quot;PinImageSmall&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageMedium&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;PinImageLarge&quot; text DEFAULT NULL COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE UNIQUE  INDEX  &quot;wp_easy2mapimg_map_points__ID_UNIQUE&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;ID&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__ID_UNIQUE, UNIQUE</li>
+<li>Executing: CREATE  INDEX  &quot;wp_easy2mapimg_map_points__wp_easy2mapimg_map_points_MapID&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;MapID&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__wp_easy2mapimg_map_points_MapID, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_easy2mapimg_map_points__&quot; ON &quot;wp_easy2mapimg_map_points&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_easy2mapimg_map_points, wp_easy2mapimg_map_points__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php(1064): add_option('ecos_multiple_s...', Array, '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ecos_easy_custom_woocommerce_oceanwp_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#9 /internal/eval.php(20): activate_plugin('easy-custom-oce...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecos_multiple_setting', 'a:119:{s:32:\"ecos_radio_default_setting_field\";s:2:\"no\";s:43:\"ecos_radio_delete_data_uninstallation_field\";s:2:\"no\";s:28:\"ecos_radio_shop_choice_field\";s:7:\"oceanwp\";s:50:\"ecos_woocommerce_error_border_top_color_text_field\";s:7:\"#000000\";s:58:\"ecos_woocommerce_error_opacity_border_top_color_text_field\";s:2:\"15\";s:39:\"ecos_woocommerce_error_border_top_color\";s:16:\"rgba(0,0,0,0.15)\";s:50:\"ecos_woocommerce_error_background_color_text_field\";s:7:\"#B81C23\";s:58:\"ecos_woocommerce_error_opacity_background_color_text_field\";s:2:\"80\";s:39:\"ecos_woocommerce_error_background_color\";s:19:\"rgba(184,28,35,0.8)\";s:44:\"ecos_woocommerce_error_text_color_text_field\";s:7:\"#FFFFFF\";s:49:\"ecos_remove_shop_sorting_drop_list_checkbox_field\";b:0;s:47:\"ecos_remove_shop_sorting_results_checkbox_field\";b:0;s:50:\"ecos_activate_products_per_row_page_checkbox_field\";b:0;s:39:\"ecos_select_field_number_of_column_shop\";s:1:\"4\";s:45:\"ecos_text_field_number_products_per_page_shop\";s:2:\"12\";s:43:\"ecos_show_product_stock_shop_checkbox_field\";b:0;s:48:\"ecos_show_prefix_variable_product_checkbox_field\";b:0;s:47:\"ecos_customizing_notify_customer_checkbox_field\";b:0;s:31:\"ecos_notify_customer_text_field\";s:22:\"Available on backorder\";s:40:\"ecos_show_sale_percentage_checkbox_field\";b:0;s:39:\"ecos_message_before_shop_textarea_field\";s:0:\"\";s:43:\"ecos_message_style_before_shop_select_field\";s:16:\"woocommerce-info\";s:29:\"ecos_disable_shop_radio_field\";s:2:\"no\";s:44:\"ecos_catalog_mode_administrators_radio_field\";s:2:\"no\";s:38:\"ecos_hide_shipping_methods_radio_field\";s:2:\"no\";s:39:\"ecos_title_click_and_collect_text_field\";s:15:\"Click & Collect\";s:44:\"ecos_enable_click_and_collect_checkbox_field\";b:0;s:47:\"ecos_enable_hide_payment_methods_checkbox_field\";b:0;s:21:\"ecos_radio_meta_field\";s:3:\"yes\";s:41:\"ecos_select_field_single_variable_product\";s:15:\"single-products\";s:40:\"ecos_radio_number_of_products_sold_field\";s:3:\"yes\";s:49:\"ecos_text_threshold_number_of_products_sold_field\";s:2:\"10\";s:34:\"ecos_radio_promotion_message_field\";s:3:\"yes\";s:33:\"ecos_text_promotion_message_field\";s:34:\"Enjoy while there is still stock !\";s:29:\"ecos_radio_credit_cards_field\";s:3:\"yes\";s:34:\"ecos_radio_description_block_field\";s:2:\"no\";s:46:\"ecos_radio_additionnal_information_block_field\";s:2:\"no\";s:30:\"ecos_radio_reviews_block_field\";s:2:\"no\";s:36:\"ecos_select_field_first_tabs_product\";s:11:\"description\";s:37:\"ecos_select_field_second_tabs_product\";s:11:\"information\";s:35:\"ecos_select_field_last_tabs_product\";s:7:\"reviews\";s:46:\"ecos_text_field_label_product_tabs_description\";s:0:\"\";s:42:\"ecos_text_field_label_product_tabs_reviews\";s:0:\"\";s:57:\"ecos_text_field_label_product_tabs_additional_information\";s:0:\"\";s:25:\"ecos_radio_sku_meta_field\";s:2:\"no\";s:31:\"ecos_radio_categorie_meta_field\";s:2:\"no\";s:49:\"ecos_activate_default_price_suffix_checkbox_field\";b:0;s:42:\"ecos_label_default_price_suffix_text_field\";s:9:\"Incl. VAT\";s:41:\"ecos_hide_related_products_checkbox_field\";b:0;s:47:\"ecos_edit_related_products_title_checkbox_field\";b:0;s:38:\"ecos_related_products_title_text_field\";s:16:\"Related products\";s:49:\"ecos_related_products_per_row_page_checkbox_field\";b:0;s:42:\"ecos_related_products_per_row_select_field\";s:1:\"4\";s:41:\"ecos_related_products_per_page_text_field\";s:1:\"4\";s:45:\"ecos_hide_recommended_products_checkbox_field\";b:0;s:51:\"ecos_edit_recommended_products_title_checkbox_field\";b:0;s:42:\"ecos_recommended_products_title_text_field\";s:20:\"You may also like…\";s:53:\"ecos_recommended_products_per_row_page_checkbox_field\";b:0;s:46:\"ecos_recommended_products_per_row_select_field\";s:1:\"4\";s:45:\"ecos_recommended_products_per_page_text_field\";s:1:\"4\";s:41:\"ecos_remove_category_count_checkbox_field\";b:0;s:46:\"ecos_remove_title_category_page_checkbox_field\";b:0;s:43:\"ecos_auto_update_cart_amount_checkbox_field\";b:0;s:39:\"ecos_remove_coupons_form_checkbox_field\";b:0;s:49:\"ecos_activate_changing_coupon_text_checkbox_field\";b:0;s:39:\"ecos_woocommerce_coupon_text_text_field\";s:11:\"client code\";s:39:\"ecos_back_to_shop_button_checkbox_field\";b:0;s:40:\"ecos_button_text_back_to_shop_text_field\";s:12:\"BACK TO SHOP\";s:46:\"ecos_position_back_to_shop_button_select_field\";s:32:\"after-proceed-to-checkout-button\";s:41:\"ecos_width_back_to_shop_button_text_field\";s:3:\"100\";s:30:\"ecos_radio_free_shipping_field\";s:2:\"no\";s:29:\"ecos_text_free_shipping_field\";s:28:\"Free Delivery From 120€ !\";s:36:\"ecos_radio_products_categories_field\";s:3:\"yes\";s:44:\"ecos_radio_normal_and_discounted_price_field\";s:3:\"yes\";s:47:\"ecos_activate_product_stock_cart_checkbox_field\";b:0;s:38:\"ecos_radio_hide_delivery_methods_field\";s:25:\"hide_except_free_shipping\";s:37:\"ecos_radio_field_change_shipping_text\";s:2:\"no\";s:36:\"ecos_text_field_change_shipping_text\";s:15:\"click & collect\";s:37:\"ecos_radio_cart_add_weight_cart_field\";s:2:\"no\";s:31:\"ecos_radio_fixed_fee_cart_field\";s:2:\"no\";s:33:\"ecos_text_label_fixed_costs_field\";s:10:\"Fixed fees\";s:32:\"ecos_text_fixed_fee_amount_field\";s:4:\"2.50\";s:25:\"ecos_text_vat_class_field\";s:8:\"VAT 5.5%\";s:39:\"ecos_radio_percentage_amount_cart_field\";s:2:\"no\";s:36:\"ecos_text_label_percentage_fee_field\";s:14:\"percentage fee\";s:32:\"ecos_text_percentage_value_field\";s:3:\"1.5\";s:36:\"ecos_text_percentage_vat_class_field\";s:8:\"VAT 5.5%\";s:42:\"ecos_enable_checkout_fee_for_gateway_field\";s:2:\"no\";s:33:\"ecos_payment_gateway_select_field\";s:6:\"paypal\";s:52:\"ecos_activate_hide_cross_selling_cart_checkbox_field\";b:0;s:36:\"ecos_move_cross_sells_checkbox_field\";b:0;s:44:\"ecos_edit_cross_selling_title_checkbox_field\";b:0;s:35:\"ecos_cross_selling_title_text_field\";s:25:\"You may be interested …\";s:46:\"ecos_cross_selling_per_row_page_checkbox_field\";b:0;s:39:\"ecos_cross_selling_per_row_select_field\";s:1:\"4\";s:38:\"ecos_cross_selling_per_page_text_field\";s:1:\"4\";s:49:\"ecos_activate_minimum_order_amount_checkbox_field\";b:0;s:36:\"ecos_minimum_order_amount_text_field\";s:3:\"120\";s:41:\"ecos_radio_checkout_add_weight_cart_field\";s:2:\"no\";s:31:\"ecos_select_field_company_field\";s:8:\"optional\";s:31:\"ecos_select_field_country_field\";s:8:\"required\";s:31:\"ecos_select_field_address_field\";s:8:\"required\";s:42:\"ecos_select_field_additional_address_field\";s:8:\"optional\";s:32:\"ecos_select_field_postcode_field\";s:8:\"required\";s:28:\"ecos_select_field_city_field\";s:8:\"required\";s:29:\"ecos_select_field_phone_field\";s:8:\"required\";s:29:\"ecos_select_field_email_field\";s:8:\"required\";s:39:\"ecos_select_field_shipping_address_form\";s:8:\"optional\";s:38:\"ecos_select_field_order_comments_field\";s:8:\"optional\";s:33:\"ecos_text_field_label_order_notes\";s:0:\"\";s:39:\"ecos_text_field_placeholder_order_notes\";s:0:\"\";s:43:\"ecos_textarea_field_message_before_checkout\";s:0:\"\";s:42:\"ecos_textarea_field_message_after_checkout\";s:0:\"\";s:43:\"ecos_edit_place_order_button_checkbox_field\";b:0;s:39:\"ecos_text_place_order_button_text_field\";s:11:\"PLACE ORDER\";s:47:\"ecos_activate_customize_headings_checkbox_field\";b:0;s:38:\"ecos_billing_detail_heading_text_field\";s:15:\"Billing details\";s:32:\"ecos_shipping_heading_text_field\";s:28:\"Ship to a different address?\";s:34:\"ecos_your_order_heading_text_field\";s:10:\"Your Order\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php'), WP_Hook->do_action, WP_Hook->apply_filters, ecos_easy_custom_woocommerce_oceanwp_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecos_multiple_setting_oceanwp_shop', 'a:61:{s:45:\"ecos_oceanwp_shop_default_setting_radio_field\";s:2:\"no\";s:48:\"ecos_oceanwp_shop_title_font_weight_select_field\";s:3:\"500\";s:45:\"ecos_oceanwp_shop_title_margin_top_text_field\";s:2:\"20\";s:40:\"ecos_oceanwp_shop_title_color_text_field\";s:7:\"#CC4A0A\";s:55:\"ecos_oceanwp_shop_woocommerce_info_font_size_text_field\";s:2:\"18\";s:51:\"ecos_oceanwp_shop_woocommerce_info_color_text_field\";s:7:\"#FFFFFF\";s:56:\"ecos_oceanwp_shop_woocommerce_info_background_text_field\";s:7:\"#6D908E\";s:58:\"ecos_oceanwp_shop_woocommerce_message_font_size_text_field\";s:2:\"18\";s:54:\"ecos_oceanwp_shop_woocommerce_message_color_text_field\";s:7:\"#666666\";s:59:\"ecos_oceanwp_shop_woocommerce_message_background_text_field\";s:7:\"#EAE672\";s:47:\"ecos_oceanwp_shop_product_title_font_text_field\";s:5:\"kalam\";s:52:\"ecos_oceanwp_shop_product_title_font_size_text_field\";s:2:\"24\";s:59:\"ecos_oceanwp_shop_product_title_font_size_mobile_text_field\";s:2:\"20\";s:56:\"ecos_oceanwp_shop_product_title_font_weight_select_field\";s:3:\"600\";s:56:\"ecos_oceanwp_shop_product_title_margin_bottom_text_field\";s:3:\"-10\";s:52:\"ecos_oceanwp_shop_text_out_of_stock_badge_text_field\";s:12:\"out of stock\";s:50:\"ecos_oceanwp_shop_stock_badge_font_size_text_field\";s:2:\"20\";s:54:\"ecos_oceanwp_shop_stock_badge_font_weight_select_field\";s:3:\"600\";s:54:\"ecos_oceanwp_shop_promotion_badge_font_size_text_field\";s:2:\"20\";s:58:\"ecos_oceanwp_shop_promotion_badge_font_weight_select_field\";s:3:\"600\";s:50:\"ecos_oceanwp_shop_breadcrumb_margin_top_text_field\";s:2:\"10\";s:54:\"ecos_oceanwp_shop_product_sheet_padding_top_text_field\";s:2:\"20\";s:50:\"ecos_oceanwp_shop_border_product_sheet_radio_field\";s:3:\"yes\";s:51:\"ecos_oceanwp_shop_related_products_title_text_field\";s:2:\"32\";s:48:\"ecos_oceanwp_shop_cross_selling_title_text_field\";s:2:\"32\";s:64:\"ecos_oceanwp_shop_products_categories_title_font_size_text_field\";s:2:\"40\";s:68:\"ecos_oceanwp_shop_products_categories_title_font_weight_select_field\";s:3:\"500\";s:53:\"ecos_oceanwp_shop_cart_title_font_weight_select_field\";s:3:\"500\";s:50:\"ecos_oceanwp_shop_cart_title_margin_top_text_field\";s:2:\"30\";s:44:\"ecos_oceanwp_shop_cart_table_head_text_field\";s:7:\"#CC4A0A\";s:51:\"ecos_oceanwp_shop_thumbnail_cart_content_text_field\";s:2:\"80\";s:48:\"ecos_oceanwp_shop_button_cart_content_text_field\";s:7:\"#F00000\";s:46:\"ecos_oceanwp_shop_cart_style_button_text_field\";s:1:\"5\";s:70:\"ecos_oceanwp_shop_adress_shipping_total_cart_table_setting_radio_field\";s:2:\"no\";s:65:\"ecos_oceanwp_shop_price_font_weight_total_cart_table_select_field\";s:3:\"600\";s:54:\"ecos_oceanwp_shop_width_column_your_order_select_field\";s:2:\"48\";s:53:\"ecos_oceanwp_shop_title_checkout_font_size_text_field\";s:2:\"40\";s:60:\"ecos_oceanwp_shop_title_checkout_font_size_mobile_text_field\";s:2:\"30\";s:57:\"ecos_oceanwp_shop_title_checkout_font_weight_select_field\";s:3:\"500\";s:54:\"ecos_oceanwp_shop_title_checkout_margin_top_text_field\";s:2:\"30\";s:56:\"ecos_oceanwp_shop_title_h3_checkout_font_size_text_field\";s:2:\"22\";s:61:\"ecos_oceanwp_shop_width_form_login_coupon_checkout_text_field\";s:3:\"100\";s:68:\"ecos_oceanwp_shop_border_color_form_login_coupon_checkout_text_field\";s:7:\"#d3ced2\";s:71:\"ecos_oceanwp_shop_border_color_form_billing_details_checkout_text_field\";s:7:\"#d3ced2\";s:71:\"ecos_oceanwp_shop_order_table_checkout_align_title_product_select_field\";s:4:\"left\";s:72:\"ecos_oceanwp_shop_order_table_checkout_align_title_subtotal_select_field\";s:5:\"right\";s:72:\"ecos_oceanwp_shop_order_table_checkout_align_product_column_select_field\";s:4:\"left\";s:73:\"ecos_oceanwp_shop_order_table_checkout_align_subtotal_column_select_field\";s:5:\"right\";s:62:\"ecos_oceanwp_shop_order_table_checkout_border_color_text_field\";s:7:\"#eaeaea\";s:69:\"ecos_oceanwp_shop_order_table_checkout_font_weight_price_select_field\";s:3:\"500\";s:64:\"ecos_oceanwp_shop_payment_methods_checkout_background_text_field\";s:7:\"#EBE9EB\";s:66:\"ecos_oceanwp_shop_payment_methods_checkout_width_button_text_field\";s:2:\"55\";s:77:\"ecos_oceanwp_shop_order_received_checkout_background_order_details_text_field\";s:7:\"#F7F7F7\";s:63:\"ecos_oceanwp_shop_order_received_checkout_text_color_text_field\";s:7:\"#444444\";s:55:\"ecos_oceanwp_shop_my_account_title_font_size_text_field\";s:2:\"40\";s:59:\"ecos_oceanwp_shop_my_account_title_font_weight_select_field\";s:3:\"500\";s:56:\"ecos_oceanwp_shop_my_account_title_margin_top_text_field\";s:2:\"30\";s:66:\"ecos_oceanwp_shop_my_account_title_font_size_login_form_text_field\";s:2:\"30\";s:61:\"ecos_oceanwp_shop_my_account_navigation_background_text_field\";s:7:\"#8AA6A5\";s:65:\"ecos_oceanwp_shop_my_account_title_order_details_color_text_field\";s:7:\"#444444\";s:73:\"ecos_oceanwp_shop_my_account_order_details_font_weight_price_select_field\";s:3:\"500\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ecos_multiple_setting_oceanwp_shop' , 'a:61:{s:45:&quot;ecos_oceanwp_shop_default_setting_radio_field&quot;;s:2:&quot;no&quot;;s:48:&quot;ecos_oceanwp_shop_title_font_weight_select_field&quot;;s:3:&quot;500&quot;;s:45:&quot;ecos_oceanwp_shop_title_margin_top_text_field&quot;;s:2:&quot;20&quot;;s:40:&quot;ecos_oceanwp_shop_title_color_text_field&quot;;s:7:&quot;#CC4A0A&quot;;s:55:&quot;ecos_oceanwp_shop_woocommerce_info_font_size_text_field&quot;;s:2:&quot;18&quot;;s:51:&quot;ecos_oceanwp_shop_woocommerce_info_color_text_field&quot;;s:7:&quot;#FFFFFF&quot;;s:56:&quot;ecos_oceanwp_shop_woocommerce_info_background_text_field&quot;;s:7:&quot;#6D908E&quot;;s:58:&quot;ecos_oceanwp_shop_woocommerce_message_font_size_text_field&quot;;s:2:&quot;18&quot;;s:54:&quot;ecos_oceanwp_shop_woocommerce_message_color_text_field&quot;;s:7:&quot;#666666&quot;;s:59:&quot;ecos_oceanwp_shop_woocommerce_message_background_text_field&quot;;s:7:&quot;#EAE672&quot;;s:47:&quot;ecos_oceanwp_shop_product_title_font_text_field&quot;;s:5:&quot;kalam&quot;;s:52:&quot;ecos_oceanwp_shop_product_title_font_size_text_field&quot;;s:2:&quot;24&quot;;s:59:&quot;ecos_oceanwp_shop_product_title_font_size_mobile_text_field&quot;;s:2:&quot;20&quot;;s:56:&quot;ecos_oceanwp_shop_product_title_font_weight_select_field&quot;;s:3:&quot;600&quot;;s:56:&quot;ecos_oceanwp_shop_product_title_margin_bottom_text_field&quot;;s:3:&quot;-10&quot;;s:52:&quot;ecos_oceanwp_shop_text_out_of_stock_badge_text_field&quot;;s:12:&quot;out of stock&quot;;s:50:&quot;ecos_oceanwp_shop_stock_badge_font_size_text_field&quot;;s:2:&quot;20&quot;;s:54:&quot;ecos_oceanwp_shop_stock_badge_font_weight_select_field&quot;;s:3:&quot;600&quot;;s:54:&quot;ecos_oceanwp_shop_promotion_badge_font_size_text_field&quot;;s:2:&quot;20&quot;;s:58:&quot;ecos_oceanwp_shop_promotion_badge_font_weight_select_field&quot;;s:3:&quot;600&quot;;s:50:&quot;ecos_oceanwp_shop_breadcrumb_margin_top_text_field&quot;;s:2:&quot;10&quot;;s:54:&quot;ecos_oceanwp_shop_product_sheet_padding_top_text_field&quot;;s:2:&quot;20&quot;;s:50:&quot;ecos_oceanwp_shop_border_product_sheet_radio_field&quot;;s:3:&quot;yes&quot;;s:51:&quot;ecos_oceanwp_shop_related_products_title_text_field&quot;;s:2:&quot;32&quot;;s:48:&quot;ecos_oceanwp_shop_cross_selling_title_text_field&quot;;s:2:&quot;32&quot;;s:64:&quot;ecos_oceanwp_shop_products_categories_title_font_size_text_field&quot;;s:2:&quot;40&quot;;s:68:&quot;ecos_oceanwp_shop_products_categories_title_font_weight_select_field&quot;;s:3:&quot;500&quot;;s:53:&quot;ecos_oceanwp_shop_cart_title_font_weight_select_field&quot;;s:3:&quot;500&quot;;s:50:&quot;ecos_oceanwp_shop_cart_title_margin_top_text_field&quot;;s:2:&quot;30&quot;;s:44:&quot;ecos_oceanwp_shop_cart_table_head_text_field&quot;;s:7:&quot;#CC4A0A&quot;;s:51:&quot;ecos_oceanwp_shop_thumbnail_cart_content_text_field&quot;;s:2:&quot;80&quot;;s:48:&quot;ecos_oceanwp_shop_button_cart_content_text_field&quot;;s:7:&quot;#F00000&quot;;s:46:&quot;ecos_oceanwp_shop_cart_style_button_text_field&quot;;s:1:&quot;5&quot;;s:70:&quot;ecos_oceanwp_shop_adress_shipping_total_cart_table_setting_radio_field&quot;;s:2:&quot;no&quot;;s:65:&quot;ecos_oceanwp_shop_price_font_weight_total_cart_table_select_field&quot;;s:3:&quot;600&quot;;s:54:&quot;ecos_oceanwp_shop_width_column_your_order_select_field&quot;;s:2:&quot;48&quot;;s:53:&quot;ecos_oceanwp_shop_title_checkout_font_size_text_field&quot;;s:2:&quot;40&quot;;s:60:&quot;ecos_oceanwp_shop_title_checkout_font_size_mobile_text_field&quot;;s:2:&quot;30&quot;;s:57:&quot;ecos_oceanwp_shop_title_checkout_font_weight_select_field&quot;;s:3:&quot;500&quot;;s:54:&quot;ecos_oceanwp_shop_title_checkout_margin_top_text_field&quot;;s:2:&quot;30&quot;;s:56:&quot;ecos_oceanwp_shop_title_h3_checkout_font_size_text_field&quot;;s:2:&quot;22&quot;;s:61:&quot;ecos_oceanwp_shop_width_form_login_coupon_checkout_text_field&quot;;s:3:&quot;100&quot;;s:68:&quot;ecos_oceanwp_shop_border_color_form_login_coupon_checkout_text_field&quot;;s:7:&quot;#d3ced2&quot;;s:71:&quot;ecos_oceanwp_shop_border_color_form_billing_details_checkout_text_field&quot;;s:7:&quot;#d3ced2&quot;;s:71:&quot;ecos_oceanwp_shop_order_table_checkout_align_title_product_select_field&quot;;s:4:&quot;left&quot;;s:72:&quot;ecos_oceanwp_shop_order_table_checkout_align_title_subtotal_select_field&quot;;s:5:&quot;right&quot;;s:72:&quot;ecos_oceanwp_shop_order_table_checkout_align_product_column_select_field&quot;;s:4:&quot;left&quot;;s:73:&quot;ecos_oceanwp_shop_order_table_checkout_align_subtotal_column_select_field&quot;;s:5:&quot;right&quot;;s:62:&quot;ecos_oceanwp_shop_order_table_checkout_border_color_text_field&quot;;s:7:&quot;#eaeaea&quot;;s:69:&quot;ecos_oceanwp_shop_order_table_checkout_font_weight_price_select_field&quot;;s:3:&quot;500&quot;;s:64:&quot;ecos_oceanwp_shop_payment_methods_checkout_background_text_field&quot;;s:7:&quot;#EBE9EB&quot;;s:66:&quot;ecos_oceanwp_shop_payment_methods_checkout_width_button_text_field&quot;;s:2:&quot;55&quot;;s:77:&quot;ecos_oceanwp_shop_order_received_checkout_background_order_details_text_field&quot;;s:7:&quot;#F7F7F7&quot;;s:63:&quot;ecos_oceanwp_shop_order_received_checkout_text_color_text_field&quot;;s:7:&quot;#444444&quot;;s:55:&quot;ecos_oceanwp_shop_my_account_title_font_size_text_field&quot;;s:2:&quot;40&quot;;s:59:&quot;ecos_oceanwp_shop_my_account_title_font_weight_select_field&quot;;s:3:&quot;500&quot;;s:56:&quot;ecos_oceanwp_shop_my_account_title_margin_top_text_field&quot;;s:2:&quot;30&quot;;s:66:&quot;ecos_oceanwp_shop_my_account_title_font_size_login_form_text_field&quot;;s:2:&quot;30&quot;;s:61:&quot;ecos_oceanwp_shop_my_account_navigation_background_text_field&quot;;s:7:&quot;#8AA6A5&quot;;s:65:&quot;ecos_oceanwp_shop_my_account_title_order_details_color_text_field&quot;;s:7:&quot;#444444&quot;;s:73:&quot;ecos_oceanwp_shop_my_account_order_details_font_weight_price_select_field&quot;;s:3:&quot;500&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php(1144): add_option('ecos_multiple_s...', Array, '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ecos_easy_custom_woocommerce_oceanwp_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#9 /internal/eval.php(20): activate_plugin('easy-custom-oce...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecos_multiple_setting_oceanwp_shop', 'a:61:{s:45:\"ecos_oceanwp_shop_default_setting_radio_field\";s:2:\"no\";s:48:\"ecos_oceanwp_shop_title_font_weight_select_field\";s:3:\"500\";s:45:\"ecos_oceanwp_shop_title_margin_top_text_field\";s:2:\"20\";s:40:\"ecos_oceanwp_shop_title_color_text_field\";s:7:\"#CC4A0A\";s:55:\"ecos_oceanwp_shop_woocommerce_info_font_size_text_field\";s:2:\"18\";s:51:\"ecos_oceanwp_shop_woocommerce_info_color_text_field\";s:7:\"#FFFFFF\";s:56:\"ecos_oceanwp_shop_woocommerce_info_background_text_field\";s:7:\"#6D908E\";s:58:\"ecos_oceanwp_shop_woocommerce_message_font_size_text_field\";s:2:\"18\";s:54:\"ecos_oceanwp_shop_woocommerce_message_color_text_field\";s:7:\"#666666\";s:59:\"ecos_oceanwp_shop_woocommerce_message_background_text_field\";s:7:\"#EAE672\";s:47:\"ecos_oceanwp_shop_product_title_font_text_field\";s:5:\"kalam\";s:52:\"ecos_oceanwp_shop_product_title_font_size_text_field\";s:2:\"24\";s:59:\"ecos_oceanwp_shop_product_title_font_size_mobile_text_field\";s:2:\"20\";s:56:\"ecos_oceanwp_shop_product_title_font_weight_select_field\";s:3:\"600\";s:56:\"ecos_oceanwp_shop_product_title_margin_bottom_text_field\";s:3:\"-10\";s:52:\"ecos_oceanwp_shop_text_out_of_stock_badge_text_field\";s:12:\"out of stock\";s:50:\"ecos_oceanwp_shop_stock_badge_font_size_text_field\";s:2:\"20\";s:54:\"ecos_oceanwp_shop_stock_badge_font_weight_select_field\";s:3:\"600\";s:54:\"ecos_oceanwp_shop_promotion_badge_font_size_text_field\";s:2:\"20\";s:58:\"ecos_oceanwp_shop_promotion_badge_font_weight_select_field\";s:3:\"600\";s:50:\"ecos_oceanwp_shop_breadcrumb_margin_top_text_field\";s:2:\"10\";s:54:\"ecos_oceanwp_shop_product_sheet_padding_top_text_field\";s:2:\"20\";s:50:\"ecos_oceanwp_shop_border_product_sheet_radio_field\";s:3:\"yes\";s:51:\"ecos_oceanwp_shop_related_products_title_text_field\";s:2:\"32\";s:48:\"ecos_oceanwp_shop_cross_selling_title_text_field\";s:2:\"32\";s:64:\"ecos_oceanwp_shop_products_categories_title_font_size_text_field\";s:2:\"40\";s:68:\"ecos_oceanwp_shop_products_categories_title_font_weight_select_field\";s:3:\"500\";s:53:\"ecos_oceanwp_shop_cart_title_font_weight_select_field\";s:3:\"500\";s:50:\"ecos_oceanwp_shop_cart_title_margin_top_text_field\";s:2:\"30\";s:44:\"ecos_oceanwp_shop_cart_table_head_text_field\";s:7:\"#CC4A0A\";s:51:\"ecos_oceanwp_shop_thumbnail_cart_content_text_field\";s:2:\"80\";s:48:\"ecos_oceanwp_shop_button_cart_content_text_field\";s:7:\"#F00000\";s:46:\"ecos_oceanwp_shop_cart_style_button_text_field\";s:1:\"5\";s:70:\"ecos_oceanwp_shop_adress_shipping_total_cart_table_setting_radio_field\";s:2:\"no\";s:65:\"ecos_oceanwp_shop_price_font_weight_total_cart_table_select_field\";s:3:\"600\";s:54:\"ecos_oceanwp_shop_width_column_your_order_select_field\";s:2:\"48\";s:53:\"ecos_oceanwp_shop_title_checkout_font_size_text_field\";s:2:\"40\";s:60:\"ecos_oceanwp_shop_title_checkout_font_size_mobile_text_field\";s:2:\"30\";s:57:\"ecos_oceanwp_shop_title_checkout_font_weight_select_field\";s:3:\"500\";s:54:\"ecos_oceanwp_shop_title_checkout_margin_top_text_field\";s:2:\"30\";s:56:\"ecos_oceanwp_shop_title_h3_checkout_font_size_text_field\";s:2:\"22\";s:61:\"ecos_oceanwp_shop_width_form_login_coupon_checkout_text_field\";s:3:\"100\";s:68:\"ecos_oceanwp_shop_border_color_form_login_coupon_checkout_text_field\";s:7:\"#d3ced2\";s:71:\"ecos_oceanwp_shop_border_color_form_billing_details_checkout_text_field\";s:7:\"#d3ced2\";s:71:\"ecos_oceanwp_shop_order_table_checkout_align_title_product_select_field\";s:4:\"left\";s:72:\"ecos_oceanwp_shop_order_table_checkout_align_title_subtotal_select_field\";s:5:\"right\";s:72:\"ecos_oceanwp_shop_order_table_checkout_align_product_column_select_field\";s:4:\"left\";s:73:\"ecos_oceanwp_shop_order_table_checkout_align_subtotal_column_select_field\";s:5:\"right\";s:62:\"ecos_oceanwp_shop_order_table_checkout_border_color_text_field\";s:7:\"#eaeaea\";s:69:\"ecos_oceanwp_shop_order_table_checkout_font_weight_price_select_field\";s:3:\"500\";s:64:\"ecos_oceanwp_shop_payment_methods_checkout_background_text_field\";s:7:\"#EBE9EB\";s:66:\"ecos_oceanwp_shop_payment_methods_checkout_width_button_text_field\";s:2:\"55\";s:77:\"ecos_oceanwp_shop_order_received_checkout_background_order_details_text_field\";s:7:\"#F7F7F7\";s:63:\"ecos_oceanwp_shop_order_received_checkout_text_color_text_field\";s:7:\"#444444\";s:55:\"ecos_oceanwp_shop_my_account_title_font_size_text_field\";s:2:\"40\";s:59:\"ecos_oceanwp_shop_my_account_title_font_weight_select_field\";s:3:\"500\";s:56:\"ecos_oceanwp_shop_my_account_title_margin_top_text_field\";s:2:\"30\";s:66:\"ecos_oceanwp_shop_my_account_title_font_size_login_form_text_field\";s:2:\"30\";s:61:\"ecos_oceanwp_shop_my_account_navigation_background_text_field\";s:7:\"#8AA6A5\";s:65:\"ecos_oceanwp_shop_my_account_title_order_details_color_text_field\";s:7:\"#444444\";s:73:\"ecos_oceanwp_shop_my_account_order_details_font_weight_price_select_field\";s:3:\"500\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easy-custom-oceanwp-shop/easy-custom-oceanwp-shop.php'), WP_Hook->do_action, WP_Hook->apply_filters, ecos_easy_custom_woocommerce_oceanwp_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ecos_multiple_setting_woocommerce_shop', 'a:68:{s:49:\"ecos_woocommerce_shop_default_setting_radio_field\";s:2:\"no\";s:57:\"ecos_woocommerce_shop_breadcrumb_modification_radio_field\";s:2:\"no\";s:49:\"ecos_woocommerce_shop_breadcrumb_hide_radio_field\";s:2:\"no\";s:49:\"ecos_woocommerce_shop_hide_shop_title_radio_field\";s:2:\"no\";s:52:\"ecos_woocommerce_shop_title_font_weight_select_field\";s:3:\"500\";s:44:\"ecos_woocommerce_shop_title_color_text_field\";s:7:\"#CC4A0A\";s:59:\"ecos_woocommerce_shop_woocommerce_info_font_size_text_field\";s:2:\"18\";s:55:\"ecos_woocommerce_shop_woocommerce_info_color_text_field\";s:7:\"#FFFFFF\";s:60:\"ecos_woocommerce_shop_woocommerce_info_background_text_field\";s:7:\"#6D908E\";s:62:\"ecos_woocommerce_shop_woocommerce_message_font_size_text_field\";s:2:\"18\";s:58:\"ecos_woocommerce_shop_woocommerce_message_color_text_field\";s:7:\"#666666\";s:63:\"ecos_woocommerce_shop_woocommerce_message_background_text_field\";s:7:\"#EAE672\";s:54:\"ecos_woocommerce_shop_custom_style_buttons_radio_field\";s:2:\"no\";s:50:\"ecos_woocommerce_shop_color_text_button_text_field\";s:7:\"#FFFFFF\";s:50:\"ecos_woocommerce_shop_background_button_text_field\";s:7:\"#6d908e\";s:52:\"ecos_woocommerce_shop_border_color_button_text_field\";s:7:\"#6d908e\";s:56:\"ecos_woocommerce_shop_hover_color_text_button_text_field\";s:7:\"#6d908e\";s:56:\"ecos_woocommerce_shop_hover_background_button_text_field\";s:7:\"#FFFFFF\";s:58:\"ecos_woocommerce_shop_hover_border_color_button_text_field\";s:7:\"#6d908e\";s:64:\"ecos_woocommerce_shop_button_add_to_cart_centered_checkbox_field\";b:0;s:52:\"ecos_woocommerce_button_width_add_to_cart_text_field\";s:3:\"100\";s:51:\"ecos_woocommerce_shop_product_title_font_text_field\";s:5:\"kalam\";s:56:\"ecos_woocommerce_shop_product_title_font_size_text_field\";s:2:\"20\";s:63:\"ecos_woocommerce_shop_product_title_font_size_mobile_text_field\";s:2:\"18\";s:60:\"ecos_woocommerce_shop_product_title_font_weight_select_field\";s:3:\"600\";s:56:\"ecos_woocommerce_shop_product_price_font_size_text_field\";s:2:\"16\";s:60:\"ecos_woocommerce_shop_product_price_font_weight_select_field\";s:3:\"600\";s:52:\"ecos_woocommerce_shop_color_product_price_text_field\";s:7:\"#77A464\";s:64:\"ecos_woocommerce_shop_activate_out_of_stock_badge_checkbox_field\";b:0;s:56:\"ecos_woocommerce_shop_text_out_of_stock_badge_text_field\";s:8:\"sold out\";s:61:\"ecos_woocommerce_shop_out_of_stock_badge_font_size_text_field\";s:2:\"16\";s:65:\"ecos_woocommerce_shop_out_of_stock_badge_font_weight_select_field\";s:3:\"700\";s:53:\"ecos_woocommerce_shop_text_promotion_badge_text_field\";s:6:\"sale !\";s:58:\"ecos_woocommerce_shop_promotion_badge_font_size_text_field\";s:2:\"16\";s:62:\"ecos_woocommerce_shop_promotion_badge_font_weight_select_field\";s
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/easy2map-photos/includes/Easy2MapImg.php(123): WP_SQLite_DB->query('CREATE TABLE `w...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Easy2MapImg::create_admin_tables('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query CREATE TABLE `wp_easy2mapimg_map_points` (
+            `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+            `MapID` bigint(20) DEFAULT NULL,
+            `CreatedByUserID` bigint(20) DEFAULT NULL,
+            `LatLong` varchar(128) DEFAULT NULL,
+            `Title` varchar(512) DEFAULT NULL,
+            `PinImageURL` varchar(512) DEFAULT NULL,
+            `Settings` varchar(512) DEFAULT NULL,
+            `DetailsHTML` text,
+            `DetailsText` text,
+            `PinImageSmall` varchar(512) DEFAULT NULL,
+            `PinImageMedium` varchar(512) DEFAULT NULL,
+            `PinImageLarge` varchar(512) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`),
+            KEY `wp_easy2mapimg_map_points_MapID` (`MapID`),
+            CONSTRAINT `easy2mapimg_map_points_MapID` FOREIGN KEY (`MapID`) REFERENCES `wp_easy2mapimg_maps` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+          ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Easy2MapImg::create_admin_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"edd-pal-pro-payment-gateway"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/edd-pal-pro-payment-gateway could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/edd-pal-pro-payment-gateway could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0
