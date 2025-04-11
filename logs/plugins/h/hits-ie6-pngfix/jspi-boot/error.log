@@ -2,564 +2,115 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:25:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_hrwidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_hrwidget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_hrwidget', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_hrwidget', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_hrwidget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:29 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $tab in /wordpress/wp-content/plugins/hrm/include/urls.php on line 2
-[09-Apr-2025 17:25:29 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $tab in /wordpress/wp-content/plugins/hrm/include/urls.php on line 8
-[09-Apr-2025 17:25:29 UTC] PHP Deprecated:  Required parameter $employee_id follows optional parameter $force in /wordpress/wp-content/plugins/hrm/class/employee.php on line 170
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_general_info', 'a:1:{s:9:\"field_dif\";a:12:{i:0;s:17:\"organization_name\";i:1;s:6:\"tax_id\";i:2;s:19:\"registration_number\";i:3;s:5:\"phone\";i:4;s:3:\"fax\";i:5;s:15:\"addres_street_1\";i:6;s:16:\"address_street_2\";i:7;s:4:\"city\";i:8;s:14:\"state_province\";i:9;s:3:\"zip\";i:10;s:7:\"country\";i:11;s:4:\"note\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_general_info' , 'a:1:{s:9:&quot;field_dif&quot;;a:12:{i:0;s:17:&quot;organization_name&quot;;i:1;s:6:&quot;tax_id&quot;;i:2;s:19:&quot;registration_number&quot;;i:3;s:5:&quot;phone&quot;;i:4;s:3:&quot;fax&quot;;i:5;s:15:&quot;addres_street_1&quot;;i:6;s:16:&quot;address_street_2&quot;;i:7;s:4:&quot;city&quot;;i:8;s:14:&quot;state_province&quot;;i:9;s:3:&quot;zip&quot;;i:10;s:7:&quot;country&quot;;i:11;s:4:&quot;note&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_general_inf...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/db.php(857): update_option('hrm_general_inf...', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(768): Hrm_Db->generl_info()
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(5): Hrm_Db->organization()
-#8 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#13 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_general_info', 'a:1:{s:9:\"field_dif\";a:12:{i:0;s:17:\"organization_name\";i:1;s:6:\"tax_id\";i:2;s:19:\"registration_number\";i:3;s:5:\"phone\";i:4;s:3:\"fax\";i:5;s:15:\"addres_street_1\";i:6;s:16:\"address_street_2\";i:7;s:4:\"city\";i:8;s:14:\"state_province\";i:9;s:3:\"zip\";i:10;s:7:\"country\";i:11;s:4:\"note\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->organization, Hrm_Db->generl_info, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_location_option', 'a:3:{s:10:\"table_name\";s:12:\"hrm_location\";s:12:\"table_format\";a:9:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";i:5;s:2:\"%s\";i:6;s:2:\"%s\";i:7;s:2:\"%s\";i:8;s:2:\"%s\";}s:12:\"table_option\";a:9:{s:4:\"name\";s:4:\"name\";s:12:\"country_code\";s:7:\"country\";s:8:\"province\";s:8:\"province\";s:4:\"city\";s:4:\"city\";s:7:\"address\";s:7:\"address\";s:8:\"zip_code\";s:7:\"zipcode\";s:5:\"phone\";s:5:\"phone\";s:3:\"fax\";s:3:\"fax\";s:5:\"notes\";s:5:\"notes\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_location_option' , 'a:3:{s:10:&quot;table_name&quot;;s:12:&quot;hrm_location&quot;;s:12:&quot;table_format&quot;;a:9:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;i:4;s:2:&quot;%s&quot;;i:5;s:2:&quot;%s&quot;;i:6;s:2:&quot;%s&quot;;i:7;s:2:&quot;%s&quot;;i:8;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:9:{s:4:&quot;name&quot;;s:4:&quot;name&quot;;s:12:&quot;country_code&quot;;s:7:&quot;country&quot;;s:8:&quot;province&quot;;s:8:&quot;province&quot;;s:4:&quot;city&quot;;s:4:&quot;city&quot;;s:7:&quot;address&quot;;s:7:&quot;address&quot;;s:8:&quot;zip_code&quot;;s:7:&quot;zipcode&quot;;s:5:&quot;phone&quot;;s:5:&quot;phone&quot;;s:3:&quot;fax&quot;;s:3:&quot;fax&quot;;s:5:&quot;notes&quot;;s:5:&quot;notes&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_location_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_location_op...', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(839): Hrm_Settings->update_table_option('hrm_location_op...', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(769): Hrm_Db->location()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(5): Hrm_Db->organization()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_location_option', 'a:3:{s:10:\"table_name\";s:12:\"hrm_location\";s:12:\"table_format\";a:9:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";i:5;s:2:\"%s\";i:6;s:2:\"%s\";i:7;s:2:\"%s\";i:8;s:2:\"%s\";}s:12:\"table_option\";a:9:{s:4:\"name\";s:4:\"name\";s:12:\"country_code\";s:7:\"country\";s:8:\"province\";s:8:\"province\";s:4:\"city\";s:4:\"city\";s:7:\"address\";s:7:\"address\";s:8:\"zip_code\";s:7:\"zipcode\";s:5:\"phone\";s:5:\"phone\";s:3:\"fax\";s:3:\"fax\";s:5:\"notes\";s:5:\"notes\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->organization, Hrm_Db->location, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_notice', 'a:3:{s:10:\"table_name\";s:10:\"hrm_notice\";s:12:\"table_format\";a:4:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%d\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:5:\"title\";s:5:\"title\";s:11:\"description\";s:11:\"description\";s:7:\"user_id\";s:7:\"user_id\";s:4:\"date\";s:4:\"date\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_notice' , 'a:3:{s:10:&quot;table_name&quot;;s:10:&quot;hrm_notice&quot;;s:12:&quot;table_format&quot;;a:4:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%d&quot;;i:3;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:4:{s:5:&quot;title&quot;;s:5:&quot;title&quot;;s:11:&quot;description&quot;;s:11:&quot;description&quot;;s:7:&quot;user_id&quot;;s:7:&quot;user_id&quot;;s:4:&quot;date&quot;;s:4:&quot;date&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_notice', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_notice', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(799): Hrm_Settings->update_table_option('hrm_notice', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(770): Hrm_Db->notice()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(5): Hrm_Db->organization()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_notice', 'a:3:{s:10:\"table_name\";s:10:\"hrm_notice\";s:12:\"table_format\";a:4:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%d\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:5:\"title\";s:5:\"title\";s:11:\"description\";s:11:\"description\";s:7:\"user_id\";s:7:\"user_id\";s:4:\"date\";s:4:\"date\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->organization, Hrm_Db->notice, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_job_title_option', 'a:3:{s:10:\"table_name\";s:13:\"hrm_job_title\";s:12:\"table_format\";a:3:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";}s:12:\"table_option\";a:3:{s:9:\"job_title\";s:9:\"job_title\";s:15:\"job_description\";s:15:\"job_description\";s:4:\"note\";s:4:\"note\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_job_title_option' , 'a:3:{s:10:&quot;table_name&quot;;s:13:&quot;hrm_job_title&quot;;s:12:&quot;table_format&quot;;a:3:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:3:{s:9:&quot;job_title&quot;;s:9:&quot;job_title&quot;;s:15:&quot;job_description&quot;;s:15:&quot;job_description&quot;;s:4:&quot;note&quot;;s:4:&quot;note&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_job_title_o...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_job_title_o...', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(760): Hrm_Settings->update_table_option('hrm_job_title_o...', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(681): Hrm_Db->title()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(6): Hrm_Db->job()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_job_title_option', 'a:3:{s:10:\"table_name\";s:13:\"hrm_job_title\";s:12:\"table_format\";a:3:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";}s:12:\"table_option\";a:3:{s:9:\"job_title\";s:9:\"job_title\";s:15:\"job_description\";s:15:\"job_description\";s:4:\"note\";s:4:\"note\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->job, Hrm_Db->title, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_job_category', 'a:3:{s:10:\"table_name\";s:16:\"hrm_job_category\";s:12:\"table_format\";a:2:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";}s:12:\"table_option\";a:2:{s:4:\"name\";s:12:\"job_category\";s:6:\"active\";s:6:\"active\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_job_category' , 'a:3:{s:10:&quot;table_name&quot;;s:16:&quot;hrm_job_category&quot;;s:12:&quot;table_format&quot;;a:2:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:2:{s:4:&quot;name&quot;;s:12:&quot;job_category&quot;;s:6:&quot;active&quot;;s:6:&quot;active&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_job_categor...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_job_categor...', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(710): Hrm_Settings->update_table_option('hrm_job_categor...', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(682): Hrm_Db->category()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(6): Hrm_Db->job()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_job_category', 'a:3:{s:10:\"table_name\";s:16:\"hrm_job_category\";s:12:\"table_format\";a:2:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";}s:12:\"table_option\";a:2:{s:4:\"name\";s:12:\"job_category\";s:6:\"active\";s:6:\"active\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->job, Hrm_Db->category, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_pay_grade', 'a:3:{s:10:\"table_name\";s:13:\"hrm_pay_grade\";s:12:\"table_format\";a:1:{i:0;s:2:\"%s\";}s:12:\"table_option\";a:1:{s:4:\"name\";s:4:\"name\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_pay_grade' , 'a:3:{s:10:&quot;table_name&quot;;s:13:&quot;hrm_pay_grade&quot;;s:12:&quot;table_format&quot;;a:1:{i:0;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:1:{s:4:&quot;name&quot;;s:4:&quot;name&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_pay_grade', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_pay_grade', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(733): Hrm_Settings->update_table_option('hrm_pay_grade', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(683): Hrm_Db->pay_grades()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(6): Hrm_Db->job()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_pay_grade', 'a:3:{s:10:\"table_name\";s:13:\"hrm_pay_grade\";s:12:\"table_format\";a:1:{i:0;s:2:\"%s\";}s:12:\"table_option\";a:1:{s:4:\"name\";s:4:\"name\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->job, Hrm_Db->pay_grades, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_language', 'a:3:{s:10:\"table_name\";s:12:\"hrm_language\";s:12:\"table_format\";a:1:{i:0;s:2:\"%s\";}s:12:\"table_option\";a:1:{s:4:\"name\";s:8:\"language\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_language' , 'a:3:{s:10:&quot;table_name&quot;;s:12:&quot;hrm_language&quot;;s:12:&quot;table_format&quot;;a:1:{i:0;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:1:{s:4:&quot;name&quot;;s:8:&quot;language&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_language', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_language', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(639): Hrm_Settings->update_table_option('hrm_language', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(616): Hrm_Db->language()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(7): Hrm_Db->qualification()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_language', 'a:3:{s:10:\"table_name\";s:12:\"hrm_language\";s:12:\"table_format\";a:1:{i:0;s:2:\"%s\";}s:12:\"table_option\";a:1:{s:4:\"name\";s:8:\"language\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->qualification, Hrm_Db->language, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_leave_type', 'a:3:{s:10:\"table_name\";s:14:\"hrm_leave_type\";s:12:\"table_format\";a:4:{i:0;s:2:\"%s\";i:1;s:2:\"%d\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:15:\"leave_type_name\";s:10:\"leave_type\";s:11:\"entitlement\";s:11:\"entitlement\";s:12:\"entitle_from\";s:12:\"entitle_from\";s:10:\"entitle_to\";s:10:\"entitle_to\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_leave_type' , 'a:3:{s:10:&quot;table_name&quot;;s:14:&quot;hrm_leave_type&quot;;s:12:&quot;table_format&quot;;a:4:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%d&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:4:{s:15:&quot;leave_type_name&quot;;s:10:&quot;leave_type&quot;;s:11:&quot;entitlement&quot;;s:11:&quot;entitlement&quot;;s:12:&quot;entitle_from&quot;;s:12:&quot;entitle_from&quot;;s:10:&quot;entitle_to&quot;;s:10:&quot;entitle_to&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_leave_type', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_leave_type', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(611): Hrm_Settings->update_table_option('hrm_leave_type', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(542): Hrm_Db->leave_type()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(8): Hrm_Db->configure()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_leave_type', 'a:3:{s:10:\"table_name\";s:14:\"hrm_leave_type\";s:12:\"table_format\";a:4:{i:0;s:2:\"%s\";i:1;s:2:\"%d\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:15:\"leave_type_name\";s:10:\"leave_type\";s:11:\"entitlement\";s:11:\"entitlement\";s:12:\"entitle_from\";s:12:\"entitle_from\";s:10:\"entitle_to\";s:10:\"entitle_to\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->configure, Hrm_Db->leave_type, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_work_week', 'a:1:{s:9:\"field_dif\";a:7:{i:0;s:8:\"saturday\";i:1;s:6:\"sunday\";i:2;s:6:\"monday\";i:3;s:7:\"tuesday\";i:4;s:9:\"wednesday\";i:5;s:8:\"thursday\";i:6;s:6:\"friday\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_work_week' , 'a:1:{s:9:&quot;field_dif&quot;;a:7:{i:0;s:8:&quot;saturday&quot;;i:1;s:6:&quot;sunday&quot;;i:2;s:6:&quot;monday&quot;;i:3;s:7:&quot;tuesday&quot;;i:4;s:9:&quot;wednesday&quot;;i:5;s:8:&quot;thursday&quot;;i:6;s:6:&quot;friday&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_work_week', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/db.php(549): update_option('hrm_work_week', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(543): Hrm_Db->work_week()
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(8): Hrm_Db->configure()
-#8 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#13 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_work_week', 'a:1:{s:9:\"field_dif\";a:7:{i:0;s:8:\"saturday\";i:1;s:6:\"sunday\";i:2;s:6:\"monday\";i:3;s:7:\"tuesday\";i:4;s:9:\"wednesday\";i:5;s:8:\"thursday\";i:6;s:6:\"friday\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->configure, Hrm_Db->work_week, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_holiday', 'a:3:{s:10:\"table_name\";s:11:\"hrm_holiday\";s:12:\"table_format\";a:5:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";}s:12:\"table_option\";a:5:{s:4:\"name\";s:4:\"name\";s:11:\"description\";s:11:\"description\";s:4:\"from\";s:4:\"from\";s:2:\"to\";s:2:\"to\";s:6:\"length\";s:6:\"length\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_holiday' , 'a:3:{s:10:&quot;table_name&quot;;s:11:&quot;hrm_holiday&quot;;s:12:&quot;table_format&quot;;a:5:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;i:4;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:5:{s:4:&quot;name&quot;;s:4:&quot;name&quot;;s:11:&quot;description&quot;;s:11:&quot;description&quot;;s:4:&quot;from&quot;;s:4:&quot;from&quot;;s:2:&quot;to&quot;;s:2:&quot;to&quot;;s:6:&quot;length&quot;;s:6:&quot;length&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_holiday', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_holiday', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(582): Hrm_Settings->update_table_option('hrm_holiday', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(544): Hrm_Db->holiday()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(8): Hrm_Db->configure()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_holiday', 'a:3:{s:10:\"table_name\";s:11:\"hrm_holiday\";s:12:\"table_format\";a:5:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";}s:12:\"table_option\";a:5:{s:4:\"name\";s:4:\"name\";s:11:\"description\";s:11:\"description\";s:4:\"from\";s:4:\"from\";s:2:\"to\";s:2:\"to\";s:6:\"length\";s:6:\"length\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->configure, Hrm_Db->holiday, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_leave', 'a:3:{s:10:\"table_name\";s:9:\"hrm_leave\";s:12:\"table_format\";a:6:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";i:5;s:2:\"%d\";}s:12:\"table_option\";a:6:{s:10:\"start_time\";s:4:\"from\";s:8:\"end_time\";s:2:\"to\";s:8:\"comments\";s:7:\"comment\";s:4:\"type\";s:7:\"type_id\";s:6:\"emp_id\";s:6:\"emp_id\";s:6:\"status\";s:6:\"status\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_leave' , 'a:3:{s:10:&quot;table_name&quot;;s:9:&quot;hrm_leave&quot;;s:12:&quot;table_format&quot;;a:6:{i:0;s:2:&quot;%s&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;i:4;s:2:&quot;%s&quot;;i:5;s:2:&quot;%d&quot;;}s:12:&quot;table_option&quot;;a:6:{s:10:&quot;start_time&quot;;s:4:&quot;from&quot;;s:8:&quot;end_time&quot;;s:2:&quot;to&quot;;s:8:&quot;comments&quot;;s:7:&quot;comment&quot;;s:4:&quot;type&quot;;s:7:&quot;type_id&quot;;s:6:&quot;emp_id&quot;;s:6:&quot;emp_id&quot;;s:6:&quot;status&quot;;s:6:&quot;status&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_leave', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_leave', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(538): Hrm_Settings->update_table_option('hrm_leave', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(9): Hrm_Db->leave_summary()
-#8 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#13 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_leave', 'a:3:{s:10:\"table_name\";s:9:\"hrm_leave\";s:12:\"table_format\";a:6:{i:0;s:2:\"%s\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";i:5;s:2:\"%d\";}s:12:\"table_option\";a:6:{s:10:\"start_time\";s:4:\"from\";s:8:\"end_time\";s:2:\"to\";s:8:\"comments\";s:7:\"comment\";s:4:\"type\";s:7:\"type_id\";s:6:\"emp_id\";s:6:\"emp_id\";s:6:\"status\";s:6:\"status\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->leave_summary, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_personal_skill', 'a:3:{s:10:\"table_name\";s:18:\"hrm_personal_skill\";s:12:\"table_format\";a:4:{i:0;s:2:\"%d\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:6:\"emp_id\";s:6:\"emp_id\";s:5:\"skill\";s:5:\"skill\";s:12:\"years_of_exp\";s:12:\"years_of_exp\";s:8:\"comments\";s:8:\"comments\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_personal_skill' , 'a:3:{s:10:&quot;table_name&quot;;s:18:&quot;hrm_personal_skill&quot;;s:12:&quot;table_format&quot;;a:4:{i:0;s:2:&quot;%d&quot;;i:1;s:2:&quot;%s&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;}s:12:&quot;table_option&quot;;a:4:{s:6:&quot;emp_id&quot;;s:6:&quot;emp_id&quot;;s:5:&quot;skill&quot;;s:5:&quot;skill&quot;;s:12:&quot;years_of_exp&quot;;s:12:&quot;years_of_exp&quot;;s:8:&quot;comments&quot;;s:8:&quot;comments&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('hrm_personal_sk...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hrm/class/settings.php(112): update_option('hrm_personal_sk...', Array)
-#6 /wordpress/wp-content/plugins/hrm/class/db.php(434): Hrm_Settings->update_table_option('hrm_personal_sk...', Array)
-#7 /wordpress/wp-content/plugins/hrm/class/db.php(333): Hrm_Db->personal_skill()
-#8 /wordpress/wp-content/plugins/hrm/class/db.php(10): Hrm_Db->personal()
-#9 /wordpress/wp-content/plugins/hrm/hrm.php(244): Hrm_Db->__construct()
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WP_Hrm->install(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hrm/hr...', false)
-#14 /internal/eval.php(20): activate_plugin('hrm/hrm.php')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_personal_skill', 'a:3:{s:10:\"table_name\";s:18:\"hrm_personal_skill\";s:12:\"table_format\";a:4:{i:0;s:2:\"%d\";i:1;s:2:\"%s\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";}s:12:\"table_option\";a:4:{s:6:\"emp_id\";s:6:\"emp_id\";s:5:\"skill\";s:5:\"skill\";s:12:\"years_of_exp\";s:12:\"years_of_exp\";s:8:\"comments\";s:8:\"comments\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hrm/hrm.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Hrm->install, Hrm_Db->__construct, Hrm_Db->personal, Hrm_Db->personal_skill, Hrm_Settings->update_table_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hrm_personal_language', 'a:3:{s:10:\"table_name\";s:21:\"hrm_personal_language\";s:12:\"table_format\";a:5:{i:0;s:2:\"%d\";i:1;s:2:\"%d\";i:2;s:2:\"%s\";i:3;s:2:\"%s\";i:4;s:2:\"%s\";}s:12:\"table_option\";a:5:{s:6:\"emp_id\";s:6:\"emp_id\";s:11:\"language_id\";s:11:\"language_id\";s:7:\"fluency\";s:7:\"fluency\";s:10:\"competency\";s:10:\"competency\";s:8:\"comments\";s:8:\"comments\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hrm_personal_language' , 'a:3:{s:10:&quot;table_name&quot;;s:21:&quot;hrm_personal_language&quot;;s:12:&quot;table_format&quot;;a:5:{i:0;s:2:&quot;%d&quot;;i:1;s:2:&quot;%d&quot;;i:2;s:2:&quot;%s&quot;;i:3;s:2:&quot;%s&quot;;i:4;s:2:&quot;
+Error: [11-Apr-2025 06:58:18 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354695.596)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:58:46 UTC] PHP Warning:  Undefined array key "style" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-admin.inc.php on line 191
+[11-Apr-2025 06:58:48 UTC] PHP Warning:  Undefined array key "css_selector" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-public.inc.php on line 55
+[11-Apr-2025 06:58:56 UTC] PHP Warning:  Undefined array key "style" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-admin.inc.php on line 191
+[11-Apr-2025 06:58:57 UTC] PHP Warning:  Undefined array key "css_selector" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-public.inc.php on line 55
+[11-Apr-2025 06:59:06 UTC] PHP Warning:  Undefined array key "style" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-admin.inc.php on line 191
+[11-Apr-2025 06:59:07 UTC] PHP Warning:  Undefined array key "css_selector" in /wordpress/wp-content/plugins/hreflang-flag/hreflang-flag-public.inc.php on line 55
+[11-Apr-2025 07:05:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('HierCatWidget')
+#2 /wordpress/wp-content/plugins/hierarchical-pages/hierpage.php(519): register_widget('HierCatWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): HierCatInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:05:10 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('HierCatWidget')
+#2 /wordpress/wp-content/plugins/hierarchical-pages/hierpage.php(519): register_widget('HierCatWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): HierCatInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:05:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('HierCatWidget')
+#2 /wordpress/wp-content/plugins/hierarchical-pages/hierpage.php(519): register_widget('HierCatWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): HierCatInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[11-Apr-2025 07:05:28 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/hits-ie6-pngfix/hits-pngfix.php on line 325
+[11-Apr-2025 07:05:35 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/hits-ie6-pngfix/hits-pngfix.php on line 325
+[11-Apr-2025 07:05:43 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/hits-ie6-pngfix/hits-pngfix.php on line 325
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"hits-ie6-pngfix"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0

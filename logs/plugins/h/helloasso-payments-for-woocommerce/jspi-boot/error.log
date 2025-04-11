@@ -2,358 +2,81 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:25:02 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php on line 43
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('FlashVideoPlayerPlugin_WidgetOptions', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'FlashVideoPlayerPlugin_WidgetOptions' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php(108): add_option('FlashVideoPlaye...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): FlashVideoPlayerPlugin_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_html5-...', false)
-#9 /internal/eval.php(20): activate_plugin('html5-and-flash...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('FlashVideoPlayerPlugin_WidgetOptions', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_html5-and-flash-video-player/flash-video-player-html5.php'), WP_Hook->do_action, WP_Hook->apply_filters, FlashVideoPlayerPlugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('FlashVideoPlayerPlugin_PlayerOptions', 'a:8:{s:15:\"File Properties\";a:11:{s:6:\"author\";a:3:{s:2:\"dn\";s:6:\"Author\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:4:\"date\";a:3:{s:2:\"dn\";s:12:\"Publish Date\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:11:\"description\";a:3:{s:2:\"dn\";s:11:\"Description\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"duration\";a:3:{s:2:\"dn\";s:8:\"Duration\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:4:\"file\";a:3:{s:2:\"dn\";s:9:\"File Name\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:5:\"image\";a:3:{s:2:\"dn\";s:13:\"Preview Image\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";}s:5:\"start\";a:3:{s:2:\"dn\";s:5:\"Start\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"streamer\";a:3:{s:2:\"dn\";s:8:\"Streamer\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";}s:4:\"tags\";a:3:{s:2:\"dn\";s:4:\"Tags\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:5:\"title\";a:3:{s:2:\"dn\";s:5:\"Title\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"provider\";a:4:{s:2:\"dn\";s:8:\"Provider\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:7:{i:0;s:9:\"undefined\";i:1;s:5:\"video\";i:2;s:5:\"sound\";i:3;s:5:\"image\";i:4;s:7:\"youtube\";i:5;s:4:\"http\";i:6;s:4:\"rtmp\";}}}s:10:\"Video Size\";a:2:{s:5:\"width\";a:4:{s:2:\"dn\";s:12:\"Player Width\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:3:\"400\";s:2:\"sz\";s:1:\"4\";}s:6:\"height\";a:4:{s:2:\"dn\";s:13:\"Player Height\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:3:\"280\";s:2:\"sz\";s:1:\"4\";}}s:6:\"Colors\";a:4:{s:9:\"backcolor\";a:4:{s:2:\"dn\";s:16:\"Background Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:10:\"frontcolor\";a:4:{s:2:\"dn\";s:16:\"Foreground Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:10:\"lightcolor\";a:4:{s:2:\"dn\";s:11:\"Light Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:11:\"screencolor\";a:4:{s:2:\"dn\";s:12:\"Screen Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}}s:6:\"Layout\";a:9:{s:10:\"controlbar\";a:4:{s:2:\"dn\";s:10:\"Controlbar\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:6:\"bottom\";s:2:\"op\";a:3:{i:0;s:4:\"none\";i:1;s:6:\"bottom\";i:2;s:4:\"over\";}}s:4:\"dock\";a:3:{s:2:\"dn\";s:4:\"Dock\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:5:\"icons\";a:3:{s:2:\"dn\";s:9:\"Play Icon\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:4:\"true\";}s:9:\"logo_file\";a:4:{s:2:\"dn\";s:20:\"Logo File (Licensed)\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:9:\"logo_link\";a:4:{s:2:\"dn\";s:20:\"Logo Link (Licensed)\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:9:\"logo_hide\";a:3:{s:2:\"dn\";s:20:\"Logo Hide (Licensed)\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:13:\"logo_position\";a:4:{s:2:\"dn\";s:24:\"Logo Position (Licensed)\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:11:\"bottom-left\";s:2:\"op\";a:4:{i:0;s:11:\"bottom-left\";i:1;s:12:\"bottom-right\";i:2;s:8:\"top-left\";i:3;s:9:\"top-right\";}}s:8:\"playlist\";a:4:{s:2:\"dn\";s:8:\"Playlist\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:4:\"none\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:6:\"bottom\";i:2;s:4:\"over\";i:3;s:5:\"right\";}}s:12:\"playlistsize\";a:4:{s:2:\"dn\";s:13:\"Playlist Size\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"4\";}}s:4:\"Skin\";a:1:{s:4:\"skin\";a:4:{s:2:\"dn\";s:4:\"Skin\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:7:{i:0;s:9:\"undefined\";i:1;s:6:\"bright\";i:2;s:7:\"overlay\";i:3;s:6:\"simple\";i:4;s:7:\"stylish\";i:5;s:5:\"swift\";i:6;s:4:\"thin\";}}}s:8:\"Behavior\";a:9:{s:9:\"autostart\";a:3:{s:2:\"dn\";s:10:\"Auto Start\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:12:\"bufferlength\";a:4:{s:2:\"dn\";s:13:\"Buffer Length\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:1:\"1\";s:2:\"sz\";s:1:\"1\";}s:4:\"item\";a:4:{s:2:\"dn\";s:13:\"Playlist Item\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:1:\"0\";s:2:\"sz\";s:1:\"1\";}s:4:\"mute\";a:3:{s:2:\"dn\";s:11:\"Mute Sounds\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:6:\"repeat\";a:4:{s:2:\"dn\";s:6:\"Repeat\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:4:\"none\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:4:\"list\";i:2;s:6:\"always\";i:3;s:6:\"single\";}}s:7:\"shuffle\";a:3:{s:2:\"dn\";s:7:\"Shuffle\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:9:\"smoothing\";a:3:{s:2:\"dn\";s:9:\"Smoothing\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:4:\"true\";}s:10:\"stretching\";a:4:{s:2:\"dn\";s:10:\"Stretching\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:7:\"uniform\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:8:\"exactfit\";i:2;s:7:\"uniform\";i:3;s:4:\"fill\";}}s:6:\"volume\";a:4:{s:2:\"dn\";s:14:\"Startup Volume\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:2:\"90\";s:2:\"op\";a:11:{i:0;s:1:\"0\";i:1;s:2:\"10\";i:2;s:2:\"20\";i:3;s:2:\"30\";i:4;s:2:\"40\";i:5;s:2:\"50\";i:6;s:2:\"60\";i:7;s:2:\"70\";i:8;s:2:\"80\";i:9;s:2:\"90\";i:10;s:3:\"100\";}}}s:8:\"External\";a:4:{s:7:\"plugins\";a:4:{s:2:\"dn\";s:7:\"Plugins\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:7:\"ltas_cc\";a:4:{s:2:\"dn\";s:17:\"Long Tail Channel\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:6:\"config\";a:4:{s:2:\"dn\";s:10:\"Config XML\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:5:\"debug\";a:4:{s:2:\"dn\";s:12:\"Player Debug\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:4:{i:0;s:9:\"undefined\";i:1;s:9:\"arthropod\";i:2;s:7:\"console\";i:3;s:5:\"trace\";}}}s:15:\"Plugin-Specific\";a:1:{s:9:\"swfobject\";a:4:{s:2:\"dn\";s:16:\"SWFObject Source\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:5:\"local\";s:2:\"op\";a:3:{i:0;s:5:\"local\";i:1;s:6:\"google\";i:2;s:4:\"none\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'FlashVideoPlayerPlugin_PlayerOptions' , 'a:8:{s:15:&quot;File Properties&quot;;a:11:{s:6:&quot;author&quot;;a:3:{s:2:&quot;dn&quot;;s:6:&quot;Author&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:4:&quot;date&quot;;a:3:{s:2:&quot;dn&quot;;s:12:&quot;Publish Date&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:11:&quot;description&quot;;a:3:{s:2:&quot;dn&quot;;s:11:&quot;Description&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:8:&quot;duration&quot;;a:3:{s:2:&quot;dn&quot;;s:8:&quot;Duration&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:4:&quot;file&quot;;a:3:{s:2:&quot;dn&quot;;s:9:&quot;File Name&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:5:&quot;image&quot;;a:3:{s:2:&quot;dn&quot;;s:13:&quot;Preview Image&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:5:&quot;start&quot;;a:3:{s:2:&quot;dn&quot;;s:5:&quot;Start&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:8:&quot;streamer&quot;;a:3:{s:2:&quot;dn&quot;;s:8:&quot;Streamer&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:4:&quot;tags&quot;;a:3:{s:2:&quot;dn&quot;;s:4:&quot;Tags&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:5:&quot;title&quot;;a:3:{s:2:&quot;dn&quot;;s:5:&quot;Title&quot;;s:1:&quot;t&quot;;s:3:&quot;dnd&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;}s:8:&quot;provider&quot;;a:4:{s:2:&quot;dn&quot;;s:8:&quot;Provider&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:9:&quot;undefined&quot;;s:2:&quot;op&quot;;a:7:{i:0;s:9:&quot;undefined&quot;;i:1;s:5:&quot;video&quot;;i:2;s:5:&quot;sound&quot;;i:3;s:5:&quot;image&quot;;i:4;s:7:&quot;youtube&quot;;i:5;s:4:&quot;http&quot;;i:6;s:4:&quot;rtmp&quot;;}}}s:10:&quot;Video Size&quot;;a:2:{s:5:&quot;width&quot;;a:4:{s:2:&quot;dn&quot;;s:12:&quot;Player Width&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:3:&quot;400&quot;;s:2:&quot;sz&quot;;s:1:&quot;4&quot;;}s:6:&quot;height&quot;;a:4:{s:2:&quot;dn&quot;;s:13:&quot;Player Height&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:3:&quot;280&quot;;s:2:&quot;sz&quot;;s:1:&quot;4&quot;;}}s:6:&quot;Colors&quot;;a:4:{s:9:&quot;backcolor&quot;;a:4:{s:2:&quot;dn&quot;;s:16:&quot;Background Color&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:10:&quot;frontcolor&quot;;a:4:{s:2:&quot;dn&quot;;s:16:&quot;Foreground Color&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:10:&quot;lightcolor&quot;;a:4:{s:2:&quot;dn&quot;;s:11:&quot;Light Color&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:11:&quot;screencolor&quot;;a:4:{s:2:&quot;dn&quot;;s:12:&quot;Screen Color&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}}s:6:&quot;Layout&quot;;a:9:{s:10:&quot;controlbar&quot;;a:4:{s:2:&quot;dn&quot;;s:10:&quot;Controlbar&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:6:&quot;bottom&quot;;s:2:&quot;op&quot;;a:3:{i:0;s:4:&quot;none&quot;;i:1;s:6:&quot;bottom&quot;;i:2;s:4:&quot;over&quot;;}}s:4:&quot;dock&quot;;a:3:{s:2:&quot;dn&quot;;s:4:&quot;Dock&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:5:&quot;false&quot;;}s:5:&quot;icons&quot;;a:3:{s:2:&quot;dn&quot;;s:9:&quot;Play Icon&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:4:&quot;true&quot;;}s:9:&quot;logo_file&quot;;a:4:{s:2:&quot;dn&quot;;s:20:&quot;Logo File (Licensed)&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:9:&quot;logo_link&quot;;a:4:{s:2:&quot;dn&quot;;s:20:&quot;Logo Link (Licensed)&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:9:&quot;logo_hide&quot;;a:3:{s:2:&quot;dn&quot;;s:20:&quot;Logo Hide (Licensed)&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:5:&quot;false&quot;;}s:13:&quot;logo_position&quot;;a:4:{s:2:&quot;dn&quot;;s:24:&quot;Logo Position (Licensed)&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:11:&quot;bottom-left&quot;;s:2:&quot;op&quot;;a:4:{i:0;s:11:&quot;bottom-left&quot;;i:1;s:12:&quot;bottom-right&quot;;i:2;s:8:&quot;top-left&quot;;i:3;s:9:&quot;top-right&quot;;}}s:8:&quot;playlist&quot;;a:4:{s:2:&quot;dn&quot;;s:8:&quot;Playlist&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:4:&quot;none&quot;;s:2:&quot;op&quot;;a:4:{i:0;s:4:&quot;none&quot;;i:1;s:6:&quot;bottom&quot;;i:2;s:4:&quot;over&quot;;i:3;s:5:&quot;right&quot;;}}s:12:&quot;playlistsize&quot;;a:4:{s:2:&quot;dn&quot;;s:13:&quot;Playlist Size&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;4&quot;;}}s:4:&quot;Skin&quot;;a:1:{s:4:&quot;skin&quot;;a:4:{s:2:&quot;dn&quot;;s:4:&quot;Skin&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:9:&quot;undefined&quot;;s:2:&quot;op&quot;;a:7:{i:0;s:9:&quot;undefined&quot;;i:1;s:6:&quot;bright&quot;;i:2;s:7:&quot;overlay&quot;;i:3;s:6:&quot;simple&quot;;i:4;s:7:&quot;stylish&quot;;i:5;s:5:&quot;swift&quot;;i:6;s:4:&quot;thin&quot;;}}}s:8:&quot;Behavior&quot;;a:9:{s:9:&quot;autostart&quot;;a:3:{s:2:&quot;dn&quot;;s:10:&quot;Auto Start&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:5:&quot;false&quot;;}s:12:&quot;bufferlength&quot;;a:4:{s:2:&quot;dn&quot;;s:13:&quot;Buffer Length&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:1:&quot;1&quot;;s:2:&quot;sz&quot;;s:1:&quot;1&quot;;}s:4:&quot;item&quot;;a:4:{s:2:&quot;dn&quot;;s:13:&quot;Playlist Item&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:1:&quot;0&quot;;s:2:&quot;sz&quot;;s:1:&quot;1&quot;;}s:4:&quot;mute&quot;;a:3:{s:2:&quot;dn&quot;;s:11:&quot;Mute Sounds&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:5:&quot;false&quot;;}s:6:&quot;repeat&quot;;a:4:{s:2:&quot;dn&quot;;s:6:&quot;Repeat&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:4:&quot;none&quot;;s:2:&quot;op&quot;;a:4:{i:0;s:4:&quot;none&quot;;i:1;s:4:&quot;list&quot;;i:2;s:6:&quot;always&quot;;i:3;s:6:&quot;single&quot;;}}s:7:&quot;shuffle&quot;;a:3:{s:2:&quot;dn&quot;;s:7:&quot;Shuffle&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:5:&quot;false&quot;;}s:9:&quot;smoothing&quot;;a:3:{s:2:&quot;dn&quot;;s:9:&quot;Smoothing&quot;;s:1:&quot;t&quot;;s:2:&quot;cb&quot;;s:1:&quot;v&quot;;s:4:&quot;true&quot;;}s:10:&quot;stretching&quot;;a:4:{s:2:&quot;dn&quot;;s:10:&quot;Stretching&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:7:&quot;uniform&quot;;s:2:&quot;op&quot;;a:4:{i:0;s:4:&quot;none&quot;;i:1;s:8:&quot;exactfit&quot;;i:2;s:7:&quot;uniform&quot;;i:3;s:4:&quot;fill&quot;;}}s:6:&quot;volume&quot;;a:4:{s:2:&quot;dn&quot;;s:14:&quot;Startup Volume&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:2:&quot;90&quot;;s:2:&quot;op&quot;;a:11:{i:0;s:1:&quot;0&quot;;i:1;s:2:&quot;10&quot;;i:2;s:2:&quot;20&quot;;i:3;s:2:&quot;30&quot;;i:4;s:2:&quot;40&quot;;i:5;s:2:&quot;50&quot;;i:6;s:2:&quot;60&quot;;i:7;s:2:&quot;70&quot;;i:8;s:2:&quot;80&quot;;i:9;s:2:&quot;90&quot;;i:10;s:3:&quot;100&quot;;}}}s:8:&quot;External&quot;;a:4:{s:7:&quot;plugins&quot;;a:4:{s:2:&quot;dn&quot;;s:7:&quot;Plugins&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:7:&quot;ltas_cc&quot;;a:4:{s:2:&quot;dn&quot;;s:17:&quot;Long Tail Channel&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:6:&quot;config&quot;;a:4:{s:2:&quot;dn&quot;;s:10:&quot;Config XML&quot;;s:1:&quot;t&quot;;s:2:&quot;tx&quot;;s:1:&quot;v&quot;;s:0:&quot;&quot;;s:2:&quot;sz&quot;;s:1:&quot;8&quot;;}s:5:&quot;debug&quot;;a:4:{s:2:&quot;dn&quot;;s:12:&quot;Player Debug&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:9:&quot;undefined&quot;;s:2:&quot;op&quot;;a:4:{i:0;s:9:&quot;undefined&quot;;i:1;s:9:&quot;arthropod&quot;;i:2;s:7:&quot;console&quot;;i:3;s:5:&quot;trace&quot;;}}}s:15:&quot;Plugin-Specific&quot;;a:1:{s:9:&quot;swfobject&quot;;a:4:{s:2:&quot;dn&quot;;s:16:&quot;SWFObject Source&quot;;s:1:&quot;t&quot;;s:2:&quot;dd&quot;;s:1:&quot;v&quot;;s:5:&quot;local&quot;;s:2:&quot;op&quot;;a:3:{i:0;s:5:&quot;local&quot;;i:1;s:6:&quot;google&quot;;i:2;s:4:&quot;none&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('FlashVideoPlaye...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php(109): update_option('FlashVideoPlaye...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FlashVideoPlayerPlugin_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [11-Apr-2025 06:56:03 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:09 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:17 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:20 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:29 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:31 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-includes/plugin.php on line 1003
+[11-Apr-2025 06:56:43 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354600.665)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_html5-...', false)
-#10 /internal/eval.php(20): activate_plugin('html5-and-flash...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('FlashVideoPlayerPlugin_PlayerOptions', 'a:8:{s:15:\"File Properties\";a:11:{s:6:\"author\";a:3:{s:2:\"dn\";s:6:\"Author\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:4:\"date\";a:3:{s:2:\"dn\";s:12:\"Publish Date\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:11:\"description\";a:3:{s:2:\"dn\";s:11:\"Description\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"duration\";a:3:{s:2:\"dn\";s:8:\"Duration\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:4:\"file\";a:3:{s:2:\"dn\";s:9:\"File Name\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:5:\"image\";a:3:{s:2:\"dn\";s:13:\"Preview Image\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";}s:5:\"start\";a:3:{s:2:\"dn\";s:5:\"Start\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"streamer\";a:3:{s:2:\"dn\";s:8:\"Streamer\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";}s:4:\"tags\";a:3:{s:2:\"dn\";s:4:\"Tags\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:5:\"title\";a:3:{s:2:\"dn\";s:5:\"Title\";s:1:\"t\";s:3:\"dnd\";s:1:\"v\";s:0:\"\";}s:8:\"provider\";a:4:{s:2:\"dn\";s:8:\"Provider\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:7:{i:0;s:9:\"undefined\";i:1;s:5:\"video\";i:2;s:5:\"sound\";i:3;s:5:\"image\";i:4;s:7:\"youtube\";i:5;s:4:\"http\";i:6;s:4:\"rtmp\";}}}s:10:\"Video Size\";a:2:{s:5:\"width\";a:4:{s:2:\"dn\";s:12:\"Player Width\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:3:\"400\";s:2:\"sz\";s:1:\"4\";}s:6:\"height\";a:4:{s:2:\"dn\";s:13:\"Player Height\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:3:\"280\";s:2:\"sz\";s:1:\"4\";}}s:6:\"Colors\";a:4:{s:9:\"backcolor\";a:4:{s:2:\"dn\";s:16:\"Background Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:10:\"frontcolor\";a:4:{s:2:\"dn\";s:16:\"Foreground Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:10:\"lightcolor\";a:4:{s:2:\"dn\";s:11:\"Light Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:11:\"screencolor\";a:4:{s:2:\"dn\";s:12:\"Screen Color\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}}s:6:\"Layout\";a:9:{s:10:\"controlbar\";a:4:{s:2:\"dn\";s:10:\"Controlbar\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:6:\"bottom\";s:2:\"op\";a:3:{i:0;s:4:\"none\";i:1;s:6:\"bottom\";i:2;s:4:\"over\";}}s:4:\"dock\";a:3:{s:2:\"dn\";s:4:\"Dock\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:5:\"icons\";a:3:{s:2:\"dn\";s:9:\"Play Icon\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:4:\"true\";}s:9:\"logo_file\";a:4:{s:2:\"dn\";s:20:\"Logo File (Licensed)\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:9:\"logo_link\";a:4:{s:2:\"dn\";s:20:\"Logo Link (Licensed)\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:9:\"logo_hide\";a:3:{s:2:\"dn\";s:20:\"Logo Hide (Licensed)\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:13:\"logo_position\";a:4:{s:2:\"dn\";s:24:\"Logo Position (Licensed)\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:11:\"bottom-left\";s:2:\"op\";a:4:{i:0;s:11:\"bottom-left\";i:1;s:12:\"bottom-right\";i:2;s:8:\"top-left\";i:3;s:9:\"top-right\";}}s:8:\"playlist\";a:4:{s:2:\"dn\";s:8:\"Playlist\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:4:\"none\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:6:\"bottom\";i:2;s:4:\"over\";i:3;s:5:\"right\";}}s:12:\"playlistsize\";a:4:{s:2:\"dn\";s:13:\"Playlist Size\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"4\";}}s:4:\"Skin\";a:1:{s:4:\"skin\";a:4:{s:2:\"dn\";s:4:\"Skin\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:7:{i:0;s:9:\"undefined\";i:1;s:6:\"bright\";i:2;s:7:\"overlay\";i:3;s:6:\"simple\";i:4;s:7:\"stylish\";i:5;s:5:\"swift\";i:6;s:4:\"thin\";}}}s:8:\"Behavior\";a:9:{s:9:\"autostart\";a:3:{s:2:\"dn\";s:10:\"Auto Start\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:12:\"bufferlength\";a:4:{s:2:\"dn\";s:13:\"Buffer Length\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:1:\"1\";s:2:\"sz\";s:1:\"1\";}s:4:\"item\";a:4:{s:2:\"dn\";s:13:\"Playlist Item\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:1:\"0\";s:2:\"sz\";s:1:\"1\";}s:4:\"mute\";a:3:{s:2:\"dn\";s:11:\"Mute Sounds\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:6:\"repeat\";a:4:{s:2:\"dn\";s:6:\"Repeat\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:4:\"none\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:4:\"list\";i:2;s:6:\"always\";i:3;s:6:\"single\";}}s:7:\"shuffle\";a:3:{s:2:\"dn\";s:7:\"Shuffle\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:5:\"false\";}s:9:\"smoothing\";a:3:{s:2:\"dn\";s:9:\"Smoothing\";s:1:\"t\";s:2:\"cb\";s:1:\"v\";s:4:\"true\";}s:10:\"stretching\";a:4:{s:2:\"dn\";s:10:\"Stretching\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:7:\"uniform\";s:2:\"op\";a:4:{i:0;s:4:\"none\";i:1;s:8:\"exactfit\";i:2;s:7:\"uniform\";i:3;s:4:\"fill\";}}s:6:\"volume\";a:4:{s:2:\"dn\";s:14:\"Startup Volume\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:2:\"90\";s:2:\"op\";a:11:{i:0;s:1:\"0\";i:1;s:2:\"10\";i:2;s:2:\"20\";i:3;s:2:\"30\";i:4;s:2:\"40\";i:5;s:2:\"50\";i:6;s:2:\"60\";i:7;s:2:\"70\";i:8;s:2:\"80\";i:9;s:2:\"90\";i:10;s:3:\"100\";}}}s:8:\"External\";a:4:{s:7:\"plugins\";a:4:{s:2:\"dn\";s:7:\"Plugins\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:7:\"ltas_cc\";a:4:{s:2:\"dn\";s:17:\"Long Tail Channel\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:6:\"config\";a:4:{s:2:\"dn\";s:10:\"Config XML\";s:1:\"t\";s:2:\"tx\";s:1:\"v\";s:0:\"\";s:2:\"sz\";s:1:\"8\";}s:5:\"debug\";a:4:{s:2:\"dn\";s:12:\"Player Debug\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:9:\"undefined\";s:2:\"op\";a:4:{i:0;s:9:\"undefined\";i:1;s:9:\"arthropod\";i:2;s:7:\"console\";i:3;s:5:\"trace\";}}}s:15:\"Plugin-Specific\";a:1:{s:9:\"swfobject\";a:4:{s:2:\"dn\";s:16:\"SWFObject Source\";s:1:\"t\";s:2:\"dd\";s:1:\"v\";s:5:\"local\";s:2:\"op\";a:3:{i:0;s:5:\"local\";i:1;s:6:\"google\";i:2;s:4:\"none\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_html5-and-flash-video-player/flash-video-player-html5.php'), WP_Hook->do_action, WP_Hook->apply_filters, FlashVideoPlayerPlugin_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:25:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php on line 43
-[09-Apr-2025 17:25:31 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:25:31 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:25:39 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php on line 43
-[09-Apr-2025 17:25:40 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:25:40 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:25:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/html5-and-flash-video-player/flash-video-player-html5.php on line 43
-[09-Apr-2025 17:25:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:25:48 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:26:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:27:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('HAQTS_default_settings', 's:84:\"a:3:{s:15:\"HAQTS_Auto_Play\";i:1;s:16:\"HAQTS_Transition\";i:1;s:11:\"HAQTS_Arrow\";i:1;}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'HAQTS_default_settings' , 's:84:&quot;a:3:{s:15:&quot;HAQTS_Auto_Play&quot;;i:1;s:16:&quot;HAQTS_Transition&quot;;i:1;s:11:&quot;HAQTS_Arrow&quot;;i:1;}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/haq-tabed-slider/haq-tabed-slider.php(24): add_option('HAQTS_default_s...', 'a:3:{s:15:"HAQT...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): HAQTS_DefaultSettings(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_haq-ta...', false)
-#9 /internal/eval.php(20): activate_plugin('haq-tabed-slide...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('HAQTS_default_settings', 's:84:\"a:3:{s:15:\"HAQTS_Auto_Play\";i:1;s:16:\"HAQTS_Transition\";i:1;s:11:\"HAQTS_Arrow\";i:1;}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_haq-tabed-slider/haq-tabed-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, HAQTS_DefaultSettings, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:27:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:27:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:27:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:27:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:28:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:28:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:28:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:28:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:28:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:28:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:28:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:28:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:23:\"hire-me-widget/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744219760;s:11:\"plugin_path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"hire-me-widget/hire-me-widget.php\";s:8:\"sdk_path\";s:23:\"hire-me-widget/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744219760;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:23:&quot;hire-me-widget/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744219760;s:11:&quot;plugin_path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;s:8:&quot;sdk_path&quot;;s:23:&quot;hire-me-widget/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744219760;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/hire-me-widget/freemius/start.php(242): fs_update_sdk_newest_version('hire-me-widget/...', 'hire-me-widget/...')
-#7 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(31): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(54): hmw_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hire-me-widget/...')
-#11 /internal/eval.php(20): activate_plugin('hire-me-widget/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:23:\"hire-me-widget/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744219760;s:11:\"plugin_path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"hire-me-widget/hire-me-widget.php\";s:8:\"sdk_path\";s:23:\"hire-me-widget/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744219760;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hire-me-widget/hire-me-widget.php'), hmw_fs, require_once('/plugins/hire-me-widget/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hire-me-widget/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/hire-me-widget/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/hire-me-widget/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(31): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(54): hmw_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hire-me-widget/...')
-#11 /internal/eval.php(20): activate_plugin('hire-me-widget/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hire-me-widget/hire-me-widget.php'), hmw_fs, require_once('/plugins/hire-me-widget/freemius/start.php'), require_once('/plugins/hire-me-widget/freemius/require.php'), require_once('/plugins/hire-me-widget/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4065;a:3:{s:4:&quot;slug&quot;;s:14:&quot;hire-me-widget&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('4065', 'hire-me-widget')
-#10 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(2868): Freemius->__construct('4065', 'hire-me-widget', true)
-#11 /wordpress/wp-content/plugins/hire-me-widget/freemius/start.php(615): Freemius::instance('4065', 'hire-me-widget', true)
-#12 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(35): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(54): hmw_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hire-me-widget/...')
-#16 /internal/eval.php(20): activate_plugin('hire-me-widget/...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hire-me-widget/hire-me-widget.php'), hmw_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"hire-me-widget\";a:1:{s:19:\"last_load_timestamp\";i:1744219760;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4065;a:3:{s:4:&quot;slug&quot;;s:14:&quot;hire-me-widget&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;hire-me-widget&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744219760;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744219760)
-#9 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744219760)
-#10 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744219760)
-#11 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(2868): Freemius->__construct('4065', 'hire-me-widget', true)
-#12 /wordpress/wp-content/plugins/hire-me-widget/freemius/start.php(615): Freemius::instance('4065', 'hire-me-widget', true)
-#13 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(35): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(54): hmw_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hire-me-widget/...')
-#17 /internal/eval.php(20): activate_plugin('hire-me-widget/...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"hire-me-widget\";a:1:{s:19:\"last_load_timestamp\";i:1744219760;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hire-me-widget/hire-me-widget.php'), hmw_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"hire-me-widget\";a:2:{s:19:\"last_load_timestamp\";i:1744219760;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:4065;a:3:{s:4:&quot;slug&quot;;s:14:&quot;hire-me-widget&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;hire-me-widget&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744219760;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;hire-me-widget/hire-me-widget.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'hire-me-widget/...')
-#12 /wordpress/wp-content/plugins/hire-me-widget/freemius/includes/class-freemius.php(2868): Freemius->__construct('4065', 'hire-me-widget', true)
-#13 /wordpress/wp-content/plugins/hire-me-widget/freemius/start.php(615): Freemius::instance('4065', 'hire-me-widget', true)
-#14 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(35): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/hire-me-widget/hire-me-widget.php(54): hmw_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hire-me-widget/...')
-#18 /internal/eval.php(20): activate_plugin('hire-me-widget/...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"hire-me-widget\";a:2:{s:19:\"last_load_timestamp\";i:1744219760;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/hire-me-widget/hire-me-widget.php'), hmw_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:4065;a:3:{s:4:\"slug\";s:14:\"hire-me-widget\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"hire-me-widget\";a:3:{s:19:\"last_load_timestamp\";i:1744219760;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"hire-me-widget/hire-me-widget.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 06:56:53 UTC] PHP Notice:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/holiday-notifications/wp-holiday-notifications.php on line 42
+[11-Apr-2025 06:57:01 UTC] PHP Notice:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/holiday-notifications/wp-holiday-notifications.php on line 42
+[11-Apr-2025 06:59:17 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "HTMLIZE_VERSION" in /wordpress/wp-content/plugins/html-emails/html-emails.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('html-emails/htm...')
+#2 /internal/eval.php(20): activate_plugin('html-emails/htm...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/html-emails/html-emails.php on line 39
+[11-Apr-2025 06:59:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "HTMLIZE_VERSION" in /wordpress/wp-content/plugins/html-emails/html-emails.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('html-emails/htm...')
+#2 /internal/eval.php(20): activate_plugin('html-emails/htm...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/html-emails/html-emails.php on line 39
+[11-Apr-2025 06:59:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "HTMLIZE_VERSION" in /wordpress/wp-content/plugins/html-emails/html-emails.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('html-emails/htm...')
+#2 /internal/eval.php(20): activate_plugin('html-emails/htm...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/html-emails/html-emails.php on line 39
+[11-Apr-2025 07:01:45 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744354902.856)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"helloasso-payments-for-woocommerce"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/helloasso-payments-for-woocommerce could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/helloasso-payments-for-woocommerce could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0
