@@ -1,723 +1,877 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 07:26:56 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
-[10-Apr-2025 07:26:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 19:45:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_gtwbundle_meetings 
+                        drop column `source`,
+                        ADD COLUMN `firstName` varchar(30) NOT NULL AFTER `type`,
+                        ADD COLUMN `lastName` varchar(30) NOT NULL AFTER `firstName`,
+                        ADD COLUMN `email` varchar(50) NOT NULL AFTER `lastName`
+                   </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_meetings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_meetings</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ? AND column_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings, source</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ? AND column_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings, source</li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_gtwbundle_meetings, database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb-enabled' , 'no' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, firstName, 13, , NO, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, lastName, 14, , NO, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, email, 15, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gtwbundle_meetings_67f97166d07f0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `postid` INTEGER NOT NULL,
+  `type` TEXT COLLATE NOCASE,
+  `firstName` TEXT COLLATE NOCASE,
+  `lastName` TEXT COLLATE NOCASE,
+  `email` TEXT COLLATE NOCASE,
+  `meeting_id` TEXT COLLATE NOCASE NOT NULL,
+  `amount` TEXT COLLATE NOCASE NOT NULL,
+  `postdata` TEXT COLLATE NOCASE NOT NULL,
+  `payment_response` TEXT COLLATE NOCASE NOT NULL,
+  `payment_type` TEXT COLLATE NOCASE,
+  `status` INTEGER NOT NULL,
+  `firstName` TEXT COLLATE NOCASE NOT NULL,
+  `lastName` TEXT COLLATE NOCASE NOT NULL,
+  `email` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: firstName
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(92): add_option('gmb-enabled', 'no', '', 'on')
-#5 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('geek-mail-black...')
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:26:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb-enabled' , 'no' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(92): add_option('gmb-enabled', 'no', '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(843): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(564): gotowp_g2m_add_missing_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gotowp_g2m_save_before_payment('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#9 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_gtwbundle_meetings 
+                        drop column `source`,
+                        ADD COLUMN `firstName` varchar(30) NOT NULL AFTER `type`,
+                        ADD COLUMN `lastName` varchar(30) NOT NULL AFTER `firstName`,
+                        ADD COLUMN `email` varchar(50) NOT NULL AFTER `lastName`
+                    made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gotowp_g2m_save_before_payment, gotowp_g2m_add_missing_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:45:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gtwbundle_webinars ADD source VARCHAR(50) NOT NULL AFTER email</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_webinars</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_webinars</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_webinars, source, 15, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gtwbundle_webinars_67f97166db3d0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `postid` INTEGER NOT NULL,
+  `type` TEXT COLLATE NOCASE,
+  `firstName` TEXT COLLATE NOCASE,
+  `lastName` TEXT COLLATE NOCASE,
+  `email` TEXT COLLATE NOCASE,
+  `source` TEXT COLLATE NOCASE,
+  `webinar_id` TEXT COLLATE NOCASE NOT NULL,
+  `amount` TEXT COLLATE NOCASE NOT NULL,
+  `formdata` TEXT COLLATE NOCASE NOT NULL,
+  `postdata` TEXT COLLATE NOCASE NOT NULL,
+  `payment_response` TEXT COLLATE NOCASE NOT NULL,
+  `payment_type` TEXT COLLATE NOCASE,
+  `status` INTEGER NOT NULL,
+  `source` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: source
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(241): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(1022): gotowp_personal_add_source_field()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gotowp_personal_save_before_payment('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_gtwbundle_webinars ADD source VARCHAR(50) NOT NULL AFTER email made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gotowp_personal_save_before_payment, gotowp_personal_add_source_field, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:46:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gulri-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 19:46:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gulri-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 19:46:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>gulri-slider</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+						CREATE INDEX idx_rgm_type_attribute_value_date
+						ON wp_recaptcha_gdpr_message_rgm (rgm_type, rgm_date)
+					</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(235): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:26:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 07:27:05 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
-[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query 
+						CREATE INDEX idx_rgm_type_attribute_value_date
+						ON wp_recaptcha_gdpr_message_rgm (rgm_type, rgm_date)
+					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>
+						CREATE INDEX idx_rgd_attribute_value
+						ON wp_recaptcha_gdpr_details_rgd (rgd_attribute(255), rgd_value(255));
+					</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(270): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+						CREATE INDEX idx_rgd_attribute_value
+						ON wp_recaptcha_gdpr_details_rgd (rgd_attribute(255), rgd_value(255));
+					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+						CREATE INDEX idx_rgd_rgm_id
+						ON wp_recaptcha_gdpr_details_rgd (rgm_id);
+					</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(287): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+						CREATE INDEX idx_rgd_rgm_id
+						ON wp_recaptcha_gdpr_details_rgd (rgm_id);
+					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_ajax, 10, , YES, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_action, 11, , YES, varchar, 500, 2000, , , , utf8mb4, utf8mb4_general_ci, varchar(500), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_67f971fe22ab0` (
+  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `rgm_type` INTEGER,
+  `rgm_date` TEXT COLLATE NOCASE,
+  `rgm_title` TEXT COLLATE NOCASE,
+  `rgm_ip` TEXT COLLATE NOCASE,
+  `rgm_site` TEXT COLLATE NOCASE,
+  `rgm_ajax` INTEGER,
+  `rgm_action` TEXT COLLATE NOCASE,
+  `rgm_pattern` TEXT COLLATE NOCASE,
+  `rgm_ajax` INTEGER,
+  `rgm_action` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_details_rgd
+							ADD COLUMN rgm_posted INT;
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd, rgm_posted, 7, , YES, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_details_rgd_67f971fe27100` (
+  `rgd_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `rgm_id` INTEGER,
+  `rgd_original_attribute` TEXT COLLATE NOCASE,
+  `rgd_attribute` TEXT COLLATE NOCASE,
+  `rgd_value` TEXT COLLATE NOCASE,
+  `rgm_posted` INTEGER,
+  `rgm_posted` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(328): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_details_rgd
+							ADD COLUMN rgm_posted INT;
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_pattern VARCHAR(1000);
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_pattern, 10, , YES, varchar, 1000, 4000, , , , utf8mb4, utf8mb4_general_ci, varchar(1000), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_67f971fe29810` (
+  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `rgm_type` INTEGER,
+  `rgm_date` TEXT COLLATE NOCASE,
+  `rgm_title` TEXT COLLATE NOCASE,
+  `rgm_ip` TEXT COLLATE NOCASE,
+  `rgm_site` TEXT COLLATE NOCASE,
+  `rgm_ajax` INTEGER,
+  `rgm_action` TEXT COLLATE NOCASE,
+  `rgm_pattern` TEXT COLLATE NOCASE,
+  `rgm_pattern` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(339): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_pattern VARCHAR(1000);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ip VARCHAR(255);
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_ip, 10, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_67f971fe2b750` (
+  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `rgm_type` INTEGER,
+  `rgm_date` TEXT COLLATE NOCASE,
+  `rgm_title` TEXT COLLATE NOCASE,
+  `rgm_ip` TEXT COLLATE NOCASE,
+  `rgm_site` TEXT COLLATE NOCASE,
+  `rgm_ajax` INTEGER,
+  `rgm_action` TEXT COLLATE NOCASE,
+  `rgm_pattern` TEXT COLLATE NOCASE,
+  `rgm_ip` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(346): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ip VARCHAR(255);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_site VARCHAR(21844);
+						</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_site, 10, , YES, varchar, 21844, 87376, , , , utf8mb4, utf8mb4_general_ci, varchar(21844), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_67f971fe2fda0` (
+  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `rgm_type` INTEGER,
+  `rgm_date` TEXT COLLATE NOCASE,
+  `rgm_title` TEXT COLLATE NOCASE,
+  `rgm_ip` TEXT COLLATE NOCASE,
+  `rgm_site` TEXT COLLATE NOCASE,
+  `rgm_ajax` INTEGER,
+  `rgm_action` TEXT COLLATE NOCASE,
+  `rgm_pattern` TEXT COLLATE NOCASE,
+  `rgm_site` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(353): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#10 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_site VARCHAR(21844);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ajax, int</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax integer | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_details_rgd
+							ADD COLUMN rgm_posted INT;
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_details_rgd, rgm_posted, int</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_details_rgd
+							ADD COLUMN rgm_posted integer;
+						 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(328): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_details_rgd
+							ADD COLUMN rgm_posted INT;
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_pattern VARCHAR(1000);
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_pattern, varchar(1000)</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_pattern text;
+						 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(339): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_pattern VARCHAR(1000);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ip VARCHAR(255);
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ip, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ip text;
+						 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(346): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ip VARCHAR(255);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_site VARCHAR(21844);
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_site, varchar(21844)</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_site text;
+						 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:06 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
-[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(353): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_site VARCHAR(21844);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 19:48:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
 				VALUES (:table, :column, :datatype)
 				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ajax, int</li>
+<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax integer | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:15 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
-[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
-#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:16 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
-[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
-#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 07:27:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 07:27:52 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"get-satisfaction-for-wordpress"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
+#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
+#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
+#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
+#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
+#8 {main}</pre>
+ for query 
+							ALTER TABLE wp_recaptcha_gdpr_message_rgm
+							ADD COLUMN rgm_ajax INT,
+							ADD COLUMN rgm_action VARCHAR(500);
+						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-c
