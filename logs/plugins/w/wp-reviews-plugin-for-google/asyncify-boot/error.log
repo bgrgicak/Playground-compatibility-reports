@@ -1,689 +1,701 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 17:25:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_settings', 'a:4:{s:13:\"email_gateway\";s:9:\"wordpress\";s:6:\"credit\";b:0;s:12:\"email_footer\";b:1;s:9:\"recaptcha\";a:3:{s:3:\"key\";s:0:\"\";s:6:\"secret\";s:0:\"\";s:4:\"type\";s:2:\"v2\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'weforms_settings' , 'a:4:{s:13:&quot;email_gateway&quot;;s:9:&quot;wordpress&quot;;s:6:&quot;credit&quot;;b:0;s:12:&quot;email_footer&quot;;b:1;s:9:&quot;recaptcha&quot;;a:3:{s:3:&quot;key&quot;;s:0:&quot;&quot;;s:6:&quot;secret&quot;;s:0:&quot;&quot;;s:4:&quot;type&quot;;s:2:&quot;v2&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wpks` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpks
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('weforms_setting...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(109): update_option('weforms_setting...', Array)
-#6 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(17): WeForms_Installer->maybe_set_default_settings()
-#7 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#12 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_settings', 'a:4:{s:13:\"email_gateway\";s:9:\"wordpress\";s:6:\"credit\";b:0;s:12:\"email_footer\";b:1;s:9:\"recaptcha\";a:3:{s:3:\"key\";s:0:\"\";s:6:\"secret\";s:0:\"\";s:4:\"type\";s:2:\"v2\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, WeForms_Installer->maybe_set_default_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(154): get_all_wpks()
+#6 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#10 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', '', '', 'Contact Form', '', 'publish', 'wpuf_contact_form', 'closed', 'closed', '', 'contact-form', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 0, '', '')</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , '' , '' , 'Contact Form' , '' , 'publish' , 'wpuf_contact_form' , 'closed' , 'closed' , '' , 'contact-form' , '' , '' , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wpks` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpks
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/weforms/includes/class-form-manager.php(79): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/weforms/includes/class-template-manager.php(132): WeForms_Form_Manager->create('Contact Form', Array)
-#8 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(126): WeForms_Template_Manager->create('contact')
-#9 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(18): WeForms_Installer->create_default_form()
-#10 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#11 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#15 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', '', '', 'Contact Form', '', 'publish', 'wpuf_contact_form', 'closed', 'closed', '', 'contact-form', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 0, '', '') made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, WeForms_Installer->create_default_form, WeForms_Template_Manager->create, WeForms_Form_Manager->create, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(155): get_all_wpks()
+#6 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#10 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:25:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:25:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:20:{s:8:\"template\";s:10:\"name_field\";s:4:\"name\";s:4:\"name\";s:5:\"label\";s:4:\"Name\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:6:\"format\";s:10:\"first-last\";s:10:\"first_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:5:\"First\";}s:11:\"middle_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:6:\"Middle\";}s:9:\"last_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:4:\"Last\";}s:6:\"inline\";s:3:\"yes\";s:9:\"hide_subs\";b:0;}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 0, '', '')</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 'a:20:{s:8:&quot;template&quot;;s:10:&quot;name_field&quot;;s:4:&quot;name&quot;;s:4:&quot;name&quot;;s:5:&quot;label&quot;;s:4:&quot;Name&quot;;s:8:&quot;required&quot;;s:3:&quot;yes&quot;;s:2:&quot;id&quot;;i:0;s:5:&quot;width&quot;;s:5:&quot;large&quot;;s:3:&quot;css&quot;;s:0:&quot;&quot;;s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:4:&quot;size&quot;;i:40;s:4:&quot;help&quot;;s:0:&quot;&quot;;s:7:&quot;is_meta&quot;;s:3:&quot;yes&quot;;s:6:&quot;is_new&quot;;b:1;s:9:&quot;wpuf_cond&quot;;a:5:{s:16:&quot;condition_status&quot;;s:2:&quot;no&quot;;s:10:&quot;cond_field&quot;;a:0:{}s:13:&quot;cond_operator&quot;;a:1:{i:0;s:1:&quot;=&quot;;}s:11:&quot;cond_option&quot;;a:1:{i:0;s:10:&quot;- select -&quot;;}s:10:&quot;cond_logic&quot;;s:3:&quot;all&quot;;}s:6:&quot;format&quot;;s:10:&quot;first-last&quot;;s:10:&quot;first_name&quot;;a:3:{s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:3:&quot;sub&quot;;s:5:&quot;First&quot;;}s:11:&quot;middle_name&quot;;a:3:{s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:3:&quot;sub&quot;;s:6:&quot;Middle&quot;;}s:9:&quot;last_name&quot;;a:3:{s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:3:&quot;sub&quot;;s:4:&quot;Last&quot;;}s:6:&quot;inline&quot;;s:3:&quot;yes&quot;;s:9:&quot;hide_subs&quot;;b:0;}' , '' , '' , '' , 'publish' , 'wpuf_input' , 'closed' , 'closed' , '' , '' , '' , '' , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/weforms/includes/class-form-manager.php(96): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/weforms/includes/class-template-manager.php(132): WeForms_Form_Manager->create('Contact Form', Array)
-#8 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(126): WeForms_Template_Manager->create('contact')
-#9 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(18): WeForms_Installer->create_default_form()
-#10 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#11 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#15 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:20:{s:8:\"template\";s:10:\"name_field\";s:4:\"name\";s:4:\"name\";s:5:\"label\";s:4:\"Name\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:6:\"format\";s:10:\"first-last\";s:10:\"first_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:5:\"First\";}s:11:\"middle_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:6:\"Middle\";}s:9:\"last_name\";a:3:{s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:3:\"sub\";s:4:\"Last\";}s:6:\"inline\";s:3:\"yes\";s:9:\"hide_subs\";b:0;}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 0, '', '') made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, WeForms_Installer->create_default_form, WeForms_Template_Manager->create, WeForms_Form_Manager->create, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:15:{s:8:\"template\";s:13:\"email_address\";s:4:\"name\";s:5:\"email\";s:5:\"label\";s:13:\"Email Address\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:9:\"duplicate\";s:0:\"\";}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 1, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 'a:15:{s:8:&quot;template&quot;;s:13:&quot;email_address&quot;;s:4:&quot;name&quot;;s:5:&quot;email&quot;;s:5:&quot;label&quot;;s:13:&quot;Email Address&quot;;s:8:&quot;required&quot;;s:3:&quot;yes&quot;;s:2:&quot;id&quot;;i:0;s:5:&quot;width&quot;;s:5:&quot;large&quot;;s:3:&quot;css&quot;;s:0:&quot;&quot;;s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:4:&quot;size&quot;;i:40;s:4:&quot;help&quot;;s:0:&quot;&quot;;s:7:&quot;is_meta&quot;;s:3:&quot;yes&quot;;s:6:&quot;is_new&quot;;b:1;s:9:&quot;wpuf_cond&quot;;a:5:{s:16:&quot;condition_status&quot;;s:2:&quot;no&quot;;s:10:&quot;cond_field&quot;;a:0:{}s:13:&quot;cond_operator&quot;;a:1:{i:0;s:1:&quot;=&quot;;}s:11:&quot;cond_option&quot;;a:1:{i:0;s:10:&quot;- select -&quot;;}s:10:&quot;cond_logic&quot;;s:3:&quot;all&quot;;}s:9:&quot;duplicate&quot;;s:0:&quot;&quot;;}' , '' , '' , '' , 'publish' , 'wpuf_input' , 'closed' , 'closed' , '' , '' , '' , '' , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 0 , 1 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/weforms/includes/class-form-manager.php(96): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/weforms/includes/class-template-manager.php(132): WeForms_Form_Manager->create('Contact Form', Array)
-#8 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(126): WeForms_Template_Manager->create('contact')
-#9 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(18): WeForms_Installer->create_default_form()
-#10 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#11 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#15 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:15:{s:8:\"template\";s:13:\"email_address\";s:4:\"name\";s:5:\"email\";s:5:\"label\";s:13:\"Email Address\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:9:\"duplicate\";s:0:\"\";}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 1, '', '') made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, WeForms_Installer->create_default_form, WeForms_Template_Manager->create, WeForms_Form_Manager->create, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:18:{s:8:\"template\";s:14:\"textarea_field\";s:4:\"name\";s:7:\"message\";s:5:\"label\";s:7:\"Message\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:16:\"word_restriction\";s:0:\"\";s:4:\"rows\";i:5;s:4:\"cols\";i:25;s:4:\"rich\";s:2:\"no\";}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 2, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 'a:18:{s:8:&quot;template&quot;;s:14:&quot;textarea_field&quot;;s:4:&quot;name&quot;;s:7:&quot;message&quot;;s:5:&quot;label&quot;;s:7:&quot;Message&quot;;s:8:&quot;required&quot;;s:3:&quot;yes&quot;;s:2:&quot;id&quot;;i:0;s:5:&quot;width&quot;;s:5:&quot;large&quot;;s:3:&quot;css&quot;;s:0:&quot;&quot;;s:11:&quot;placeholder&quot;;s:0:&quot;&quot;;s:7:&quot;default&quot;;s:0:&quot;&quot;;s:4:&quot;size&quot;;i:40;s:4:&quot;help&quot;;s:0:&quot;&quot;;s:7:&quot;is_meta&quot;;s:3:&quot;yes&quot;;s:6:&quot;is_new&quot;;b:1;s:9:&quot;wpuf_cond&quot;;a:5:{s:16:&quot;condition_status&quot;;s:2:&quot;no&quot;;s:10:&quot;cond_field&quot;;a:0:{}s:13:&quot;cond_operator&quot;;a:1:{i:0;s:1:&quot;=&quot;;}s:11:&quot;cond_option&quot;;a:1:{i:0;s:10:&quot;- select -&quot;;}s:10:&quot;cond_logic&quot;;s:3:&quot;all&quot;;}s:16:&quot;word_restriction&quot;;s:0:&quot;&quot;;s:4:&quot;rows&quot;;i:5;s:4:&quot;cols&quot;;i:25;s:4:&quot;rich&quot;;s:2:&quot;no&quot;;}' , '' , '' , '' , 'publish' , 'wpuf_input' , 'closed' , 'closed' , '' , '' , '' , '' , '2025-04-10 03:57:03' , '2025-04-10 03:57:03' , 0 , 2 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/weforms/includes/class-form-manager.php(96): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/weforms/includes/class-template-manager.php(132): WeForms_Form_Manager->create('Contact Form', Array)
-#8 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(126): WeForms_Template_Manager->create('contact')
-#9 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(18): WeForms_Installer->create_default_form()
-#10 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#11 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#15 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 03:57:03', '2025-04-10 03:57:03', 'a:18:{s:8:\"template\";s:14:\"textarea_field\";s:4:\"name\";s:7:\"message\";s:5:\"label\";s:7:\"Message\";s:8:\"required\";s:3:\"yes\";s:2:\"id\";i:0;s:5:\"width\";s:5:\"large\";s:3:\"css\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:7:\"default\";s:0:\"\";s:4:\"size\";i:40;s:4:\"help\";s:0:\"\";s:7:\"is_meta\";s:3:\"yes\";s:6:\"is_new\";b:1;s:9:\"wpuf_cond\";a:5:{s:16:\"condition_status\";s:2:\"no\";s:10:\"cond_field\";a:0:{}s:13:\"cond_operator\";a:1:{i:0;s:1:\"=\";}s:11:\"cond_option\";a:1:{i:0;s:10:\"- select -\";}s:10:\"cond_logic\";s:3:\"all\";}s:16:\"word_restriction\";s:0:\"\";s:4:\"rows\";i:5;s:4:\"cols\";i:25;s:4:\"rich\";s:2:\"no\";}', '', '', '', 'publish', 'wpuf_input', 'closed', 'closed', '', '', '', '', '2025-04-10 03:57:03', '2025-04-10 03:57:03', 0, 2, '', '') made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, WeForms_Installer->create_default_form, WeForms_Template_Manager->create, WeForms_Form_Manager->create, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_installed', '1744257423', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'weforms_installed' , '1744257423' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('weforms_install...', 1744257423, '', 'auto')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(23): update_option('weforms_install...', 1744257423)
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_installed', '1744257423', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_weforms_activation_redirect', '1744257453', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_weforms_activation_redirect' , '1744257453' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744257453, '', 'off')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(26): set_transient('weforms_activat...', true, 30)
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_weforms_activation_redirect', '1744257453', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_weforms_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_weforms_activation_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wefo...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(26): set_transient('weforms_activat...', true, 30)
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_weforms_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_weforms_prevent_tracker_notice', '1744862223', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_weforms_prevent_tracker_notice' , '1744862223' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744862223, '', 'off')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(27): set_transient('weforms_prevent...', true, 604800)
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_weforms_prevent_tracker_notice', '1744862223', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_weforms_prevent_tracker_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_weforms_prevent_tracker_notice' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wefo...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(27): set_transient('weforms_prevent...', true, 604800)
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_weforms_prevent_tracker_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_version', '1.6.25', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'weforms_version' , '1.6.25' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('weforms_version', '1.6.25', '', 'auto')
-#5 /wordpress/wp-content/plugins/weforms/includes/class-installer.php(28): update_option('weforms_version', '1.6.25')
-#6 /wordpress/wp-content/plugins/weforms/weforms.php(198): WeForms_Installer->install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WeForms->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_weform...', false)
-#11 /internal/eval.php(20): activate_plugin('weforms/weforms...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('weforms_version', '1.6.25', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_weforms/weforms.php'), WP_Hook->do_action, WP_Hook->apply_filters, WeForms->activate, WeForms_Installer->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:03 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:57:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 03:57:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_weforms_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_weforms_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_weforms_...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_weforms_...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_weforms_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:57:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:57:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:57:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:57:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 03:58:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 03:58:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:58:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:58:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:58:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 03:59:03 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 03:59:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_bg_tile_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_bg_tile_db_version' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-background-tile/wp_background_tile.php(80): add_option('wp_bg_tile_db_v...', NULL)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_bg_tile_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-bac...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-background-t...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_bg_tile_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-background-tile/wp_background_tile.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_bg_tile_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 03:59:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:59:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:59:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:59:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 03:59:12 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 03:59:20 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 03:59:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 03:59:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 03:59:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 03:59:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:00:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[10-Apr-2025 04:00:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[10-Apr-2025 04:00:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[10-Apr-2025 04:00:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[10-Apr-2025 04:00:22 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$blog_versions in /wordpress/wp-includes/class-wpdb.php on line 783
-[10-Apr-2025 04:00:30 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$blog_versions in /wordpress/wp-includes/class-wpdb.php on line 783
-[10-Apr-2025 04:00:39 UTC] PHP Warning:  Undefined property: WP_SQLite_DB::$blog_versions in /wordpress/wp-includes/class-wpdb.php on line 783
-[10-Apr-2025 04:00:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIGHLIGHT, varchar(11)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD highlight text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(154): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#8 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(155): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#8 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_wpks (
+		ID mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		mode text NOT NULL,
+		keycode text NOT NULL,
+		comment text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		target varchar(10) DEFAULT '' NOT NULL,
+		toggle text NOT NULL,
+		remove text NOT NULL,
+		PRIMARY KEY  (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(28): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpks_create_table(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-key...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wpks (
+		ID mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		mode text NOT NULL,
+		keycode text NOT NULL,
+		comment text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		target varchar(10) DEFAULT '' NOT NULL,
+		toggle text NOT NULL,
+		remove text NOT NULL,
+		PRIMARY KEY  (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-keyboard-shortcut/wpks.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpks_create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(154): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
 #7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:00:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wpks made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REPLY, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(155): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
 #7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:00:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wpks made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REVIEWID, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reviewId text NULL   | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 04:00:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(154): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#8 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
+<p>SELECT * FROM wp_wpks</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIDDEN, tinyint(1)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(155): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-keyboard-sho...')
+#8 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpks made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_wpks (
+		ID mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		mode text NOT NULL,
+		keycode text NOT NULL,
+		comment text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		target varchar(10) DEFAULT '' NOT NULL,
+		toggle text NOT NULL,
+		remove text NOT NULL,
+		PRIMARY KEY  (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(28): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpks_create_table(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-key...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-keyboard-sho...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wpks (
+		ID mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		mode text NOT NULL,
+		keycode text NOT NULL,
+		comment text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		target varchar(10) DEFAULT '' NOT NULL,
+		toggle text NOT NULL,
+		remove text NOT NULL,
+		PRIMARY KEY  (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wp-keyboard-shortcut/wpks.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpks_create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(154): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
 #7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+ for query SELECT * FROM wp_wpks made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpks | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpks.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(119): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wp-keyboard-shortcut/php/database.php(155): get_all_wpks()
+#4 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(19): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-content/plugins/wp-keyboard-shortcut/wpks.php(143): WP_Keyboard_Shortcut->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wpks made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-keyboard-shortcut/wpks.php'), WP_Keyboard_Shortcut->__construct, require_once('/plugins/wp-keyboard-shortcut/php/database.php'), get_all_wpks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:25:37 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:25:38 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:25:46 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:25:47 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:25:55 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:25:56 UTC] PHP Warning:  Constant pmanagerCatTABLE already defined in /wordpress/wp-content/plugins/wp-programmmanager/category.php on line 3
+[11-Apr-2025 17:26:05 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:05 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:05 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:06 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:06 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:06 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:07 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 505
+[11-Apr-2025 17:26:07 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 506
+[11-Apr-2025 17:26:15 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:15 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:15 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:16 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:16 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:16 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:16 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 505
+[11-Apr-2025 17:26:16 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 506
+[11-Apr-2025 17:26:24 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:24 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:24 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:25 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:25 UTC] PHP Deprecated:  Required parameter $output follows optional parameter $depth in /wordpress/wp-content/plugins/wp-sitemanager/modules/site-structure.php on line 799
+[11-Apr-2025 17:26:25 UTC] PHP Deprecated:  Required parameter $request follows optional parameter $pagenum in /wordpress/wp-content/plugins/wp-sitemanager/modules/meta-manager.php on line 740
+[11-Apr-2025 17:26:25 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 505
+[11-Apr-2025 17:26:25 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/wp-sitemanager/modules/theme_switcher.php on line 506
+[11-Apr-2025 17:30:34 UTC] PHP Warning:  Undefined array key "public_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 120
+[11-Apr-2025 17:30:34 UTC] PHP Warning:  Undefined array key "private_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 121
+[11-Apr-2025 17:30:42 UTC] PHP Warning:  Undefined array key "public_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 120
+[11-Apr-2025 17:30:43 UTC] PHP Warning:  Undefined array key "private_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 121
+[11-Apr-2025 17:30:50 UTC] PHP Warning:  Undefined array key "public_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 120
+[11-Apr-2025 17:30:50 UTC] PHP Warning:  Undefined array key "private_key" in /wordpress/wp-content/plugins/wp-recaptcha/recaptcha.php on line 121
+[11-Apr-2025 17:31:34 UTC] PHP Deprecated:  Required parameter $gedcom follows optional parameter $gen in /wordpress/wp-content/plugins/wpgenealogy/public/Traits/Relationship.php on line 33
+[11-Apr-2025 17:31:34 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:38
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(38): PDO->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #2 ({"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org/plugins","slug":"wp-reviews-plugin-for-google"},"options":{"activate":true},"pluginData":{"resource":"wordpress.org/plugins","slug":"wp-reviews-plugin-for-google"}}) : Plugin /wordpress/wp-content/plugins/wp-reviews-plugin-for-google could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/wp-reviews-plugin-for-google could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-  }
-}
+Next Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDO/Exception.php:18
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(42): Doctrine\DBAL\Driver\PDO\Exception::new(Object(PDOException))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
 
-Node.js v23.11.0
+Next Illuminate\Database\QueryException: SQLSTATE[HY000] [2002] Address family not supported by protocol (SQL: SET FOREIGN_KEY_CHECKS=1;) in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php:669
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#3 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#4 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#5 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#10 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php on line 669
+[11-Apr-2025 17:31:52 UTC] PHP Deprecated:  Required parameter $gedcom follows optional parameter $gen in /wordpress/wp-content/plugins/wpgenealogy/public/Traits/Relationship.php on line 33
+[11-Apr-2025 17:31:53 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:38
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(38): PDO->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
+
+Next Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDO/Exception.php:18
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(42): Doctrine\DBAL\Driver\PDO\Exception::new(Object(PDOException))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[HY000] [2002] Address family not supported by protocol (SQL: SET FOREIGN_KEY_CHECKS=1;) in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php:669
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#3 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#4 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#5 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#10 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php on line 669
+[11-Apr-2025 17:32:11 UTC] PHP Deprecated:  Required parameter $gedcom follows optional parameter $gen in /wordpress/wp-content/plugins/wpgenealogy/public/Traits/Relationship.php on line 33
+[11-Apr-2025 17:32:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:38
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(38): PDO->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
+
+Next Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDO/Exception.php:18
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(42): Doctrine\DBAL\Driver\PDO\Exception::new(Object(PDOException))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(67): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=loca...', 'username_here', 'password_here', Array)
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=loca...', 'username_here', 'password_here', Array)
+#3 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#4 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connectors/ConnectionFactory.php(182): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#5 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#6 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(924): call_user_func(Object(Closure))
+#7 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(457): Illuminate\Database\Connection->getPdo()
+#8 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(662): Illuminate\Database\Connection->Illuminate\Database\{closure}('SET FOREIGN_KEY...', Array)
+#9 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#10 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#11 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#12 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#13 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#14 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#15 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#19 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#20 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[HY000] [2002] Address family not supported by protocol (SQL: SET FOREIGN_KEY_CHECKS=1;) in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php:669
+Stack trace:
+#0 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(629): Illuminate\Database\Connection->runQueryCallback('SET FOREIGN_KEY...', Array, Object(Closure))
+#1 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php(464): Illuminate\Database\Connection->run('SET FOREIGN_KEY...', Array, Object(Closure))
+#2 /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Schema/Builder.php(266): Illuminate\Database\Connection->statement('SET FOREIGN_KEY...')
+#3 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(627): Illuminate\Database\Schema\Builder->enableForeignKeyConstraints()
+#4 /wordpress/wp-content/plugins/wpgenealogy/includes/class-wpgenealogy-activator.php(43): WPGenealogy\WPGenealogy_Activator::create_tables()
+#5 /wordpress/wp-content/plugins/wpgenealogy/wpgenealogy.php(90): WPGenealogy\WPGenealogy_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpgenealogy_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpgene...', false)
+#10 /internal/eval.php(20): activate_plugin('wpgenealogy/wpg...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wpgenealogy/vendor/illuminate/database/Connection.php on line 669
+[11-Apr-2025 17:34:34 UTC] PHP Deprecated:  File wp-db.php is <strong>deprecated</strong> since version 6.1.0! Use wp-includes/class-wpdb.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php on line 37
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php on line 37
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php on line 38
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php on line 38
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "Submit" in /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php on line 169
+[11-Apr-2025 17:34:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_directory_links (
+    id int(11) NOT NULL auto_increment,
+    title text NOT NULL,
+    description text NOT NULL,
+    url text,
+    categories text NOT NULL,
+    status int(11) NOT NULL default '0',
+    views int(11) NOT NULL default '0',
+    clicks int(11) NOT NULL default '0',
+    rank int(11) NOT NULL default '0',
+    paid tinyint(1) NOT NULL default '0',
+    bid float NOT NULL default '0',
+    expires int(11) NOT NULL default '0',
+    address1 varchar(100) default NULL,
+    address2 varchar(100) default NULL,
+    city varchar(100) default NULL,
+    state varchar(20) default NULL,
+    country varchar(100) default NULL,
+    zipcode varchar(20) default NULL,
+    phone varchar(20) default NULL,
+    fax varchar(20) default NULL,
+    email varchar(100) default NULL,
+    user int(11) NOT NULL default '0',
+    date_added int(11) NOT NULL default '0',
+    tags text ,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/wp-directory-list/wp-directory-install.php(48): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/wp-directory-list/wp-directory-list.php(188): include('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_directory_list_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-dir...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-directory-li...')
+#11 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_directory_links (
+    id int(11) NOT NULL auto_increment,
+    title text NOT NULL,
+    description text NOT NULL,
+    url text,
+    categories text NOT NULL,
+    status int(11) NOT NULL default '0',
+    views int(11) NOT NULL default '0',
+    clicks int(11) NOT NULL default '0',
+    rank int(11) NOT NULL default '0',
+    paid tinyint(1) NOT NULL default '0',
+    bid float NOT NULL default '0',
+    expires int(11) NOT NULL default '0',
+    address1 varchar(100) default NULL,
+    address2 varchar(100) default NULL,
+    city varchar(100) default NULL,
+    state varchar(20) default NULL,
+    country varchar(100) default NULL,
+    zipcode varchar(20) default NULL,
+    phone varchar(20) default NULL,
+    fax varchar(20) default NULL,
+    email varchar(100) default NULL,
+    user int(11) NOT NULL default '0',
+    date_added int(11) NOT NULL default '0',
+    tags text ,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM made by activate_plugin, do_action('activate_wp-directory-list/wp-directory-list.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_directory_list_install, include('/plugins/wp-directory-list/wp-directory-install.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "title" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "title" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "description" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "description" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "url" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "url" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "address1" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "address1" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "address2" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Undefined array key "address2" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[11-Apr-2025 17:34:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/cla
