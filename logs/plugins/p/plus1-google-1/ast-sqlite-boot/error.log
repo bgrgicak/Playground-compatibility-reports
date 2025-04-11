@@ -2,135 +2,151 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 17:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('remove_comment_ips_firstrun', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'remove_comment_ips_firstrun' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('remove_comment_...', '1', '', 'auto')
-#5 /wordpress/wp-content/plugins/remove-comment-ips/remove-comment-ips.php(43): update_option('remove_comment_...', '1')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('remove-comment-...')
-#8 /internal/eval.php(20): activate_plugin('remove-comment-...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('remove_comment_ips_firstrun', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/remove-comment-ips/remove-comment-ips.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:49:38 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:49:39 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:49:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:49:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:49:39 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:50:58 UTC] PHP Warning:  Undefined property: Rezgo2Crm::$table_log in /wordpress/wp-content/plugins/rezgo-import-contacts-into-crm/wp-rezgo-crm.php on line 101
-[09-Apr-2025 17:50:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:51:07 UTC] PHP Warning:  Undefined property: Rezgo2Crm::$table_log in /wordpress/wp-content/plugins/rezgo-import-contacts-into-crm/wp-rezgo-crm.php on line 101
-[09-Apr-2025 17:51:15 UTC] PHP Warning:  Undefined property: Rezgo2Crm::$table_log in /wordpress/wp-content/plugins/rezgo-import-contacts-into-crm/wp-rezgo-crm.php on line 101
-[09-Apr-2025 17:51:24 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:51:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:51:25 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:33 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:34 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:41 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:42 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:50 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:51:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('runkeeper_options', 'a:4:{s:8:\"rk_width\";i:600;s:9:\"rk_height\";i:400;s:4:\"rk_x\";i:300;s:4:\"rk_y\";i:300;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'runkeeper_options' , 'a:4:{s:8:&quot;rk_width&quot;;i:600;s:9:&quot;rk_height&quot;;i:400;s:4:&quot;rk_x&quot;;i:300;s:4:&quot;rk_y&quot;;i:300;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/runkeeper-plugin/runkeeper.php(39): add_option('runkeeper_optio...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WPRunkeeper->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_runkee...', false)
-#9 /internal/eval.php(20): activate_plugin('runkeeper-plugi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('runkeeper_options', 'a:4:{s:8:\"rk_width\";i:600;s:9:\"rk_height\";i:400;s:4:\"rk_x\";i:300;s:4:\"rk_y\";i:300;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_runkeeper-plugin/runkeeper.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPRunkeeper->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 17:51:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:51:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:51:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:51:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:51:52 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:52:00 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:52:01 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:52:09 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:52:09 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 17:52:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 17:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 17:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 17:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 17:53:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/plus1-google-1/plus1.php:37
+Error: [11-Apr-2025 04:32:32 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/picasa-lightbox/wp-picasalb.php on line 227
+[11-Apr-2025 04:32:39 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/picasa-lightbox/wp-picasalb.php on line 227
+[11-Apr-2025 04:32:48 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/picasa-lightbox/wp-picasalb.php on line 227
+[11-Apr-2025 04:33:00 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 64
+[11-Apr-2025 04:33:00 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 65
+[11-Apr-2025 04:33:00 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 66
+[11-Apr-2025 04:33:00 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 67
+[11-Apr-2025 04:33:09 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 64
+[11-Apr-2025 04:33:09 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 65
+[11-Apr-2025 04:33:09 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 66
+[11-Apr-2025 04:33:09 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 67
+[11-Apr-2025 04:33:17 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 64
+[11-Apr-2025 04:33:17 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 65
+[11-Apr-2025 04:33:17 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 66
+[11-Apr-2025 04:33:17 UTC] PHP Warning:  Undefined array key "wpbase" in /wordpress/wp-content/plugins/plugin-picasacumulus/PluginPicasaCumulus.php on line 67
+[11-Apr-2025 04:34:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php:356
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rated90-player-...')
+#2 /internal/eval.php(20): activate_plugin('rated90-player-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php on line 356
+[11-Apr-2025 04:34:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php:356
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rated90-player-...')
+#2 /internal/eval.php(20): activate_plugin('rated90-player-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php on line 356
+[11-Apr-2025 04:34:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php:356
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rated90-player-...')
+#2 /internal/eval.php(20): activate_plugin('rated90-player-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/rated90-player-rankings/r90playerwidget.php on line 356
+[11-Apr-2025 04:34:35 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744346072.555)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:35:37 UTC] Automatic updates starting...
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:37 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 04:35:38 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:50 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:35:51 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:35:52 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 04:35:52 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:03 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 21
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 45
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_cdn.php on line 104
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/class.redux_functions.php on line 54
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[11-Apr-2025 04:36:05 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/recurwp/options/framework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[11-Apr-2025 04:39:48 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>registration-page-shortcut</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 04:39:58 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>registration-page-shortcut</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 04:40:06 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>registration-page-shortcut</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 04:40:46 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744346444.059)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[11-Apr-2025 04:42:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/plus1-google-1/plus1.php:37
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plus1-google-1/...')
@@ -139,24 +155,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/plus1-google-1/plus1.php on line 37
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"plus1-google-1"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
