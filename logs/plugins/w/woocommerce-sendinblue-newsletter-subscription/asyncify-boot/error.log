@@ -1,490 +1,580 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [11-Apr-2025 08:54:39 UTC] PHP Deprecated:  Required parameter $count follows optional parameter $post_id in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 320
-[11-Apr-2025 08:54:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [12-Apr-2025 22:25:41 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $type in /wordpress/wp-content/plugins/wp-attention-click/admin/framework/pixel/classes/class-init.php on line 624
+[12-Apr-2025 22:25:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence'</p>
+<p>CREATE TABLE wp_wpac_clicks (
+                                ID int(11) NOT NULL AUTO_INCREMENT,
+                                post_id int(15) NULL,
+                                type_click CHAR(20) NOT NULL DEFAULT 'b', /* ← even if you add it here, it goes to the end of the table */
+                                date_click datetime NOT NULL,
+                                timestamp_click int(15) NOT NULL,
+                                ip varchar(100) NULL,
+                                la varchar(100) NULL,
+                                lo varchar(100) NULL,
+                                country varchar(100) NULL,
+                                country_code varchar(100) NULL,
+                                region varchar(100) NULL,
+                                city varchar(100) NULL,
+                                device varchar(10) NOT NULL,
+                                url varchar(250) NOT NULL,
+                                where_is varchar(30) NULL,
+                                browser_details varchar(500) NULL
+                            UNIQUE KEY ID (ID)
+                    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#4 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(122): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(28): wpAttentionClick\Core\wpacActivator::create_tables()
+#6 /wordpress/wp-content/plugins/wp-attention-click/admin/classes/class-admin.php(118): wpAttentionClick\Core\wpacActivator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(326): wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin('wp-attention-cl...')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'wp-attention-cl...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-attention-cl...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_wpac_clicks (
+                                ID int(11) NOT NULL AUTO_INCREMENT,
+                                post_id int(15) NULL,
+                                type_click CHAR(20) NOT NULL DEFAULT 'b', /* ← even if you add it here, it goes to the end of the table */
+                                date_click datetime NOT NULL,
+                                timestamp_click int(15) NOT NULL,
+                                ip varchar(100) NULL,
+                                la varchar(100) NULL,
+                                lo varchar(100) NULL,
+                                country varchar(100) NULL,
+                                country_code varchar(100) NULL,
+                                region varchar(100) NULL,
+                                city varchar(100) NULL,
+                                device varchar(10) NOT NULL,
+                                url varchar(250) NOT NULL,
+                                where_is varchar(30) NULL,
+                                browser_details varchar(500) NULL
+                            UNIQUE KEY ID (ID)
+                    ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin, wpAttentionClick\Core\wpacActivator::activate, wpAttentionClick\Core\wpacActivator::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:25:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS FROM wp_wpac_clicks LIKE 'type_click'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpac_clicks</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpac_clicks</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: oryx_options
+Table 'database_name_here.wp_wpac_clicks' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'database...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#3 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(128): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#4 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(28): wpAttentionClick\Core\wpacActivator::create_tables()
+#5 /wordpress/wp-content/plugins/wp-attention-click/admin/classes/class-admin.php(118): wpAttentionClick\Core\wpacActivator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(326): wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin('wp-attention-cl...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'wp-attention-cl...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-attention-cl...')
+#11 {main}</pre>
+ for query SHOW COLUMNS FROM wp_wpac_clicks LIKE 'type_click' made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin, wpAttentionClick\Core\wpacActivator::activate, wpAttentionClick\Core\wpacActivator::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:25:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpac_clicks ADD type_click CHAR(20) NOT NULL DEFAULT 'b'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpac_clicks</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpac_clicks</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpac_clicks</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpac_clicks</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpac_clicks, type_click, 1, b, NO, char, 20, 80, , , , utf8mb4, utf8mb4_general_ci, char(20), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpac_clicks</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_wpac_clicks' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_wpac_...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(130): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-attention-click/includes/classes/class-activator.php(28): wpAttentionClick\Core\wpacActivator::create_tables()
+#5 /wordpress/wp-content/plugins/wp-attention-click/admin/classes/class-admin.php(118): wpAttentionClick\Core\wpacActivator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(326): wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin('wp-attention-cl...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'wp-attention-cl...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-attention-cl...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wpac_clicks ADD type_click CHAR(20) NOT NULL DEFAULT 'b' made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, wpAttentionClick\Admin\wpacAdmin::admin_activated_plugin, wpAttentionClick\Core\wpacActivator::activate, wpAttentionClick\Core\wpacActivator::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:25:50 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $type in /wordpress/wp-content/plugins/wp-attention-click/admin/framework/pixel/classes/class-init.php on line 624
+[12-Apr-2025 22:25:59 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $type in /wordpress/wp-content/plugins/wp-attention-click/admin/framework/pixel/classes/class-init.php on line 624
+[12-Apr-2025 22:26:57 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:26:57 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:27:06 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:27:07 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:27:15 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:27:16 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:27:25 UTC] PHP Deprecated:  Required parameter $debug follows optional parameter $switch in /wordpress/wp-content/plugins/wp-post-frontend/classes/nm-framework.php on line 384
+[12-Apr-2025 22:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:27:25 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php:36
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php(36): array_map('esc_attr', false)
+#1 /wordpress/wp-content/plugins/wp-post-frontend/index.php(39): NM_PLUGIN_PostFront->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-post-fronten...')
+#4 /internal/eval.php(20): activate_plugin('wp-post-fronten...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:27:33 UTC] PHP Deprecated:  Required parameter $debug follows optional parameter $switch in /wordpress/wp-content/plugins/wp-post-frontend/classes/nm-framework.php on line 384
+[12-Apr-2025 22:27:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:27:33 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php:36
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php(36): array_map('esc_attr', false)
+#1 /wordpress/wp-content/plugins/wp-post-frontend/index.php(39): NM_PLUGIN_PostFront->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-post-fronten...')
+#4 /internal/eval.php(20): activate_plugin('wp-post-fronten...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:27:40 UTC] PHP Deprecated:  Required parameter $debug follows optional parameter $switch in /wordpress/wp-content/plugins/wp-post-frontend/classes/nm-framework.php on line 384
+[12-Apr-2025 22:27:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:27:40 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php:36
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php(36): array_map('esc_attr', false)
+#1 /wordpress/wp-content/plugins/wp-post-frontend/index.php(39): NM_PLUGIN_PostFront->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-post-fronten...')
+#4 /internal/eval.php(20): activate_plugin('wp-post-fronten...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-post-frontend/classes/plugin.class.php on line 36
+[12-Apr-2025 22:28:15 UTC] PHP Fatal error:  Declaration of Fblb_Widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/wp-social-blocks/widgets.php on line 11
+[12-Apr-2025 22:28:22 UTC] PHP Fatal error:  Declaration of Fblb_Widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/wp-social-blocks/widgets.php on line 11
+[12-Apr-2025 22:28:30 UTC] PHP Fatal error:  Declaration of Fblb_Widget::widget() must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/wp-social-blocks/widgets.php on line 11
+[12-Apr-2025 22:28:40 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:28:40 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:28:41 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:28:41 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:28:50 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:28:50 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:28:51 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:28:51 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:29:00 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:29:00 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:29:01 UTC] PHP Deprecated:  Required parameter $transient_expiration_time follows optional parameter $force in /wordpress/wp-content/plugins/wp-to-socialpilot/includes/admin/socialpilot-api.php on line 213
+[12-Apr-2025 22:29:01 UTC] PHP Deprecated:  Required parameter $key follows optional parameter $post_type in /wordpress/wp-content/plugins/wp-to-socialpilot/vendor/includes/admin/post.php on line 187
+[12-Apr-2025 22:29:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wpcdnkoloss_files` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `value` ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `value` ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#5 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(446): oryx_option_get('tag-relevence')
-#6 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#9 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#10 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#6 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#7 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(36): WpCdnKoloss->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#10 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key'</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key' | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wpcdnkoloss_files` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: oryx_options
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `value` ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `value` ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#5 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(447): oryx_option_get('oc-api-key')
-#6 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#6 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#7 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossAdmin.php(11): WpCdnKoloss->__construct()
+#8 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(41): WpCdnKolossAdmin->__construct()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#11 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKolossAdmin->__construct, WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(36): WpCdnKoloss->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#8 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossAdmin.php(11): WpCdnKoloss->__construct()
+#6 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(41): WpCdnKolossAdmin->__construct()
 #7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#9 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#9 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
 #10 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKolossAdmin->__construct, WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key'</p>
+<p>CREATE TABLE wp_wpcdnkoloss_files (
+  	  id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+      library VARCHAR(255) NOT NULL,
+  	  file VARCHAR(255) NOT NULL,
+      version VARCHAR(255) NOT NULL,
+      type VARCHAR(255) NOT NULL,
+  	  position VARCHAR(255) NOT NULL,
+  	  PRIMARY KEY wpcdnkoloss_files_id (id),
+      KEY wpcdnkoloss_files_library (library),
+      KEY wpcdnkoloss_files_file (file),
+      KEY wpcdnkoloss_files_version (version),
+      KEY wpcdnkoloss_files_type (type)
+  	) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: oryx_options
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `value` ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `value` ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#5 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(448): oryx_option_get('yahoo-api-key')
-#6 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(207): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WpCdnKoloss::wpcdnkoloss_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcdnk...', false)
+#7 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wpcdnkoloss_files (
+  	  id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+      library VARCHAR(255) NOT NULL,
+  	  file VARCHAR(255) NOT NULL,
+      version VARCHAR(255) NOT NULL,
+      type VARCHAR(255) NOT NULL,
+  	  position VARCHAR(255) NOT NULL,
+  	  PRIMARY KEY wpcdnkoloss_files_id (id),
+      KEY wpcdnkoloss_files_library (library),
+      KEY wpcdnkoloss_files_file (file),
+      KEY wpcdnkoloss_files_version (version),
+      KEY wpcdnkoloss_files_type (type)
+  	) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_wpcdnkoloss/kolossum-wpcdnkoloss.php'), WP_Hook->do_action, WP_Hook->apply_filters, WpCdnKoloss::wpcdnkoloss_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(36): WpCdnKoloss->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(36): WpCdnKoloss->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#8 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossAdmin.php(11): WpCdnKoloss->__construct()
+#6 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(41): WpCdnKolossAdmin->__construct()
 #7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#9 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpcdnkoloss/kol...')
+#9 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
 #10 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wpcdnkoloss_files made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKolossAdmin->__construct, WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc'</p>
+<p>CREATE TABLE wp_wpcdnkoloss_files (
+  	  id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+      library VARCHAR(255) NOT NULL,
+  	  file VARCHAR(255) NOT NULL,
+      version VARCHAR(255) NOT NULL,
+      type VARCHAR(255) NOT NULL,
+  	  position VARCHAR(255) NOT NULL,
+  	  PRIMARY KEY wpcdnkoloss_files_id (id),
+      KEY wpcdnkoloss_files_library (library),
+      KEY wpcdnkoloss_files_file (file),
+      KEY wpcdnkoloss_files_version (version),
+      KEY wpcdnkoloss_files_type (type)
+  	) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: oryx_options
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `value` ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `value` ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#5 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(449): oryx_option_get('use-oc')
-#6 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#9 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(207): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WpCdnKoloss::wpcdnkoloss_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpcdnk...', false)
+#7 /internal/eval.php(20): activate_plugin('wpcdnkoloss/kol...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_wpcdnkoloss_files (
+  	  id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+      library VARCHAR(255) NOT NULL,
+  	  file VARCHAR(255) NOT NULL,
+      version VARCHAR(255) NOT NULL,
+      type VARCHAR(255) NOT NULL,
+  	  position VARCHAR(255) NOT NULL,
+  	  PRIMARY KEY wpcdnkoloss_files_id (id),
+      KEY wpcdnkoloss_files_library (library),
+      KEY wpcdnkoloss_files_file (file),
+      KEY wpcdnkoloss_files_version (version),
+      KEY wpcdnkoloss_files_type (type)
+  	) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_wpcdnkoloss/kolossum-wpcdnkoloss.php'), WP_Hook->do_action, WP_Hook->apply_filters, WpCdnKoloss::wpcdnkoloss_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:29:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wpcdnkoloss_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wpcdnkoloss_files | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKolossDbConnector.php(21): wpdb->get_results('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(166): wpCdnKolossDbConnector->getCollection('wp_wpcdnkoloss_...')
+#4 /wordpress/wp-content/plugins/wpcdnkoloss/includes/WpCdnKoloss.php(123): WpCdnKoloss->loadIncludedFiles()
+#5 /wordpress/wp-content/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php(36): WpCdnKoloss->__construct()
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: oryx_options
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `value` ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `value` ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#5 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(450): oryx_option_get('use-yahoo')
-#6 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#9 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#10 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:40 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:40 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php:430
-Stack trace:
-#0 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-install.php(16): oryx_debug('------------')
-#1 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(57): oryx_install()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): hook_install_oryx(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmu-r...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 430
-[11-Apr-2025 08:54:47 UTC] PHP Deprecated:  Required parameter $count follows optional parameter $post_id in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 320
-[11-Apr-2025 08:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: tag-relevence</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(446): oryx_option_get('tag-relevence')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: oc-api-key</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(447): oryx_option_get('oc-api-key')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: yahoo-api-key</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(448): oryx_option_get('yahoo-api-key')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: use-oc</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(449): oryx_option_get('use-oc')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: use-yahoo</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(450): oryx_option_get('use-yahoo')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:47 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:47 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php:430
-Stack trace:
-#0 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-install.php(16): oryx_debug('------------')
-#1 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(57): oryx_install()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): hook_install_oryx(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmu-r...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 430
-[11-Apr-2025 08:54:55 UTC] PHP Deprecated:  Required parameter $count follows optional parameter $post_id in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 320
-[11-Apr-2025 08:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: tag-relevence</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(446): oryx_option_get('tag-relevence')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'tag-relevence' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: oc-api-key</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(447): oryx_option_get('oc-api-key')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'oc-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: yahoo-api-key</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(448): oryx_option_get('yahoo-api-key')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'yahoo-api-key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: use-oc</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(449): oryx_option_get('use-oc')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-oc' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` FROM `oryx_options` WHERE `key` = :param0  | parameters: use-yahoo</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: oryx_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(179): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php(450): oryx_option_get('use-yahoo')
-#4 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(45): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmu-related-bl...')
-#7 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#8 {main}</pre>
- for query SELECT `value` FROM `oryx_options` WHERE `key` = 'use-yahoo' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmu-related-blogs-and-posts/oryx.php'), require_once('/plugins/wpmu-related-blogs-and-posts/oryx-functions.php'), oryx_option_get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 08:54:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:55 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 08:54:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php:430
-Stack trace:
-#0 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-install.php(16): oryx_debug('------------')
-#1 /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx.php(57): oryx_install()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): hook_install_oryx(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmu-r...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmu-related-bl...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wpmu-related-blogs-and-posts/oryx-functions.php on line 430
-[11-Apr-2025 08:55:08 UTC] Automatic updates starting...
-[11-Apr-2025 08:55:53 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php:27
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): mope_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php on line 27
-[11-Apr-2025 08:56:02 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php:27
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): mope_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php on line 27
-[11-Apr-2025 08:56:11 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php:27
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): mope_init_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/wc-mope-payment-gateway/mope.php on line 27
-[11-Apr-2025 08:57:51 UTC] PHP Fatal error:  Please install and activate WooCommerce 3.1 or newer before this. in /wordpress/wp-content/plugins/woocommerce-sendinblue-newsletter-subscription/woocommerce-sendinblue.php on line 204
-[11-Apr-2025 08:58:00 UTC] PHP Fatal error:  Please install and activate WooCommerce 3.1 or newer before this. in /wordpress/wp-content/plugins/woocommerce-sendinblue-newsletter-subscription/woocommerce-sendinblue.php on line 204
+ for query SELECT * FROM wp_wpcdnkoloss_files made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpcdnkoloss/kolossum-wpcdnkoloss.php'), WpCdnKoloss->__construct, WpCdnKoloss->loadIncludedFiles, wpCdnKolossDbConnector->getCollection, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 22:30:32 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:32 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:32 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:32 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:30:33 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:33 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:33 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpcf</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:33 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:30:40 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:40 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:40 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:40 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:30:41 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:41 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:41 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpcf</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:41 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:30:49 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:49 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:49 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:49 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:30:50 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:50 UTC] PHP Deprecated:  Function get_profile is <strong>deprecated</strong> since version 3.0.0! Use get_the_author_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:50 UTC] PHP Deprecated:  Function get_usermeta is <strong>deprecated</strong> since version 3.0.0! Use get_user_meta() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpcf</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:30:50 UTC] PHP Warning:  Undefined array key "wpcf_msg" in /wordpress/wp-content/plugins/wp-contactform/wp-contactform.php on line 30
+[12-Apr-2025 22:31:00 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/wp-fb-fan-box/wp-fb-fan-box.php on line 71
+[12-Apr-2025 22:31:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:00 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:09 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/wp-fb-fan-box/wp-fb-fan-box.php on line 71
+[12-Apr-2025 22:31:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:17 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/wp-fb-fan-box/wp-fb-fan-box.php on line 71
+[12-Apr-2025 22:31:17 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:17 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 22:31:25 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-image-vote/wp-image-vote.php on line 61
+[12-Apr-2025 22:31:33 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-image-vote/wp-image-vote.php on line 61
+[12-Apr-2025 22:31:41 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-image-vote/wp-image-vote.php on line 61
+[12-Apr-2025 22:34:02 UTC] PHP Fatal error:  Please install and activate WooCommerce 3.1 or newer before this. in /wordpress/wp-content/plugins/woocommerce-sendinblue-newsletter-subscription/woocommerce-sendinblue.php on line 204
+[12-Apr-2025 22:34:10 UTC] PHP Fatal error:  Please install and activate WooCommerce 3.1 or newer before this. in /wordpress/wp-content/plugins/woocommerce-sendinblue-newsletter-subscription/woocommerce-sendinblue.php on line 204
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"woocommerce-sendinblue-newsletter-subscription"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"woocommerce-sendinblue-newsletter-subscription"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
