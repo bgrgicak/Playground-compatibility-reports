@@ -1,1 +1,56 @@
-{"landingPage":"\/wp-admin\/admin.php?page=faq-builder-ays","preferredVersions":{"php":"8.2","wp":"latest"},"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"admin123"},{"step":"installPlugin","pluginData":{"resource":"wordpress.org\/plugins","slug":"faq-builder-ays"}},{"step":"runPHP","code":"<?php\nrequire_once '\/wordpress\/wp-load.php';\n\n$posts = get_posts(array(\n 'numberposts' => -1,\n 'post_type' => array('post', 'page'),\n 'post_status' => 'any'\n));\n\nforeach ($posts as $post) {\n wp_delete_post($post->ID, true);\n}"},{"step":"runPHP","code":"<?php\nrequire_once '\/wordpress\/wp-load.php';\n\n$post_args = array(\n    'post_type'    => 'post',\n    'post_date'    => current_time('mysql'),\n    'post_status'  => 'publish',\n    'post_title'   => 'FAQ Builder Example Post',\n    'post_content' => '<!-- wp:faq-builder-ays\/faq {\"shortcode\":\"[ays_faq id=1]\"} \/-->'\n);\n\n$post_id = wp_insert_post($post_args);"},{"step":"setSiteOptions","options":{"blogname":"FAQ Builder Test Site","blogdescription":"Automated FAQ Builder Preview"}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"faq-builder-ays"},"options":{"activate":true}}]}
+{
+  "landingPage": "/wp-admin/admin.php?page=faq-builder-ays",
+  "preferredVersions": {
+    "php": "8.2",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "admin123"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "faq-builder-ays"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\n$posts = get_posts(array(\n 'numberposts' => -1,\n 'post_type' => array('post', 'page'),\n 'post_status' => 'any'\n));\n\nforeach ($posts as $post) {\n wp_delete_post($post->ID, true);\n}"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\n$post_args = array(\n    'post_type'    => 'post',\n    'post_date'    => current_time('mysql'),\n    'post_status'  => 'publish',\n    'post_title'   => 'FAQ Builder Example Post',\n    'post_content' => '<!-- wp:faq-builder-ays/faq {\"shortcode\":\"[ays_faq id=1]\"} /-->'\n);\n\n$post_id = wp_insert_post($post_args);"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "FAQ Builder Test Site",
+        "blogdescription": "Automated FAQ Builder Preview"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "faq-builder-ays"
+      },
+      "options": {
+        "activate": true
+      }
+    }
+  ]
+}
