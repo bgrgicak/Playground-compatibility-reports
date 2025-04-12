@@ -1,104 +1,116 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 23:29:43 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744327781.051)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[10-Apr-2025 23:29:51 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /wordpress/wp-content/plugins/tambar/tambar.php on line 68
-[10-Apr-2025 23:29:59 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /wordpress/wp-content/plugins/tambar/tambar.php on line 68
-[10-Apr-2025 23:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_tayori` (`mail`, `button_title`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `button_icon_transparent_type`, `created_at`, `updated_at`) VALUES ('admin@localhost.com', 'お問い合わせ', '#43bfa0', '1', '1', '1', '#ffffff', '1', '2025-04-10 23:30:19', '2025-04-10 23:30:19')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_tayori</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_tayori</li>
-<li>Executing: INSERT INTO `wp_tayori` (`id`, `mail`, `button_title`, `button_type`, `pop_button_type`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `form_type_sp`, `form_type_pc`, `button_icon_transparent_type`, `delete_flag`, `created_at`, `updated_at`) SELECT NULL, `column1`, `column2`, '1', '1', `column3`, `column4`, `column5`, `column6`, `column7`, '1', '1', `column8`, 'false', `column9`, `column10` FROM (VALUES ( 'admin@localhost.com' , 'お問い合わせ' , '#43bfa0' , '1' , '1' , '1' , '#ffffff' , '1' , '2025-04-10 23:30:19' , '2025-04-10 23:30:19' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_tayori.delete_flag
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_tayori', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/tayori/includes/tayori.php(55): wpdb->insert('wp_tayori', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Tayori::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tayori...', false)
-#10 /internal/eval.php(20): activate_plugin('tayori/tayori.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_tayori` (`mail`, `button_title`, `button_color`, `button_position_pc`, `button_position_sp`, `button_icon_type`, `button_font_color`, `button_icon_transparent_type`, `created_at`, `updated_at`) VALUES ('admin@localhost.com', 'お問い合わせ', '#43bfa0', '1', '1', '1', '#ffffff', '1', '2025-04-10 23:30:19', '2025-04-10 23:30:19') made by activate_plugin, do_action('activate_tayori/tayori.php'), WP_Hook->do_action, WP_Hook->apply_filters, Tayori::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 23:30:19 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
-[10-Apr-2025 23:30:20 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:20 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:28 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
-[10-Apr-2025 23:30:29 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:29 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:37 UTC] PHP Warning:  Undefined variable $tayori_db_version in /wordpress/wp-content/plugins/tayori/includes/tayori.php on line 59
-[10-Apr-2025 23:30:39 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>button-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:39 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>tayori-setting-js</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:30:59 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744327856.799)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[10-Apr-2025 23:31:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>templ-optimizer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:31:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>templ-optimizer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[10-Apr-2025 23:32:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tf-button/tf-button.php:178
+Error: [12-Apr-2025 01:46:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tf-button/tf-bu...')
-#2 /internal/eval.php(20): activate_plugin('tf-button/tf-bu...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tcvn-accordion-...')
+#2 /internal/eval.php(20): activate_plugin('tcvn-accordion-...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/tf-button/tf-button.php on line 178
-[10-Apr-2025 23:32:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tf-button/tf-button.php:178
+  thrown in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php on line 272
+[12-Apr-2025 01:46:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tf-button/tf-bu...')
-#2 /internal/eval.php(20): activate_plugin('tf-button/tf-bu...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tcvn-accordion-...')
+#2 /internal/eval.php(20): activate_plugin('tcvn-accordion-...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/tf-button/tf-button.php on line 178
-[10-Apr-2025 23:32:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tf-button/tf-button.php:178
+  thrown in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php on line 272
+[12-Apr-2025 01:46:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tf-button/tf-bu...')
-#2 /internal/eval.php(20): activate_plugin('tf-button/tf-bu...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tcvn-accordion-...')
+#2 /internal/eval.php(20): activate_plugin('tcvn-accordion-...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/tf-button/tf-button.php on line 178
-[10-Apr-2025 23:35:28 UTC] PHP Fatal error:  Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50
+  thrown in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php on line 272
+[12-Apr-2025 01:46:57 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 01:47:05 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 01:47:14 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 01:48:55 UTC] PHP Warning:  Undefined array key "preview_theme" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 42
+[12-Apr-2025 01:48:55 UTC] PHP Warning:  Undefined array key "preview_css" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 43
+[12-Apr-2025 01:49:03 UTC] PHP Warning:  Undefined array key "preview_theme" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 42
+[12-Apr-2025 01:49:03 UTC] PHP Warning:  Undefined array key "preview_css" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 43
+[12-Apr-2025 01:49:11 UTC] PHP Warning:  Undefined array key "preview_theme" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 42
+[12-Apr-2025 01:49:11 UTC] PHP Warning:  Undefined array key "preview_css" in /wordpress/wp-content/plugins/theme-preview/theme-preview.php on line 43
+[12-Apr-2025 01:51:04 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ZMGallery::zm_gallery_plugin_create() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zm-gal...', false)
+#3 /internal/eval.php(20): activate_plugin('zm-gallery/zm-g...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-Apr-2025 01:51:12 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ZMGallery::zm_gallery_plugin_create() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zm-gal...', false)
+#3 /internal/eval.php(20): activate_plugin('zm-gallery/zm-g...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-Apr-2025 01:51:19 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ZMGallery::zm_gallery_plugin_create() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zm-gal...', false)
+#3 /internal/eval.php(20): activate_plugin('zm-gallery/zm-g...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[12-Apr-2025 01:51:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ZodiacInformati...')
+#2 /wordpress/wp-content/plugins/zodiac-sign-information-widget/zodiac_information_widget.php(30): register_widget('ZodiacInformati...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ZodiacInformation_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[12-Apr-2025 01:51:37 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ZodiacInformati...')
+#2 /wordpress/wp-content/plugins/zodiac-sign-information-widget/zodiac_information_widget.php(30): register_widget('ZodiacInformati...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ZodiacInformation_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[12-Apr-2025 01:51:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ZodiacInformati...')
+#2 /wordpress/wp-content/plugins/zodiac-sign-information-widget/zodiac_information_widget.php(30): register_widget('ZodiacInformati...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ZodiacInformation_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[12-Apr-2025 01:51:54 UTC] PHP Fatal error:  Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50
 Stack trace:
 #0 /wordpress/wp-content/plugins/zoneboard/zoneboard.php(26): Zoneboard->load_json('/wordpress/wp-c...')
 #1 /wordpress/wp-content/plugins/zoneboard/zoneboard.php(129): Zoneboard->__construct('/wordpress/wp-c...')
@@ -107,7 +119,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('zoneboard/zoneb...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/zoneboard/zoneboard.php on line 50
-[10-Apr-2025 23:35:36 UTC] PHP Fatal error:  Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50
+[12-Apr-2025 01:52:01 UTC] PHP Fatal error:  Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50
 Stack trace:
 #0 /wordpress/wp-content/plugins/zoneboard/zoneboard.php(26): Zoneboard->load_json('/wordpress/wp-c...')
 #1 /wordpress/wp-content/plugins/zoneboard/zoneboard.php(129): Zoneboard->__construct('/wordpress/wp-c...')
@@ -117,25 +129,27 @@ Stack trace:
 #5 {main}
   thrown in /wordpress/wp-content/plugins/zoneboard/zoneboard.php on line 50
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"zoneboard"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"zoneboard"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
