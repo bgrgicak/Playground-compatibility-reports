@@ -1,11 +1,88 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 19:22:25 UTC] PHP Fatal error:  __autoload() is no longer supported, use spl_autoload_register() instead in /wordpress/wp-content/plugins/paradox-magazin-widget/php/classes/class-autoloader.php on line 103
-[10-Apr-2025 19:22:34 UTC] PHP Fatal error:  __autoload() is no longer supported, use spl_autoload_register() instead in /wordpress/wp-content/plugins/paradox-magazin-widget/php/classes/class-autoloader.php on line 103
-[10-Apr-2025 19:22:42 UTC] PHP Fatal error:  __autoload() is no longer supported, use spl_autoload_register() instead in /wordpress/wp-content/plugins/paradox-magazin-widget/php/classes/class-autoloader.php on line 103
-[10-Apr-2025 19:24:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [12-Apr-2025 07:25:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM '...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM '...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM '...')
+#4 /wordpress/wp-content/plugins/persian-woocommerce-sms/src/Subscribe/Contacts.php(157): wpdb->get_results('SELECT * FROM '...', 'ARRAY_A')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): PW\PWSMS\Subscribe\Contacts->move_old_contents_38('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PW\PWSMS\Subscribe\Contacts->move_old_contents_38, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 07:26:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM :param0  WHERE `meta_key`=:param1  LIMIT 50 | parameters: wp_postmeta, _hannanstd_sms_notification</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM '...')
+#2 /wordpress/wp-content/plugins/persian-woocommerce-sms/src/Subscribe/Contacts.php(157): wpdb->get_results('SELECT * FROM '...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PW\PWSMS\Subscribe\Contacts->move_old_contents_38('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PW\PWSMS\Subscribe\Contacts->move_old_contents_38, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 07:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM :param0  WHERE `meta_key`=:param1  LIMIT 50 | parameters: wp_postmeta, _hannanstd_sms_notification</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ":param0": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM '...')
+#2 /wordpress/wp-content/plugins/persian-woocommerce-sms/src/Subscribe/Contacts.php(157): wpdb->get_results('SELECT * FROM '...', 'ARRAY_A')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): PW\PWSMS\Subscribe\Contacts->move_old_contents_38('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query SELECT * FROM 'wp_postmeta' WHERE `meta_key`='_hannanstd_sms_notification' LIMIT 50 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, PW\PWSMS\Subscribe\Contacts->move_old_contents_38, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 07:26:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pixelpost_Widge...')
@@ -23,7 +100,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[10-Apr-2025 19:24:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[12-Apr-2025 07:26:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pixelpost_Widge...')
@@ -41,7 +118,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[10-Apr-2025 19:24:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[12-Apr-2025 07:26:35 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Pixelpost_Widge...')
@@ -59,41 +136,108 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[10-Apr-2025 19:24:55 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744313092.839)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[10-Apr-2025 19:26:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php:17
+[12-Apr-2025 07:27:12 UTC] PHP Fatal error:  Uncaught Error: Non-static method PopularPosts::install_post_plugin_library() cannot be called statically in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php:75
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pretty-pinteres...')
-#2 /internal/eval.php(20): activate_plugin('pretty-pinteres...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('popular-posts-p...')
+#2 /internal/eval.php(20): activate_plugin('popular-posts-p...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php on line 17
-[10-Apr-2025 19:27:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php:17
+  thrown in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php on line 75
+[12-Apr-2025 07:27:19 UTC] PHP Fatal error:  Uncaught Error: Non-static method PopularPosts::install_post_plugin_library() cannot be called statically in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php:75
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pretty-pinteres...')
-#2 /internal/eval.php(20): activate_plugin('pretty-pinteres...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('popular-posts-p...')
+#2 /internal/eval.php(20): activate_plugin('popular-posts-p...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php on line 17
-[10-Apr-2025 19:27:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php:17
+  thrown in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php on line 75
+[12-Apr-2025 07:27:27 UTC] PHP Fatal error:  Uncaught Error: Non-static method PopularPosts::install_post_plugin_library() cannot be called statically in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php:75
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pretty-pinteres...')
-#2 /internal/eval.php(20): activate_plugin('pretty-pinteres...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('popular-posts-p...')
+#2 /internal/eval.php(20): activate_plugin('popular-posts-p...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/pretty-pinterest-pins/pretty-pinterest-pins.php on line 17
-[10-Apr-2025 19:27:27 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php:61
+  thrown in /wordpress/wp-content/plugins/popular-posts-plugin/popular-posts.php on line 75
+[12-Apr-2025 07:28:48 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:28:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                main_product_id INT(11) NOT NULL,
+                active TINYINT(4) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
+#3 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesModel.php(354): WP_SQLite_DB->query('\n            CR...')
+#4 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesPlugin.php(86): Premmerce\ProductBundles\ProductBundlesModel->createBundlesTable()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Premmerce\ProductBundles\ProductBundlesPlugin->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_premme...', false)
+#9 /internal/eval.php(20): activate_plugin('premmerce-wooco...')
+#10 {main}</pre>
+ for query 
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                main_product_id INT(11) NOT NULL,
+                active TINYINT(4) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_premmerce-woocommerce-product-bundles/premmerce-product-bundles.php'), WP_Hook->do_action, WP_Hook->apply_filters, Premmerce\ProductBundles\ProductBundlesPlugin->activate, Premmerce\ProductBundles\ProductBundlesModel->createBundlesTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 07:28:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>            
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles_products (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                bundle_id INT(11) NOT NULL,
+                product_id INT(11) NOT NULL,
+                discount INT(11) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('            \n  ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('            \n  ...')
+#3 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesModel.php(371): WP_SQLite_DB->query('            \n  ...')
+#4 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesPlugin.php(87): Premmerce\ProductBundles\ProductBundlesModel->createBundleProductsTable()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Premmerce\ProductBundles\ProductBundlesPlugin->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_premme...', false)
+#9 /internal/eval.php(20): activate_plugin('premmerce-wooco...')
+#10 {main}</pre>
+ for query             
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles_products (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                bundle_id INT(11) NOT NULL,
+                product_id INT(11) NOT NULL,
+                discount INT(11) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_premmerce-woocommerce-product-bundles/premmerce-product-bundles.php'), WP_Hook->do_action, WP_Hook->apply_filters, Premmerce\ProductBundles\ProductBundlesPlugin->activate, Premmerce\ProductBundles\ProductBundlesModel->createBundleProductsTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 07:28:50 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:28:59 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:29:01 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:29:10 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:29:12 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[12-Apr-2025 07:29:20 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php:61
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): PPS_Promotional_Product_Subscription::pps_promotional_product_for_subscription_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -104,7 +248,7 @@ Stack trace:
 #6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #7 {main}
   thrown in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php on line 61
-[10-Apr-2025 19:27:36 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php:61
+[12-Apr-2025 07:29:28 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php:61
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): PPS_Promotional_Product_Subscription::pps_promotional_product_for_subscription_init('')
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
@@ -116,25 +260,27 @@ Stack trace:
 #7 {main}
   thrown in /wordpress/wp-content/plugins/promotional-product-for-subscription/promotional-product-for-subscription.php on line 61
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"promotional-product-for-subscription"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"promotional-product-for-subscription"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
