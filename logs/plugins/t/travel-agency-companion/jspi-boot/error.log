@@ -1,68 +1,798 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [11-Apr-2025 11:23:35 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744370614.097)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+Error: [12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_settings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_settings' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_s...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(125): TP_Tables::change_engine('wp_teachpress_s...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(33): TP_Tables::add_table_settings('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_settings' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_settings, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/teachpress/core/class-tables.php on line 97
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_pub' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_p...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(221): TP_Tables::change_engine('wp_teachpress_p...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(36): TP_Tables::add_table_pub('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_meta'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_pub_meta' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_p...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(248): TP_Tables::change_engine('wp_teachpress_p...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(37): TP_Tables::add_table_pub_meta('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_meta' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_meta, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_capabilities'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_pub_capabilities' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_p...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(276): TP_Tables::change_engine('wp_teachpress_p...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(38): TP_Tables::add_table_pub_capabilities('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_capabilities' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_capabilities, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_documents'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_pub_documents' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_p...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(306): TP_Tables::change_engine('wp_teachpress_p...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(39): TP_Tables::add_table_pub_documents('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_documents' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_documents, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_documents'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_pub_documents' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_p...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(331): TP_Tables::change_engine('wp_teachpress_p...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(40): TP_Tables::add_table_pub_imports('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_pub_documents' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_imports, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_tags'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_tags' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_t...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(356): TP_Tables::change_engine('wp_teachpress_t...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(41): TP_Tables::add_table_tags('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_tags' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_tags, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_relation'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_relation' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_r...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(383): TP_Tables::change_engine('wp_teachpress_r...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(42): TP_Tables::add_table_relation('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_relation' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_relation, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_user'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_user' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_u...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(410): TP_Tables::change_engine('wp_teachpress_u...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(43): TP_Tables::add_table_user('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_user' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_user, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_authors'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_authors' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_a...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(436): TP_Tables::change_engine('wp_teachpress_a...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(44): TP_Tables::add_table_authors('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_authors' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_authors, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_rel_pub_auth'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_rel_pub_auth' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_r...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(465): TP_Tables::change_engine('wp_teachpress_r...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(45): TP_Tables::add_table_rel_pub_auth('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_rel_pub_auth' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_rel_pub_auth, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:44:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_monitored_sources'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_teachpress_monitored_sources' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(85): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(96): TP_Tables::check_table_status('wp_teachpress_m...')
+#6 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(492): TP_Tables::change_engine('wp_teachpress_m...')
+#7 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(46): TP_Tables::add_table_monitored_sources('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#9 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#14 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_teachpress_monitored_sources' made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_monitored_sources, TP_Tables::change_engine, TP_Tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_settings ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(125): TP_Tables::change_engine('wp_teachpress_s...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(33): TP_Tables::add_table_settings('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[11-Apr-2025 11:25:23 UTC] PHP Notice:  Function register_sidebar was called <strong>incorrectly</strong>. No <code>id</code> was set in the arguments array for the "" sidebar. Defaulting to "sidebar-1". Manually set the <code>id</code> to "sidebar-1" to silence this notice and keep existing sidebar content. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 11:25:31 UTC] PHP Notice:  Function register_sidebar was called <strong>incorrectly</strong>. No <code>id</code> was set in the arguments array for the "" sidebar. Defaulting to "sidebar-1". Manually set the <code>id</code> to "sidebar-1" to silence this notice and keep existing sidebar content. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 11:25:40 UTC] PHP Notice:  Function register_sidebar was called <strong>incorrectly</strong>. No <code>id</code> was set in the arguments array for the "" sidebar. Defaulting to "sidebar-1". Manually set the <code>id</code> to "sidebar-1" to silence this notice and keep existing sidebar content. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.2.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 11:25:50 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:25:50 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:25:51 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:25:51 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:25:59 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:25:59 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:26:00 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:26:00 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:26:07 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:26:07 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:26:09 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 49
-[11-Apr-2025 11:26:09 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $options in /wordpress/wp-content/plugins/temporarily-hidden-content/includes/class-temporarily-hidden-content-public.php on line 56
-[11-Apr-2025 11:26:50 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744370808.966)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_settings ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_settings, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(221): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(36): TP_Tables::add_table_pub('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"travel-agency-companion"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/travel-agency-companion could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/travel-agency-companion could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-  }
-}
-
-Node.js v23.11.0
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_meta ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(248): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(37): TP_Tables::add_table_pub_meta('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub_meta ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_meta, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_capabilities ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(276): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(38): TP_Tables::add_table_pub_capabilities('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub_capabilities ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_capabilities, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_documents ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(306): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(39): TP_Tables::add_table_pub_documents('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub_documents ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_documents, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_documents ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(331): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(40): TP_Tables::add_table_pub_imports('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub_documents ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_imports, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_tags ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(356): TP_Tables::change_engine('wp_teachpress_t...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(41): TP_Tables::add_table_tags('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_tags ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_tags, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_relation ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(383): TP_Tables::change_engine('wp_teachpress_r...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(42): TP_Tables::add_table_relation('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_relation ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_relation, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_user ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(410): TP_Tables::change_engine('wp_teachpress_u...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(43): TP_Tables::add_table_user('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_user ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_user, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_authors ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(436): TP_Tables::change_engine('wp_teachpress_a...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(44): TP_Tables::add_table_authors('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_authors ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_authors, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_rel_pub_auth ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(465): TP_Tables::change_engine('wp_teachpress_r...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(45): TP_Tables::add_table_rel_pub_auth('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_rel_pub_auth ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_rel_pub_auth, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_monitored_sources ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(492): TP_Tables::change_engine('wp_teachpress_m...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(46): TP_Tables::add_table_monitored_sources('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_monitored_sources ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_monitored_sources, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_settings ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(125): TP_Tables::change_engine('wp_teachpress_s...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(33): TP_Tables::add_table_settings('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_settings ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_settings, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(221): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(36): TP_Tables::add_table_pub('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_meta ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(98): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(248): TP_Tables::change_engine('wp_teachpress_p...')
+#3 /wordpress/wp-content/plugins/teachpress/core/class-tables.php(37): TP_Tables::add_table_pub_meta('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/teachpress/teachpress.php(323): TP_Tables::create()
+#5 /wordpress/wp-content/plugins/teachpress/teachpress.php(306): tp_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tp_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_teachp...', false)
+#10 /internal/eval.php(20): activate_plugin('teachpress/teac...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_teachpress_pub_meta ENGINE = INNODB made by activate_plugin, do_action('activate_teachpress/teachpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, tp_activation, tp_install, TP_Tables::create, TP_Tables::add_table_pub_meta, TP_Tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 11:45:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_teachpress_pub_ca
