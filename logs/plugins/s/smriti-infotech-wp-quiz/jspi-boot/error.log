@@ -1,33 +1,386 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1577
-      throw new Error(
-            ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip".
-				Check if the URL is correct and the server is reachable.
-				If it is reachable, the server might be blocking the request.
-				Check the browser console and network tabs for more information.
+Error: [12-Apr-2025 10:25:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:25:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:25:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:25:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:25:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:25:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 10:26:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Setka\Editor\Service\get_editable_roles() in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php:87
+Stack trace:
+#0 /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php(44): Setka\Editor\Service\Activation->isActivatedFirstTime()
+#1 /wordpress/wp-content/plugins/setka-editor/source/Service/ActivationRunner.php(43): Setka\Editor\Service\Activation->run()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Setka\Editor\Service\ActivationRunner::run(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_setka-...', false)
+#6 /internal/eval.php(20): activate_plugin('setka-editor/pl...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php on line 87
+[12-Apr-2025 10:26:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Setka\Editor\Service\get_editable_roles() in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php:87
+Stack trace:
+#0 /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php(44): Setka\Editor\Service\Activation->isActivatedFirstTime()
+#1 /wordpress/wp-content/plugins/setka-editor/source/Service/ActivationRunner.php(43): Setka\Editor\Service\Activation->run()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Setka\Editor\Service\ActivationRunner::run(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_setka-...', false)
+#6 /internal/eval.php(20): activate_plugin('setka-editor/pl...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php on line 87
+[12-Apr-2025 10:26:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Setka\Editor\Service\get_editable_roles() in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php:87
+Stack trace:
+#0 /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php(44): Setka\Editor\Service\Activation->isActivatedFirstTime()
+#1 /wordpress/wp-content/plugins/setka-editor/source/Service/ActivationRunner.php(43): Setka\Editor\Service\Activation->run()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Setka\Editor\Service\ActivationRunner::run(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_setka-...', false)
+#6 /internal/eval.php(20): activate_plugin('setka-editor/pl...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/setka-editor/source/Service/Activation.php on line 87
+[12-Apr-2025 10:30:31 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:31 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:31 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
+[12-Apr-2025 10:30:32 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:32 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
+[12-Apr-2025 10:30:40 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:40 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
+[12-Apr-2025 10:30:40 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:40 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
+[12-Apr-2025 10:30:48 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:48 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
+[12-Apr-2025 10:30:49 UTC] PHP Deprecated:  Required parameter $attr follows optional parameter $content in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 121
+[12-Apr-2025 10:30:49 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 33
+[12-Apr-2025 10:30:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 37
+[12-Apr-2025 10:30:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 40
+[12-Apr-2025 10:30:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 43
+[12-Apr-2025 10:30:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-wp-gallery-pro/sp-gallery.php on line 46
 
-				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
-
-				This means the server that hosts your file does not allow requests from other sites
-				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
-				cross-origin file downloads. Learn more about CORS at
-				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
-
-				If your file is on GitHub, load it from "raw.githubusercontent.com".
-				Here's how to do that:
-
-				1. Start with the original GitHub URL of the file. For example:
-				https://github.com/username/repository/blob/branch/filename.
-				2. Replace "github.com" with "raw.githubusercontent.com".
-				3. Remove the "/blob/" part of the URL.
-
-				The resulting URL should look like this:
-				https://raw.githubusercontent.com/username/repository/branch/filename
-
-				Error:
-				Error: Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip"
-    at Et.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1577:13)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"smriti-infotech-wp-quiz"},"options":{"activate":true}}) : Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip".
+  				Check if the URL is correct and the server is reachable.
+  				If it is reachable, the server might be blocking the request.
+  				Check the browser console and network tabs for more information.
+  
+  				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+  
+  				This means the server that hosts your file does not allow requests from other sites
+  				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+  				cross-origin file downloads. Learn more about CORS at
+  				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+  
+  				If your file is on GitHub, load it from "raw.githubusercontent.com".
+  				Here's how to do that:
+  
+  				1. Start with the original GitHub URL of the file. For example:
+  				https://github.com/username/repository/blob/branch/filename.
+  				2. Replace "github.com" with "raw.githubusercontent.com".
+  				3. Remove the "/blob/" part of the URL.
+  
+  				The resulting URL should look like this:
+  				https://raw.githubusercontent.com/username/repository/branch/filename
+  
+  				Error:
+  				Error: Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip"
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+      at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: Error: Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip".
+    				Check if the URL is correct and the server is reachable.
+    				If it is reachable, the server might be blocking the request.
+    				Check the browser console and network tabs for more information.
+    
+    				## Does the console show the error "No 'Access-Control-Allow-Origin' header"?
+    
+    				This means the server that hosts your file does not allow requests from other sites
+    				(cross-origin requests, or CORS).	You need to move the asset to a server that allows
+    				cross-origin file downloads. Learn more about CORS at
+    				https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS.
+    
+    				If your file is on GitHub, load it from "raw.githubusercontent.com".
+    				Here's how to do that:
+    
+    				1. Start with the original GitHub URL of the file. For example:
+    				https://github.com/username/repository/blob/branch/filename.
+    				2. Replace "github.com" with "raw.githubusercontent.com".
+    				3. Remove the "/blob/" part of the URL.
+    
+    				The resulting URL should look like this:
+    				https://raw.githubusercontent.com/username/repository/branch/filename
+    
+    				Error:
+    				Error: Could not download "https://downloads.wordpress.org/plugin/smriti-infotech-wp-quiz.latest-stable.zip"
+        at Ct.resolve (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1472:13)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async _.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/util/index.js:45:14)
+  }
+}
 
 Node.js v23.11.0
