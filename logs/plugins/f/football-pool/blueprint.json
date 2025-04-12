@@ -1,1 +1,122 @@
-{"landingPage":"\/","preferredVersions":{"php":"7.4","wp":"latest"},"phpExtensionBundles":["kitchen-sink"],"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"password"},{"step":"setSiteOptions","options":{"users_can_register":"1"}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"football-pool"},"options":{"activate":true}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"user-switching"},"options":{"activate":true}},{"step":"installTheme","themeZipFile":{"resource":"wordpress.org\/themes","slug":"astra"},"options":{"activate":true}},{"step":"setSiteOptions","options":{"blogname":"Football Pool","blogdescription":"A great way to test a few features of the football pool plugin."}},{"step":"wp-cli","command":"wp post update 1 2 --post_status='draft'"},{"step":"wp-cli","command":"wp user update 1 --first_name='Antoine' --last_name='Hurkmans' --display_name='Antoine Hurkmans'"},{"step":"runPHP","code":"<?php require_once 'wordpress\/wp-load.php'; $pool = new Football_Pool_Pool; $pool->update_league_for_user( 1, FOOTBALLPOOL_LEAGUE_DEFAULT, 'update league' ); ?>"},{"step":"wp-cli","command":"wp football-pool test-data --users=10 --yes"},{"step":"unzip","zipFile":{"resource":"url","url":"https:\/\/raw.githubusercontent.com\/WordPressFootballPool\/playground-blueprint\/main\/blueprint.assets.zip"},"extractToPath":"\/wordpress"},{"step":"importFile","file":{"resource":"url","url":"https:\/\/raw.githubusercontent.com\/WordPressFootballPool\/playground-blueprint\/main\/blueprint.content.xml"}},{"step":"wp-cli","command":"wp post update 15 --post_author=1"},{"step":"wp-cli","command":"wp term update category 'uncategorized' --by=slug --name='demo content'"},{"step":"mkdir","path":"\/wordpress\/blueprint"},{"step":"writeFile","path":"\/wordpress\/blueprint\/blueprint.custom_css.css","data":"img.flag { max-width: 100px; }"},{"step":"wp-cli","command":"wp post create \/wordpress\/blueprint\/blueprint.custom_css.css --post_status='publish' --post_type='custom_css' --post_author=1 --post_title='astra' --post_name='astra' --comment_status='closed' --ping_status='closed' "}]}
+{
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "7.4",
+    "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_AUTO_UPDATE_CORE": false,
+        "DISABLE_WP_CRON": true
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "users_can_register": "1"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "football-pool"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "user-switching"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "wordpress.org/themes",
+        "slug": "astra"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Football Pool",
+        "blogdescription": "A great way to test a few features of the football pool plugin."
+      }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post update 1 2 --post_status='draft'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user update 1 --first_name='Antoine' --last_name='Hurkmans' --display_name='Antoine Hurkmans'"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once 'wordpress/wp-load.php'; $pool = new Football_Pool_Pool; $pool->update_league_for_user( 1, FOOTBALLPOOL_LEAGUE_DEFAULT, 'update league' ); ?>"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp football-pool test-data --users=10 --yes"
+    },
+    {
+      "step": "unzip",
+      "zipFile": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/WordPressFootballPool/playground-blueprint/main/blueprint.assets.zip"
+      },
+      "extractToPath": "/wordpress"
+    },
+    {
+      "step": "importFile",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/WordPressFootballPool/playground-blueprint/main/blueprint.content.xml"
+      }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post update 15 --post_author=1"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term update category 'uncategorized' --by=slug --name='demo content'"
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/blueprint"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/blueprint/blueprint.custom_css.css",
+      "data": "img.flag { max-width: 100px; }"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create /wordpress/blueprint/blueprint.custom_css.css --post_status='publish' --post_type='custom_css' --post_author=1 --post_title='astra' --post_name='astra' --comment_status='closed' --ping_status='closed' "
+    }
+  ]
+}
