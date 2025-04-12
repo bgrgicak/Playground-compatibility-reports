@@ -1,38 +1,147 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [11-Apr-2025 12:49:15 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744375752.497)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+Error: [12-Apr-2025 20:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_woocommerce_downloadable_product_permissions DROP PRIMARY KEY, ADD `permission_id` bigint(20) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP INDEX &quot;wp_woocommerce_downloadable_product_permissions__,&quot; ADD `permission_id` bigint(20) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ADD": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(1457): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(533): WC_Install::create_tables()
+#3 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(489): WC_Install::install_core()
+#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(364): WC_Install::install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::check_version('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(99): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_woocommerce_downloadable_product_permissions DROP PRIMARY KEY, ADD `permission_id` bigint(20) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::check_version, WC_Install::install, WC_Install::install_core, WC_Install::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 20:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW KEYS FROM wp_woocommerce_sessions WHERE Key_name = 'PRIMARY' AND Column_name = 'session_id'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: KEYS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#2 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(1470): wpdb->get_var('SHOW KEYS FROM ...')
+#3 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(533): WC_Install::create_tables()
+#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(489): WC_Install::install_core()
+#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(364): WC_Install::install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::check_version('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[11-Apr-2025 12:50:10 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
-[11-Apr-2025 12:50:10 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
+#9 /wordpress/wp-settings.php(704): do_action('init')
+#10 /wordpress/wp-config.php(99): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SHOW KEYS FROM wp_woocommerce_sessions WHERE Key_name = 'PRIMARY' AND Column_name = 'session_id' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::check_version, WC_Install::install, WC_Install::install_core, WC_Install::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 20:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_woocommerce_sessions` DROP PRIMARY KEY, DROP KEY `session_id`, ADD PRIMARY KEY(`session_id`), ADD UNIQUE KEY(`session_key`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP INDEX &quot;wp_woocommerce_sessions__,&quot; DROP KEY `session_id` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "DROP": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(1472): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(533): WC_Install::create_tables()
+#3 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(489): WC_Install::install_core()
+#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(364): WC_Install::install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::check_version('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(99): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_woocommerce_sessions` DROP PRIMARY KEY, DROP KEY `session_id`, ADD PRIMARY KEY(`session_id`), ADD UNIQUE KEY(`session_key`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::check_version, WC_Install::install, WC_Install::install_core, WC_Install::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 20:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wc_product_attributes_lookup ADD PRIMARY KEY  (`product_or_parent_id`,`term_id`,`product_id`,`taxonomy`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wc_product_attributes_lookup, wp_wc_product_attributes_lookup__(, PRIMARY</li>
+<li>Executing: CREATE PRIMARY KEY &quot;wp_wc_product_attributes_lookup__(&quot; ON &quot;wp_wc_product_attributes_lookup&quot; (,`term_id`,`product_id`,`taxonomy`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(1477): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(533): WC_Install::create_tables()
+#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(489): WC_Install::install_core()
+#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(364): WC_Install::install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::check_version('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(704): do_action('init')
+#10 /wordpress/wp-config.php(99): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wc_product_attributes_lookup ADD PRIMARY KEY  (`product_or_parent_id`,`term_id`,`product_id`,`taxonomy`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::check_version, WC_Install::install, WC_Install::install_core, WC_Install::create_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[12-Apr-2025 20:50:13 UTC] PHP Notice:  unserialize(): Error at offset 71 of 304 bytes in /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php on line 397
+[12-Apr-2025 20:51:52 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
+[12-Apr-2025 20:51:52 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('aweber-subscrib...')
 #2 /internal/eval.php(20): activate_plugin('aweber-subscrib...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 12
-[11-Apr-2025 12:50:17 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
-[11-Apr-2025 12:50:17 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
+[12-Apr-2025 20:51:59 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
+[12-Apr-2025 20:51:59 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('aweber-subscrib...')
 #2 /internal/eval.php(20): activate_plugin('aweber-subscrib...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 12
-[11-Apr-2025 12:50:25 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
-[11-Apr-2025 12:50:25 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
+[12-Apr-2025 20:52:07 UTC] PHP Warning:  Undefined variable $Fm_tweets_defaults in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 14
+[12-Apr-2025 20:52:07 UTC] PHP Fatal error:  Uncaught Error: Attempt to modify property "options" on null in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php:12
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('aweber-subscrib...')
@@ -40,25 +149,27 @@ Stack trace:
 #3 {main}
   thrown in /wordpress/wp-content/plugins/aweber-subscriber-form/index.php on line 12
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"aweber-subscriber-form"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"aweber-subscriber-form"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
