@@ -1,144 +1,29 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [11-Apr-2025 07:28:42 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744356520.54)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[11-Apr-2025 07:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_dcrm_leads` ADD COLUMN `tags` VARCHAR(255);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_dcrm_leads, tags, varchar(255)</li>
-<li>Executing: ALTER TABLE wp_dcrm_leads ADD COLUMN `tags` text; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: tags.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(237): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(18): DevCrmRunMigrationV1->update_leads_table_with_tags_column()
-#3 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(7): DevCrmRunMigrationV1->run_migrations()
-#4 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(242): DevCrmRunMigrationV1->__construct()
-#5 /wordpress/wp-content/plugins/devs-crm/DevsCrm.php(94): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): DevsCrmFinal->on_plugin_update('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query ALTER TABLE `wp_dcrm_leads` ADD COLUMN `tags` VARCHAR(255); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DevsCrmFinal->on_plugin_update, include('/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php'), DevCrmRunMigrationV1->__construct, DevCrmRunMigrationV1->run_migrations, DevCrmRunMigrationV1->update_leads_table_with_tags_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 07:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_dcrm_leads` ADD COLUMN `tags` VARCHAR(255);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_dcrm_leads, tags, varchar(255)</li>
-<li>Executing: ALTER TABLE wp_dcrm_leads ADD COLUMN `tags` text; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: tags.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(237): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(18): DevCrmRunMigrationV1->update_leads_table_with_tags_column()
-#3 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(7): DevCrmRunMigrationV1->run_migrations()
-#4 /wordpress/wp-content/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php(242): DevCrmRunMigrationV1->__construct()
-#5 /wordpress/wp-content/plugins/devs-crm/DevsCrm.php(94): include('/wordpress/wp-c...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): DevsCrmFinal->on_plugin_update('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query ALTER TABLE `wp_dcrm_leads` ADD COLUMN `tags` VARCHAR(255); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, DevsCrmFinal->on_plugin_update, include('/plugins/devs-crm/migrations/class-devcrm-run-migration-v1.php'), DevCrmRunMigrationV1->__construct, DevCrmRunMigrationV1->run_migrations, DevCrmRunMigrationV1->update_leads_table_with_tags_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 07:31:42 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:31:42 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:31:42 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:31:44 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:31:44 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:31:44 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:31:54 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:31:54 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:31:54 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:31:56 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:31:56 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:31:57 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:32:07 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:32:07 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:32:07 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:32:09 UTC] PHP Deprecated:  Required parameter $month follows optional parameter $day in /wordpress/wp-content/plugins/deals-engine/includes/class-wps-deals-model.php on line 1659
-[11-Apr-2025 07:32:09 UTC] PHP Deprecated:  Required parameter $orderid follows optional parameter $newstatus in /wordpress/wp-content/plugins/deals-engine/includes/gateways/functions.php on line 336
-[11-Apr-2025 07:32:09 UTC] PHP Deprecated:  Required parameter $user follows optional parameter $args in /wordpress/wp-content/plugins/deals-engine/includes/social/libraries/facebook.php on line 109
-[11-Apr-2025 07:34:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-core-updates/Function.php:53
+Error: [12-Apr-2025 13:55:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php:46
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-core-up...')
-#2 /internal/eval.php(20): activate_plugin('disable-core-up...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-trackba...')
+#2 /internal/eval.php(20): activate_plugin('disable-trackba...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/disable-core-updates/Function.php on line 53
-[11-Apr-2025 07:34:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-core-updates/Function.php:53
+  thrown in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php on line 46
+[12-Apr-2025 13:55:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php:46
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-core-up...')
-#2 /internal/eval.php(20): activate_plugin('disable-core-up...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-trackba...')
+#2 /internal/eval.php(20): activate_plugin('disable-trackba...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/disable-core-updates/Function.php on line 53
-[11-Apr-2025 07:35:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-core-updates/Function.php:53
+  thrown in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php on line 46
+[12-Apr-2025 13:56:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php:46
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-core-up...')
-#2 /internal/eval.php(20): activate_plugin('disable-core-up...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('disable-trackba...')
+#2 /internal/eval.php(20): activate_plugin('disable-trackba...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/disable-core-updates/Function.php on line 53
-[11-Apr-2025 07:36:55 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
-Stack trace:
-#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
-#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
-#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
-#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
-#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
-#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744357013.056)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
-[11-Apr-2025 07:37:26 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 07:37:35 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 07:37:44 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
-[11-Apr-2025 07:37:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/double-opt-contact-form/Double_Opt_Contact_Form.php:45
+  thrown in /wordpress/wp-content/plugins/disable-trackbacks/disable-trackbacks.php on line 46
+[12-Apr-2025 13:58:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/double-opt-contact-form/Double_Opt_Contact_Form.php:45
 Stack trace:
 #0 /wordpress/wp-content/plugins/double-opt-contact-form/Double_Opt_Contact_Form.php(52): double_opt_contact_form_dam('example.com:443')
 #1 /wordpress/wp-content/plugins/double-opt-contact-form/Double_Opt_Contact_Form.php(465): double_opt_contact_form_whois()
@@ -150,30 +35,27 @@ Stack trace:
 #7 {main}
   thrown in /wordpress/wp-content/plugins/double-opt-contact-form/Double_Opt_Contact_Form.php on line 45
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at processTicksAndRejections (node:internal/process/task_queues:105:5)
-    ... 2 lines matching cause stack trace ...
-    at process.processTimers (node:internal/timers:543:7)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"double-opt-contact-form"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"double-opt-contact-form"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
       ... 2 lines matching cause stack trace ...
-      at process.processTimers (node:internal/timers:543:7)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at runNextTicks (node:internal/process/task_queues:69:3)
-        at listOnTimeout (node:internal/timers:569:9)
-        at process.processTimers (node:internal/timers:543:7)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
