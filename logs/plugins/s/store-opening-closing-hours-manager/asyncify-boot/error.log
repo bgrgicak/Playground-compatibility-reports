@@ -1,155 +1,134 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: [10-Apr-2025 22:53:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_sendpress_customfields;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_sendpress_customfields` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
-#6 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(704): do_action('init')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 22:53:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_sendpress_customfields;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
-#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(704): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 22:53:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_sendpress_customfields;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
-#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(704): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[10-Apr-2025 22:55:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php:120
+Error: [12-Apr-2025 10:50:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/setfm-widget/plugin.php:246
 Stack trace:
-#0 /wordpress/wp-content/plugins/showdown/showdown.php(32): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('showdown/showdo...')
-#3 /internal/eval.php(20): activate_plugin('showdown/showdo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php on line 120
-[10-Apr-2025 22:55:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php:120
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('setfm-widget/pl...')
+#2 /internal/eval.php(20): activate_plugin('setfm-widget/pl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/setfm-widget/plugin.php on line 246
+[12-Apr-2025 10:50:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/setfm-widget/plugin.php:246
 Stack trace:
-#0 /wordpress/wp-content/plugins/showdown/showdown.php(32): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('showdown/showdo...')
-#3 /internal/eval.php(20): activate_plugin('showdown/showdo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php on line 120
-[10-Apr-2025 22:55:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php:120
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('setfm-widget/pl...')
+#2 /internal/eval.php(20): activate_plugin('setfm-widget/pl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/setfm-widget/plugin.php on line 246
+[12-Apr-2025 10:50:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/setfm-widget/plugin.php:246
 Stack trace:
-#0 /wordpress/wp-content/plugins/showdown/showdown.php(32): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('showdown/showdo...')
-#3 /internal/eval.php(20): activate_plugin('showdown/showdo...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/showdown/php/showdown_widgets.php on line 120
-[10-Apr-2025 22:59:09 UTC] PHP Deprecated:  Required parameter $currentTimestamp follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
-[10-Apr-2025 22:59:09 UTC] PHP Deprecated:  Required parameter $currentDate follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
-[10-Apr-2025 22:59:18 UTC] PHP Deprecated:  Required parameter $currentTimestamp follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
-[10-Apr-2025 22:59:18 UTC] PHP Deprecated:  Required parameter $currentDate follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('setfm-widget/pl...')
+#2 /internal/eval.php(20): activate_plugin('setfm-widget/pl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/setfm-widget/plugin.php on line 246
+[12-Apr-2025 10:51:38 UTC] PHP Warning:  Undefined array key "root_url" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 47
+[12-Apr-2025 10:51:38 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 50
+[12-Apr-2025 10:51:38 UTC] PHP Warning:  Undefined array key "uuid" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 38
+[12-Apr-2025 10:51:38 UTC] PHP Warning:  Undefined array key "name" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 39
+[12-Apr-2025 10:51:50 UTC] PHP Warning:  Undefined array key "root_url" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 47
+[12-Apr-2025 10:51:50 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 50
+[12-Apr-2025 10:51:50 UTC] PHP Warning:  Undefined array key "uuid" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 38
+[12-Apr-2025 10:51:50 UTC] PHP Warning:  Undefined array key "name" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 39
+[12-Apr-2025 10:52:02 UTC] PHP Warning:  Undefined array key "root_url" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 47
+[12-Apr-2025 10:52:02 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 50
+[12-Apr-2025 10:52:02 UTC] PHP Warning:  Undefined array key "uuid" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 38
+[12-Apr-2025 10:52:02 UTC] PHP Warning:  Undefined array key "name" in /wordpress/wp-content/plugins/showcase-idx/3/install.php on line 39
+[12-Apr-2025 10:52:12 UTC] PHP Fatal error:  Uncaught TypeError: unlink(): Argument #2 ($context) must be of type resource or null, bool given in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php:182
+Stack trace:
+#0 /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php(182): unlink('/wordpress/wp-c...', true)
+#1 /wordpress/wp-content/plugins/simple-cache/simple-cache.php(105): SC_Config->write(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sc_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#6 /internal/eval.php(20): activate_plugin('simple-cache/si...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php on line 182
+[12-Apr-2025 10:52:20 UTC] PHP Fatal error:  Uncaught TypeError: unlink(): Argument #2 ($context) must be of type resource or null, bool given in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php:182
+Stack trace:
+#0 /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php(182): unlink('/wordpress/wp-c...', true)
+#1 /wordpress/wp-content/plugins/simple-cache/simple-cache.php(105): SC_Config->write(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sc_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#6 /internal/eval.php(20): activate_plugin('simple-cache/si...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php on line 182
+[12-Apr-2025 10:52:29 UTC] PHP Fatal error:  Uncaught TypeError: unlink(): Argument #2 ($context) must be of type resource or null, bool given in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php:182
+Stack trace:
+#0 /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php(182): unlink('/wordpress/wp-c...', true)
+#1 /wordpress/wp-content/plugins/simple-cache/simple-cache.php(105): SC_Config->write(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): sc_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#6 /internal/eval.php(20): activate_plugin('simple-cache/si...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/simple-cache/inc/class-sc-config.php on line 182
+[12-Apr-2025 10:53:06 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/simple-mail-address-encoder/simple-mail-address-encoder.php on line 83
+[12-Apr-2025 10:53:13 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/simple-mail-address-encoder/simple-mail-address-encoder.php on line 83
+[12-Apr-2025 10:53:20 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/simple-mail-address-encoder/simple-mail-address-encoder.php on line 83
+[12-Apr-2025 10:55:08 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 10:55:17 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 10:55:25 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[12-Apr-2025 10:57:17 UTC] PHP Fatal error:  Uncaught Error: Class "mp_ssv_general\custom_fields\Field" not found in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/Field.php(12): require_once()
+#1 /wordpress/wp-content/plugins/ssv-mailchimp/general/general.php(10): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/ssv-mailchimp/ssv-mailchimp.php(23): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ssv-mailchimp/s...')
+#5 /internal/eval.php(20): activate_plugin('ssv-mailchimp/s...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php on line 17
+[12-Apr-2025 10:57:25 UTC] PHP Fatal error:  Uncaught Error: Class "mp_ssv_general\custom_fields\Field" not found in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/Field.php(12): require_once()
+#1 /wordpress/wp-content/plugins/ssv-mailchimp/general/general.php(10): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/ssv-mailchimp/ssv-mailchimp.php(23): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ssv-mailchimp/s...')
+#5 /internal/eval.php(20): activate_plugin('ssv-mailchimp/s...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php on line 17
+[12-Apr-2025 10:57:32 UTC] PHP Fatal error:  Uncaught Error: Class "mp_ssv_general\custom_fields\Field" not found in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/Field.php(12): require_once()
+#1 /wordpress/wp-content/plugins/ssv-mailchimp/general/general.php(10): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/ssv-mailchimp/ssv-mailchimp.php(23): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ssv-mailchimp/s...')
+#5 /internal/eval.php(20): activate_plugin('ssv-mailchimp/s...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/ssv-mailchimp/general/models/custom-fields/TabField.php on line 17
+[12-Apr-2025 10:57:41 UTC] PHP Deprecated:  Required parameter $currentTimestamp follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
+[12-Apr-2025 10:57:41 UTC] PHP Deprecated:  Required parameter $currentDate follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
+[12-Apr-2025 10:57:50 UTC] PHP Deprecated:  Required parameter $currentTimestamp follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
+[12-Apr-2025 10:57:50 UTC] PHP Deprecated:  Required parameter $currentDate follows optional parameter $todayOpeningClosingHours in /wordpress/wp-content/plugins/store-opening-closing-hours-manager/includes/util.php on line 326
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"store-opening-closing-hours-manager"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/store-opening-closing-hours-manager could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"store-opening-closing-hours-manager"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/store-opening-closing-hours-manager could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
     [cause]: Error: Plugin /wordpress/wp-content/plugins/store-opening-closing-hours-manager could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
   }
 }
 
