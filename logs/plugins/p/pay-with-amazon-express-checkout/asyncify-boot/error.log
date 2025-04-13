@@ -2,214 +2,544 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [11-Apr-2025 14:26:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [13-Apr-2025 04:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL</p>
+<p>CREATE TABLE wp_pta_sus_sheets (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(200) NOT NULL,
+            first_date DATE,
+            last_date DATE,
+            details LONGTEXT,
+            type VARCHAR(200) NOT NULL,
+            position VARCHAR(200),
+            chair_name VARCHAR(100),
+            chair_email VARCHAR(100),
+            sus_group VARCHAR(500) DEFAULT 'none',
+            reminder1_days INT,
+            reminder2_days INT,
+            clear BOOL NOT NULL DEFAULT TRUE,
+            clear_type varchar(20) NOT NULL DEFAULT 'days',
+            clear_days INT DEFAULT 0,
+            no_signups BOOL NOT NULL DEFAULT FALSE,
+            duplicate_times BOOL NOT NULL DEFAULT FALSE,
+            visible BOOL NOT NULL DEFAULT TRUE,
+            trash BOOL NOT NULL DEFAULT FALSE,
+            clear_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            signup_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            PRIMARY KEY id (id),
+            KEY `first_date` (`first_date`),
+            KEY `last_date` (`last_date`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies, attribute_invisible, 1, , YES, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'wp_woocommerce_attribute_taxonomies' doesn't exist
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: clear.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_wooco...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(37): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#8 /internal/eval.php(20): activate_plugin('product-attribu...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
 #9 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:26:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_pta_sus_sheets (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(200) NOT NULL,
+            first_date DATE,
+            last_date DATE,
+            details LONGTEXT,
+            type VARCHAR(200) NOT NULL,
+            position VARCHAR(200),
+            chair_name VARCHAR(100),
+            chair_email VARCHAR(100),
+            sus_group VARCHAR(500) DEFAULT 'none',
+            reminder1_days INT,
+            reminder2_days INT,
+            clear BOOL NOT NULL DEFAULT TRUE,
+            clear_type varchar(20) NOT NULL DEFAULT 'days',
+            clear_days INT DEFAULT 0,
+            no_signups BOOL NOT NULL DEFAULT FALSE,
+            duplicate_times BOOL NOT NULL DEFAULT FALSE,
+            visible BOOL NOT NULL DEFAULT TRUE,
+            trash BOOL NOT NULL DEFAULT FALSE,
+            clear_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            signup_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            PRIMARY KEY id (id),
+            KEY `first_date` (`first_date`),
+            KEY `last_date` (`last_date`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL</p>
+<p>CREATE TABLE wp_pta_sus_tasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            sheet_id INT NOT NULL,
+            dates VARCHAR(8000) NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            time_start VARCHAR(50),
+            time_end VARCHAR(50),
+            qty INT NOT NULL DEFAULT 1,
+            need_details VARCHAR(3) NOT NULL DEFAULT 'NO',
+            details_text VARCHAR(200) NOT NULL DEFAULT 'Item you are bringing',
+            details_required VARCHAR(3) NOT NULL DEFAULT 'YES',
+            allow_duplicates VARCHAR(3) NOT NULL DEFAULT 'NO',
+            enable_quantities VARCHAR(3) NOT NULL DEFAULT 'NO',
+            position INT NOT NULL,
+            PRIMARY KEY id (id),
+            KEY `sheet_id` (`sheet_id`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies, attribute_custom_order, 1, , YES, int, , , 10, 0, , , , int(10), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'wp_woocommerce_attribute_taxonomies' doesn't exist
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_wooco...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(38): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#8 /internal/eval.php(20): activate_plugin('product-attribu...')
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
 #9 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_pta_sus_tasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            sheet_id INT NOT NULL,
+            dates VARCHAR(8000) NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            time_start VARCHAR(50),
+            time_end VARCHAR(50),
+            qty INT NOT NULL DEFAULT 1,
+            need_details VARCHAR(3) NOT NULL DEFAULT 'NO',
+            details_text VARCHAR(200) NOT NULL DEFAULT 'Item you are bringing',
+            details_required VARCHAR(3) NOT NULL DEFAULT 'YES',
+            allow_duplicates VARCHAR(3) NOT NULL DEFAULT 'NO',
+            enable_quantities VARCHAR(3) NOT NULL DEFAULT 'NO',
+            position INT NOT NULL,
+            PRIMARY KEY id (id),
+            KEY `sheet_id` (`sheet_id`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL</p>
+<p>CREATE TABLE wp_pta_sus_signups (
+            id INT NOT NULL AUTO_INCREMENT,
+            task_id INT NOT NULL,
+            date DATE NOT NULL,
+            item VARCHAR(500) NOT NULL,
+            user_id INT NOT NULL,
+            firstname VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(50) NOT NULL,
+            reminder1_sent BOOL NOT NULL DEFAULT FALSE,
+            reminder2_sent BOOL NOT NULL DEFAULT FALSE,
+            item_qty INT NOT NULL DEFAULT 1,
+            ts INT NULL DEFAULT NULL,
+            validated BOOLEAN NOT NULL DEFAULT TRUE,
+            PRIMARY KEY id (id),
+            KEY `task_id` (`task_id`),
+            KEY `date` (`date`),
+            KEY `user_id` (`user_id`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_woocommerce_attribute_taxonomies, ATTRIBUTE_INVISIBLE, int(1)</li>
-<li>Executing: ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible integer NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: reminder1_sent.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(37): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#6 /internal/eval.php(20): activate_plugin('product-attribu...')
-#7 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:26:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_signups (
+            id INT NOT NULL AUTO_INCREMENT,
+            task_id INT NOT NULL,
+            date DATE NOT NULL,
+            item VARCHAR(500) NOT NULL,
+            user_id INT NOT NULL,
+            firstname VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(50) NOT NULL,
+            reminder1_sent BOOL NOT NULL DEFAULT FALSE,
+            reminder2_sent BOOL NOT NULL DEFAULT FALSE,
+            item_qty INT NOT NULL DEFAULT 1,
+            ts INT NULL DEFAULT NULL,
+            validated BOOLEAN NOT NULL DEFAULT TRUE,
+            PRIMARY KEY id (id),
+            KEY `task_id` (`task_id`),
+            KEY `date` (`date`),
+            KEY `user_id` (`user_id`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL</p>
+<p>CREATE TABLE wp_pta_sus_validation_codes (
+            id INT NOT NULL AUTO_INCREMENT,
+            firstname VARCHAR(100),
+            lastname VARCHAR(100),
+            email VARCHAR(100),
+            code VARCHAR(200),
+        	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_woocommerce_attribute_taxonomies, ATTRIBUTE_CUSTOM_ORDER, int(10)</li>
-<li>Executing: ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order integer NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(38): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#6 /internal/eval.php(20): activate_plugin('product-attribu...')
-#7 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:26:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_validation_codes (
+            id INT NOT NULL AUTO_INCREMENT,
+            firstname VARCHAR(100),
+            lastname VARCHAR(100),
+            email VARCHAR(100),
+            code VARCHAR(200),
+        	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL</p>
+<p>CREATE TABLE wp_pta_sus_sheets (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(200) NOT NULL,
+            first_date DATE,
+            last_date DATE,
+            details LONGTEXT,
+            type VARCHAR(200) NOT NULL,
+            position VARCHAR(200),
+            chair_name VARCHAR(100),
+            chair_email VARCHAR(100),
+            sus_group VARCHAR(500) DEFAULT 'none',
+            reminder1_days INT,
+            reminder2_days INT,
+            clear BOOL NOT NULL DEFAULT TRUE,
+            clear_type varchar(20) NOT NULL DEFAULT 'days',
+            clear_days INT DEFAULT 0,
+            no_signups BOOL NOT NULL DEFAULT FALSE,
+            duplicate_times BOOL NOT NULL DEFAULT FALSE,
+            visible BOOL NOT NULL DEFAULT TRUE,
+            trash BOOL NOT NULL DEFAULT FALSE,
+            clear_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            signup_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            PRIMARY KEY id (id),
+            KEY `first_date` (`first_date`),
+            KEY `last_date` (`last_date`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_woocommerce_attribute_taxonomies, ATTRIBUTE_INVISIBLE, int(1)</li>
-<li>Executing: ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible integer NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: clear.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(37): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#6 /internal/eval.php(20): activate_plugin('product-attribu...')
-#7 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_invisible INT(1) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:26:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_sheets (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(200) NOT NULL,
+            first_date DATE,
+            last_date DATE,
+            details LONGTEXT,
+            type VARCHAR(200) NOT NULL,
+            position VARCHAR(200),
+            chair_name VARCHAR(100),
+            chair_email VARCHAR(100),
+            sus_group VARCHAR(500) DEFAULT 'none',
+            reminder1_days INT,
+            reminder2_days INT,
+            clear BOOL NOT NULL DEFAULT TRUE,
+            clear_type varchar(20) NOT NULL DEFAULT 'days',
+            clear_days INT DEFAULT 0,
+            no_signups BOOL NOT NULL DEFAULT FALSE,
+            duplicate_times BOOL NOT NULL DEFAULT FALSE,
+            visible BOOL NOT NULL DEFAULT TRUE,
+            trash BOOL NOT NULL DEFAULT FALSE,
+            clear_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            signup_emails VARCHAR(50) NOT NULL DEFAULT 'default',
+            PRIMARY KEY id (id),
+            KEY `first_date` (`first_date`),
+            KEY `last_date` (`last_date`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL</p>
+<p>CREATE TABLE wp_pta_sus_tasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            sheet_id INT NOT NULL,
+            dates VARCHAR(8000) NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            time_start VARCHAR(50),
+            time_end VARCHAR(50),
+            qty INT NOT NULL DEFAULT 1,
+            need_details VARCHAR(3) NOT NULL DEFAULT 'NO',
+            details_text VARCHAR(200) NOT NULL DEFAULT 'Item you are bringing',
+            details_required VARCHAR(3) NOT NULL DEFAULT 'YES',
+            allow_duplicates VARCHAR(3) NOT NULL DEFAULT 'NO',
+            enable_quantities VARCHAR(3) NOT NULL DEFAULT 'NO',
+            position INT NOT NULL,
+            PRIMARY KEY id (id),
+            KEY `sheet_id` (`sheet_id`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_woocommerce_attribute_taxonomies, ATTRIBUTE_CUSTOM_ORDER, int(10)</li>
-<li>Executing: ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order integer NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php(38): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): pagov_product_attribute_order_visibility(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_produc...', false)
-#6 /internal/eval.php(20): activate_plugin('product-attribu...')
-#7 {main}</pre>
- for query ALTER TABLE wp_woocommerce_attribute_taxonomies ADD attribute_custom_order INT(10) NULL made by activate_plugin, do_action('activate_product-attribute-global-order-and-visibility/woo-attribute-global-order-visibility.php'), WP_Hook->do_action, WP_Hook->apply_filters, pagov_product_attribute_order_visibility, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Apr-2025 14:27:37 UTC] PHP Fatal error:  Redefinition of parameter $quotaMax in /wordpress/wp-content/plugins/pay-with-amazon-express-checkout/MarketplaceWebServiceSellers/Model/ResponseHeaderMetaData.php on line 31
-[11-Apr-2025 14:27:45 UTC] PHP Fatal error:  Redefinition of parameter $quotaMax in /wordpress/wp-content/plugins/pay-with-amazon-express-checkout/MarketplaceWebServiceSellers/Model/ResponseHeaderMetaData.php on line 31
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_tasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            sheet_id INT NOT NULL,
+            dates VARCHAR(8000) NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            time_start VARCHAR(50),
+            time_end VARCHAR(50),
+            qty INT NOT NULL DEFAULT 1,
+            need_details VARCHAR(3) NOT NULL DEFAULT 'NO',
+            details_text VARCHAR(200) NOT NULL DEFAULT 'Item you are bringing',
+            details_required VARCHAR(3) NOT NULL DEFAULT 'YES',
+            allow_duplicates VARCHAR(3) NOT NULL DEFAULT 'NO',
+            enable_quantities VARCHAR(3) NOT NULL DEFAULT 'NO',
+            position INT NOT NULL,
+            PRIMARY KEY id (id),
+            KEY `sheet_id` (`sheet_id`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_pta_sus_signups (
+            id INT NOT NULL AUTO_INCREMENT,
+            task_id INT NOT NULL,
+            date DATE NOT NULL,
+            item VARCHAR(500) NOT NULL,
+            user_id INT NOT NULL,
+            firstname VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(50) NOT NULL,
+            reminder1_sent BOOL NOT NULL DEFAULT FALSE,
+            reminder2_sent BOOL NOT NULL DEFAULT FALSE,
+            item_qty INT NOT NULL DEFAULT 1,
+            ts INT NULL DEFAULT NULL,
+            validated BOOLEAN NOT NULL DEFAULT TRUE,
+            PRIMARY KEY id (id),
+            KEY `task_id` (`task_id`),
+            KEY `date` (`date`),
+            KEY `user_id` (`user_id`)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: reminder1_sent.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_signups (
+            id INT NOT NULL AUTO_INCREMENT,
+            task_id INT NOT NULL,
+            date DATE NOT NULL,
+            item VARCHAR(500) NOT NULL,
+            user_id INT NOT NULL,
+            firstname VARCHAR(100) NOT NULL,
+            lastname VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(50) NOT NULL,
+            reminder1_sent BOOL NOT NULL DEFAULT FALSE,
+            reminder2_sent BOOL NOT NULL DEFAULT FALSE,
+            item_qty INT NOT NULL DEFAULT 1,
+            ts INT NULL DEFAULT NULL,
+            validated BOOLEAN NOT NULL DEFAULT TRUE,
+            PRIMARY KEY id (id),
+            KEY `task_id` (`task_id`),
+            KEY `date` (`date`),
+            KEY `user_id` (`user_id`)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_pta_sus_validation_codes (
+            id INT NOT NULL AUTO_INCREMENT,
+            firstname VARCHAR(100),
+            lastname VARCHAR(100),
+            email VARCHAR(100),
+            code VARCHAR(200),
+        	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(677): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php(587): PTA_Sign_Up_Sheet->pta_sus_activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): PTA_Sign_Up_Sheet->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pta-vo...', false)
+#8 /internal/eval.php(20): activate_plugin('pta-volunteer-s...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_pta_sus_validation_codes (
+            id INT NOT NULL AUTO_INCREMENT,
+            firstname VARCHAR(100),
+            lastname VARCHAR(100),
+            email VARCHAR(100),
+            code VARCHAR(200),
+        	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_pta-volunteer-sign-up-sheets/pta-volunteer-sign-up-sheets.php'), WP_Hook->do_action, WP_Hook->apply_filters, PTA_Sign_Up_Sheet->activate, PTA_Sign_Up_Sheet->pta_sus_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 04:57:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('parsisokhan_Wid...')
+#2 /wordpress/wp-content/plugins/parsi-sokhan/inc/widget.php(62): register_widget('parsisokhan_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): parsisokhan_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[13-Apr-2025 04:57:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('parsisokhan_Wid...')
+#2 /wordpress/wp-content/plugins/parsi-sokhan/inc/widget.php(62): register_widget('parsisokhan_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): parsisokhan_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[13-Apr-2025 04:58:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('parsisokhan_Wid...')
+#2 /wordpress/wp-content/plugins/parsi-sokhan/inc/widget.php(62): register_widget('parsisokhan_Wid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): parsisokhan_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[13-Apr-2025 05:00:41 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:00:41 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery.rating</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:00:49 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:00:49 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery.rating</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:00:58 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:00:58 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery.rating</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 05:03:18 UTC] PHP Fatal error:  Redefinition of parameter $quotaMax in /wordpress/wp-content/plugins/pay-with-amazon-express-checkout/MarketplaceWebServiceSellers/Model/ResponseHeaderMetaData.php on line 31
+[13-Apr-2025 05:03:27 UTC] PHP Fatal error:  Redefinition of parameter $quotaMax in /wordpress/wp-content/plugins/pay-with-amazon-express-checkout/MarketplaceWebServiceSellers/Model/ResponseHeaderMetaData.php on line 31
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
