@@ -2,129 +2,387 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [12-Apr-2025 08:33:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [13-Apr-2025 18:54:45 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:54:47 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:54:56 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:54:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_besucher_log LIKE 'IS_BOT'</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_denied (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        seen datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        type tinytext NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_besucher_log</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_besucher_log</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'database_name_here.wp_besucher_log' doesn't exist
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'database...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/besucherzahler/besucherzaehler.php(234): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-content/plugins/besucherzahler/besucherzaehler.php(267): wp_besucher_install_db()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): traffic_counter_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SHOW COLUMNS FROM wp_besucher_log LIKE 'IS_BOT' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, traffic_counter_init, wp_besucher_install_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Apr-2025 08:33:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(108): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_denied (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        seen datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        type tinytext NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:54:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM wp_besucher_log LIKE 'IS_HIT'</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_besucher_log</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_besucher_log</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'database_name_here.wp_besucher_log' doesn't exist
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'database...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/besucherzahler/besucherzaehler.php(235): wpdb->get_results('SHOW COLUMNS FR...')
-#5 /wordpress/wp-content/plugins/besucherzahler/besucherzaehler.php(267): wp_besucher_install_db()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): traffic_counter_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SHOW COLUMNS FROM wp_besucher_log LIKE 'IS_HIT' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, traffic_counter_init, wp_besucher_install_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Apr-2025 08:33:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:33:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:33:30 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:33:30 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:33:38 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:33:38 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[12-Apr-2025 08:34:15 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/bing-website-translator/classes/common.class.php on line 972
-[12-Apr-2025 08:34:23 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/bing-website-translator/classes/common.class.php on line 972
-[12-Apr-2025 08:34:31 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/bing-website-translator/classes/common.class.php on line 972
-[12-Apr-2025 08:36:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 77
-[12-Apr-2025 08:36:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 81
-[12-Apr-2025 08:36:59 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method bwpv_setup::on_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_better...', false)
-#3 /internal/eval.php(20): activate_plugin('better-wp-varni...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[12-Apr-2025 08:37:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 77
-[12-Apr-2025 08:37:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 81
-[12-Apr-2025 08:37:08 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method bwpv_setup::on_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_better...', false)
-#3 /internal/eval.php(20): activate_plugin('better-wp-varni...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[12-Apr-2025 08:37:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 77
-[12-Apr-2025 08:37:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/better-wp-varnish/better-wp-varnish.php on line 81
-[12-Apr-2025 08:37:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method bwpv_setup::on_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_better...', false)
-#3 /internal/eval.php(20): activate_plugin('better-wp-varni...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[12-Apr-2025 08:37:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php:240
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bistri-video-ca...')
-#2 /internal/eval.php(20): activate_plugin('bistri-video-ca...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php on line 240
-[12-Apr-2025 08:37:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php:240
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bistri-video-ca...')
-#2 /internal/eval.php(20): activate_plugin('bistri-video-ca...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php on line 240
-[12-Apr-2025 08:37:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php:240
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bistri-video-ca...')
-#2 /internal/eval.php(20): activate_plugin('bistri-video-ca...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bistri-video-call-button/bistri-video-call-button.php on line 240
-[12-Apr-2025 08:37:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function EzBasePlugin::__construct(), 0 passed in /wordpress/wp-content/plugins/blackjack-lite/blackjack-lite.php on line 276 and exactly 3 expected in /wordpress/wp-content/plugins/blackjack-lite/EzOptions.php:541
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(110): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:54:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_blacklist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(111): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_blacklist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:54:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_query_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        query varchar(255) NOT NULL,
+        PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(112): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_query_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        query varchar(255) NOT NULL,
+        PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:54:57 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:55:08 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:55:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_denied (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        seen datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        type tinytext NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(108): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_denied (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        seen datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        type tinytext NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:55:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(110): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:55:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_blacklist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(111): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_blacklist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        ip varchar(20) NOT NULL,
+        PRIMARY KEY id (id),
+        UNIQUE KEY ip (ip)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:55:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS wp_bad_ip_query_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        query varchar(255) NOT NULL,
+        PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/bad-ip-wp/includes/class-bad_ip_wp-activator.php(112): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/bad-ip-wp/bad_ip_wp.php(50): bad_ip_wp_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_bad_ip_wp(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_bad-ip...', false)
+#8 /internal/eval.php(20): activate_plugin('bad-ip-wp/bad_i...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS wp_bad_ip_query_whitelist (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        query varchar(255) NOT NULL,
+        PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_bad-ip-wp/bad_ip_wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_bad_ip_wp, bad_ip_wp_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:55:10 UTC] PHP Deprecated:  Required parameter $data follows optional parameter $sidebar in /wordpress/wp-content/plugins/bad-ip-wp/lib/timber-library/lib/Timber.php on line 456
+[13-Apr-2025 18:55:46 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:55:47 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:55:55 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:55:56 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:56:04 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:56:05 UTC] PHP Deprecated:  Required parameter $title_id follows optional parameter $title in /wordpress/wp-content/plugins/besan-block/source/blocks/chart/chart/chart.php on line 23
+[13-Apr-2025 18:59:33 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:33 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW_COLUMNS FROM wp_comments LIKE 'featured'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW_COLUMNS FR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW_COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW_COLUMNS FR...')
+#4 /wordpress/wp-content/plugins/best-of-comments/best-of-comments.php(36): wpdb->get_var('SHOW_COLUMNS FR...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): install_best_of_comments(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_best-o...', false)
+#9 /internal/eval.php(20): activate_plugin('best-of-comment...')
+#10 {main}</pre>
+ for query SHOW_COLUMNS FROM wp_comments LIKE 'featured' made by activate_plugin, do_action('activate_best-of-comments/best-of-comments.php'), WP_Hook->do_action, WP_Hook->apply_filters, install_best_of_comments, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:59:34 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:34 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:42 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:42 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW_COLUMNS FROM wp_comments LIKE 'featured'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: SHOW_COLUMNS.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW_COLUMNS FR...')
+#2 /wordpress/wp-content/plugins/best-of-comments/best-of-comments.php(36): wpdb->get_var('SHOW_COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): install_best_of_comments(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_best-o...', false)
+#7 /internal/eval.php(20): activate_plugin('best-of-comment...')
+#8 {main}</pre>
+ for query SHOW_COLUMNS FROM wp_comments LIKE 'featured' made by activate_plugin, do_action('activate_best-of-comments/best-of-comments.php'), WP_Hook->do_action, WP_Hook->apply_filters, install_best_of_comments, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:59:43 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:43 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:50 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:50 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW_COLUMNS FROM wp_comments LIKE 'featured'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: SHOW_COLUMNS.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW_COLUMNS FR...')
+#2 /wordpress/wp-content/plugins/best-of-comments/best-of-comments.php(36): wpdb->get_var('SHOW_COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): install_best_of_comments(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_best-o...', false)
+#7 /internal/eval.php(20): activate_plugin('best-of-comment...')
+#8 {main}</pre>
+ for query SHOW_COLUMNS FROM wp_comments LIKE 'featured' made by activate_plugin, do_action('activate_best-of-comments/best-of-comments.php'), WP_Hook->do_action, WP_Hook->apply_filters, install_best_of_comments, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[13-Apr-2025 18:59:51 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 18:59:51 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[13-Apr-2025 19:00:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function EzBasePlugin::__construct(), 0 passed in /wordpress/wp-content/plugins/blackjack-lite/blackjack-lite.php on line 276 and exactly 3 expected in /wordpress/wp-content/plugins/blackjack-lite/EzOptions.php:541
 Stack trace:
 #0 /wordpress/wp-content/plugins/blackjack-lite/blackjack-lite.php(276): EzBasePlugin->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
