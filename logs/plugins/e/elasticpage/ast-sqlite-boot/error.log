@@ -2,16 +2,74 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [13-Apr-2025 05:11:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [14-Apr-2025 17:49:08 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/embedder/emb-admin.php on line 27
+[14-Apr-2025 17:49:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_ezwp_videocount (
-				  id mediumint(9) NOT NULL AUTO_INCREMENT,
-                  postID MEDIUMINT(8) UNSIGNED NOT NULL,
-				  videoid char(255) DEFAULT '0',
-				  viewcount bigint(10) NOT NULL,
-				  PRIMARY KEY id (id)
-				)</p>
+<p>ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emb_embeds</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emb_embeds</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_emb_embeds</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emb_embeds</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_emb_embeds, emgroup, 7, , YES, varchar, 64, 256, , , , utf8mb4, utf8mb4_general_ci, varchar(64), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_emb_embeds</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emb_embeds</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_emb_embeds</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_emb_embeds_67fd4a94cfc38` (
+  `embed` TEXT COLLATE NOCASE NOT NULL,
+  `emgroup` TEXT COLLATE NOCASE,
+  `description` TEXT COLLATE NOCASE,
+  `value` TEXT COLLATE NOCASE,
+  `options` TEXT COLLATE NOCASE,
+  `data` TEXT COLLATE NOCASE,
+  `emgroup` TEXT COLLATE NOCASE,
+  PRIMARY KEY (`embed`)
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: emgroup
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/embedder/emb-admin.php(120): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#8 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:09 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 324
+[14-Apr-2025 17:49:09 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 333
+[14-Apr-2025 17:49:09 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 340
+[14-Apr-2025 17:49:17 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/embedder/emb-admin.php on line 27
+[14-Apr-2025 17:49:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS IN wp_emb_embeds LIKE 'embed'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -19,35 +77,23 @@ Error: [13-Apr-2025 05:11:46 UTC] WordPress database error <div style="clear:bot
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: COLUMNS IN.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/ezwebplayer-wordpress-light-video-plugin/ezwebplayerlite.php(519): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ezwebplayerlite_activate(false)
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS IN...')
+#2 /wordpress/wp-content/plugins/embedder/emb-admin.php(112): wpdb->get_results('SHOW COLUMNS IN...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ezwebp...', false)
-#7 /internal/eval.php(20): activate_plugin('ezwebplayer-wor...')
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#7 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
 #8 {main}</pre>
- for query CREATE TABLE wp_ezwp_videocount (
-				  id mediumint(9) NOT NULL AUTO_INCREMENT,
-                  postID MEDIUMINT(8) UNSIGNED NOT NULL,
-				  videoid char(255) DEFAULT '0',
-				  viewcount bigint(10) NOT NULL,
-				  PRIMARY KEY id (id)
-				) made by activate_plugin, do_action('activate_ezwebplayer-wordpress-light-video-plugin/ezwebplayerlite.php'), WP_Hook->do_action, WP_Hook->apply_filters, ezwebplayerlite_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[13-Apr-2025 05:11:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW COLUMNS IN wp_emb_embeds LIKE 'embed' made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_ezwp_videocount (
-				  id mediumint(9) NOT NULL AUTO_INCREMENT,
-                  postID MEDIUMINT(8) UNSIGNED NOT NULL,
-				  videoid char(255) DEFAULT '0',
-				  viewcount bigint(10) NOT NULL,
-				  PRIMARY KEY id (id)
-				)</p>
+<p>SHOW COLUMNS IN wp_emb_embeds LIKE 'emgroup'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -55,64 +101,289 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: COLUMNS IN.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS IN...')
+#2 /wordpress/wp-content/plugins/embedder/emb-admin.php(118): wpdb->get_results('SHOW COLUMNS IN...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#7 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#8 {main}</pre>
+ for query SHOW COLUMNS IN wp_emb_embeds LIKE 'emgroup' made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_emb_embeds, EMGROUP, varchar(64)</li>
+<li>Executing: ALTER TABLE wp_emb_embeds ADD emgroup text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: emgroup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/embedder/emb-admin.php(120): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#6 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emb_embeds CONVERT TO CHARACTER SET utf8</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/embedder/emb-admin.php(125): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#6 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_emb_embeds CONVERT TO CHARACTER SET utf8 made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:18 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 324
+[14-Apr-2025 17:49:18 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 333
+[14-Apr-2025 17:49:18 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 340
+[14-Apr-2025 17:49:26 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/embedder/emb-admin.php on line 27
+[14-Apr-2025 17:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS IN wp_emb_embeds LIKE 'embed'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: COLUMNS IN.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS IN...')
+#2 /wordpress/wp-content/plugins/embedder/emb-admin.php(112): wpdb->get_results('SHOW COLUMNS IN...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#7 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#8 {main}</pre>
+ for query SHOW COLUMNS IN wp_emb_embeds LIKE 'embed' made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS IN wp_emb_embeds LIKE 'emgroup'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: COLUMNS IN.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS IN...')
+#2 /wordpress/wp-content/plugins/embedder/emb-admin.php(118): wpdb->get_results('SHOW COLUMNS IN...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#7 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#8 {main}</pre>
+ for query SHOW COLUMNS IN wp_emb_embeds LIKE 'emgroup' made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_emb_embeds, EMGROUP, varchar(64)</li>
+<li>Executing: ALTER TABLE wp_emb_embeds ADD emgroup text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: emgroup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/embedder/emb-admin.php(120): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#6 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_emb_embeds ADD emgroup VARCHAR(64) AFTER embed made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_emb_embeds CONVERT TO CHARACTER SET utf8</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/embedder/emb-admin.php(125): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): emb_plugin_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_embedd...', false)
+#6 /internal/eval.php(20): activate_plugin('embedder/emb-ma...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_emb_embeds CONVERT TO CHARACTER SET utf8 made by activate_plugin, do_action('activate_embedder/emb-main.php'), WP_Hook->do_action, WP_Hook->apply_filters, emb_plugin_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:49:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 324
+[14-Apr-2025 17:49:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 333
+[14-Apr-2025 17:49:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $attrs in /wordpress/wp-content/plugins/embedder/emb-embed.php on line 340
+[14-Apr-2025 17:49:36 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>escalate-network-frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:49:36 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:49:45 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>escalate-network-frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:49:45 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:49:52 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>escalate-network-frontend</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:49:52 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:50:59 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>font-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:50:59 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:51:08 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>font-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:51:08 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:51:16 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>font-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:51:16 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[14-Apr-2025 17:51:24 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/easy-shortcode-manager/lib/color.php on line 61
+[14-Apr-2025 17:51:32 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/easy-shortcode-manager/lib/color.php on line 61
+[14-Apr-2025 17:51:40 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/easy-shortcode-manager/lib/color.php on line 61
+[14-Apr-2025 17:53:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_egrower (
+				ID int(11) NOT NULL AUTO_INCREMENT,
+				userID int NOT NULL,
+				postID int NOT NULL,
+				startTime int NOT NULL,
+				endTime int NOT NULL,
+				activeTime int DEFAULT 0 NOT NULL,
+				adsLoaded int DEFAULT 0 NOT NULL,
+				infiniteScroll bool DEFAULT 0 NOT NULL,
+				prevPost int,
+				PRIMARY KEY  (ID)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: infiniteScroll.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/ezwebplayer-wordpress-light-video-plugin/ezwebplayerlite.php(519): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ezwebplayerlite_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ezwebp...', false)
-#7 /internal/eval.php(20): activate_plugin('ezwebplayer-wor...')
-#8 {main}</pre>
- for query CREATE TABLE wp_ezwp_videocount (
-				  id mediumint(9) NOT NULL AUTO_INCREMENT,
-                  postID MEDIUMINT(8) UNSIGNED NOT NULL,
-				  videoid char(255) DEFAULT '0',
-				  viewcount bigint(10) NOT NULL,
-				  PRIMARY KEY id (id)
-				) made by activate_plugin, do_action('activate_ezwebplayer-wordpress-light-video-plugin/ezwebplayerlite.php'), WP_Hook->do_action, WP_Hook->apply_filters, ezwebplayerlite_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[13-Apr-2025 05:12:56 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/easify-server-woocommerce/includes/class-easify-generic-basic-auth.php on line 151
-[13-Apr-2025 05:13:04 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/easify-server-woocommerce/includes/class-easify-generic-basic-auth.php on line 151
-[13-Apr-2025 05:13:11 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/easify-server-woocommerce/includes/class-easify-generic-basic-auth.php on line 151
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:38 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:39 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:48 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:49 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:56 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $acfs follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $implode_delimiter follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
-[13-Apr-2025 05:19:57 UTC] PHP Deprecated:  Required parameter $preview follows optional parameter $xmlWriter in /wordpress/wp-content/plugins/export-wp-users-xml-csv/libraries/XmlExportUser.php on line 411
+#2 /wordpress/wp-content/plugins/engagement-grower/includes/egrower-activator.php(47): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/engagement-grower/includes/egrower-activator.php(15): Engagement_Grower_Activator::db_install()
+#4 /wordpress/wp-content/plugins/engagement-grower/engagement-grower.php(37): Engagement_Grower_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_egrower(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_engage...', false)
+#9 /internal/eval.php(20): activate_plugin('engagement-grow...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_egrower (
+				ID int(11) NOT NULL AUTO_INCREMENT,
+				userID int NOT NULL,
+				postID int NOT NULL,
+				startTime int NOT NULL,
+				endTime int NOT NULL,
+				activeTime int DEFAULT 0 NOT NULL,
+				adsLoaded int DEFAULT 0 NOT NULL,
+				infiniteScroll bool DEFAULT 0 NOT NULL,
+				prevPost int,
+				PRIMARY KEY  (ID)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_engagement-grower/engagement-grower.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_egrower, Engagement_Grower_Activator::activate, Engagement_Grower_Activator::db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:53:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_egrower (
+				ID int(11) NOT NULL AUTO_INCREMENT,
+				userID int NOT NULL,
+				postID int NOT NULL,
+				startTime int NOT NULL,
+				endTime int NOT NULL,
+				activeTime int DEFAULT 0 NOT NULL,
+				adsLoaded int DEFAULT 0 NOT NULL,
+				infiniteScroll bool DEFAULT 0 NOT NULL,
+				prevPost int,
+				PRIMARY KEY  (ID)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: infiniteScroll.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/engagement-grower/includes/egrower-activator.php(47): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/engagement-grower/includes/egrower-activator.php(15): Engagement_Grower_Activator::db_install()
+#4 /wordpress/wp-content/plugins/engagement-grower/engagement-grower.php(37): Engagement_Grower_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_egrower(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_engage...', false)
+#9 /internal/eval.php(20): activate_plugin('engagement-grow...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_egrower (
+				ID int(11) NOT NULL AUTO_INCREMENT,
+				userID int NOT NULL,
+				postID int NOT NULL,
+				startTime int NOT NULL,
+				endTime int NOT NULL,
+				activeTime int DEFAULT 0 NOT NULL,
+				adsLoaded int DEFAULT 0 NOT NULL,
+				infiniteScroll bool DEFAULT 0 NOT NULL,
+				prevPost int,
+				PRIMARY KEY  (ID)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_engagement-grower/engagement-grower.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_egrower, Engagement_Grower_Activator::activate, Engagement_Grower_Activator::db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 17:55:41 UTC] PHP Warning:  mkdir(): File exists in /wordpress/wp-content/plugins/export-users-data-distinct/Export-Users-Data-Distinct.php on line 23
+[14-Apr-2025 17:55:55 UTC] PHP Warning:  mkdir(): File exists in /wordpress/wp-content/plugins/export-users-data-distinct/Export-Users-Data-Distinct.php on line 23
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
