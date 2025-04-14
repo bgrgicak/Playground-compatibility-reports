@@ -2,122 +2,203 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [12-Apr-2025 23:25:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [14-Apr-2025 15:35:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpurl" in /wordpress/wp-content/plugins/expire-password/functions.php:32
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#4 /internal/eval.php(20): activate_plugin('expire-password...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/expire-password/functions.php on line 32
+[14-Apr-2025 15:35:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_ext_relevant (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			keyword varchar(255) NOT NULL,
-			text varchar(255) NOT NULL,
-			url varchar(255) NOT NULL,
-			PRIMARY KEY id(id)
-		)ENGINE=MyISAM  DEFAULT CHARSET=utf8</p>
+<p>ALTER TABLE wp_users ADD PwdSettings VARCHAR(60) NOT NULL DEFAULT -30 AFTER user_registered, ADD PwdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER PwdSettings, ADD ExpDate INT DEFAULT 0 AFTER PwdDate</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, PWDSETTINGS, varchar(60)</li>
+<li>Executing: ALTER TABLE wp_users ADD PwdSettings text NOT NULL DEFAULT -30   | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, PWDDATE, timestamp</li>
+<li>Executing: ALTER TABLE wp_users ADD PwdDate text NOT NULL DEFAULT CURRENT_TIMESTAMP   | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/external-related-links/Ext-Relevant.php(46): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ext_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_extern...', false)
-#7 /internal/eval.php(20): activate_plugin('external-relate...')
-#8 {main}</pre>
- for query CREATE TABLE wp_ext_relevant (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			keyword varchar(255) NOT NULL,
-			text varchar(255) NOT NULL,
-			url varchar(255) NOT NULL,
-			PRIMARY KEY id(id)
-		)ENGINE=MyISAM  DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_external-related-links/Ext-Relevant.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ext_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Apr-2025 23:26:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(10): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_users ADD PwdSettings VARCHAR(60) NOT NULL DEFAULT -30 AFTER user_registered, ADD PwdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER PwdSettings, ADD ExpDate INT DEFAULT 0 AFTER PwdDate made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_ext_relevant (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			keyword varchar(255) NOT NULL,
-			text varchar(255) NOT NULL,
-			url varchar(255) NOT NULL,
-			PRIMARY KEY id(id)
-		)ENGINE=MyISAM  DEFAULT CHARSET=utf8</p>
+<p>UPDATE wp_users SET PwdDate=NOW() WHERE ID > '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_users SET PwdDate=NOW() WHERE rowid IN (SELECT rowid FROM wp_users WHERE ID &gt; :param0 ) | parameters: 0</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: PwdDate.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/external-related-links/Ext-Relevant.php(46): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Ext_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_extern...', false)
-#7 /internal/eval.php(20): activate_plugin('external-relate...')
-#8 {main}</pre>
- for query CREATE TABLE wp_ext_relevant (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			keyword varchar(255) NOT NULL,
-			text varchar(255) NOT NULL,
-			url varchar(255) NOT NULL,
-			PRIMARY KEY id(id)
-		)ENGINE=MyISAM  DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_external-related-links/Ext-Relevant.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ext_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[12-Apr-2025 23:31:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(12): WP_SQLite_DB->query('UPDATE wp_users...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query UPDATE wp_users SET PwdDate=NOW() WHERE ID > '0' made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, '0', 'PassExpireSettings', 'a:3:{i:0;s:4:"null";i:1;s:1:"0";i:2;s:16:"2025-04-14 15:23";}', 'yes');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, :param0 , :param1 , :param2 , :param3 ); | parameters: 0, PassExpireSettings, a:3:{i:0;s:4:&quot;null&quot;;i:1;s:1:&quot;0&quot;;i:2;s:16:&quot;2025-04-14 15:23&quot;;}, yes</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(29): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, '0', 'PassExpireSettings', 'a:3:{i:0;s:4:"null";i:1;s:1:"0";i:2;s:16:"2025-04-14 15:23";}', 'yes'); made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:23 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpurl" in /wordpress/wp-content/plugins/expire-password/functions.php:32
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('EG_Archives_Wid...')
-#2 /wordpress/wp-content/plugins/eg-archives/eg-archives.php(264): register_widget('EG_Archives_Wid...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): eg_archives_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[12-Apr-2025 23:31:28 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#4 /internal/eval.php(20): activate_plugin('expire-password...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/expire-password/functions.php on line 32
+[14-Apr-2025 15:35:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_users ADD PwdSettings VARCHAR(60) NOT NULL DEFAULT -30 AFTER user_registered, ADD PwdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER PwdSettings, ADD ExpDate INT DEFAULT 0 AFTER PwdDate</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, PWDSETTINGS, varchar(60)</li>
+<li>Executing: ALTER TABLE wp_users ADD PwdSettings text NOT NULL DEFAULT -30   | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, PWDDATE, timestamp</li>
+<li>Executing: ALTER TABLE wp_users ADD PwdDate text NOT NULL DEFAULT CURRENT_TIMESTAMP   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(10): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_users ADD PwdSettings VARCHAR(60) NOT NULL DEFAULT -30 AFTER user_registered, ADD PwdDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER PwdSettings, ADD ExpDate INT DEFAULT 0 AFTER PwdDate made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_users SET PwdDate=NOW() WHERE ID > '0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_users SET PwdDate=NOW() WHERE rowid IN (SELECT rowid FROM wp_users WHERE ID &gt; :param0 ) | parameters: 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: PwdDate.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(12): WP_SQLite_DB->query('UPDATE wp_users...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query UPDATE wp_users SET PwdDate=NOW() WHERE ID > '0' made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, '0', 'PassExpireSettings', 'a:3:{i:0;s:4:"null";i:1;s:1:"0";i:2;s:16:"2025-04-14 15:30";}', 'yes');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, :param0 , :param1 , :param2 , :param3 ); | parameters: 0, PassExpireSettings, a:3:{i:0;s:4:&quot;null&quot;;i:1;s:1:&quot;0&quot;;i:2;s:16:&quot;2025-04-14 15:30&quot;;}, yes</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/expire-password/functions.php(29): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#6 /internal/eval.php(20): activate_plugin('expire-password...')
+#7 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_id`, `blog_id`, `option_name`, `option_value`, `autoload`) VALUES (NULL, '0', 'PassExpireSettings', 'a:3:{i:0;s:4:"null";i:1;s:1:"0";i:2;s:16:"2025-04-14 15:30";}', 'yes'); made by activate_plugin, do_action('activate_expire-password/PassExpire.php'), WP_Hook->do_action, WP_Hook->apply_filters, PluginInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[14-Apr-2025 15:35:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wpurl" in /wordpress/wp-content/plugins/expire-password/functions.php:32
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('EG_Archives_Wid...')
-#2 /wordpress/wp-content/plugins/eg-archives/eg-archives.php(264): register_widget('EG_Archives_Wid...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): eg_archives_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[12-Apr-2025 23:31:37 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('EG_Archives_Wid...')
-#2 /wordpress/wp-content/plugins/eg-archives/eg-archives.php(264): register_widget('EG_Archives_Wid...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): eg_archives_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[12-Apr-2025 23:32:05 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
+#0 /wordpress/wp-includes/class-wp-hook.php(324): PluginInstall(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_expire...', false)
+#4 /internal/eval.php(20): activate_plugin('expire-password...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/expire-password/functions.php on line 32
+[14-Apr-2025 15:37:49 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:37:49 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:37:57 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:37:58 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:38:06 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:38:07 UTC] PHP Notice:  date_default_timezone_set(): Timezone ID '' is invalid in /wordpress/wp-content/plugins/einsatzberichte-oo/einsatzberichte.php on line 20
+[14-Apr-2025 15:38:17 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
+[14-Apr-2025 15:38:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
 Stack trace:
 #0 /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php(55): Elements_For_Lifterlms_Admin->load_dependencies()
 #1 /wordpress/wp-content/plugins/elements-for-lifterlms/includes/class-elements-for-lifterlms.php(581): Elements_For_Lifterlms_Admin->__construct('elements-for-li...', '1.1.2')
@@ -129,8 +210,8 @@ Stack trace:
 #7 /internal/eval.php(20): activate_plugin('elements-for-li...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:13 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
+[14-Apr-2025 15:38:25 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
+[14-Apr-2025 15:38:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
 Stack trace:
 #0 /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php(55): Elements_For_Lifterlms_Admin->load_dependencies()
 #1 /wordpress/wp-content/plugins/elements-for-lifterlms/includes/class-elements-for-lifterlms.php(581): Elements_For_Lifterlms_Admin->__construct('elements-for-li...', '1.1.2')
@@ -142,8 +223,8 @@ Stack trace:
 #7 /internal/eval.php(20): activate_plugin('elements-for-li...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:22 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
+[14-Apr-2025 15:38:34 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
+[14-Apr-2025 15:38:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/elements-for-lifterlms/admin/partials/elements-for-lifterlms-hide-elements.php' (include_path='.:') in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php:133
 Stack trace:
 #0 /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php(55): Elements_For_Lifterlms_Admin->load_dependencies()
 #1 /wordpress/wp-content/plugins/elements-for-lifterlms/includes/class-elements-for-lifterlms.php(581): Elements_For_Lifterlms_Admin->__construct('elements-for-li...', '1.1.2')
@@ -155,9 +236,9 @@ Stack trace:
 #7 /internal/eval.php(20): activate_plugin('elements-for-li...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/elements-for-lifterlms/admin/class-elements-for-lifterlms-admin.php on line 133
-[12-Apr-2025 23:32:31 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
-[12-Apr-2025 23:32:40 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
-[12-Apr-2025 23:32:48 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
+[14-Apr-2025 15:38:43 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
+[14-Apr-2025 15:38:51 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
+[14-Apr-2025 15:39:00 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/elvez-wc-stripe-card-icon/admin/class-elvez-wc-stripe-card-icon-admin.php on line 224
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
