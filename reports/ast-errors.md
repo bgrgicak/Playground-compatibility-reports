@@ -1631,9 +1631,6 @@
 | recipe-manager | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/recipe-manager/includes/markup-functions.php on line 139 | [View logs](/logs/plugins/r/recipe-manager/error.json) |
 | recipe-manager | "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/recipe-manager/classes/Admin/Ingredients/Metaboxes.php on line 400 | [View logs](/logs/plugins/r/recipe-manager/error.json) |
 | recipe-manager | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/recipe-manager/classes/Partner_Tables/Recipe_Ingredients.php:82 | [View logs](/logs/plugins/r/recipe-manager/error.json) |
-| searchpro | Undefined index: path in /wordpress/wp-content/plugins/searchpro/inc/dropin-functions.php on line 46 | [View logs](/logs/plugins/s/searchpro/error.json) |
-| searchpro | Undefined index: path in /wordpress/wp-content/plugins/searchpro/inc/dropin-functions.php on line 46 | [View logs](/logs/plugins/s/searchpro/error.json) |
-| searchpro | Undefined index: path in /wordpress/wp-content/plugins/searchpro/inc/dropin-functions.php on line 46 | [View logs](/logs/plugins/s/searchpro/error.json) |
 | tf-faq | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thingiverse-embed/thingiverse-embed.php:73 | [View logs](/logs/plugins/t/tf-faq/error.json) |
 | tf-faq | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thingiverse-embed/thingiverse-embed.php:73 | [View logs](/logs/plugins/t/tf-faq/error.json) |
 | tf-faq | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thingiverse-embed/thingiverse-embed.php:73 | [View logs](/logs/plugins/t/tf-faq/error.json) |
