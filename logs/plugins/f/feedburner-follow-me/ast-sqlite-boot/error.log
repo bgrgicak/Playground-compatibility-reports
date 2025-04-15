@@ -2,115 +2,73 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [13-Apr-2025 23:47:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Freestockcharts...')
-#2 /wordpress/wp-content/plugins/freestockcharts-live-stock-chart-browser/heist-freestockcharts-browser.php(272): register_widget('Freestockcharts...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): freestockchartsdynamic_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+Error: [15-Apr-2025 14:29:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>alter table `wpftsi_docs` add column `id` int(11) NOT NULL PRIMARY KEY auto_increment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wpftsi_docs, id, int(11)</li>
+<li>Executing: ALTER TABLE wpftsi_docs add column `id` integer NOT NULL PRIMARY KEY auto_increment | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_db.php(57): WP_SQLite_DB->query('alter table `wp...')
+#2 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_database.php(344): WPFTS_DB->query('alter table `wp...')
+#3 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_database.php(613): WPFTS_Database->checkDBTable('docs', Array, Array, false)
+#4 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(697): WPFTS_Database->updateDB()
+#5 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(660): WPFTS_Core->_activate_plugin(false)
+#6 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(665): WPFTS_Core->network_actdeact(Array, false)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WPFTS_Core->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:47:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Freestockcharts...')
-#2 /wordpress/wp-content/plugins/freestockcharts-live-stock-chart-browser/heist-freestockcharts-browser.php(272): register_widget('Freestockcharts...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): freestockchartsdynamic_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fullte...', false)
+#11 /internal/eval.php(20): activate_plugin('fulltext-search...')
+#12 {main}</pre>
+ for query alter table `wpftsi_docs` add column `id` int(11) NOT NULL PRIMARY KEY auto_increment made by activate_plugin, do_action('activate_fulltext-search/fulltext-search.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPFTS_Core->activate_plugin, WPFTS_Core->network_actdeact, WPFTS_Core->_activate_plugin, WPFTS_Database->updateDB, WPFTS_Database->checkDBTable, WPFTS_DB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Apr-2025 14:29:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>alter table `wpftsi_docs` add column `id` int(11) NOT NULL PRIMARY KEY auto_increment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wpftsi_docs, id, int(11)</li>
+<li>Executing: ALTER TABLE wpftsi_docs add column `id` integer NOT NULL PRIMARY KEY auto_increment | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: id.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_db.php(57): WP_SQLite_DB->query('alter table `wp...')
+#2 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_database.php(344): WPFTS_DB->query('alter table `wp...')
+#3 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_database.php(613): WPFTS_Database->checkDBTable('docs', Array, Array, false)
+#4 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(697): WPFTS_Database->updateDB()
+#5 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(660): WPFTS_Core->_activate_plugin(false)
+#6 /wordpress/wp-content/plugins/fulltext-search/includes/wpfts_core.php(665): WPFTS_Core->network_actdeact(Array, false)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WPFTS_Core->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:47:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Freestockcharts...')
-#2 /wordpress/wp-content/plugins/freestockcharts-live-stock-chart-browser/heist-freestockcharts-browser.php(272): register_widget('Freestockcharts...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): freestockchartsdynamic_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:47:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fpc_widget')
-#2 /wordpress/wp-content/plugins/future-posts-calendar/future_calendar.php(26): register_widget('fpc_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fpc_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:47:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fpc_widget')
-#2 /wordpress/wp-content/plugins/future-posts-calendar/future_calendar.php(26): register_widget('fpc_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fpc_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:47:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('fpc_widget')
-#2 /wordpress/wp-content/plugins/future-posts-calendar/future_calendar.php(26): register_widget('fpc_widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): fpc_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[13-Apr-2025 23:53:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feedburner-follow-me/ffm-widget.php:130
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fullte...', false)
+#11 /internal/eval.php(20): activate_plugin('fulltext-search...')
+#12 {main}</pre>
+ for query alter table `wpftsi_docs` add column `id` int(11) NOT NULL PRIMARY KEY auto_increment made by activate_plugin, do_action('activate_fulltext-search/fulltext-search.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPFTS_Core->activate_plugin, WPFTS_Core->network_actdeact, WPFTS_Core->_activate_plugin, WPFTS_Database->updateDB, WPFTS_Database->checkDBTable, WPFTS_DB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[15-Apr-2025 14:33:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feedburner-follow-me/ffm-widget.php:130
 Stack trace:
 #0 /wordpress/wp-content/plugins/feedburner-follow-me/ffm-main.php(13): require_once()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
