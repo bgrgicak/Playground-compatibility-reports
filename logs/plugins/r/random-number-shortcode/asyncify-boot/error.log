@@ -2,251 +2,54 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [15-Apr-2025 10:53:53 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method serpzilla::plugins_loaded() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [15-Apr-2025 10:54:37 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Post_map::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[15-Apr-2025 10:54:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TABLE wp_serpzilla (
-              uri varchar(255) NOT NULL,
-              text text NOT NULL,
-              PRIMARY KEY uri (uri)
-            )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_serpzilla, uri, varchar(255)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_serpzilla, text, text</li>
-<li>Executing: 
-            CREATE TABLE &quot;wp_serpzilla&quot; (
-&quot;uri&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-PRIMARY KEY (&quot;(&quot;, &quot;)&quot;)) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(491): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
-#6 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
-#7 {main}</pre>
- for query 
-            CREATE TABLE wp_serpzilla (
-              uri varchar(255) NOT NULL,
-              text text NOT NULL,
-              PRIMARY KEY uri (uri)
-            ) made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 10:54:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESCRIBE wp_serpzilla;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT
-				`name` as `Field`,
-				(
-					CASE `notnull`
-					WHEN 0 THEN 'YES'
-					WHEN 1 THEN 'NO'
-					END
-				) as `Null`,
-				COALESCE(
-					d.`mysql_type`,
-					(
-						CASE `type`
-						WHEN 'INTEGER' THEN 'int'
-						WHEN 'TEXT' THEN 'text'
-						WHEN 'BLOB' THEN 'blob'
-						WHEN 'REAL' THEN 'real'
-						ELSE `type`
-						END
-					)
-				) as `Type`,
-				TRIM(`dflt_value`, &quot;'&quot;) as `Default`,
-				'' as Extra,
-				(
-					CASE `pk`
-					WHEN 0 THEN ''
-					ELSE 'PRI'
-					END
-				) as `Key`
-				FROM pragma_table_info(&quot;wp_serpzilla&quot;) p
-				LEFT JOIN _mysql_data_types_cache d
-				ON d.`table` = &quot;wp_serpzilla&quot;
-				AND d.`column_or_index` = p.`name`
-				;
-			 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Table not found.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('DESCRIBE wp_ser...')
-#2 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(499): wpdb->get_results('DESCRIBE wp_ser...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+[15-Apr-2025 10:54:46 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Post_map::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
-#7 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
-#8 {main}</pre>
- for query DESCRIBE wp_serpzilla; made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 10:54:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TABLE wp_serpzilla (
-              uri varchar(255) NOT NULL,
-              text text NOT NULL,
-              PRIMARY KEY uri (uri)
-            )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_serpzilla, uri, varchar(255)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_serpzilla, text, text</li>
-<li>Executing: 
-            CREATE TABLE &quot;wp_serpzilla&quot; (
-&quot;uri&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-PRIMARY KEY (&quot;(&quot;, &quot;)&quot;)) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(491): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
-#6 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
-#7 {main}</pre>
- for query 
-            CREATE TABLE wp_serpzilla (
-              uri varchar(255) NOT NULL,
-              text text NOT NULL,
-              PRIMARY KEY uri (uri)
-            ) made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 10:54:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DESCRIBE wp_serpzilla;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT
-				`name` as `Field`,
-				(
-					CASE `notnull`
-					WHEN 0 THEN 'YES'
-					WHEN 1 THEN 'NO'
-					END
-				) as `Null`,
-				COALESCE(
-					d.`mysql_type`,
-					(
-						CASE `type`
-						WHEN 'INTEGER' THEN 'int'
-						WHEN 'TEXT' THEN 'text'
-						WHEN 'BLOB' THEN 'blob'
-						WHEN 'REAL' THEN 'real'
-						ELSE `type`
-						END
-					)
-				) as `Type`,
-				TRIM(`dflt_value`, &quot;'&quot;) as `Default`,
-				'' as Extra,
-				(
-					CASE `pk`
-					WHEN 0 THEN ''
-					ELSE 'PRI'
-					END
-				) as `Key`
-				FROM pragma_table_info(&quot;wp_serpzilla&quot;) p
-				LEFT JOIN _mysql_data_types_cache d
-				ON d.`table` = &quot;wp_serpzilla&quot;
-				AND d.`column_or_index` = p.`name`
-				;
-			 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Table not found.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('DESCRIBE wp_ser...')
-#2 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(499): wpdb->get_results('DESCRIBE wp_ser...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[15-Apr-2025 10:54:55 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Post_map::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
-#7 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
-#8 {main}</pre>
- for query DESCRIBE wp_serpzilla; made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 10:56:40 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 69
-[15-Apr-2025 10:56:41 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 16
-[15-Apr-2025 10:56:48 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 69
-[15-Apr-2025 10:56:48 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 16
-[15-Apr-2025 10:56:56 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 69
-[15-Apr-2025 10:56:57 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/show-theme-style/show-theme-style.php on line 16
-[15-Apr-2025 10:57:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[15-Apr-2025 10:57:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[15-Apr-2025 10:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[15-Apr-2025 10:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[15-Apr-2025 10:57:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[15-Apr-2025 10:57:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[15-Apr-2025 10:57:56 UTC] PHP Deprecated:  Required parameter $extension follows optional parameter $imageQuality in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 969
-[15-Apr-2025 10:57:56 UTC] PHP Fatal error:  'break' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 1078
-[15-Apr-2025 10:58:03 UTC] PHP Deprecated:  Required parameter $extension follows optional parameter $imageQuality in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 969
-[15-Apr-2025 10:58:03 UTC] PHP Fatal error:  'break' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 1078
-[15-Apr-2025 10:58:10 UTC] PHP Deprecated:  Required parameter $extension follows optional parameter $imageQuality in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 969
-[15-Apr-2025 10:58:10 UTC] PHP Fatal error:  'break' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/simple-thumbs/index.php on line 1078
-[15-Apr-2025 10:59:08 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Forms.php on line 33
-[15-Apr-2025 10:59:08 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Cron.php on line 22
-[15-Apr-2025 10:59:08 UTC] PHP Fatal error:  Declaration of SAR_Settings::validate($args) must be compatible with scbAdminPage::validate($new_data, $old_data) in /wordpress/wp-content/plugins/smart-archives-reloaded/admin/admin.php on line 23
-[15-Apr-2025 10:59:15 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Forms.php on line 33
-[15-Apr-2025 10:59:15 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Cron.php on line 22
-[15-Apr-2025 10:59:16 UTC] PHP Fatal error:  Declaration of SAR_Settings::validate($args) must be compatible with scbAdminPage::validate($new_data, $old_data) in /wordpress/wp-content/plugins/smart-archives-reloaded/admin/admin.php on line 23
-[15-Apr-2025 10:59:23 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Forms.php on line 33
-[15-Apr-2025 10:59:23 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/smart-archives-reloaded/scb/Cron.php on line 22
-[15-Apr-2025 10:59:23 UTC] PHP Fatal error:  Declaration of SAR_Settings::validate($args) must be compatible with scbAdminPage::validate($new_data, $old_data) in /wordpress/wp-content/plugins/smart-archives-reloaded/admin/admin.php on line 23
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[15-Apr-2025 10:59:52 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
+[15-Apr-2025 10:59:54 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
+[15-Apr-2025 11:00:02 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
+[15-Apr-2025 11:00:04 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
+[15-Apr-2025 11:00:13 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
+[15-Apr-2025 11:00:14 UTC] PHP Deprecated:  Required parameter $redirect follows optional parameter $remember_login in /wordpress/wp-content/plugins/ppress/classes/class.login-form-auth.php on line 67
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
