@@ -2,715 +2,240 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [16-Apr-2025 08:55:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [17-Apr-2025 21:25:46 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:25:46 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:25:46 UTC] PHP Deprecated:  Required parameter $sql follows optional parameter $table_version in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php on line 6
+[17-Apr-2025 21:25:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_events' AND INDEX_NAME = 'post_id'</p>
+<p>ALTER TABLE  wp_events_answer ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_events' AND `INDEX_NAME` = 'post_id' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_events_answer</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_events_answer</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_events_answer, id, 6, , NO, int, , , 10, 0, , , , int(11) unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_events_answer, id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_events_answer, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_events_answer, database_name_here, wp_events_answer</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_events_answer_680171dc3c4d8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `registration_id` TEXT COLLATE NOCASE NOT NULL,
+  `attendee_id` INTEGER NOT NULL DEFAULT '0',
+  `question_id` INTEGER NOT NULL DEFAULT '0',
+  `answer` TEXT COLLATE NOCASE NOT NULL,
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
+SQLSTATE[HY000]: General error: 1 duplicate column name: id
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(92): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('post_id')
-#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
-#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_events' AND INDEX_NAME = 'post_id' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:55:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'event_id'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'event_id' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('event_id', 'wp_tec_occurren...')
-#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'event_id' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:55:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'idx_wp_tec_occurrences_post_id_dates' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('idx_wp_tec_occu...', 'wp_tec_occurren...')
-#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:55:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates_utc'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'idx_wp_tec_occurrences_post_id_dates_utc' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(109): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('idx_wp_tec_occu...', 'wp_tec_occurren...')
-#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'idx_wp_tec_occurrences_post_id_dates_utc' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:55:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'hash'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_statistics WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_tec_occurrences' AND `INDEX_NAME` = 'hash' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(133): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index('hash')
-#6 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#7 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#8 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT COUNT(*) FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'wp_tec_occurrences' AND INDEX_NAME = 'hash' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->has_index, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_events, wp_tec_events__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_events__(&quot; ON &quot;wp_tec_events&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(93): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_tec_occurrences ADD INDEX (event_id)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; () | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(113): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_tec_occurrences ADD INDEX (event_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(134): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_events, wp_tec_events__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_events__(&quot; ON &quot;wp_tec_events&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Events.php(93): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Events->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE `wp_tec_events`ADD UNIQUE( `post_id` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Events->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_tec_occurrences ADD INDEX (event_id)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, KEY</li>
-<li>Executing: CREATE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; () | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(113): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_tec_occurrences ADD INDEX (event_id) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_tec_occurrences, wp_tec_occurrences__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_tec_occurrences__(&quot; ON &quot;wp_tec_occurrences&quot; (  ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Tables/Occurrences.php(134): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Abstract_Custom_Table.php(62): TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update(Array)
-#3 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Schema_Builder/Schema_Builder.php(262): TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update()
-#4 /wordpress/wp-content/plugins/the-events-calendar/src/Events/Custom_Tables/V1/Activation.php(82): TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): TEC\Events\Custom_Tables\V1\Activation::init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE `wp_tec_occurrences`ADD UNIQUE( `hash` ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, TEC\Events\Custom_Tables\V1\Activation::init, TEC\Events\Custom_Tables\V1\Schema_Builder\Schema_Builder->up, TEC\Events\Custom_Tables\V1\Schema_Builder\Abstract_Custom_Table->update, TEC\Events\Custom_Tables\V1\Tables\Occurrences->after_update, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(68): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(71): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY type varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(77): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY type varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY options text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(80): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY options text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css_filters DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(86): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css_filters DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css_filters MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(89): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css_filters MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css_filters MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(92): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css_filters MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(68): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(71): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY title text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY type varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(77): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY type varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css MODIFY options text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(80): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {main}</pre>
- for query ALTER TABLE wp_easy_custom_js_and_css MODIFY options text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, do_action('activate_easy-custom-js-and-css/easy-custom-js-and-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, easy_custom_js_and_css_activate, EasyCustomJsAndCss_Activator->activate, EasyCustomJsAndCss_Activator->update_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 08:57:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_easy_custom_js_and_css_filters DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: DEFAULT CHARACTER SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(86): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/easy-custom-js-and-css/includes/activator.php(51): EasyCustomJsAndCss_Activator->update_data()
-#3 /wordpress/wp-content/plugins/easy-custom-js-and-css/easy-custom-js-and-css.php(36): EasyCustomJsAndCss_Activator->activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): easy_custom_js_and_css_activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-c...', false)
-#8 /internal/eval.php(20): activate_plugin('easy-custom-js-...')
-#9 {ma
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE  wp...')
+#3 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(244): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#4 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(820): espresso_answer_fix()
+#5 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1222): events_data_tables_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#10 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#11 {main}</pre>
+ for query ALTER TABLE  wp_events_answer ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id ) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, events_data_tables_install, espresso_answer_fix, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 21:25:50 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:25:50 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:26:00 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:26:00 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:26:00 UTC] PHP Deprecated:  Required parameter $sql follows optional parameter $table_version in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php on line 6
+[17-Apr-2025 21:26:02 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:26:02 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:26:13 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:26:13 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:26:13 UTC] PHP Deprecated:  Required parameter $sql follows optional parameter $table_version in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php on line 6
+[17-Apr-2025 21:26:16 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[17-Apr-2025 21:26:16 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[17-Apr-2025 21:26:25 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:25 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:25 UTC] PHP Warning:  Undefined variable $eventy_version in /wordpress/wp-content/plugins/eventy/controllers/install.php on line 21
+[17-Apr-2025 21:26:33 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:33 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:33 UTC] PHP Warning:  Undefined variable $eventy_version in /wordpress/wp-content/plugins/eventy/controllers/install.php on line 21
+[17-Apr-2025 21:26:42 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:42 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/eventy/eventy.php on line 29
+[17-Apr-2025 21:26:42 UTC] PHP Warning:  Undefined variable $eventy_version in /wordpress/wp-content/plugins/eventy/controllers/install.php on line 21
+[17-Apr-2025 21:27:11 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:27:12 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:27:19 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:27:20 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:27:28 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:27:29 UTC] PHP Deprecated:  Required parameter $_and_more follows optional parameter $sFieldID2 in /wordpress/wp-content/plugins/easy-admin-panel-management/includes/admin-page-framework/factory/admin_page/AdminPageFramework.php on line 353
+[17-Apr-2025 21:30:11 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:12 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:12 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php:746
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-metaboxs.php(164): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ehb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php on line 746
+[17-Apr-2025 21:30:19 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:20 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:20 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php:746
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-metaboxs.php(164): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ehb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php on line 746
+[17-Apr-2025 21:30:28 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:29 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $url in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-utility-functions.php on line 11
+[17-Apr-2025 21:30:30 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php:746
+Stack trace:
+#0 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(162): cmb_Meta_Box::set_mb_type(Array)
+#1 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php(43): cmb_Meta_Box->__construct(Array)
+#2 /wordpress/wp-content/plugins/easy-heads-up-bar/lib/ehb-metaboxs.php(164): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ehb_initialize_cmb_meta_boxes('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(727): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/easy-heads-up-bar/lib/cmb/init.php on line 746
+[17-Apr-2025 21:31:32 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:31:32 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:31:40 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:31:40 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:31:48 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:31:48 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/easy-social-share-buttons/includes/lib/class-easy-social-share-buttons-admin-api.php on line 285
+[17-Apr-2025 21:32:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ecampaign/ecampaign.php:218
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ecampaign/ecamp...')
+#2 /internal/eval.php(20): activate_plugin('ecampaign/ecamp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ecampaign/ecampaign.php on line 218
+[17-Apr-2025 21:32:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ecampaign/ecampaign.php:218
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ecampaign/ecamp...')
+#2 /internal/eval.php(20): activate_plugin('ecampaign/ecamp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ecampaign/ecampaign.php on line 218
+[17-Apr-2025 21:33:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ecampaign/ecampaign.php:218
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ecampaign/ecamp...')
+#2 /internal/eval.php(20): activate_plugin('ecampaign/ecamp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/ecampaign/ecampaign.php on line 218
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"ecampaign"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
