@@ -2,162 +2,313 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [16-Apr-2025 10:52:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [17-Apr-2025 22:48:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-list/news-ticker.php:223
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-list/news-...')
+#2 /internal/eval.php(20): activate_plugin('news-list/news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/news-list/news-ticker.php on line 223
+[17-Apr-2025 22:48:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-list/news-ticker.php:223
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-list/news-...')
+#2 /internal/eval.php(20): activate_plugin('news-list/news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/news-list/news-ticker.php on line 223
+[17-Apr-2025 22:48:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-list/news-ticker.php:223
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-list/news-...')
+#2 /internal/eval.php(20): activate_plugin('news-list/news-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/news-list/news-ticker.php on line 223
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT blog_id FROM  ORDER BY domain ASC</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_email_address"</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_email_address' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT blog_id ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT blog_id ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('SELECT blog_id ...')
-#4 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(66): wpdb->get_col('SELECT blog_id ...')
-#5 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(48): Network_Summary->get_sites()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(111): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#10 /internal/eval.php(20): activate_plugin('network-summary...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
 #11 {main}</pre>
- for query SELECT blog_id FROM  ORDER BY domain ASC made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Network_Summary->get_sites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php on line 16
-[16-Apr-2025 10:52:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_email_address" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_address_list_mapping"</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_address_list_mapping' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(29): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(126): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#10 /internal/eval.php(20): activate_plugin('network-summary...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
 #11 {main}</pre>
- for query CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_address_list_mapping" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_additional_field_value"</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_additional_field_value' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(45): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(152): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#10 /internal/eval.php(20): activate_plugin('network-summary...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
 #11 {main}</pre>
- for query CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php on line 197
-[16-Apr-2025 10:52:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_additional_field_value" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT blog_id FROM  ORDER BY domain ASC</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_email_campaign"</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT blog_id FROM  ORDER BY domain ASC | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_email_campaign' | parameters: database_name_here</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
+SQLSTATE[HY000]: General error: 1 no such column: name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('SELECT blog_id ...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(66): wpdb->get_col('SELECT blog_id ...')
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(48): Network_Summary->get_sites()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query SELECT blog_id FROM  ORDER BY domain ASC made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Network_Summary->get_sites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:10 UTC] PHP Warning:  Undefined array key "ENGINE" in /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php on line 16
-[16-Apr-2025 10:52:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(166): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#11 {main}</pre>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_email_campaign" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_xyz_em_email_campaign</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_xyz_em_email_campaign</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_xyz_em_email_campaign</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Information_Schema_Builder::get_value(): Argument #1 ($node) must be of type WP_Parser_Node, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 549
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Infor...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(200): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL ) made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_xyz_em_email_campaign</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_xyz_em_email_campaign</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_xyz_em_email_campaign</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Information_Schema_Builder::get_value(): Argument #1 ($node) must be of type WP_Parser_Node, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 549
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Infor...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(210): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_attachment"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_attachment' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(218): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#11 {main}</pre>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_attachment" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_sender_email_address"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_sender_email_address' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(232): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#11 {main}</pre>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_sender_email_address" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_additional_field_info"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_additional_field_info' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(253): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#11 {main}</pre>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_additional_field_info" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS WHERE name="xyz_em_email_template"</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `name` = 'xyz_em_email_template' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(274): wpdb->get_results('SHOW TABLE STAT...')
+#5 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#10 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#11 {main}</pre>
+ for query SHOW TABLE STATUS WHERE name="xyz_em_email_template" made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_address TO wp_xyz_em_email_address</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -165,347 +316,1179 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(29): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_site_categories_relationships, blog_id, bigint</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_site_categories_relationships, category_id, bigint</li>
-<li>Executing: CREATE TABLE &quot;wp_site_categories_relationships&quot; (
-&quot;blog_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;category_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-PRIMARY KEY (&quot;(&quot;, &quot;,&quot;, &quot;)&quot;)) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(45): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:11 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php on line 197
-[16-Apr-2025 10:52:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT blog_id FROM  ORDER BY domain ASC</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT blog_id FROM  ORDER BY domain ASC | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('SELECT blog_id ...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(66): wpdb->get_col('SELECT blog_id ...')
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(48): Network_Summary->get_sites()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query SELECT blog_id FROM  ORDER BY domain ASC made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Network_Summary->get_sites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:18 UTC] PHP Warning:  Undefined array key "ENGINE" in /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php on line 16
-[16-Apr-2025 10:52:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(29): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query CREATE TABLE wp_site_categories (
-			id BIGINT NOT NULL AUTO_INCREMENT,
-			created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			name VARCHAR(55) NOT NULL,
-			description VARCHAR(255) DEFAULT NULL,
-			PRIMARY KEY id (id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_site_categories_relationships, blog_id, bigint</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_site_categories_relationships, category_id, bigint</li>
-<li>Executing: CREATE TABLE &quot;wp_site_categories_relationships&quot; (
-&quot;blog_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;category_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-PRIMARY KEY (&quot;(&quot;, &quot;,&quot;, &quot;)&quot;)) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/network-summary/includes/class-site-category-repository.php(45): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php(53): Site_Category_Repository->create_table()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Network_Summary->activate(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_networ...', false)
-#8 /internal/eval.php(20): activate_plugin('network-summary...')
-#9 {main}</pre>
- for query CREATE TABLE wp_site_categories_relationships (
-			blog_id BIGINT NOT NULL,
-			category_id BIGINT NOT NULL,
-			PRIMARY KEY id (blog_id, category_id),
-			INDEX blog_ind (blog_id),
-			INDEX category_ind (category_id),
-			FOREIGN KEY (blog_id)
-				REFERENCES (blog_id),
-			FOREIGN KEY (category_id)
-				REFERENCES wp_site_categories(id)
-		)
-		ENGINE ,
-		DEFAULT COLLATE utf8_general_ci made by activate_plugin, do_action('activate_network-summary/network-summary.php'), WP_Hook->do_action, WP_Hook->apply_filters, Network_Summary->activate, Site_Category_Repository->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 10:52:20 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/network-summary/includes/class-network-summary.php on line 197
-[16-Apr-2025 10:55:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('newsinpic_widge...')
-#2 /wordpress/wp-content/plugins/news-in-pictures/goNewsinpictures.php(15): register_widget('newsinpic_widge...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): newspic_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(113): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 10:55:28 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('newsinpic_widge...')
-#2 /wordpress/wp-content/plugins/news-in-pictures/goNewsinpictures.php(15): register_widget('newsinpic_widge...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): newspic_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_address TO wp_xyz_em_email_address made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_address_list_mapping TO wp_xyz_em_address_list_mapping</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(128): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 10:55:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('newsinpic_widge...')
-#2 /wordpress/wp-content/plugins/news-in-pictures/goNewsinpictures.php(15): register_widget('newsinpic_widge...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): newspic_widget('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_address_list_mapping TO wp_xyz_em_address_list_mapping made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_address_list_mapping ADD (`formid` int(20) COLLATE utf8_unicode_ci NOT NULL )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: formid.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(145): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 10:55:48 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:55:48 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:55:48 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_ie_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:55:58 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:55:58 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:55:58 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_ie_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:56:07 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:56:07 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:56:07 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>o2_rss_style_ie_sheet</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[16-Apr-2025 10:56:15 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:16 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:16 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php:531
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_address_list_mapping ADD (`formid` int(20) COLLATE utf8_unicode_ci NOT NULL ) made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_additional_field_value TO wp_xyz_em_additional_field_value</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(154): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_additional_field_value TO wp_xyz_em_additional_field_value made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_campaign TO wp_xyz_em_email_campaign</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(168): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_campaign TO wp_xyz_em_email_campaign made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: end_time.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(200): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL ) made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: join_after_campaign_started.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(210): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_attachment TO wp_xyz_em_attachment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(220): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_attachment TO wp_xyz_em_attachment made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_sender_email_address TO wp_xyz_em_sender_email_address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(234): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_sender_email_address TO wp_xyz_em_sender_email_address made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_additional_field_info TO wp_xyz_em_additional_field_info</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(255): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_additional_field_info TO wp_xyz_em_additional_field_info made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT default_value FROM wp_xyz_em_additional_field_info</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT default_value FROM wp_xyz_em_additional_field_info | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT default_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(268): wpdb->get_results('SELECT default_...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT default_value FROM wp_xyz_em_additional_field_info made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES ('Name', 0, 'User', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES (:param0 , 0, :param1 , :param2 ) | parameters: Name, User, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_addit...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(270): wpdb->insert('wp_xyz_em_addit...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES ('Name', 0, 'User', '') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_template TO wp_xyz_em_email_template</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(276): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_template TO wp_xyz_em_email_template made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(286): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=1 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, 'Subscription Active', '<p>Hi {field1},</p>
+<p>Thank you for subscribing to our list.<br />
+Your subscription is active now.</p><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of subscription : {date}<br/>Time of subscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com<br />
+&nbsp;</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, :param0 , :param1 ) | parameters: Subscription Active, &lt;p&gt;Hi {field1},&lt;/p&gt;
+&lt;p&gt;Thank you for subscribing to our list.&lt;br /&gt;
+Your subscription is active now.&lt;/p&gt;&lt;p&gt;You are currently subscribed to following list(s) &lt;br /&gt;&lt;i&gt;{subscribed_lists}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Your subscription details are given below,&lt;/p&gt;Email Address : {email-ID}&lt;br /&gt;Date of subscription : {date}&lt;br/&gt;Time of subscription :{time}&lt;br/&gt;IP Address:{ip_address}&lt;br /&gt;
+&lt;p&gt;Regards&lt;br /&gt;
+Yoursite.com&lt;br /&gt;
+&amp;nbsp;&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(290): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, 'Subscription Active', '<p>Hi {field1},</p>
+<p>Thank you for subscribing to our list.<br />
+Your subscription is active now.</p><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of subscription : {date}<br/>Time of subscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com<br />
+&nbsp;</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=2</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=2 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(294): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=2 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, 'Email Unsubscribed', '<p>Hi {field1},</p>
+<p>Your email address has been successfully unsubscribed from our list.</p><p>Your email address has been unsubscribed from the  following list(s)</p><i>{unsubscribed_lists}</i><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of unsubscription : {date}<br/>Time of unsubscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, :param0 , :param1 ) | parameters: Email Unsubscribed, &lt;p&gt;Hi {field1},&lt;/p&gt;
+&lt;p&gt;Your email address has been successfully unsubscribed from our list.&lt;/p&gt;&lt;p&gt;Your email address has been unsubscribed from the  following list(s)&lt;/p&gt;&lt;i&gt;{unsubscribed_lists}&lt;/i&gt;&lt;p&gt;You are currently subscribed to following list(s) &lt;br /&gt;&lt;i&gt;{subscribed_lists}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Your subscription details are given below,&lt;/p&gt;Email Address : {email-ID}&lt;br /&gt;Date of unsubscription : {date}&lt;br/&gt;Time of unsubscription :{time}&lt;br/&gt;IP Address:{ip_address}&lt;br /&gt;
+&lt;p&gt;Regards&lt;br /&gt;
+Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(298): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, 'Email Unsubscribed', '<p>Hi {field1},</p>
+<p>Your email address has been successfully unsubscribed from our list.</p><p>Your email address has been unsubscribed from the  following list(s)</p><i>{unsubscribed_lists}</i><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of unsubscription : {date}<br/>Time of unsubscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=3</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=3 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(302): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=3 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, 'Subscription Pending', '<p>Hi {field1},</p><p>Thank you for subscribing to our list. <br />You are one click away from activating your subscription.<br />Just click the link below to  activate your subscription <br /><i><a href=\"{confirmation_url}\">Confirm now</a></i></p><p>Regards<br />Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, :param0 , :param1 ) | parameters: Subscription Pending, &lt;p&gt;Hi {field1},&lt;/p&gt;&lt;p&gt;Thank you for subscribing to our list. &lt;br /&gt;You are one click away from activating your subscription.&lt;br /&gt;Just click the link below to  activate your subscription &lt;br /&gt;&lt;i&gt;&lt;a href=&quot;{confirmation_url}&quot;&gt;Confirm now&lt;/a&gt;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Regards&lt;br /&gt;Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(306): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, 'Subscription Pending', '<p>Hi {field1},</p><p>Thank you for subscribing to our list. <br />You are one click away from activating your subscription.<br />Just click the link below to  activate your subscription <br /><i><a href=\"{confirmation_url}\">Confirm now</a></i></p><p>Regards<br />Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=4 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(319): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=4 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, ' Update Your Subscription Status', '<p>Hi {field1},</p><p>You have recently requested for updating  your subscription status. <br />Please click below  link to update your subscription status <br /><i><a href=\"{update_sub_status_url}\">Update Now</a></i></p><p>You can ignore this message if this request not made by you.</p><p>Regards<br />Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, :param0 , :param1 ) | parameters:  Update Your Subscription Status, &lt;p&gt;Hi {field1},&lt;/p&gt;&lt;p&gt;You have recently requested for updating  your subscription status. &lt;br /&gt;Please click below  link to update your subscription status &lt;br /&gt;&lt;i&gt;&lt;a href=&quot;{update_sub_status_url}&quot;&gt;Update Now&lt;/a&gt;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;You can ignore this message if this request not made by you.&lt;/p&gt;&lt;p&gt;Regards&lt;br /&gt;Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(324): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, ' Update Your Subscription Status', '<p>Hi {field1},</p><p>You have recently requested for updating  your subscription status. <br />Please click below  link to update your subscription status <br /><i><a href=\"{update_sub_status_url}\">Update Now</a></i></p><p>You can ignore this message if this request not made by you.</p><p>Regards<br />Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:48:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>delete from wp_xyz_em_address_list_mapping WHERE ea_id=0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from wp_xyz_em_address_list_mapping WHERE ea_id=0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(429): WP_SQLite_DB->query('delete from wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query delete from wp_xyz_em_address_list_mapping WHERE ea_id=0 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_address TO wp_xyz_em_email_address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(113): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_address TO wp_xyz_em_email_address made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_address_list_mapping TO wp_xyz_em_address_list_mapping</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(128): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_address_list_mapping TO wp_xyz_em_address_list_mapping made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_address_list_mapping ADD (`formid` int(20) COLLATE utf8_unicode_ci NOT NULL )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: formid.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(145): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_address_list_mapping ADD (`formid` int(20) COLLATE utf8_unicode_ci NOT NULL ) made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_additional_field_value TO wp_xyz_em_additional_field_value</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(154): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_additional_field_value TO wp_xyz_em_additional_field_value made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_campaign TO wp_xyz_em_email_campaign</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(168): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_campaign TO wp_xyz_em_email_campaign made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: end_time.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(200): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`end_time` varchar(100) COLLATE utf8_unicode_ci NOT NULL ) made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: join_after_campaign_started.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(210): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_xyz_em_email_campaign ADD (`join_after_campaign_started` int(1) NOT NULL DEFAULT '1') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_attachment TO wp_xyz_em_attachment</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(220): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_attachment TO wp_xyz_em_attachment made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_sender_email_address TO wp_xyz_em_sender_email_address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(234): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_sender_email_address TO wp_xyz_em_sender_email_address made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_additional_field_info TO wp_xyz_em_additional_field_info</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(255): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_additional_field_info TO wp_xyz_em_additional_field_info made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT default_value FROM wp_xyz_em_additional_field_info</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT default_value FROM wp_xyz_em_additional_field_info | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT default_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(268): wpdb->get_results('SELECT default_...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT default_value FROM wp_xyz_em_additional_field_info made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES ('Name', 0, 'User', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES (:param0 , 0, :param1 , :param2 ) | parameters: Name, User, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_addit...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(270): wpdb->insert('wp_xyz_em_addit...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_additional_field_info` (`field_name`, `type`, `default_value`, `options`) VALUES ('Name', 0, 'User', '') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>RENAME TABLE xyz_em_email_template TO wp_xyz_em_email_template</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: RENAME.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(276): WP_SQLite_DB->query('RENAME TABLE xy...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query RENAME TABLE xyz_em_email_template TO wp_xyz_em_email_template made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(286): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=1 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, 'Subscription Active', '<p>Hi {field1},</p>
+<p>Thank you for subscribing to our list.<br />
+Your subscription is active now.</p><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of subscription : {date}<br/>Time of subscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com<br />
+&nbsp;</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, :param0 , :param1 ) | parameters: Subscription Active, &lt;p&gt;Hi {field1},&lt;/p&gt;
+&lt;p&gt;Thank you for subscribing to our list.&lt;br /&gt;
+Your subscription is active now.&lt;/p&gt;&lt;p&gt;You are currently subscribed to following list(s) &lt;br /&gt;&lt;i&gt;{subscribed_lists}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Your subscription details are given below,&lt;/p&gt;Email Address : {email-ID}&lt;br /&gt;Date of subscription : {date}&lt;br/&gt;Time of subscription :{time}&lt;br/&gt;IP Address:{ip_address}&lt;br /&gt;
+&lt;p&gt;Regards&lt;br /&gt;
+Yoursite.com&lt;br /&gt;
+&amp;nbsp;&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(290): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (1, 'Subscription Active', '<p>Hi {field1},</p>
+<p>Thank you for subscribing to our list.<br />
+Your subscription is active now.</p><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of subscription : {date}<br/>Time of subscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com<br />
+&nbsp;</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=2</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=2 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(294): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=2 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, 'Email Unsubscribed', '<p>Hi {field1},</p>
+<p>Your email address has been successfully unsubscribed from our list.</p><p>Your email address has been unsubscribed from the  following list(s)</p><i>{unsubscribed_lists}</i><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of unsubscription : {date}<br/>Time of unsubscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, :param0 , :param1 ) | parameters: Email Unsubscribed, &lt;p&gt;Hi {field1},&lt;/p&gt;
+&lt;p&gt;Your email address has been successfully unsubscribed from our list.&lt;/p&gt;&lt;p&gt;Your email address has been unsubscribed from the  following list(s)&lt;/p&gt;&lt;i&gt;{unsubscribed_lists}&lt;/i&gt;&lt;p&gt;You are currently subscribed to following list(s) &lt;br /&gt;&lt;i&gt;{subscribed_lists}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Your subscription details are given below,&lt;/p&gt;Email Address : {email-ID}&lt;br /&gt;Date of unsubscription : {date}&lt;br/&gt;Time of unsubscription :{time}&lt;br/&gt;IP Address:{ip_address}&lt;br /&gt;
+&lt;p&gt;Regards&lt;br /&gt;
+Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(298): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (2, 'Email Unsubscribed', '<p>Hi {field1},</p>
+<p>Your email address has been successfully unsubscribed from our list.</p><p>Your email address has been unsubscribed from the  following list(s)</p><i>{unsubscribed_lists}</i><p>You are currently subscribed to following list(s) <br /><i>{subscribed_lists}</i></p><p>Your subscription details are given below,</p>Email Address : {email-ID}<br />Date of unsubscription : {date}<br/>Time of unsubscription :{time}<br/>IP Address:{ip_address}<br />
+<p>Regards<br />
+Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=3</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=3 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(302): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=3 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, 'Subscription Pending', '<p>Hi {field1},</p><p>Thank you for subscribing to our list. <br />You are one click away from activating your subscription.<br />Just click the link below to  activate your subscription <br /><i><a href=\"{confirmation_url}\">Confirm now</a></i></p><p>Regards<br />Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, :param0 , :param1 ) | parameters: Subscription Pending, &lt;p&gt;Hi {field1},&lt;/p&gt;&lt;p&gt;Thank you for subscribing to our list. &lt;br /&gt;You are one click away from activating your subscription.&lt;br /&gt;Just click the link below to  activate your subscription &lt;br /&gt;&lt;i&gt;&lt;a href=&quot;{confirmation_url}&quot;&gt;Confirm now&lt;/a&gt;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Regards&lt;br /&gt;Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(306): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (3, 'Subscription Pending', '<p>Hi {field1},</p><p>Thank you for subscribing to our list. <br />You are one click away from activating your subscription.<br />Just click the link below to  activate your subscription <br /><i><a href=\"{confirmation_url}\">Confirm now</a></i></p><p>Regards<br />Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT subject FROM wp_xyz_em_email_template WHERE id=4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT subject FROM wp_xyz_em_email_template WHERE id=4 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT subject ...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(319): wpdb->get_results('SELECT subject ...')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#8 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#9 {main}</pre>
+ for query SELECT subject FROM wp_xyz_em_email_template WHERE id=4 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, ' Update Your Subscription Status', '<p>Hi {field1},</p><p>You have recently requested for updating  your subscription status. <br />Please click below  link to update your subscription status <br /><i><a href=\"{update_sub_status_url}\">Update Now</a></i></p><p>You can ignore this message if this request not made by you.</p><p>Regards<br />Yoursite.com</p>')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, :param0 , :param1 ) | parameters:  Update Your Subscription Status, &lt;p&gt;Hi {field1},&lt;/p&gt;&lt;p&gt;You have recently requested for updating  your subscription status. &lt;br /&gt;Please click below  link to update your subscription status &lt;br /&gt;&lt;i&gt;&lt;a href=&quot;{update_sub_status_url}&quot;&gt;Update Now&lt;/a&gt;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;You can ignore this message if this request not made by you.&lt;/p&gt;&lt;p&gt;Regards&lt;br /&gt;Yoursite.com&lt;/p&gt;</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_xyz_em_email...', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(324): wpdb->insert('wp_xyz_em_email...', Array, Array)
+#4 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#9 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_xyz_em_email_template` (`id`, `subject`, `message`) VALUES (4, ' Update Your Subscription Status', '<p>Hi {field1},</p><p>You have recently requested for updating  your subscription status. <br />Please click below  link to update your subscription status <br /><i><a href=\"{update_sub_status_url}\">Update Now</a></i></p><p>You can ignore this message if this request not made by you.</p><p>Regards<br />Yoursite.com</p>') made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>delete from wp_xyz_em_address_list_mapping WHERE ea_id=0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from wp_xyz_em_address_list_mapping WHERE ea_id=0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(429): WP_SQLite_DB->query('delete from wp_...')
+#2 /wordpress/wp-content/plugins/newsletter-manager/admin/install.php(20): em_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): em_network_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_newsle...', false)
+#7 /internal/eval.php(20): activate_plugin('newsletter-mana...')
+#8 {main}</pre>
+ for query delete from wp_xyz_em_address_list_mapping WHERE ea_id=0 made by activate_plugin, do_action('activate_newsletter-manager/newsletter-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, em_network_install, em_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[17-Apr-2025 22:49:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>next-feed</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:49:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>next-feed</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:49:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>next-feed</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:49:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php:87
 Stack trace:
-#0 /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php(371): Nourish2->register_widget()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Nourish2->nourish_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 531
-[16-Apr-2025 10:56:24 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:24 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:25 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php:531
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nextgen-cu3er-g...')
+#2 /internal/eval.php(20): activate_plugin('nextgen-cu3er-g...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php on line 87
+[17-Apr-2025 22:49:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php:87
 Stack trace:
-#0 /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php(371): Nourish2->register_widget()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Nourish2->nourish_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 531
-[16-Apr-2025 10:56:33 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:34 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break" in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 480
-[16-Apr-2025 10:56:34 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php:531
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nextgen-cu3er-g...')
+#2 /internal/eval.php(20): activate_plugin('nextgen-cu3er-g...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php on line 87
+[17-Apr-2025 22:50:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php:87
 Stack trace:
-#0 /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php(371): Nourish2->register_widget()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): Nourish2->nourish_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/newsletters-from-rss-to-email-newsletters-using-nourish/php/Nourish.php on line 531
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:33 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 10:58:42 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:42 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:42 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 10:58:43 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:43 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:43 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 10:58:51 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:51 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:51 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 10:58:52 UTC] PHP Warning:  Undefined array key "wp-submit" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:52 UTC] PHP Warning:  Undefined array key "passwordlogin" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 200
-[16-Apr-2025 10:58:52 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/nopassword-free-muti-factor-authentication/nopassword.php on line 208
-[16-Apr-2025 11:01:01 UTC] turning on cron event for NPR CDS plugin
-[16-Apr-2025 11:01:12 UTC] turning on cron event for NPR CDS plugin
-[16-Apr-2025 11:01:26 UTC] turning on cron event for NPR CDS plugin
-[16-Apr-2025 11:03:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nextgen-cu3er-g...')
+#2 /internal/eval.php(20): activate_plugin('nextgen-cu3er-g...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/nextgen-cu3er-gallery/cu3er.php on line 87
+[17-Apr-2025 22:51:43 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:51:51 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:52:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[17-Apr-2025 22:55:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NashOS')
@@ -523,7 +1506,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 11:03:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[17-Apr-2025 22:55:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NashOS')
@@ -541,7 +1524,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 11:03:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[17-Apr-2025 22:55:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('NashOS')
@@ -590,23 +1573,4 @@ Stack trace:
           'cache-control': [ 'no-cache, must-revalidate, max-age=0, no-store, private' ]
         },
         bytes: Uint8Array(2653) [
-           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
-          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
-          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
-           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
-           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
-           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
-          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
-           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
-           99, 104,  97, 114,
-          ... 2553 more items
-        ],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 10
