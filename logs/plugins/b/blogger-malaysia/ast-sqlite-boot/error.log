@@ -2,230 +2,237 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [15-Apr-2025 14:53:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '7e08d331798536bbdf8c30cbdba82bf9') ON DUPLICATE KEY UPDATE cvalue = '7e08d331798536bbdf8c30cbdba82bf9'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_sg_config</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_sg_config</li>
-<li>Executing: INSERT INTO `wp_sg_config` () SELECT  FROM (VALUES ( 'SG_BACKUP_CURRENT_KEY' , '7e08d331798536bbdf8c30cbdba82bf9' )) WHERE true ON CONFLICT DO UPDATE SET `cvalue` = '7e08d331798536bbdf8c30cbdba82bf9' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
-#3 /wordpress/wp-content/plugins/backup/com/core/database/SGDatabaseAdapterWordpress.php(35): WP_SQLite_DB->query('INSERT INTO wp_...')
-#4 /wordpress/wp-content/plugins/backup/com/core/SGConfig.php(16): SGDatabaseAdapterWordpress->query('INSERT INTO wp_...', Array)
-#5 /wordpress/wp-content/plugins/backup/BackupGuard.php(22): SGConfig::set('SG_BACKUP_CURRE...', '7e08d331798536b...', true)
-#6 /wordpress/wp-content/plugins/backup/BackupGuard.php(32): backupguard_genkey()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#11 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#12 {main}</pre>
- for query INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '7e08d331798536bbdf8c30cbdba82bf9') ON DUPLICATE KEY UPDATE cvalue = '7e08d331798536bbdf8c30cbdba82bf9' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, backupguard_genkey, SGConfig::set, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:53:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_users' AND `Engine` = 'MyISAM' | parameters: database_name_here</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/backup/public/include/functions.php(271): wpdb->get_results('SHOW TABLE STAT...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(70): backupGuardGetDatabaseEngine()
-#6 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(159): SGBoot::installConfigTable(Object(SGDatabaseAdapterWordpress))
-#7 /wordpress/wp-content/plugins/backup/BackupGuard.php(39): SGBoot::install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#12 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#13 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, SGBoot::install, SGBoot::installConfigTable, backupGuardGetDatabaseEngine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:53:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_users' AND `Engine` = 'MyISAM' | parameters: database_name_here</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/backup/public/include/functions.php(271): wpdb->get_results('SHOW TABLE STAT...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(108): backupGuardGetDatabaseEngine()
-#6 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(163): SGBoot::installScheduleTable(Object(SGDatabaseAdapterWordpress))
-#7 /wordpress/wp-content/plugins/backup/BackupGuard.php(39): SGBoot::install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#12 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#13 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, SGBoot::install, SGBoot::installScheduleTable, backupGuardGetDatabaseEngine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:53:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_users' AND `Engine` = 'MyISAM' | parameters: database_name_here</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/backup/public/include/functions.php(271): wpdb->get_results('SHOW TABLE STAT...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(130): backupGuardGetDatabaseEngine()
-#6 /wordpress/wp-content/plugins/backup/com/core/SGBoot.php(167): SGBoot::installActionTable(Object(SGDatabaseAdapterWordpress))
-#7 /wordpress/wp-content/plugins/backup/BackupGuard.php(39): SGBoot::install()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#12 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#13 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name = 'wp_users' AND Engine = 'MyISAM' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, SGBoot::install, SGBoot::installActionTable, backupGuardGetDatabaseEngine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:53:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '6845beb7559b847aa0d51794b54e8010') ON DUPLICATE KEY UPDATE cvalue = '6845beb7559b847aa0d51794b54e8010'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_sg_config&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO wp_sg_config (ckey, cvalue) VALUES (:param0 , :param1 )        | parameters: SG_BACKUP_CURRENT_KEY, 6845beb7559b847aa0d51794b54e8010</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/backup/com/core/database/SGDatabaseAdapterWordpress.php(35): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/backup/com/core/SGConfig.php(16): SGDatabaseAdapterWordpress->query('INSERT INTO wp_...', Array)
-#3 /wordpress/wp-content/plugins/backup/BackupGuard.php(22): SGConfig::set('SG_BACKUP_CURRE...', '6845beb7559b847...', true)
-#4 /wordpress/wp-content/plugins/backup/BackupGuard.php(32): backupguard_genkey()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#9 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#10 {main}</pre>
- for query INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '6845beb7559b847aa0d51794b54e8010') ON DUPLICATE KEY UPDATE cvalue = '6845beb7559b847aa0d51794b54e8010' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, backupguard_genkey, SGConfig::set, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:54:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '961692533ea6e66ef148312799c5e047') ON DUPLICATE KEY UPDATE cvalue = '961692533ea6e66ef148312799c5e047'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_sg_config&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO wp_sg_config (ckey, cvalue) VALUES (:param0 , :param1 )        | parameters: SG_BACKUP_CURRENT_KEY, 961692533ea6e66ef148312799c5e047</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sg_config.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/backup/com/core/database/SGDatabaseAdapterWordpress.php(35): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-content/plugins/backup/com/core/SGConfig.php(16): SGDatabaseAdapterWordpress->query('INSERT INTO wp_...', Array)
-#3 /wordpress/wp-content/plugins/backup/BackupGuard.php(22): SGConfig::set('SG_BACKUP_CURRE...', '961692533ea6e66...', true)
-#4 /wordpress/wp-content/plugins/backup/BackupGuard.php(32): backupguard_genkey()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_backup_guard(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
-#9 /internal/eval.php(20): activate_plugin('backup/backup.p...')
-#10 {main}</pre>
- for query INSERT INTO wp_sg_config (ckey, cvalue) VALUES ('SG_BACKUP_CURRENT_KEY', '961692533ea6e66ef148312799c5e047') ON DUPLICATE KEY UPDATE cvalue = '961692533ea6e66ef148312799c5e047' made by activate_plugin, do_action('activate_backup/backup.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_backup_guard, backupguard_genkey, SGConfig::set, SGDatabaseAdapterWordpress->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[15-Apr-2025 14:54:11 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /wordpress/wp-content/plugins/balsamico-news/balsamico-news.php on line 11
-[15-Apr-2025 14:54:19 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /wordpress/wp-content/plugins/balsamico-news/balsamico-news.php on line 11
-[15-Apr-2025 14:54:26 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in /wordpress/wp-content/plugins/balsamico-news/balsamico-news.php on line 11
-[15-Apr-2025 14:58:01 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
-[15-Apr-2025 14:58:02 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[15-Apr-2025 14:58:10 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
-[15-Apr-2025 14:58:11 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[15-Apr-2025 14:58:19 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
-[15-Apr-2025 14:58:20 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[15-Apr-2025 14:58:28 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 14:58:29 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 14:58:36 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 14:58:37 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 14:58:44 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 14:58:45 UTC] PHP Deprecated:  Required parameter $meta_field follows optional parameter $separator in /wordpress/wp-content/plugins/bitatags/bitatags.php on line 107
-[15-Apr-2025 15:01:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_after_content" in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php:253
+Error: [16-Apr-2025 23:47:43 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:43 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "imagefile" in /wordpress/wp-content/plugins/buddypress-gifts/loader.php:217
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bittipit-bitcoi...')
-#2 /internal/eval.php(20): activate_plugin('bittipit-bitcoi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php on line 253
-[15-Apr-2025 15:01:09 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_after_content" in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php:253
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_gifts_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_buddyp...', false)
+#4 /internal/eval.php(20): activate_plugin('buddypress-gift...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-gifts/loader.php on line 217
+[16-Apr-2025 23:47:50 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:50 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "imagefile" in /wordpress/wp-content/plugins/buddypress-gifts/loader.php:217
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bittipit-bitcoi...')
-#2 /internal/eval.php(20): activate_plugin('bittipit-bitcoi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php on line 253
-[15-Apr-2025 15:01:17 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_after_content" in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php:253
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_gifts_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_buddyp...', false)
+#4 /internal/eval.php(20): activate_plugin('buddypress-gift...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-gifts/loader.php on line 217
+[16-Apr-2025 23:47:58 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:58 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:47:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "imagefile" in /wordpress/wp-content/plugins/buddypress-gifts/loader.php:217
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('bittipit-bitcoi...')
-#2 /internal/eval.php(20): activate_plugin('bittipit-bitcoi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/bittipit-bitcoin-donation-button/bittip_it.php on line 253
-[15-Apr-2025 15:01:25 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/block-editor-gallery-slider/classes/events/class-begs-gallery-slider.php on line 126
-[15-Apr-2025 15:01:33 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/block-editor-gallery-slider/classes/events/class-begs-gallery-slider.php on line 126
-[15-Apr-2025 15:01:42 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/block-editor-gallery-slider/classes/events/class-begs-gallery-slider.php on line 126
+#0 /wordpress/wp-includes/class-wp-hook.php(324): bp_gifts_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_buddyp...', false)
+#4 /internal/eval.php(20): activate_plugin('buddypress-gift...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/buddypress-gifts/loader.php on line 217
+[16-Apr-2025 23:48:08 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:48:16 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:48:25 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:48:34 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:48:43 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:48:52 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:01 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:10 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:19 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:28 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:37 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:46 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:56 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:49:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ban-users</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:04 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ban-users</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:13 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>ban-users</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:22 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:23 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:30 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:31 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:32 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:40 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined array key "bcsts_speed" in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 61
+[16-Apr-2025 23:50:41 UTC] PHP Warning:  Undefined variable $theme in /wordpress/wp-content/plugins/barnameha-csts/barnameha-csts.php on line 75
+[16-Apr-2025 23:50:49 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:50:59 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:08 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:17 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:25 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:34 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:43 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:51:53 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:02 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:11 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:20 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:28 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:36 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:46 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:52:54 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:04 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:13 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:22 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:32 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:32 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
+[16-Apr-2025 23:53:33 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:41 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:41 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
+[16-Apr-2025 23:53:42 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:51 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:53:51 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/bibsonomy/util/cwpu/christians-wp-utils.php on line 32
+[16-Apr-2025 23:53:52 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:54:22 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:54:22 UTC] PHP Warning:  Undefined variable $tsc_SAD_db_version in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 79
+[16-Apr-2025 23:54:23 UTC] PHP Warning:  Undefined array key "last_activity" in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 110
+[16-Apr-2025 23:54:31 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:54:31 UTC] PHP Warning:  Undefined variable $tsc_SAD_db_version in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 79
+[16-Apr-2025 23:54:32 UTC] PHP Warning:  Undefined array key "last_activity" in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 110
+[16-Apr-2025 23:54:40 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:54:40 UTC] PHP Warning:  Undefined variable $tsc_SAD_db_version in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 79
+[16-Apr-2025 23:54:41 UTC] PHP Warning:  Undefined array key "last_activity" in /wordpress/wp-content/plugins/browser-window-stats/browser-window-stats.php on line 110
+[16-Apr-2025 23:54:49 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:54:51 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "            " in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php:35
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): create_post_type_bigboss_slider('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php on line 35
+[16-Apr-2025 23:54:59 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "            " in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php:35
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): create_post_type_bigboss_slider('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php on line 35
+[16-Apr-2025 23:55:08 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "            " in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php:35
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): create_post_type_bigboss_slider('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/bigboss-slider/bigboss-slider.php on line 35
+[16-Apr-2025 23:55:19 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:27 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:36 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:46 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:55:54 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:56:03 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:56:13 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:56:21 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[16-Apr-2025 23:56:31 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
