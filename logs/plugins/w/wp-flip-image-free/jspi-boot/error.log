@@ -2,9 +2,262 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [17-Apr-2025 04:53:04 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:06 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:06 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [18-Apr-2025 18:35:32 UTC] PHP Warning:  Undefined array key "pixel`.`reportable" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[18-Apr-2025 18:35:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[18-Apr-2025 18:35:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[18-Apr-2025 18:35:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[18-Apr-2025 18:35:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000")))</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_worthy_markers` `pixel</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_worthy_markers` `pixel</li>
+<li>Executing: UPDATE `wp_worthy_markers` `pixel` , `wp_posts` `p` LEFT JOIN `wp_postmeta` `pm` ON ( `p`.`ID` = `pm`.`post_id` AND `pm`.`meta_key` = 'worthy_counter' ) LEFT JOIN `wp_postmeta` `pmi` ON ( `p`.`ID` = `pmi`.`post_id` AND `pmi`.`meta_key` = 'worthy_ignore' ) LEFT JOIN `wp_postmeta` `pml` ON ( `p`.`ID` = `pml`.`post_id` AND `pml`.`meta_key` = 'worthy_lyric' ) SET `pixel`.`reportable` = '1' WHERE `pixel`.`postid` = `p`.`ID` AND `pixel`.`siteid` = '1' AND ( `pmi`.`meta_value` IS NULL OR `pmi`.`meta_value` = '0' ) AND ( ( `pixel`.`status` = '3' AND ( CONVERT ( `pm`.`meta_value` , UNSIGNED INTEGER ) &gt;= '1800' ) OR `pml`.`meta_value` = '1' ) OR ( `pixel`.`status` = '2' AND ( CONVERT ( `pm`.`meta_value` , UNSIGNED INTEGER ) &gt;= '10000' ) ) ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "`pixel`": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE `wp_wort...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE `wp_wort...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('UPDATE `wp_wort...')
+#4 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(1252): wpdb->get_results('UPDATE `wp_wort...')
+#5 /wordpress/wp-content/plugins/wp-worthy/class-wp-worthy-pixel.php(108): wp_worthy->querySites('UPDATE `wp_wort...')
+#6 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(157): wp_worthy_pixel::setupDatabase()
+#7 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(139): wp_worthy->__construct()
+#8 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(8415): wp_worthy::singleton()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-worthy/wp-wo...')
+#11 /internal/eval.php(20): activate_plugin('wp-worthy/wp-wo...')
+#12 {main}</pre>
+ for query UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000"))) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-worthy/wp-worthy.php'), wp_worthy::singleton, wp_worthy->__construct, wp_worthy_pixel::setupDatabase, wp_worthy->querySites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 18:35:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000")))</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key=&quot;worthy_counter&quot;) LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key=&quot;worthy_ignore&quot;) LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`=&quot;worthy_lyric&quot;) SET pixel.`reportable`=&quot;1&quot; WHERE rowid IN (SELECT rowid FROM wp_worthy_markers WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`=&quot;1&quot; AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`=&quot;0&quot;) AND ((pixel.`status`=&quot;3&quot; AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)&gt;=&quot;1800&quot;) OR pml.meta_value=&quot;1&quot;) OR (pixel.`status`=&quot;2&quot; AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)&gt;=&quot;10000&quot;)))) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "pixel": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('UPDATE `wp_wort...')
+#2 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(1252): wpdb->get_results('UPDATE `wp_wort...')
+#3 /wordpress/wp-content/plugins/wp-worthy/class-wp-worthy-pixel.php(108): wp_worthy->querySites('UPDATE `wp_wort...')
+#4 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(157): wp_worthy_pixel::setupDatabase()
+#5 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(139): wp_worthy->__construct()
+#6 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(8415): wp_worthy::singleton()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-worthy/wp-wo...')
+#9 /internal/eval.php(20): activate_plugin('wp-worthy/wp-wo...')
+#10 {main}</pre>
+ for query UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000"))) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-worthy/wp-worthy.php'), wp_worthy::singleton, wp_worthy->__construct, wp_worthy_pixel::setupDatabase, wp_worthy->querySites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 18:35:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000")))</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key=&quot;worthy_counter&quot;) LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key=&quot;worthy_ignore&quot;) LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`=&quot;worthy_lyric&quot;) SET pixel.`reportable`=&quot;1&quot; WHERE rowid IN (SELECT rowid FROM wp_worthy_markers WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`=&quot;1&quot; AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`=&quot;0&quot;) AND ((pixel.`status`=&quot;3&quot; AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)&gt;=&quot;1800&quot;) OR pml.meta_value=&quot;1&quot;) OR (pixel.`status`=&quot;2&quot; AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)&gt;=&quot;10000&quot;)))) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "pixel": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('UPDATE `wp_wort...')
+#2 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(1252): wpdb->get_results('UPDATE `wp_wort...')
+#3 /wordpress/wp-content/plugins/wp-worthy/class-wp-worthy-pixel.php(108): wp_worthy->querySites('UPDATE `wp_wort...')
+#4 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(157): wp_worthy_pixel::setupDatabase()
+#5 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(139): wp_worthy->__construct()
+#6 /wordpress/wp-content/plugins/wp-worthy/wp-worthy.php(8415): wp_worthy::singleton()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-worthy/wp-wo...')
+#9 /internal/eval.php(20): activate_plugin('wp-worthy/wp-wo...')
+#10 {main}</pre>
+ for query UPDATE `wp_worthy_markers` pixel, `wp_posts` p LEFT JOIN `wp_postmeta` pm ON (p.ID=pm.post_id AND pm.meta_key="worthy_counter") LEFT JOIN `wp_postmeta` pmi ON (p.ID=pmi.post_id AND pmi.meta_key="worthy_ignore") LEFT JOIN `wp_postmeta` pml ON (p.`ID`=pml.`post_id` AND pml.`meta_key`="worthy_lyric") SET pixel.`reportable`="1" WHERE pixel.`postid`=p.`ID` AND pixel.`siteid`="1" AND (pmi.`meta_value` IS NULL OR pmi.`meta_value`="0") AND ((pixel.`status`="3" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="1800") OR pml.meta_value="1") OR (pixel.`status`="2" AND (CONVERT(pm.`meta_value`, UNSIGNED INTEGER)>="10000"))) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-worthy/wp-worthy.php'), wp_worthy::singleton, wp_worthy->__construct, wp_worthy_pixel::setupDatabase, wp_worthy->querySites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 18:36:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpfeed-news/feednews.php:137
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpfeed-news/fee...')
+#2 /internal/eval.php(20): activate_plugin('wpfeed-news/fee...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpfeed-news/feednews.php on line 137
+[18-Apr-2025 18:36:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpfeed-news/feednews.php:137
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpfeed-news/fee...')
+#2 /internal/eval.php(20): activate_plugin('wpfeed-news/fee...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpfeed-news/feednews.php on line 137
+[18-Apr-2025 18:36:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wpfeed-news/feednews.php:137
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpfeed-news/fee...')
+#2 /internal/eval.php(20): activate_plugin('wpfeed-news/fee...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wpfeed-news/feednews.php on line 137
+[18-Apr-2025 18:36:56 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:36:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:36:56 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:36:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:37:07 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:37:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:37:07 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:37:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:37:17 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:37:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 46
+[18-Apr-2025 18:37:17 UTC] PHP Warning:  Trying to access array offset on value of type int in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:37:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wppizza/classes/class.wppizza.gateways.php on line 51
+[18-Apr-2025 18:38:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php:230
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-custom-l...')
+#2 /internal/eval.php(20): activate_plugin('widget-custom-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php on line 230
+[18-Apr-2025 18:38:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php:230
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-custom-l...')
+#2 /internal/eval.php(20): activate_plugin('widget-custom-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php on line 230
+[18-Apr-2025 18:38:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php:230
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('widget-custom-l...')
+#2 /internal/eval.php(20): activate_plugin('widget-custom-l...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/widget-custom-loop/widget-custom-loop.php on line 230
+[18-Apr-2025 18:38:46 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TwobuyTinyFixes::TwobuyTinyFixes_WPanels() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#1 /wordpress/wp-includes/widgets.php(1051): apply_filters('sidebars_widget...', Array)
+#2 /wordpress/wp-includes/widgets.php(917): wp_get_sidebars_widgets()
+#3 /wordpress/wp-includes/widgets/class-wp-widget-recent-comments.php(34): is_active_widget(false, false, 'recent-comments')
+#4 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget_Recent_Comments->__construct()
+#5 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Recen...')
+#6 /wordpress/wp-includes/widgets.php(1853): register_widget('WP_Widget_Recen...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[18-Apr-2025 18:38:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TwobuyTinyFixes::TwobuyTinyFixes_WPanels() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#1 /wordpress/wp-includes/widgets.php(1051): apply_filters('sidebars_widget...', Array)
+#2 /wordpress/wp-includes/widgets.php(917): wp_get_sidebars_widgets()
+#3 /wordpress/wp-includes/widgets/class-wp-widget-recent-comments.php(34): is_active_widget(false, false, 'recent-comments')
+#4 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget_Recent_Comments->__construct()
+#5 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Recen...')
+#6 /wordpress/wp-includes/widgets.php(1853): register_widget('WP_Widget_Recen...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[18-Apr-2025 18:39:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TwobuyTinyFixes::TwobuyTinyFixes_WPanels() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#1 /wordpress/wp-includes/widgets.php(1051): apply_filters('sidebars_widget...', Array)
+#2 /wordpress/wp-includes/widgets.php(917): wp_get_sidebars_widgets()
+#3 /wordpress/wp-includes/widgets/class-wp-widget-recent-comments.php(34): is_active_widget(false, false, 'recent-comments')
+#4 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget_Recent_Comments->__construct()
+#5 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Recen...')
+#6 /wordpress/wp-includes/widgets.php(1853): register_widget('WP_Widget_Recen...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[18-Apr-2025 18:39:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:40:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:41:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:11 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 353
+[18-Apr-2025 18:42:11 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 362
+[18-Apr-2025 18:42:11 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 371
+[18-Apr-2025 18:42:21 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 353
+[18-Apr-2025 18:42:21 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 362
+[18-Apr-2025 18:42:21 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 371
+[18-Apr-2025 18:42:29 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 353
+[18-Apr-2025 18:42:29 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 362
+[18-Apr-2025 18:42:29 UTC] PHP Deprecated:  Required parameter $id follows optional parameter $times in /wordpress/wp-content/plugins/wc-previously-bought-product-notifier/includes/functions.php on line 371
+[18-Apr-2025 18:42:39 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:40 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:40 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:40 UTC] PHP Warning:  Undefined array key "a" in /wordpress/wp-content/plugins/weichuncai/sm-weichuncai.php on line 17
+[18-Apr-2025 18:42:48 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:49 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:49 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:50 UTC] PHP Warning:  Undefined array key "a" in /wordpress/wp-content/plugins/weichuncai/sm-weichuncai.php on line 17
+[18-Apr-2025 18:42:58 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:59 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:59 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 18:42:59 UTC] PHP Warning:  Undefined array key "a" in /wordpress/wp-content/plugins/weichuncai/sm-weichuncai.php on line 17
+[18-Apr-2025 18:44:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:44:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:44:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:44:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:44:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:44:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/woo-paylate/src/php/Main.php on line 51
+[18-Apr-2025 18:45:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-etiketter-fo...')
+#2 /internal/eval.php(20): activate_plugin('wp-etiketter-fo...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php on line 71
+[18-Apr-2025 18:45:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-etiketter-fo...')
+#2 /internal/eval.php(20): activate_plugin('wp-etiketter-fo...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php on line 71
+[18-Apr-2025 18:45:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php:71
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-etiketter-fo...')
+#2 /internal/eval.php(20): activate_plugin('wp-etiketter-fo...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-etiketter-for-bloggar/wp-etiketter-for-bloggar.php on line 71
+[18-Apr-2025 18:45:39 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:45:41 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:45:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
 #1 /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php(125): apply_filters('load_textdomain...', '/wordpress/wp-c...', 'flip-image-free')
@@ -17,9 +270,9 @@ Stack trace:
 #8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #9 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[17-Apr-2025 04:53:15 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:17 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[18-Apr-2025 18:45:49 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:45:51 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:45:51 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
 #1 /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php(125): apply_filters('load_textdomain...', '/wordpress/wp-c...', 'flip-image-free')
@@ -32,9 +285,9 @@ Stack trace:
 #8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #9 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[17-Apr-2025 04:53:26 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:28 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
-[17-Apr-2025 04:53:28 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
+[18-Apr-2025 18:45:59 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:46:02 UTC] PHP Warning:  Undefined array key "save_wp_flip_image_free" in /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php on line 833
+[18-Apr-2025 18:46:02 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "flip_images_pro_cglang" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters('/wordpress/wp-c...', Array)
 #1 /wordpress/wp-content/plugins/wp-flip-image-free/wp-flip-image-free.php(125): apply_filters('load_textdomain...', '/wordpress/wp-c...', 'flip-image-free')
@@ -73,7 +326,7 @@ Stack trace:
         httpStatusCode: 500,
         headers: {
           'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'set-cookie': [ 'PHPSESSID=4446e1a41ccd6935017d773111d388b7; path=/' ],
+          'set-cookie': [ 'PHPSESSID=aeaccfa006c2eb54c383d69a39240c7a; path=/' ],
           pragma: [ 'no-cache' ],
           'content-type': [ 'text/html; charset=UTF-8' ],
           expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
