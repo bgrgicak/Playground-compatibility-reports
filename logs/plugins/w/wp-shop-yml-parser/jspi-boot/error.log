@@ -2,89 +2,167 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [17-Apr-2025 03:30:08 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-jalali/lib/date.php on line 96
-[17-Apr-2025 03:30:15 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-jalali/lib/date.php on line 96
-[17-Apr-2025 03:30:22 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-jalali/lib/date.php on line 96
-[17-Apr-2025 03:31:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [18-Apr-2025 16:32:48 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:32:56 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:33:07 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:35:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_tm_tasks MODIFY COLUMN `id` INT auto_increment</p>
+<p>ALTER TABLE wp_wpdm_visitors ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpdm_visitors</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpdm_visitors</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpdm_visitors</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpdm_visitors</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpdm_visitors, updated_at, 8, CURRENT_TIMESTAMP, YES, timestamp, , , , , 0, , , timestamp, , on update CURRENT_TIMESTAMP, select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpdm_visitors</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpdm_visitors</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpdm_visitors</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpdm_visitors_68027f3bd9878` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_id` INTEGER,
+  `meta` TEXT COLLATE NOCASE,
+  `ip` TEXT COLLATE NOCASE,
+  `mode` TEXT COLLATE NOCASE,
+  `created_at` TEXT COLLATE NOCASE DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TEXT COLLATE NOCASE DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TEXT COLLATE NOCASE DEFAULT CURRENT_TIMESTAMP
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+SQLSTATE[HY000]: General error: 1 duplicate column name: updated_at
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(238): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(160): Updraft_Tasks_Activation::add_attempts_and_class_identifier()
-#3 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(65): Updraft_Tasks_Activation::check_updates()
-#4 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(86): Updraft_Tasks_Activation::install()
-#5 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(76): Updraft_Tasks_Activation::reinstall()
-#6 /wordpress/wp-content/plugins/wp-optimize/includes/class-wpo-activation.php(72): Updraft_Tasks_Activation::reinstall_if_needed()
-#7 /wordpress/wp-content/plugins/wp-optimize/includes/class-wpo-activation.php(32): WPO_Activation::init_batch_processing()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): WPO_Activation::actions(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-opt...', false)
-#12 /internal/eval.php(20): activate_plugin('wp-optimize/wp-...')
-#13 {main}</pre>
- for query ALTER TABLE wp_tm_tasks MODIFY COLUMN `id` INT auto_increment made by activate_plugin, do_action('activate_wp-optimize/wp-optimize.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPO_Activation::actions, WPO_Activation::init_batch_processing, Updraft_Tasks_Activation::reinstall_if_needed, Updraft_Tasks_Activation::reinstall, Updraft_Tasks_Activation::install, Updraft_Tasks_Activation::check_updates, Updraft_Tasks_Activation::add_attempts_and_class_identifier, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 03:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_tm_tasks MODIFY COLUMN `id` INT auto_increment</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(238): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(160): Updraft_Tasks_Activation::add_attempts_and_class_identifier()
-#3 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(65): Updraft_Tasks_Activation::check_updates()
-#4 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(86): Updraft_Tasks_Activation::install()
-#5 /wordpress/wp-content/plugins/wp-optimize/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php(76): Updraft_Tasks_Activation::reinstall()
-#6 /wordpress/wp-content/plugins/wp-optimize/includes/class-wpo-activation.php(72): Updraft_Tasks_Activation::reinstall_if_needed()
-#7 /wordpress/wp-content/plugins/wp-optimize/includes/class-wpo-activation.php(32): WPO_Activation::init_batch_processing()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): WPO_Activation::actions(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-opt...', false)
-#12 /internal/eval.php(20): activate_plugin('wp-optimize/wp-...')
-#13 {main}</pre>
- for query ALTER TABLE wp_tm_tasks MODIFY COLUMN `id` INT auto_increment made by activate_plugin, do_action('activate_wp-optimize/wp-optimize.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPO_Activation::actions, WPO_Activation::init_batch_processing, Updraft_Tasks_Activation::reinstall_if_needed, Updraft_Tasks_Activation::reinstall, Updraft_Tasks_Activation::install, Updraft_Tasks_Activation::check_updates, Updraft_Tasks_Activation::add_attempts_and_class_identifier, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 03:31:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php:586
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-dark-mode/includes/models/class-visitor.php(68): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): WP_Dark_Mode\Model\Visitor->init_db_table('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_wpdm_visitors ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Dark_Mode\Model\Visitor->init_db_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:36:04 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:36:13 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:36:21 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:36:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:36:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:36:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:36:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:36:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:36:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:36:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:36:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:36:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:36:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:37:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:37:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:37:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:37:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:37:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:37:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:37:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:37:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:37:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:37:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:37:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:37:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 819
+[18-Apr-2025 16:37:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 825
+[18-Apr-2025 16:37:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 831
+[18-Apr-2025 16:37:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 841
+[18-Apr-2025 16:37:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-htaccess-control/wp-htaccess-control.php on line 851
+[18-Apr-2025 16:37:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpsseo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:37:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-posts-most-r...')
-#2 /internal/eval.php(20): activate_plugin('wp-posts-most-r...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php on line 586
-[17-Apr-2025 03:31:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php:586
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPS_SEO_BOOSTER...')
+#2 /wordpress/wp-content/plugins/wp-social-seo-booster/includes/widgets/vcard-widget-business.php(15): register_widget('WPS_SEO_BOOSTER...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wps_seo_booster_business_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:37:26 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 101
+[18-Apr-2025 16:37:26 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 104
+[18-Apr-2025 16:37:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpsseo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:37:35 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-posts-most-r...')
-#2 /internal/eval.php(20): activate_plugin('wp-posts-most-r...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php on line 586
-[17-Apr-2025 03:32:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php:586
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPS_SEO_BOOSTER...')
+#2 /wordpress/wp-content/plugins/wp-social-seo-booster/includes/widgets/vcard-widget-business.php(15): register_widget('WPS_SEO_BOOSTER...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wps_seo_booster_business_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:37:35 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 101
+[18-Apr-2025 16:37:35 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 104
+[18-Apr-2025 16:37:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpsseo</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:37:44 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-posts-most-r...')
-#2 /internal/eval.php(20): activate_plugin('wp-posts-most-r...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-posts-most-read/PMRposts.php on line 586
-[17-Apr-2025 03:32:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPS_SEO_BOOSTER...')
+#2 /wordpress/wp-content/plugins/wp-social-seo-booster/includes/widgets/vcard-widget-business.php(15): register_widget('WPS_SEO_BOOSTER...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wps_seo_booster_business_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:37:44 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 101
+[18-Apr-2025 16:37:44 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/wp-social-seo-booster/includes/wps-seo-booster-ogp.php on line 104
+[18-Apr-2025 16:41:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
 Stack trace:
 #0 /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php(48): disableMagicQuotes()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -92,7 +170,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('wp-shop-yml-par...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php on line 31
-[17-Apr-2025 03:32:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
+[18-Apr-2025 16:41:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
 Stack trace:
 #0 /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php(48): disableMagicQuotes()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -100,7 +178,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('wp-shop-yml-par...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php on line 31
-[17-Apr-2025 03:32:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
+[18-Apr-2025 16:41:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php:31
 Stack trace:
 #0 /wordpress/wp-content/plugins/wp-shop-yml-parser/import-yml.php(48): disableMagicQuotes()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
