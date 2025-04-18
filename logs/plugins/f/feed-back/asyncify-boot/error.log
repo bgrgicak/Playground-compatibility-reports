@@ -2,7 +2,360 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [17-Apr-2025 04:00:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [18-Apr-2025 16:31:52 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:31:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `c`.`id` , `c`.`name` , `c`.`description` , `c`.`image` , NULL AS `dt` FROM `wp_product_categories` `c` , `wp_item_category_associations` `cp` , `wp_product_list` `p` WHERE `c`.`id` = `cp`.`category_id` AND `cp`.`product_id` = `p`.`id` AND `c`.`active` = 1 AND `p`.`active` = 1 GROUP BY `c`.`id` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT c.id,c.n...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT c.id,c.n...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT c.id,c.n...')
+#4 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(46): wpdb->get_results('SELECT c.id,c.n...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#9 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#10 {main}</pre>
+ for query SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:31:52 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:31:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `p`.`name` , `p`.`price` , `ci`.`image` , `p`.`id` FROM `wp_product_list` `p` LEFT JOIN `wp_product_images` `ci` ON `p`.`id` = `ci`.`product_id` WHERE `p`.`active` = 1 ORDER BY `p`.`date_added` DESC LIMIT 0 , 15 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_product_list
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT p.name,p...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT p.name,p...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.name,p...')
+#4 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(81): wpdb->get_results('SELECT p.name,p...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#9 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#10 {main}</pre>
+ for query SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15 made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:32:02 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:32:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT c.id,c.n...')
+#2 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(46): wpdb->get_results('SELECT c.id,c.n...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#7 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#8 {main}</pre>
+ for query SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:32:02 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:32:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_product_list.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.name,p...')
+#2 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(81): wpdb->get_results('SELECT p.name,p...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#7 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#8 {main}</pre>
+ for query SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15 made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:32:10 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:32:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT c.id,c.n...')
+#2 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(46): wpdb->get_results('SELECT c.id,c.n...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#7 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#8 {main}</pre>
+ for query SELECT c.id,c.name,c.description,c.image,
+		                               NULL AS dt 
+		                         FROM wp_product_categories c,
+		                              wp_item_category_associations cp,
+			                      wp_product_list p
+		                        WHERE c.id = cp.category_id
+		                          AND cp.product_id = p.id
+		                          AND c.active = 1
+		                          AND p.active = 1
+		                          
+		                     GROUP BY c.id made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:32:10 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:32:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_product_list.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.name,p...')
+#2 /wordpress/wp-content/plugins/floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php(81): wpdb->get_results('SELECT p.name,p...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ses_wpsc_generate_category_entries(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floatb...', false)
+#7 /internal/eval.php(20): activate_plugin('floatbar-for-in...')
+#8 {main}</pre>
+ for query SELECT p.name,p.price,ci.image,p.id
+		                         FROM  wp_product_list p
+							LEFT JOIN wp_product_images ci
+							       ON p.id = ci.product_id
+		                        WHERE p.active = 1
+		                          
+							ORDER BY p.`date_added` DESC 
+								LIMIT 0 , 15 made by activate_plugin, do_action('activate_floatbar-for-instinct-shopping-cart/wordpress_ecart_floatbar.php'), WP_Hook->do_action, WP_Hook->apply_filters, ses_wpsc_generate_category_entries, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Apr-2025 16:32:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('folksylistWidge...')
+#2 /wordpress/wp-content/plugins/folksy-product-listing-widget-and-shortcode/folksylisting.php(305): register_widget('folksylistWidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): folksylistWidgetInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:32:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('folksylistWidge...')
+#2 /wordpress/wp-content/plugins/folksy-product-listing-widget-and-shortcode/folksylisting.php(305): register_widget('folksylistWidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): folksylistWidgetInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:32:40 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('folksylistWidge...')
+#2 /wordpress/wp-content/plugins/folksy-product-listing-widget-and-shortcode/folksylisting.php(305): register_widget('folksylistWidge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): folksylistWidgetInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 16:32:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fontsampler</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:33:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fontsampler</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:33:12 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fontsampler</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 16:36:54 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Foursquare_Venu...')
@@ -20,7 +373,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[17-Apr-2025 04:01:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[18-Apr-2025 16:37:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Foursquare_Venu...')
@@ -38,7 +391,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[17-Apr-2025 04:01:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[18-Apr-2025 16:37:11 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Foursquare_Venu...')
@@ -56,10 +409,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[17-Apr-2025 04:03:00 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/faq-builder/functions.php on line 534
-[17-Apr-2025 04:03:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/faq-builder/functions.php on line 534
-[17-Apr-2025 04:03:16 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/faq-builder/functions.php on line 534
-[17-Apr-2025 04:04:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/feed-back/feed_back.php:14
+[18-Apr-2025 16:39:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/feed-back/feed_back.php:14
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): feed_back_install(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -68,7 +418,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('feed-back/feed_...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/feed-back/feed_back.php on line 14
-[17-Apr-2025 04:04:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/feed-back/feed_back.php:14
+[18-Apr-2025 16:39:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/feed-back/feed_back.php:14
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): feed_back_install(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
