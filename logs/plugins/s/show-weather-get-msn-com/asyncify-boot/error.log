@@ -2,304 +2,136 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [16-Apr-2025 15:30:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum("CORE", "PLUGIN", "THEME") NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set("UP_TO_DATE","OUTDATED","NOT_IN_DIRECTORY","UNKNOWN") NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum("UNKNOWN","OK","APPROVED_BY_USER","APPROVED_BY_CT","DENIED_BY_CT","MODIFIED","INFECTED","QUARANTINED", "DENIED_BY_CLOUD", "APPROVED_BY_CLOUD", "ERROR") NOT NULL DEFAULT "UNKNOWN",
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum("CRITICAL", "SUSPICIOUS", "NONE") NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NULL DEFAULT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` ENUM("DANGEROUS", "SAFE") NULL DEFAULT NULL,
-`pscan_processing_status` ENUM("NEW", "DONE", "ERROR", "IN_SCANER", "NEW_CLOUD", "IN_CLOUD", "IN_SANDBOX", "NEW_SANDBOX", "UNKNOWN") NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-UNIQUE KEY (`fast_hash`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(499): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum("CORE", "PLUGIN", "THEME") NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set("UP_TO_DATE","OUTDATED","NOT_IN_DIRECTORY","UNKNOWN") NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum("UNKNOWN","OK","APPROVED_BY_USER","APPROVED_BY_CT","DENIED_BY_CT","MODIFIED","INFECTED","QUARANTINED", "DENIED_BY_CLOUD", "APPROVED_BY_CLOUD", "ERROR") NOT NULL DEFAULT "UNKNOWN",
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum("CRITICAL", "SUSPICIOUS", "NONE") NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NULL DEFAULT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` ENUM("DANGEROUS", "SAFE") NULL DEFAULT NULL,
-`pscan_processing_status` ENUM("NEW", "DONE", "ERROR", "IN_SCANER", "NEW_CLOUD", "IN_CLOUD", "IN_SANDBOX", "NEW_SANDBOX", "UNKNOWN") NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-UNIQUE KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 15:30:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum("FILE","CODE_PHP","CODE_HTML","CODE_JS","WAF_RULE") NOT NULL,
-`attack_type` set("SQL_INJECTION","XSS","MALWARE","EXPLOIT","SUSPICIOUS") NOT NULL,
-`waf_action` enum("DENY","LOG","ALLOW") NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(499): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum("FILE","CODE_PHP","CODE_HTML","CODE_JS","WAF_RULE") NOT NULL,
-`attack_type` set("SQL_INJECTION","XSS","MALWARE","EXPLOIT","SUSPICIOUS") NOT NULL,
-`waf_action` enum("DENY","LOG","ALLOW") NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 15:30:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum("CORE", "PLUGIN", "THEME") NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set("UP_TO_DATE","OUTDATED","NOT_IN_DIRECTORY","UNKNOWN") NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum("UNKNOWN","OK","APPROVED_BY_USER","APPROVED_BY_CT","DENIED_BY_CT","MODIFIED","INFECTED","QUARANTINED", "DENIED_BY_CLOUD", "APPROVED_BY_CLOUD", "ERROR") NOT NULL DEFAULT "UNKNOWN",
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum("CRITICAL", "SUSPICIOUS", "NONE") NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NULL DEFAULT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` ENUM("DANGEROUS", "SAFE") NULL DEFAULT NULL,
-`pscan_processing_status` ENUM("NEW", "DONE", "ERROR", "IN_SCANER", "NEW_CLOUD", "IN_CLOUD", "IN_SANDBOX", "NEW_SANDBOX", "UNKNOWN") NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-UNIQUE KEY (`fast_hash`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(499): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum("CORE", "PLUGIN", "THEME") NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set("UP_TO_DATE","OUTDATED","NOT_IN_DIRECTORY","UNKNOWN") NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum("UNKNOWN","OK","APPROVED_BY_USER","APPROVED_BY_CT","DENIED_BY_CT","MODIFIED","INFECTED","QUARANTINED", "DENIED_BY_CLOUD", "APPROVED_BY_CLOUD", "ERROR") NOT NULL DEFAULT "UNKNOWN",
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum("CRITICAL", "SUSPICIOUS", "NONE") NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NULL DEFAULT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` ENUM("DANGEROUS", "SAFE") NULL DEFAULT NULL,
-`pscan_processing_status` ENUM("NEW", "DONE", "ERROR", "IN_SCANER", "NEW_CLOUD", "IN_CLOUD", "IN_SANDBOX", "NEW_SANDBOX", "UNKNOWN") NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-UNIQUE KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 15:30:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum("FILE","CODE_PHP","CODE_HTML","CODE_JS","WAF_RULE") NOT NULL,
-`attack_type` set("SQL_INJECTION","XSS","MALWARE","EXPLOIT","SUSPICIOUS") NOT NULL,
-`waf_action` enum("DENY","LOG","ALLOW") NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(499): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum("FILE","CODE_PHP","CODE_HTML","CODE_JS","WAF_RULE") NOT NULL,
-`attack_type` set("SQL_INJECTION","XSS","MALWARE","EXPLOIT","SUSPICIOUS") NOT NULL,
-`waf_action` enum("DENY","LOG","ALLOW") NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[16-Apr-2025 15:30:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php:198
+Error: [18-Apr-2025 03:56:30 UTC] PHP Deprecated:  Required parameter $showcounts follows optional parameter $limit in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 91
+[18-Apr-2025 03:56:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php:121
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sharelock4wp/sh...')
-#2 /internal/eval.php(20): activate_plugin('sharelock4wp/sh...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php on line 198
-[16-Apr-2025 15:31:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php:198
+#0 /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/statcomm.php(18): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('statpress-commu...')
+#3 /internal/eval.php(20): activate_plugin('statpress-commu...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 121
+[18-Apr-2025 03:56:39 UTC] PHP Deprecated:  Required parameter $showcounts follows optional parameter $limit in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 91
+[18-Apr-2025 03:56:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php:121
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sharelock4wp/sh...')
-#2 /internal/eval.php(20): activate_plugin('sharelock4wp/sh...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php on line 198
-[16-Apr-2025 15:31:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php:198
+#0 /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/statcomm.php(18): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('statpress-commu...')
+#3 /internal/eval.php(20): activate_plugin('statpress-commu...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 121
+[18-Apr-2025 03:56:48 UTC] PHP Deprecated:  Required parameter $showcounts follows optional parameter $limit in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 91
+[18-Apr-2025 03:56:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php:121
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sharelock4wp/sh...')
-#2 /internal/eval.php(20): activate_plugin('sharelock4wp/sh...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/sharelock4wp/sharelk4wp.php on line 198
-[16-Apr-2025 15:32:44 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:32:45 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:32:53 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:32:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:33:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:33:04 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/social-bookmarking-made-easy/plugin.php on line 23
-[16-Apr-2025 15:33:13 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:33:14 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:33:21 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:33:22 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:33:31 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:33:32 UTC] PHP Warning:  The magic method Speed_Bumps::__wakeup() must have public visibility in /wordpress/wp-content/plugins/speed-bumps/speed-bumps.php on line 38
-[16-Apr-2025 15:35:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/statcomm.php(18): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('statpress-commu...')
+#3 /internal/eval.php(20): activate_plugin('statpress-commu...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/statpress-community-formerly-statcomm/classes/widget_toppost.php on line 121
+[18-Apr-2025 03:57:27 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:57:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php' (include_path='.:') in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php:53
+Stack trace:
+#0 /wordpress/wp-content/plugins/super-rollback/includes/freemius/start.php(514): require_once()
+#1 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(8): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(25): swpf()
+#3 /wordpress/wp-content/plugins/super-rollback/super-rollback.php(22): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('super-rollback/...')
+#6 /internal/eval.php(20): activate_plugin('super-rollback/...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:57:35 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:57:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php' (include_path='.:') in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php:53
+Stack trace:
+#0 /wordpress/wp-content/plugins/super-rollback/includes/freemius/start.php(514): require_once()
+#1 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(8): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(25): swpf()
+#3 /wordpress/wp-content/plugins/super-rollback/super-rollback.php(22): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('super-rollback/...')
+#6 /internal/eval.php(20): activate_plugin('super-rollback/...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:57:44 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:57:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/super-rollback/includes/freemius/includes/managers/class-fs-debug-manager.php' (include_path='.:') in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php:53
+Stack trace:
+#0 /wordpress/wp-content/plugins/super-rollback/includes/freemius/start.php(514): require_once()
+#1 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(8): require_once('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/super-rollback/includes/functions.php(25): swpf()
+#3 /wordpress/wp-content/plugins/super-rollback/super-rollback.php(22): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('super-rollback/...')
+#6 /internal/eval.php(20): activate_plugin('super-rollback/...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/super-rollback/includes/freemius/require.php on line 53
+[18-Apr-2025 03:59:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 03:59:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 03:59:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[18-Apr-2025 04:02:05 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:06 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:06 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:14 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:15 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:15 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:15 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:23 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:24 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:24 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:02:24 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[18-Apr-2025 04:04:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wqn_weather_Wid...')
@@ -317,7 +149,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[16-Apr-2025 15:35:12 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[18-Apr-2025 04:04:21 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wqn_weather_Wid...')
