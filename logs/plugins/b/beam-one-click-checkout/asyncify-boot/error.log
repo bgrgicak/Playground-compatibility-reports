@@ -2,56 +2,82 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [18-Apr-2025 05:50:31 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:50:32 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:50:40 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:50:41 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:50:48 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:50:50 UTC] PHP Warning:  file_get_contents(/wordpress/wp-content/plugins/woocommerce/woocommerce.php): Failed to open stream: No such file or directory in /wordpress/wp-includes/functions.php on line 6900
-[18-Apr-2025 05:51:00 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Banners::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+Error: [19-Apr-2025 14:24:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE UNIQUE I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE UNIQUE I...')
+#3 /wordpress/wp-content/plugins/build-app-online/includes/class-build-app-online-activator.php(59): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#4 /wordpress/wp-content/plugins/build-app-online/build-app-online.php(47): Build_App_Online_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_build_app_online(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_build-...', false)
+#9 /internal/eval.php(20): activate_plugin('build-app-onlin...')
+#10 {main}</pre>
+ for query CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id) made by activate_plugin, do_action('activate_build-app-online/build-app-online.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_build_app_online, Build_App_Online_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 14:24:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: UNIQUE INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/build-app-online/includes/class-build-app-online-activator.php(59): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#2 /wordpress/wp-content/plugins/build-app-online/build-app-online.php(47): Build_App_Online_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_build_app_online(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Apr-2025 05:51:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Banners::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_build-...', false)
+#7 /internal/eval.php(20): activate_plugin('build-app-onlin...')
+#8 {main}</pre>
+ for query CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id) made by activate_plugin, do_action('activate_build-app-online/build-app-online.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_build_app_online, Build_App_Online_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 14:24:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: UNIQUE INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/build-app-online/includes/class-build-app-online-activator.php(59): WP_SQLite_DB->query('CREATE UNIQUE I...')
+#2 /wordpress/wp-content/plugins/build-app-online/build-app-online.php(47): Build_App_Online_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_build_app_online(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Apr-2025 05:51:19 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Banners::register() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[18-Apr-2025 05:52:35 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/beam-one-click-checkout/includes/checkout-button.php on line 132
-[18-Apr-2025 05:52:42 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/beam-one-click-checkout/includes/checkout-button.php on line 132
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_build-...', false)
+#7 /internal/eval.php(20): activate_plugin('build-app-onlin...')
+#8 {main}</pre>
+ for query CREATE UNIQUE INDEX index_name ON wp_mstoreapp_wishlist(customer_id, product_id) made by activate_plugin, do_action('activate_build-app-online/build-app-online.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_build_app_online, Build_App_Online_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 14:27:07 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/beam-one-click-checkout/includes/checkout-button.php on line 132
+[19-Apr-2025 14:27:16 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/beam-one-click-checkout/includes/checkout-button.php on line 132
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
