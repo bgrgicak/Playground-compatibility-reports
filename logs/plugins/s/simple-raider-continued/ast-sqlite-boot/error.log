@@ -2,30 +2,173 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [17-Apr-2025 12:48:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:48:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:48:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:48:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:48:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:48:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 31
-[17-Apr-2025 12:48:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/shopper-approved-reviews/shopperapproved.php on line 32
-[17-Apr-2025 12:49:13 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/show-environment-in-editor/show-environment-in-editor.php on line 39
-[17-Apr-2025 12:49:21 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/show-environment-in-editor/show-environment-in-editor.php on line 39
-[17-Apr-2025 12:49:29 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/show-environment-in-editor/show-environment-in-editor.php on line 39
-[17-Apr-2025 12:49:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[17-Apr-2025 12:49:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[17-Apr-2025 12:49:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[17-Apr-2025 12:50:36 UTC] PHP Notice:  Undefined index: QUERY_STRING in /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSession.php on line 110
-[17-Apr-2025 12:50:36 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSession.php on line 168
-[17-Apr-2025 12:50:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [19-Apr-2025 01:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES (NULL, 'JV361RGT9EUO604JSI831CUDTHG2R72R6593FSCD', NULL, 'noUserAgent', '2025-04-17 12:50:36', 'a:0:{}')</p>
+<p>
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n    CREATE TRI...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n    CREATE TRI...')
+#3 /wordpress/wp-content/plugins/secure-signups/function.php(140): WP_SQLite_DB->query('\n    CREATE TRI...')
+#4 /wordpress/wp-content/plugins/secure-signups/function.php(118): secure_signups_create_trigger()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): secure_signups_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_secure...', false)
+#9 /internal/eval.php(20): activate_plugin('secure-signups/...')
+#10 {main}</pre>
+ for query 
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END; made by activate_plugin, do_action('activate_secure-signups/function.php'), WP_Hook->do_action, WP_Hook->apply_filters, secure_signups_install, secure_signups_create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 01:51:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/secure-signups/function.php(140): WP_SQLite_DB->query('\n    CREATE TRI...')
+#2 /wordpress/wp-content/plugins/secure-signups/function.php(118): secure_signups_create_trigger()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): secure_signups_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_secure...', false)
+#7 /internal/eval.php(20): activate_plugin('secure-signups/...')
+#8 {main}</pre>
+ for query 
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END; made by activate_plugin, do_action('activate_secure-signups/function.php'), WP_Hook->do_action, WP_Hook->apply_filters, secure_signups_install, secure_signups_create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 01:51:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/secure-signups/function.php(140): WP_SQLite_DB->query('\n    CREATE TRI...')
+#2 /wordpress/wp-content/plugins/secure-signups/function.php(118): secure_signups_create_trigger()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): secure_signups_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_secure...', false)
+#7 /internal/eval.php(20): activate_plugin('secure-signups/...')
+#8 {main}</pre>
+ for query 
+    CREATE TRIGGER secure_signups_limit_insert_trigger
+    BEFORE INSERT ON wp_secure_signups_list_of_domains
+    FOR EACH ROW
+    BEGIN
+        DECLARE row_count INT;
+        SELECT COUNT(*) INTO row_count FROM wp_secure_signups_list_of_domains;
+        IF row_count >= 10 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot insert more than 10 rows into wp_secure_signups_list_of_domains';
+        END IF;
+    END; made by activate_plugin, do_action('activate_secure-signups/function.php'), WP_Hook->do_action, WP_Hook->apply_filters, secure_signups_install, secure_signups_create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 01:51:20 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 46
+[19-Apr-2025 01:51:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-rotator-for...')
+#2 /internal/eval.php(20): activate_plugin('seo-rotator-for...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 47
+[19-Apr-2025 01:51:28 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 46
+[19-Apr-2025 01:51:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-rotator-for...')
+#2 /internal/eval.php(20): activate_plugin('seo-rotator-for...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 47
+[19-Apr-2025 01:51:35 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 46
+[19-Apr-2025 01:51:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('seo-rotator-for...')
+#2 /internal/eval.php(20): activate_plugin('seo-rotator-for...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/seo-rotator-for-images/wp-seo.php on line 47
+[19-Apr-2025 01:53:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-Apr-2025 01:53:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-Apr-2025 01:53:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sidebar-menu-items</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[19-Apr-2025 01:54:10 UTC] PHP Notice:  Undefined index: QUERY_STRING in /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSession.php on line 110
+[19-Apr-2025 01:54:10 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSession.php on line 168
+[19-Apr-2025 01:54:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES (NULL, 'VBGO2CGJT2DK6VQ58H43H3V8MV6P4WSSDEP3X6R1', NULL, 'noUserAgent', '2025-04-19 01:54:10', 'a:0:{}')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -37,7 +180,7 @@ Error: [17-Apr-2025 12:48:25 UTC] PHP Warning:  Trying to access array offset on
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_simpleecommcart_sessions</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6` FROM (VALUES ( NULL , 'JV361RGT9EUO604JSI831CUDTHG2R72R6593FSCD' , NULL , 'noUserAgent' , '2025-04-17 12:50:36' , 'a:0:{}' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6` FROM (VALUES ( NULL , 'VBGO2CGJT2DK6VQ58H43H3V8MV6P4WSSDEP3X6R1' , NULL , 'noUserAgent' , '2025-04-19 01:54:10' , 'a:0:{}' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -67,8 +210,8 @@ SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: 
 #19 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #20 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #21 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES (NULL, 'JV361RGT9EUO604JSI831CUDTHG2R72R6593FSCD', NULL, 'noUserAgent', '2025-04-17 12:50:36', 'a:0:{}') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->init, SimpleEcommCart->initCart, SimpleEcommCartSession::get, SimpleEcommCartSession::_init, SimpleEcommCartSession::_start, SimpleEcommCartSession::_loadSession, SimpleEcommCartSession::_newSession, SimpleEcommCartSession::_save, SimpleEcommCartSession::_insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_simpleecommcart_sessions` (`id`, `session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES (NULL, 'VBGO2CGJT2DK6VQ58H43H3V8MV6P4WSSDEP3X6R1', NULL, 'noUserAgent', '2025-04-19 01:54:10', 'a:0:{}') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->init, SimpleEcommCart->initCart, SimpleEcommCartSession::get, SimpleEcommCartSession::_init, SimpleEcommCartSession::_start, SimpleEcommCartSession::_loadSession, SimpleEcommCartSession::_newSession, SimpleEcommCartSession::_save, SimpleEcommCartSession::_insert, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>create table if not exists `wp_simpleecommcart_products` (
@@ -225,7 +368,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
   `product_image_path` text NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -260,7 +403,7 @@ create table if not exists `wp_simpleecommcart_product_categories` (
   `description` text,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -297,7 +440,7 @@ create table if not exists `wp_simpleecommcart_downloads` (
   `ip` varchar(50) not null,
   primary key(`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -358,7 +501,7 @@ create table if not exists `wp_simpleecommcart_promotions` (
   `optional_option1_value` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -399,7 +542,7 @@ create table if not exists `wp_simpleecommcart_shipping_methods` (
   `code` varchar(50) not null,
   primary key(`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -438,7 +581,7 @@ create table if not exists `wp_simpleecommcart_shipping_rates` (
   `shipping_bundle_rate` decimal(8,2) not null,
   primary key(`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -475,7 +618,7 @@ create table if not exists `wp_simpleecommcart_shipping_rules` (
   `shipping_cost` decimal(8,2),
   primary key(`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -520,7 +663,7 @@ create table if not exists `wp_simpleecommcart_tax_rates` (
   `country` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -553,7 +696,7 @@ create table if not exists `wp_simpleecommcart_cart_settings` (
   `value` text not null,
   primary key(`key`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -654,7 +797,7 @@ create table if not exists `wp_simpleecommcart_orders` (
   `payment_status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -703,7 +846,7 @@ create table if not exists `wp_simpleecommcart_order_items` (
   `form_entry_ids` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -740,7 +883,7 @@ create table if not exists `wp_simpleecommcart_inventory` (
   `quantity` int(10) unsigned NOT NULL,
   PRIMARY KEY (`ikey`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -783,7 +926,7 @@ create table if not exists`wp_simpleecommcart_sessions` (
   unique key `sid` (`session_id`),
   primary key (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -820,7 +963,7 @@ create table if not exists`wp_simpleecommcart_shipping_table_rate` (
   `international_shipping_price` decimal(8,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -855,7 +998,7 @@ create table if not exists`wp_simpleecommcart_shipping_variation` (
   `additional_price` decimal(8,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>
@@ -892,7 +1035,7 @@ create table if not exists`wp_simpleecommcart_shipping_weight_rate` (
   `international_shipping_price` decimal(8,2) NOT NULL,
   PRIMARY KEY (`id`)
 ); made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'version'</p>
@@ -919,7 +1062,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'version' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('version', '3.1.2')</p>
@@ -947,7 +1090,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('version', '3.1.2') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'track_inventory'</p>
@@ -974,7 +1117,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'track_inventory' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('track_inventory', '1')</p>
@@ -1002,7 +1145,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('track_inventory', '1') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'webservice_iphone_api_key'</p>
@@ -1029,7 +1172,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'webservice_iphone_api_key' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'webservice_iphone_api_key'</p>
@@ -1056,7 +1199,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'webservice_iphone_api_key' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('webservice_iphone_api_key', 'wsiak123456')</p>
@@ -1084,7 +1227,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('webservice_iphone_api_key', 'wsiak123456') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'product_folder'</p>
@@ -1111,7 +1254,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'product_folder' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('product_folder', '/wordpress/wp-content/uploads/simpleecommcart/digitalproduct/')</p>
@@ -1139,7 +1282,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('product_folder', '/wordpress/wp-content/uploads/simpleecommcart/digitalproduct/') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'tmp_folder'</p>
@@ -1166,7 +1309,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'tmp_folder' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('tmp_folder', '/wordpress/wp-content/uploads/simpleecommcart/tmp/')</p>
@@ -1194,7 +1337,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('tmp_folder', '/wordpress/wp-content/uploads/simpleecommcart/tmp/') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'out_of_stock_notification'</p>
@@ -1221,7 +1364,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'out_of_stock_notification' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('out_of_stock_notification', '1')</p>
@@ -1249,7 +1392,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('out_of_stock_notification', '1') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'out_of_stock_threshhold'</p>
@@ -1276,7 +1419,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'out_of_stock_threshhold' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'low_stock_notification'</p>
@@ -1303,7 +1446,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'low_stock_notification' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'order_number'</p>
@@ -1330,7 +1473,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'order_number' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('order_number', '0000000')</p>
@@ -1358,7 +1501,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('order_number', '0000000') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'home_country'</p>
@@ -1385,7 +1528,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'home_country' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'home_country'</p>
@@ -1412,7 +1555,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'home_country' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('home_country', 'US~United States')</p>
@@ -1440,7 +1583,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('home_country', 'US~United States') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'store_type'</p>
@@ -1467,7 +1610,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'store_type' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'store_type'</p>
@@ -1494,7 +1637,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'store_type' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('store_type', 'mixed')</p>
@@ -1522,7 +1665,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('store_type', 'mixed') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'display_products'</p>
@@ -1549,7 +1692,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'display_products' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'display_products'</p>
@@ -1576,7 +1719,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'display_products' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('display_products', 'list')</p>
@@ -1604,7 +1747,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('display_products', 'list') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'delivery_status_options'</p>
@@ -1631,7 +1774,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'delivery_status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'delivery_status_options'</p>
@@ -1658,7 +1801,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #10 {main}</pre>
  for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'delivery_status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('delivery_status_options', 'Pending,Shipped,Complete')</p>
@@ -1686,7 +1829,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
 #11 {main}</pre>
  for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('delivery_status_options', 'Pending,Shipped,Complete') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[19-Apr-2025 01:54:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'status_options'</p>
@@ -1698,814 +1841,4 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(99): SimpleEcommCartSetting::getValue('status_options')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'status_options'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: status_options</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(100): SimpleEcommCartSetting::setValue('status_options', 'Pending,Complet...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('status_options', 'Pending,Complete')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: status_options, Pending,Complete</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(100): SimpleEcommCartSetting::setValue('status_options', 'Pending,Complet...')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('status_options', 'Pending,Complete') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'payment_status_options'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: payment_status_options</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(101): SimpleEcommCartSetting::getValue('payment_status_...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'payment_status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'payment_status_options'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: payment_status_options</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(102): SimpleEcommCartSetting::setValue('payment_status_...', 'Pending,Complet...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'payment_status_options' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('payment_status_options', 'Pending,Complete,Refund')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: payment_status_options, Pending,Complete,Refund</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(102): SimpleEcommCartSetting::setValue('payment_status_...', 'Pending,Complet...')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('payment_status_options', 'Pending,Complete,Refund') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'terms_and_condition'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: terms_and_condition</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(104): SimpleEcommCartSetting::getValue('terms_and_condi...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'terms_and_condition' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'terms_and_condition'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: terms_and_condition</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(105): SimpleEcommCartSetting::setValue('terms_and_condi...', 'no')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'terms_and_condition' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('terms_and_condition', 'no')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: terms_and_condition, no</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(105): SimpleEcommCartSetting::setValue('terms_and_condi...', 'no')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('terms_and_condition', 'no') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'disable_caching'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: disable_caching</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(107): SimpleEcommCartSetting::getValue('disable_caching')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'disable_caching' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'disable_caching'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: disable_caching</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(108): SimpleEcommCartSetting::setValue('disable_caching', '0')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'disable_caching' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_radio'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: shipping_options_radio</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(111): SimpleEcommCartSetting::getValue('shipping_option...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_radio' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_radio'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: shipping_options_radio</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(112): SimpleEcommCartSetting::setValue('shipping_option...', '1')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_radio' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('shipping_options_radio', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: shipping_options_radio, 1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(112): SimpleEcommCartSetting::setValue('shipping_option...', '1')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('shipping_options_radio', '1') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_flat_rate_option'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: shipping_options_flat_rate_option</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(114): SimpleEcommCartSetting::getValue('shipping_option...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_flat_rate_option' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_flat_rate_option'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: shipping_options_flat_rate_option</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(115): SimpleEcommCartSetting::setValue('shipping_option...', '1')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'shipping_options_flat_rate_option' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('shipping_options_flat_rate_option', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: shipping_options_flat_rate_option, 1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(115): SimpleEcommCartSetting::setValue('shipping_option...', '1')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('shipping_options_flat_rate_option', '1') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'tax_settings'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: tax_settings</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(122): SimpleEcommCartSetting::getValue('tax_settings')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'tax_settings' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'tax_settings'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: tax_settings</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(123): SimpleEcommCartSetting::setValue('tax_settings', 'a:3:{s:6:"optio...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'tax_settings' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('tax_settings', 'a:3:{s:6:\"option\";s:1:\"1\";s:9:\"flat_rate\";s:0:\"\";s:5:\"logic\";s:1:\"2\";}')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: tax_settings, a:3:{s:6:&quot;option&quot;;s:1:&quot;1&quot;;s:9:&quot;flat_rate&quot;;s:0:&quot;&quot;;s:5:&quot;logic&quot;;s:1:&quot;2&quot;;}</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(123): SimpleEcommCartSetting::setValue('tax_settings', 'a:3:{s:6:"optio...')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('tax_settings', 'a:3:{s:6:\"option\";s:1:\"1\";s:9:\"flat_rate\";s:0:\"\";s:5:\"logic\";s:1:\"2\";}') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_from_name'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_from_name</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(126): SimpleEcommCartSetting::getValue('email_from_name')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_from_name' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_from_name'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_from_name</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(127): SimpleEcommCartSetting::setValue('email_from_name', 'My WordPress We...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_from_name' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_from_name', 'My WordPress Website')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: email_from_name, My WordPress Website</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(127): SimpleEcommCartSetting::setValue('email_from_name', 'My WordPress We...')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_from_name', 'My WordPress Website') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_from_address'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_from_address</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(128): SimpleEcommCartSetting::getValue('email_from_addr...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_from_address' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_from_address'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_from_address</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(129): SimpleEcommCartSetting::setValue('email_from_addr...', 'admin@localhost...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_from_address' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_from_address', 'admin@localhost.com')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: email_from_address, admin@localhost.com</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(129): SimpleEcommCartSetting::setValue('email_from_addr...', 'admin@localhost...')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_from_address', 'admin@localhost.com') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_sent_on_purchase</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(131): SimpleEcommCartSetting::getValue('email_sent_on_p...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `key` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_sent_on_purchase</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `key` fr...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(9): wpdb->get_var('SELECT `key` fr...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(132): SimpleEcommCartSetting::setValue('email_sent_on_p...', 'on')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `key` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_sent_on_purchase', 'on')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES (:param0 , :param1 ) | parameters: email_sent_on_purchase, on</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_simpleecommc...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(27): wpdb->insert('wp_simpleecommc...', Array, Array)
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(132): SimpleEcommCartSetting::setValue('email_sent_on_p...', 'on')
-#5 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#10 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#11 {main}</pre>
- for query INSERT INTO `wp_simpleecommcart_cart_settings` (`key`, `value`) VALUES ('email_sent_on_purchase', 'on') made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::setValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase_subject'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `value` from wp_simpleecommcart_cart_settings where `key`= :param0  | parameters: email_sent_on_purchase_subject</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_simpleecommcart_cart_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT `value` ...')
-#2 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCartSetting.php(38): wpdb->get_var('SELECT `value` ...')
-#3 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(133): SimpleEcommCartSetting::getValue('email_sent_on_p...')
-#4 /wordpress/wp-content/plugins/simple-e-commerce-shopping-cart/models/SimpleEcommCart.php(20): SimpleEcommCart->installDefaultSettings()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): SimpleEcommCart->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#9 /internal/eval.php(20): activate_plugin('simple-e-commer...')
-#10 {main}</pre>
- for query SELECT `value` from wp_simpleecommcart_cart_settings where `key`= 'email_sent_on_purchase_subject' made by activate_plugin, do_action('activate_simple-e-commerce-shopping-cart/simpleecommcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, SimpleEcommCart->install, SimpleEcommCart->installDefaultSettings, SimpleEcommCartSetting::getValue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[17-Apr-2025 12:50:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT `key` 
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[H
