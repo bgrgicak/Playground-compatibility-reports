@@ -2,20 +2,62 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [19-Apr-2025 23:46:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:47:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:47:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:47:28 UTC] PHP Notice:  Function WP_Scripts::localize was called <strong>incorrectly</strong>. The <code>$l10n</code> parameter must be an array. To pass arbitrary data to scripts, use the <code>wp_add_inline_script()</code> function instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:47:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [21-Apr-2025 01:56:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_xloc_locations (
-    id int(11) NOT NULL AUTO_INCREMENT,
-    post_id bigint(20) NOT NULL,
-    latitude float(10,6) NOT NULL,
-    longitude float(10,6) NOT NULL,
-    PRIMARY KEY id (id)
-    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_order_items</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_woocommerce_order_items</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_order_items</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Information_Schema_Builder::get_value(): Argument #1 ($node) must be of type WP_Parser_Node, null given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 549
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Infor...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/x-config-cim-starter-edition/X-Config-CIM-SE.php(247): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): xwpp_expand_db_order_items(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_x-conf...', false)
+#8 /internal/eval.php(20): activate_plugin('x-config-cim-st...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	); made by activate_plugin, do_action('activate_x-config-cim-starter-edition/X-Config-CIM-SE.php'), WP_Hook->do_action, WP_Hook->apply_filters, xwpp_expand_db_order_items, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 01:57:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -23,36 +65,38 @@ Error: [19-Apr-2025 23:46:58 UTC] PHP Notice:  Function _load_textdomain_just_in
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: xconfigdesc.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/xlocate/includes/xlocate-init.php(53): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): xlocate_Init::xloc_activate_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_xlocat...', false)
-#7 /internal/eval.php(20): activate_plugin('xlocate/xlocate...')
-#8 {main}</pre>
- for query CREATE TABLE wp_xloc_locations (
-    id int(11) NOT NULL AUTO_INCREMENT,
-    post_id bigint(20) NOT NULL,
-    latitude float(10,6) NOT NULL,
-    longitude float(10,6) NOT NULL,
-    PRIMARY KEY id (id)
-    ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_xlocate/xlocate.php'), WP_Hook->do_action, WP_Hook->apply_filters, xlocate_Init::xloc_activate_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-Apr-2025 23:47:39 UTC] PHP Notice:  Function WP_Scripts::localize was called <strong>incorrectly</strong>. The <code>$l10n</code> parameter must be an array. To pass arbitrary data to scripts, use the <code>wp_add_inline_script()</code> function instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:47:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/x-config-cim-starter-edition/X-Config-CIM-SE.php(247): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): xwpp_expand_db_order_items(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_x-conf...', false)
+#6 /internal/eval.php(20): activate_plugin('x-config-cim-st...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	); made by activate_plugin, do_action('activate_x-config-cim-starter-edition/X-Config-CIM-SE.php'), WP_Hook->do_action, WP_Hook->apply_filters, xwpp_expand_db_order_items, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 01:57:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_xloc_locations (
-    id int(11) NOT NULL AUTO_INCREMENT,
-    post_id bigint(20) NOT NULL,
-    latitude float(10,6) NOT NULL,
-    longitude float(10,6) NOT NULL,
-    PRIMARY KEY id (id)
-    ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -60,36 +104,99 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: xconfigdesc.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/xlocate/includes/xlocate-init.php(53): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): xlocate_Init::xloc_activate_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_xlocat...', false)
-#7 /internal/eval.php(20): activate_plugin('xlocate/xlocate...')
-#8 {main}</pre>
- for query CREATE TABLE wp_xloc_locations (
-    id int(11) NOT NULL AUTO_INCREMENT,
-    post_id bigint(20) NOT NULL,
-    latitude float(10,6) NOT NULL,
-    longitude float(10,6) NOT NULL,
-    PRIMARY KEY id (id)
-    ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_xlocate/xlocate.php'), WP_Hook->do_action, WP_Hook->apply_filters, xlocate_Init::xloc_activate_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[19-Apr-2025 23:47:48 UTC] PHP Notice:  Function WP_Scripts::localize was called <strong>incorrectly</strong>. The <code>$l10n</code> parameter must be an array. To pass arbitrary data to scripts, use the <code>wp_add_inline_script()</code> function instead. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[19-Apr-2025 23:48:25 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
-[19-Apr-2025 23:48:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
+#1 /wordpress/wp-content/plugins/x-config-cim-starter-edition/X-Config-CIM-SE.php(247): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): xwpp_expand_db_order_items(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_x-conf...', false)
+#6 /internal/eval.php(20): activate_plugin('x-config-cim-st...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_woocommerce_order_items ADD COLUMN ( 
+		xconfigdesc varchar(2048) NULL, 
+		xconfigflag int(2) NULL,
+		xconfigurl varchar(2048) NULL,
+		xconfigprice varchar(2048) NULL,
+		xconfigattr1 varchar(2048) NULL, 
+		xconfigattr2 varchar(2048) NULL, 
+		xconfigattr3 varchar(2048) NULL
+	); made by activate_plugin, do_action('activate_x-config-cim-starter-edition/X-Config-CIM-SE.php'), WP_Hook->do_action, WP_Hook->apply_filters, xwpp_expand_db_order_items, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 01:59:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php:319
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xbooster-advanc...')
+#2 /internal/eval.php(20): activate_plugin('xbooster-advanc...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php on line 319
+[21-Apr-2025 02:00:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php:319
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xbooster-advanc...')
+#2 /internal/eval.php(20): activate_plugin('xbooster-advanc...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php on line 319
+[21-Apr-2025 02:00:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php:319
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xbooster-advanc...')
+#2 /internal/eval.php(20): activate_plugin('xbooster-advanc...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xbooster-advanced-text-widget/xbooster_advanced_text_widget.php on line 319
+[21-Apr-2025 02:00:22 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:22 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:31 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:31 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:40 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:40 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:00:49 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:00:49 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:00:58 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:00:58 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:01:07 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:01:07 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[21-Apr-2025 02:03:49 UTC] PHP Warning:  Undefined variable $wp_db_version in /wordpress/wp-admin/upgrade.php on line 90
+[21-Apr-2025 02:03:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:03:59 UTC] PHP Warning:  Undefined variable $wp_db_version in /wordpress/wp-admin/upgrade.php on line 90
+[21-Apr-2025 02:04:00 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:04:10 UTC] PHP Warning:  Undefined variable $wp_db_version in /wordpress/wp-admin/upgrade.php on line 90
+[21-Apr-2025 02:04:11 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:04:41 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:41 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:41 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:04:42 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:42 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:42 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:04:51 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:51 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:51 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:04:52 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:52 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:04:52 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:05:01 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:05:01 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:05:01 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:05:02 UTC] PHP Deprecated:  Required parameter $msgid follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:05:02 UTC] PHP Deprecated:  Required parameter $curlang follows optional parameter $content in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1628
+[21-Apr-2025 02:05:02 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $context in /wordpress/wp-content/plugins/xili-dictionary/xili-dictionary.php on line 1797
+[21-Apr-2025 02:05:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:05:52 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:06:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>xlfly</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 02:06:11 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/xlanguage/xlanguage.php on line 1394
+[21-Apr-2025 02:06:19 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/xlanguage/xlanguage.php on line 1394
+[21-Apr-2025 02:06:28 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/xlanguage/xlanguage.php on line 1394
+[21-Apr-2025 02:07:25 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[21-Apr-2025 02:07:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml-and-csv-imp...')
 #2 /internal/eval.php(20): activate_plugin('xml-and-csv-imp...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
-[19-Apr-2025 23:48:32 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
-[19-Apr-2025 23:48:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
+[21-Apr-2025 02:07:30 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[21-Apr-2025 02:07:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml-and-csv-imp...')
