@@ -2,227 +2,125 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [20-Apr-2025 03:32:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [21-Apr-2025 16:54:56 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>s3slider</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 16:55:05 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>s3slider</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 16:55:14 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>s3slider</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[21-Apr-2025 16:56:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_shinobi_options ( 
-		ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		option_name varchar(191) NOT NULL,
-		option_value longtext NOT NULL,
-		PRIMARY KEY  id (ID)
-		 ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_sendpress_customfields` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/shinobi-blocks/vendor/shinobiworks/wp-core/src/DB.php(62): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/shinobi-blocks/vendor/shinobiworks/wp-core/src/Bootstrap.php(27): Shinobi_Works\WP\DB::create_table('1.0.1', 'wp_shinobi_opti...', '\n\t\tID bigint(20...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Shinobi_Works\WP\Bootstrap->create_options_table('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE wp_shinobi_options ( 
-		ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		option_name varchar(191) NOT NULL,
-		option_value longtext NOT NULL,
-		PRIMARY KEY  id (ID)
-		 ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Shinobi_Works\WP\Bootstrap->create_options_table, Shinobi_Works\WP\DB::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:32:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#6 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-settings.php(727): do_action('init')
+#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#18 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 16:56:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_shinobi_options ( 
-		ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		option_name varchar(191) NOT NULL,
-		option_value longtext NOT NULL,
-		PRIMARY KEY  id (ID)
-		 ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/shinobi-blocks/vendor/shinobiworks/wp-core/src/DB.php(62): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/shinobi-blocks/vendor/shinobiworks/wp-core/src/Bootstrap.php(27): Shinobi_Works\WP\DB::create_table('1.0.1', 'wp_shinobi_opti...', '\n\t\tID bigint(20...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Shinobi_Works\WP\Bootstrap->create_options_table('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query CREATE TABLE wp_shinobi_options ( 
-		ID bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		option_name varchar(191) NOT NULL,
-		option_value longtext NOT NULL,
-		PRIMARY KEY  id (ID)
-		 ) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Shinobi_Works\WP\Bootstrap->create_options_table, Shinobi_Works\WP\DB::create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:32:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_oldurls (
-		  	`oldurl` varchar(255) NOT NULL,
-  			`newurl` varchar(255) NOT NULL,
-			 PRIMARY KEY  (`oldurl`)
-		  ) TYPE=MyISAM </p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/ss-old-urls/ss-old-urls.php(33): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ssou_install(false)
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ss-old...', false)
-#9 /internal/eval.php(20): activate_plugin('ss-old-urls/ss-...')
-#10 {main}</pre>
- for query CREATE TABLE wp_oldurls (
-		  	`oldurl` varchar(255) NOT NULL,
-  			`newurl` varchar(255) NOT NULL,
-			 PRIMARY KEY  (`oldurl`)
-		  ) TYPE=MyISAM  made by activate_plugin, do_action('activate_ss-old-urls/ss-old-urls.php'), WP_Hook->do_action, WP_Hook->apply_filters, ssou_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:33:50 UTC] PHP Warning:  Undefined variable $knote_db_version in /wordpress/wp-content/plugins/sticky-note/sticky-note.php on line 53
-[20-Apr-2025 03:33:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 16:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_k_note (
-												  id INT(9) NOT NULL AUTO_INCREMENT,
-												  note TEXT NOT NULL,
-												  PRIMARY KEY id (id)
-												  )</p>
+<p>SELECT * FROM wp_sendpress_customfields;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_sendpress_customfields; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_sendpress_customfields.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sticky-note/sticky-note.php(46): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): note_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
-#7 /internal/eval.php(20): activate_plugin('sticky-note/sti...')
-#8 {main}</pre>
- for query CREATE TABLE wp_k_note (
-												  id INT(9) NOT NULL AUTO_INCREMENT,
-												  note TEXT NOT NULL,
-												  PRIMARY KEY id (id)
-												  ) made by activate_plugin, do_action('activate_sticky-note/sticky-note.php'), WP_Hook->do_action, WP_Hook->apply_filters, note_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:33:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_k_note(note) VALUES('This is your first note. Congratz!')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_k_note(note) VALUES(:param0 ) | parameters: This is your first note. Congratz!</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_k_note.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/sticky-note/sticky-note.php(49): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): note_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
-#6 /internal/eval.php(20): activate_plugin('sticky-note/sti...')
-#7 {main}</pre>
- for query INSERT INTO wp_k_note(note) VALUES('This is your first note. Congratz!') made by activate_plugin, do_action('activate_sticky-note/sticky-note.php'), WP_Hook->do_action, WP_Hook->apply_filters, note_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:33:58 UTC] PHP Warning:  Undefined variable $knote_db_version in /wordpress/wp-content/plugins/sticky-note/sticky-note.php on line 53
-[20-Apr-2025 03:34:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_k_note (
-												  id INT(9) NOT NULL AUTO_INCREMENT,
-												  note TEXT NOT NULL,
-												  PRIMARY KEY id (id)
-												  )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sticky-note/sticky-note.php(46): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): note_install(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
-#7 /internal/eval.php(20): activate_plugin('sticky-note/sti...')
-#8 {main}</pre>
- for query CREATE TABLE wp_k_note (
-												  id INT(9) NOT NULL AUTO_INCREMENT,
-												  note TEXT NOT NULL,
-												  PRIMARY KEY id (id)
-												  ) made by activate_plugin, do_action('activate_sticky-note/sticky-note.php'), WP_Hook->do_action, WP_Hook->apply_filters, note_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:34:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_k_note(note) VALUES('This is your first note. Congratz!')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_k_note(note) VALUES(:param0 ) | parameters: This is your first note. Congratz!</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_k_note.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/sticky-note/sticky-note.php(49): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): note_install(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
-#6 /internal/eval.php(20): activate_plugin('sticky-note/sti...')
-#7 {main}</pre>
- for query INSERT INTO wp_k_note(note) VALUES('This is your first note. Congratz!') made by activate_plugin, do_action('activate_sticky-note/sticky-note.php'), WP_Hook->do_action, WP_Hook->apply_filters, note_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 03:34:07 UTC] PHP Warning:  Undefined variable $knote_db_version in /wordpress/wp-content/plugins/sticky-note/sticky-note.php on line 53
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/sendpress/classes/db/class-sendpress-db-customfields.php(51): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(559): SendPress_DB_Customfields->get_all()
+#4 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(748): spnl_load_custom_field_tags()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): spnl_setup_template_tags('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-content/plugins/sendpress/classes/class-sendpress-template-tags.php(552): do_action('spnl_add_templa...')
+#9 /wordpress/wp-includes/class-wp-hook.php(324): spnl_load_template_tags('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(727): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT * FROM wp_sendpress_customfields; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_load_template_tags, do_action('spnl_add_template_tags'), WP_Hook->do_action, WP_Hook->apply_filters, spnl_setup_template_tags, spnl_load_custom_field_tags, SendPress_DB_Customfields->get_all, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[21-Apr-2025 16:58:30 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/shoutem-api-vip/controllers/class-shoutem-controller-view.php on line 45
+[21-Apr-2025 16:58:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/shoutem-api-vip/controllers/class-shoutem-controller-view.php on line 45
+[21-Apr-2025 16:58:47 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/shoutem-api-vip/controllers/class-shoutem-controller-view.php on line 45
+[21-Apr-2025 17:00:17 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:17 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:18 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:18 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:26 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:26 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:27 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:27 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:35 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:35 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:36 UTC] PHP Deprecated:  Required parameter $permlink follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
+[21-Apr-2025 17:00:36 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $ajax in /wordpress/wp-content/plugins/steemit-feed/includes/class-steemit-feed-data.php on line 27
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
