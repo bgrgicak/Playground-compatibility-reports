@@ -2,88 +2,20 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-Apr-2025 08:54:09 UTC] PHP Warning:  Undefined variable $ttfOptions in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "install_plugin" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ttf...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-ttfgen/ttfge...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[21-Apr-2025 08:54:17 UTC] PHP Warning:  Undefined variable $ttfOptions in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "install_plugin" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ttf...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-ttfgen/ttfge...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[21-Apr-2025 08:54:22 UTC] PHP Warning:  Undefined variable $ttfOptions in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-ttfgen/ttfgen.php on line 1104
-[21-Apr-2025 08:54:22 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "install_plugin" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ttf...', false)
-#3 /internal/eval.php(20): activate_plugin('wp-ttfgen/ttfge...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[21-Apr-2025 08:54:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [22-Apr-2025 22:50:31 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[22-Apr-2025 22:50:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
+[22-Apr-2025 22:50:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
+<p>CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -91,132 +23,41 @@ Stack trace:
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
-#3 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(245): WP_SQLite_DB->query('\n            CR...')
-#4 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(329): WC_Blacklist_Manager_DB->create_trigger()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(196): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(30): WPAA_Install::_install_capabilities_table()
+#4 /wordpress/wp-content/plugins/wp-access-areas/wp-access-areas.php(70): WPAA_Install::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): accessareas_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#9 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-access-areas...')
 #10 {main}</pre>
- for query 
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:54:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				) made by activate_plugin, do_action('activate_wp-access-areas/wp-access-areas.php'), WP_Hook->do_action, WP_Hook->apply_filters, accessareas_activate, WPAA_Install::activate, WPAA_Install::_install_capabilities_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-Apr-2025 22:50:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
+<p>CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -224,727 +65,119 @@ MySQL query not supported. Cause: statement type: "createStatement" > "createTri
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createTrigger"
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
-#3 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(321): WP_SQLite_DB->query('\n            CR...')
-#4 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(330): WC_Blacklist_Manager_DB->create_delete_trigger()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(196): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/wp-access-areas/inc/class-wpaa_install.php(30): WPAA_Install::_install_capabilities_table()
+#4 /wordpress/wp-content/plugins/wp-access-areas/wp-access-areas.php(70): WPAA_Install::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): accessareas_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#9 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-acc...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-access-areas...')
 #10 {main}</pre>
- for query 
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_delete_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TRIGGER IF EXISTS after_insert_blacklist_row</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(193): WP_SQLite_DB->query('DROP TRIGGER IF...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(329): WC_Blacklist_Manager_DB->create_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query DROP TRIGGER IF EXISTS after_insert_blacklist_row made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(245): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(329): WC_Blacklist_Manager_DB->create_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query 
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TRIGGER IF EXISTS after_delete_blacklist_row</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(258): WP_SQLite_DB->query('DROP TRIGGER IF...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(330): WC_Blacklist_Manager_DB->create_delete_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query DROP TRIGGER IF EXISTS after_delete_blacklist_row made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_delete_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(321): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(330): WC_Blacklist_Manager_DB->create_delete_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query 
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_delete_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TRIGGER IF EXISTS after_insert_blacklist_row</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(193): WP_SQLite_DB->query('DROP TRIGGER IF...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(329): WC_Blacklist_Manager_DB->create_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query DROP TRIGGER IF EXISTS after_insert_blacklist_row made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(245): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(329): WC_Blacklist_Manager_DB->create_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query 
-            CREATE TRIGGER after_insert_blacklist_row
-            AFTER INSERT ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = CAST(option_value AS UNSIGNED) + 1
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by adding the sum of valid fields:
-                UPDATE wp_options
-                SET option_value = CAST(option_value AS UNSIGNED) + (
-                    (CASE WHEN NEW.first_name IS NOT NULL AND TRIM(NEW.first_name) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.phone_number IS NOT NULL AND TRIM(NEW.phone_number) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.email_address IS NOT NULL AND TRIM(NEW.email_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.ip_address IS NOT NULL AND TRIM(NEW.ip_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.customer_address IS NOT NULL AND TRIM(NEW.customer_address) <> '' THEN 1 ELSE 0 END) +
-                    (CASE WHEN NEW.domain IS NOT NULL AND TRIM(NEW.domain) <> '' THEN 1 ELSE 0 END)
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TRIGGER IF EXISTS after_delete_blacklist_row</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(258): WP_SQLite_DB->query('DROP TRIGGER IF...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(330): WC_Blacklist_Manager_DB->create_delete_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query DROP TRIGGER IF EXISTS after_delete_blacklist_row made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_delete_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:55:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: TRIGGER.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(321): WP_SQLite_DB->query('\n            CR...')
-#2 /wordpress/wp-content/plugins/wc-blacklist-manager/inc/cores/yobm-wc-blacklist-manager-database.php(330): WC_Blacklist_Manager_DB->create_delete_trigger()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): WC_Blacklist_Manager_DB->activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wc-bla...', false)
-#7 /internal/eval.php(20): activate_plugin('wc-blacklist-ma...')
-#8 {main}</pre>
- for query 
-            CREATE TRIGGER after_delete_blacklist_row
-            AFTER DELETE ON wp_wc_blacklist
-            FOR EACH ROW
-            BEGIN
-                -- Update individual counters:
-                IF OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_name';
-                END IF;
-                IF OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_phone';
-                END IF;
-                IF OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_email';
-                END IF;
-                IF OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_ip';
-                END IF;
-                IF OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_address';
-                END IF;
-                IF OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN
-                    UPDATE wp_options
-                    SET option_value = IF(CAST(option_value AS UNSIGNED) > 0, CAST(option_value AS UNSIGNED) - 1, 0)
-                    WHERE option_name = 'wc_blacklist_sum_domain';
-                END IF;
-                -- Update the total counter by subtracting the sum of valid fields from the deleted row:
-                UPDATE wp_options
-                SET option_value = IF(
-                    CAST(option_value AS UNSIGNED) >= (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    CAST(option_value AS UNSIGNED) - (
-                        (CASE WHEN OLD.first_name IS NOT NULL AND TRIM(OLD.first_name) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.phone_number IS NOT NULL AND TRIM(OLD.phone_number) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.email_address IS NOT NULL AND TRIM(OLD.email_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.ip_address IS NOT NULL AND TRIM(OLD.ip_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.customer_address IS NOT NULL AND TRIM(OLD.customer_address) <> '' THEN 1 ELSE 0 END) +
-                        (CASE WHEN OLD.domain IS NOT NULL AND TRIM(OLD.domain) <> '' THEN 1 ELSE 0 END)
-                    ),
-                    0
-                )
-                WHERE option_name = 'wc_blacklist_sum_total';
-            END;
-         made by activate_plugin, do_action('activate_wc-blacklist-manager/wc-blacklist-manager.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Blacklist_Manager_DB->activate, WC_Blacklist_Manager_DB->create_delete_trigger, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 08:58:24 UTC] PHP Warning:  error_log(/var/tmp/wp-log.log): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wp-athletics/includes/wp-athletics-functions.php on line 12
-[21-Apr-2025 08:58:25 UTC] PHP Warning:  Undefined property: WP_Athletics_Records::$GENDER_BOTH in /wordpress/wp-content/plugins/wp-athletics/includes/wp-athletics-records.php on line 21
-[21-Apr-2025 08:58:25 UTC] PHP Warning:  error_log(/var/tmp/wp-log.log): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wp-athletics/includes/wp-athletics-functions.php on line 12
-[21-Apr-2025 08:58:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE OR REPLACE VIEW v_wpa_results AS SELECT r.id, r.time, r.user_id, r.event_id, r.garmin_id, r.position, r.age_category, r.gender, r.pending, r.age_grade, r.date_created,
-			e.event_cat_id, e.name as event_name, e.location as event_location, ec.name as category, ec.time_format, ec.type, ec.distance_meters,
-			e.date, e.sub_type_id as event_sub_type_id
-			FROM wp_wpa_result r
-			JOIN wp_wpa_event e on e.id = r.event_id
-			JOIN wp_wpa_event_cat ec on ec.id = e.event_cat_id;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createView"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE OR REPLA...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE OR REPLA...')
-#3 /wordpress/wp-content/plugins/wp-athletics/includes/wp-athletics-db.php(172): WP_SQLite_DB->query('CREATE OR REPLA...')
-#4 /wordpress/wp-content/plugins/wp-athletics/includes/wp-athletics-db.php(140): WP_Athletics_DB->create_view()
-#5 /wordpress/wp-content/plugins/wp-athletics/wp-athletics.php(449): WP_Athletics_DB->create_db()
-#6 /wordpres
+ for query CREATE TABLE wp_disclosure_userlabels (
+				ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				cap_title varchar(64) NOT NULL,
+				capability varchar(128) NOT NULL,
+				blog_id bigint(20) NOT NULL,
+				PRIMARY KEY id (`id`),
+				UNIQUE KEY capability (`capability`),
+				KEY blog_id (`blog_id`)
+				) made by activate_plugin, do_action('activate_wp-access-areas/wp-access-areas.php'), WP_Hook->do_action, WP_Hook->apply_filters, accessareas_activate, WPAA_Install::activate, WPAA_Install::_install_capabilities_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-Apr-2025 22:52:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "let_it_snows" in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php:119
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-christmas/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-christmas/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php on line 119
+[22-Apr-2025 22:52:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "let_it_snows" in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php:119
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-christmas/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-christmas/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php on line 119
+[22-Apr-2025 22:52:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "let_it_snows" in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php:119
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-christmas/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-christmas/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-christmas/wp-christmas.php on line 119
+[22-Apr-2025 22:53:03 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php:231
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-video-html5-...')
+#2 /internal/eval.php(20): activate_plugin('wp-video-html5-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php on line 231
+[22-Apr-2025 22:53:10 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php:231
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-video-html5-...')
+#2 /internal/eval.php(20): activate_plugin('wp-video-html5-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php on line 231
+[22-Apr-2025 22:53:18 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php:231
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-video-html5-...')
+#2 /internal/eval.php(20): activate_plugin('wp-video-html5-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-video-html5-video-player/video-js.php on line 231
+[22-Apr-2025 22:53:53 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpbkash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:54:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpbkash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:54:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpbkash</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:54:22 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmbytplayer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:54:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmbytplayer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:54:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmbytplayer</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 22:55:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-coupon-widget/coupon.php:46
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-coupon-widge...')
+#2 /internal/eval.php(20): activate_plugin('wp-coupon-widge...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-coupon-widget/coupon.php on line 46
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-coupon-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
+        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
+        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
 Node.js v23.11.0
