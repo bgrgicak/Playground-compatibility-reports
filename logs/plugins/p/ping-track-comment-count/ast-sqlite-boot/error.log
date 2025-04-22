@@ -2,115 +2,279 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [20-Apr-2025 18:33:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [22-Apr-2025 08:55:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-				CREATE TABLE wp_premmerce_redirects (
-				  	id INT(11) NOT NULL AUTO_INCREMENT,
-				  	old_url VARCHAR(255) NOT NULL,
-				  	redirect_type VARCHAR(20) NOT NULL,
-				  	redirect_content VARCHAR(255) NOT NULL,
-				  	type INT(3) NOT NULL,
-				  	PRIMARY KEY (id)
-				) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `p`.* , `m`.`meta_value` as `options` , ( SELECT GROUP_CONCAT ( `t`.`name` ORDER BY `t`.`name` ASC SEPARATOR ', ' ) FROM `wp_term_relationships` `tr` , `wp_term_taxonomy` `tt` , `wp_terms` `t` WHERE `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` AND `tt`.`term_id` = `t`.`term_id` AND `tr`.`object_id` = `p`.`ID` AND `tt`.`taxonomy` = 'post_tag' ) as `tags` FROM `wp_posts` `p` LEFT JOIN `wp_postmeta` `m` ON `m`.`meta_key` = 'gns_option' AND `m`.`post_id` = `p`.`ID` WHERE `p`.`post_status` = 'publish' AND `p`.`post_type` = 'post' AND `p`.`post_date` &gt;= ( CURRENT_TIMESTAMP - INTERVAL 2 DAY ) ORDER BY `p`.`ID` DESC LIMIT 0 , 1000 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n\t\t\t\tCREATE TAB...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n\t\t\t\tCREATE TAB...')
-#3 /wordpress/wp-content/plugins/premmerce-redirect-manager/src/RedirectModel.php(33): WP_SQLite_DB->query('\n\t\t\t\tCREATE TAB...')
-#4 /wordpress/wp-content/plugins/premmerce-redirect-manager/src/RedirectPlugin.php(60): Premmerce\Redirect\RedirectModel->createTable()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Premmerce\Redirect\RedirectPlugin->activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_premme...', false)
-#9 /internal/eval.php(20): activate_plugin('premmerce-redir...')
-#10 {main}</pre>
- for query 
-				CREATE TABLE wp_premmerce_redirects (
-				  	id INT(11) NOT NULL AUTO_INCREMENT,
-				  	old_url VARCHAR(255) NOT NULL,
-				  	redirect_type VARCHAR(20) NOT NULL,
-				  	redirect_content VARCHAR(255) NOT NULL,
-				  	type INT(3) NOT NULL,
-				  	PRIMARY KEY (id)
-				) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_premmerce-redirect-manager/premmerce-redirect.php'), WP_Hook->do_action, WP_Hook->apply_filters, Premmerce\Redirect\RedirectPlugin->activate, Premmerce\Redirect\RedirectModel->createTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:18 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:18 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:19 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:27 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:27 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:28 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:28 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:35 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:35 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 12
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 13
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 16
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 17
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 18
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 19
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 21
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 22
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 23
-[20-Apr-2025 18:35:36 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/performable-connect/performable-connect.php on line 24
-[20-Apr-2025 18:35:36 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:35:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:36:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[20-Apr-2025 18:36:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT p.*, m.m...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT p.*, m.m...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#4 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#10 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#11 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-Apr-2025 08:55:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR :param0 )
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = :param1 ) as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = :param2 
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = :param3 
+      AND p.post_type = :param4 
+      AND p.post_date &gt;= (NOW() -   '+2 DAY')
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 | parameters: , , post_tag, gns_option, publish, post</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#2 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#8 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#9 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-Apr-2025 08:55:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR :param0 )
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = :param1 ) as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = :param2 
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = :param3 
+      AND p.post_type = :param4 
+      AND p.post_date &gt;= (NOW() -   '+2 DAY')
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 | parameters: , , post_tag, gns_option, publish, post</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT p.*, m.m...')
+#2 /wordpress/wp-content/plugins/propeople-google-news-sitemap/classes/sitemap.class.php(350): wpdb->get_results('SELECT p.*, m.m...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/propeople-google-news-sitemap/index.php(103): Plugin->getPosts()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Propeople\GoogleNewsSitemap\{closure}(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_propeo...', false)
+#8 /internal/eval.php(20): activate_plugin('propeople-googl...')
+#9 {main}</pre>
+ for query SELECT p.*, m.meta_value as options,
+
+      (SELECT GROUP_CONCAT(t.name ORDER BY t.name ASC SEPARATOR ', ')
+      FROM wp_term_relationships tr,
+           wp_term_taxonomy tt,
+           wp_terms t
+      WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+      AND tt.term_id = t.term_id
+      AND tr.object_id = p.ID
+      AND tt.taxonomy = 'post_tag') as tags
+
+      FROM wp_posts p
+
+      LEFT JOIN wp_postmeta m
+      ON m.meta_key = 'gns_option'
+      AND m.post_id = p.ID
+
+      WHERE p.post_status = 'publish'
+      AND p.post_type = 'post'
+      AND p.post_date >= (NOW() - INTERVAL 2 DAY)
+
+      ORDER BY p.ID DESC
+
+      LIMIT 0,1000 made by activate_plugin, do_action('activate_propeople-google-news-sitemap/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Propeople\GoogleNewsSitemap\{closure}, Plugin->getPosts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[22-Apr-2025 08:56:27 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:56:27 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:56:37 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:56:37 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:56:46 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:56:46 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/post-half-life/post-half-life.php on line 16
+[22-Apr-2025 08:58:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 08:58:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[22-Apr-2025 08:59:03 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>photo-gallery-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
