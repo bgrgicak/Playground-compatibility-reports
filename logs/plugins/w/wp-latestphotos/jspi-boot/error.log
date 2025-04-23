@@ -2,553 +2,856 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-Apr-2025 21:26:19 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:26:20 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:26:29 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:26:30 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:26:37 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:26:38 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0)</p>
+<p>ALTER TABLE wp_posts ADD INDEX(ID, post_date, post_status, post_name, post_modified, guid, post_type);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_posts, wp_posts__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_posts__(&quot; ON &quot;wp_posts&quot; (, `post_date`, `post_status`, `post_name`, `post_modified`, `guid`, `post_type`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(18): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_posts ADD INDEX(ID, post_date, post_status, post_name, post_modified, guid, post_type); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL)</p>
+<p>ALTER TABLE wp_commentmeta ADD INDEX(meta_id, comment_id, meta_key);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_commentmeta, wp_commentmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_commentmeta__(&quot; ON &quot;wp_commentmeta&quot; (, `comment_id`, `meta_key`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(20): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_commentmeta ADD INDEX(meta_id, comment_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_comments ADD INDEX(comment_ID, comment_post_ID, comment_date, comment_type);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_comments, wp_comments__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_comments__(&quot; ON &quot;wp_comments&quot; (, `comment_post_ID`, `comment_date`, `comment_type`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(22): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_comments ADD INDEX(comment_ID, comment_post_ID, comment_date, comment_type); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_links ADD INDEX(link_id, link_url, link_name, link_visible);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_links, wp_links__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_links__(&quot; ON &quot;wp_links&quot; (, `link_url`, `link_name`, `link_visible`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(24): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_links ADD INDEX(link_id, link_url, link_name, link_visible); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_options ADD INDEX(option_id, option_name);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_options, wp_options__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_options__(&quot; ON &quot;wp_options&quot; (, `option_name`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(26): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_options ADD INDEX(option_id, option_name); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0</p>
+<p>ALTER TABLE wp_postmeta ADD INDEX(meta_id, post_id, meta_key);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE :param0  AND plugin_file = 0 | parameters: %wp-content/plugins%</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_postmeta, wp_postmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_postmeta__(&quot; ON &quot;wp_postmeta&quot; (, `post_id`, `meta_key`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_sec_filelist.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(*)...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(32): wpdb->get_row('SELECT count(*)...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(120): WP_MadeIT_Security_DB->querySingleRecord('SELECT count(*)...', Array)
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#5 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#8 /internal/eval.php(20): activate_plugin('wp-security-by-...')
-#9 {main}</pre>
- for query SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->querySingleRecord, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE :param0  AND plugin_file = 0 | parameters: %wp-content/plugins%</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_sec_filelist.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(*)...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(32): wpdb->get_row('SELECT count(*)...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(120): WP_MadeIT_Security_DB->querySingleRecord('SELECT count(*)...', Array)
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#5 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->querySingleRecord, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(28): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_postmeta ADD INDEX(meta_id, post_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL)</p>
+<p>ALTER TABLE wp_termmeta ADD INDEX(meta_id, term_id, meta_key);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_termmeta, wp_termmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_termmeta__(&quot; ON &quot;wp_termmeta&quot; (, `term_id`, `meta_key`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(30): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_termmeta ADD INDEX(meta_id, term_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_terms ADD INDEX(term_id, name);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_terms, wp_terms__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_terms__(&quot; ON &quot;wp_terms&quot; (, `name`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(32): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_terms ADD INDEX(term_id, name); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_term_relationships ADD INDEX(object_id, term_taxonomy_id);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_term_relationships, wp_term_relationships__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_term_relationships__(&quot; ON &quot;wp_term_relationships&quot; (, `term_taxonomy_id`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(34): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_term_relationships ADD INDEX(object_id, term_taxonomy_id); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_term_taxonomy ADD INDEX(term_taxonomy_id, term_id, taxonomy);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_term_taxonomy, wp_term_taxonomy__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_term_taxonomy__(&quot; ON &quot;wp_term_taxonomy&quot; (, `term_id`, `taxonomy`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#7 /internal/eval.php(20): activate_plugin('wp-security-by-...')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(36): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
 #8 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_blockip (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `start_block` int UNSIGNED NOT NULL, `end_block` int UNSIGNED NOT NULL, `blocked` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_term_taxonomy ADD INDEX(term_taxonomy_id, term_id, taxonomy); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0</p>
+<p>ALTER TABLE wp_users ADD INDEX(ID, user_login, user_email, user_status);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE :param0  AND plugin_file = 0 | parameters: %wp-content/plugins%</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, wp_users__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_users__(&quot; ON &quot;wp_users&quot; (, `user_login`, `user_email`, `user_status`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_sec_filelist.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(*)...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(32): wpdb->get_row('SELECT count(*)...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(120): WP_MadeIT_Security_DB->querySingleRecord('SELECT count(*)...', Array)
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#5 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-security-by-...')
-#8 /internal/eval.php(20): activate_plugin('wp-security-by-...')
-#9 {main}</pre>
- for query SELECT count(*) as aantal FROM wp_madeit_sec_filelist WHERE filename LIKE '%wp-content/plugins%' AND plugin_file = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->querySingleRecord, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:31:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(38): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_users ADD INDEX(ID, user_login, user_email, user_status); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0)</p>
+<p>ALTER TABLE wp_usermeta ADD INDEX(umeta_id, user_id, meta_key);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_usermeta, wp_usermeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_usermeta__(&quot; ON &quot;wp_usermeta&quot; (, `user_id`, `meta_key`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_filelist (`filename_md5` varchar(64) NOT NULL PRIMARY KEY, `filename` varchar(1000) NOT NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `file_created` int UNSIGNED NOT NULL, `file_changed` int UNSIGNED NULL, `file_checked` int UNSIGNED NULL, `file_loaded` int UNSIGNED NULL, `file_deleted` int UNSIGNED NULL, `exist_in_orig` tinyint UNSIGNED NOT NULL default 1, `changed` tinyint UNSIGNED NOT NULL default 0, `is_safe` tinyint UNSIGNED NOT NULL default 1, `ignore` tinyint UNSIGNED NOT NULL default 0, `reason` varchar(64) NULL, `need_backup` tinyint UNSIGNED NOT NULL default 0, `in_backup` tinyint UNSIGNED NOT NULL default 0, `has_url` tinyint UNSIGNED NOT NULL default 0, `safe_url` tinyint UNSIGNED NOT NULL default 0, `plugin_theme` varchar(255) NULL, `core_file` tinyint UNSIGNED NOT NULL default 0, `plugin_file` tinyint UNSIGNED NOT NULL default 0, `theme_file` tinyint UNSIGNED NOT NULL default 0, `content_file` tinyint UNSIGNED NOT NULL default 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:31:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(41): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_usermeta ADD INDEX(umeta_id, user_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL)</p>
+<p>ALTER TABLE wp_posts ADD INDEX(ID, post_date, post_status, post_name, post_modified, guid, post_type);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_posts, wp_posts__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_posts__(&quot; ON &quot;wp_posts&quot; (, `post_date`, `post_status`, `post_name`, `post_modified`, `guid`, `post_type`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_issues (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `filename_md5` varchar(64) NULL, `filename` varchar(1000) NULL, `old_md5` varchar(64) NULL, `new_md5` varchar(64) NULL, `type` int UNSIGNED NOT NULL default 0, `severity` tinyint UNSIGNED NOT NULL default 0, `issue_created` int UNSIGNED NULL, `issue_fixed` int UNSIGNED NULL, `issue_ignored` int UNSIGNED NULL, `issue_readed` int UNSIGNED NULL, `issue_remind` int UNSIGNED NULL, `shortMsg` varchar(255) NULL, `longMsg` text NULL, `data` text NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:31:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(18): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_posts ADD INDEX(ID, post_date, post_status, post_name, post_modified, guid, post_type); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_commentmeta ADD INDEX(meta_id, comment_id, meta_key);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_commentmeta, wp_commentmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_commentmeta__(&quot; ON &quot;wp_commentmeta&quot; (, `comment_id`, `meta_key`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login_attempts (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `login_failed` tinyint UNSIGNED NOT NULL default 0, `notify` tinyint UNSIGNED NOT NULL default 0, `reasonNr` int UNSIGNED NULL, `reason` varchar(64) NULL, `user_agent` varchar(255) NULL, `created_at` int UNSIGNED NOT NULL) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-security-by-made-it/madeit-security.php'), WP_MadeIT_Security_DB->__construct, WP_MadeIT_Security_DB_Schema->loadDB, WP_MadeIT_Security_DB->queryWrite, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 21:31:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(20): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_commentmeta ADD INDEX(meta_id, comment_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varchar(255) NULL, `user_agent` varchar(255) NULL, `username` varchar(255) NULL, `hash` varchar(255) NULL, `notify` tinyint UNSIGNED NOT NULL default 0, `created_at` int UNSIGNED NOT NULL)</p>
+<p>ALTER TABLE wp_comments ADD INDEX(comment_ID, comment_post_ID, comment_date, comment_type);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_comments, wp_comments__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_comments__(&quot; ON &quot;wp_comments&quot; (, `comment_post_ID`, `comment_date`, `comment_type`); | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(46): WP_SQLite_DB->query('create table IF...')
-#2 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB_Schema.php(116): WP_MadeIT_Security_DB->queryWrite('create table IF...')
-#3 /wordpress/wp-content/plugins/wp-security-by-made-it/inc/WP_MadeIT_Security_DB.php(11): WP_MadeIT_Security_DB_Schema->loadDB()
-#4 /wordpress/wp-content/plugins/wp-security-by-made-it/madeit-security.php(47): WP_MadeIT_Security_DB->__construct()
-#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query create table IF NOT EXISTS wp_madeit_sec_login (`id` int UNSIGNED NOT NULL auto_increment PRIMARY KEY, `ipaddress` varchar(50) NULL, `country` varch
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(22): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_comments ADD INDEX(comment_ID, comment_post_ID, comment_date, comment_type); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_links ADD INDEX(link_id, link_url, link_name, link_visible);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_links, wp_links__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_links__(&quot; ON &quot;wp_links&quot; (, `link_url`, `link_name`, `link_visible`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(24): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_links ADD INDEX(link_id, link_url, link_name, link_visible); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_options ADD INDEX(option_id, option_name);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_options, wp_options__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_options__(&quot; ON &quot;wp_options&quot; (, `option_name`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(26): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_options ADD INDEX(option_id, option_name); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_postmeta ADD INDEX(meta_id, post_id, meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_postmeta, wp_postmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_postmeta__(&quot; ON &quot;wp_postmeta&quot; (, `post_id`, `meta_key`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(28): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_postmeta ADD INDEX(meta_id, post_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_termmeta ADD INDEX(meta_id, term_id, meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_termmeta, wp_termmeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_termmeta__(&quot; ON &quot;wp_termmeta&quot; (, `term_id`, `meta_key`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(30): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_termmeta ADD INDEX(meta_id, term_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_terms ADD INDEX(term_id, name);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_terms, wp_terms__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_terms__(&quot; ON &quot;wp_terms&quot; (, `name`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(32): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_terms ADD INDEX(term_id, name); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_term_relationships ADD INDEX(object_id, term_taxonomy_id);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_term_relationships, wp_term_relationships__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_term_relationships__(&quot; ON &quot;wp_term_relationships&quot; (, `term_taxonomy_id`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(34): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_term_relationships ADD INDEX(object_id, term_taxonomy_id); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_term_taxonomy ADD INDEX(term_taxonomy_id, term_id, taxonomy);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_term_taxonomy, wp_term_taxonomy__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_term_taxonomy__(&quot; ON &quot;wp_term_taxonomy&quot; (, `term_id`, `taxonomy`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(36): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_term_taxonomy ADD INDEX(term_taxonomy_id, term_id, taxonomy); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_users ADD INDEX(ID, user_login, user_email, user_status);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_users, wp_users__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_users__(&quot; ON &quot;wp_users&quot; (, `user_login`, `user_email`, `user_status`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(38): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_users ADD INDEX(ID, user_login, user_email, user_status); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_usermeta ADD INDEX(umeta_id, user_id, meta_key);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_usermeta, wp_usermeta__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_usermeta__(&quot; ON &quot;wp_usermeta&quot; (, `user_id`, `meta_key`); | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-super-speed/wp-super-speed.php(41): wpdb->get_results('ALTER TABLE wp_...', 'OBJECT')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpsuperspeed_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sup...', false)
+#7 /internal/eval.php(20): activate_plugin('wp-super-speed/...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_usermeta ADD INDEX(umeta_id, user_id, meta_key); made by activate_plugin, do_action('activate_wp-super-speed/wp-super-speed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpsuperspeed_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 12:50:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_today_option" in /wordpress/wp-content/plugins/wp-today/wp_today.php:114
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wp_today('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-today/wp_today.php on line 114
+[23-Apr-2025 12:50:25 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_today_option" in /wordpress/wp-content/plugins/wp-today/wp_today.php:114
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wp_today('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-today/wp_today.php on line 114
+[23-Apr-2025 12:50:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "wp_today_option" in /wordpress/wp-content/plugins/wp-today/wp_today.php:114
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): wp_today('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-today/wp_today.php on line 114
+[23-Apr-2025 12:50:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php:104
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-users-list-w...')
+#2 /internal/eval.php(20): activate_plugin('wp-users-list-w...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php on line 104
+[23-Apr-2025 12:50:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php:104
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-users-list-w...')
+#2 /internal/eval.php(20): activate_plugin('wp-users-list-w...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php on line 104
+[23-Apr-2025 12:50:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php:104
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-users-list-w...')
+#2 /internal/eval.php(20): activate_plugin('wp-users-list-w...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-users-list-widget/wp-users-list-widget.php on line 104
+[23-Apr-2025 12:52:29 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:52:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php' (include_path='.:') in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/wc-dynamic-payment-gateways-tcs.php(21): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wc-dynamic-paym...')
+#3 /internal/eval.php(20): activate_plugin('wc-dynamic-paym...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:52:38 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:52:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php' (include_path='.:') in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/wc-dynamic-payment-gateways-tcs.php(21): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wc-dynamic-paym...')
+#3 /internal/eval.php(20): activate_plugin('wc-dynamic-paym...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:52:46 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:52:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/composer/autoload_real.php' (include_path='.:') in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php:23
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/wc-dynamic-payment-gateways-tcs.php(21): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wc-dynamic-paym...')
+#3 /internal/eval.php(20): activate_plugin('wc-dynamic-paym...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wc-dynamic-payment-gateways-tcs/vendor/autoload.php on line 23
+[23-Apr-2025 12:54:50 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method MerlicFilterCategory::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 12:55:00 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method MerlicFilterCategory::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 12:55:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method MerlicFilterCategory::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 12:55:46 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_LatestPhotos...')
+#2 /wordpress/wp-content/plugins/wp-latestphotos/wp-latestphotos.php(74): register_widget('WP_LatestPhotos...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_LatestPhotos->on_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[23-Apr-2025 12:55:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_LatestPhotos...')
+#2 /wordpress/wp-content/plugins/wp-latestphotos/wp-latestphotos.php(74): register_widget('WP_LatestPhotos...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_LatestPhotos->on_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[23-Apr-2025 12:56:05 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_LatestPhotos...')
+#2 /wordpress/wp-content/plugins/wp-latestphotos/wp-latestphotos.php(74): register_widget('WP_LatestPhotos...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): WP_LatestPhotos->on_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-h
