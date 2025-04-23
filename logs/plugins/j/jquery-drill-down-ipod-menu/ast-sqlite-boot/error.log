@@ -2,40 +2,281 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-Apr-2025 22:48:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/jm-avail-booking/jm_avail_booking.php on line 427
-[21-Apr-2025 22:48:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/jm-avail-booking/jm_avail_booking.php on line 427
-[21-Apr-2025 22:48:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/jm-avail-booking/jm_avail_booking.php on line 427
-[21-Apr-2025 22:53:48 UTC] PHP Fatal error:  Uncaught TypeError: round(): Argument #1 ($num) must be of type int|float, string given in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php:29
+Error: [23-Apr-2025 10:53:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_myvideoroom_user_video_preference` (`user_id`, `room_name`, `layout_id`, `reception_id`, `reception_enabled`, `reception_video_enabled`, `reception_video_url`, `show_floorplan`) VALUES (-1, 'site-default-settings', 'boardroom', 'default', '', '', NULL, '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_myvideoroom_user_video_preference</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_myvideoroom_user_video_preference</li>
+<li>Executing: INSERT INTO `wp_myvideoroom_user_video_preference` (`record_id`, `user_id`, `room_name`, `layout_id`, `reception_id`, `reception_enabled`, `reception_video_enabled`, `reception_video_url`, `show_floorplan`) SELECT NULL, `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8` FROM (VALUES ( - 1 , 'site-default-settings' , 'boardroom' , 'default' , '' , '' , NULL , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_myvideoroom_user_video_preference.reception_enabled
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_myvideoroom_...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/my-video-room/dao/class-uservideopreference.php(48): wpdb->insert('wp_myvideoroom_...', Array)
+#6 /wordpress/wp-content/plugins/my-video-room/dao/class-setup.php(119): MyVideoRoomPlugin\DAO\UserVideoPreference->create(Object(MyVideoRoomPlugin\Entity\UserVideoPreference))
+#7 /wordpress/wp-content/plugins/my-video-room/class-sitedefaults.php(58): MyVideoRoomPlugin\DAO\Setup->initialise_default_video_settings()
+#8 /wordpress/wp-content/plugins/my-video-room/class-activation.php(26): MyVideoRoomPlugin\SiteDefaults->activate_module()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): MyVideoRoomPlugin\Activation::activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_my-vid...', false)
+#13 /internal/eval.php(20): activate_plugin('my-video-room/i...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_myvideoroom_user_video_preference` (`user_id`, `room_name`, `layout_id`, `reception_id`, `reception_enabled`, `reception_video_enabled`, `reception_video_url`, `show_floorplan`) VALUES (-1, 'site-default-settings', 'boardroom', 'default', '', '', NULL, '') made by activate_plugin, do_action('activate_my-video-room/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, MyVideoRoomPlugin\Activation::activate, MyVideoRoomPlugin\SiteDefaults->activate_module, MyVideoRoomPlugin\DAO\Setup->initialise_default_video_settings, MyVideoRoomPlugin\DAO\UserVideoPreference->create, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 10:54:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "MZ_Mobilize_America\\Core\Activator" not found in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php(29): round('8.0.30-dev', 2)
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('joudisoft-gener...')
-#3 /internal/eval.php(20): activate_plugin('joudisoft-gener...')
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mz-mob...', false)
+#3 /internal/eval.php(20): activate_plugin('mz-mobilize-ame...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php on line 29
-[21-Apr-2025 22:53:55 UTC] PHP Fatal error:  Uncaught TypeError: round(): Argument #1 ($num) must be of type int|float, string given in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php:29
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 10:54:34 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "MZ_Mobilize_America\\Core\Activator" not found in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php(29): round('8.0.30-dev', 2)
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('joudisoft-gener...')
-#3 /internal/eval.php(20): activate_plugin('joudisoft-gener...')
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mz-mob...', false)
+#3 /internal/eval.php(20): activate_plugin('mz-mobilize-ame...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php on line 29
-[21-Apr-2025 22:54:05 UTC] PHP Fatal error:  Uncaught TypeError: round(): Argument #1 ($num) must be of type int|float, string given in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php:29
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 10:54:43 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class "MZ_Mobilize_America\\Core\Activator" not found in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php(29): round('8.0.30-dev', 2)
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('joudisoft-gener...')
-#3 /internal/eval.php(20): activate_plugin('joudisoft-gener...')
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mz-mob...', false)
+#3 /internal/eval.php(20): activate_plugin('mz-mobilize-ame...')
 #4 {main}
-  thrown in /wordpress/wp-content/plugins/joudisoft-general-wp-mobile-application/appbox-wordpress-general.php on line 29
-[21-Apr-2025 22:54:15 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:15 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:24 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:24 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:34 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:34 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[21-Apr-2025 22:54:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-drill-down-ipod-menu/dcwp_jquery_drill_down.php:56
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[23-Apr-2025 10:54:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-content-glos...')
+#2 /internal/eval.php(20): activate_plugin('my-content-glos...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php on line 39
+[23-Apr-2025 10:55:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-content-glos...')
+#2 /internal/eval.php(20): activate_plugin('my-content-glos...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php on line 39
+[23-Apr-2025 10:55:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php:39
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-content-glos...')
+#2 /internal/eval.php(20): activate_plugin('my-content-glos...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-content-glossary/my-content-glossary.php on line 39
+[23-Apr-2025 10:58:06 UTC] PHP Fatal error:  Uncaught Error: Non-static method JMB_Post_Feeds::get_instance() cannot be called statically in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php:14
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jmb-post-feeds/...')
+#2 /internal/eval.php(20): activate_plugin('jmb-post-feeds/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php on line 14
+[23-Apr-2025 10:58:14 UTC] PHP Fatal error:  Uncaught Error: Non-static method JMB_Post_Feeds::get_instance() cannot be called statically in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php:14
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jmb-post-feeds/...')
+#2 /internal/eval.php(20): activate_plugin('jmb-post-feeds/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php on line 14
+[23-Apr-2025 10:58:22 UTC] PHP Fatal error:  Uncaught Error: Non-static method JMB_Post_Feeds::get_instance() cannot be called statically in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php:14
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jmb-post-feeds/...')
+#2 /internal/eval.php(20): activate_plugin('jmb-post-feeds/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/jmb-post-feeds/jmb-post-feeds.php on line 14
+[23-Apr-2025 10:58:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>job-board-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 10:58:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>job-board-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 10:58:53 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>job-board-manager</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 10:59:30 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/joebooking/hc4/app/profiler.php on line 31
+[23-Apr-2025 10:59:41 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/joebooking/hc4/app/profiler.php on line 31
+[23-Apr-2025 10:59:50 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/joebooking/hc4/app/profiler.php on line 31
+[23-Apr-2025 11:00:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>joli-clb</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 11:00:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>joli-clb</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 11:00:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>joli-clb</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[23-Apr-2025 11:00:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_jp_journals` WHERE `journalUse` != 'no' ORDER BY `journalUse` , `journalUser` , `journalServer` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/journalpress/admin/jpmeta.class.php(18): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(62): jpmeta->__construct()
+#6 /wordpress/wp-content/plugins/journalpress/journalpress.php(31): journalpress->canpost()
+#7 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#10 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->canpost, jpmeta->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:00:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_jp_journals` WHERE `journalUse` != 'no' ORDER BY `journalUse` , `journalUser` , `journalServer` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/journalpress/lib/jpposts.class.php(23): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(72): jpposts->__construct()
+#6 /wordpress/wp-content/plugins/journalpress/journalpress.php(33): journalpress->catchposts()
+#7 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#10 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->catchposts, jpposts->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:00:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_jp_journals WHERE journalUse != :param0  ORDER BY journalUse, journalUser, journalServer | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/journalpress/admin/jpmeta.class.php(18): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/journalpress/journalpress.php(62): jpmeta->__construct()
+#4 /wordpress/wp-content/plugins/journalpress/journalpress.php(31): journalpress->canpost()
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#8 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->canpost, jpmeta->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:00:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_jp_journals WHERE journalUse != :param0  ORDER BY journalUse, journalUser, journalServer | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/journalpress/lib/jpposts.class.php(23): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/journalpress/journalpress.php(72): jpposts->__construct()
+#4 /wordpress/wp-content/plugins/journalpress/journalpress.php(33): journalpress->catchposts()
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#8 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->catchposts, jpposts->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:00:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_jp_journals WHERE journalUse != :param0  ORDER BY journalUse, journalUser, journalServer | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/journalpress/admin/jpmeta.class.php(18): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/journalpress/journalpress.php(62): jpmeta->__construct()
+#4 /wordpress/wp-content/plugins/journalpress/journalpress.php(31): journalpress->canpost()
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#8 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->canpost, jpmeta->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:00:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_jp_journals WHERE journalUse != :param0  ORDER BY journalUse, journalUser, journalServer | parameters: no</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_jp_journals.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/journalpress/lib/jpposts.class.php(23): wpdb->get_results('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/journalpress/journalpress.php(72): jpposts->__construct()
+#4 /wordpress/wp-content/plugins/journalpress/journalpress.php(33): journalpress->catchposts()
+#5 /wordpress/wp-content/plugins/journalpress/journalpress.php(102): journalpress->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('journalpress/jo...')
+#8 /internal/eval.php(20): activate_plugin('journalpress/jo...')
+#9 {main}</pre>
+ for query SELECT * FROM wp_jp_journals WHERE journalUse != 'no' ORDER BY journalUse, journalUser, journalServer made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/journalpress/journalpress.php'), journalpress->__construct, journalpress->catchposts, jpposts->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 11:01:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/jquery-drill-down-ipod-menu/dcwp_jquery_drill_down.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('jquery-drill-do...')
