@@ -2,269 +2,299 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [21-Apr-2025 13:35:47 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[21-Apr-2025 13:35:47 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[21-Apr-2025 13:35:47 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[21-Apr-2025 13:35:47 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[21-Apr-2025 13:35:50 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[21-Apr-2025 13:35:50 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[21-Apr-2025 13:35:50 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[21-Apr-2025 13:35:50 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[21-Apr-2025 13:35:53 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[21-Apr-2025 13:35:53 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[21-Apr-2025 13:35:53 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[21-Apr-2025 13:35:53 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[21-Apr-2025 13:36:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-Apr-2025 03:59:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIGHLIGHT, varchar(11)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD highlight text NULL   | (no parameters)</li>
+<li>Executing: SELECT `post_title` , `ID` FROM `wp_posts` WHERE `post_type` = 'product' AND `post_title` != 'Auto Draft' GROUP BY `ID` ASC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
+SQLSTATE[HY000]: General error: 1 near "ASC": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT post_tit...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT post_tit...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#4 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-simply-add-...')
+#7 /internal/eval.php(20): activate_plugin('woo-simply-add-...')
+#8 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REPLY, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
+<li>Executing: SELECT `post_title` , `ID` FROM `wp_posts` WHERE `post_type` = 'product' AND `post_title` != 'Auto Draft' GROUP BY `ID` ASC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+SQLSTATE[HY000]: General error: 1 near "ASC": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT post_tit...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT post_tit...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#4 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#5 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REVIEWID, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reviewId text NULL   | (no parameters)</li>
+<li>Executing: SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = :param0  
+	AND post_title != :param1  
+	GROUP BY ID ASC | parameters: product, Auto Draft</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ASC": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#2 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-simply-add-...')
+#5 /internal/eval.php(20): activate_plugin('woo-simply-add-...')
+#6 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIDDEN, tinyint(1)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
+<li>Executing: SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = :param0  
+	AND post_title != :param1  
+	GROUP BY ID ASC | parameters: product, Auto Draft</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ASC": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#2 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIGHLIGHT, varchar(11)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD highlight text NULL   | (no parameters)</li>
+<li>Executing: SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = :param0  
+	AND post_title != :param1  
+	GROUP BY ID ASC | parameters: product, Auto Draft</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ASC": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#2 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-simply-add-...')
+#5 /internal/eval.php(20): activate_plugin('woo-simply-add-...')
+#6 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
+<p>SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REPLY, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
+<li>Executing: SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = :param0  
+	AND post_title != :param1  
+	GROUP BY ID ASC | parameters: product, Auto Draft</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ASC": syntax error.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT post_tit...')
+#2 /wordpress/wp-content/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php(198): wpdb->get_results('SELECT post_tit...', 'OBJECT')
+#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}</pre>
+ for query SELECT post_title, ID 
+	FROM wp_posts 
+	WHERE post_type = 'product' 
+	AND post_title != 'Auto Draft' 
+	GROUP BY ID ASC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/woo-simply-add-related-products-to-blog-posts/woo-related-products-on-posts.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 03:59:45 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $mode in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 786
+[23-Apr-2025 03:59:45 UTC] PHP Fatal error:  Uncaught Error: Non-static method Word_Stats_Core::load_options() cannot be called statically in /wordpress/wp-content/plugins/word-stats/word-stats.php:46
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('word-stats/word...')
+#2 /internal/eval.php(20): activate_plugin('word-stats/word...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 46
+[23-Apr-2025 03:59:53 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $mode in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 786
+[23-Apr-2025 03:59:53 UTC] PHP Fatal error:  Uncaught Error: Non-static method Word_Stats_Core::load_options() cannot be called statically in /wordpress/wp-content/plugins/word-stats/word-stats.php:46
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('word-stats/word...')
+#2 /internal/eval.php(20): activate_plugin('word-stats/word...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 46
+[23-Apr-2025 04:00:02 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $mode in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 786
+[23-Apr-2025 04:00:02 UTC] PHP Fatal error:  Uncaught Error: Non-static method Word_Stats_Core::load_options() cannot be called statically in /wordpress/wp-content/plugins/word-stats/word-stats.php:46
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('word-stats/word...')
+#2 /internal/eval.php(20): activate_plugin('word-stats/word...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/word-stats/word-stats.php on line 46
+[23-Apr-2025 04:03:39 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Likek...')
+#2 /wordpress/wp-content/plugins/wp-likekhor/likekhor.php(539): register_widget('WP_Widget_Likek...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_likekhor_init('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, REVIEWID, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD reviewId text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[23-Apr-2025 04:03:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Likek...')
+#2 /wordpress/wp-content/plugins/wp-likekhor/likekhor.php(539): register_widget('WP_Widget_Likek...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_likekhor_init('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_google_reviews, HIDDEN, tinyint(1)</li>
-<li>Executing: ALTER TABLE wp_trustindex_google_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/wp-reviews-plugin-for-google/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_google->load('')
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[23-Apr-2025 04:03:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WP_Widget_Likek...')
+#2 /wordpress/wp-content/plugins/wp-likekhor/likekhor.php(539): register_widget('WP_Widget_Likek...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_likekhor_init('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_google_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_google->load, include('/plugins/wp-reviews-plugin-for-google/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[21-Apr-2025 13:37:33 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
-[21-Apr-2025 13:37:41 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
-[21-Apr-2025 13:37:49 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[23-Apr-2025 04:06:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-seo-html-sitemap/sitemap.php on line 34
+[23-Apr-2025 04:06:25 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-seo-html-sitemap/sitemap.php on line 34
+[23-Apr-2025 04:06:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-seo-html-sitemap/sitemap.php on line 34
+[23-Apr-2025 04:07:36 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
+[23-Apr-2025 04:07:44 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
+[23-Apr-2025 04:07:52 UTC] PHP Fatal error:  Cannot unset $this in /wordpress/wp-content/plugins/wp-teacher/includes/classes/wpt-meta-boxes.class.php on line 10
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
