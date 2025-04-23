@@ -2,209 +2,671 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [22-Apr-2025 03:30:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 162
+[23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 166
+[23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:08 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:10 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:10 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:10 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:10 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 162
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 166
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:19 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW TABLE STATUS WHERE Name = 'wp_posts';</p>
+<p>CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		) </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_posts' | parameters: database_name_here</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: Name
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#8 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#11 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('campus-director...')
+#14 /internal/eval.php(20): activate_plugin('campus-director...')
+#15 {main}</pre>
+ for query CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		)  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_emd_sessions WHERE session_key = 'c3af107ca7fb41f7ffe6dff1490d7de3'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: c3af107ca7fb41f7ffe6dff1490d7de3</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('c3af107ca7fb41f...', Array)
+#4 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
+#5 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
+#6 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#8 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('campus-director...')
+#13 /internal/eval.php(20): activate_plugin('campus-director...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_emd_sessions WHERE session_key = 'c3af107ca7fb41f7ffe6dff1490d7de3' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:22 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:22 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#8 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#11 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#12 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		)  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_emd_sessions WHERE session_key = 'd1056bc103ac198109f6eb4b9fc228c2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: d1056bc103ac198109f6eb4b9fc228c2</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('d1056bc103ac198...', Array)
+#4 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
+#5 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
+#6 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#8 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT * FROM wp_emd_sessions WHERE session_key = 'd1056bc103ac198109f6eb4b9fc228c2' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:22 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:22 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 162
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $current_post_id follows optional parameter $render in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/admin/box.php on line 166
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:31 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#8 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#11 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('campus-director...')
+#14 /internal/eval.php(20): activate_plugin('campus-director...')
+#15 {main}</pre>
+ for query CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		)  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_emd_sessions WHERE session_key = '69e69ee09c558780d16300d4a3ad264b'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: 69e69ee09c558780d16300d4a3ad264b</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('69e69ee09c55878...', Array)
+#4 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
+#5 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
+#6 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#8 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('campus-director...')
+#13 /internal/eval.php(20): activate_plugin('campus-director...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_emd_sessions WHERE session_key = '69e69ee09c558780d16300d4a3ad264b' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:34 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
+[23-Apr-2025 09:31:34 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/campus-directory/includes/emd-form-builder-lite/emd-form-functions.php on line 688
+[23-Apr-2025 09:31:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#8 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#11 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#12 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query CREATE TABLE wp_emd_sessions (
+		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		  session_key char(32) NOT NULL,
+		  session_value LONGTEXT NOT NULL,
+		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
+		  PRIMARY KEY  (session_key),
+		  UNIQUE KEY session_id (session_id)
+		)  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_emd_sessions WHERE session_key = '96c7689de40a38cd3860c11ebcc2a9bb'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: 96c7689de40a38cd3860c11ebcc2a9bb</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('96c7689de40a38c...', Array)
+#4 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
+#5 /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
+#6 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
+#7 /wordpress/wp-content/plugins/campus-directory/includes/class-emd-session.php(63): Emd_Session->init()
+#8 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(57): Emd_Session->__construct('campus_director...')
+#9 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(340): Campus_Directory::instance()
+#10 /wordpress/wp-content/plugins/campus-directory/campus-directory.php(343): CAMPUS_DIRECTORY()
+#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT * FROM wp_emd_sessions WHERE session_key = '96c7689de40a38cd3860c11ebcc2a9bb' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/campus-directory/campus-directory.php'), CAMPUS_DIRECTORY, Campus_Directory::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:31:34 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Forms.php on line 35
+[23-Apr-2025 09:31:34 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/campus-directory/assets/ext/emd-posts-to-posts/scb/Cron.php on line 24
+[23-Apr-2025 09:31:42 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/AutoLoad.php on line 11
+[23-Apr-2025 09:31:43 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-tomat...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php on line 41
+[23-Apr-2025 09:31:51 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/AutoLoad.php on line 11
+[23-Apr-2025 09:31:51 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-tomat...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php on line 41
+[23-Apr-2025 09:31:59 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/AutoLoad.php on line 11
+[23-Apr-2025 09:31:59 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-tomat...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-tomatocart-to-woocommerce-migration/class/Api.php on line 41
+[23-Apr-2025 09:32:37 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:37 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:37 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:32:38 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:38 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:38 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:32:47 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:47 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:47 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:32:49 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:49 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:49 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:32:57 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:57 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:57 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:32:58 UTC] PHP Deprecated:  Required parameter $answers_extra follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:58 UTC] PHP Deprecated:  Required parameter $poll_postid follows optional parameter $index in /wordpress/wp-content/plugins/cbxpoll/includes/class-cbxpoll-helper.php on line 1523
+[23-Apr-2025 09:32:58 UTC] PHP Deprecated:  Required parameter $poll_result follows optional parameter $reference in /wordpress/wp-content/plugins/cbxpoll/public/class-cbxpoll-public.php on line 158
+[23-Apr-2025 09:34:35 UTC] PHP Deprecated:  Required parameter $response follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:35 UTC] PHP Deprecated:  Required parameter $_authintication follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/custom-wp-rest-api/admin/settings.php on line 131
+[23-Apr-2025 09:34:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count ( * ) from `wp_wcra_notification_log` where `STR_TO_DATE` ( `date_time` , '%Y-%m-%d %H:%i:%s' ) &lt;= '2025-04-20 11:59:59' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW TABLE STAT...')
-#4 /wordpress/wp-content/plugins/canvasflow/includes/canvasflow-db.php(900): wpdb->get_results('SHOW TABLE STAT...')
-#5 /wordpress/wp-content/plugins/canvasflow/includes/canvasflow-db.php(533): Canvasflow_DB->get_wp_posts_engine()
-#6 /wordpress/wp-content/plugins/canvasflow/canvasflow-plugin.php(129): Canvasflow_DB->is_valid_wp_post_engine()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WP_Canvasflow->wpc_install(false)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT count(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT count(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT count(*)...')
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(165): wpdb->get_var('SELECT count(*)...')
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(225): wcra_save_recent_activity(Array)
+#7 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(57): wcra_save_default_endpoint()
+#8 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#13 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#14 {main}</pre>
+ for query SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_default_endpoint, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE from `wp_wcra_notification_log` where `STR_TO_DATE` ( `date_time` , '%Y-%m-%d %H:%i:%s' ) &lt;= '2025-04-20 11:59:59' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DELETE from wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DELETE from wp_...')
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(174): WP_SQLite_DB->query('DELETE from wp_...')
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(225): wcra_save_recent_activity(Array)
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(57): wcra_save_default_endpoint()
+#7 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#12 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#13 {main}</pre>
+ for query DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_default_endpoint, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count ( * ) from `wp_wcra_notification_log` where `STR_TO_DATE` ( `date_time` , '%Y-%m-%d %H:%i:%s' ) &lt;= '2025-04-20 11:59:59' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT count(*)...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT count(*)...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT count(*)...')
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(165): wpdb->get_var('SELECT count(*)...')
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(58): wcra_save_recent_activity(Array)
+#7 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#12 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#13 {main}</pre>
+ for query SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE from `wp_wcra_notification_log` where `STR_TO_DATE` ( `date_time` , '%Y-%m-%d %H:%i:%s' ) &lt;= '2025-04-20 11:59:59' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DELETE from wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DELETE from wp_...')
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(174): WP_SQLite_DB->query('DELETE from wp_...')
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(58): wcra_save_recent_activity(Array)
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_canvas...', false)
-#11 /internal/eval.php(20): activate_plugin('canvasflow/canv...')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#11 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
 #12 {main}</pre>
- for query SHOW TABLE STATUS WHERE Name = 'wp_posts'; made by activate_plugin, do_action('activate_canvasflow/canvasflow-plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Canvasflow->wpc_install, Canvasflow_DB->is_valid_wp_post_engine, Canvasflow_DB->get_wp_posts_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 03:31:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
-#2 /internal/eval.php(20): activate_plugin('case-converter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
-[22-Apr-2025 03:31:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
-#2 /internal/eval.php(20): activate_plugin('case-converter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
-[22-Apr-2025 03:31:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
-#2 /internal/eval.php(20): activate_plugin('case-converter/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
-[22-Apr-2025 03:31:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php:121
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cbis-widget/cbi...')
-#2 /internal/eval.php(20): activate_plugin('cbis-widget/cbi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php on line 121
-[22-Apr-2025 03:32:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php:121
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cbis-widget/cbi...')
-#2 /internal/eval.php(20): activate_plugin('cbis-widget/cbi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php on line 121
-[22-Apr-2025 03:32:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php:121
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cbis-widget/cbi...')
-#2 /internal/eval.php(20): activate_plugin('cbis-widget/cbi...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cbis-widget/cbis-widget.php on line 121
-[22-Apr-2025 03:38:34 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:38:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:37 UTC] PHP Deprecated:  Required parameter $response follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:37 UTC] PHP Deprecated:  Required parameter $_authintication follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:45 UTC] PHP Deprecated:  Required parameter $response follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:45 UTC] PHP Deprecated:  Required parameter $_authintication follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:45 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/custom-wp-rest-api/admin/settings.php on line 131
+[23-Apr-2025 09:34:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM `wp_contact_stored_data` WHERE field = 'sd_status'</p>
+<p>SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_contact_stored_data</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_contact_stored_data</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'sd_status' | parameters: database_name_here, wp_contact_stored_data</li>
+<li>Executing: SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, :param0 ) &lt;= :param1   | parameters: %Y-%m-%d %H:%i:%s, 2025-04-20 11:59:59</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: field
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/contact-form-with-shortcode/contact.php(114): wpdb->get_row('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Contact_Form_SC::cfws_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_contac...', false)
-#9 /internal/eval.php(20): activate_plugin('contact-form-wi...')
-#10 {main}</pre>
- for query SHOW COLUMNS FROM `wp_contact_stored_data` WHERE field = 'sd_status' made by activate_plugin, do_action('activate_contact-form-with-shortcode/contact.php'), WP_Hook->do_action, WP_Hook->apply_filters, Contact_Form_SC::cfws_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 03:38:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT count(*)...')
+#2 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(165): wpdb->get_var('SELECT count(*)...')
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(225): wcra_save_recent_activity(Array)
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(57): wcra_save_default_endpoint()
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#11 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#12 {main}</pre>
+ for query SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_default_endpoint, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SHOW COLUMNS FROM `wp_contact_stored_data` WHERE field = 'sd_email'</p>
+<p>DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_contact_stored_data</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_contact_stored_data</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'sd_email' | parameters: database_name_here, wp_contact_stored_data</li>
+<li>Executing: DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, :param0 ) &lt;= :param1   | parameters: %Y-%m-%d %H:%i:%s, 2025-04-20 11:59:59</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such column: field
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW COLUMNS FR...')
-#4 /wordpress/wp-content/plugins/contact-form-with-shortcode/contact.php(121): wpdb->get_row('SHOW COLUMNS FR...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Contact_Form_SC::cfws_install(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(174): WP_SQLite_DB->query('DELETE from wp_...')
+#2 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(225): wcra_save_recent_activity(Array)
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(57): wcra_save_default_endpoint()
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#10 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#11 {main}</pre>
+ for query DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_default_endpoint, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, :param0 ) &lt;= :param1   | parameters: %Y-%m-%d %H:%i:%s, 2025-04-20 11:59:59</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT count(*)...')
+#2 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(165): wpdb->get_var('SELECT count(*)...')
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(58): wcra_save_recent_activity(Array)
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#10 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
+#11 {main}</pre>
+ for query SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, :param0 ) &lt;= :param1   | parameters: %Y-%m-%d %H:%i:%s, 2025-04-20 11:59:59</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(174): WP_SQLite_DB->query('DELETE from wp_...')
+#2 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(58): wcra_save_recent_activity(Array)
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_contac...', false)
-#9 /internal/eval.php(20): activate_plugin('contact-form-wi...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-wp-rest-...')
 #10 {main}</pre>
- for query SHOW COLUMNS FROM `wp_contact_stored_data` WHERE field = 'sd_email' made by activate_plugin, do_action('activate_contact-form-with-shortcode/contact.php'), WP_Hook->do_action, WP_Hook->apply_filters, Contact_Form_SC::cfws_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 03:38:36 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:38:44 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:38:45 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:38:54 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:38:55 UTC] PHP Deprecated:  Required parameter $options follows optional parameter $field in /wordpress/wp-content/plugins/contact-form-with-shortcode/includes/class-fields-contact.php on line 65
-[22-Apr-2025 03:40:50 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class CryptocurrencyMiningPools does not have a method "cryptomp_textdomain" in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[22-Apr-2025 03:41:00 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class CryptocurrencyMiningPools does not have a method "cryptomp_textdomain" in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-  [cause]: Error: Error when executing the blueprint step #1 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"cryptocurrency-mining-pools"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-      ... 2 lines matching cause stack trace ...
-      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
-        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
-        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
-        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ],
-          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
-          'cache-control': [ 'no-cache, must-revalidate, max-age=0, no-store, private' ]
-        },
-        bytes: Uint8Array(2653) [
-           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
-          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
-          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
-           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
-           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
-           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
-          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
-           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
-           99, 104,  97, 114,
-          ... 2553 more items
-        ],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+ for query DELETE from wp_wcra_notification_log where  STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59'  made by activate_plugin, do_action('activate_custom-wp-rest-api/wp-custom-rest-api.php'), WP_Hook->do_action, WP_Hook->apply_filters, wcra_activate_plugin, WCRA_Activator::activate, wcra_save_recent_activity, wcra_delete_recent_activity, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[23-Apr-2025 09:34:45 UTC] PHP Deprecated:  Required parameter $response follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:45 UTC] PHP Deprecated:  Required parameter $_authintication follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:54 UTC] PHP Deprecated:  Required parameter $response follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:54 UTC] PHP Deprecated:  Required parameter $_authintication follows optional parameter $code in /wordpress/wp-content/plugins/custom-wp-rest-api/includes/Rest.inc.php on line 53
+[23-Apr-2025 09:34:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/custom-wp-rest-api/admin/settings.php on line 131
+[23-Apr-2025 09:34:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, '%Y-%m-%d %H:%i:%s') <= '2025-04-20 11:59:59' </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(*) from wp_wcra_notification_log where STR_TO_DATE(date_time, :param0 ) &lt;= :param1   | parameters: %Y-%m-%d %H:%i:%s, 2025-04-20 11:59:59</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT count(*)...')
+#2 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(165): wpdb->get_var('SELECT count(*)...')
+#3 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(141): wcra_delete_recent_activity()
+#4 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/functions.php(225): wcra_save_recent_activity(Array)
+#5 /wordpress/wp-content/plugins/custom-wp-rest-api/includes/class-customwprest-activator.php(57): wcra_save_default_endpoint()
+#6 /wordpress/wp-content/plugins/custom-wp-rest-api/wp-custom-rest-api.php(52): WCRA_Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wcra_activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(
