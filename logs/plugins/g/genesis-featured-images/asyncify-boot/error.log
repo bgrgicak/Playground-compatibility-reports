@@ -2,266 +2,216 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [22-Apr-2025 21:26:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [24-Apr-2025 11:46:58 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/google-subscribed-links/google-subscribed-links.php on line 27
+[24-Apr-2025 11:47:06 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/google-subscribed-links/google-subscribed-links.php on line 27
+[24-Apr-2025 11:47:14 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/google-subscribed-links/google-subscribed-links.php on line 27
+[24-Apr-2025 11:47:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'permalink'</p>
+<p>ALTER TABLE wp_gtwbundle_meetings 
+                        drop column `source`,
+                        ADD COLUMN `firstName` varchar(30) NOT NULL AFTER `type`,
+                        ADD COLUMN `lastName` varchar(30) NOT NULL AFTER `firstName`,
+                        ADD COLUMN `email` varchar(50) NOT NULL AFTER `lastName`
+                   </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_guiform_options` WHERE `name` = 'permalink' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_meetings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_meetings</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ? AND column_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings, source</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ? AND column_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings, source</li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_gtwbundle_meetings, database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, firstName, 13, , NO, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, lastName, 14, , NO, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_meetings, email, 15, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_meetings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gtwbundle_meetings_680a24e9226c8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `postid` INTEGER NOT NULL,
+  `type` TEXT COLLATE NOCASE,
+  `firstName` TEXT COLLATE NOCASE,
+  `lastName` TEXT COLLATE NOCASE,
+  `email` TEXT COLLATE NOCASE,
+  `meeting_id` TEXT COLLATE NOCASE NOT NULL,
+  `amount` TEXT COLLATE NOCASE NOT NULL,
+  `postdata` TEXT COLLATE NOCASE NOT NULL,
+  `payment_response` TEXT COLLATE NOCASE NOT NULL,
+  `payment_type` TEXT COLLATE NOCASE,
+  `status` INTEGER NOT NULL,
+  `firstName` TEXT COLLATE NOCASE NOT NULL,
+  `lastName` TEXT COLLATE NOCASE NOT NULL,
+  `email` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options
+SQLSTATE[HY000]: General error: 1 duplicate column name: firstName
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(134): GuiForm_Module_Api->getOption('permalink')
-#6 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#7 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#8 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#9 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#12 /internal/eval.php(20): activate_plugin('guiform/index.p...')
-#13 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'permalink' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:33 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 134
-[22-Apr-2025 21:26:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(843): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(564): gotowp_g2m_add_missing_fields()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gotowp_g2m_save_before_payment('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_gtwbundle_meetings 
+                        drop column `source`,
+                        ADD COLUMN `firstName` varchar(30) NOT NULL AFTER `type`,
+                        ADD COLUMN `lastName` varchar(30) NOT NULL AFTER `firstName`,
+                        ADD COLUMN `email` varchar(50) NOT NULL AFTER `lastName`
+                    made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gotowp_g2m_save_before_payment, gotowp_g2m_add_missing_fields, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Apr-2025 11:47:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'upload_folder'</p>
+<p>ALTER TABLE wp_gtwbundle_webinars ADD source VARCHAR(50) NOT NULL AFTER email</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_guiform_options` WHERE `name` = 'upload_folder' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_webinars</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_gtwbundle_webinars</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_gtwbundle_webinars, source, 15, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_gtwbundle_webinars</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_gtwbundle_webinars_680a24e928870` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `postid` INTEGER NOT NULL,
+  `type` TEXT COLLATE NOCASE,
+  `firstName` TEXT COLLATE NOCASE,
+  `lastName` TEXT COLLATE NOCASE,
+  `email` TEXT COLLATE NOCASE,
+  `source` TEXT COLLATE NOCASE,
+  `webinar_id` TEXT COLLATE NOCASE NOT NULL,
+  `amount` TEXT COLLATE NOCASE NOT NULL,
+  `formdata` TEXT COLLATE NOCASE NOT NULL,
+  `postdata` TEXT COLLATE NOCASE NOT NULL,
+  `payment_response` TEXT COLLATE NOCASE NOT NULL,
+  `payment_type` TEXT COLLATE NOCASE,
+  `status` INTEGER NOT NULL,
+  `source` TEXT COLLATE NOCASE NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options
+SQLSTATE[HY000]: General error: 1 duplicate column name: source
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(610): GuiForm_Module_Api->getOption('upload_folder')
-#6 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(135): GuiForm_Module_Api->_uploadFolder()
-#7 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#8 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#9 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#10 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#13 /internal/eval.php(20): activate_plugin('guiform/index.p...')
-#14 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'upload_folder' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->_uploadFolder, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:33 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 610
-[22-Apr-2025 21:26:33 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:33 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:33 UTC] PHP Warning:  Attempt to read property "value" on null in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Setup.php on line 273
-[22-Apr-2025 21:26:34 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:34 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>guiform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:34 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:34 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Frontend.php on line 57
-[22-Apr-2025 21:26:34 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:34 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Update.php on line 67
-[22-Apr-2025 21:26:43 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'permalink'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_guiform_options WHERE name = :param0  | parameters: permalink</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(134): GuiForm_Module_Api->getOption('permalink')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#6 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#7 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#10 /internal/eval.php(20): activate_plugin('guiform/index.p...')
-#11 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'permalink' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:43 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 134
-[22-Apr-2025 21:26:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'upload_folder'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_guiform_options WHERE name = :param0  | parameters: upload_folder</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(610): GuiForm_Module_Api->getOption('upload_folder')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(135): GuiForm_Module_Api->_uploadFolder()
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#6 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#8 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#11 /internal/eval.php(20): activate_plugin('guiform/index.p...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(241): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/gotowp/_gotowpp_inc.php(1022): gotowp_personal_add_source_field()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gotowp_personal_save_before_payment('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'upload_folder' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->_uploadFolder, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:43 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 610
-[22-Apr-2025 21:26:43 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:43 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:43 UTC] PHP Warning:  Attempt to read property "value" on null in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Setup.php on line 273
-[22-Apr-2025 21:26:44 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>guiform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:45 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:45 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Frontend.php on line 57
-[22-Apr-2025 21:26:45 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:45 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Update.php on line 67
-[22-Apr-2025 21:26:53 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'permalink'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_guiform_options WHERE name = :param0  | parameters: permalink</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(134): GuiForm_Module_Api->getOption('permalink')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#6 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#7 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#10 /internal/eval.php(20): activate_plugin('guiform/index.p...')
-#11 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'permalink' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:53 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 134
-[22-Apr-2025 21:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_guiform_options WHERE name = 'upload_folder'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_guiform_options WHERE name = :param0  | parameters: upload_folder</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_guiform_options.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(443): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(610): GuiForm_Module_Api->getOption('upload_folder')
-#4 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php(135): GuiForm_Module_Api->_uploadFolder()
-#5 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(135): GuiForm_Module_Api->init()
-#6 /wordpress/wp-content/plugins/guiform/classes/GuiForm/Plugin.php(162): GuiForm_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/guiform/index.php(85): GuiForm_Plugin::instance()
-#8 /wordpress/wp-content/plugins/guiform/index.php(122): guiform_launch()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('guiform/index.p...')
-#11 /internal/eval.php(20): activate_plugin('guiform/index.p...')
-#12 {main}</pre>
- for query SELECT * FROM wp_guiform_options WHERE name = 'upload_folder' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/guiform/index.php'), guiform_launch, GuiForm_Plugin::instance, GuiForm_Plugin->__construct, GuiForm_Module_Api->init, GuiForm_Module_Api->_uploadFolder, GuiForm_Module_Api->getOption, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:26:53 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 610
-[22-Apr-2025 21:26:53 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:53 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:54 UTC] PHP Warning:  Attempt to read property "value" on null in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Setup.php on line 273
-[22-Apr-2025 21:26:55 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Api.php on line 124
-[22-Apr-2025 21:26:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>guiform</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:55 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Frontend.php on line 57
-[22-Apr-2025 21:26:55 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in GuiForm_Module_Widget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[22-Apr-2025 21:26:55 UTC] PHP Warning:  Attempt to read property "value" on bool in /wordpress/wp-content/plugins/guiform/classes/GuiForm/Module/Update.php on line 67
-[22-Apr-2025 21:27:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE 'wp_ts_galleryv_manager' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE 'wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE 'wp...')
-#3 /wordpress/wp-content/plugins/gallery-videos/includes/class-tsvg-gallery.php(58): WP_SQLite_DB->query('ALTER TABLE 'wp...')
-#4 /wordpress/wp-content/plugins/gallery-videos/includes/class-tsvg-gallery.php(19): TS_Video_Gallery->tsvg_update_plugin()
-#5 /wordpress/wp-content/plugins/gallery-videos/index.php(30): TS_Video_Gallery->__construct()
-#6 /wordpress/wp-content/plugins/gallery-videos/index.php(33): tsvg_run_plugin()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gallery-videos/...')
-#9 /internal/eval.php(20): activate_plugin('gallery-videos/...')
-#10 {main}</pre>
- for query ALTER TABLE 'wp_ts_galleryv_manager' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gallery-videos/index.php'), tsvg_run_plugin, TS_Video_Gallery->__construct, TS_Video_Gallery->tsvg_update_plugin, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:27:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE 'wp_ts_galleryv_videos' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE 'wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE 'wp...')
-#3 /wordpress/wp-content/plugins/gallery-videos/includes/class-tsvg-gallery.php(59): WP_SQLite_DB->query('ALTER TABLE 'wp...')
-#4 /wordpress/wp-content/plugins/gallery-videos/includes/class-tsvg-gallery.php(19): TS_Video_Gallery->tsvg_update_plugin()
-#5 /wordpress/wp-content/plugins/gallery-videos/index.php(30): TS_Video_Gallery->__construct()
-#6 /wordpress/wp-content/plugins/gallery-videos/index.php(33): tsvg_run_plugin()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gallery-videos/...')
-#9 /internal/eval.php(20): activate_plugin('gallery-videos/...')
-#10 {main}</pre>
- for query ALTER TABLE 'wp_ts_galleryv_videos' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gallery-videos/index.php'), tsvg_run_plugin, TS_Video_Gallery->__construct, TS_Video_Gallery->tsvg_update_plugin, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[22-Apr-2025 21:28:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function is_wp_error(), 0 passed in /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php on line 55 and exactly 1 expected in /wordpress/wp-includes/load.php:1798
+ for query ALTER TABLE wp_gtwbundle_webinars ADD source VARCHAR(50) NOT NULL AFTER email made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gotowp_personal_save_before_payment, gotowp_personal_add_source_field, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Apr-2025 11:48:48 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:48:48 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:48:58 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:48:59 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:49:09 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:49:10 UTC] PHP Warning:  The magic method GVWC_Vantiv::__wakeup() must have public visibility in /wordpress/wp-content/plugins/gateway-for-vantiv-on-wc/gateway-vantiv-woocommerce.php on line 73
+[24-Apr-2025 11:49:19 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function is_wp_error(), 0 passed in /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php on line 55 and exactly 1 expected in /wordpress/wp-includes/load.php:1798
 Stack trace:
 #0 /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php(55): is_wp_error()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): gfi_activation_check(false)
@@ -271,7 +221,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('genesis-feature...')
 #6 {main}
   thrown in /wordpress/wp-includes/load.php on line 1798
-[22-Apr-2025 21:28:35 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function is_wp_error(), 0 passed in /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php on line 55 and exactly 1 expected in /wordpress/wp-includes/load.php:1798
+[24-Apr-2025 11:49:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function is_wp_error(), 0 passed in /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php on line 55 and exactly 1 expected in /wordpress/wp-includes/load.php:1798
 Stack trace:
 #0 /wordpress/wp-content/plugins/genesis-featured-images/genesis-featured-images.php(55): is_wp_error()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): gfi_activation_check(false)
