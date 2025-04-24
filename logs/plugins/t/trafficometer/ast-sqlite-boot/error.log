@@ -2,16 +2,44 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [23-Apr-2025 21:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [24-Apr-2025 22:55:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php:91
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('thickbox-conten...')
+#2 /internal/eval.php(20): activate_plugin('thickbox-conten...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php on line 91
+[24-Apr-2025 22:55:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php:91
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('thickbox-conten...')
+#2 /internal/eval.php(20): activate_plugin('thickbox-conten...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php on line 91
+[24-Apr-2025 22:56:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php:91
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('thickbox-conten...')
+#2 /internal/eval.php(20): activate_plugin('thickbox-conten...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/thickbox-content/thkBoxContent.php on line 91
+[24-Apr-2025 22:56:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
+			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
+			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
+			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
+			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
+			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
+			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
+			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
+			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
+			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
+			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
+			INDEX ( `i_datetime_created` )
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
+		</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -19,70 +47,50 @@ Error: [23-Apr-2025 21:50:54 UTC] WordPress database error <div style="clear:bot
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: i_for_site_admin.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2623): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(28): maybe_create_table('wp_tcf_custom_f...', 'CREATE TABLE wp...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(87): TCF_CustomFields_Table->createTable()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->createTable, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Apr-2025 21:50:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Base_Global_News.php(147): wpdb->get_results('CREATE TABLE IF...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Global_News.php(61): ThreeWP_Base_Global_News->query('CREATE TABLE IF...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Global_News->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
+#8 /internal/eval.php(20): activate_plugin('threewp-global-...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
+			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
+			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
+			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
+			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
+			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
+			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
+			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
+			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
+			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
+			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
+			INDEX ( `i_datetime_created` )
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
+		 made by activate_plugin, do_action('activate_threewp-global-news/ThreeWP_Global_News.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Global_News->activate, ThreeWP_Base_Global_News->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Apr-2025 22:56:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tcf_custom_fields.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(34): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(88): TCF_CustomFields_Table->getAll()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->getAll, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Apr-2025 21:51:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4;</p>
+<p>CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
+			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
+			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
+			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
+			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
+			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
+			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
+			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
+			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
+			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
+			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
+			INDEX ( `i_datetime_created` )
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
+		</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -90,63 +98,93 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: json.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: i_for_site_admin.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(2623): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(28): maybe_create_table('wp_tcf_custom_f...', 'CREATE TABLE wp...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(87): TCF_CustomFields_Table->createTable()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query CREATE TABLE wp_tcf_custom_fields (
-      id int(9) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY  (id),
-      json_configs json NOT NULL,
-      created_at datetime NOT NULL DEFAULT current_timestamp(),
-      updated_at datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-    ) DEFAULT CHARACTER SET utf8mb4; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->createTable, maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Apr-2025 21:51:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC;</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_tcf_custom_fields.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/toolazy-custom-fields/migration/TCF-CustomFields.table.php(34): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(88): TCF_CustomFields_Table->getAll()
-#4 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(59): ToolazyCf->initialize()
-#5 /wordpress/wp-content/plugins/toolazy-custom-fields/toolazy-cf.php(360): ToolazyCf->__construct()
-#6 /wordpress/wp-includes/class-wp-hook.php(322): toolazy()
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(727): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT * FROM wp_tcf_custom_fields ORDER BY id DESC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, toolazy, ToolazyCf->__construct, ToolazyCf->initialize, TCF_CustomFields_Table->getAll, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[23-Apr-2025 21:52:03 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/tourmix/inc/TourmixOrdersTableHandler.php on line 248
-[23-Apr-2025 21:52:11 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/tourmix/inc/TourmixOrdersTableHandler.php on line 248
-[23-Apr-2025 21:52:19 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/tourmix/inc/TourmixOrdersTableHandler.php on line 248
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Base_Global_News.php(147): wpdb->get_results('CREATE TABLE IF...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/threewp-global-news/ThreeWP_Global_News.php(61): ThreeWP_Base_Global_News->query('CREATE TABLE IF...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Global_News->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
+#8 /internal/eval.php(20): activate_plugin('threewp-global-...')
+#9 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp__3wp_global_news_items` (
+			`i_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'News item ID',
+			`i_datetime_created` DATETIME NOT NULL COMMENT 'When the item was created',
+			`i_title` TEXT NOT NULL COMMENT 'Short title describing the item',
+			`i_text` LONGTEXT NOT NULL COMMENT 'Item text in all its glory',
+			`i_for_site_admin` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for site admins?',
+			`i_for_administrator` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for the administrators?',
+			`i_for_editor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for editors',
+			`i_for_author` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for authors',
+			`i_for_contributor` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for contributors',
+			`i_for_subscriber` BOOL NOT NULL DEFAULT '0' COMMENT 'Is this news item for subscriber',
+			INDEX ( `i_datetime_created` )
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='News items';
+		 made by activate_plugin, do_action('activate_threewp-global-news/ThreeWP_Global_News.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Global_News->activate, ThreeWP_Base_Global_News->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[24-Apr-2025 22:57:13 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, bool given in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php(17): in_array('Ticket Form Fie...', false)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tikipress-ticke...')
+#3 /internal/eval.php(20): activate_plugin('tikipress-ticke...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php on line 17
+[24-Apr-2025 22:57:21 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, bool given in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php(17): in_array('Ticket Form Fie...', false)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tikipress-ticke...')
+#3 /internal/eval.php(20): activate_plugin('tikipress-ticke...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php on line 17
+[24-Apr-2025 22:57:30 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, bool given in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php(17): in_array('Ticket Form Fie...', false)
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tikipress-ticke...')
+#3 /internal/eval.php(20): activate_plugin('tikipress-ticke...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/tikipress-tickets-events-plugin/wpsc_tickets.php on line 17
+[24-Apr-2025 22:58:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function glob() on null in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php:57
+Stack trace:
+#0 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migration.php(108): TotalFormVendors\TotalSuite\Foundation\Migration\Migration@anonymous->applySchema()
+#1 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migrator.php(88): TotalFormVendors\TotalSuite\Foundation\Migration\Migration->run()
+#2 /wordpress/wp-content/plugins/totalform/src/Plugin.php(202): TotalFormVendors\TotalSuite\Foundation\Migration\Migrator->execute()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TotalForm\Plugin->onActivation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_totalf...', false)
+#7 /internal/eval.php(20): activate_plugin('totalform/plugi...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php on line 57
+[24-Apr-2025 22:58:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function glob() on null in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php:57
+Stack trace:
+#0 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migration.php(108): TotalFormVendors\TotalSuite\Foundation\Migration\Migration@anonymous->applySchema()
+#1 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migrator.php(88): TotalFormVendors\TotalSuite\Foundation\Migration\Migration->run()
+#2 /wordpress/wp-content/plugins/totalform/src/Plugin.php(202): TotalFormVendors\TotalSuite\Foundation\Migration\Migrator->execute()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TotalForm\Plugin->onActivation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_totalf...', false)
+#7 /internal/eval.php(20): activate_plugin('totalform/plugi...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php on line 57
+[24-Apr-2025 22:58:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function glob() on null in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php:57
+Stack trace:
+#0 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migration.php(108): TotalFormVendors\TotalSuite\Foundation\Migration\Migration@anonymous->applySchema()
+#1 /wordpress/wp-content/plugins/totalform/vendor/totalsuite/foundation/src/Migration/Migrator.php(88): TotalFormVendors\TotalSuite\Foundation\Migration\Migration->run()
+#2 /wordpress/wp-content/plugins/totalform/src/Plugin.php(202): TotalFormVendors\TotalSuite\Foundation\Migration\Migrator->execute()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): TotalForm\Plugin->onActivation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_totalf...', false)
+#7 /internal/eval.php(20): activate_plugin('totalform/plugi...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/totalform/migrations/1.0.0/migration.php on line 57
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
