@@ -1,4 +1,11 @@
 {
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "login": true,
+  "siteOptions": {
+    "users_can_register": "1",
+    "blogname": "Football Pool",
+    "blogdescription": "A great way to test a few features of the football pool plugin."
+  },
   "landingPage": "/",
   "preferredVersions": {
     "php": "7.4",
@@ -19,19 +26,8 @@
       }
     },
     {
-      "step": "login",
-      "username": "admin",
-      "password": "password"
-    },
-    {
-      "step": "setSiteOptions",
-      "options": {
-        "users_can_register": "1"
-      }
-    },
-    {
       "step": "installPlugin",
-      "pluginZipFile": {
+      "pluginData": {
         "resource": "wordpress.org/plugins",
         "slug": "football-pool"
       },
@@ -41,7 +37,7 @@
     },
     {
       "step": "installPlugin",
-      "pluginZipFile": {
+      "pluginData": {
         "resource": "wordpress.org/plugins",
         "slug": "user-switching"
       },
@@ -51,7 +47,7 @@
     },
     {
       "step": "installTheme",
-      "themeZipFile": {
+      "themeData": {
         "resource": "wordpress.org/themes",
         "slug": "astra"
       },
@@ -60,19 +56,12 @@
       }
     },
     {
-      "step": "setSiteOptions",
-      "options": {
-        "blogname": "Football Pool",
-        "blogdescription": "A great way to test a few features of the football pool plugin."
-      }
-    },
-    {
       "step": "wp-cli",
       "command": "wp post update 1 2 --post_status='draft'"
     },
     {
       "step": "wp-cli",
-      "command": "wp user update 1 --first_name='Antoine' --last_name='Hurkmans' --display_name='Antoine Hurkmans'"
+      "command": "wp user update 1 --first_name='Antoine' --last_name='Hurkmans'  --display_name='Antoine Hurkmans'"
     },
     {
       "step": "runPHP",
@@ -91,7 +80,7 @@
       "extractToPath": "/wordpress"
     },
     {
-      "step": "importFile",
+      "step": "importWxr",
       "file": {
         "resource": "url",
         "url": "https://raw.githubusercontent.com/WordPressFootballPool/playground-blueprint/main/blueprint.content.xml"
@@ -116,7 +105,17 @@
     },
     {
       "step": "wp-cli",
-      "command": "wp post create /wordpress/blueprint/blueprint.custom_css.css --post_status='publish' --post_type='custom_css' --post_author=1 --post_title='astra' --post_name='astra' --comment_status='closed' --ping_status='closed' "
+      "command": "wp post create /wordpress/blueprint/blueprint.custom_css.css  --post_status='publish' --post_type='custom_css' --post_author=1 --post_title='astra' --post_name='astra' --comment_status='closed' --ping_status='closed'"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "football-pool"
+      },
+      "options": {
+        "activate": true
+      }
     }
   ]
 }
