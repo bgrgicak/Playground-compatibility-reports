@@ -700,6 +700,16 @@
 | team-feed | Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/t/team-feed/error.json) |
 | team-feed | Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/t/team-feed/error.json) |
 | tf-faq | Uncaught Error: Call to undefined method WP_SQLite_Driver::get_columns() in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:505 | [View logs](/logs/plugins/t/tf-faq/error.json) |
+| vo-html-sitemap | Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/viewmobile/viewmobile.php on line 14 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/viewmobile/viewmobile.php:25 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/viewmobile/viewmobile.php on line 14 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/viewmobile/viewmobile.php:25 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/viewmobile/viewmobile.php on line 14 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/viewmobile/viewmobile.php:25 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vina-categories-treeview-widget/treeview.php:230 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vina-categories-treeview-widget/treeview.php:230 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vina-categories-treeview-widget/treeview.php:230 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
+| vo-html-sitemap | Undefined array key 5 in /wordpress/wp-includes/link-template.php on line 282 | [View logs](/logs/plugins/v/vo-html-sitemap/error.json) |
 | web-font-optimization | Undefined variable $HTTP_POST_VARS in /wordpress/wp-content/plugins/wp-linkchanger/wp-linkchanger.php on line 72 | [View logs](/logs/plugins/w/web-font-optimization/error.json) |
 | web-font-optimization | Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-linkchanger/wp-linkchanger.php on line 72 | [View logs](/logs/plugins/w/web-font-optimization/error.json) |
 | web-font-optimization | Undefined variable $HTTP_POST_VARS in /wordpress/wp-content/plugins/wp-linkchanger/wp-linkchanger.php on line 72 | [View logs](/logs/plugins/w/web-font-optimization/error.json) |
