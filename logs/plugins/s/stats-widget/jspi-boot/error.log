@@ -2,713 +2,249 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [24-Apr-2025 10:53:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NOT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
-`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-PRIMARY KEY (`fast_hash`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(500): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NOT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
-`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-PRIMARY KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:53:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
-`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
-`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(500): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
-`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
-`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:53:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NOT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
-`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-PRIMARY KEY (`fast_hash`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_re...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(500): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_results` (`path` varchar(1024) NOT NULL,
-`size` int NOT NULL,
-`perms` int NOT NULL,
-`mtime` int NOT NULL,
-`detected_at` int NULL DEFAULT NULL,
-`source_type` enum('CORE', 'PLUGIN', 'THEME') NULL DEFAULT NULL,
-`source` varchar(300) NULL DEFAULT NULL,
-`source_status` set('UP_TO_DATE','OUTDATED','NOT_IN_DIRECTORY','UNKNOWN') NULL DEFAULT NULL,
-`version` varchar(20) NULL DEFAULT NULL,
-`checked_heuristic` int NOT NULL,
-`checked_signatures` int NOT NULL,
-`status` enum('UNKNOWN','OK','APPROVED_BY_USER','APPROVED_BY_CT','DENIED_BY_CT','MODIFIED','INFECTED','QUARANTINED', 'DENIED_BY_CLOUD', 'APPROVED_BY_CLOUD', 'ERROR') NOT NULL DEFAULT 'UNKNOWN',
-`error_msg` varchar(1024) NULL DEFAULT NULL,
-`severity` enum('CRITICAL', 'SUSPICIOUS', 'NONE') NULL DEFAULT NULL,
-`weak_spots` varchar(2048) NULL DEFAULT NULL,
-`difference` varchar(1024) NULL DEFAULT NULL,
-`last_sent` int NULL DEFAULT NULL,
-`fast_hash` varchar(32) NOT NULL,
-`full_hash` varchar(32) NULL DEFAULT NULL,
-`real_full_hash` varchar(32) NULL DEFAULT NULL,
-`previous_state` varchar(1024) NULL DEFAULT NULL,
-`q_path` varchar(1024) NULL DEFAULT NULL,
-`q_time` int NULL DEFAULT NULL,
-`pscan_status` enum('DANGEROUS', 'SAFE') NULL DEFAULT NULL,
-`pscan_processing_status` enum('NEW', 'DONE', 'ERROR', 'IN_SCANER', 'NEW_CLOUD', 'IN_CLOUD', 'IN_SANDBOX', 'NEW_SANDBOX', 'UNKNOWN') NULL DEFAULT NULL,
-`pscan_pending_queue` SMALLINT NULL DEFAULT NULL,
-`pscan_balls` varchar(1024) NULL DEFAULT NULL,
-`pscan_file_id` varchar(32) NULL DEFAULT NULL,
-`pscan_estimated_execution_time` int NULL DEFAULT NULL,
-PRIMARY KEY (`fast_hash`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:53:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
-`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
-`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`));</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB.php(128): WP_SQLite_DB->query('CREATE TABLE IF...')
-#2 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/DB/TablesCreator.php(66): CleantalkSP\SpbctWP\DB->execute('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/security-malware-firewall/lib/CleantalkSP/SpbctWP/Activator.php(31): CleantalkSP\SpbctWP\DB\TablesCreator->createTable('wp_spbc_scan_si...')
-#4 /wordpress/wp-content/plugins/security-malware-firewall/security-malware-firewall.php(500): CleantalkSP\SpbctWP\Activator::activation(false, true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): spbc_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_securi...', false)
-#9 /internal/eval.php(20): activate_plugin('security-malwar...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_spbc_scan_signatures` (`id` int unsigned NOT NULL AUTO_INCREMENT,
-`name` varchar(128) NOT NULL,
-`body` text NOT NULL,
-`type` enum('FILE','CODE_PHP','CODE_HTML','CODE_JS','WAF_RULE') NOT NULL,
-`attack_type` set('SQL_INJECTION','XSS','MALWARE','EXPLOIT','SUSPICIOUS') NOT NULL,
-`waf_action` enum('DENY','LOG','ALLOW') NULL DEFAULT NULL,
-`submitted` datetime NOT NULL,
-`cci` text NULL DEFAULT NULL,
-`waf_headers` varchar(1024) NULL DEFAULT NULL,
-`waf_url` varchar(512) NULL DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY (`name`)); made by activate_plugin, do_action('activate_security-malware-firewall/security-malware-firewall.php'), WP_Hook->do_action, WP_Hook->apply_filters, spbc_activation, CleantalkSP\SpbctWP\Activator::activation, CleantalkSP\SpbctWP\DB\TablesCreator->createTable, CleantalkSP\SpbctWP\DB->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_ami_share_socials_settings (
-			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-			name TEXT NULL,
-			status bool NULL
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, name, text</li>
-<li>Executing: CREATE TABLE &quot;wp_ami_share_socials_settings&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;name&quot; text COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_ami_share_socials_settings__&quot; ON &quot;wp_ami_share_socials_settings&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, wp_ami_share_socials_settings__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(44): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
-#8 /internal/eval.php(20): activate_plugin('share-social-ne...')
-#9 {main}</pre>
- for query CREATE TABLE wp_ami_share_socials_settings (
-			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-			name TEXT NULL,
-			status bool NULL
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES (:param0 , TRUE),(:param1 , TRUE),(:param2 , TRUE),(:param3 , TRUE),(:param4 , TRUE),(:param5 , TRUE),(:param6 , TRUE),(:param7 , TRUE); | parameters: facebook, linkedin, pinterest, reddit, telegram, tumblr, twitter, vk</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ami_share_socials_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(68): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [26-Apr-2025 01:49:22 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
-#7 /internal/eval.php(20): activate_plugin('share-social-ne...')
-#8 {main}</pre>
- for query INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE); made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:55:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_ami_share_socials_settings (
-			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-			name TEXT NULL,
-			status bool NULL
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, name, text</li>
-<li>Executing: CREATE TABLE &quot;wp_ami_share_socials_settings&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;name&quot; text COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_ami_share_socials_settings__&quot; ON &quot;wp_ami_share_socials_settings&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ami_share_socials_settings, wp_ami_share_socials_settings__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(44): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
-#8 /internal/eval.php(20): activate_plugin('share-social-ne...')
-#9 {main}</pre>
- for query CREATE TABLE wp_ami_share_socials_settings (
-			id BIGINT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-			name TEXT NULL,
-			status bool NULL
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:55:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES (:param0 , TRUE),(:param1 , TRUE),(:param2 , TRUE),(:param3 , TRUE),(:param4 , TRUE),(:param5 , TRUE),(:param6 , TRUE),(:param7 , TRUE); | parameters: facebook, linkedin, pinterest, reddit, telegram, tumblr, twitter, vk</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_ami_share_socials_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/share-social-networks/includes/class-share-sociale-networks-activator.php(68): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/share-social-networks/share-sociale-networks.php(51): Share_Sociale_Networks_Activator::activate()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_share_sociale_networks(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_share-...', false)
-#7 /internal/eval.php(20): activate_plugin('share-social-ne...')
-#8 {main}</pre>
- for query INSERT INTO `wp_ami_share_socials_settings` (`name`, `status`)VALUES ('facebook', TRUE),('linkedin', TRUE),('pinterest', TRUE),('reddit', TRUE),('telegram', TRUE),('tumblr', TRUE),('twitter', TRUE),('vk', TRUE); made by activate_plugin, do_action('activate_share-social-networks/share-sociale-networks.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_share_sociale_networks, Share_Sociale_Networks_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 10:57:08 UTC] PHP Fatal error:  Uncaught Error: Non-static method simple_fourohfour_keyword_insertion::go() cannot be called statically in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php:55
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-404-keyw...')
-#2 /internal/eval.php(20): activate_plugin('simple-404-keyw...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php on line 55
-[24-Apr-2025 10:57:16 UTC] PHP Fatal error:  Uncaught Error: Non-static method simple_fourohfour_keyword_insertion::go() cannot be called statically in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php:55
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-404-keyw...')
-#2 /internal/eval.php(20): activate_plugin('simple-404-keyw...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php on line 55
-[24-Apr-2025 10:57:23 UTC] PHP Fatal error:  Uncaught Error: Non-static method simple_fourohfour_keyword_insertion::go() cannot be called statically in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php:55
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-404-keyw...')
-#2 /internal/eval.php(20): activate_plugin('simple-404-keyw...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/simple-404-keyword-insertion/simple-404-keyword-insertion.php on line 55
-[24-Apr-2025 10:57:57 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Easy_Feedback::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-easy-fee...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[24-Apr-2025 10:58:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Easy_Feedback::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-easy-fee...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[24-Apr-2025 10:58:14 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Simple_Easy_Feedback::my_plugin_create_db() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
-#3 /internal/eval.php(20): activate_plugin('simple-easy-fee...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[24-Apr-2025 11:00:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, id, 1, , NO, bigint, , , 19, 0, , , , bigint(20), , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, mo_sp_id, 2, , YES, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, mo_sp_attr_name, 3, , NO, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, mo_sp_attr_value, 4, , NO, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, mo_attr_type, 5, 0, NO, smallint, , , 5, 0, , , , smallint, , , select,insert,update,references, , , </li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_mo_sp_attributes, id</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_mo_sp_attributes, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_mo_sp_attributes, database_name_here, wp_mo_sp_attributes</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#4 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(72): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(81): MSFSI\Helper\Database\MoDbQueries->generate_tables()
-#6 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/MoIDP.php(107): MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): MSFSI\MoIDP->mo_plugin_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sso-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('sso-freshdesk-s...')
-#12 {main}</pre>
- for query CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                ) made by activate_plugin, do_action('activate_sso-freshdesk-support-integration/MoIDPSettings.php'), WP_Hook->do_action, WP_Hook->apply_filters, MSFSI\MoIDP->mo_plugin_activate, MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries, MSFSI\Helper\Database\MoDbQueries->generate_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 11:00:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[26-Apr-2025 01:49:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[26-Apr-2025 01:49:39 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Sexy_Login_Widg...')
+#2 /wordpress/wp-content/plugins/sexy-login/sexy-login-init.php(25): register_widget('Sexy_Login_Widg...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): sexy_login_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[26-Apr-2025 01:51:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                )</p>
+<p>CREATE TABLE wp_su_access_archive (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    ip varchar(100) NOT NULL DEFAULT '',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    possible_bot varchar(100) NOT NULL DEFAULT '',
+    user_agent varchar(255) NOT NULL DEFAULT '',
+    date date NOT NULL DEFAULT '0000-00-00',
+    PRIMARY KEY  (id),
+    KEY date (date),
+    KEY ip (ip)
+ 	) ENGINE=MyISAM DEFAULT CHARSET=utf8</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_attr_name, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_attr_value, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_attr_type, smallint</li>
-<li>Executing: CREATE TABLE &quot;wp_mo_sp_attributes&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;mo_sp_id&quot; integer,
-&quot;mo_sp_attr_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;mo_sp_attr_value&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;mo_attr_type&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_mo_sp_attributes__&quot; ON &quot;wp_mo_sp_attributes&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, wp_mo_sp_attributes__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 200.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(72): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(81): MSFSI\Helper\Database\MoDbQueries->generate_tables()
-#4 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/MoIDP.php(107): MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): MSFSI\MoIDP->mo_plugin_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sso-fr...', false)
-#9 /internal/eval.php(20): activate_plugin('sso-freshdesk-s...')
-#10 {main}</pre>
- for query CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                ) made by activate_plugin, do_action('activate_sso-freshdesk-support-integration/MoIDPSettings.php'), WP_Hook->do_action, WP_Hook->apply_filters, MSFSI\MoIDP->mo_plugin_activate, MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries, MSFSI\Helper\Database\MoDbQueries->generate_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 11:00:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/shieldup/includes/functions.php(82): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): shieldup_db_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shield...', false)
+#7 /internal/eval.php(20): activate_plugin('shieldup/su_mai...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_su_access_archive (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    ip varchar(100) NOT NULL DEFAULT '',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    possible_bot varchar(100) NOT NULL DEFAULT '',
+    user_agent varchar(255) NOT NULL DEFAULT '',
+    date date NOT NULL DEFAULT '0000-00-00',
+    PRIMARY KEY  (id),
+    KEY date (date),
+    KEY ip (ip)
+ 	) ENGINE=MyISAM DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_shieldup/su_main.php'), WP_Hook->do_action, WP_Hook->apply_filters, shieldup_db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 01:51:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                )</p>
+<p>CREATE TABLE wp_su_date_stats (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    date date NOT NULL DEFAULT '0000-00-00',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_attr_name, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_sp_attr_value, longtext</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, mo_attr_type, smallint</li>
-<li>Executing: CREATE TABLE &quot;wp_mo_sp_attributes&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;mo_sp_id&quot; integer,
-&quot;mo_sp_attr_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;mo_sp_attr_value&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;mo_attr_type&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_mo_sp_attributes__&quot; ON &quot;wp_mo_sp_attributes&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_mo_sp_attributes, wp_mo_sp_attributes__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 200.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(72): dbDelta(Array)
-#3 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/helper/database/MoDbQueries.php(81): MSFSI\Helper\Database\MoDbQueries->generate_tables()
-#4 /wordpress/wp-content/plugins/sso-freshdesk-support-integration/MoIDP.php(107): MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): MSFSI\MoIDP->mo_plugin_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sso-fr...', false)
-#9 /internal/eval.php(20): activate_plugin('sso-freshdesk-s...')
-#10 {main}</pre>
- for query CREATE TABLE wp_mo_sp_attributes (
-                    id bigint(20) NOT NULL auto_increment,
-                    mo_sp_id bigint(20),
-                    mo_sp_attr_name longtext NOT NULL,
-                    mo_sp_attr_value longtext NOT NULL,
-                    mo_attr_type smallint DEFAULT 0 NOT NULL,
-                    PRIMARY KEY  (id),
-                    FOREIGN KEY  (mo_sp_id) REFERENCES wp_mo_sp_data (id)
-                ) made by activate_plugin, do_action('activate_sso-freshdesk-support-integration/MoIDPSettings.php'), WP_Hook->do_action, WP_Hook->apply_filters, MSFSI\MoIDP->mo_plugin_activate, MSFSI\Helper\Database\MoDbQueries->checkTablesAndRunQueries, MSFSI\Helper\Database\MoDbQueries->generate_tables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 11:00:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#2 /wordpress/wp-content/plugins/shieldup/includes/functions.php(92): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): shieldup_db_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shield...', false)
+#7 /internal/eval.php(20): activate_plugin('shieldup/su_mai...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_su_date_stats (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    date date NOT NULL DEFAULT '0000-00-00',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_shieldup/su_main.php'), WP_Hook->do_action, WP_Hook->apply_filters, shieldup_db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 01:51:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_su_access_archive (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    ip varchar(100) NOT NULL DEFAULT '',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    possible_bot varchar(100) NOT NULL DEFAULT '',
+    user_agent varchar(255) NOT NULL DEFAULT '',
+    date date NOT NULL DEFAULT '0000-00-00',
+    PRIMARY KEY  (id),
+    KEY date (date),
+    KEY ip (ip)
+ 	) ENGINE=MyISAM DEFAULT CHARSET=utf8</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 200.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shieldup/includes/functions.php(82): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): shieldup_db_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shield...', false)
+#7 /internal/eval.php(20): activate_plugin('shieldup/su_mai...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_su_access_archive (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    ip varchar(100) NOT NULL DEFAULT '',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    possible_bot varchar(100) NOT NULL DEFAULT '',
+    user_agent varchar(255) NOT NULL DEFAULT '',
+    date date NOT NULL DEFAULT '0000-00-00',
+    PRIMARY KEY  (id),
+    KEY date (date),
+    KEY ip (ip)
+ 	) ENGINE=MyISAM DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_shieldup/su_main.php'), WP_Hook->do_action, WP_Hook->apply_filters, shieldup_db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 01:51:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_su_date_stats (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    date date NOT NULL DEFAULT '0000-00-00',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 200.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shieldup/includes/functions.php(92): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): shieldup_db_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shield...', false)
+#7 /internal/eval.php(20): activate_plugin('shieldup/su_mai...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_su_date_stats (
+    id int(9) NOT NULL AUTO_INCREMENT,
+    date date NOT NULL DEFAULT '0000-00-00',
+    200_count int(6) NOT NULL DEFAULT 0,
+    404_count int(6) NOT NULL DEFAULT 0,
+    PRIMARY KEY  (id)
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8 made by activate_plugin, do_action('activate_shieldup/su_main.php'), WP_Hook->do_action, WP_Hook->apply_filters, shieldup_db_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 01:57:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php:235
+Stack trace:
+#0 /wordpress/wp-content/plugins/stackoverflow/stackoverflow-plus.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stackoverflow/s...')
+#3 /internal/eval.php(20): activate_plugin('stackoverflow/s...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php on line 235
+[26-Apr-2025 01:57:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php:235
+Stack trace:
+#0 /wordpress/wp-content/plugins/stackoverflow/stackoverflow-plus.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stackoverflow/s...')
+#3 /internal/eval.php(20): activate_plugin('stackoverflow/s...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php on line 235
+[26-Apr-2025 01:57:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php:235
+Stack trace:
+#0 /wordpress/wp-content/plugins/stackoverflow/stackoverflow-plus.php(43): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stackoverflow/s...')
+#3 /internal/eval.php(20): activate_plugin('stackoverflow/s...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/stackoverflow/wsp-widget.php on line 235
+[26-Apr-2025 01:57:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_SiteStat...')
@@ -726,7 +262,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[24-Apr-2025 11:01:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[26-Apr-2025 01:58:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_SiteStat...')
@@ -744,7 +280,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[24-Apr-2025 11:01:17 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[26-Apr-2025 01:58:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_SiteStat...')
