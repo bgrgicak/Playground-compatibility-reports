@@ -2,10 +2,702 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [25-Apr-2025 09:32:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-tocjs</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:32:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-tocjs</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:32:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-tocjs</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:32:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_scanned_files ADD file_permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_scanned_files, FILE_PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_scanned_files ADD file_permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_scanned_files ADD file_permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_stored_files ADD file_permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_stored_files, FILE_PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_stored_files ADD file_permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_stored_files ADD file_permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_scanned_directories ADD permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_scanned_directories, PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_scanned_directories ADD permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_scanned_directories ADD permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_stored_directories ADD permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_stored_directories, PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_stored_directories ADD permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_stored_directories ADD permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_scanned_files ADD file_permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_scanned_files, FILE_PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_scanned_files ADD file_permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_scanned_files ADD file_permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1353): maybe_add_column('wp_mfm_scanned_...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_stored_files ADD file_permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_stored_files, FILE_PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_stored_files ADD file_permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_stored_files ADD file_permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_files</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1358): maybe_add_column('wp_mfm_stored_f...', 'file_permission...', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_files made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_scanned_directories ADD permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_scanned_directories, PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_scanned_directories ADD permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_scanned_directories ADD permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_scanned_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sca...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sca...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1363): maybe_add_column('wp_mfm_scanned_...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_scanned_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_mfm_stored_directories ADD permissions TEXT NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_mfm_stored_directories, PERMISSIONS, text</li>
+<li>Executing: ALTER TABLE wp_mfm_stored_directories ADD permissions text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: permissions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#8 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_mfm_stored_directories ADD permissions TEXT NOT NULL made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_mfm_stored_directories</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_mfm_sto...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_mfm_sto...', 0)
+#3 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(1368): maybe_add_column('wp_mfm_stored_d...', 'permissions', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/website-file-changes-monitor/classes/class-db-handler.php(189): MFM\DB_Handler::create_permissions_column()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MFM\DB_Handler::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_websit...', false)
+#9 /internal/eval.php(20): activate_plugin('website-file-ch...')
+#10 {main}</pre>
+ for query DESC wp_mfm_stored_directories made by activate_plugin, do_action('activate_website-file-changes-monitor/website-file-changes-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, MFM\DB_Handler::install, MFM\DB_Handler::create_permissions_column, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 23:27:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:27:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:27:15 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:15 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:27:16 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:16 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:27:23 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:23 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:27:24 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[26-Apr-2025 23:27:24 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[26-Apr-2025 23:30:31 UTC] PHP Fatal error:  Uncaught Error: Non-static method WP_Present_Core::action_init_register_post_type() cannot be called statically in /wordpress/wp-content/plugins/wp-present/wp-present.php:107
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WP_Present_Loader->activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pre...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-present/wp-p...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-present/wp-present.php on line 107
+[26-Apr-2025 23:30:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method WP_Present_Core::action_init_register_post_type() cannot be called statically in /wordpress/wp-content/plugins/wp-present/wp-present.php:107
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WP_Present_Loader->activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pre...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-present/wp-p...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-present/wp-present.php on line 107
+[26-Apr-2025 23:30:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method WP_Present_Core::action_init_register_post_type() cannot be called statically in /wordpress/wp-content/plugins/wp-present/wp-present.php:107
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WP_Present_Loader->activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-pre...', false)
+#4 /internal/eval.php(20): activate_plugin('wp-present/wp-p...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/wp-present/wp-present.php on line 107
+[26-Apr-2025 23:31:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE `wp_users` ADD CONSTRAINT `wpvf_vf_uid` UNIQUE (`wpvf_vf_uid`);</p>
@@ -31,7 +723,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('wp-vereinsflieg...')
 #10 {main}</pre>
  for query ALTER TABLE `wp_users` ADD CONSTRAINT `wpvf_vf_uid` UNIQUE (`wpvf_vf_uid`); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-vereinsflieger/wp-vereinsflieger.php'), Diginize\WpVereinsflieger\WpVereinsflieger::init, Diginize\WpVereinsflieger\DbSchema\DbSchema::init, Diginize\WpVereinsflieger\DbSchema\DbSchema::install, Diginize\WpVereinsflieger\DbSchema\Users::install, Diginize\WpVereinsflieger\DbSchema\DbSchema::addUnique, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Apr-2025 09:32:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[26-Apr-2025 23:31:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE `wp_users` ADD CONSTRAINT `wpvf_vf_uid` UNIQUE (`wpvf_vf_uid`);</p>
@@ -57,136 +749,28 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #9 /internal/eval.php(20): activate_plugin('wp-vereinsflieg...')
 #10 {main}</pre>
  for query ALTER TABLE `wp_users` ADD CONSTRAINT `wpvf_vf_uid` UNIQUE (`wpvf_vf_uid`); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-vereinsflieger/wp-vereinsflieger.php'), Diginize\WpVereinsflieger\WpVereinsflieger::init, Diginize\WpVereinsflieger\DbSchema\DbSchema::init, Diginize\WpVereinsflieger\DbSchema\DbSchema::install, Diginize\WpVereinsflieger\DbSchema\Users::install, Diginize\WpVereinsflieger\DbSchema\DbSchema::addUnique, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[25-Apr-2025 09:33:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php:34
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WPTweetImporter::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wptwee...', false)
-#4 /internal/eval.php(20): activate_plugin('wptweetimporter...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php on line 34
-[25-Apr-2025 09:33:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php:34
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WPTweetImporter::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wptwee...', false)
-#4 /internal/eval.php(20): activate_plugin('wptweetimporter...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php on line 34
-[25-Apr-2025 09:33:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_insert_category() in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php:34
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WPTweetImporter::activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wptwee...', false)
-#4 /internal/eval.php(20): activate_plugin('wptweetimporter...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wptweetimporter/includes/main.php on line 34
-[25-Apr-2025 09:34:40 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-class.php on line 1018
-[25-Apr-2025 09:34:40 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php:275
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php(152): WP_FFPC_ABSTRACT->plugin_options_read()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): WP_FFPC_ABSTRACT->plugin_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php on line 275
-[25-Apr-2025 09:34:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-class.php on line 1018
-[25-Apr-2025 09:34:49 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php:275
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php(152): WP_FFPC_ABSTRACT->plugin_options_read()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): WP_FFPC_ABSTRACT->plugin_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php on line 275
-[25-Apr-2025 09:34:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-class.php on line 1018
-[25-Apr-2025 09:34:58 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php:275
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php(152): WP_FFPC_ABSTRACT->plugin_options_read()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): WP_FFPC_ABSTRACT->plugin_init('')
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-settings.php(727): do_action('init')
-#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/wp-ffpc/wp-ffpc-abstract.php on line 275
-[25-Apr-2025 09:35:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-ie-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:35:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-ie-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:35:49 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-ie-buster</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[25-Apr-2025 09:37:59 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/web2easy/web2easy.php on line 60
-[25-Apr-2025 09:38:06 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/web2easy/web2easy.php on line 60
-[25-Apr-2025 09:38:14 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/web2easy/web2easy.php on line 60
-[25-Apr-2025 09:38:22 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/webp-conversion/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/webp-conversion/vendor/autoload.php(25): ComposerAutoloaderInit5ecbabff5f374cf0a6ff2146b68b0b1b::getLoader()
-#2 /wordpress/wp-content/plugins/webp-conversion/webp-conversion.php(18): require('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('webp-conversion...')
-#5 /internal/eval.php(20): activate_plugin('webp-conversion...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php on line 17
-[25-Apr-2025 09:38:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/webp-conversion/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/webp-conversion/vendor/autoload.php(25): ComposerAutoloaderInit5ecbabff5f374cf0a6ff2146b68b0b1b::getLoader()
-#2 /wordpress/wp-content/plugins/webp-conversion/webp-conversion.php(18): require('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('webp-conversion...')
-#5 /internal/eval.php(20): activate_plugin('webp-conversion...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php on line 17
-[25-Apr-2025 09:38:40 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php:17
-Stack trace:
-#0 /wordpress/wp-content/plugins/webp-conversion/vendor/composer/autoload_real.php(25): require()
-#1 /wordpress/wp-content/plugins/webp-conversion/vendor/autoload.php(25): ComposerAutoloaderInit5ecbabff5f374cf0a6ff2146b68b0b1b::getLoader()
-#2 /wordpress/wp-content/plugins/webp-conversion/webp-conversion.php(18): require('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('webp-conversion...')
-#5 /internal/eval.php(20): activate_plugin('webp-conversion...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/webp-conversion/vendor/composer/platform_check.php on line 17
-[25-Apr-2025 09:39:14 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/wp-mail-manager/source/class-extensions.php on line 95
-[25-Apr-2025 09:39:26 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/wp-mail-manager/source/class-extensions.php on line 95
-[25-Apr-2025 09:39:38 UTC] PHP Warning:  mail(): Could not execute mail delivery program '/usr/sbin/sendmail -t -i' in /wordpress/wp-content/plugins/wp-mail-manager/source/class-extensions.php on line 95
-[25-Apr-2025 09:39:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-ngrok/wp-ngrok.php on line 38
-[25-Apr-2025 09:39:59 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-ngrok/wp-ngrok.php on line 38
-[25-Apr-2025 09:40:07 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wp-ngrok/wp-ngrok.php on line 38
-[25-Apr-2025 09:40:42 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
+[26-Apr-2025 23:32:42 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twittersearc...')
 #2 /internal/eval.php(20): activate_plugin('wp-twittersearc...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php on line 29
-[25-Apr-2025 09:40:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
+[26-Apr-2025 23:32:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twittersearc...')
 #2 /internal/eval.php(20): activate_plugin('wp-twittersearc...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php on line 29
-[25-Apr-2025 09:40:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
+[26-Apr-2025 23:32:58 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTS_CURRENT_VERSION" in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php:29
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-twittersearc...')
 #2 /internal/eval.php(20): activate_plugin('wp-twittersearc...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wp-twittersearch/wp-twitter-search.php on line 29
-[25-Apr-2025 09:41:06 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WP_World_Travel::wpwt_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[26-Apr-2025 23:33:07 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WP_World_Travel::wpwt_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
@@ -194,7 +778,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('wp-world-travel...')
 #4 {main}
   thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[25-Apr-2025 09:41:12 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WP_World_Travel::wpwt_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+[26-Apr-2025 23:33:15 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method WP_World_Travel::wpwt_activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
