@@ -2,28 +2,138 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [24-Apr-2025 21:27:19 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  Undefined variable $table_name in /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php on line 40
-[24-Apr-2025 21:27:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [26-Apr-2025 11:46:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			)</p>
+<p>ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_postbox_email_log</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_postbox_email_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_postbox_email_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_postbox_email_log</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_postbox_email_log, read_status, 11, , YES, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_postbox_email_log</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_postbox_email_log</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_postbox_email_log</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_postbox_email_log_680cc78b3d478` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `to_email` TEXT COLLATE NOCASE,
+  `subject` TEXT COLLATE NOCASE,
+  `headers` TEXT COLLATE NOCASE,
+  `attachments` TEXT COLLATE NOCASE,
+  `message` TEXT COLLATE NOCASE,
+  `ip_address` TEXT COLLATE NOCASE,
+  `error_message` TEXT COLLATE NOCASE,
+  `read_status` TEXT COLLATE NOCASE,
+  `sent_date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `read_status` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: read_status
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/postbox-email-logs/inc/utility.php(197): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/postbox-email-logs/postbox-email-logs.php(41): PBEML\Utility\create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): pbeml_on_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_postbo...', false)
+#9 /internal/eval.php(20): activate_plugin('postbox-email-l...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL; made by activate_plugin, do_action('activate_postbox-email-logs/postbox-email-logs.php'), WP_Hook->do_action, WP_Hook->apply_filters, pbeml_on_activate, PBEML\Utility\create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 11:46:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_postbox_email_log, `READ_STATUS`, varchar(30)</li>
+<li>Executing: ALTER TABLE wp_postbox_email_log ADD `read_status` text NULL; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: read_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/postbox-email-logs/inc/utility.php(197): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/postbox-email-logs/postbox-email-logs.php(41): PBEML\Utility\create_table()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): pbeml_on_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_postbo...', false)
+#7 /internal/eval.php(20): activate_plugin('postbox-email-l...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL; made by activate_plugin, do_action('activate_postbox-email-logs/postbox-email-logs.php'), WP_Hook->do_action, WP_Hook->apply_filters, pbeml_on_activate, PBEML\Utility\create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 11:46:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_postbox_email_log, `READ_STATUS`, varchar(30)</li>
+<li>Executing: ALTER TABLE wp_postbox_email_log ADD `read_status` text NULL; | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: read_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/postbox-email-logs/inc/utility.php(197): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/postbox-email-logs/postbox-email-logs.php(41): PBEML\Utility\create_table()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): pbeml_on_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_postbo...', false)
+#7 /internal/eval.php(20): activate_plugin('postbox-email-l...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_postbox_email_log ADD `read_status` varchar(30) NULL; made by activate_plugin, do_action('activate_postbox-email-logs/postbox-email-logs.php'), WP_Hook->do_action, WP_Hook->apply_filters, pbeml_on_activate, PBEML\Utility\create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 11:47:14 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:47:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                main_product_id INT(11) NOT NULL,
+                active TINYINT(4) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
 <p>Queries made or created this session were:</p>
 <ol>
 </ol>
@@ -33,185 +143,105 @@ Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE  (...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE  (...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#4 /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php(56): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): rsvpbee_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
+#3 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesModel.php(354): WP_SQLite_DB->query('\n            CR...')
+#4 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesPlugin.php(86): Premmerce\ProductBundles\ProductBundlesModel->createBundlesTable()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Premmerce\ProductBundles\ProductBundlesPlugin->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rsvp-b...', false)
-#9 /internal/eval.php(20): activate_plugin('rsvp-bee/rsvpbe...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_premme...', false)
+#9 /internal/eval.php(20): activate_plugin('premmerce-wooco...')
 #10 {main}</pre>
- for query CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			) made by activate_plugin, do_action('activate_rsvp-bee/rsvpbee.php'), WP_Hook->do_action, WP_Hook->apply_filters, rsvpbee_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:19 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:27 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:27 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:27 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:27 UTC] PHP Warning:  Undefined variable $table_name in /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php on line 40
-[24-Apr-2025 21:27:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query 
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                main_product_id INT(11) NOT NULL,
+                active TINYINT(4) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_premmerce-woocommerce-product-bundles/premmerce-product-bundles.php'), WP_Hook->do_action, WP_Hook->apply_filters, Premmerce\ProductBundles\ProductBundlesPlugin->activate, Premmerce\ProductBundles\ProductBundlesModel->createBundlesTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 11:47:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			)</p>
+<p>            
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles_products (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                bundle_id INT(11) NOT NULL,
+                product_id INT(11) NOT NULL,
+                discount INT(11) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 11.
+Failed to parse the MySQL query.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#2 /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php(56): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): rsvpbee_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rsvp-b...', false)
-#7 /internal/eval.php(20): activate_plugin('rsvp-bee/rsvpbe...')
-#8 {main}</pre>
- for query CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			) made by activate_plugin, do_action('activate_rsvp-bee/rsvpbee.php'), WP_Hook->do_action, WP_Hook->apply_filters, rsvpbee_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 21:27:28 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:28 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:28 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:36 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:36 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:36 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:36 UTC] PHP Warning:  Undefined variable $table_name in /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php on line 40
-[24-Apr-2025 21:27:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: 11.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE  (...')
-#2 /wordpress/wp-content/plugins/rsvp-bee/rsvpbee.php(56): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): rsvpbee_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rsvp-b...', false)
-#7 /internal/eval.php(20): activate_plugin('rsvp-bee/rsvpbe...')
-#8 {main}</pre>
- for query CREATE TABLE  (
-			`id` int(11) not null auto_increment,
-  			`firstname` varchar(20),
-			`lastname` varchar(20),
-			`address` varchar(200),
-			`city` varchar(30),
-			`state` varchar(30),
-			`zip` int(11),
-			`phone` varchar(20),
-			`email` varchar(100),
-			`rsvp` tinyint(1) unsigned not null default '0',
-   			`relation` tinyint(1) unsigned not null default '0',
-			`plusone` tinyint(1) unsigned not null default '0',
-			PRIMARY KEY (`id`)
-			) made by activate_plugin, do_action('activate_rsvp-bee/rsvpbee.php'), WP_Hook->do_action, WP_Hook->apply_filters, rsvpbee_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[24-Apr-2025 21:27:37 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 3
-[24-Apr-2025 21:27:37 UTC] PHP Warning:  include_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:27:37 UTC] PHP Warning:  include_once(): Failed opening '/wp-load.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/rsvp-bee/glist.class.php on line 4
-[24-Apr-2025 21:28:13 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:28:13 UTC] PHP Warning:  Undefined variable $replay in /wordpress/wp-content/plugins/peckplayer/PeckPlayerDBManager.class.php on line 72
-[24-Apr-2025 21:28:14 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in PeckPlayerWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:28:22 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:28:22 UTC] PHP Warning:  Undefined variable $replay in /wordpress/wp-content/plugins/peckplayer/PeckPlayerDBManager.class.php on line 72
-[24-Apr-2025 21:28:23 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in PeckPlayerWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:28:31 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:28:31 UTC] PHP Warning:  Undefined variable $replay in /wordpress/wp-content/plugins/peckplayer/PeckPlayerDBManager.class.php on line 72
-[24-Apr-2025 21:28:32 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in PeckPlayerWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
-[24-Apr-2025 21:29:37 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/picasa-albums/plugin.php on line 487
-[24-Apr-2025 21:29:45 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/picasa-albums/plugin.php on line 487
-[24-Apr-2025 21:29:54 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/picasa-albums/plugin.php on line 487
-[24-Apr-2025 21:30:29 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:29 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('            \n  ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('            \n  ...')
+#3 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesModel.php(371): WP_SQLite_DB->query('            \n  ...')
+#4 /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/src/ProductBundlesPlugin.php(87): Premmerce\ProductBundles\ProductBundlesModel->createBundleProductsTable()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Premmerce\ProductBundles\ProductBundlesPlugin->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_premme...', false)
+#9 /internal/eval.php(20): activate_plugin('premmerce-wooco...')
+#10 {main}</pre>
+ for query             
+            CREATE TABLE IF NOT EXISTS wp_premmerce_bundles_products (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                bundle_id INT(11) NOT NULL,
+                product_id INT(11) NOT NULL,
+                discount INT(11) NOT NULL,
+                PRIMARY KEY (id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_premmerce-woocommerce-product-bundles/premmerce-product-bundles.php'), WP_Hook->do_action, WP_Hook->apply_filters, Premmerce\ProductBundles\ProductBundlesPlugin->activate, Premmerce\ProductBundles\ProductBundlesModel->createBundleProductsTable, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[26-Apr-2025 11:47:16 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:47:25 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:47:26 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:47:35 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:47:36 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/premmerce-woocommerce-product-bundles/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:48:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:48:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:49:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:50:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>payment-gateway-for-idbank</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:50:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>payment-gateway-for-idbank</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:50:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>payment-gateway-for-idbank</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[26-Apr-2025 11:51:09 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:09 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:51:11 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:11 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:51:20 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:20 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:51:22 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:22 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:51:30 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:31 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:51:32 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $id in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/jem-pdf-lite.php on line 454
+[26-Apr-2025 11:51:32 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/pdf-invoices-for-woocommerce/freemius/includes/class-fs-logger.php on line 145
+[26-Apr-2025 11:53:33 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:33 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plx-portal-conn...')
 #2 /internal/eval.php(20): activate_plugin('plx-portal-conn...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:37 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:37 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
+[26-Apr-2025 11:53:41 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:41 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plx-portal-conn...')
 #2 /internal/eval.php(20): activate_plugin('plx-portal-conn...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:45 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:45 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
-[24-Apr-2025 21:30:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
+[26-Apr-2025 11:53:49 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:49 UTC] PHP Warning:  require_once(/wp-load.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php on line 41
+[26-Apr-2025 11:53:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wp-load.php' (include_path='.:') in /wordpress/wp-content/plugins/plx-portal-connector/plx-portal.php:41
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('plx-portal-conn...')
