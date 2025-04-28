@@ -2,296 +2,541 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [26-Apr-2025 23:47:05 UTC] PHP Warning:  The magic method WooNovaPoshtaShipping\App\DB\WNPS_DB::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php on line 21
-[26-Apr-2025 23:47:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [28-Apr-2025 17:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_areas (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        AreasCenter varchar(255),
-        Description varchar(255),
-        Ref varchar(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_posts'</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_admin_blog_posts' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: Name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n            CR...')
-#4 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php(47): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/nova-poshta-shipping.php(72): WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table('novaposhta_area...', 'id int(11) AUTO...', 'IF NOT EXISTS')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): create_base_tables(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-no...', false)
-#10 /internal/eval.php(20): activate_plugin('woo-nova-poshta...')
-#11 {main}</pre>
- for query 
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_areas (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        AreasCenter varchar(255),
-        Description varchar(255),
-        Ref varchar(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_woo-nova-poshta-shipping/nova-poshta-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_base_tables, WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Apr-2025 23:47:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(229): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(240): wpam_tables::check_table_status('wp_admin_blog_p...')
+#6 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(60): wpam_tables::change_engine('wp_admin_blog_p...')
+#7 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(24): wpam_tables::add_posts_table('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#9 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_posts' made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_posts_table, wpam_tables::change_engine, wpam_tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php on line 241
+[28-Apr-2025 17:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_cities (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        Area VARCHAR(255),
-        CityID VARCHAR(255),
-        Description VARCHAR(255),
-        DescriptionRu VARCHAR(255),
-        IsBranch INT(5),
-        PreventEntryNewStreetsUser VARCHAR(255) NULL,
-        SpecialCashCheck INT(5),
-        SettlementType varchar(255),
-        Delivery1 int(5),
-        Delivery2 int(5),
-        Delivery3 int(5),
-        Delivery4 int(5),
-        Delivery5 int(5),
-        Delivery6 int(5),
-        Delivery7 int(5),
-        Ref varchar(255),
-        Conglomerates varchar(255),
-        SettlementTypeDescriptionRu varchar(255),
-        SettlementTypeDescription varchar(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_tags'</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_admin_blog_tags' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: Name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n            CR...')
-#4 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php(47): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/nova-poshta-shipping.php(96): WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table('novaposhta_citi...', 'id int(11) AUTO...', 'IF NOT EXISTS')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): create_base_tables(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-no...', false)
-#10 /internal/eval.php(20): activate_plugin('woo-nova-poshta...')
-#11 {main}</pre>
- for query 
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_cities (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        Area VARCHAR(255),
-        CityID VARCHAR(255),
-        Description VARCHAR(255),
-        DescriptionRu VARCHAR(255),
-        IsBranch INT(5),
-        PreventEntryNewStreetsUser VARCHAR(255) NULL,
-        SpecialCashCheck INT(5),
-        SettlementType varchar(255),
-        Delivery1 int(5),
-        Delivery2 int(5),
-        Delivery3 int(5),
-        Delivery4 int(5),
-        Delivery5 int(5),
-        Delivery6 int(5),
-        Delivery7 int(5),
-        Ref varchar(255),
-        Conglomerates varchar(255),
-        SettlementTypeDescriptionRu varchar(255),
-        SettlementTypeDescription varchar(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_woo-nova-poshta-shipping/nova-poshta-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_base_tables, WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Apr-2025 23:47:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(229): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(240): wpam_tables::check_table_status('wp_admin_blog_t...')
+#6 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(86): wpam_tables::change_engine('wp_admin_blog_t...')
+#7 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(25): wpam_tables::add_tags_table('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#9 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_tags' made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_tags_table, wpam_tables::change_engine, wpam_tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_warehouses (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        SiteKey varchar(255),
-        Description varchar(255),
-        DescriptionRu varchar(255),
-        TypeOfWarehouse varchar(255),
-        Number int(5),
-        CityRef varchar(255),
-        CityDescription varchar(255),
-        CityDescriptionRu varchar(255),
-        Longitude varchar(255),
-        Latitude varchar(255),
-        PostFinance int(5),
-        POSTerminal int(5),
-        InternationalShipping int(5),
-        TotalMaxWeightAllowed varchar(255),
-        PlaceMaxWeightAllowed varchar(255),
-        Reception longtext,
-        Delivery longtext,
-        Schedule longtext,
-        Ref varchar(255),
-        BicycleParking INT(1),
-        CategoryOfWarehouse VARCHAR(255),
-        DistrictCode VARCHAR(255),
-        PaymentAccess VARCHAR(255),
-        Phone VARCHAR(255),
-        ShortAddress VARCHAR(255),
-        ShortAddressRu VARCHAR(255),
-        WarehouseStatus VARCHAR(255),
-        SettlementAreaDescription VARCHAR(255),
-        SettlementDescription VARCHAR(255),
-        SettlementRef VARCHAR(255),
-        SettlementRegionsDescription VARCHAR(255),
-        SettlementTypeDescription VARCHAR(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE </p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_relations'</p>
 <p>Queries made or created this session were:</p>
 <ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_admin_blog_relations' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+SQLSTATE[HY000]: General error: 1 no such column: Name
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n            CR...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n            CR...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n            CR...')
-#4 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php(47): dbDelta(Array)
-#5 /wordpress/wp-content/plugins/woo-nova-poshta-shipping/nova-poshta-shipping.php(133): WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table('novaposhta_ware...', 'id int(11) AUTO...', 'IF NOT EXISTS')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): create_base_tables(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(229): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(240): wpam_tables::check_table_status('wp_admin_blog_r...')
+#6 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(112): wpam_tables::change_engine('wp_admin_blog_r...')
+#7 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(26): wpam_tables::add_relation_table('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#9 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_relations' made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_relation_table, wpam_tables::change_engine, wpam_tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_likes'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_admin_blog_likes' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(229): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(240): wpam_tables::check_table_status('wp_admin_blog_l...')
+#6 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(139): wpam_tables::change_engine('wp_admin_blog_l...')
+#7 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(27): wpam_tables::add_like_table('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#9 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_likes' made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_like_table, wpam_tables::change_engine, wpam_tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_meta'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND `Name` = 'wp_admin_blog_meta' | parameters: database_name_here</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: Name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLE STAT...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLE STAT...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW TABLE STAT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(229): wpdb->get_row('SHOW TABLE STAT...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(240): wpam_tables::check_table_status('wp_admin_blog_m...')
+#6 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(178): wpam_tables::change_engine('wp_admin_blog_m...')
+#7 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(28): wpam_tables::add_meta_table('DEFAULT CHARACT...')
+#8 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#9 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#14 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#15 {main}</pre>
+ for query SHOW TABLE STATUS FROM database_name_here WHERE `Name` = 'wp_admin_blog_meta' made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_meta_table, wpam_tables::change_engine, wpam_tables::check_table_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_posts ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(60): wpam_tables::change_engine('wp_admin_blog_p...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(24): wpam_tables::add_posts_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-no...', false)
-#10 /internal/eval.php(20): activate_plugin('woo-nova-poshta...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
 #11 {main}</pre>
- for query 
-            CREATE TABLE IF NOT EXISTS wp_novaposhta_warehouses (
-                id int(11) AUTO_INCREMENT PRIMARY KEY,
-        SiteKey varchar(255),
-        Description varchar(255),
-        DescriptionRu varchar(255),
-        TypeOfWarehouse varchar(255),
-        Number int(5),
-        CityRef varchar(255),
-        CityDescription varchar(255),
-        CityDescriptionRu varchar(255),
-        Longitude varchar(255),
-        Latitude varchar(255),
-        PostFinance int(5),
-        POSTerminal int(5),
-        InternationalShipping int(5),
-        TotalMaxWeightAllowed varchar(255),
-        PlaceMaxWeightAllowed varchar(255),
-        Reception longtext,
-        Delivery longtext,
-        Schedule longtext,
-        Ref varchar(255),
-        BicycleParking INT(1),
-        CategoryOfWarehouse VARCHAR(255),
-        DistrictCode VARCHAR(255),
-        PaymentAccess VARCHAR(255),
-        Phone VARCHAR(255),
-        ShortAddress VARCHAR(255),
-        ShortAddressRu VARCHAR(255),
-        WarehouseStatus VARCHAR(255),
-        SettlementAreaDescription VARCHAR(255),
-        SettlementDescription VARCHAR(255),
-        SettlementRef VARCHAR(255),
-        SettlementRegionsDescription VARCHAR(255),
-        SettlementTypeDescription VARCHAR(255)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE  made by activate_plugin, do_action('activate_woo-nova-poshta-shipping/nova-poshta-shipping.php'), WP_Hook->do_action, WP_Hook->apply_filters, create_base_tables, WooNovaPoshtaShipping\App\DB\WNPS_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[26-Apr-2025 23:47:14 UTC] PHP Warning:  The magic method WooNovaPoshtaShipping\App\DB\WNPS_DB::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php on line 21
-[26-Apr-2025 23:47:22 UTC] PHP Warning:  The magic method WooNovaPoshtaShipping\App\DB\WNPS_DB::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-nova-poshta-shipping/app/DB/wnps-db.php on line 21
-[26-Apr-2025 23:47:56 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php:32
+ for query ALTER TABLE wp_admin_blog_posts ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_posts_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_tags ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(86): wpam_tables::change_engine('wp_admin_blog_t...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(25): wpam_tables::add_tags_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_tags ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_tags_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_relations ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(112): wpam_tables::change_engine('wp_admin_blog_r...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(26): wpam_tables::add_relation_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_relations ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_relation_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_likes ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(139): wpam_tables::change_engine('wp_admin_blog_l...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(27): wpam_tables::add_like_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_likes ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_like_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_meta ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(178): wpam_tables::change_engine('wp_admin_blog_m...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(28): wpam_tables::add_meta_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_meta ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_meta_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_posts ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(60): wpam_tables::change_engine('wp_admin_blog_p...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(24): wpam_tables::add_posts_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_posts ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_posts_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_tags ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(86): wpam_tables::change_engine('wp_admin_blog_t...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(25): wpam_tables::add_tags_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_tags ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_tags_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_relations ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(112): wpam_tables::change_engine('wp_admin_blog_r...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(26): wpam_tables::add_relation_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_relations ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_relation_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_likes ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(139): wpam_tables::change_engine('wp_admin_blog_l...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(27): wpam_tables::add_like_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_likes ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_like_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_admin_blog_meta ENGINE = INNODB</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: ENGINE.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(242): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(178): wpam_tables::change_engine('wp_admin_blog_m...')
+#3 /wordpress/wp-content/plugins/wp-admin-microblog/core/class-tables.php(28): wpam_tables::add_meta_table('DEFAULT CHARACT...')
+#4 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(340): wpam_tables::create()
+#5 /wordpress/wp-content/plugins/wp-admin-microblog/wp-admin-microblog.php(302): wpam_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wpam_activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-adm...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-admin-microb...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_admin_blog_meta ENGINE = INNODB made by activate_plugin, do_action('activate_wp-admin-microblog/wp-admin-microblog.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpam_activation, wpam_install, wpam_tables::create, wpam_tables::add_meta_table, wpam_tables::change_engine, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[28-Apr-2025 17:26:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-photo-text-slider-50</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:26:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-photo-text-slider-50</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:26:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-photo-text-slider-50</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:27:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:28:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:28:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[28-Apr-2025 17:29:54 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 490
+[28-Apr-2025 17:29:54 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 586
+[28-Apr-2025 17:29:54 UTC] PHP Fatal error:  Uncaught Zend\Uri\Exception\InvalidUriPartException: Host "example.com:443" is not valid or is not accepted by Zend\Uri\Http in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Uri/Uri.php:729
 Stack trace:
-#0 /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_LifeCycle.php(29): WoocommerceProductEditor_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor_init.php(34): WoocommerceProductEditor_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor.php(84): WoocommerceProductEditor_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-edi...')
-#5 /internal/eval.php(20): activate_plugin('woo-product-edi...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php on line 32
-[26-Apr-2025 23:48:03 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php:32
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(285): Zend\Uri\Uri->setHost('example.com:443')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(85): Zend\Http\PhpEnvironment\Request->setServer(Object(Zend\Stdlib\Parameters))
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Application.php(126): Zend\Http\PhpEnvironment\Request->__construct()
+#3 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Service/ApplicationFactory.php(35): Zend\Mvc\Application->__construct(Array, Object(Zend\ServiceManager\ServiceManager))
+#4 [internal function]: Zend\Mvc\Service\ApplicationFactory->createService(Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#5 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(726): call_user_func(Array, Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#6 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#7 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#8 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#9 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#12 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
+#13 {main}
+
+Next Zend\ServiceManager\Exception\ServiceNotCreatedException: An exception was raised while creating "Application"; no instance returned in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php:733
 Stack trace:
-#0 /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_LifeCycle.php(29): WoocommerceProductEditor_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor_init.php(34): WoocommerceProductEditor_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor.php(84): WoocommerceProductEditor_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-edi...')
-#5 /internal/eval.php(20): activate_plugin('woo-product-edi...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php on line 32
-[26-Apr-2025 23:48:11 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php:32
-Stack trace:
-#0 /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_LifeCycle.php(29): WoocommerceProductEditor_Plugin->initOptions()
-#1 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor_init.php(34): WoocommerceProductEditor_LifeCycle->install()
-#2 /wordpress/wp-content/plugins/woo-product-editor/woocommerce-product-editor.php(84): WoocommerceProductEditor_init('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-product-edi...')
-#5 /internal/eval.php(20): activate_plugin('woo-product-edi...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/woo-product-editor/WoocommerceProductEditor_Plugin.php on line 32
-[26-Apr-2025 23:48:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WC_VERSION" in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php:67
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WOO_transfirst_init->WOO_transfirst_load_init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#3 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#6 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
 #7 {main}
-  thrown in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php on line 67
-[26-Apr-2025 23:48:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WC_VERSION" in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php:67
+  thrown in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php on line 733
+[28-Apr-2025 17:30:06 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 490
+[28-Apr-2025 17:30:06 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 586
+[28-Apr-2025 17:30:06 UTC] PHP Fatal error:  Uncaught Zend\Uri\Exception\InvalidUriPartException: Host "example.com:443" is not valid or is not accepted by Zend\Uri\Http in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Uri/Uri.php:729
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WOO_transfirst_init->WOO_transfirst_load_init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php on line 67
-[26-Apr-2025 23:49:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WC_VERSION" in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php:67
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(285): Zend\Uri\Uri->setHost('example.com:443')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(85): Zend\Http\PhpEnvironment\Request->setServer(Object(Zend\Stdlib\Parameters))
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Application.php(126): Zend\Http\PhpEnvironment\Request->__construct()
+#3 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Service/ApplicationFactory.php(35): Zend\Mvc\Application->__construct(Array, Object(Zend\ServiceManager\ServiceManager))
+#4 [internal function]: Zend\Mvc\Service\ApplicationFactory->createService(Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#5 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(726): call_user_func(Array, Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#6 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#7 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#8 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#9 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#12 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
+#13 {main}
+
+Next Zend\ServiceManager\Exception\ServiceNotCreatedException: An exception was raised while creating "Application"; no instance returned in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php:733
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): WOO_transfirst_init->WOO_transfirst_load_init('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#3 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#6 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
 #7 {main}
-  thrown in /wordpress/wp-content/plugins/woo-transfirst-gateway/inc/woo_transfirst_init.php on line 67
-[26-Apr-2025 23:51:51 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-powerplaygallery/power_play.php on line 767
-[26-Apr-2025 23:51:59 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-powerplaygallery/power_play.php on line 767
-[26-Apr-2025 23:52:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-powerplaygallery/power_play.php on line 767
-[26-Apr-2025 23:52:43 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:52:44 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:52:55 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:52:56 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:53:07 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:53:08 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $status in /wordpress/wp-content/plugins/woomulti/inc/Base/GBWM_Cron.php on line 74
-[26-Apr-2025 23:53:16 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:17 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:26 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:26 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:34 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:35 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wordpress-by-circle-tree/includes/class.wp_login_lockdown.php on line 844
-[26-Apr-2025 23:53:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTEXTMSGFOLDER" in /wordpress/wp-content/plugins/wordpress-text-message/sms-text-message.php:41
+  thrown in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php on line 733
+[28-Apr-2025 17:30:19 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 490
+[28-Apr-2025 17:30:19 UTC] PHP Deprecated:  iconv_set_encoding(): Use of iconv.internal_encoding is deprecated in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Validator/Hostname.php on line 586
+[28-Apr-2025 17:30:19 UTC] PHP Fatal error:  Uncaught Zend\Uri\Exception\InvalidUriPartException: Host "example.com:443" is not valid or is not accepted by Zend\Uri\Http in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Uri/Uri.php:729
+Stack trace:
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(285): Zend\Uri\Uri->setHost('example.com:443')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Http/PhpEnvironment/Request.php(85): Zend\Http\PhpEnvironment\Request->setServer(Object(Zend\Stdlib\Parameters))
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Application.php(126): Zend\Http\PhpEnvironment\Request->__construct()
+#3 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/Mvc/Service/ApplicationFactory.php(35): Zend\Mvc\Application->__construct(Array, Object(Zend\ServiceManager\ServiceManager))
+#4 [internal function]: Zend\Mvc\Service\ApplicationFactory->createService(Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#5 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(726): call_user_func(Array, Object(Zend\ServiceManager\ServiceManager), 'application', 'Application')
+#6 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#7 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#8 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#9 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#12 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
+#13 {main}
+
+Next Zend\ServiceManager\Exception\ServiceNotCreatedException: An exception was raised while creating "Application"; no instance returned in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php:733
+Stack trace:
+#0 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(841): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Array, 'application', 'Application')
+#1 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('application', 'Application')
+#2 /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
+#3 /wordpress/wp-content/plugins/wopzen2/wpzf2.php(66): Zend\ServiceManager\ServiceManager->get('Application')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wopzen2/wpzf2.p...')
+#6 /internal/eval.php(20): activate_plugin('wopzen2/wpzf2.p...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wopzen2/vendor/ZF2/library/Zend/ServiceManager/ServiceManager.php on line 733
+[28-Apr-2025 17:30:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTEXTMSGFOLDER" in /wordpress/wp-content/plugins/wordpress-text-message/sms-text-message.php:41
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-text-...')
 #2 /internal/eval.php(20): activate_plugin('wordpress-text-...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/wordpress-text-message/sms-text-message.php on line 41
-[26-Apr-2025 23:53:51 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTEXTMSGFOLDER" in /wordpress/wp-content/plugins/wordpress-text-message/sms-text-message.php:41
+[28-Apr-2025 17:30:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WPTEXTMSGFOLDER" in /wordpress/wp-content/plugins/wordpress-text-message/sms-text-message.php:41
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordpress-text-...')
