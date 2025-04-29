@@ -2,173 +2,456 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [27-Apr-2025 22:48:01 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:48:01 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:48:09 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:48:09 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:48:17 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:48:17 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:49:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [29-Apr-2025 15:50:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p> # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
 
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-('USD', 'US Dollar', '$', '&#36;', '', '', 1),
-('EUR', 'Euro', '€', '&#128;', '', '', 0),
-('CAD', 'Canadian Dollar', '$', '&#36;', '', '', 0),
-('GBP', 'British Pound', '£', '&#163;', '', '', 0),
-('AUD', 'Australian Dollar', '$', '&#36;', '', '', 0),
-('CHF', 'Swiss Franc', 'Fr', 'Fr', '', '', 0),
-('BGN', 'Bulgarian Lev', '', '', 'лв', '&#1083;&#1074;', 0),
-('CNY', 'Yuan (Chinese) Renminbi', '¥', '&#165;', '', '', 0),
-('JPY', 'Japanese Yen', '¥', '&#165;', '', '', 0)</p>
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DELIMITER $$\r\nD...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DELIMITER $$\r\nD...')
+#3 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#8 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#9 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:50:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
+
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing:  # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
-
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-(:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , 1),
-(:param6 , :param7 , :param8 , :param9 , :param10 , :param11 , 0),
-(:param12 , :param13 , :param14 , :param15 , :param16 , :param17 , 0),
-(:param18 , :param19 , :param20 , :param21 , :param22 , :param23 , 0),
-(:param24 , :param25 , :param26 , :param27 , :param28 , :param29 , 0),
-(:param30 , :param31 , :param32 , :param33 , :param34 , :param35 , 0),
-(:param36 , :param37 , :param38 , :param39 , :param40 , :param41 , 0),
-(:param42 , :param43 , :param44 , :param45 , :param46 , :param47 , 0),
-(:param48 , :param49 , :param50 , :param51 , :param52 , :param53 , 0) | parameters: USD, US Dollar, $, &amp;#36;, , , EUR, Euro, €, &amp;#128;, , , CAD, Canadian Dollar, $, &amp;#36;, , , GBP, British Pound, £, &amp;#163;, , , AUD, Australian Dollar, $, &amp;#36;, , , CHF, Swiss Franc, Fr, Fr, , , BGN, Bulgarian Lev, , , лв, &amp;#1083;&amp;#1074;, CNY, Yuan (Chinese) Renminbi, ¥, &amp;#165;, , , JPY, Japanese Yen, ¥, &amp;#165;, , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 unrecognized token: "#".
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DELIMITER.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/real-membership/includes/class-activator.php(80): WP_SQLite_DB->query(' # @todo add mo...')
-#2 /wordpress/wp-content/plugins/real-membership/includes/class-activator.php(26): Real_Membership_Activator::insert_currency_data()
-#3 /wordpress/wp-content/plugins/real-membership/real-membership.php(78): Real_Membership_Activator::activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_real_membership(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-m...', false)
-#8 /internal/eval.php(20): activate_plugin('real-membership...')
-#9 {main}</pre>
- for query  # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
+#1 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#6 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#7 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
 
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-('USD', 'US Dollar', '$', '&#36;', '', '', 1),
-('EUR', 'Euro', '€', '&#128;', '', '', 0),
-('CAD', 'Canadian Dollar', '$', '&#36;', '', '', 0),
-('GBP', 'British Pound', '£', '&#163;', '', '', 0),
-('AUD', 'Australian Dollar', '$', '&#36;', '', '', 0),
-('CHF', 'Swiss Franc', 'Fr', 'Fr', '', '', 0),
-('BGN', 'Bulgarian Lev', '', '', 'лв', '&#1083;&#1074;', 0),
-('CNY', 'Yuan (Chinese) Renminbi', '¥', '&#165;', '', '', 0),
-('JPY', 'Japanese Yen', '¥', '&#165;', '', '', 0) made by activate_plugin, do_action('activate_real-membership/real-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_real_membership, Real_Membership_Activator::activate, Real_Membership_Activator::insert_currency_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-Apr-2025 22:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p> # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
+<p>DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
 
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-('USD', 'US Dollar', '$', '&#36;', '', '', 1),
-('EUR', 'Euro', '€', '&#128;', '', '', 0),
-('CAD', 'Canadian Dollar', '$', '&#36;', '', '', 0),
-('GBP', 'British Pound', '£', '&#163;', '', '', 0),
-('AUD', 'Australian Dollar', '$', '&#36;', '', '', 0),
-('CHF', 'Swiss Franc', 'Fr', 'Fr', '', '', 0),
-('BGN', 'Bulgarian Lev', '', '', 'лв', '&#1083;&#1074;', 0),
-('CNY', 'Yuan (Chinese) Renminbi', '¥', '&#165;', '', '', 0),
-('JPY', 'Japanese Yen', '¥', '&#165;', '', '', 0)</p>
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing:  # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
-
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-(:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , 1),
-(:param6 , :param7 , :param8 , :param9 , :param10 , :param11 , 0),
-(:param12 , :param13 , :param14 , :param15 , :param16 , :param17 , 0),
-(:param18 , :param19 , :param20 , :param21 , :param22 , :param23 , 0),
-(:param24 , :param25 , :param26 , :param27 , :param28 , :param29 , 0),
-(:param30 , :param31 , :param32 , :param33 , :param34 , :param35 , 0),
-(:param36 , :param37 , :param38 , :param39 , :param40 , :param41 , 0),
-(:param42 , :param43 , :param44 , :param45 , :param46 , :param47 , 0),
-(:param48 , :param49 , :param50 , :param51 , :param52 , :param53 , 0) | parameters: USD, US Dollar, $, &amp;#36;, , , EUR, Euro, €, &amp;#128;, , , CAD, Canadian Dollar, $, &amp;#36;, , , GBP, British Pound, £, &amp;#163;, , , AUD, Australian Dollar, $, &amp;#36;, , , CHF, Swiss Franc, Fr, Fr, , , BGN, Bulgarian Lev, , , лв, &amp;#1083;&amp;#1074;, CNY, Yuan (Chinese) Renminbi, ¥, &amp;#165;, , , JPY, Japanese Yen, ¥, &amp;#165;, , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 unrecognized token: "#".
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DELIMITER.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/real-membership/includes/class-activator.php(80): WP_SQLite_DB->query(' # @todo add mo...')
-#2 /wordpress/wp-content/plugins/real-membership/includes/class-activator.php(26): Real_Membership_Activator::insert_currency_data()
-#3 /wordpress/wp-content/plugins/real-membership/real-membership.php(78): Real_Membership_Activator::activate()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_real_membership(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-m...', false)
-#8 /internal/eval.php(20): activate_plugin('real-membership...')
-#9 {main}</pre>
- for query  # @todo add more currencies
-# Links to lists of currencies:
-# https://github.com/gregormck/multi-currencies-iso-codes-symbols-positions/blob/master/currencies.txt
-# https://gist.github.com/allanlaal/6206895
+#1 /wordpress/wp-content/plugins/quizlord/quizlord.php(128): WP_SQLite_DB->query('DELIMITER $$\r\nD...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): ql_create_database(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quizlo...', false)
+#6 /internal/eval.php(20): activate_plugin('quizlord/quizlo...')
+#7 {main}</pre>
+ for query DELIMITER $$
+DROP PROCEDURE IF EXISTS upgrade_database_1_0_to_2_0 $$
+CREATE PROCEDURE upgrade_database_1_0_to_2_0()
+BEGIN
 
-INSERT INTO wp_1rm_currencies
-(iso, name, symbol_before, unicode_before, symbol_after, unicode_after, is_default)
-VALUES
-('USD', 'US Dollar', '$', '&#36;', '', '', 1),
-('EUR', 'Euro', '€', '&#128;', '', '', 0),
-('CAD', 'Canadian Dollar', '$', '&#36;', '', '', 0),
-('GBP', 'British Pound', '£', '&#163;', '', '', 0),
-('AUD', 'Australian Dollar', '$', '&#36;', '', '', 0),
-('CHF', 'Swiss Franc', 'Fr', 'Fr', '', '', 0),
-('BGN', 'Bulgarian Lev', '', '', 'лв', '&#1083;&#1074;', 0),
-('CNY', 'Yuan (Chinese) Renminbi', '¥', '&#165;', '', '', 0),
-('JPY', 'Japanese Yen', '¥', '&#165;', '', '', 0) made by activate_plugin, do_action('activate_real-membership/real-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_real_membership, Real_Membership_Activator::activate, Real_Membership_Activator::insert_currency_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[27-Apr-2025 22:49:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-rebill-subscription</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:49:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-rebill-subscription</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:49:37 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wc-rebill-subscription</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:14 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:15 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:22 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:24 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:32 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:50:33 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:51:35 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>paybox</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:51:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>paybox</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:51:51 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>paybox</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[27-Apr-2025 22:52:58 UTC] PHP Fatal error:  Declaration of Pencil_Wiki_Walker_Page::start_lvl(&$output, $depth) must be compatible with Walker_Page::start_lvl(&$output, $depth = 0, $args = []) in /wordpress/wp-content/plugins/pencil-wiki/pencil-wiki.php on line 765
+	IF NOT EXISTS( (SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE()
+    	AND COLUMN_NAME='date' AND TABLE_NAME='wp_ql_results') ) THEN
+	ALTER TABLE `wp_ql_results` ADD `date` int(10);
+	
+END IF;
+ALTER TABLE `wp_ql_quizzes` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE `wp_ql_results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+END $$
+
+CALL upgrade_database_1_0_to_2_0() $$
+DELIMITER ; made by activate_plugin, do_action('activate_quizlord/quizlord.php'), WP_Hook->do_action, WP_Hook->apply_filters, ql_create_database, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:52:00 UTC] PHP Notice:  Function is_embed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:52:09 UTC] PHP Notice:  Function is_embed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:52:17 UTC] PHP Notice:  Function is_embed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:52:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>page-swapper</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:52:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>page-swapper</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:52:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>page-swapper</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[29-Apr-2025 15:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-db.php(176): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(92): Payamito_DB::updateTable2024122()
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(68): Payamito->__construct()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(127): Payamito::get_instance()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(130): run_payamito()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(282): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(156): Payamito_Woocommerce->load_core()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payamito-sms-wo...')
+#13 /internal/eval.php(20): activate_plugin('payamito-sms-wo...')
+#14 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->load_core, require_once('/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php'), run_payamito, Payamito::get_instance, Payamito->__construct, Payamito_DB::updateTable2024122, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY COLUMN reciever varchar(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(150): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(43): Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType('wp_payamito_sms', 'reciever', 'varchar(100)')
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(42): Payamito\Woocommerce\Modules\Abandoned\DB::create()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(31): Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(62): Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(36): Payamito_WC_Abandoned->class()
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(29): Payamito_WC_Abandoned->init()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-base.php(100): Payamito_WC_Abandoned->__construct()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(79): Payamito\Woocommerce\Modules\Base::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(58): payamito_wc_abandoned()
+#11 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(35): Payamito\Woocommerce\Modules\Modules->class()
+#12 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(25): Payamito\Woocommerce\Modules\Modules->__construct()
+#13 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(270): Payamito\Woocommerce\Modules\Modules::get_instance()
+#14 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(157): Payamito_Woocommerce->init_classes()
+#15 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#16 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#17 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payamito-sms-wo...')
+#20 /internal/eval.php(20): activate_plugin('payamito-sms-wo...')
+#21 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY COLUMN reciever varchar(100) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->init_classes, Payamito\Woocommerce\Modules\Modules::get_instance, Payamito\Woocommerce\Modules\Modules->__construct, Payamito\Woocommerce\Modules\Modules->class, payamito_wc_abandoned, Payamito\Woocommerce\Modules\Base::get_instance, Payamito_WC_Abandoned->__construct, Payamito_WC_Abandoned->init, Payamito_WC_Abandoned->class, Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance, Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct, Payamito\Woocommerce\Modules\Abandoned\DB::create, Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-db.php(176): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(92): Payamito_DB::updateTable2024122()
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(68): Payamito->__construct()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(127): Payamito::get_instance()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(130): run_payamito()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(282): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(156): Payamito_Woocommerce->load_core()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->load_core, require_once('/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php'), run_payamito, Payamito::get_instance, Payamito->__construct, Payamito_DB::updateTable2024122, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_wc_cart_abandonment MODIFY COLUMN phone varchar(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(150): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(32): Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType('wp_payamito_wc_...', 'phone', 'varchar(100)')
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(42): Payamito\Woocommerce\Modules\Abandoned\DB::create()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(31): Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(62): Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(36): Payamito_WC_Abandoned->class()
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(29): Payamito_WC_Abandoned->init()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-base.php(100): Payamito_WC_Abandoned->__construct()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(79): Payamito\Woocommerce\Modules\Base::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(58): payamito_wc_abandoned()
+#11 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(35): Payamito\Woocommerce\Modules\Modules->class()
+#12 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(25): Payamito\Woocommerce\Modules\Modules->__construct()
+#13 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(270): Payamito\Woocommerce\Modules\Modules::get_instance()
+#14 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(157): Payamito_Woocommerce->init_classes()
+#15 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#16 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#17 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#18 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query ALTER TABLE wp_payamito_wc_cart_abandonment MODIFY COLUMN phone varchar(100) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->init_classes, Payamito\Woocommerce\Modules\Modules::get_instance, Payamito\Woocommerce\Modules\Modules->__construct, Payamito\Woocommerce\Modules\Modules->class, payamito_wc_abandoned, Payamito\Woocommerce\Modules\Base::get_instance, Payamito_WC_Abandoned->__construct, Payamito_WC_Abandoned->init, Payamito_WC_Abandoned->class, Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance, Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct, Payamito\Woocommerce\Modules\Abandoned\DB::create, Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-db.php(176): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(92): Payamito_DB::updateTable2024122()
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(68): Payamito->__construct()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(127): Payamito::get_instance()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(130): run_payamito()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(282): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(156): Payamito_Woocommerce->load_core()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payamito-sms-wo...')
+#13 /internal/eval.php(20): activate_plugin('payamito-sms-wo...')
+#14 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->load_core, require_once('/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php'), run_payamito, Payamito::get_instance, Payamito->__construct, Payamito_DB::updateTable2024122, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY COLUMN reciever varchar(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(150): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(43): Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType('wp_payamito_sms', 'reciever', 'varchar(100)')
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(42): Payamito\Woocommerce\Modules\Abandoned\DB::create()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(31): Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(62): Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(36): Payamito_WC_Abandoned->class()
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(29): Payamito_WC_Abandoned->init()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-base.php(100): Payamito_WC_Abandoned->__construct()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(79): Payamito\Woocommerce\Modules\Base::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(58): payamito_wc_abandoned()
+#11 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(35): Payamito\Woocommerce\Modules\Modules->class()
+#12 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(25): Payamito\Woocommerce\Modules\Modules->__construct()
+#13 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(270): Payamito\Woocommerce\Modules\Modules::get_instance()
+#14 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(157): Payamito_Woocommerce->init_classes()
+#15 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#16 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#17 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payamito-sms-wo...')
+#20 /internal/eval.php(20): activate_plugin('payamito-sms-wo...')
+#21 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY COLUMN reciever varchar(100) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->init_classes, Payamito\Woocommerce\Modules\Modules::get_instance, Payamito\Woocommerce\Modules\Modules->__construct, Payamito\Woocommerce\Modules\Modules->class, payamito_wc_abandoned, Payamito\Woocommerce\Modules\Base::get_instance, Payamito_WC_Abandoned->__construct, Payamito_WC_Abandoned->init, Payamito_WC_Abandoned->class, Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance, Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct, Payamito\Woocommerce\Modules\Abandoned\DB::create, Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-db.php(176): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(92): Payamito_DB::updateTable2024122()
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/includes/class-payamito.php(68): Payamito->__construct()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(127): Payamito::get_instance()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php(130): run_payamito()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(282): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(156): Payamito_Woocommerce->load_core()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query ALTER TABLE wp_payamito_sms MODIFY reciever VARCHAR(100) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->load_core, require_once('/plugins/payamito-sms-woocommerce/includes/core/payamito-core/payamito.php'), run_payamito, Payamito::get_instance, Payamito->__construct, Payamito_DB::updateTable2024122, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:54:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_payamito_wc_cart_abandonment MODIFY COLUMN phone varchar(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(150): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-db.php(32): Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType('wp_payamito_wc_...', 'phone', 'varchar(100)')
+#3 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(42): Payamito\Woocommerce\Modules\Abandoned\DB::create()
+#4 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/class-abandonment.php(31): Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct()
+#5 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(62): Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance()
+#6 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(36): Payamito_WC_Abandoned->class()
+#7 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(29): Payamito_WC_Abandoned->init()
+#8 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-base.php(100): Payamito_WC_Abandoned->__construct()
+#9 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/abandonment/module.php(79): Payamito\Woocommerce\Modules\Base::get_instance()
+#10 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(58): payamito_wc_abandoned()
+#11 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(35): Payamito\Woocommerce\Modules\Modules->class()
+#12 /wordpress/wp-content/plugins/payamito-sms-woocommerce/modules/class-modules.php(25): Payamito\Woocommerce\Modules\Modules->__construct()
+#13 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(270): Payamito\Woocommerce\Modules\Modules::get_instance()
+#14 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(157): Payamito_Woocommerce->init_classes()
+#15 /wordpress/wp-content/plugins/payamito-sms-woocommerce/includes/payamito-woocommerce.php(108): Payamito_Woocommerce->init()
+#16 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(78): Payamito_Woocommerce::get_instance()
+#17 /wordpress/wp-content/plugins/payamito-sms-woocommerce/bootstrap.php(81): payamito_wc()
+#18 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query ALTER TABLE wp_payamito_wc_cart_abandonment MODIFY COLUMN phone varchar(100) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/payamito-sms-woocommerce/bootstrap.php'), payamito_wc, Payamito_Woocommerce::get_instance, Payamito_Woocommerce->init, Payamito_Woocommerce->init_classes, Payamito\Woocommerce\Modules\Modules::get_instance, Payamito\Woocommerce\Modules\Modules->__construct, Payamito\Woocommerce\Modules\Modules->class, payamito_wc_abandoned, Payamito\Woocommerce\Modules\Base::get_instance, Payamito_WC_Abandoned->__construct, Payamito_WC_Abandoned->init, Payamito_WC_Abandoned->class, Payamito\Woocommerce\Modules\Abandoned\Abandonment::get_instance, Payamito\Woocommerce\Modules\Abandoned\Abandonment->__construct, Payamito\Woocommerce\Modules\Abandoned\DB::create, Payamito\Woocommerce\Modules\Abandoned\DB::changeColumnType, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[29-Apr-2025 15:55:17 UTC] PHP Fatal error:  Declaration of Pencil_Wiki_Walker_Page::start_lvl(&$output, $depth) must be compatible with Walker_Page::start_lvl(&$output, $depth = 0, $args = []) in /wordpress/wp-content/plugins/pencil-wiki/pencil-wiki.php on line 765
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
