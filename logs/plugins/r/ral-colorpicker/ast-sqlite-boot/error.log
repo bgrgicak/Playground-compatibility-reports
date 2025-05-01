@@ -2,23 +2,23 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [01-May-2025 18:37:34 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:37:34 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:37:36 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:37:36 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:37:45 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:37:45 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:37:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [01-May-2025 18:37:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shortpixel-image-optimiser</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		) </p>
+<p>CREATE TABLE wp_shortpixel_folders (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          file_count int,
+          status SMALLINT NOT NULL DEFAULT 0,
+          parent SMALLINT DEFAULT 0,
+          ts_checked timestamp,
+          ts_updated timestamp,
+          ts_created timestamp,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -31,72 +31,53 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#8 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#11 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('request-a-quote...')
-#14 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#15 {main}</pre>
- for query CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		)  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:37:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(174): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_folders (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          file_count int,
+          status SMALLINT NOT NULL DEFAULT 0,
+          parent SMALLINT DEFAULT 0,
+          ts_checked timestamp,
+          ts_updated timestamp,
+          ts_created timestamp,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_emd_sessions WHERE session_key = '1a2b1995361dba7efffe94b5b26784a4'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: 1a2b1995361dba7efffe94b5b26784a4</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('1a2b1995361dba7...', Array)
-#4 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
-#5 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#8 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('request-a-quote...')
-#13 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#14 {main}</pre>
- for query SELECT * FROM wp_emd_sessions WHERE session_key = '1a2b1995361dba7efffe94b5b26784a4' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:37:48 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:37:48 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:37:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		) </p>
+<p>CREATE TABLE wp_shortpixel_meta (
+          id mediumint(10) NOT NULL AUTO_INCREMENT,
+          folder_id mediumint(9) NOT NULL,
+          ext_meta_id int(10),
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          compressed_size int(10) NOT NULL DEFAULT 0,
+          compression_type tinyint,
+          keep_exif tinyint DEFAULT 0,
+          cmyk2rgb tinyint DEFAULT 0,
+          resize tinyint,
+          resize_width smallint,
+          resize_height smallint,
+          backup tinyint DEFAULT 0,
+          status SMALLINT NOT NULL DEFAULT 0,
+          retries tinyint NOT NULL DEFAULT 0,
+          message varchar(255),
+          ts_added timestamp,
+          ts_optimized timestamp,
+					extra_info LONGTEXT,
+          PRIMARY KEY sp_id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -109,74 +90,55 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#8 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#11 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#12 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		)  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:37:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(175): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_meta (
+          id mediumint(10) NOT NULL AUTO_INCREMENT,
+          folder_id mediumint(9) NOT NULL,
+          ext_meta_id int(10),
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          compressed_size int(10) NOT NULL DEFAULT 0,
+          compression_type tinyint,
+          keep_exif tinyint DEFAULT 0,
+          cmyk2rgb tinyint DEFAULT 0,
+          resize tinyint,
+          resize_width smallint,
+          resize_height smallint,
+          backup tinyint DEFAULT 0,
+          status SMALLINT NOT NULL DEFAULT 0,
+          retries tinyint NOT NULL DEFAULT 0,
+          message varchar(255),
+          ts_added timestamp,
+          ts_optimized timestamp,
+					extra_info LONGTEXT,
+          PRIMARY KEY sp_id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_emd_sessions WHERE session_key = '90a992c94073cf58c0f4f5a7eb5b0138'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: 90a992c94073cf58c0f4f5a7eb5b0138</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('90a992c94073cf5...', Array)
-#4 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
-#5 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#8 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query SELECT * FROM wp_emd_sessions WHERE session_key = '90a992c94073cf58c0f4f5a7eb5b0138' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:37:57 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:37:57 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:37:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		) </p>
+<p>CREATE TABLE wp_shortpixel_postmeta (
+			 id bigint unsigned NOT NULL AUTO_INCREMENT ,
+			 attach_id bigint unsigned NOT NULL,
+			 parent bigint unsigned NOT NULL,
+			 image_type tinyint default 0,
+			 size varchar(200),
+			 status tinyint default 0,
+			 compression_type tinyint,
+			 compressed_size  int,
+			 original_size int,
+			 tsAdded timestamp,
+			 tsOptimized  timestamp,
+			 extra_info LONGTEXT,
+			 PRIMARY KEY id (id)
+		 ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -189,72 +151,221 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#8 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#11 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('request-a-quote...')
-#14 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#15 {main}</pre>
- for query CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		)  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:37:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(176): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_postmeta (
+			 id bigint unsigned NOT NULL AUTO_INCREMENT ,
+			 attach_id bigint unsigned NOT NULL,
+			 parent bigint unsigned NOT NULL,
+			 image_type tinyint default 0,
+			 size varchar(200),
+			 status tinyint default 0,
+			 compression_type tinyint,
+			 compressed_size  int,
+			 original_size int,
+			 tsAdded timestamp,
+			 tsOptimized  timestamp,
+			 extra_info LONGTEXT,
+			 PRIMARY KEY id (id)
+		 ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_emd_sessions WHERE session_key = '435e4ce29f3d34ba53ffda57b38faff6'</p>
+<p>CREATE INDEX path ON wp_shortpixel_meta ( path)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: 435e4ce29f3d34ba53ffda57b38faff6</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('435e4ce29f3d34b...', Array)
-#4 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
-#5 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#8 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('request-a-quote...')
-#13 /internal/eval.php(20): activate_plugin('request-a-quote...')
-#14 {main}</pre>
- for query SELECT * FROM wp_emd_sessions WHERE session_key = '435e4ce29f3d34ba53ffda57b38faff6' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:38:01 UTC] PHP Deprecated:  Required parameter $submit_result follows optional parameter $error in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-frontend.php on line 996
-[01-May-2025 18:38:01 UTC] PHP Deprecated:  Required parameter $myfields follows optional parameter $args in /wordpress/wp-content/plugins/request-a-quote/includes/emd-form-builder-lite/emd-form-functions.php on line 688
-[01-May-2025 18:38:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX path ON wp_shortpixel_meta ( path) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		) </p>
+<p>CREATE INDEX path ON wp_shortpixel_folders ( path)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX path ON wp_shortpixel_folders ( path) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX attach_id ON wp_shortpixel_postmeta ( attach_id)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX at...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX attach_id ON wp_shortpixel_postmeta ( attach_id) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX parent ON wp_shortpixel_postmeta ( parent)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX parent ON wp_shortpixel_postmeta ( parent) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX size ON wp_shortpixel_postmeta ( size)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX si...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX size ON wp_shortpixel_postmeta ( size) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX status ON wp_shortpixel_postmeta ( status)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX st...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX status ON wp_shortpixel_postmeta ( status) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX compression_type ON wp_shortpixel_postmeta ( compression_type)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX co...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX compression_type ON wp_shortpixel_postmeta ( compression_type) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:43 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shortpixel-image-optimiser</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 18:37:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_shortpixel_folders (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          file_count int,
+          status SMALLINT NOT NULL DEFAULT 0,
+          parent SMALLINT DEFAULT 0,
+          ts_checked timestamp,
+          ts_updated timestamp,
+          ts_created timestamp,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -267,91 +378,349 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
 #1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/emd-session-manager.php(68): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): create_emd_sessions_table('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(57): do_action('emd_wp_session_...')
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#8 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#11 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#12 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query CREATE TABLE wp_emd_sessions (
-		  session_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		  session_key char(32) NOT NULL,
-		  session_value LONGTEXT NOT NULL,
-		  session_expiry BIGINT(20) UNSIGNED NOT NULL,
-		  PRIMARY KEY  (session_key),
-		  UNIQUE KEY session_id (session_id)
-		)  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, do_action('emd_wp_session_init'), WP_Hook->do_action, WP_Hook->apply_filters, create_emd_sessions_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:38:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(174): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_folders (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          file_count int,
+          status SMALLINT NOT NULL DEFAULT 0,
+          parent SMALLINT DEFAULT 0,
+          ts_checked timestamp,
+          ts_updated timestamp,
+          ts_created timestamp,
+          PRIMARY KEY id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_emd_sessions WHERE session_key = 'e5d1bff93d1d0644cf57be64a2451730'</p>
+<p>CREATE TABLE wp_shortpixel_meta (
+          id mediumint(10) NOT NULL AUTO_INCREMENT,
+          folder_id mediumint(9) NOT NULL,
+          ext_meta_id int(10),
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          compressed_size int(10) NOT NULL DEFAULT 0,
+          compression_type tinyint,
+          keep_exif tinyint DEFAULT 0,
+          cmyk2rgb tinyint DEFAULT 0,
+          resize tinyint,
+          resize_width smallint,
+          resize_height smallint,
+          backup tinyint DEFAULT 0,
+          status SMALLINT NOT NULL DEFAULT 0,
+          retries tinyint NOT NULL DEFAULT 0,
+          message varchar(255),
+          ts_added timestamp,
+          ts_optimized timestamp,
+					extra_info LONGTEXT,
+          PRIMARY KEY sp_id (id)
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_emd_sessions WHERE session_key = :param0  | parameters: e5d1bff93d1d0644cf57be64a2451730</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_emd_sessions.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session-utils.php(217): wpdb->get_row('SELECT * FROM w...', 'ARRAY_A')
-#3 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(148): EMD_WP_Session_Utils::get_session('e5d1bff93d1d064...', Array)
-#4 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(97): EMD_WP_Session->read_data()
-#5 /wordpress/wp-content/plugins/request-a-quote/assets/ext/emd-session/includes/class-emd-wp-session.php(58): EMD_WP_Session->__construct()
-#6 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(76): EMD_WP_Session::get_instance()
-#7 /wordpress/wp-content/plugins/request-a-quote/includes/class-emd-session.php(63): Emd_Session->init()
-#8 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(57): Emd_Session->__construct('request_a_quote')
-#9 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(349): Request_a_quote::instance()
-#10 /wordpress/wp-content/plugins/request-a-quote/request-a-quote.php(352): REQUEST_A_QUOTE()
-#11 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query SELECT * FROM wp_emd_sessions WHERE session_key = 'e5d1bff93d1d0644cf57be64a2451730' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/request-a-quote/request-a-quote.php'), REQUEST_A_QUOTE, Request_a_quote::instance, Emd_Session->__construct, Emd_Session->init, EMD_WP_Session::get_instance, EMD_WP_Session->__construct, EMD_WP_Session->read_data, EMD_WP_Session_Utils::get_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[01-May-2025 18:38:10 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php:102
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(175): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_meta (
+          id mediumint(10) NOT NULL AUTO_INCREMENT,
+          folder_id mediumint(9) NOT NULL,
+          ext_meta_id int(10),
+          path varchar(512),
+          name varchar(150),
+          path_md5 char(32),
+          compressed_size int(10) NOT NULL DEFAULT 0,
+          compression_type tinyint,
+          keep_exif tinyint DEFAULT 0,
+          cmyk2rgb tinyint DEFAULT 0,
+          resize tinyint,
+          resize_width smallint,
+          resize_height smallint,
+          backup tinyint DEFAULT 0,
+          status SMALLINT NOT NULL DEFAULT 0,
+          retries tinyint NOT NULL DEFAULT 0,
+          message varchar(255),
+          ts_added timestamp,
+          ts_optimized timestamp,
+					extra_info LONGTEXT,
+          PRIMARY KEY sp_id (id)
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_shortpixel_postmeta (
+			 id bigint unsigned NOT NULL AUTO_INCREMENT ,
+			 attach_id bigint unsigned NOT NULL,
+			 parent bigint unsigned NOT NULL,
+			 image_type tinyint default 0,
+			 size varchar(200),
+			 status tinyint default 0,
+			 compression_type tinyint,
+			 compressed_size  int,
+			 original_size int,
+			 tsAdded timestamp,
+			 tsOptimized  timestamp,
+			 extra_info LONGTEXT,
+			 PRIMARY KEY id (id)
+		 ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(176): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_shortpixel_postmeta (
+			 id bigint unsigned NOT NULL AUTO_INCREMENT ,
+			 attach_id bigint unsigned NOT NULL,
+			 parent bigint unsigned NOT NULL,
+			 image_type tinyint default 0,
+			 size varchar(200),
+			 status tinyint default 0,
+			 compression_type tinyint,
+			 compressed_size  int,
+			 original_size int,
+			 tsAdded timestamp,
+			 tsOptimized  timestamp,
+			 extra_info LONGTEXT,
+			 PRIMARY KEY id (id)
+		 ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX path ON wp_shortpixel_meta ( path)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX path ON wp_shortpixel_meta ( path) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX path ON wp_shortpixel_folders ( path)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX path ON wp_shortpixel_folders ( path) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX attach_id ON wp_shortpixel_postmeta ( attach_id)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX at...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX attach_id ON wp_shortpixel_postmeta ( attach_id) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX parent ON wp_shortpixel_postmeta ( parent)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX pa...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX parent ON wp_shortpixel_postmeta ( parent) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX size ON wp_shortpixel_postmeta ( size)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX si...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX size ON wp_shortpixel_postmeta ( size) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX status ON wp_shortpixel_postmeta ( status)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX st...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX status ON wp_shortpixel_postmeta ( status) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE INDEX compression_type ON wp_shortpixel_postmeta ( compression_type)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: INDEX.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(216): WP_SQLite_DB->query('CREATE INDEX co...')
+#2 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(178): ShortPixel\Helper\InstallHelper::checkIndexes()
+#3 /wordpress/wp-content/plugins/shortpixel-image-optimiser/class/Helper/InstallHelper.php(33): ShortPixel\Helper\InstallHelper::checkTables()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ShortPixel\Helper\InstallHelper::activatePlugin(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shortp...', false)
+#8 /internal/eval.php(20): activate_plugin('shortpixel-imag...')
+#9 {main}</pre>
+ for query CREATE INDEX compression_type ON wp_shortpixel_postmeta ( compression_type) made by activate_plugin, do_action('activate_shortpixel-image-optimiser/wp-shortpixel.php'), WP_Hook->do_action, WP_Hook->apply_filters, ShortPixel\Helper\InstallHelper::activatePlugin, ShortPixel\Helper\InstallHelper::checkTables, ShortPixel\Helper\InstallHelper::checkIndexes, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 18:37:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>shortpixel-image-optimiser</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 18:40:26 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method PD_StickyPostsInCategory::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('resize-on-uploa...')
-#2 /internal/eval.php(20): activate_plugin('resize-on-uploa...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php on line 102
-[01-May-2025 18:38:18 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php:102
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
+#3 /internal/eval.php(20): activate_plugin('sticky-posts-in...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[01-May-2025 18:40:34 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method PD_StickyPostsInCategory::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('resize-on-uploa...')
-#2 /internal/eval.php(20): activate_plugin('resize-on-uploa...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php on line 102
-[01-May-2025 18:38:27 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php:102
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
+#3 /internal/eval.php(20): activate_plugin('sticky-posts-in...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[01-May-2025 18:40:43 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method PD_StickyPostsInCategory::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('resize-on-uploa...')
-#2 /internal/eval.php(20): activate_plugin('resize-on-uploa...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/resize-on-upload/resize-on-upload.php on line 102
-[01-May-2025 18:39:40 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $type in /wordpress/wp-content/plugins/responsive-modern-slider/inc/fields/cmb2/includes/rest-api/CMB2_REST.php on line 693
-[01-May-2025 18:39:50 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $type in /wordpress/wp-content/plugins/responsive-modern-slider/inc/fields/cmb2/includes/rest-api/CMB2_REST.php on line 693
-[01-May-2025 18:40:00 UTC] PHP Deprecated:  Required parameter $field_id follows optional parameter $type in /wordpress/wp-content/plugins/responsive-modern-slider/inc/fields/cmb2/includes/rest-api/CMB2_REST.php on line 693
-[01-May-2025 18:43:51 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
-[01-May-2025 18:43:52 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
-[01-May-2025 18:44:00 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
-[01-May-2025 18:44:01 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
-[01-May-2025 18:44:09 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
-[01-May-2025 18:44:10 UTC] PHP Deprecated:  Required parameter $return_url follows optional parameter $h in /wordpress/wp-content/plugins/pontopass/pontopass_sdk.php on line 293
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_sticky...', false)
+#3 /internal/eval.php(20): activate_plugin('sticky-posts-in...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
