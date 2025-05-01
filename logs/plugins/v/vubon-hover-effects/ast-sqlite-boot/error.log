@@ -2,465 +2,679 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [30-Apr-2025 09:50:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/videofyme/videofyme.php:111
+Error: [01-May-2025 10:55:33 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>iframeResizer</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:55:40 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>iframeResizer</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:55:49 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>iframeResizer</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:56:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SET @virtual_queue_position := 0;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+MySQL query not supported. Cause: SET statement: setStatement
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SET @virtual_qu...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SET @virtual_qu...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(367): WP_SQLite_DB->query('SET @virtual_qu...')
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SET @virtual_queue_position := 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vq_sessions</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_vq_sessions</li>
+<li>Executing: UPDATE `wp_vq_sessions` SET `estimated_time` = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) WHERE rowid IN ( SELECT rowid FROM `wp_vq_sessions` where `status` = 0 ORDER BY `id` ASC ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 unrecognized token: ":"
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE wp_vq_se...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE wp_vq_se...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(368): WP_SQLite_DB->query('UPDATE wp_vq_se...')
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tCREATE ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tINSERT ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `active`, `pending` FROM wp_vq_status where id='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `active`, `pending` FROM wp_vq_status where id=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT `active`...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(276): wpdb->get_row('SELECT `active`...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(144): Virtual_Queue_Public::vq_status(Object(WP_SQLite_DB), 'wp_vq_status')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `active`, `pending` FROM wp_vq_status where id='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::vq_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('68135363c7768-30dec1bbe7ef74c89c65394fa46651a8', 0, 1746096995, 1746096995, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES (:param0 , 0, 1746096995, 1746096995, 0) | parameters: 68135363c7768-30dec1bbe7ef74c89c65394fa46651a8</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_vq_sessions', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(247): wpdb->insert('wp_vq_sessions', Array, Array)
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '68135363c7768-3...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('68135363c7768-30dec1bbe7ef74c89c65394fa46651a8', 0, 1746096995, 1746096995, 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(420): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(381): Virtual_Queue_Public::pendingCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '68135363c7768-3...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::pendingCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:35 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 422
+[01-May-2025 10:56:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(401): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(382): Virtual_Queue_Public::activeCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '68135363c7768-3...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::activeCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:35 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 403
+[01-May-2025 10:56:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE rowid IN (SELECT rowid FROM wp_vq_status WHERE `id` = :param0 ) | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2720): WP_SQLite_DB->query('UPDATE `wp_vq_s...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(384): wpdb->update('wp_vq_status', Array, Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '68135363c7768-3...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tCREATE ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tINSERT ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `active`, `pending` FROM wp_vq_status where id='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `active`, `pending` FROM wp_vq_status where id=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT `active`...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(276): wpdb->get_row('SELECT `active`...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(144): Virtual_Queue_Public::vq_status(Object(WP_SQLite_DB), 'wp_vq_status')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `active`, `pending` FROM wp_vq_status where id='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::vq_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('6813536c6f540-b58398a18b20670f03f54454c1d3a85b', 0, 1746097004, 1746097004, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES (:param0 , 0, 1746097004, 1746097004, 0) | parameters: 6813536c6f540-b58398a18b20670f03f54454c1d3a85b</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_vq_sessions', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(247): wpdb->insert('wp_vq_sessions', Array, Array)
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '6813536c6f540-b...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('6813536c6f540-b58398a18b20670f03f54454c1d3a85b', 0, 1746097004, 1746097004, 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(420): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(381): Virtual_Queue_Public::pendingCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '6813536c6f540-b...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::pendingCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:44 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 422
+[01-May-2025 10:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(401): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(382): Virtual_Queue_Public::activeCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '6813536c6f540-b...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::activeCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:56:44 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 403
+[01-May-2025 10:56:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE rowid IN (SELECT rowid FROM wp_vq_status WHERE `id` = :param0 ) | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2720): WP_SQLite_DB->query('UPDATE `wp_vq_s...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(384): wpdb->update('wp_vq_status', Array, Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '6813536c6f540-b...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[01-May-2025 10:57:45 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sw_win</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:57:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sw_win</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:58:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>sw_win</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[01-May-2025 10:58:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_current_screen() in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php:582
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('videofyme/video...')
-#2 /internal/eval.php(20): activate_plugin('videofyme/video...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/videofyme/videofyme.php on line 111
-[30-Apr-2025 09:50:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/videofyme/videofyme.php:111
+#0 /wordpress/wp-includes/class-wp-hook.php(326): QC_VOICEWIDGET_activation_redirect('voice-widgets/v...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'voice-widgets/v...', false)
+#4 /internal/eval.php(20): activate_plugin('voice-widgets/v...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php on line 582
+[01-May-2025 10:59:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_current_screen() in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php:582
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('videofyme/video...')
-#2 /internal/eval.php(20): activate_plugin('videofyme/video...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/videofyme/videofyme.php on line 111
-[30-Apr-2025 09:50:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/videofyme/videofyme.php:111
+#0 /wordpress/wp-includes/class-wp-hook.php(326): QC_VOICEWIDGET_activation_redirect('voice-widgets/v...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'voice-widgets/v...', false)
+#4 /internal/eval.php(20): activate_plugin('voice-widgets/v...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php on line 582
+[01-May-2025 10:59:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_current_screen() in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php:582
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('videofyme/video...')
-#2 /internal/eval.php(20): activate_plugin('videofyme/video...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/videofyme/videofyme.php on line 111
-[30-Apr-2025 09:53:22 UTC] Sending first visit request...
-[30-Apr-2025 09:53:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT set_hits...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
-#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#8 {main}</pre>
- for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(251): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(631): ahcfree_getVisitsTime(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getVisitsTime, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[30-Apr-2025 09:53:33 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES (:param0 , :param1 , 0, 1) | parameters: 00:00:00, 00:59:59</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_visits_time has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_visits_time', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1476): wpdb->insert('ahc_visits_time', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(632): ahcfree_insert_visit_times_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_visit_times_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(569): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(634): ahcfree_getBrowsersCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getBrowsersCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[30-Apr-2025 09:53:33 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, :param0 , :param1 , 1) | parameters: IE, ie.png</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_browsers has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_browsers', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1441): wpdb->insert('ahc_browsers', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(635): ahcfree_insert_browsers_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_browsers_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES (:param0 , 1, 1) | parameters: Googlebot</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_search_engine_crawlers has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_search_engi...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1402): wpdb->insert('ahc_search_engi...', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(640): ahcfree_insert_search_engines_into_table(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_search_engines_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:34 UTC] Sending first visit request...
-[30-Apr-2025 09:53:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT set_hits...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
-#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#8 {main}</pre>
- for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(251): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(631): ahcfree_getVisitsTime(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getVisitsTime, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[30-Apr-2025 09:53:44 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES (:param0 , :param1 , 0, 1) | parameters: 00:00:00, 00:59:59</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_visits_time has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_visits_time', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1476): wpdb->insert('ahc_visits_time', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(632): ahcfree_insert_visit_times_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_visit_times_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(569): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(634): ahcfree_getBrowsersCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getBrowsersCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[30-Apr-2025 09:53:44 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, :param0 , :param1 , 1) | parameters: IE, ie.png</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_browsers has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_browsers', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1441): wpdb->insert('ahc_browsers', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(635): ahcfree_insert_browsers_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_browsers_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES (:param0 , 1, 1) | parameters: Googlebot</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_search_engine_crawlers has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('ahc_search_engi...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1402): wpdb->insert('ahc_search_engi...', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(640): ahcfree_insert_search_engines_into_table(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_search_engines_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[30-Apr-2025 09:53:45 UTC] Sending first visit request...
-[30-Apr-2025 09:58:11 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/vm-menu-reorder/vm-menu-class.php on line 10
-[30-Apr-2025 09:58:20 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/vm-menu-reorder/vm-menu-class.php on line 10
-[30-Apr-2025 09:58:29 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/vm-menu-reorder/vm-menu-class.php on line 10
-[30-Apr-2025 09:59:35 UTC] PHP Deprecated:  Required parameter $namespace follows optional parameter $directories in /wordpress/wp-content/plugins/vubon-hover-effects/framework/autoload.php on line 163
-[30-Apr-2025 09:59:35 UTC] PHP Fatal error:  Uncaught Error: Cannot call constructor in /wordpress/wp-content/plugins/vubon-hover-effects/framework/classes/metabox.php:30
+#0 /wordpress/wp-includes/class-wp-hook.php(326): QC_VOICEWIDGET_activation_redirect('voice-widgets/v...')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'voice-widgets/v...', false)
+#4 /internal/eval.php(20): activate_plugin('voice-widgets/v...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/voice-widgets/voice-widgets.php on line 582
+[01-May-2025 11:00:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('VimeoSidebarWid...')
+#2 /wordpress/wp-content/plugins/vimeo-sidebar-widget/vimeo-sidebar-widget.php(15): register_widget('VimeoSidebarWid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_vimeo_sidebar_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[01-May-2025 11:00:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('VimeoSidebarWid...')
+#2 /wordpress/wp-content/plugins/vimeo-sidebar-widget/vimeo-sidebar-widget.php(15): register_widget('VimeoSidebarWid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_vimeo_sidebar_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[01-May-2025 11:00:43 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('VimeoSidebarWid...')
+#2 /wordpress/wp-content/plugins/vimeo-sidebar-widget/vimeo-sidebar-widget.php(15): register_widget('VimeoSidebarWid...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_vimeo_sidebar_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[01-May-2025 11:01:47 UTC] PHP Deprecated:  Required parameter $namespace follows optional parameter $directories in /wordpress/wp-content/plugins/vubon-hover-effects/framework/autoload.php on line 163
+[01-May-2025 11:01:47 UTC] PHP Fatal error:  Uncaught Error: Cannot call constructor in /wordpress/wp-content/plugins/vubon-hover-effects/framework/classes/metabox.php:30
 Stack trace:
 #0 /wordpress/wp-content/plugins/vubon-hover-effects/main_hover_items.php(91): VP_Metabox->__construct(Array)
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
