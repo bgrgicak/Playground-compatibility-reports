@@ -1830,11 +1830,20 @@
 | wpvr | Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/w/wpvr/error.json) |
 | wpvr | Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/w/wpvr/error.json) |
 | wpvr | Uncaught Error: Call to undefined function media_handle_sideload() in /wordpress/wp-content/plugins/wpvr/admin/classes/class-wpvr-import-sample-tour.php:164 | [View logs](/logs/plugins/w/wpvr/error.json) |
-| yabp | Unknown operation: MODIFY. | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Unknown operation: MODIFY. | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yabp | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/xwolf-progress-bar/xw-progressbar.php:428 | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Unexpected token in MySQL query: /. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | SQLSTATE[HY000]: General error: 1 no such table: wp_yapt_templates. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Unexpected token in MySQL query: /. | [View logs](/logs/plugins/y/yabp/error.json) |
+| yabp | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323 | [View logs](/logs/plugins/y/yabp/error.json) |
@@ -1842,19 +1851,4 @@
 | yabp | Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323 | [View logs](/logs/plugins/y/yabp/error.json) |
 | yabp | Uncaught Error: Call to undefined method WP_SQLite_Driver::get_columns() in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:505 | [View logs](/logs/plugins/y/yabp/error.json) |
-| yatterukun | Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yappd-for-wordpress/yappd.php on line 128 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yappd-for-wordpress/yappd.php on line 128 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yappd-for-wordpress/yappd.php on line 128 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | [View logs](/logs/plugins/y/yatterukun/error.json) |
-| yatterukun | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | [View logs](/logs/plugins/y/yatterukun/error.json) |
 | yatterukun | Uncaught Error: Call to undefined function wp_read_video_metadata() in /wordpress/wp-admin/includes/image.php:590 | [View logs](/logs/plugins/y/yatterukun/error.json) |
