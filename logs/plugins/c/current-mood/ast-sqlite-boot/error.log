@@ -2,258 +2,264 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 13:32:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [05-May-2025 20:30:58 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
+<p>ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_nc_coming_soon_free` WHERE `option_name` = 'plugin_status' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cbcart_abandoneddetails</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cbcart_abandoneddetails</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cbcart_abandoneddetails</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_cbcart_abandoneddetails</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_cbcart_abandoneddetails, cbcart_message_api_request, 19, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_cbcart_abandoneddetails</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_cbcart_abandoneddetails</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_cbcart_abandoneddetails</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_cbcart_abandoneddetails_68192002883b0` (
+  `cbcart_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `cbcart_customer_id` TEXT COLLATE NOCASE,
+  `cbcart_customer_email` TEXT COLLATE NOCASE,
+  `cbcart_customer_mobile_no` TEXT COLLATE NOCASE,
+  `cbcart_customer_first_name` TEXT COLLATE NOCASE,
+  `cbcart_customer_last_name` TEXT COLLATE NOCASE,
+  `cbcart_customer_type` TEXT COLLATE NOCASE,
+  `cbcart_create_date_time` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cbcart_cart_json` TEXT COLLATE NOCASE,
+  `cbcart_cart_total_json` TEXT COLLATE NOCASE,
+  `cbcart_cart_total` REAL NOT NULL,
+  `cbcart_cart_currency` TEXT COLLATE NOCASE NOT NULL,
+  `cbcart_abandoned_date_time` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cbcart_message_sent` INTEGER NOT NULL DEFAULT '0',
+  `cbcart_status` INTEGER NOT NULL DEFAULT '0',
+  `cbcart_last_access_time` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cbcart_message_api_request` TEXT COLLATE NOCASE,
+  `cbcart_message_api_response` TEXT COLLATE NOCASE,
+  `cbcart_message_api_request` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free
+SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#6 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('custom-coming-s...')
-#10 /internal/eval.php(20): activate_plugin('custom-coming-s...')
-#11 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:38 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:38 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:32:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_nc_coming_soon_free` WHERE `option_name` = 'plugin_status' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#6 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#8 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:39 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:39 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:32:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_nc_coming_soon_free WHERE option_name = :param0  | parameters: plugin_status</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('custom-coming-s...')
-#8 /internal/eval.php(20): activate_plugin('custom-coming-s...')
-#9 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:47 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:47 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:32:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_nc_coming_soon_free WHERE option_name = :param0  | parameters: plugin_status</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/cartbox-messaging-widgets/includes/class-cbcart-activator.php(169): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/cartbox-messaging-widgets/cbcart.php(712): cbcart_Activator::activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): cbcart_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cartbo...', false)
+#9 /internal/eval.php(20): activate_plugin('cartbox-messagi...')
 #10 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:48 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:48 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:32:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time` made by activate_plugin, do_action('activate_cartbox-messaging-widgets/cbcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, cbcart_activate, cbcart_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 20:31:07 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:31:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
+<p>ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_nc_coming_soon_free WHERE option_name = :param0  | parameters: plugin_status</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_cbcart_abandoneddetails, CBCART_MESSAGE_API_REQUEST, longtext</li>
+<li>Executing: ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request text NULL DEFAULT NULL   | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('custom-coming-s...')
-#8 /internal/eval.php(20): activate_plugin('custom-coming-s...')
-#9 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:56 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:56 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:32:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/cartbox-messaging-widgets/includes/class-cbcart-activator.php(169): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/cartbox-messaging-widgets/cbcart.php(712): cbcart_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cbcart_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cartbo...', false)
+#7 /internal/eval.php(20): activate_plugin('cartbox-messagi...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time` made by activate_plugin, do_action('activate_cartbox-messaging-widgets/cbcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, cbcart_activate, cbcart_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 20:31:17 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:31:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status'</p>
+<p>ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time`</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_nc_coming_soon_free WHERE option_name = :param0  | parameters: plugin_status</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_cbcart_abandoneddetails, CBCART_MESSAGE_API_REQUEST, longtext</li>
+<li>Executing: ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request text NULL DEFAULT NULL   | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_nc_coming_soon_free.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(128): wpdb->get_row('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php(3): nccsf_top('plugin_status')
-#4 /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php(372): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/custom-coming-soon-page/index.php(29): nccsf_load_modules(Array)
-#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query SELECT * FROM wp_nc_coming_soon_free WHERE option_name = 'plugin_status' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/custom-coming-soon-page/index.php'), nccsf_load_modules, require_once('/plugins/custom-coming-soon-page/modules/functions/coming_soon_page.php'), nccsf_top, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:32:57 UTC] PHP Warning:  Attempt to read property "option_value" on null in /wordpress/wp-content/plugins/custom-coming-soon-page/framework/framework.php on line 132
-[04-May-2025 13:32:57 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:33:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php:594
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('carousel-free-v...')
-#2 /internal/eval.php(20): activate_plugin('carousel-free-v...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php on line 594
-[04-May-2025 13:33:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php:594
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('carousel-free-v...')
-#2 /internal/eval.php(20): activate_plugin('carousel-free-v...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php on line 594
-[04-May-2025 13:33:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php:594
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('carousel-free-v...')
-#2 /internal/eval.php(20): activate_plugin('carousel-free-v...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/carousel-free-video-gallery/ultimate_carouselfree_video.php on line 594
-[04-May-2025 13:34:23 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:23 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:23 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:24 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:24 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:24 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:32 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:32 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:32 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:33 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:33 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:33 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $photo_id follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $title follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:34:42 UTC] PHP Deprecated:  Required parameter $description follows optional parameter $blog_id in /wordpress/wp-content/plugins/cdwpflickr/lib/inc.cdflickr.php on line 690
-[04-May-2025 13:38:23 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>content-connector</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:38:32 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>content-connector</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:38:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>content-connector</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:40:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/css-email-obfuscator/public/class-css-email-obfuscator-public.php on line 207
-[04-May-2025 13:40:47 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/css-email-obfuscator/public/class-css-email-obfuscator-public.php on line 207
-[04-May-2025 13:40:54 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/css-email-obfuscator/public/class-css-email-obfuscator-public.php on line 207
-[04-May-2025 13:41:03 UTC] PHP Notice:  Function add_shortcode was called <strong>incorrectly</strong>. Invalid shortcode name: Empty name given. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "csv_sumotto" in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php:57
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): csv_sumotto_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_csv-su...', false)
-#4 /internal/eval.php(20): activate_plugin('csv-sumotto/csv...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php on line 57
-[04-May-2025 13:41:11 UTC] PHP Notice:  Function add_shortcode was called <strong>incorrectly</strong>. Invalid shortcode name: Empty name given. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "csv_sumotto" in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php:57
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): csv_sumotto_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_csv-su...', false)
-#4 /internal/eval.php(20): activate_plugin('csv-sumotto/csv...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php on line 57
-[04-May-2025 13:41:19 UTC] PHP Notice:  Function add_shortcode was called <strong>incorrectly</strong>. Invalid shortcode name: Empty name given. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "csv_sumotto" in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php:57
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): csv_sumotto_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_csv-su...', false)
-#4 /internal/eval.php(20): activate_plugin('csv-sumotto/csv...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/csv-sumotto/csv_sumotto_function.php on line 57
-[04-May-2025 13:41:55 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/current-mood/current-mood.php on line 15
-[04-May-2025 13:41:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "cm_version" in /wordpress/wp-content/plugins/current-mood/current-mood.php:155
+#1 /wordpress/wp-content/plugins/cartbox-messaging-widgets/includes/class-cbcart-activator.php(169): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/cartbox-messaging-widgets/cbcart.php(712): cbcart_Activator::activate()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cbcart_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cartbo...', false)
+#7 /internal/eval.php(20): activate_plugin('cartbox-messagi...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_cbcart_abandoneddetails ADD cbcart_message_api_request LONGTEXT NULL DEFAULT NULL AFTER `cbcart_last_access_time` made by activate_plugin, do_action('activate_cartbox-messaging-widgets/cbcart.php'), WP_Hook->do_action, WP_Hook->apply_filters, cbcart_activate, cbcart_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 20:31:53 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/certishopping-social-reviews-for-woocommerce/wc_certishopping.php on line 146
+[05-May-2025 20:32:03 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/certishopping-social-reviews-for-woocommerce/wc_certishopping.php on line 146
+[05-May-2025 20:32:12 UTC] PHP Warning:  Undefined variable $plugin in /wordpress/wp-content/plugins/certishopping-social-reviews-for-woocommerce/wc_certishopping.php on line 146
+[05-May-2025 20:33:20 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:33:20 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:33:29 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:33:29 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:33:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:33:37 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:56 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:37:56 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:37:56 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:37:57 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:37:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cryptocurrency-rocket-tools</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:37:58 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:37:58 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:37:58 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:37:58 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[05-May-2025 20:37:58 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[05-May-2025 20:37:58 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:12 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:38:13 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:38:13 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:13 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:38:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cryptocurrency-rocket-tools</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:38:14 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:38:14 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:38:14 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:38:14 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[05-May-2025 20:38:14 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[05-May-2025 20:38:14 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:29 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:38:30 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:38:30 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 21
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 45
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_cdn.php on line 104
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_functions.php on line 54
+[05-May-2025 20:38:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cryptocurrency-rocket-tools</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 20:38:31 UTC] PHP Warning:  file_get_contents(https://api.coinmarketcap.com/v1/ticker/?limit=10000): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 78
+[05-May-2025 20:38:31 UTC] PHP Warning:  Undefined variable $coinList in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/cryptocurrency-rocket-tools.php on line 84
+[05-May-2025 20:38:31 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[05-May-2025 20:38:31 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[05-May-2025 20:38:31 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cryptocurrency-rocket-tools/frameworks/ReduxFramework/ReduxCore/inc/class.redux_helpers.php on line 69
+[05-May-2025 20:39:35 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/current-mood/current-mood.php on line 15
+[05-May-2025 20:39:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "cm_version" in /wordpress/wp-content/plugins/current-mood/current-mood.php:155
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('current-mood/cu...')
