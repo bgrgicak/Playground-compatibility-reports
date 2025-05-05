@@ -2,834 +2,839 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [03-May-2025 22:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [05-May-2025 13:37:52 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $redirect_to in /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php on line 1229
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-						CREATE INDEX idx_rgm_type_attribute_value_date
-						ON wp_recaptcha_gdpr_message_rgm (rgm_type, rgm_date)
-					</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_qty" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_qty' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
+SQLSTATE[HY000]: General error: 1 no such column: field
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(235): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-						CREATE INDEX idx_rgm_type_attribute_value_date
-						ON wp_recaptcha_gdpr_message_rgm (rgm_type, rgm_date)
-					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(102): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_qty"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-						CREATE INDEX idx_rgd_attribute_value
-						ON wp_recaptcha_gdpr_details_rgd (rgd_attribute(255), rgd_value(255));
-					</p>
+<p>Alter table  wp_getbwp_bookings add column booking_qty int (11) default 1 ; </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(270): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-						CREATE INDEX idx_rgd_attribute_value
-						ON wp_recaptcha_gdpr_details_rgd (rgd_attribute(255), rgd_value(255));
-					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-						CREATE INDEX idx_rgd_rgm_id
-						ON wp_recaptcha_gdpr_details_rgd (rgm_id);
-					</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "createStatement" > "createIndex"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\tCREATE ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\tCREATE ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(287): WP_SQLite_DB->query('\r\n\t\t\t\t\t\tCREATE ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-						CREATE INDEX idx_rgd_rgm_id
-						ON wp_recaptcha_gdpr_details_rgd (rgm_id);
-					 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_ajax, 10, , YES, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_action, 11, , YES, varchar, 500, 2000, , , , utf8mb4, utf8mb4_general_ci, varchar(500), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_qty, 20, 1, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_6816980b01770` (
-  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `rgm_type` INTEGER,
-  `rgm_date` TEXT COLLATE NOCASE,
-  `rgm_title` TEXT COLLATE NOCASE,
-  `rgm_ip` TEXT COLLATE NOCASE,
-  `rgm_site` TEXT COLLATE NOCASE,
-  `rgm_ajax` INTEGER,
-  `rgm_action` TEXT COLLATE NOCASE,
-  `rgm_pattern` TEXT COLLATE NOCASE,
-  `rgm_ajax` INTEGER,
-  `rgm_action` TEXT COLLATE NOCASE
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30a21c0` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_qty` INTEGER DEFAULT '1'
 ) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_qty
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(106): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_qty int (11) default 1 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_item_id" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_details_rgd</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_woo_commerce_item_id' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(110): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_item_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_woo_commerce_item_id int (11) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd, rgm_posted, 7, , YES, int, , , 10, 0, , , , int, , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_woo_commerce_item_id, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_details_rgd</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_details_rgd_6816980b04650` (
-  `rgd_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `rgm_id` INTEGER,
-  `rgd_original_attribute` TEXT COLLATE NOCASE,
-  `rgd_attribute` TEXT COLLATE NOCASE,
-  `rgd_value` TEXT COLLATE NOCASE,
-  `rgm_posted` INTEGER,
-  `rgm_posted` INTEGER
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30a6040` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_woo_commerce_item_id` INTEGER DEFAULT '0'
 ) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_woo_commerce_item_id
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(328): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(113): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_woo_commerce_item_id int (11) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_order_id" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_woo_commerce_order_id' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(117): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_order_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_woo_commerce_order_id int (11) default NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_pattern, 10, , YES, varchar, 1000, 4000, , , , utf8mb4, utf8mb4_general_ci, varchar(1000), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_woo_commerce_order_id, 20, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_6816980b07530` (
-  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `rgm_type` INTEGER,
-  `rgm_date` TEXT COLLATE NOCASE,
-  `rgm_title` TEXT COLLATE NOCASE,
-  `rgm_ip` TEXT COLLATE NOCASE,
-  `rgm_site` TEXT COLLATE NOCASE,
-  `rgm_ajax` INTEGER,
-  `rgm_action` TEXT COLLATE NOCASE,
-  `rgm_pattern` TEXT COLLATE NOCASE,
-  `rgm_pattern` TEXT COLLATE NOCASE
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30a96f0` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_woo_commerce_order_id` INTEGER
 ) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_woo_commerce_order_id
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(339): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(120): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_woo_commerce_order_id int (11) default NULL ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_reservation_id" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_reservation_id' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(128): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_reservation_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_reservation_id int (11) default NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_ip, 10, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_reservation_id, 20, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_6816980b084d0` (
-  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `rgm_type` INTEGER,
-  `rgm_date` TEXT COLLATE NOCASE,
-  `rgm_title` TEXT COLLATE NOCASE,
-  `rgm_ip` TEXT COLLATE NOCASE,
-  `rgm_site` TEXT COLLATE NOCASE,
-  `rgm_ajax` INTEGER,
-  `rgm_action` TEXT COLLATE NOCASE,
-  `rgm_pattern` TEXT COLLATE NOCASE,
-  `rgm_ip` TEXT COLLATE NOCASE
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30ae128` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_reservation_id` INTEGER
 ) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_reservation_id
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(346): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(132): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_reservation_id int (11) default NULL ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_zoom_meetings" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_recaptcha_gdpr_message_rgm</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_zoom_meetings' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(136): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_zoom_meetings"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_zoom_meetings int (1) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm, rgm_site, 10, , YES, varchar, 21844, 87376, , , , utf8mb4, utf8mb4_general_ci, varchar(21844), , , select,insert,update,references, , , </li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_zoom_meetings, 20, 0, YES, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_recaptcha_gdpr_message_rgm</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_recaptcha_gdpr_message_rgm_6816980b09c40` (
-  `rgm_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `rgm_type` INTEGER,
-  `rgm_date` TEXT COLLATE NOCASE,
-  `rgm_title` TEXT COLLATE NOCASE,
-  `rgm_ip` TEXT COLLATE NOCASE,
-  `rgm_site` TEXT COLLATE NOCASE,
-  `rgm_ajax` INTEGER,
-  `rgm_action` TEXT COLLATE NOCASE,
-  `rgm_pattern` TEXT COLLATE NOCASE,
-  `rgm_site` TEXT COLLATE NOCASE
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30b0c20` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_zoom_meetings` INTEGER DEFAULT '0'
 ) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_zoom_meetings
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\r\n\t\t\t\t\t\t\tALTER ...')
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(353): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#5 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#6 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#9 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#10 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(140): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_zoom_meetings int (1) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_qty_2" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ajax, int</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax integer | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_qty_2' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax.
+SQLSTATE[HY000]: General error: 1 no such column: field
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(144): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_qty_2"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						</p>
+<p>Alter table  wp_getbwp_bookings add column booking_qty_2 int (11) default 0 ; </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_details_rgd, rgm_posted, int</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted integer;
-						 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_qty_2, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30b4aa0` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_qty_2` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted.
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_qty_2
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(328): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(148): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_qty_2 int (11) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_time_offset" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_pattern, varchar(1000)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern text;
-						 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_time_offset' ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern.
+SQLSTATE[HY000]: General error: 1 no such column: field
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(339): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(152): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_time_offset"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						</p>
+<p>Alter table  wp_getbwp_bookings add column booking_time_offset int (11) default 0 ; </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ip, varchar(255)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip text;
-						 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_getbwp_bookings, booking_time_offset, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_6818bf30b7598` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip.
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_time_offset
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(346): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(156): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_time_offset int (11) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 13:37:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_template_id" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_site, varchar(21844)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site text;
-						 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(353): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ajax, int</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax integer | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(314): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ajax INT,
-							ADD COLUMN rgm_action VARCHAR(500);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_details_rgd, rgm_posted, int</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted integer;
-						 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(328): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_details_rgd
-							ADD COLUMN rgm_posted INT;
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_pattern, varchar(1000)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern text;
-						 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(339): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_pattern VARCHAR(1000);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_ip, varchar(255)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip text;
-						 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(346): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_ip VARCHAR(255);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_recaptcha_gdpr_message_rgm, rgm_site, varchar(21844)</li>
-<li>Executing: ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site text;
-						 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(353): WP_SQLite_DB->query('\r\n\t\t\t\t\t\t\tALTER ...')
-#2 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(81): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate()
-#3 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(69): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct()
-#4 /wordpress/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php(382): VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gdpr-compliant-...')
-#7 /internal/eval.php(20): activate_plugin('gdpr-compliant-...')
-#8 {main}</pre>
- for query 
-							ALTER TABLE wp_recaptcha_gdpr_message_rgm
-							ADD COLUMN rgm_site VARCHAR(21844);
-						 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gdpr-compliant-recaptcha-for-all-forms/recaptcha-gdpr-compliant.php'), VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main::getInstance, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->__construct, VENDOR\RECAPTCHA_GDPR_COMPLIANT\RCM_Main->activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[03-May-2025 22:26:49 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:26:49 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:27:00 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:27:00 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:27:10 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:27:10 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>geckopress_ajax</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
-[03-May-2025 22:28:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "EMPTY_TRASH_DAYS" in /wordpress/wp-content/plugins/generalstats/generalstats.php:434
-Stack trace:
-#0 /wordpress/wp-content/plugins/generalstats/generalstats.php(383): GeneralStats->add_cache_refresh_hooks()
-#1 /wordpress/wp-content/plugins/generalstats/generalstats.php(259): GeneralStats->register_hooks()
-#2 /wordpress/wp-content/plugins/generalstats/generalstats.php(50): GeneralStats->__construct()
-#3 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
-#4 /wordpress/wp-config.php(102): require_once('
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp
