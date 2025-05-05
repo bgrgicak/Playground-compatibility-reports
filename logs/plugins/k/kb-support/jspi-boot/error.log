@@ -2,34 +2,105 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 06:35:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [05-May-2025 18:33:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kanban</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:33:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_tracker_peers` ( `info_hash` varchar( 40 ) COLLATE  NOT NULL,`peer_id` varchar( 40 ) COLLATE  NOT NULL,`compact` binary( 6 ) NOT NULL,`ip` char( 15 ) NOT NULL,`port` smallint( 5 ) unsigned NOT NULL,`state` tinyint( 1 ) unsigned NOT NULL DEFAULT '0',`updated` int( 10 ) unsigned NOT NULL,PRIMARY KEY ( `info_hash`,`peer_id` ) )DEFAULT CHARACTER SET utf8mb4</p>
+<p>
+			SELECT *
+			FROM wp_kanban_options
+			WHERE name LIKE 'license_kanban%';
+		;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
+Multi-query is not supported.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/katracker/functions.php(494): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-content/plugins/katracker/katracker.php(24): katracker_db_init()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_katrac...', false)
-#9 /internal/eval.php(20): activate_plugin('katracker/katra...')
-#10 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_tracker_peers` ( `info_hash` varchar( 40 ) COLLATE  NOT NULL,`peer_id` varchar( 40 ) COLLATE  NOT NULL,`compact` binary( 6 ) NOT NULL,`ip` char( 15 ) NOT NULL,`port` smallint( 5 ) unsigned NOT NULL,`state` tinyint( 1 ) unsigned NOT NULL DEFAULT '0',`updated` int( 10 ) unsigned NOT NULL,PRIMARY KEY ( `info_hash`,`peer_id` ) )DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_katracker/katracker.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, katracker_db_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 06:36:57 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
-[04-May-2025 06:37:05 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
-[04-May-2025 06:37:13 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
-[04-May-2025 06:37:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(610): WP_SQLite_Driver->new_driver_exception('Multi-query is ...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n\t\t\tSELECT *\n\t\t...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n\t\t\tSELECT *\n\t\t...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('\n\t\t\tSELECT *\n\t\t...')
+#4 /wordpress/wp-content/plugins/kanban/src/Kanban/License.php(108): wpdb->get_results('\n\t\t\tSELECT *\n\t\t...')
+#5 /wordpress/wp-content/plugins/kanban/src/Kanban/Db.php(297): Kanban_License::migrate_licenses()
+#6 /wordpress/wp-includes/class-wp-hook.php(322): Kanban_Db::check_for_updates()
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query 
+			SELECT *
+			FROM wp_kanban_options
+			WHERE name LIKE 'license_kanban%';
+		; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Kanban_Db::check_for_updates, Kanban_License::migrate_licenses, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[05-May-2025 18:33:16 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kanban</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:33:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>kanban</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:34:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Kapost_Widget')
+#2 /wordpress/wp-content/plugins/kapost-community-publishing/modules/widget.php(397): register_widget('Kapost_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): kapost_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[05-May-2025 18:34:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Kapost_Widget')
+#2 /wordpress/wp-content/plugins/kapost-community-publishing/modules/widget.php(397): register_widget('Kapost_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): kapost_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[05-May-2025 18:34:22 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Kapost_Widget')
+#2 /wordpress/wp-content/plugins/kapost-community-publishing/modules/widget.php(397): register_widget('Kapost_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): kapost_widget_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[05-May-2025 18:35:29 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:35:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:35:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[05-May-2025 18:37:53 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
+[05-May-2025 18:38:01 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
+[05-May-2025 18:38:09 UTC] PHP Parse error:  syntax error, unexpected token "[", expecting "," or ";" in /wordpress/wp-content/plugins/kb-countdown-widget/kb_countdown.php on line 1042
+[05-May-2025 18:38:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
 Stack trace:
 #0 /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php(306): kbs_get_user_role_options()
 #1 /wordpress/wp-content/plugins/kb-support/includes/install.php(143): kbs_get_registered_settings()
@@ -41,7 +112,7 @@ Stack trace:
 #7 /internal/eval.php(20): activate_plugin('kb-support/kb-s...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php on line 2227
-[04-May-2025 06:37:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
+[05-May-2025 18:38:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
 Stack trace:
 #0 /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php(306): kbs_get_user_role_options()
 #1 /wordpress/wp-content/plugins/kb-support/includes/install.php(143): kbs_get_registered_settings()
@@ -53,7 +124,7 @@ Stack trace:
 #7 /internal/eval.php(20): activate_plugin('kb-support/kb-s...')
 #8 {main}
   thrown in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php on line 2227
-[04-May-2025 06:37:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
+[05-May-2025 18:38:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php:2227
 Stack trace:
 #0 /wordpress/wp-content/plugins/kb-support/includes/admin/settings/register-settings.php(306): kbs_get_user_role_options()
 #1 /wordpress/wp-content/plugins/kb-support/includes/install.php(143): kbs_get_registered_settings()
