@@ -2,127 +2,640 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 13:41:01 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>advanced-content-pagination</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 13:41:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>advanced-content-pagination</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 13:41:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>advanced-content-pagination</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 13:41:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Error: [06-May-2025 22:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_abtest_experiments` SET `name` = 'Experiment 1' , `type` = 'content' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#7 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#8 {main}</pre>
+ for query INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_abtest_variations` SET `experiment_id` = 1 , `name` = 'Variation 1' , `content` = 'Content for variation 1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#7 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#8 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_abtest_variations` SET `experiment_id` = 1 , `name` = 'Variation 2' , `content` = 'Content for variation 2' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#7 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#8 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_abtest_goals` SET `experiment_id` = 1 , `name` = 'Goal 1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#7 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#8 {main}</pre>
+ for query INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_abtest_experiments</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_abtest_experiments</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_abtest_experiments</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_abtest_experiments</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_abtest_experiments, type, 4, content, NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_abtest_experiments, type</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_abtest_experiments, 1, database_name_here, type, 1, type, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_abtest_experiments, database_name_here, wp_abtest_experiments</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_abtest_experiments</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_abtest_experiments</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_abtest_experiments</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_abtest_experiments_681a8cfb5ad20` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL,
+  `type` TEXT COLLATE NOCASE NOT NULL DEFAULT 'content'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: type
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#7 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type ) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:12 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_experiments SET name=:param0 , type=:param1  | parameters: Experiment 1, content</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_variations SET experiment_id=1, name=:param0 , content=:param1  | parameters: Variation 1, Content for variation 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_variations SET experiment_id=1, name=:param0 , content=:param1  | parameters: Variation 2, Content for variation 2</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_goals SET experiment_id=1, name=:param0  | parameters: Goal 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_experiments, TYPE, varchar(50)</li>
+<li>Executing: ALTER TABLE wp_abtest_experiments ADD type   text NOT NULL DEFAULT 'content' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type ) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_abtest_variations ADD active BOOLEAN NOT NULL DEFAULT '1', ADD INDEX ( active )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_variations, ACTIVE, boolean</li>
+<li>Executing: ALTER TABLE wp_abtest_variations ADD active integer NOT NULL DEFAULT '1' | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_variations, wp_abtest_variations__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_abtest_variations__(&quot; ON &quot;wp_abtest_variations&quot; (  ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query ALTER TABLE wp_abtest_variations ADD active BOOLEAN NOT NULL DEFAULT '1', ADD INDEX ( active ) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:21 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_experiments SET name=:param0 , type=:param1  | parameters: Experiment 1, content</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_experiments SET name='Experiment 1', type='content' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_variations SET experiment_id=1, name=:param0 , content=:param1  | parameters: Variation 1, Content for variation 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 1', content='Content for variation 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_variations SET experiment_id=1, name=:param0 , content=:param1  | parameters: Variation 2, Content for variation 2</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_variations SET experiment_id=1, name='Variation 2', content='Content for variation 2' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO wp_abtest_goals SET experiment_id=1, name=:param0  | parameters: Goal 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('INSERT INTO wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query INSERT INTO wp_abtest_goals SET experiment_id=1, name='Goal 1' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_experiments, TYPE, varchar(50)</li>
+<li>Executing: ALTER TABLE wp_abtest_experiments ADD type   text NOT NULL DEFAULT 'content' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query ALTER TABLE wp_abtest_experiments ADD type VARCHAR( 50 ) NOT NULL DEFAULT 'content', ADD INDEX ( type ) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_abtest_variations ADD active BOOLEAN NOT NULL DEFAULT '1', ADD INDEX ( active )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_variations, ACTIVE, boolean</li>
+<li>Executing: ALTER TABLE wp_abtest_variations ADD active integer NOT NULL DEFAULT '1' | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_abtest_variations, wp_abtest_variations__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_abtest_variations__(&quot; ON &quot;wp_abtest_variations&quot; (  ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/abtest/includes/install.php(12): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/abtest/abtest.php(16): abtest_migrate_if_needed()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('abtest/abtest.p...')
+#5 /internal/eval.php(20): activate_plugin('abtest/abtest.p...')
+#6 {main}</pre>
+ for query ALTER TABLE wp_abtest_variations ADD active BOOLEAN NOT NULL DEFAULT '1', ADD INDEX ( active ) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/abtest/abtest.php'), abtest_migrate_if_needed, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 22:28:30 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:29:08 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:20 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:21 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:22 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:23 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:23 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:29:24 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:24 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:29:34 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:45 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:45 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:29:46 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:47 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:47 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:48 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:29:59 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:10 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 502 Bad Gateway
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:10 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:30:11 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:11 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:30:12 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:13 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:13 UTC] PHP Warning:  file_get_contents(http://127.0.0.1:9404/wp-content/plugins/acw_lore/acw_lore_quotes.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 15
+[06-May-2025 22:30:13 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/acw-lore/acw_lore.php on line 33
+[06-May-2025 22:32:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>air-quality-mk</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:32:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>air-quality-mk</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:32:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>air-quality-mk</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:32:58 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:32:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ag_twitter')
-#2 /wordpress/wp-content/plugins/ag-twitter/ag-twitter.php(14): register_widget('ag_twitter')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_ag_twitter('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[05-May-2025 13:42:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[06-May-2025 22:33:06 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:33:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ag_twitter')
-#2 /wordpress/wp-content/plugins/ag-twitter/ag-twitter.php(14): register_widget('ag_twitter')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_ag_twitter('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[05-May-2025 13:42:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[06-May-2025 22:33:14 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>my-ajax-handle</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 22:33:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_list_tables() in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php:123
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ag_twitter')
-#2 /wordpress/wp-content/plugins/ag-twitter/ag-twitter.php(14): register_widget('ag_twitter')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): load_ag_twitter('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[05-May-2025 13:42:24 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:25 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:25 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:25 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:25 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:42:26 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:26 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:26 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:26 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:26 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:42:35 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:36 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:36 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:36 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:36 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:42:37 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:37 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:37 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:37 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:37 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:42:45 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:46 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:42:47 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/airpress/freemius/includes/class-fs-logger.php on line 145
-[05-May-2025 13:42:47 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 124
-[05-May-2025 13:42:47 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 189
-[05-May-2025 13:42:47 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 256
-[05-May-2025 13:42:47 UTC] PHP Deprecated:  Required parameter $tag follows optional parameter $content in /wordpress/wp-content/plugins/airpress/lib/chetmac/Airpress.php on line 287
-[05-May-2025 13:44:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php:37
+#0 /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php(47): tableExists('wp_design_form')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): design_form_db('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/ajax-contact-form/ajaxcf.php on line 123
+[06-May-2025 22:33:50 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[06-May-2025 22:33:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[06-May-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/all-in-one-social-network-buttons/all_in_one_social_network_buttons.php on line 193
+[06-May-2025 22:34:16 UTC] PHP Warning:  fopen(http://www.writoo.com/scriptallo.php): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 169
+[06-May-2025 22:34:16 UTC] PHP Fatal error:  Uncaught TypeError: stream_get_meta_data(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php:171
 Stack trace:
-#0 /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php(26): Db->conectar()
-#1 /wordpress/wp-content/plugins/av-csv-2-posts/av-csv-2-posts.php(26): Db->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('av-csv-2-posts/...')
-#4 /internal/eval.php(20): activate_plugin('av-csv-2-posts/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php on line 37
-[05-May-2025 13:45:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php:37
+#0 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(171): stream_get_meta_data(false)
+#1 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(32): allopass_post(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): allopass_init(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_allopa...', false)
+#6 /internal/eval.php(20): activate_plugin('allopass/allopa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 171
+[06-May-2025 22:34:24 UTC] PHP Warning:  fopen(http://www.writoo.com/scriptallo.php): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 169
+[06-May-2025 22:34:24 UTC] PHP Fatal error:  Uncaught TypeError: stream_get_meta_data(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php:171
 Stack trace:
-#0 /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php(26): Db->conectar()
-#1 /wordpress/wp-content/plugins/av-csv-2-posts/av-csv-2-posts.php(26): Db->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('av-csv-2-posts/...')
-#4 /internal/eval.php(20): activate_plugin('av-csv-2-posts/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php on line 37
-[05-May-2025 13:45:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php:37
+#0 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(171): stream_get_meta_data(false)
+#1 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(32): allopass_post(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): allopass_init(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_allopa...', false)
+#6 /internal/eval.php(20): activate_plugin('allopass/allopa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 171
+[06-May-2025 22:34:32 UTC] PHP Warning:  fopen(http://www.writoo.com/scriptallo.php): Failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden
+ in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 169
+[06-May-2025 22:34:32 UTC] PHP Fatal error:  Uncaught TypeError: stream_get_meta_data(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php:171
 Stack trace:
-#0 /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php(26): Db->conectar()
-#1 /wordpress/wp-content/plugins/av-csv-2-posts/av-csv-2-posts.php(26): Db->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('av-csv-2-posts/...')
-#4 /internal/eval.php(20): activate_plugin('av-csv-2-posts/...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/av-csv-2-posts/classes/db.php on line 37
-[05-May-2025 13:45:22 UTC] Avify error: You need to install WooCommerce in order to run Avify
-[05-May-2025 13:45:31 UTC] Avify error: You need to install WooCommerce in order to run Avify
-[05-May-2025 13:45:41 UTC] Avify error: You need to install WooCommerce in order to run Avify
-[05-May-2025 13:46:17 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/amcaptcha/amcaptcha.php on line 256
-[05-May-2025 13:46:25 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/amcaptcha/amcaptcha.php on line 256
-[05-May-2025 13:46:32 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/amcaptcha/amcaptcha.php on line 256
-[05-May-2025 13:48:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#0 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(171): stream_get_meta_data(false)
+#1 /wordpress/wp-content/plugins/allopass/allopass-for-wp.php(32): allopass_post(Array)
+#2 /wordpress/wp-includes/class-wp-hook.php(324): allopass_init(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_allopa...', false)
+#6 /internal/eval.php(20): activate_plugin('allopass/allopa...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/allopass/allopass-for-wp.php on line 171
+[06-May-2025 22:36:05 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:36:06 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:36:15 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:36:16 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:36:24 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:36:25 UTC] PHP Warning:  Undefined variable $wpmu in /wordpress/wp-content/plugins/animal-captcha/animal-captcha.php on line 91
+[06-May-2025 22:37:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE wp_apct_testimonial_detail (
@@ -161,7 +674,7 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
           testimonial_status varchar(255) NOT NULL,
           PRIMARY KEY id (id)
         ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_ap-custom-testimonial/ap-custom-testimonial.php'), WP_Hook->do_action, WP_Hook->apply_filters, APCT_free->apct_plugin_activation, include('/plugins/ap-custom-testimonial/inc/backend/activate.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 13:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[06-May-2025 22:38:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>CREATE TABLE wp_apct_testimonial_detail (
@@ -200,27 +713,27 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
           testimonial_status varchar(255) NOT NULL,
           PRIMARY KEY id (id)
         ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_ap-custom-testimonial/ap-custom-testimonial.php'), WP_Hook->do_action, WP_Hook->apply_filters, APCT_free->apct_plugin_activation, include('/plugins/ap-custom-testimonial/inc/backend/activate.php'), dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 13:48:56 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
-[05-May-2025 13:48:56 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
-[05-May-2025 13:48:56 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
+[06-May-2025 22:38:08 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[06-May-2025 22:38:08 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[06-May-2025 22:38:08 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
 #2 /internal/eval.php(20): activate_plugin('apcu/object-cac...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/apcu/object-cache.php on line 13
-[05-May-2025 13:49:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
-[05-May-2025 13:49:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
-[05-May-2025 13:49:03 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
+[06-May-2025 22:38:16 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[06-May-2025 22:38:16 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[06-May-2025 22:38:16 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
 #2 /internal/eval.php(20): activate_plugin('apcu/object-cac...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/apcu/object-cache.php on line 13
-[05-May-2025 13:49:10 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
-[05-May-2025 13:49:10 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
-[05-May-2025 13:49:10 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
+[06-May-2025 22:38:22 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 15
+[06-May-2025 22:38:22 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/apcu/object-cache.php on line 17
+[06-May-2025 22:38:22 UTC] PHP Fatal error:  Uncaught RuntimeException: <strong>ERROR:</strong> This is <em>not</em> a plugin, and it should not be activated as one.<br /><br />Instead, <code>/wordpress/wp-content/plugins/apcu/object-cache.php</code> must be moved to <code>/wordpress/wp-content/object-cache.php</code> in /wordpress/wp-content/plugins/apcu/object-cache.php:13
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('apcu/object-cac...')
@@ -244,24 +757,4 @@ Stack trace:
         at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
         at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12446:23)
-        at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:227:48)
-        at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-        at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playgroun
