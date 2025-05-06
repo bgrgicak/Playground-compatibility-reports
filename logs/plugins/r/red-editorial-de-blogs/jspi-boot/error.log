@@ -2,224 +2,362 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 13:37:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>recipepress-reloaded</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:37:57 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>recipepress-reloaded</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:38:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>recipepress-reloaded</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:38:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [06-May-2025 05:29:59 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method serpzilla::plugins_loaded() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[06-May-2025 05:30:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1</p>
+<p>
+            CREATE TABLE wp_serpzilla (
+              uri varchar(255) NOT NULL,
+              text text NOT NULL,
+              PRIMARY KEY uri (uri)
+            )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `c_lang` FROM `wp_rencontre_profil` WHERE `c_lang` = 'en' LIMIT 1 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_serpzilla, uri, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_serpzilla, text, text</li>
+<li>Executing: 
+            CREATE TABLE &quot;wp_serpzilla&quot; (
+&quot;uri&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+PRIMARY KEY (&quot;(&quot;, &quot;)&quot;)) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_profil
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT c_lang F...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT c_lang F...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_lang F...')
-#4 /wordpress/wp-content/plugins/rencontre/rencontre.php(185): wpdb->get_var('SELECT c_lang F...')
-#5 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#8 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#9 {main}</pre>
- for query SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:38:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `c_liste_lang` FROM `wp_rencontre_liste` WHERE `c_liste_lang` = 'en' LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_liste
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT c_liste_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT c_liste_...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_liste_...')
-#4 /wordpress/wp-content/plugins/rencontre/rencontre.php(188): wpdb->get_var('SELECT c_liste_...')
-#5 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#8 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#9 {main}</pre>
- for query SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:38:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT c_lang FROM wp_rencontre_profil WHERE c_lang=:param0  LIMIT 1 | parameters: en</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_profil.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_lang F...')
-#2 /wordpress/wp-content/plugins/rencontre/rencontre.php(185): wpdb->get_var('SELECT c_lang F...')
-#3 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#7 {main}</pre>
- for query SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:38:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang=:param0  LIMIT 1 | parameters: en</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_liste.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_liste_...')
-#2 /wordpress/wp-content/plugins/rencontre/rencontre.php(188): wpdb->get_var('SELECT c_liste_...')
-#3 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#7 {main}</pre>
- for query SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:38:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_rencontre_liste AUTO_INCREMENT = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: AUTO_INCREMENT.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/rencontre/rencontre.php(155): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): rencontre_activation(false)
+#1 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(491): WP_SQLite_DB->query('\n            CR...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
 #3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rencon...', false)
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
+#6 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
 #7 {main}</pre>
- for query ALTER TABLE wp_rencontre_liste AUTO_INCREMENT = 1 made by activate_plugin, do_action('activate_rencontre/rencontre.php'), WP_Hook->do_action, WP_Hook->apply_filters, rencontre_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:40:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query 
+            CREATE TABLE wp_serpzilla (
+              uri varchar(255) NOT NULL,
+              text text NOT NULL,
+              PRIMARY KEY uri (uri)
+            ) made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 05:30:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1</p>
+<p>DESCRIBE wp_serpzilla;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT c_lang FROM wp_rencontre_profil WHERE c_lang=:param0  LIMIT 1 | parameters: en</li>
+<li>Executing: SELECT
+				`name` as `Field`,
+				(
+					CASE `notnull`
+					WHEN 0 THEN 'YES'
+					WHEN 1 THEN 'NO'
+					END
+				) as `Null`,
+				COALESCE(
+					d.`mysql_type`,
+					(
+						CASE `type`
+						WHEN 'INTEGER' THEN 'int'
+						WHEN 'TEXT' THEN 'text'
+						WHEN 'BLOB' THEN 'blob'
+						WHEN 'REAL' THEN 'real'
+						ELSE `type`
+						END
+					)
+				) as `Type`,
+				TRIM(`dflt_value`, &quot;'&quot;) as `Default`,
+				'' as Extra,
+				(
+					CASE `pk`
+					WHEN 0 THEN ''
+					ELSE 'PRI'
+					END
+				) as `Key`
+				FROM pragma_table_info(&quot;wp_serpzilla&quot;) p
+				LEFT JOIN _mysql_data_types_cache d
+				ON d.`table` = &quot;wp_serpzilla&quot;
+				AND d.`column_or_index` = p.`name`
+				;
+			 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_profil.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Table not found.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_lang F...')
-#2 /wordpress/wp-content/plugins/rencontre/rencontre.php(185): wpdb->get_var('SELECT c_lang F...')
-#3 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#7 {main}</pre>
- for query SELECT c_lang FROM wp_rencontre_profil WHERE c_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:40:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('DESCRIBE wp_ser...')
+#2 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(499): wpdb->get_results('DESCRIBE wp_ser...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
+#7 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
+#8 {main}</pre>
+ for query DESCRIBE wp_serpzilla; made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 05:30:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1</p>
+<p>
+            CREATE TABLE wp_serpzilla (
+              uri varchar(255) NOT NULL,
+              text text NOT NULL,
+              PRIMARY KEY uri (uri)
+            )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang=:param0  LIMIT 1 | parameters: en</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_serpzilla, uri, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_serpzilla, text, text</li>
+<li>Executing: 
+            CREATE TABLE &quot;wp_serpzilla&quot; (
+&quot;uri&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+PRIMARY KEY (&quot;(&quot;, &quot;)&quot;)) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_rencontre_liste.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT c_liste_...')
-#2 /wordpress/wp-content/plugins/rencontre/rencontre.php(188): wpdb->get_var('SELECT c_liste_...')
-#3 /wordpress/wp-content/plugins/rencontre/rencontre.php(164): Rencontre->__construct()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rencontre/renco...')
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
-#7 {main}</pre>
- for query SELECT c_liste_lang FROM wp_rencontre_liste WHERE c_liste_lang='en' LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/rencontre/rencontre.php'), Rencontre->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:40:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_rencontre_liste AUTO_INCREMENT = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: AUTO_INCREMENT.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/rencontre/rencontre.php(155): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): rencontre_activation(false)
+#1 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(491): WP_SQLite_DB->query('\n            CR...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
 #3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rencon...', false)
-#6 /internal/eval.php(20): activate_plugin('rencontre/renco...')
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
+#6 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
 #7 {main}</pre>
- for query ALTER TABLE wp_rencontre_liste AUTO_INCREMENT = 1 made by activate_plugin, do_action('activate_rencontre/rencontre.php'), WP_Hook->do_action, WP_Hook->apply_filters, rencontre_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:41:33 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:33 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:41 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:41 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:49 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:49 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
+ for query 
+            CREATE TABLE wp_serpzilla (
+              uri varchar(255) NOT NULL,
+              text text NOT NULL,
+              PRIMARY KEY uri (uri)
+            ) made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 05:30:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESCRIBE wp_serpzilla;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT
+				`name` as `Field`,
+				(
+					CASE `notnull`
+					WHEN 0 THEN 'YES'
+					WHEN 1 THEN 'NO'
+					END
+				) as `Null`,
+				COALESCE(
+					d.`mysql_type`,
+					(
+						CASE `type`
+						WHEN 'INTEGER' THEN 'int'
+						WHEN 'TEXT' THEN 'text'
+						WHEN 'BLOB' THEN 'blob'
+						WHEN 'REAL' THEN 'real'
+						ELSE `type`
+						END
+					)
+				) as `Type`,
+				TRIM(`dflt_value`, &quot;'&quot;) as `Default`,
+				'' as Extra,
+				(
+					CASE `pk`
+					WHEN 0 THEN ''
+					ELSE 'PRI'
+					END
+				) as `Key`
+				FROM pragma_table_info(&quot;wp_serpzilla&quot;) p
+				LEFT JOIN _mysql_data_types_cache d
+				ON d.`table` = &quot;wp_serpzilla&quot;
+				AND d.`column_or_index` = p.`name`
+				;
+			 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Table not found.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('DESCRIBE wp_ser...')
+#2 /wordpress/wp-content/plugins/serpzilla/serpzilla.php(499): wpdb->get_results('DESCRIBE wp_ser...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): serpzilla::_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_serpzi...', false)
+#7 /internal/eval.php(20): activate_plugin('serpzilla/serpz...')
+#8 {main}</pre>
+ for query DESCRIBE wp_serpzilla; made by activate_plugin, do_action('activate_serpzilla/serpzilla.php'), WP_Hook->do_action, WP_Hook->apply_filters, serpzilla::_activation, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 05:30:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('purely_shipping...')
+#2 /wordpress/wp-content/plugins/shipping-countdown-timer/purely-shipping-countdown.php(427): register_widget('purely_shipping...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_purely_shipping_countdown('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:31:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('purely_shipping...')
+#2 /wordpress/wp-content/plugins/shipping-countdown-timer/purely-shipping-countdown.php(427): register_widget('purely_shipping...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_purely_shipping_countdown('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:31:10 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('purely_shipping...')
+#2 /wordpress/wp-content/plugins/shipping-countdown-timer/purely-shipping-countdown.php(427): register_widget('purely_shipping...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_purely_shipping_countdown('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:33:57 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sidebar_stats_w...')
+#2 /wordpress/wp-content/plugins/sidebar-stats-widget/sidebar_stats_widget.php(69): register_widget('sidebar_stats_w...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_sidebar_stats_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:34:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sidebar_stats_w...')
+#2 /wordpress/wp-content/plugins/sidebar-stats-widget/sidebar_stats_widget.php(69): register_widget('sidebar_stats_w...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_sidebar_stats_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:34:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('sidebar_stats_w...')
+#2 /wordpress/wp-content/plugins/sidebar-stats-widget/sidebar_stats_widget.php(69): register_widget('sidebar_stats_w...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_sidebar_stats_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:35:17 UTC] PHP Warning:  Undefined variable $widget_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:17 UTC] PHP Warning:  Undefined variable $control_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:17 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Simple_converter is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:35:26 UTC] PHP Warning:  Undefined variable $widget_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:26 UTC] PHP Warning:  Undefined variable $control_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:26 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Simple_converter is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:35:35 UTC] PHP Warning:  Undefined variable $widget_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:35 UTC] PHP Warning:  Undefined variable $control_ops in /wordpress/wp-content/plugins/simple-convertor/simple-convertor.php on line 53
+[06-May-2025 05:35:35 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Simple_converter is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:36:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:36:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:36:58 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:36:58 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:37:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:37:07 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 05:37:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('red-editorial-d...')
 #2 /internal/eval.php(20): activate_plugin('red-editorial-d...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php on line 45
-[04-May-2025 13:42:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
+[06-May-2025 05:37:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('red-editorial-d...')
 #2 /internal/eval.php(20): activate_plugin('red-editorial-d...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php on line 45
-[04-May-2025 13:42:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
+[06-May-2025 05:37:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/red-editorial-de-blogs/red_editorial_blogs.php:45
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('red-editorial-d...')
