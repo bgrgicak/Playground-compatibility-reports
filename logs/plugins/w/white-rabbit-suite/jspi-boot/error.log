@@ -2,238 +2,272 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 06:38:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [06-May-2025 20:31:35 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427115'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427115';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` SET `option_name` = 'wpsl_version' , `option_value` = '1.1' , `updated` = '1746427115' ON CONFLICT DO UPDATE SET `option_name` = 'wpsl_version' , `option_value` = '1.1' , `updated` = '1746427115' | (no parameters)</li>
+<li>Executing: SELECT `a`.`id` AS `id` , `a`.`name` AS `name` , `a`.`quantity` AS `quantity` , `a`.`price` AS `price` , `c`.`name` as `category` FROM `wp_wpsc_product_list` AS `a` , `wp_wpsc_item_category_assoc` AS `b` , `wp_wpsc_product_categories` AS `c` where `a`.`active` = 1 and `a`.`quantity_limited` = 1 and `a`.`id` = `b`.`product_id` and `b`.`category_id` = `c`.`id` ORDER BY `id` DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(26): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(135): wpsl_add_option('wpsl_version', '1.1')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-secure-login...')
-#10 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427115'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427115'; made by activate_plugin, do_action('activate_wp-secure-login/wp-secure-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_activation, wpsl_add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:38:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18
-[05-May-2025 06:38:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT a.id AS ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT a.id AS ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#6 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#7 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsc-inventory-...')
+#10 /internal/eval.php(20): activate_plugin('wpsc-inventory-...')
+#11 {main}</pre>
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:31:35 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:37 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427116'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427116';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` SET `option_name` = 'wpsl_version' , `option_value` = '1.1' , `updated` = '1746427116' ON CONFLICT DO UPDATE SET `option_name` = 'wpsl_version' , `option_value` = '1.1' , `updated` = '1746427116' | (no parameters)</li>
+<li>Executing: SELECT `a`.`id` AS `id` , `a`.`name` AS `name` , `a`.`quantity` AS `quantity` , `a`.`price` AS `price` , `c`.`name` as `category` FROM `wp_wpsc_product_list` AS `a` , `wp_wpsc_item_category_assoc` AS `b` , `wp_wpsc_product_categories` AS `c` where `a`.`active` = 1 and `a`.`quantity_limited` = 1 and `a`.`id` = `b`.`product_id` and `b`.`category_id` = `c`.`id` ORDER BY `id` DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "SET": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(40): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(153): wpsl_update_option('wpsl_version', '1.1')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_update_check('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT a.id AS ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT a.id AS ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#6 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#7 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#8 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
 #9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427116'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427116'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_update_check, wpsl_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:38:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:31:45 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427124'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427124';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_wpsl_options&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_wpsl_options__option_name&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = :param0 , `option_value` = :param1 , `updated` = :param2 
-	ON   CONFLICT (&quot;option_name&quot;) DO UPDATE SET  `option_name` = :param3 , `option_value` = :param4 , `updated` = :param5 ; | parameters: wpsl_version, 1.1, 1746427124, wpsl_version, 1.1, 1746427124</li>
+<li>Executing: SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(26): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(135): wpsl_add_option('wpsl_version', '1.1')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-secure-login...')
-#8 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427124'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427124'; made by activate_plugin, do_action('activate_wp-secure-login/wp-secure-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_activation, wpsl_add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:38:45 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18
-[05-May-2025 06:38:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#2 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#3 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsc-inventory-...')
+#8 /internal/eval.php(20): activate_plugin('wpsc-inventory-...')
+#9 {main}</pre>
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:31:45 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:46 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427125'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427125';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_wpsl_options&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_wpsl_options__option_name&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = :param0 , `option_value` = :param1 , `updated` = :param2 
-	ON   CONFLICT (&quot;option_name&quot;) DO UPDATE SET  `option_name` = :param3 , `option_value` = :param4 , `updated` = :param5 ; | parameters: wpsl_version, 1.1, 1746427125, wpsl_version, 1.1, 1746427125</li>
+<li>Executing: SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(40): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(153): wpsl_update_option('wpsl_version', '1.1')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_update_check('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#2 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#3 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
 #7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427125'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427125'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_update_check, wpsl_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:38:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:31:54 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427133'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427133';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_wpsl_options&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_wpsl_options__option_name&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = :param0 , `option_value` = :param1 , `updated` = :param2 
-	ON   CONFLICT (&quot;option_name&quot;) DO UPDATE SET  `option_name` = :param3 , `option_value` = :param4 , `updated` = :param5 ; | parameters: wpsl_version, 1.1, 1746427133, wpsl_version, 1.1, 1746427133</li>
+<li>Executing: SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(26): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(135): wpsl_add_option('wpsl_version', '1.1')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_activation(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-sec...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-secure-login...')
-#8 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427133'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427133'; made by activate_plugin, do_action('activate_wp-secure-login/wp-secure-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_activation, wpsl_add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:38:54 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php on line 18
-[05-May-2025 06:38:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#2 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#3 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpsc-inventory-...')
+#8 /internal/eval.php(20): activate_plugin('wpsc-inventory-...')
+#9 {main}</pre>
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:31:54 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:55 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 20:31:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427134'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427134';</p>
+<p>SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_wpsl_options&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_wpsl_options__option_name&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = :param0 , `option_value` = :param1 , `updated` = :param2 
-	ON   CONFLICT (&quot;option_name&quot;) DO UPDATE SET  `option_name` = :param3 , `option_value` = :param4 , `updated` = :param5 ; | parameters: wpsl_version, 1.1, 1746427134, wpsl_version, 1.1, 1746427134</li>
+<li>Executing: SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wp-secure-login/includes/functions.php(40): WP_SQLite_DB->query('INSERT INTO `wp...')
-#2 /wordpress/wp-content/plugins/wp-secure-login/wp-secure-login.php(153): wpsl_update_option('wpsl_version', '1.1')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wp_secure_login_update_check('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT a.id AS ...')
+#2 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(88): wpdb->get_results('SELECT a.id AS ...')
+#3 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(74): WPSC_InventoryManager->getProducts()
+#4 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(46): WPSC_InventoryManager->initialize()
+#5 /wordpress/wp-content/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php(375): WPSC_InventoryManager->__construct()
+#6 /wordpress/wp-settings.php(545): include_once('/wordpress/wp-c...')
 #7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_wpsl_options` 
-	SET `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427134'
-	ON DUPLICATE KEY UPDATE `option_name` = 'wpsl_version', `option_value` = '1.1', `updated` = '1746427134'; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, wp_secure_login_update_check, wpsl_update_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 06:39:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_wp_sliding_login_form_css" in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php:239
+ for query SELECT a.id AS id, a.name AS name, a.quantity AS quantity, a.price AS price, c.name as category FROM wp_wpsc_product_list AS a, wp_wpsc_item_category_assoc AS b, wp_wpsc_product_categories AS c where a.active = 1 and a.quantity_limited = 1 and a.id = b.product_id and b.category_id = c.id ORDER BY id DESC made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wpsc-inventory-manager/wpsc-inventory-manager.php'), WPSC_InventoryManager->__construct, WPSC_InventoryManager->initialize, WPSC_InventoryManager->getProducts, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 20:33:01 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:01 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:33:02 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:02 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:33:09 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:09 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:33:10 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:10 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:33:18 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:18 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:33:19 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
+[06-May-2025 20:33:19 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
+[06-May-2025 20:35:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "TERM_REL_IMG" in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imagetagger/imagetagger.php(29): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imagetagger/...')
+#3 /internal/eval.php(20): activate_plugin('wp-imagetagger/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php on line 6
+[06-May-2025 20:35:21 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "TERM_REL_IMG" in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imagetagger/imagetagger.php(29): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imagetagger/...')
+#3 /internal/eval.php(20): activate_plugin('wp-imagetagger/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php on line 6
+[06-May-2025 20:35:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "TERM_REL_IMG" in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-imagetagger/imagetagger.php(29): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-imagetagger/...')
+#3 /internal/eval.php(20): activate_plugin('wp-imagetagger/...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/wp-imagetagger/imagetagger-lib.php on line 6
+[06-May-2025 20:36:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-sliding-logi...')
-#2 /internal/eval.php(20): activate_plugin('wp-sliding-logi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-mobileme-gal...')
+#2 /internal/eval.php(20): activate_plugin('wp-mobileme-gal...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php on line 239
-[05-May-2025 06:39:10 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_wp_sliding_login_form_css" in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php:239
+  thrown in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php on line 81
+[06-May-2025 20:37:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-sliding-logi...')
-#2 /internal/eval.php(20): activate_plugin('wp-sliding-logi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-mobileme-gal...')
+#2 /internal/eval.php(20): activate_plugin('wp-mobileme-gal...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php on line 239
-[05-May-2025 06:39:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "add_wp_sliding_login_form_css" in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php:239
+  thrown in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php on line 81
+[06-May-2025 20:37:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php:81
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-sliding-logi...')
-#2 /internal/eval.php(20): activate_plugin('wp-sliding-logi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-mobileme-gal...')
+#2 /internal/eval.php(20): activate_plugin('wp-mobileme-gal...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-sliding-logindashboard-panel/wp-sliding-login-dashboard-panel.php on line 239
-[05-May-2025 06:40:24 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-youtube-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 06:40:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-youtube-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 06:40:41 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-youtube-gallery</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 06:41:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
+  thrown in /wordpress/wp-content/plugins/wp-mobileme-gallery/wp_mmg_plugin.php on line 81
+[06-May-2025 20:37:25 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php:98
+Stack trace:
+#0 /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php(98): sprintf('Search %a', 'Weekly Menus')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Pmz_Weekly_Menu->register_post_type('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php on line 98
+[06-May-2025 20:37:33 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php:98
+Stack trace:
+#0 /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php(98): sprintf('Search %a', 'Weekly Menus')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Pmz_Weekly_Menu->register_post_type('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php on line 98
+[06-May-2025 20:37:42 UTC] PHP Fatal error:  Uncaught ValueError: Unknown format specifier "a" in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php:98
+Stack trace:
+#0 /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php(98): sprintf('Search %a', 'Weekly Menus')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Pmz_Weekly_Menu->register_post_type('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(727): do_action('init')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/weekly-menu/includes/class-pmz-weekly-menu.php on line 98
+[06-May-2025 20:38:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
 Stack trace:
 #0 /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php(24): whiterabbitInstall()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): whiterabbitRegistrationInstall(false)
@@ -243,7 +277,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('white-rabbit-su...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php on line 116
-[05-May-2025 06:41:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
+[06-May-2025 20:38:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
 Stack trace:
 #0 /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php(24): whiterabbitInstall()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): whiterabbitRegistrationInstall(false)
@@ -253,7 +287,7 @@ Stack trace:
 #5 /internal/eval.php(20): activate_plugin('white-rabbit-su...')
 #6 {main}
   thrown in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php on line 116
-[05-May-2025 06:42:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
+[06-May-2025 20:38:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dbDelta() in /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php:116
 Stack trace:
 #0 /wordpress/wp-content/plugins/white-rabbit-suite/install/install-posts.php(24): whiterabbitInstall()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): whiterabbitRegistrationInstall(false)
