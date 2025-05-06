@@ -2,24 +2,899 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 21:47:36 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
-[04-May-2025 21:47:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
+Error: [06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_addresses` (
+  `address_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `unit_flat` varchar(255) COLLATE  DEFAULT NULL,
+  `street_address` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `province` varchar(100) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `zip_code` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `country_code` varchar(5) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `timezone` varchar(50) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  PRIMARY KEY (`address_id`),
+  KEY `province` (`province`,`country_code`,`timezone`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_addresses` (
+  `address_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `unit_flat` varchar(255) COLLATE  DEFAULT NULL,
+  `street_address` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `province` varchar(100) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `zip_code` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `country_code` varchar(5) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `timezone` varchar(50) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  PRIMARY KEY (`address_id`),
+  KEY `province` (`province`,`country_code`,`timezone`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_applications` (
+  `application_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `job_id` bigint(20) UNSIGNED NOT NULL,
+  `stage_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `address_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `first_name` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `last_name` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `cover_letter` longtext CHARACTER SET utf8mb4 COLLATE ,
+  `resume_file_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `is_complete` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'It will be null until all the files are uploaded one by one. Null means application not completed yet. ',
+  `application_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`application_id`),
+  KEY `job_id` (`job_id`,`stage_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_applications` (
+  `application_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `job_id` bigint(20) UNSIGNED NOT NULL,
+  `stage_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `address_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `first_name` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `last_name` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `cover_letter` longtext CHARACTER SET utf8mb4 COLLATE ,
+  `resume_file_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `is_complete` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'It will be null until all the files are uploaded one by one. Null means application not completed yet. ',
+  `application_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`application_id`),
+  KEY `job_id` (`job_id`,`stage_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_appmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`),
+  KEY `object_id` (`object_id`,`meta_key`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_appmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`),
+  KEY `object_id` (`object_id`,`meta_key`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_comments` (
+  `comment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `comment_content` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `comment_type` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL DEFAULT 'text',
+  `comment_parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `application_id` bigint(20) UNSIGNED NOT NULL,
+  `commenter_id` bigint(20) UNSIGNED NOT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_edit_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_comments` (
+  `comment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `comment_content` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `comment_type` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL DEFAULT 'text',
+  `comment_parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `application_id` bigint(20) UNSIGNED NOT NULL,
+  `commenter_id` bigint(20) UNSIGNED NOT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_edit_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_departments` (
+  `department_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sequence` smallint(5) UNSIGNED NOT NULL,
+  PRIMARY KEY (`department_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_departments` (
+  `department_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sequence` smallint(5) UNSIGNED NOT NULL,
+  PRIMARY KEY (`department_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_employee_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_employee_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_employment_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_employment_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_events` (
+  `event_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `event_title` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `description` mediumtext CHARACTER SET utf8mb4 COLLATE ,
+  `starts_at` timestamp NOT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `channel` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'zoom, meet, in_person etc.',
+  `event_dest` text CHARACTER SET utf8mb4 COLLATE  COMMENT 'zoom or meet id, address id etc.',
+  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `application_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `host_id` bigint(20) UNSIGNED NOT NULL,
+  `creator_id` bigint(20) UNSIGNED NOT NULL COMMENT 'The user ID who creates event',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_events` (
+  `event_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `event_title` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `description` mediumtext CHARACTER SET utf8mb4 COLLATE ,
+  `starts_at` timestamp NOT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `channel` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'zoom, meet, in_person etc.',
+  `event_dest` text CHARACTER SET utf8mb4 COLLATE  COMMENT 'zoom or meet id, address id etc.',
+  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `application_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `host_id` bigint(20) UNSIGNED NOT NULL,
+  `creator_id` bigint(20) UNSIGNED NOT NULL COMMENT 'The user ID who creates event',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_jobmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`),
+  KEY `object_id` (`object_id`,`meta_key`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_jobmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `meta_value` longtext CHARACTER SET utf8mb4 COLLATE ,
+  PRIMARY KEY (`meta_id`),
+  KEY `object_id` (`object_id`,`meta_key`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_jobs` (
+  `job_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `job_code` varchar(50) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `job_title` mediumtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_slug` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `job_description` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_status` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'draft, publish or archive. Once published, draft copies will be saved in meta instead to show prompt in editor. ',
+  `department_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `vacancy` mediumint(8) UNSIGNED DEFAULT NULL,
+  `address_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `currency` varchar(5) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `salary_a` mediumint(8) UNSIGNED DEFAULT NULL COMMENT 'To support salary range like 2000-4000. Second portion will go into salary_b column.',
+  `salary_b` mediumint(8) UNSIGNED DEFAULT NULL,
+  `salary_basis` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'daily, weekly, monthly, yearly',
+  `employment_type` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'part_time, full_time, contract, temporary, trainee',
+  `attendance_type` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `experience_level` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'beginner, intermediate, expert etc.',
+  `experience_years` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `application_deadline` timestamp NULL DEFAULT NULL,
+  `application_form` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`job_id`),
+  UNIQUE KEY `job_slug` (`job_slug`),
+  KEY `job_status` (`job_status`,`department_id`,`salary_basis`,`employment_type`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_jobs` (
+  `job_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `job_code` varchar(50) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `job_title` mediumtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_slug` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `job_description` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_status` varchar(20) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'draft, publish or archive. Once published, draft copies will be saved in meta instead to show prompt in editor. ',
+  `department_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `vacancy` mediumint(8) UNSIGNED DEFAULT NULL,
+  `address_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `currency` varchar(5) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `salary_a` mediumint(8) UNSIGNED DEFAULT NULL COMMENT 'To support salary range like 2000-4000. Second portion will go into salary_b column.',
+  `salary_b` mediumint(8) UNSIGNED DEFAULT NULL,
+  `salary_basis` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'daily, weekly, monthly, yearly',
+  `employment_type` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'part_time, full_time, contract, temporary, trainee',
+  `attendance_type` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `experience_level` varchar(20) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL COMMENT 'beginner, intermediate, expert etc.',
+  `experience_years` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+  `application_deadline` timestamp NULL DEFAULT NULL,
+  `application_form` longtext CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`job_id`),
+  UNIQUE KEY `job_slug` (`job_slug`),
+  KEY `job_status` (`job_status`,`department_id`,`salary_basis`,`employment_type`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_leaves` (
+  `leave_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `request_note` text COLLATE ,
+  `rejection_note` text COLLATE ,
+  `leave_status` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'pending, cancelled, approved, rejected',
+  `leave_type` varchar(20) COLLATE  NOT NULL COMMENT 'sick, parental, maternity, paternity, annual etc. Also unpaid, however unpaid has special usage in backend functionalities. ',
+  `employee_user_id` bigint(20) UNSIGNED NOT NULL,
+  `reviewer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `request_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `action_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`leave_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_leaves` (
+  `leave_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `request_note` text COLLATE ,
+  `rejection_note` text COLLATE ,
+  `leave_status` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'pending, cancelled, approved, rejected',
+  `leave_type` varchar(20) COLLATE  NOT NULL COMMENT 'sick, parental, maternity, paternity, annual etc. Also unpaid, however unpaid has special usage in backend functionalities. ',
+  `employee_user_id` bigint(20) UNSIGNED NOT NULL,
+  `reviewer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `request_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `action_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`leave_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_stages` (
+  `stage_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `stage_name` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_id` bigint(20) UNSIGNED NOT NULL,
+  `sequence` tinyint(3) UNSIGNED NOT NULL,
+  PRIMARY KEY (`stage_id`),
+  KEY `job_id` (`job_id`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_stages` (
+  `stage_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `stage_name` varchar(50) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+  `job_id` bigint(20) UNSIGNED NOT NULL,
+  `sequence` tinyint(3) UNSIGNED NOT NULL,
+  PRIMARY KEY (`stage_id`),
+  KEY `job_id` (`job_id`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_crewhrm_weekly_schedules` (
+  `schedule_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `employment_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'Null means global settings, otherwise for specific employment',
+  `week_day` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'monday, tuesday and so on',
+  `time_starts` time NOT NULL,
+  `time_ends` time NOT NULL,
+  `enable` tinyint(1) UNSIGNED NOT NULL,
+  PRIMARY KEY (`schedule_id`),
+  KEY `week_day` (`week_day`)
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/hr-management/classes/Models/DB.php(169): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/hr-management/classes/Setup/Database.php(54): CrewHRM\Models\DB::import('-- phpMyAdmin S...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Setup\Database->importDB('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/hr-management/classes/Main.php(144): do_action('crewhrm_activat...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): CrewHRM\Main->activate(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hr-man...', false)
+#14 /internal/eval.php(20): activate_plugin('hr-management/h...')
+#15 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_crewhrm_weekly_schedules` (
+  `schedule_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `employment_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'Null means global settings, otherwise for specific employment',
+  `week_day` varchar(10) CHARACTER SET utf8mb4 COLLATE  NOT NULL COMMENT 'monday, tuesday and so on',
+  `time_starts` time NOT NULL,
+  `time_ends` time NOT NULL,
+  `enable` tinyint(1) UNSIGNED NOT NULL,
+  PRIMARY KEY (`schedule_id`),
+  KEY `week_day` (`week_day`)
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_hr-management/hr-management.php'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Main->activate, do_action('crewhrm_activated'), WP_Hook->do_action, WP_Hook->apply_filters, CrewHRM\Setup\Database->importDB, CrewHRM\Models\DB::import, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:54:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>hack-info</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:54:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>hack-info</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:55:08 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>hack-info</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:55:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:56:34 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:56:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table if not exists `wp_handmade_posts`
+				(
+				    ID                    bigint unsigned auto_increment		        primary key,
+				    post_author           bigint unsigned default 0                     not null,
+				    post_date             datetime        default '0000-00-00 00:00:00' not null,
+				    post_date_gmt         datetime        default '0000-00-00 00:00:00' not null,
+				    post_content          longtext        default ''                    not null,
+				    post_title            text                                          not null,
+				    post_excerpt          text                                          not null,
+				    post_status           varchar(20)     default 'publish'             not null,
+				    post_name             varchar(200)    default ''                    not null,
+				    post_modified         datetime        default '0000-00-00 00:00:00' not null,
+				    post_modified_gmt     datetime        default '0000-00-00 00:00:00' not null,
+				    post_parent           bigint unsigned default 0                     not null,
+				    post_type             varchar(200)     default 'c'  not null,
+					KEY post_name (post_name(191)),
+					KEY type_status_date (post_type,post_status,post_date,ID),
+					KEY post_parent (post_parent),
+					KEY post_author (post_author)
+				) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(65): WP_SQLite_DB->query('create table if...')
+#2 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(15): HANDMADE_Products_Table::create_table()
+#3 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(178): HANDMADE_Products_Table::maybe_create_table()
+#4 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(163): HANDMADE->create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): HANDMADE->after_activated('handmade-dropsh...', false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'handmade-dropsh...', false)
+#9 /internal/eval.php(20): activate_plugin('handmade-dropsh...')
+#10 {main}</pre>
+ for query create table if not exists `wp_handmade_posts`
+				(
+				    ID                    bigint unsigned auto_increment		        primary key,
+				    post_author           bigint unsigned default 0                     not null,
+				    post_date             datetime        default '0000-00-00 00:00:00' not null,
+				    post_date_gmt         datetime        default '0000-00-00 00:00:00' not null,
+				    post_content          longtext        default ''                    not null,
+				    post_title            text                                          not null,
+				    post_excerpt          text                                          not null,
+				    post_status           varchar(20)     default 'publish'             not null,
+				    post_name             varchar(200)    default ''                    not null,
+				    post_modified         datetime        default '0000-00-00 00:00:00' not null,
+				    post_modified_gmt     datetime        default '0000-00-00 00:00:00' not null,
+				    post_parent           bigint unsigned default 0                     not null,
+				    post_type             varchar(200)     default 'c'  not null,
+					KEY post_name (post_name(191)),
+					KEY type_status_date (post_type,post_status,post_date,ID),
+					KEY post_parent (post_parent),
+					KEY post_author (post_author)
+				)  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, HANDMADE->after_activated, HANDMADE->create_table, HANDMADE_Products_Table::maybe_create_table, HANDMADE_Products_Table::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:56:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table if not exists `wp_handmade_postmeta`
+				(
+				    meta_id bigint(20) unsigned NOT NULL auto_increment,
+					handmade_post_id bigint(20) unsigned NOT NULL default '0',
+					meta_key varchar(255) default NULL,
+					meta_value longtext,
+					PRIMARY KEY  (meta_id),
+					KEY handmade_post_id (handmade_post_id),
+					KEY meta_key (meta_key(191))
+				) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(65): WP_SQLite_DB->query('create table if...')
+#2 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(15): HANDMADE_Products_Table::create_table()
+#3 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(178): HANDMADE_Products_Table::maybe_create_table()
+#4 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(163): HANDMADE->create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): HANDMADE->after_activated('handmade-dropsh...', false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'handmade-dropsh...', false)
+#9 /internal/eval.php(20): activate_plugin('handmade-dropsh...')
+#10 {main}</pre>
+ for query create table if not exists `wp_handmade_postmeta`
+				(
+				    meta_id bigint(20) unsigned NOT NULL auto_increment,
+					handmade_post_id bigint(20) unsigned NOT NULL default '0',
+					meta_key varchar(255) default NULL,
+					meta_value longtext,
+					PRIMARY KEY  (meta_id),
+					KEY handmade_post_id (handmade_post_id),
+					KEY meta_key (meta_key(191))
+				)  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, HANDMADE->after_activated, HANDMADE->create_table, HANDMADE_Products_Table::maybe_create_table, HANDMADE_Products_Table::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:57:26 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 12:57:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table if not exists `wp_handmade_posts`
+				(
+				    ID                    bigint unsigned auto_increment		        primary key,
+				    post_author           bigint unsigned default 0                     not null,
+				    post_date             datetime        default '0000-00-00 00:00:00' not null,
+				    post_date_gmt         datetime        default '0000-00-00 00:00:00' not null,
+				    post_content          longtext        default ''                    not null,
+				    post_title            text                                          not null,
+				    post_excerpt          text                                          not null,
+				    post_status           varchar(20)     default 'publish'             not null,
+				    post_name             varchar(200)    default ''                    not null,
+				    post_modified         datetime        default '0000-00-00 00:00:00' not null,
+				    post_modified_gmt     datetime        default '0000-00-00 00:00:00' not null,
+				    post_parent           bigint unsigned default 0                     not null,
+				    post_type             varchar(200)     default 'c'  not null,
+					KEY post_name (post_name(191)),
+					KEY type_status_date (post_type,post_status,post_date,ID),
+					KEY post_parent (post_parent),
+					KEY post_author (post_author)
+				) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(65): WP_SQLite_DB->query('create table if...')
+#2 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(15): HANDMADE_Products_Table::create_table()
+#3 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(178): HANDMADE_Products_Table::maybe_create_table()
+#4 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(163): HANDMADE->create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): HANDMADE->after_activated('handmade-dropsh...', false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'handmade-dropsh...', false)
+#9 /internal/eval.php(20): activate_plugin('handmade-dropsh...')
+#10 {main}</pre>
+ for query create table if not exists `wp_handmade_posts`
+				(
+				    ID                    bigint unsigned auto_increment		        primary key,
+				    post_author           bigint unsigned default 0                     not null,
+				    post_date             datetime        default '0000-00-00 00:00:00' not null,
+				    post_date_gmt         datetime        default '0000-00-00 00:00:00' not null,
+				    post_content          longtext        default ''                    not null,
+				    post_title            text                                          not null,
+				    post_excerpt          text                                          not null,
+				    post_status           varchar(20)     default 'publish'             not null,
+				    post_name             varchar(200)    default ''                    not null,
+				    post_modified         datetime        default '0000-00-00 00:00:00' not null,
+				    post_modified_gmt     datetime        default '0000-00-00 00:00:00' not null,
+				    post_parent           bigint unsigned default 0                     not null,
+				    post_type             varchar(200)     default 'c'  not null,
+					KEY post_name (post_name(191)),
+					KEY type_status_date (post_type,post_status,post_date,ID),
+					KEY post_parent (post_parent),
+					KEY post_author (post_author)
+				)  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, HANDMADE->after_activated, HANDMADE->create_table, HANDMADE_Products_Table::maybe_create_table, HANDMADE_Products_Table::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:57:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>create table if not exists `wp_handmade_postmeta`
+				(
+				    meta_id bigint(20) unsigned NOT NULL auto_increment,
+					handmade_post_id bigint(20) unsigned NOT NULL default '0',
+					meta_key varchar(255) default NULL,
+					meta_value longtext,
+					PRIMARY KEY  (meta_id),
+					KEY handmade_post_id (handmade_post_id),
+					KEY meta_key (meta_key(191))
+				) </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: table.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(65): WP_SQLite_DB->query('create table if...')
+#2 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/includes/class/handmade-products-table.php(15): HANDMADE_Products_Table::create_table()
+#3 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(178): HANDMADE_Products_Table::maybe_create_table()
+#4 /wordpress/wp-content/plugins/handmade-dropshipping-for-etsy-and-woo/handmade-dropshipping-for-etsy-and-woo.php(163): HANDMADE->create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): HANDMADE->after_activated('handmade-dropsh...', false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'handmade-dropsh...', false)
+#9 /internal/eval.php(20): activate_plugin('handmade-dropsh...')
+#10 {main}</pre>
+ for query create table if not exists `wp_handmade_postmeta`
+				(
+				    meta_id bigint(20) unsigned NOT NULL auto_increment,
+					handmade_post_id bigint(20) unsigned NOT NULL default '0',
+					meta_key varchar(255) default NULL,
+					meta_value longtext,
+					PRIMARY KEY  (meta_id),
+					KEY handmade_post_id (handmade_post_id),
+					KEY meta_key (meta_key(191))
+				)  made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, HANDMADE->after_activated, HANDMADE->create_table, HANDMADE_Products_Table::maybe_create_table, HANDMADE_Products_Table::create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 12:57:52 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
+[06-May-2025 12:57:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hub2word/hub2wo...')
 #2 /internal/eval.php(20): activate_plugin('hub2word/hub2wo...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
-[04-May-2025 21:47:44 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
-[04-May-2025 21:47:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
+[06-May-2025 12:58:00 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
+[06-May-2025 12:58:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hub2word/hub2wo...')
 #2 /internal/eval.php(20): activate_plugin('hub2word/hub2wo...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
-[04-May-2025 21:47:52 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
-[04-May-2025 21:47:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
+[06-May-2025 12:58:09 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/hub2word/inc/Authentication.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/hub2word/hub2word.php on line 144
+[06-May-2025 12:58:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/hub2word/inc/Authentication.php' (include_path='.:') in /wordpress/wp-content/plugins/hub2word/hub2word.php:144
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('hub2word/hub2wo...')
