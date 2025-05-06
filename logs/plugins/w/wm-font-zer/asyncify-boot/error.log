@@ -2,273 +2,404 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 02:37:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [06-May-2025 16:55:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:55:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:55:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:55:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:55:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:55:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT error_count from wp_WPMailMon_counters where ID>0</p>
+<p>CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `error_count` from `wp_WPMailMon_counters` where `ID` &gt; 0 | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`) VALUES (?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_departments_agents, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_departments_agents, department_id, 1, , NO, mediumint, , , 7, 0, , , , mediumint(9), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_departments_agents, agent_id, 2, , NO, mediumint, , , 7, 0, , , , mediumint(9), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT error_co...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT error_co...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT error_co...')
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(687): wpdb->get_var('SELECT error_co...')
-#5 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#6 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#9 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wd...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wd...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#4 /wordpress/wp-content/plugins/wdesk/index.php(99): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#9 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #10 {main}</pre>
- for query SELECT error_count from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:55:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0</p>
+<p>CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `throttle_counter_day` from `wp_WPMailMon_counters` where `ID` &gt; 0 | (no parameters)</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`) VALUES (?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, id, 1, , NO, mediumint, , , 7, 0, , , , mediumint(9), , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, ticket_id, 2, , NO, mediumint, , , 7, 0, , , , mediumint(9), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, created, 3, CURRENT_TIMESTAMP, NO, timestamp, , , , , 0, , , timestamp, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, text, 4, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, note, 5, 0, YES, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, file, 6, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wdesk_tickets_threads, user_name, 7, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT throttle...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT throttle...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT throttle...')
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(689): wpdb->get_var('SELECT throttle...')
-#5 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#6 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#9 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('CREATE TABLE wd...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('CREATE TABLE wd...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#4 /wordpress/wp-content/plugins/wdesk/index.php(145): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#9 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #10 {main}</pre>
- for query SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[05-May-2025 02:37:09 UTC] PHP Warning:  Undefined array key "id" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[05-May-2025 02:37:10 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmailmon</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:55:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:55:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:55:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:55:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:55:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:55:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:55:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:55:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:55:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:55:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:55:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT error_count from wp_WPMailMon_counters where ID>0</p>
+<p>CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT error_count from wp_WPMailMon_counters where ID&gt;0 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, department_id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, agent_id, mediumint(9)</li>
+<li>Executing: CREATE TABLE &quot;wdesk_departments_agents&quot; (
+&quot;department_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;agent_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wdesk_departments_agents__&quot; ON &quot;wdesk_departments_agents&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, wdesk_departments_agents__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT error_co...')
-#2 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(687): wpdb->get_var('SELECT error_co...')
-#3 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#7 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#2 /wordpress/wp-content/plugins/wdesk/index.php(99): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#7 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #8 {main}</pre>
- for query SELECT error_count from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:55:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0</p>
+<p>CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT throttle_counter_day from wp_WPMailMon_counters where ID&gt;0 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, ticket_id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, created, timestamp</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, text, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, note, tinyint(1)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, file, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, user_name, varchar(255)</li>
+<li>Executing: CREATE TABLE &quot;wdesk_tickets_threads&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;ticket_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;created&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;note&quot; integer DEFAULT 0,
+&quot;file&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;user_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wdesk_tickets_threads__&quot; ON &quot;wdesk_tickets_threads&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, wdesk_tickets_threads__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT throttle...')
-#2 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(689): wpdb->get_var('SELECT throttle...')
-#3 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#7 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#2 /wordpress/wp-content/plugins/wdesk/index.php(145): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#7 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #8 {main}</pre>
- for query SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:55:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:55:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:55:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:55:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:55:55 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:56:03 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:56:03 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:56:03 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:56:03 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:56:03 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:56:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_WPMailMon_throttle_rules (ID INT(9) NOT NULL AUTO_INCREMENT, UNIQUE KEY ID (id), rule_active INT(9) DEFAULT 0, rule_title VARCHAR(200), rule_expires VARCHAR(100), rule_type SET('time','flood') NOT NULL, rule_min INT(9) DEFAULT 0, rule_hour INT(9) DEFAULT 0, rule_day INT(9) DEFAULT 0, time_hour_start VARCHAR(100) DEFAULT NULL, time_hour_end VARCHAR(100) DEFAULT NULL, time_min_start VARCHAR(100) DEFAULT NULL, time_min_end VARCHAR(100) DEFAULT NULL, rule_maxerrors INT(9) DEFAULT 0);</p>
+<p>CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, department_id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, agent_id, mediumint(9)</li>
+<li>Executing: CREATE TABLE &quot;wdesk_departments_agents&quot; (
+&quot;department_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;agent_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wdesk_departments_agents__&quot; ON &quot;wdesk_departments_agents&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_departments_agents, wdesk_departments_agents__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1449): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query CREATE TABLE wp_WPMailMon_throttle_rules (ID INT(9) NOT NULL AUTO_INCREMENT, UNIQUE KEY ID (id), rule_active INT(9) DEFAULT 0, rule_title VARCHAR(200), rule_expires VARCHAR(100), rule_type SET('time','flood') NOT NULL, rule_min INT(9) DEFAULT 0, rule_hour INT(9) DEFAULT 0, rule_day INT(9) DEFAULT 0, time_hour_start VARCHAR(100) DEFAULT NULL, time_hour_end VARCHAR(100) DEFAULT NULL, time_min_start VARCHAR(100) DEFAULT NULL, time_min_end VARCHAR(100) DEFAULT NULL, rule_maxerrors INT(9) DEFAULT 0); made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, 'All Day Blocked', '0', 'time', '00', '00', '23', '59')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, :param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: All Day Blocked, 0, time, 00, 00, 23, 59</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1456): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, 'All Day Blocked', '0', 'time', '00', '00', '23', '59') made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'No Emails After 3 Errors', '0', 'flood', 0, 0, 0, 3)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, :param0 , :param1 , :param2 , 0, 0, 0, 3) | parameters: No Emails After 3 Errors, 0, flood</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1466): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'No Emails After 3 Errors', '0', 'flood', 0, 0, 0, 3) made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'Flooding 10 per minute limit.', '0', 'flood', 10, 0, 0, 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, :param0 , :param1 , :param2 , 10, 0, 0, 0) | parameters: Flooding 10 per minute limit., 0, flood</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1469): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'Flooding 10 per minute limit.', '0', 'flood', 10, 0, 0, 0) made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:19 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmailmon</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT error_count from wp_WPMailMon_counters where ID>0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT error_count from wp_WPMailMon_counters where ID&gt;0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT error_co...')
-#2 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(687): wpdb->get_var('SELECT error_co...')
-#3 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#7 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#2 /wordpress/wp-content/plugins/wdesk/index.php(99): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#7 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #8 {main}</pre>
- for query SELECT error_count from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_departments_agents (
+		department_id mediumint(9) NOT NULL,
+		agent_id mediumint(9) NOT NULL,
+		FOREIGN KEY (department_id) REFERENCES wdesk_departments(id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:56:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0</p>
+<p>CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT throttle_counter_day from wp_WPMailMon_counters where ID&gt;0 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, ticket_id, mediumint(9)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, created, timestamp</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, text, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, note, tinyint(1)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, file, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, user_name, varchar(255)</li>
+<li>Executing: CREATE TABLE &quot;wdesk_tickets_threads&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;ticket_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;created&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT CURRENT_TIMESTAMP COLLATE NOCASE,
+&quot;text&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;note&quot; integer DEFAULT 0,
+&quot;file&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;user_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wdesk_tickets_threads__&quot; ON &quot;wdesk_tickets_threads&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wdesk_tickets_threads, wdesk_tickets_threads__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_counters.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT throttle...')
-#2 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(689): wpdb->get_var('SELECT throttle...')
-#3 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(219): WPMailMon->check_mail_throttle()
-#4 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(2653): WPMailMon->__construct()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpmailmon/wpmai...')
-#7 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wd...')
+#2 /wordpress/wp-content/plugins/wdesk/index.php(145): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wdesk_activation(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wdesk/...', false)
+#7 /internal/eval.php(20): activate_plugin('wdesk/index.php')
 #8 {main}</pre>
- for query SELECT throttle_counter_day from wp_WPMailMon_counters where ID>0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpmailmon/wpmailmon.php'), WPMailMon->__construct, WPMailMon->check_mail_throttle, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wdesk_tickets_threads (
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		ticket_id mediumint(9) NOT NULL,
+		created timestamp NOT NULL default CURRENT_TIMESTAMP,
+		text varchar(255) NOT NULL,
+		note tinyint(1) DEFAULT 0,
+		file varchar(255) NOT NULL,
+		user_name varchar(255) NOT NULL,
+		FOREIGN KEY (ticket_id) REFERENCES wdesk_tickets(id),
+		UNIQUE KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_wdesk/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, wdesk_activation, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:56:05 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/recover.php on line 3
+[06-May-2025 16:56:05 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/sign-in.php on line 3
+[06-May-2025 16:56:05 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/log-in.php on line 3
+[06-May-2025 16:56:05 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/access.php on line 3
+[06-May-2025 16:56:05 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /wordpress/wp-content/plugins/wdesk/shortcode/guest.php on line 3
+[06-May-2025 16:56:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_WPMailMon_throttle_rules (ID INT(9) NOT NULL AUTO_INCREMENT, UNIQUE KEY ID (id), rule_active INT(9) DEFAULT 0, rule_title VARCHAR(200), rule_expires VARCHAR(100), rule_type SET('time','flood') NOT NULL, rule_min INT(9) DEFAULT 0, rule_hour INT(9) DEFAULT 0, rule_day INT(9) DEFAULT 0, time_hour_start VARCHAR(100) DEFAULT NULL, time_hour_end VARCHAR(100) DEFAULT NULL, time_min_start VARCHAR(100) DEFAULT NULL, time_min_end VARCHAR(100) DEFAULT NULL, rule_maxerrors INT(9) DEFAULT 0);</p>
+<p>CREATE TABLE web3onlineusers_tlist (
+		 id int(11) NOT NULL AUTO_INCREMENT,         
+         adddate int(11) NOT NULL,
+         mtoken  varchar(250) NOT NULL,
+         active  int(11) NOT NULL,        
+           userpage  varchar(250) NOT NULL,
+		PRIMARY KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -276,94 +407,70 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: MySQL field type cannot be translated to SQLite: set.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1449): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query CREATE TABLE wp_WPMailMon_throttle_rules (ID INT(9) NOT NULL AUTO_INCREMENT, UNIQUE KEY ID (id), rule_active INT(9) DEFAULT 0, rule_title VARCHAR(200), rule_expires VARCHAR(100), rule_type SET('time','flood') NOT NULL, rule_min INT(9) DEFAULT 0, rule_hour INT(9) DEFAULT 0, rule_day INT(9) DEFAULT 0, time_hour_start VARCHAR(100) DEFAULT NULL, time_hour_end VARCHAR(100) DEFAULT NULL, time_min_start VARCHAR(100) DEFAULT NULL, time_min_end VARCHAR(100) DEFAULT NULL, rule_maxerrors INT(9) DEFAULT 0); made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE we...')
+#2 /wordpress/wp-content/plugins/web3onlineusers/web3onlineusers.php(34): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): web3onlineusers_create_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_web3on...', false)
+#7 /internal/eval.php(20): activate_plugin('web3onlineusers...')
+#8 {main}</pre>
+ for query CREATE TABLE web3onlineusers_tlist (
+		 id int(11) NOT NULL AUTO_INCREMENT,         
+         adddate int(11) NOT NULL,
+         mtoken  varchar(250) NOT NULL,
+         active  int(11) NOT NULL,        
+           userpage  varchar(250) NOT NULL,
+		PRIMARY KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_web3onlineusers/web3onlineusers.php'), WP_Hook->do_action, WP_Hook->apply_filters, web3onlineusers_create_db, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:56:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, 'All Day Blocked', '0', 'time', '00', '00', '23', '59')</p>
+<p>CREATE TABLE web3onlineusers_tlist (
+		 id int(11) NOT NULL AUTO_INCREMENT,         
+         adddate int(11) NOT NULL,
+         mtoken  varchar(250) NOT NULL,
+         active  int(11) NOT NULL,        
+           userpage  varchar(250) NOT NULL,
+		PRIMARY KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, :param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 ) | parameters: All Day Blocked, 0, time, 00, 00, 23, 59</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1456): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, time_hour_start, time_min_start, time_hour_end, time_min_end) VALUES (0, 'All Day Blocked', '0', 'time', '00', '00', '23', '59') made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'No Emails After 3 Errors', '0', 'flood', 0, 0, 0, 3)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, :param0 , :param1 , :param2 , 0, 0, 0, 3) | parameters: No Emails After 3 Errors, 0, flood</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1466): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'No Emails After 3 Errors', '0', 'flood', 0, 0, 0, 3) made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'Flooding 10 per minute limit.', '0', 'flood', 10, 0, 0, 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, :param0 , :param1 , :param2 , 10, 0, 0, 0) | parameters: Flooding 10 per minute limit., 0, flood</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_WPMailMon_throttle_rules.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpmailmon/wpmailmon.php(1469): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): WPMailMon->wpmmInstall(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpmail...', false)
-#6 /internal/eval.php(20): activate_plugin('wpmailmon/wpmai...')
-#7 {main}</pre>
- for query INSERT INTO wp_WPMailMon_throttle_rules (rule_active, rule_title, rule_expires, rule_type, rule_min, rule_hour, rule_day, rule_maxerrors) VALUES (0, 'Flooding 10 per minute limit.', '0', 'flood', 10, 0, 0, 0) made by activate_plugin, do_action('activate_wpmailmon/wpmailmon.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPMailMon->wpmmInstall, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 02:37:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpmailmon</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 02:38:29 UTC] PHP Warning:  Undefined array key "plugin" in /wordpress/wp-content/plugins/webo-facto-connector/WeboFacto/Utils.php on line 24
-[05-May-2025 02:38:39 UTC] PHP Warning:  Undefined array key "plugin" in /wordpress/wp-content/plugins/webo-facto-connector/WeboFacto/Utils.php on line 24
-[05-May-2025 02:38:47 UTC] PHP Warning:  Undefined array key "plugin" in /wordpress/wp-content/plugins/webo-facto-connector/WeboFacto/Utils.php on line 24
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE we...')
+#2 /wordpress/wp-content/plugins/web3onlineusers/web3onlineusers.php(34): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): web3onlineusers_create_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_web3on...', false)
+#7 /internal/eval.php(20): activate_plugin('web3onlineusers...')
+#8 {main}</pre>
+ for query CREATE TABLE web3onlineusers_tlist (
+		 id int(11) NOT NULL AUTO_INCREMENT,         
+         adddate int(11) NOT NULL,
+         mtoken  varchar(250) NOT NULL,
+         active  int(11) NOT NULL,        
+           userpage  varchar(250) NOT NULL,
+		PRIMARY KEY id (id)
+	) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_web3onlineusers/web3onlineusers.php'), WP_Hook->do_action, WP_Hook->apply_filters, web3onlineusers_create_db, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 16:57:36 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
+[06-May-2025 16:57:39 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
+[06-May-2025 16:57:46 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
+[06-May-2025 16:57:48 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
+[06-May-2025 16:57:57 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
+[06-May-2025 16:57:58 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wgauge/freemius/includes/class-fs-logger.php on line 145
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
