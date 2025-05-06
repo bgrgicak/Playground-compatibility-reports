@@ -1,7 +1,11 @@
 {
+  "landingPage": "/wp-admin/admin.php?page=personal-dictionary",
   "preferredVersions": {
-    "php": "8.0",
+    "php": "8.2",
     "wp": "latest"
+  },
+  "features": {
+    "networking": true
   },
   "steps": [
     {
@@ -12,8 +16,35 @@
       }
     },
     {
+      "step": "login",
+      "username": "admin",
+      "password": "admin123"
+    },
+    {
       "step": "installPlugin",
       "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "personal-dictionary"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\n$posts = get_posts(array(\n 'numberposts' => -1,\n 'post_type' => array('post', 'page'),\n 'post_status' => 'any'\n));\n\nforeach ($posts as $post) {\n wp_delete_post($post->ID, true);\n}"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n$page_args = array(\n    'post_type'    => 'post',\n    'post_date'    => current_time('mysql'),\n    'post_status'  => 'publish',\n    'post_title'   => 'Personal Dictionary Example Post',\n    'post_content' => '<!-- wp:personal-dictionary/pd {\"shortcode\":\"[ayspd_userpage]\"} -->\n<div class=\"wp-block-personal-dictionary-pd\">[ayspd_userpage]</div>\n<!-- /wp:personal-dictionary/pd -->'\n);\n\n$page_id = wp_insert_post($page_args);"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Personal Dictionary Test Site",
+        "blogdescription": "Automated Personal Dictionary Preview"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
         "resource": "wordpress.org/plugins",
         "slug": "personal-dictionary"
       },
