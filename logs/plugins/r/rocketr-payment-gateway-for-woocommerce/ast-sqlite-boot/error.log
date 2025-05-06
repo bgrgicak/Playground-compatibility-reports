@@ -2,102 +2,142 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 13:34:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: Select * FROM `wp_ab_experiment` `AB_EXE` INNER JOIN `wp_ab_variations` `AB_VARI` ON `AB_EXE`.`experiment_id` = `AB_VARI`.`experiment_id` WHERE `AB_EXE`.`experiment_status` = 1 AND `FIND_IN_SET` ( 'example.com:443' , `AB_EXE`.`target_url` ) | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Select * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#4 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(727): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:34:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( :param0 , AB_EXE.target_url ) | parameters: example.com:443</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#2 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
+Error: [06-May-2025 05:49:49 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:49:49 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-settings.php(660): load_default_textdomain()
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:49:49 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:49:49 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-includes/class-wp-fatal-error-handler.php(49): load_default_textdomain()
+#3 [internal function]: WP_Fatal_Error_Handler->handle()
+#4 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:49:58 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:49:58 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-settings.php(660): load_default_textdomain()
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:49:58 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:49:58 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-includes/class-wp-fatal-error-handler.php(49): load_default_textdomain()
+#3 [internal function]: WP_Fatal_Error_Handler->handle()
+#4 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:50:07 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:50:07 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-settings.php(660): load_default_textdomain()
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:50:07 UTC] PHP Warning:  Undefined array key "user_wp_localization" in /wordpress/wp-content/plugins/ptis-wp-multi-localization-switching-plugin/wp-multilang.php on line 26
+[06-May-2025 05:50:07 UTC] PHP Fatal error:  Uncaught TypeError: WP_Translation_Controller::set_locale(): Argument #1 ($locale) must be of type string, null given, called in /wordpress/wp-includes/l10n.php on line 804 and defined in /wordpress/wp-includes/l10n/class-wp-translation-controller.php:87
+Stack trace:
+#0 /wordpress/wp-includes/l10n.php(804): WP_Translation_Controller->set_locale(NULL)
+#1 /wordpress/wp-includes/l10n.php(960): load_textdomain('default', '/wordpress/wp-c...', NULL)
+#2 /wordpress/wp-includes/class-wp-fatal-error-handler.php(49): load_default_textdomain()
+#3 [internal function]: WP_Fatal_Error_Handler->handle()
+#4 {main}
+  thrown in /wordpress/wp-includes/l10n/class-wp-translation-controller.php on line 87
+[06-May-2025 05:50:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('QuickWeather_wi...')
+#2 /wordpress/wp-content/plugins/quickweather/QuickWeather.php(17): register_widget('QuickWeather_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): QuickWeather_load_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:34:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( :param0 , AB_EXE.target_url ) | parameters: example.com:443</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: FIND_IN_SET.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('Select * FROM w...')
-#2 /wordpress/wp-content/plugins/simple-ab-testing/public/class-wordpress-ab-testing-public.php(116): wpdb->get_results('Select * FROM w...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): Wordpress_Ab_Testing_Public->ab_testing_cookie('')
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:50:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('QuickWeather_wi...')
+#2 /wordpress/wp-content/plugins/quickweather/QuickWeather.php(17): register_widget('QuickWeather_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): QuickWeather_load_widgets('')
 #4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(727): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query Select * FROM wp_ab_experiment AB_EXE INNER JOIN wp_ab_variations AB_VARI ON AB_EXE.experiment_id = AB_VARI.experiment_id WHERE AB_EXE.experiment_status = 1 AND FIND_IN_SET( 'example.com:443', AB_EXE.target_url ) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Wordpress_Ab_Testing_Public->ab_testing_cookie, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 13:34:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-carousel-slider/simple-carousel-slider.php on line 36
-[04-May-2025 13:35:00 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-carousel-slider/simple-carousel-slider.php on line 36
-[04-May-2025 13:35:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-carousel-slider/simple-carousel-slider.php on line 36
-[04-May-2025 13:36:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[04-May-2025 13:36:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[04-May-2025 13:36:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-cookie-control</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:36:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[04-May-2025 13:36:26 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[04-May-2025 13:36:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-cookie-control</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:36:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 203
-[04-May-2025 13:36:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/simple-cookie-control/core/class-simple-cookie-control.php on line 208
-[04-May-2025 13:36:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>simple-cookie-control</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 13:41:16 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/includes/class-wc-gateway-rocketr.php:6
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:50:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('QuickWeather_wi...')
+#2 /wordpress/wp-content/plugins/quickweather/QuickWeather.php(17): register_widget('QuickWeather_wi...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): QuickWeather_load_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[06-May-2025 05:50:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php:1233
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quote-calculati...')
+#2 /internal/eval.php(20): activate_plugin('quote-calculati...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php on line 1233
+[06-May-2025 05:50:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php:1233
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quote-calculati...')
+#2 /internal/eval.php(20): activate_plugin('quote-calculati...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php on line 1233
+[06-May-2025 05:50:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php:1233
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quote-calculati...')
+#2 /internal/eval.php(20): activate_plugin('quote-calculati...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quote-calculation-system/quote-system.php on line 1233
+[06-May-2025 05:52:13 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/includes/class-wc-gateway-rocketr.php:6
 Stack trace:
 #0 /wordpress/wp-content/plugins/rocketr-payment-gateway-for-woocommerce/woocommerce-gateway-rocketr.php(27): require_once()
 #1 /wordpress/wp-includes/class-wp-hook.php(324): init_rocketr_gatway('')
