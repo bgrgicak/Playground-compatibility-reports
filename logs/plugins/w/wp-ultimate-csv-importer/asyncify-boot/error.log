@@ -1,11 +1,946 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function n(i,s){const o=new h(await e.createPhpRuntime());return e.sapiName&&o.setSapiName(e.sapiName),i&&(o.requestHandler=i),e.phpIniEntries&&w(o,e.phpIniEntries),s?(await T(o),await m(o,"/",e.createFiles||{}),await L(o,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await i.getPrimaryPhp(),o,["/tmp",i.documentRoot,"/internal/shared"]),e.spawnHandler&&await o.setSpawnHandler(e.spawnHandler(i.processManager)),y({php:o,cwd:i.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),o}const r=new g({phpFactory:async({isPrimary:i})=>n(r,i),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E,cookieStore:e.cookieStore}),t=await r.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const i in e.constants)t.defineConstant(i,e.constants[i]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return r}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237
+        throw new Error(y, { cause: u });
+              ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1562)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:194:42)
-    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
-    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12)
-
-Node.js v23.11.0
+Error: [06-May-2025 14:28:20 UTC] PHP Fatal error:  Declaration of bv46v_data_settings::data() must be compatible with & bv46v_base::data($data = null, $slug = null) in /wordpress/wp-content/plugins/wp-submission/library/base/data/settings.php on line 182
+[06-May-2025 14:28:29 UTC] PHP Fatal error:  Declaration of bv46v_data_settings::data() must be compatible with & bv46v_base::data($data = null, $slug = null) in /wordpress/wp-content/plugins/wp-submission/library/base/data/settings.php on line 182
+[06-May-2025 14:28:37 UTC] PHP Fatal error:  Declaration of bv46v_data_settings::data() must be compatible with & bv46v_base::data($data = null, $slug = null) in /wordpress/wp-content/plugins/wp-submission/library/base/data/settings.php on line 182
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_mappingtemplate` ADD COLUMN `mapping_filter` blob NULL AFTER `mapping`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate, mapping_filter, 12, , YES, blob, 65535, 65535, , , , , , blob, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_mappingtemplate</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_mappingtemplate_681a1ce9a8f20` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `templatename` TEXT COLLATE NOCASE NOT NULL,
+  `mapping` BLOB NOT NULL,
+  `mapping_filter` BLOB NOT NULL,
+  `createdtime` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` INTEGER DEFAULT '0',
+  `templateused` INTEGER DEFAULT '0',
+  `mapping_type` TEXT COLLATE NOCASE,
+  `module` TEXT COLLATE NOCASE,
+  `csvname` TEXT COLLATE NOCASE,
+  `eventKey` TEXT COLLATE NOCASE,
+  `mapping_filter` BLOB
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: mapping_filter
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(234): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_ultimate_csv_importer_mappingtemplate` ADD COLUMN `mapping_filter` blob NULL AFTER `mapping` made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_import_detail_log` ADD COLUMN templatekey varchar(32)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_import_detail_log</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_import_detail_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_import_detail_log, templatekey, 15, , YES, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_import_detail_log_681a1ce9c2178` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `file_name` TEXT COLLATE NOCASE NOT NULL,
+  `status` TEXT COLLATE NOCASE NOT NULL,
+  `hash_key` TEXT COLLATE NOCASE NOT NULL,
+  `templatekey` TEXT COLLATE NOCASE,
+  `total_records` INTEGER,
+  `processing_records` INTEGER DEFAULT '0',
+  `remaining_records` INTEGER DEFAULT '0',
+  `filesize` TEXT COLLATE NOCASE NOT NULL,
+  `created` INTEGER NOT NULL DEFAULT '0',
+  `updated` INTEGER NOT NULL DEFAULT '0',
+  `failed` INTEGER NOT NULL DEFAULT '0',
+  `skipped` INTEGER NOT NULL DEFAULT '0',
+  `running` INTEGER NOT NULL DEFAULT '1',
+  `templatekey` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: templatekey
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(248): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_import_detail_log` ADD COLUMN templatekey varchar(32) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_import_detail_log` ADD COLUMN failed bigint(20) NOT NULL default 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_import_detail_log</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_import_detail_log</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_import_detail_log, failed, 15, 0, NO, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_import_detail_log</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_import_detail_log_681a1ce9c5058` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `file_name` TEXT COLLATE NOCASE NOT NULL,
+  `status` TEXT COLLATE NOCASE NOT NULL,
+  `hash_key` TEXT COLLATE NOCASE NOT NULL,
+  `templatekey` TEXT COLLATE NOCASE,
+  `total_records` INTEGER,
+  `processing_records` INTEGER DEFAULT '0',
+  `remaining_records` INTEGER DEFAULT '0',
+  `filesize` TEXT COLLATE NOCASE NOT NULL,
+  `created` INTEGER NOT NULL DEFAULT '0',
+  `updated` INTEGER NOT NULL DEFAULT '0',
+  `failed` INTEGER NOT NULL DEFAULT '0',
+  `skipped` INTEGER NOT NULL DEFAULT '0',
+  `running` INTEGER NOT NULL DEFAULT '1',
+  `failed` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: failed
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(253): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_import_detail_log` ADD COLUMN failed bigint(20) NOT NULL default 0 made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_smackuci_events` ADD COLUMN failed bigint(20) NOT NULL default 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackuci_events</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackuci_events</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_smackuci_events, failed, 30, 0, NO, bigint, , , 19, 0, , , , bigint(20), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_smackuci_events_681a1ce9c7380` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `revision` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE,
+  `original_file_name` TEXT COLLATE NOCASE,
+  `friendly_name` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `filetype` TEXT COLLATE NOCASE,
+  `filepath` TEXT COLLATE NOCASE,
+  `eventKey` TEXT COLLATE NOCASE,
+  `registered_on` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `parent_node` TEXT COLLATE NOCASE,
+  `processing` INTEGER NOT NULL DEFAULT '0',
+  `executing` INTEGER NOT NULL DEFAULT '0',
+  `triggered` INTEGER NOT NULL DEFAULT '0',
+  `event_started_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `count` INTEGER NOT NULL DEFAULT '0',
+  `processed` INTEGER NOT NULL DEFAULT '0',
+  `created` INTEGER NOT NULL DEFAULT '0',
+  `updated` INTEGER NOT NULL DEFAULT '0',
+  `skipped` INTEGER NOT NULL DEFAULT '0',
+  `failed` INTEGER NOT NULL DEFAULT '0',
+  `deleted` INTEGER NOT NULL DEFAULT '0',
+  `is_terminated` INTEGER NOT NULL DEFAULT '0',
+  `terminated_on` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_activity` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `siteid` INTEGER NOT NULL DEFAULT '1',
+  `month` TEXT COLLATE NOCASE,
+  `year` TEXT COLLATE NOCASE,
+  `deletelog` INTEGER DEFAULT 'false',
+  `failed` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: failed
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(258): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_smackuci_events` ADD COLUMN failed bigint(20) NOT NULL default 0 made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_smackcsv_file_events ADD COLUMN templatekey varchar(32)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackcsv_file_events</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smackcsv_file_events</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackcsv_file_events</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackcsv_file_events</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_smackcsv_file_events, templatekey, 10, , YES, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackcsv_file_events</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_smackcsv_file_events</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_smackcsv_file_events</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_smackcsv_file_events_681a1ce9c92c0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `file_name` TEXT COLLATE NOCASE NOT NULL,
+  `status` TEXT COLLATE NOCASE NOT NULL,
+  `mode` TEXT COLLATE NOCASE NOT NULL,
+  `hash_key` TEXT COLLATE NOCASE NOT NULL,
+  `templatekey` TEXT COLLATE NOCASE,
+  `total_rows` INTEGER NOT NULL,
+  `lock` INTEGER DEFAULT 'false',
+  `progress` INTEGER,
+  `templatekey` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: templatekey
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(263): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_smackcsv_file_events ADD COLUMN templatekey varchar(32) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_ultimate_csv_importer_media ADD COLUMN templatekey varchar(32)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_media</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_media</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_media</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_media</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_media, templatekey, 9, , YES, varchar, 32, 128, , , , utf8mb4, utf8mb4_general_ci, varchar(32), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_media</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_media</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_media</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_media_681a1ce9cb200` (
+  `post_id` INTEGER,
+  `attach_id` INTEGER NOT NULL,
+  `image_url` BLOB NOT NULL,
+  `hash_key` TEXT COLLATE NOCASE NOT NULL,
+  `templatekey` TEXT COLLATE NOCASE,
+  `status` TEXT COLLATE NOCASE DEFAULT 'pending',
+  `module` TEXT COLLATE NOCASE,
+  `image_type` TEXT COLLATE NOCASE,
+  `templatekey` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: templatekey
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(268): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_ultimate_csv_importer_media ADD COLUMN templatekey varchar(32) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_smackuci_events` ADD COLUMN deletelog boolean default false</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackuci_events</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_smackuci_events</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_smackuci_events, deletelog, 30, false, YES, tinyint, , , 3, 0, , , , tinyint(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_smackuci_events</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_smackuci_events_681a1ce9d4670` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `revision` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE,
+  `original_file_name` TEXT COLLATE NOCASE,
+  `friendly_name` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `filetype` TEXT COLLATE NOCASE,
+  `filepath` TEXT COLLATE NOCASE,
+  `eventKey` TEXT COLLATE NOCASE,
+  `registered_on` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `parent_node` TEXT COLLATE NOCASE,
+  `processing` INTEGER NOT NULL DEFAULT '0',
+  `executing` INTEGER NOT NULL DEFAULT '0',
+  `triggered` INTEGER NOT NULL DEFAULT '0',
+  `event_started_at` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `count` INTEGER NOT NULL DEFAULT '0',
+  `processed` INTEGER NOT NULL DEFAULT '0',
+  `created` INTEGER NOT NULL DEFAULT '0',
+  `updated` INTEGER NOT NULL DEFAULT '0',
+  `skipped` INTEGER NOT NULL DEFAULT '0',
+  `failed` INTEGER NOT NULL DEFAULT '0',
+  `deleted` INTEGER NOT NULL DEFAULT '0',
+  `is_terminated` INTEGER NOT NULL DEFAULT '0',
+  `terminated_on` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_activity` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `siteid` INTEGER NOT NULL DEFAULT '1',
+  `month` TEXT COLLATE NOCASE,
+  `year` TEXT COLLATE NOCASE,
+  `deletelog` INTEGER DEFAULT 'false',
+  `deletelog` INTEGER DEFAULT 'false'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: deletelog
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(278): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_smackuci_events` ADD COLUMN deletelog boolean default false made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN indexs int(10) DEFAULT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager, indexs, 14, , YES, int, , , 10, 0, , , , int(10), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_shortcode_manager_681a1ce9d9878` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER,
+  `post_title` TEXT COLLATE NOCASE,
+  `image_shortcode` TEXT COLLATE NOCASE NOT NULL,
+  `media_id` INTEGER,
+  `original_image` TEXT COLLATE NOCASE NOT NULL,
+  `indexs` INTEGER,
+  `status` TEXT COLLATE NOCASE DEFAULT 'failed',
+  `image_meta` TEXT COLLATE NOCASE,
+  `hash_key` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE,
+  `templatekey` TEXT COLLATE NOCASE,
+  `indexs` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: indexs
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(286): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN indexs int(10) DEFAULT NULL made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER table `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN import_type VARCHAR(10);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager, import_type, 14, , YES, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_shortcode_manager_681a1ce9dc370` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER,
+  `post_title` TEXT COLLATE NOCASE,
+  `image_shortcode` TEXT COLLATE NOCASE NOT NULL,
+  `media_id` INTEGER,
+  `original_image` TEXT COLLATE NOCASE NOT NULL,
+  `indexs` INTEGER,
+  `status` TEXT COLLATE NOCASE DEFAULT 'failed',
+  `image_meta` TEXT COLLATE NOCASE,
+  `hash_key` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE,
+  `templatekey` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: import_type
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER table `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER table `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(290): WP_SQLite_DB->query('ALTER table `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER table `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN import_type VARCHAR(10); made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN file_name varchar(100)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager, file_name, 13, , YES, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_shortcode_manager_681a1ce9e57e0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER,
+  `post_title` TEXT COLLATE NOCASE,
+  `image_shortcode` TEXT COLLATE NOCASE NOT NULL,
+  `media_id` INTEGER,
+  `original_image` TEXT COLLATE NOCASE NOT NULL,
+  `indexs` INTEGER,
+  `status` TEXT COLLATE NOCASE DEFAULT 'failed',
+  `image_meta` TEXT COLLATE NOCASE,
+  `hash_key` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: file_name
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(298): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN file_name varchar(100) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN post_title varchar(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager, post_title, 13, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_shortcode_manager_681a1ce9e9660` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER,
+  `post_title` TEXT COLLATE NOCASE,
+  `image_shortcode` TEXT COLLATE NOCASE NOT NULL,
+  `media_id` INTEGER,
+  `original_image` TEXT COLLATE NOCASE NOT NULL,
+  `indexs` INTEGER,
+  `status` TEXT COLLATE NOCASE DEFAULT 'failed',
+  `image_meta` TEXT COLLATE NOCASE,
+  `hash_key` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE,
+  `post_title` TEXT COLLATE NOCASE
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: post_title
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(302): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN post_title varchar(255) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN media_id INT(6)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager, media_id, 13, , YES, int, , , 10, 0, , , , int(6), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_ultimate_csv_importer_shortcode_manager</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ultimate_csv_importer_shortcode_manager_681a1ce9ec540` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER,
+  `post_title` TEXT COLLATE NOCASE,
+  `image_shortcode` TEXT COLLATE NOCASE NOT NULL,
+  `media_id` INTEGER,
+  `original_image` TEXT COLLATE NOCASE NOT NULL,
+  `indexs` INTEGER,
+  `status` TEXT COLLATE NOCASE DEFAULT 'failed',
+  `image_meta` TEXT COLLATE NOCASE,
+  `hash_key` TEXT COLLATE NOCASE,
+  `import_type` TEXT COLLATE NOCASE,
+  `file_name` TEXT COLLATE NOCASE,
+  `media_id` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: media_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/Tables.php(306): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/wp-ultimate-csv-importer/SmackCSVImporterInstall.php(87): Smackcoders\FCSV\Tables->create_tables()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Smackcoders\FCSV\SmackCSVInstall->install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#9 /internal/eval.php(20): activate_plugin('wp-ultimate-csv...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_ultimate_csv_importer_shortcode_manager` ADD COLUMN media_id INT(6) made by activate_plugin, do_action('activate_wp-ultimate-csv-importer/wp-ultimate-csv-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Smackcoders\FCSV\SmackCSVInstall->install, Smackcoders\FCSV\Tables->create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 14:30:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ultimate_csv_importer_mappingtemplate` ADD COLUMN `mapping_filter` blob NULL AFTER `mapping`</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Execu
