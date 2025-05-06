@@ -2,141 +2,244 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [04-May-2025 14:49:18 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginfy</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 14:49:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginfy</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 14:49:48 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginfy</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [06-May-2025 04:34:24 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/logo-management/includes/class.upload.php on line 2081
+[06-May-2025 04:34:31 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/logo-management/includes/class.upload.php on line 2081
+[06-May-2025 04:34:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/logo-management/includes/class.upload.php on line 2081
+[06-May-2025 04:35:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_warehouse 
-                    ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL</p>
+<p>SHOW COLUMNS FROM wp_warehouse LIKE 'phone_instore'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'database_name_here.wp_warehouse' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1719): WP_SQLite_Driver->new_driver_exception('Table 'database...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1424): WP_SQLite_Driver->execute_show_columns_statement(Object(WP_Parser_Node))
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(885): WP_SQLite_Driver->execute_show_statement(Object(WP_Parser_Node))
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#6 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#7 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(287): wpdb->get_row('SHOW COLUMNS FR...')
+#8 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#13 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM wp_warehouse LIKE 'phone_instore' made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
 <li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
 			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, enable_store_pickup, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, miles_store_pickup, 22, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, match_postal_store_pickup, 23, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, checkout_desc_store_pickup, 24, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, enable_local_delivery, 25, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, miles_local_delivery, 26, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, match_postal_local_delivery, 27, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, checkout_desc_local_delivery, 28, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, fee_local_delivery, 29, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, suppress_local_delivery, 30, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, address, 1, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
 			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_68177ecc09858` (
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_warehouse' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3163): WP_SQLite_Driver->new_driver_exception('Table 'wp_wareh...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2840): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_warehouse', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1331): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_warehouse', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(853): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(289): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#13 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#14 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, phone_instore, 1, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_warehouse' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(3163): WP_SQLite_Driver->new_driver_exception('Table 'wp_wareh...', '42S02')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(2840): WP_SQLite_Driver->get_sqlite_create_table_statement(false, 'wp_warehouse', '_wp_sqlite_tmp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(1331): WP_SQLite_Driver->recreate_table_from_information_schema(false, 'wp_warehouse', Array)
+#3 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(853): WP_SQLite_Driver->execute_alter_table_statement(Object(WP_Parser_Node))
+#4 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(669): WP_SQLite_Driver->execute_mysql_query(Object(WP_Parser_Node))
+#5 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#6 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#7 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(291): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#8 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#13 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#14 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, enable_store_pickup, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, miles_store_pickup, 22, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, match_postal_store_pickup, 23, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, checkout_desc_store_pickup, 24, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, enable_local_delivery, 25, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, miles_local_delivery, 26, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, match_postal_local_delivery, 27, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, checkout_desc_local_delivery, 28, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, fee_local_delivery, 29, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, suppress_local_delivery, 30, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM `_wp_sqlite_mysql_information_schema_tables`
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_68199185347d8` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   `city` TEXT COLLATE NOCASE NOT NULL,
   `state` TEXT COLLATE NOCASE NOT NULL,
@@ -175,28 +278,18 @@ Error: [04-May-2025 14:49:18 UTC] PHP Notice:  Function _load_textdomain_just_in
 SQLSTATE[HY000]: General error: 1 duplicate column name: enable_store_pickup
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(181): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): eniture_create_unishippers_ltl_wh_db(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(395): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
 #8 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
 #9 {main}</pre>
- for query ALTER TABLE wp_warehouse 
-                    ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL, 
-                    ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL, 
-                    ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_create_unishippers_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL</p>
@@ -204,30 +297,40 @@ SQLSTATE[HY000]: General error: 1 duplicate column name: enable_store_pickup
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
 <li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
 <li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
 <li>Executing: 
 				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
+				FROM `_wp_sqlite_mysql_information_schema_columns`
 				WHERE table_schema = ?
 				AND table_name = ?
 			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, origin_markup, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_warehouse, origin_markup, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
 				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
+				FROM `_wp_sqlite_mysql_information_schema_tables`
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
 			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_68177ecc0fa00` (
+<li>Executing: SELECT * FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: 
+					SELECT *
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					ORDER BY
+						INDEX_NAME = 'PRIMARY' DESC,
+						NON_UNIQUE = '0' DESC,
+						INDEX_TYPE = 'SPATIAL' DESC,
+						INDEX_TYPE = 'BTREE' DESC,
+						INDEX_TYPE = 'FULLTEXT' DESC,
+						ROWID,
+						SEQ_IN_INDEX
+				 | parameters: database_name_here, wp_warehouse</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_6819918538270` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   `city` TEXT COLLATE NOCASE NOT NULL,
   `state` TEXT COLLATE NOCASE NOT NULL,
@@ -257,530 +360,349 @@ SQLSTATE[HY000]: General error: 1 duplicate column name: enable_store_pickup
 SQLSTATE[HY000]: General error: 1 duplicate column name: origin_markup
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(198): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): eniture_create_unishippers_ltl_wh_db(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(400): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
 #5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
 #8 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
 #9 {main}</pre>
- for query ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_create_unishippers_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_orders() in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php:86
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): Freightquote_EnOrderExport->en_orders_ids('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php on line 86
+[06-May-2025 04:35:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, address, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_68177ecc124f8` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `city` TEXT COLLATE NOCASE NOT NULL,
-  `state` TEXT COLLATE NOCASE NOT NULL,
-  `address` TEXT COLLATE NOCASE NOT NULL,
-  `phone_instore` TEXT COLLATE NOCASE NOT NULL,
-  `zip` TEXT COLLATE NOCASE NOT NULL,
-  `country` TEXT COLLATE NOCASE NOT NULL,
-  `location` TEXT COLLATE NOCASE NOT NULL,
-  `nickname` TEXT COLLATE NOCASE NOT NULL,
-  `enable_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `miles_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `match_postal_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `checkout_desc_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `enable_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `miles_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `match_postal_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `checkout_desc_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `fee_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `suppress_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `origin_markup` TEXT COLLATE NOCASE,
-  `address` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, address, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN address text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: address
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_warehouse.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(219): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(204): eniture_unishippers_freight_update_warehouse()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): eniture_create_unishippers_ltl_wh_db(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#9 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#10 {main}</pre>
- for query ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_create_unishippers_ltl_wh_db, eniture_unishippers_freight_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(289): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_warehouse</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_warehouse, phone_instore, 21, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_warehouse</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_warehouse_68177ecc14820` (
-  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `city` TEXT COLLATE NOCASE NOT NULL,
-  `state` TEXT COLLATE NOCASE NOT NULL,
-  `address` TEXT COLLATE NOCASE NOT NULL,
-  `phone_instore` TEXT COLLATE NOCASE NOT NULL,
-  `zip` TEXT COLLATE NOCASE NOT NULL,
-  `country` TEXT COLLATE NOCASE NOT NULL,
-  `location` TEXT COLLATE NOCASE NOT NULL,
-  `nickname` TEXT COLLATE NOCASE NOT NULL,
-  `enable_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `miles_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `match_postal_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `checkout_desc_store_pickup` TEXT COLLATE NOCASE NOT NULL,
-  `enable_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `miles_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `match_postal_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `checkout_desc_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `fee_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `suppress_local_delivery` TEXT COLLATE NOCASE NOT NULL,
-  `origin_markup` TEXT COLLATE NOCASE,
-  `phone_instore` TEXT COLLATE NOCASE NOT NULL
-) STRICT | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, phone_instore, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN phone_instore text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: phone_instore
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_warehouse.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(220): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(204): eniture_unishippers_freight_update_warehouse()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): eniture_create_unishippers_ltl_wh_db(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#9 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#10 {main}</pre>
- for query ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_create_unishippers_ltl_wh_db, eniture_unishippers_freight_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(291): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(*) AS carriers FROM wp_unishippers_freight</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) AS `carriers` FROM `wp_unishippers_freight` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, enable_store_pickup, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup text NOT NULL  | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_unishippers_freight
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: enable_store_pickup.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(29): wpdb->get_results('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#10 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#11 {main}</pre>
- for query SELECT COUNT(*) AS carriers FROM wp_unishippers_freight made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php on line 31
-[04-May-2025 14:50:52 UTC] PHP Warning:  Attempt to read property "carriers" on null in /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php on line 31
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(395): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#6 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('AACT', 'AAA Cooper', 'aact.png', '1')</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'AACT' , 'AAA Cooper' , 'aact.png' , '1' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, origin_markup, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN origin_markup text NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: origin_markup.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(34): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(400): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#6 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_orders() in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php:86
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): Freightquote_EnOrderExport->en_orders_ids('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php on line 86
+[06-May-2025 04:35:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, address, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN address text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_warehouse.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(289): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN address VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, phone_instore, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN phone_instore text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_warehouse.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(291): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(271): freightquote_update_warehouse()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_carriers_db(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#7 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN phone_instore VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_carriers_db, freightquote_update_warehouse, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, enable_store_pickup, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup text NOT NULL  | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: enable_store_pickup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(395): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#6 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN enable_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN miles_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN match_postal_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_store_pickup VARCHAR(255) NOT NULL , ADD COLUMN enable_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN miles_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN match_postal_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN checkout_desc_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN fee_local_delivery VARCHAR(255) NOT NULL , ADD COLUMN suppress_local_delivery VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_warehouse, origin_markup, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_warehouse ADD COLUMN origin_markup text NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: origin_markup.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/db/freightquote_db.php(400): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): freightquote_create_ltl_wh_db(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
+#6 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
+#7 {main}</pre>
+ for query ALTER TABLE wp_warehouse ADD COLUMN origin_markup VARCHAR(255) NOT NULL made by activate_plugin, do_action('activate_ltl-freight-quotes-freightquote-edition/ltl-freight-quotes-freightquote-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, freightquote_create_ltl_wh_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-May-2025 04:35:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_orders() in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php:86
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): Freightquote_EnOrderExport->en_orders_ids('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(727): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ltl-freight-quotes-freightquote-edition/order/en-order-export.php on line 86
+[06-May-2025 04:37:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginizr</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 04:37:46 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginizr</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 04:37:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>loginizr</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 04:39:53 UTC] PHP Fatal error:  Declaration of bv35v_data_settings::data() must be compatible with & bv35v_base::data($data = null) in /wordpress/wp-content/plugins/icharts/library/base/data/settings.php on line 172
+[06-May-2025 04:40:01 UTC] PHP Fatal error:  Declaration of bv35v_data_settings::data() must be compatible with & bv35v_base::data($data = null) in /wordpress/wp-content/plugins/icharts/library/base/data/settings.php on line 172
+[06-May-2025 04:40:09 UTC] PHP Fatal error:  Declaration of bv35v_data_settings::data() must be compatible with & bv35v_base::data($data = null) in /wordpress/wp-content/plugins/icharts/library/base/data/settings.php on line 172
+[06-May-2025 04:40:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function idcrm\includes\lib\download_url() in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php:12
+Stack trace:
+#0 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-company.php(40): idcrm\includes\lib\set_attachment(5, 'logo_idresult_k...')
+#1 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/idcrm-contacts-activator.php(17): idcrm\includes\lib\create_first_company()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): idcrm\includes\idCRMContactsActivator::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_idcrm-...', false)
+#6 /internal/eval.php(20): activate_plugin('idcrm-contacts-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php on line 12
+[06-May-2025 04:40:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function idcrm\includes\lib\download_url() in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php:12
+Stack trace:
+#0 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-company.php(40): idcrm\includes\lib\set_attachment(5, 'logo_idresult_k...')
+#1 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/idcrm-contacts-activator.php(17): idcrm\includes\lib\create_first_company()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): idcrm\includes\idCRMContactsActivator::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_idcrm-...', false)
+#6 /internal/eval.php(20): activate_plugin('idcrm-contacts-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php on line 12
+[06-May-2025 04:40:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function idcrm\includes\lib\download_url() in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php:12
+Stack trace:
+#0 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-company.php(40): idcrm\includes\lib\set_attachment(5, 'logo_idresult_k...')
+#1 /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/idcrm-contacts-activator.php(17): idcrm\includes\lib\create_first_company()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): idcrm\includes\idCRMContactsActivator::activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_idcrm-...', false)
+#6 /internal/eval.php(20): activate_plugin('idcrm-contacts-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/idcrm-contacts-companies/includes/lib/idcrm-activation-media.php on line 12
+[06-May-2025 04:43:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('LinkableTitleHt...')
+#2 /wordpress/wp-content/plugins/linkable-title-html-and-php-widget/linkable-title-html-and-php-widget.php(128): register_widget('LinkableTitleHt...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): LinkableTitleHtmlAndPhpWidgetInit('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('AACT', 'AAA Cooper', 'aact.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CENF', 'Central Freight Lines', 'cenf.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'CENF' , 'Central Freight Lines' , 'cenf.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(41): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CENF', 'Central Freight Lines', 'cenf.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CLNI', 'Clear Lane Freight Systems', 'clni.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'CLNI' , 'Clear Lane Freight Systems' , 'clni.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(48): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CLNI', 'Clear Lane Freight Systems', 'clni.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CNWY', 'XPO Logistics', 'cnwy.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'CNWY' , 'XPO Logistics' , 'cnwy.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(55): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CNWY', 'XPO Logistics', 'cnwy.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CTII', 'Central Transport Intl', 'ctii.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'CTII' , 'Central Transport Intl' , 'ctii.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(62): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('CTII', 'Central Transport Intl', 'ctii.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DAFG', 'Dayton Freight', 'dafg.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'DAFG' , 'Dayton Freight' , 'dafg.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(69): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DAFG', 'Dayton Freight', 'dafg.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DHRN', 'Dohrn', 'dhrn.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'DHRN' , 'Dohrn' , 'dhrn.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(76): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DHRN', 'Dohrn', 'dhrn.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DYLT', 'Daylight Transportation', 'dylt.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'DYLT' , 'Daylight Transportation' , 'dylt.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(83): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('DYLT', 'Daylight Transportation', 'dylt.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('EXLA', 'Estes Express Lines', 'exla.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_unishippers_freight</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_unishippers_freight</li>
-<li>Executing: INSERT INTO `wp_unishippers_freight` () SELECT  FROM (VALUES ( 'EXLA' , 'Estes Express Lines' , 'exla.png' , '1' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2614): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2503): wpdb->_insert_replace_helper('wp_unishippers_...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/unishipper-ltl-carrier-list.php(90): wpdb->insert('wp_unishippers_...', Array)
-#6 /wordpress/wp-content/plugins/ltl-freight-quotes-unishippers-edition/db/unishippers_ltl_db.php(247): unishippers_freight_carriers->carriers()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): eniture_unishippers_ltl_freihgt_installation_carrier(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ltl-fr...', false)
-#11 /internal/eval.php(20): activate_plugin('ltl-freight-quo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('EXLA', 'Estes Express Lines', 'exla.png', '1') made by activate_plugin, do_action('activate_ltl-freight-quotes-unishippers-edition/ltl-freight-quotes-unishippers-edition.php'), WP_Hook->do_action, WP_Hook->apply_filters, eniture_unishippers_ltl_freihgt_installation_carrier, unishippers_freight_carriers->carriers, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-May-2025 14:50:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_unishippers_freight` (`unishippers_carrierSCAC`, `unishippers_carrierName`, `carrier_logo`, `carrier_status`) VALUES ('HMES', 'USF Holland', 'hmes.png', '1')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: 
+#10 /wordpress/wp-settings.php(727): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async V (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:64:10)
+    at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+  [cause]: Error: Error when executing the blueprint step #5 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"linkable-title-html-and-php-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12449:19)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ms (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12552:3)
+      ... 2 lines matching cause stack trace ...
+      at async ja (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:8161:12) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:987:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async wr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.gt [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:974:42)
+        at async g (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12517:30)
