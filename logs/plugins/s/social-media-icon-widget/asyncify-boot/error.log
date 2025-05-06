@@ -2,282 +2,125 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [02-May-2025 19:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `wp_posts`.`ID` , `wp_posts`.`post_title` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock' LIMIT 1 ) as `_stock` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_stock_status' LIMIT 1 ) as `_stock_status` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_regular_price' LIMIT 1 ) as `_regular_price` , ( SELECT `wp_postmeta`.`meta_value` FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = `wp_posts`.`ID` AND `wp_postmeta`.`meta_key` = '_sale_price' LIMIT 1 ) as `_sale_price` , ( SELECT GROUP_CONCAT ( `CONCAT_WS` ( ':' , `t`.`term_id` , `t`.`name` ) ) FROM `wp_term_relationships` `tr` INNER JOIN `wp_term_taxonomy` `tt` ON `tr`.`term_taxonomy_id` = `tt`.`term_taxonomy_id` INNER JOIN `wp_terms` `t` ON `t`.`term_id` = `tt`.`term_id` WHERE `tr`.`object_id` = `wp_posts`.`ID` AND `tt`.`taxonomy` = 'product_type' LIMIT 1 ) as `product_type` From `wp_posts` WHERE `wp_posts`.`post_type` IN ( 'product' , 'product_variation' ) AND `wp_posts`.`post_status` IN ( 'publish' ) GROUP BY `wp_posts`.`ID` ORDER BY `wp_posts`.`post_date` ASC LIMIT 100 OFFSET 0 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT wp_posts...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT wp_posts...')
-#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(727): do_action('init')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:17 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+Error: [06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:42 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:34:44 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-coming-soon-mode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[06-May-2025 03:34:44 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:53 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:34:54 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-coming-soon-mode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[06-May-2025 03:34:54 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:03 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $is_script follows optional parameter $list in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 21
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 45
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $handle follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $src_cdn follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $deps follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $ver follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $footer_or_media follows optional parameter $register in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_cdn.php on line 104
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $expire in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/class.redux_functions.php on line 54
+[06-May-2025 03:35:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>smart-coming-soon-mode</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 583
+[06-May-2025 03:35:04 UTC] PHP Deprecated:  Required parameter $wp_customize follows optional parameter $args in /wordpress/wp-content/plugins/smart-coming-soon-mode/admin/ReduxCore/inc/extensions/customizer/extension_customizer.php on line 606
+[06-May-2025 03:35:14 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Smsdeck_Cliente::post_type_sms() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[02-May-2025 19:25:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:27 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[06-May-2025 03:35:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Smsdeck_Cliente::post_type_sms() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[02-May-2025 19:25:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(112): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products MODIFY COLUMN product_id INT NOT NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id);</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_ssgsw_products, wp_ssgsw_products__(, UNIQUE</li>
-<li>Executing: CREATE UNIQUE INDEX &quot;wp_ssgsw_products__(&quot; ON &quot;wp_ssgsw_products&quot; (); | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(119): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
-#8 /internal/eval.php(20): activate_plugin('stock-sync-with...')
-#9 {main}</pre>
- for query ALTER TABLE wp_ssgsw_products ADD UNIQUE KEY (product_id); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param0  LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param1  LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param2  LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = :param3  LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(:param4  , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = :param5  LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN (:param6 ,:param7 ) AND wp_posts.post_status IN (:param8 ) GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 | parameters: _stock, _stock_status, _regular_price, _sale_price, :, product_type, product, product_variation, publish</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such function: CONCAT_WS.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT wp_posts...')
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(310): wpdb->get_results('SELECT wp_posts...')
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(342): StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data(NULL, 0, 0, Array, true)
-#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(727): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT wp_posts.ID, wp_posts.post_title, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock' LIMIT 1) as _stock, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_stock_status' LIMIT 1) as _stock_status, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_regular_price' LIMIT 1) as _regular_price, (SELECT wp_postmeta.meta_value FROM wp_postmeta WHERE wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_sale_price' LIMIT 1) as _sale_price, (SELECT GROUP_CONCAT(CONCAT_WS(':' , t.term_id, t.name)) FROM wp_term_relationships tr INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN wp_terms t ON t.term_id = tt.term_id WHERE tr.object_id = wp_posts.ID AND tt.taxonomy = 'product_type' LIMIT 1)  as product_type From wp_posts WHERE wp_posts.post_type IN ('product','product_variation') AND wp_posts.post_status IN ('publish') GROUP BY wp_posts.ID ORDER BY wp_posts.post_date ASC LIMIT 100 OFFSET 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced, StockSyncWithGoogleSheetForWooCommerce\Product->sync_all, StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products, StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data, StockSyncWithGoogleSheetForWooCommerce\Product->get_raw_data, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[02-May-2025 19:25:38 UTC] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php:344
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[06-May-2025 03:35:33 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Smsdeck_Cliente::post_type_sms() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(344): count('<div style="cle...')
-#1 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(516): StockSyncWithGoogleSheetForWooCommerce\Product->get_formatted_data()
-#2 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php(1040): StockSyncWithGoogleSheetForWooCommerce\Product->get_all_products()
-#3 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-hooks.php(950): StockSyncWithGoogleSheetForWooCommerce\Product->sync_all()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): StockSyncWithGoogleSheetForWooCommerce\Hooks->check_ssgsw_synced('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(727): do_action('init')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/models/class-product.php on line 344
-[02-May-2025 19:25:46 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
-[02-May-2025 19:25:54 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
-[02-May-2025 19:26:02 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/supra-open-form/classes/Form.class.php on line 97
-[02-May-2025 19:27:27 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/simple-floating-contact-form/src/Settings/Pages/General.php on line 121
-[02-May-2025 19:27:39 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/simple-floating-contact-form/src/Settings/Pages/General.php on line 121
-[02-May-2025 19:27:51 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/simple-floating-contact-form/src/Settings/Pages/General.php on line 121
-[02-May-2025 19:29:21 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>twentytwentyfive</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[02-May-2025 19:29:29 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>twentytwentyfive</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[02-May-2025 19:29:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>twentytwentyfive</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[02-May-2025 19:31:25 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:25 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:25 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 24
-[02-May-2025 19:31:34 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:34 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:34 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 24
-[02-May-2025 19:31:42 UTC] PHP Warning:  Use of undefined constant STDERR - assumed 'STDERR' (this will throw an Error in a future version of PHP) in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:42 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, string given in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 17
-[02-May-2025 19:31:42 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/siteswp-wc-print-orders-brazil/vendor/composer/platform_check.php on line 24
-[02-May-2025 19:33:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-icon-widget/social-media-icon-widget.php:245
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-settings.php(727): do_action('init')
+#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[06-May-2025 03:35:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-icon-widget/social-media-icon-widget.php:245
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ic...')
 #2 /internal/eval.php(20): activate_plugin('social-media-ic...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/social-media-icon-widget/social-media-icon-widget.php on line 245
-[02-May-2025 19:33:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-icon-widget/social-media-icon-widget.php:245
+[06-May-2025 03:35:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-icon-widget/social-media-icon-widget.php:245
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ic...')
