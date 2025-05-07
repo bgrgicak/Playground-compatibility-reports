@@ -2,13 +2,356 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 13:42:20 UTC] Loading the plugin
-[06-May-2025 13:42:22 UTC] Loading the plugin
-[06-May-2025 13:42:30 UTC] Loading the plugin
-[06-May-2025 13:42:31 UTC] Loading the plugin
-[06-May-2025 13:42:39 UTC] Loading the plugin
-[06-May-2025 13:42:41 UTC] Loading the plugin
-[06-May-2025 13:43:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
+Error: [07-May-2025 22:29:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `toe_m`.* , `toe_m_t`.`label` as `type_name` FROM `wp_bup_modules` `toe_m` INNER JOIN `wp_bup_modules_type` `toe_m_t` ON `toe_m_t`.`id` = `toe_m`.`type_id` ORDER BY `id` ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_bup_modules
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT toe_m.*,...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT toe_m.*,...')
+#3 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT toe_m.*,...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(32): wpdb->get_results('SELECT toe_m.*,...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/table.php(241): dbBup::get('SELECT toe_m.*,...', 'all')
+#6 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(68): tableBup->get('toe_m.*, toe_m_...')
+#7 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(107): frameBup->_extractModules()
+#8 /wordpress/wp-content/plugins/backup-by-supsystic/backup-supsystic.php(54): frameBup->init()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-by-supsy...')
+#11 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#12 {main}</pre>
+ for query SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-by-supsystic/backup-supsystic.php'), frameBup->init, frameBup->_extractModules, tableBup->get, dbBup::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+				(NULL,'full','1','Full backup','on/off full backup',1,'',0,0,'dest_backup'),
+				(NULL,'wp_core','1','Wordpress core backup','on/off Wordpress core backup',1,'',0,0,'dest_backup'),
+				(NULL,'plugins','1','Plugins','on/off backup plugins',1,'',0,0,'dest_backup'),
+				(NULL,'themes','1','Themes','on/off backup themes',1,'',0,0,'dest_backup'),
+				(NULL,'uploads','1','Uploads','on/off backup uploads',1,'',0,0,'dest_backup'),
+				(NULL,'database','1','Database','on/off backup database',1,'',0,0,'db_backup'),
+				(NULL,'any_directories','1','Any','Any other directories found inside wp-content',1,'',0,0,'dest_backup'),
+				(NULL,'warehouse','/wp-content/upsupsystic/','Warehouse','path to storage',1,'',0,0,''),
+				(NULL,'warehouse_ignore','upsupsystic','Warehouse_ignore','Name ignore directory storage',1,'',0,0,''),
+				(NULL,'safe_array','','Safe array','Safe file array',1,'',0,0,''),
+				(NULL,'dropbox_model','','Dropbox model','Module uses two models: for PHP 5.2.x and for PHP >= 5.3.x', '1','', '', '',''),
+				(NULL,'aws_access_key','','AWS Access Key','Amazon Web Services Access Key to work with the Amazon S3', '1','', '', '',''),
+				(NULL,'aws_secret_key','','AWS Secret Key','Amazon Web Services Secret Key to work with Amazon S3', '1','', '', '',''),
+				(NULL,'aws_s3_bucket','','S3 Bucket','Name of bucket to upload backups', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'full' , '1' , 'Full backup' , 'on/off full backup' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'wp_core' , '1' , 'Wordpress core backup' , 'on/off Wordpress core backup' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'plugins' , '1' , 'Plugins' , 'on/off backup plugins' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'themes' , '1' , 'Themes' , 'on/off backup themes' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'uploads' , '1' , 'Uploads' , 'on/off backup uploads' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'database' , '1' , 'Database' , 'on/off backup database' , 1 , '' , 0 , 0 , 'db_backup' ) , ( NULL , 'any_directories' , '1' , 'Any' , 'Any other directories found inside wp-content' , 1 , '' , 0 , 0 , 'dest_backup' ) , ( NULL , 'warehouse' , '/wp-content/upsupsystic/' , 'Warehouse' , 'path to storage' , 1 , '' , 0 , 0 , '' ) , ( NULL , 'warehouse_ignore' , 'upsupsystic' , 'Warehouse_ignore' , 'Name ignore directory storage' , 1 , '' , 0 , 0 , '' ) , ( NULL , 'safe_array' , '' , 'Safe array' , 'Safe file array' , 1 , '' , 0 , 0 , '' ) , ( NULL , 'dropbox_model' , '' , 'Dropbox model' , 'Module uses two models: for PHP 5.2.x and for PHP &gt;= 5.3.x' , '1' , '' , '' , '' , '' ) , ( NULL , 'aws_access_key' , '' , 'AWS Access Key' , 'Amazon Web Services Access Key to work with the Amazon S3' , '1' , '' , '' , '' , '' ) , ( NULL , 'aws_secret_key' , '' , 'AWS Secret Key' , 'Amazon Web Services Secret Key to work with Amazon S3' , '1' , '' , '' , '' , '' ) , ( NULL , 'aws_s3_bucket' , '' , 'S3 Bucket' , 'Name of bucket to upload backups' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(131): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+				(NULL,'full','1','Full backup','on/off full backup',1,'',0,0,'dest_backup'),
+				(NULL,'wp_core','1','Wordpress core backup','on/off Wordpress core backup',1,'',0,0,'dest_backup'),
+				(NULL,'plugins','1','Plugins','on/off backup plugins',1,'',0,0,'dest_backup'),
+				(NULL,'themes','1','Themes','on/off backup themes',1,'',0,0,'dest_backup'),
+				(NULL,'uploads','1','Uploads','on/off backup uploads',1,'',0,0,'dest_backup'),
+				(NULL,'database','1','Database','on/off backup database',1,'',0,0,'db_backup'),
+				(NULL,'any_directories','1','Any','Any other directories found inside wp-content',1,'',0,0,'dest_backup'),
+				(NULL,'warehouse','/wp-content/upsupsystic/','Warehouse','path to storage',1,'',0,0,''),
+				(NULL,'warehouse_ignore','upsupsystic','Warehouse_ignore','Name ignore directory storage',1,'',0,0,''),
+				(NULL,'safe_array','','Safe array','Safe file array',1,'',0,0,''),
+				(NULL,'dropbox_model','','Dropbox model','Module uses two models: for PHP 5.2.x and for PHP >= 5.3.x', '1','', '', '',''),
+				(NULL,'aws_access_key','','AWS Access Key','Amazon Web Services Access Key to work with the Amazon S3', '1','', '', '',''),
+				(NULL,'aws_secret_key','','AWS Secret Key','Amazon Web Services Secret Key to work with Amazon S3', '1','', '', '',''),
+				(NULL,'aws_s3_bucket','','S3 Bucket','Name of bucket to upload backups', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'dropbox_model','','Dropbox model','Module uses two models: for PHP 5.2.x and for PHP >= 5.3.x', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'dropbox_model' , '' , 'Dropbox model' , 'Module uses two models: for PHP 5.2.x and for PHP &gt;= 5.3.x' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(141): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'dropbox_model','','Dropbox model','Module uses two models: for PHP 5.2.x and for PHP >= 5.3.x', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'gdrive_refresh_token','','Google Refresh Token','GoogleDrive refresh token using for automatically extend token time', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'gdrive_refresh_token' , '' , 'Google Refresh Token' , 'GoogleDrive refresh token using for automatically extend token time' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(145): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'gdrive_refresh_token','','Google Refresh Token','GoogleDrive refresh token using for automatically extend token time', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_access_key','','AWS Access Key','Amazon Web Services Access Key to work with the Amazon S3', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'aws_access_key' , '' , 'AWS Access Key' , 'Amazon Web Services Access Key to work with the Amazon S3' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(149): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_access_key','','AWS Access Key','Amazon Web Services Access Key to work with the Amazon S3', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_secret_key','','AWS Secret Key','Amazon Web Services Secret Key to work with Amazon S3', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'aws_secret_key' , '' , 'AWS Secret Key' , 'Amazon Web Services Secret Key to work with Amazon S3' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(153): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_secret_key','','AWS Secret Key','Amazon Web Services Secret Key to work with Amazon S3', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_s3_bucket','','S3 Bucket','Name of bucket to upload backups', '1','', '', '','');</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_bup_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM `_wp_sqlite_mysql_information_schema_columns`
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_bup_options</li>
+<li>Executing: INSERT INTO `wp_bup_options` (`id`, `code`, `value`, `label`, `description`, `htmltype_id`, `params`, `cat_id`, `sort_order`, `value_type`) SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10` FROM (VALUES ( NULL , 'aws_s3_bucket' , '' , 'S3 Bucket' , 'Name of bucket to upload backups' , '1' , '' , '' , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[23000]: Integrity constraint violation: 19 cannot store TEXT value in INTEGER column wp_bup_options.cat_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', '23000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(43): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/installer.php(157): dbBup::query('INSERT INTO `wp...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/utils.php(358): installerBup::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsBup::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_backup...', false)
+#10 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_bup_options` (`id`,`code`,`value`,`label`,`description`,`htmltype_id`,`params`,`cat_id`,`sort_order`,`value_type`) VALUES
+			    (NULL,'aws_s3_bucket','','S3 Bucket','Name of bucket to upload backups', '1','', '', '',''); made by activate_plugin, do_action('activate_backup-by-supsystic/backup-supsystic.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsBup::activatePlugin, installerBup::init, dbBup::query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>backup-by-supsystic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 22:29:15 UTC] PHP Deprecated:  Required parameter $encode follows optional parameter $fields in /wordpress/wp-content/plugins/backup-by-supsystic/modules/dropbox/classes/curlBup.php on line 150
+[07-May-2025 22:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bup_modules.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT toe_m.*,...')
+#2 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(32): wpdb->get_results('SELECT toe_m.*,...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/table.php(241): dbBup::get('SELECT toe_m.*,...', 'all')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(68): tableBup->get('toe_m.*, toe_m_...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(107): frameBup->_extractModules()
+#6 /wordpress/wp-content/plugins/backup-by-supsystic/backup-supsystic.php(54): frameBup->init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-by-supsy...')
+#9 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#10 {main}</pre>
+ for query SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-by-supsystic/backup-supsystic.php'), frameBup->init, frameBup->_extractModules, tableBup->get, dbBup::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>backup-by-supsystic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 22:29:27 UTC] PHP Deprecated:  Required parameter $encode follows optional parameter $fields in /wordpress/wp-content/plugins/backup-by-supsystic/modules/dropbox/classes/curlBup.php on line 150
+[07-May-2025 22:29:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bup_modules.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3146): WP_SQLite_DB->query('SELECT toe_m.*,...')
+#2 /wordpress/wp-content/plugins/backup-by-supsystic/classes/db.php(32): wpdb->get_results('SELECT toe_m.*,...', 'ARRAY_A')
+#3 /wordpress/wp-content/plugins/backup-by-supsystic/classes/table.php(241): dbBup::get('SELECT toe_m.*,...', 'all')
+#4 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(68): tableBup->get('toe_m.*, toe_m_...')
+#5 /wordpress/wp-content/plugins/backup-by-supsystic/classes/frame.php(107): frameBup->_extractModules()
+#6 /wordpress/wp-content/plugins/backup-by-supsystic/backup-supsystic.php(54): frameBup->init()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('backup-by-supsy...')
+#9 /internal/eval.php(20): activate_plugin('backup-by-supsy...')
+#10 {main}</pre>
+ for query SELECT toe_m.*, toe_m_t.label as type_name FROM wp_bup_modules toe_m INNER JOIN wp_bup_modules_type toe_m_t ON toe_m_t.id = toe_m.type_id ORDER BY id ASC made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/backup-by-supsystic/backup-supsystic.php'), frameBup->init, frameBup->_extractModules, tableBup->get, dbBup::get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:39 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>backup-by-supsystic</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 22:29:40 UTC] PHP Deprecated:  Required parameter $encode follows optional parameter $fields in /wordpress/wp-content/plugins/backup-by-supsystic/modules/dropbox/classes/curlBup.php on line 150
+[07-May-2025 22:30:42 UTC] Loading the plugin
+[07-May-2025 22:30:43 UTC] Loading the plugin
+[07-May-2025 22:30:51 UTC] Loading the plugin
+[07-May-2025 22:30:53 UTC] Loading the plugin
+[07-May-2025 22:31:01 UTC] Loading the plugin
+[07-May-2025 22:31:02 UTC] Loading the plugin
+[07-May-2025 22:31:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): br_install(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -17,7 +360,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('benday-reviews-...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php on line 22
-[06-May-2025 13:43:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
+[07-May-2025 22:31:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): br_install(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -26,7 +369,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('benday-reviews-...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php on line 22
-[06-May-2025 13:43:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
+[07-May-2025 22:31:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/benday-reviews-system/br-system.php:22
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): br_install(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
