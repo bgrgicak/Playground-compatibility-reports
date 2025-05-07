@@ -2,13 +2,12 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [05-May-2025 15:30:49 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php on line 53
-[05-May-2025 15:30:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpessentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:30:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpessentials/inc/brute-force.php on line 449
-[05-May-2025 15:30:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-May-2025 07:28:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-poll</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:28:16 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-poll</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wpessentials_bf_failed_logins CONVERT TO CHARACTER SET utf8mb4;</p>
+<p>DESC wp_liquidpoll_emails</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -16,22 +15,59 @@ Error: [05-May-2025 15:30:49 UTC] PHP Warning:  foreach() argument must be of ty
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php(76): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpessentials_set_default_settings(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpesse...', false)
-#6 /internal/eval.php(20): activate_plugin('wpessentials/wp...')
-#7 {main}</pre>
- for query ALTER TABLE wp_wpessentials_bf_failed_logins CONVERT TO CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_wpessentials/wpessentials.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpessentials_set_default_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 15:30:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wpessentials_bf_lockouts CONVERT TO CHARACTER SET utf8mb4;</p>
+<p>ALTER TABLE wp_liquidpoll_emails ADD consent VARCHAR(255) AFTER email_address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_liquidpoll_emails, CONSENT, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_liquidpoll_emails ADD consent text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: consent.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_liquidpoll_emails ADD consent VARCHAR(255) AFTER email_address made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_liquidpoll_emails</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -39,25 +75,27 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php(77): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpessentials_set_default_settings(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpesse...', false)
-#6 /internal/eval.php(20): activate_plugin('wpessentials/wp...')
-#7 {main}</pre>
- for query ALTER TABLE wp_wpessentials_bf_lockouts CONVERT TO CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_wpessentials/wpessentials.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpessentials_set_default_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 15:30:57 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php on line 53
-[05-May-2025 15:30:58 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpessentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:30:58 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpessentials/inc/brute-force.php on line 449
-[05-May-2025 15:31:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wpessentials_bf_failed_logins CONVERT TO CHARACTER SET utf8mb4;</p>
+<p>DESC wp_liquidpoll_results</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -65,22 +103,27 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php(76): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpessentials_set_default_settings(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpesse...', false)
-#6 /internal/eval.php(20): activate_plugin('wpessentials/wp...')
-#7 {main}</pre>
- for query ALTER TABLE wp_wpessentials_bf_failed_logins CONVERT TO CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_wpessentials/wpessentials.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpessentials_set_default_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 15:31:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(611): maybe_add_column('wp_liquidpoll_r...', 'status', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_results made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wpessentials_bf_lockouts CONVERT TO CHARACTER SET utf8mb4;</p>
+<p>DESC wp_liquidpoll_results</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -88,91 +131,364 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: CONVERT.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php(77): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): wpessentials_set_default_settings(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpesse...', false)
-#6 /internal/eval.php(20): activate_plugin('wpessentials/wp...')
-#7 {main}</pre>
- for query ALTER TABLE wp_wpessentials_bf_lockouts CONVERT TO CHARACTER SET utf8mb4; made by activate_plugin, do_action('activate_wpessentials/wpessentials.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpessentials_set_default_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-May-2025 15:31:05 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/wpessentials/inc/install-hooks.php on line 53
-[05-May-2025 15:31:06 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpessentials</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:31:06 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpessentials/inc/brute-force.php on line 449
-[05-May-2025 15:31:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:32:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:32:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woocommerce</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:33:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:33:15 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:33:23 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:34:01 UTC] PHP Warning:  Array to string conversion in /wordpress/wp-content/plugins/wp-changes-tracker/wp-changes-tracker.php on line 125
-[05-May-2025 15:36:11 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:12 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:12 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:12 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:12 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:12 UTC] PHP Warning:  preg_replace(): No ending delimiter '/' found in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 164
-[05-May-2025 15:36:13 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:13 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:13 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:13 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:21 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:21 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:21 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:21 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:21 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:21 UTC] PHP Warning:  preg_replace(): No ending delimiter '/' found in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 164
-[05-May-2025 15:36:22 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:22 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:22 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:22 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:30 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:30 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:30 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:30 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:30 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:36:30 UTC] PHP Warning:  preg_replace(): No ending delimiter '/' found in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 164
-[05-May-2025 15:36:31 UTC] PHP Warning:  Undefined array key "d" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 12
-[05-May-2025 15:36:31 UTC] PHP Warning:  Undefined array key "scan_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 16
-[05-May-2025 15:36:31 UTC] PHP Warning:  Undefined array key "crop_dir" in /wordpress/wp-content/plugins/wp-paysite/wp-paysite.php on line 29
-[05-May-2025 15:36:31 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:37:42 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 885
-[05-May-2025 15:37:42 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 892
-[05-May-2025 15:37:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php:632
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('weptile-image-s...')
-#2 /internal/eval.php(20): activate_plugin('weptile-image-s...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php on line 632
-[05-May-2025 15:37:50 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 885
-[05-May-2025 15:37:50 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 892
-[05-May-2025 15:37:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php:632
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('weptile-image-s...')
-#2 /internal/eval.php(20): activate_plugin('weptile-image-s...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php on line 632
-[05-May-2025 15:37:58 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 885
-[05-May-2025 15:37:58 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /wordpress/wp-content/plugins/weptile-image-slider-widget/notice.php on line 892
-[05-May-2025 15:37:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php:632
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('weptile-image-s...')
-#2 /internal/eval.php(20): activate_plugin('weptile-image-s...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/weptile-image-slider-widget/weptile-image-slider-widget.php on line 632
-[05-May-2025 15:38:55 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:38:56 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:39:04 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:39:05 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:39:13 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[05-May-2025 15:39:13 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(611): maybe_add_column('wp_liquidpoll_r...', 'status', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_results made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:28 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-poll</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:28:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_liquidpoll_emails</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_liquidpoll_emails ADD consent VARCHAR(255) AFTER email_address</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_liquidpoll_emails, CONSENT, varchar(255)</li>
+<li>Executing: ALTER TABLE wp_liquidpoll_emails ADD consent text   | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: consent.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2703): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(727): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_liquidpoll_emails ADD consent VARCHAR(255) AFTER email_address made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_liquidpoll_emails</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(610): maybe_add_column('wp_liquidpoll_e...', 'consent', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_emails made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_liquidpoll_results</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2696): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(611): maybe_add_column('wp_liquidpoll_r...', 'status', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_results made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:28:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DESC wp_liquidpoll_results</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: DESC.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3107): WP_SQLite_DB->query('DESC wp_liquidp...')
+#2 /wordpress/wp-admin/includes/upgrade.php(2706): wpdb->get_col('DESC wp_liquidp...', 0)
+#3 /wordpress/wp-content/plugins/wp-poll/includes/functions.php(611): maybe_add_column('wp_liquidpoll_r...', 'status', 'ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wp-poll/includes/classes/class-hooks.php(756): liquidpoll_create_table()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): LIQUIDPOLL_Hooks->register_everything('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(727): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DESC wp_liquidpoll_results made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, LIQUIDPOLL_Hooks->register_everything, liquidpoll_create_table, maybe_add_column, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(606): WP_SQLite_Driver->new_driver_exception('Failed to parse...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT ID FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT ID FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT ID FROM ...')
+#4 /wordpress/wp-content/plugins/wpforum/forum-functions.php(574): wpdb->get_var('SELECT ID FROM ...')
+#5 /wordpress/wp-content/plugins/wpforum/forum-functions.php(9): forum_get_page_id()
+#6 /wordpress/wp-content/plugins/wpforum/wp-forum.php(11): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpforum/wp-foru...')
+#9 /internal/eval.php(20): activate_plugin('wpforum/wp-foru...')
+#10 {main}</pre>
+ for query SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpforum/wp-forum.php'), include('/plugins/wpforum/forum-functions.php'), forum_get_page_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:30:15 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wpforum/bbcode.php on line 173
+[07-May-2025 07:30:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID FROM  WHERE post_content LIKE :param0  | parameters: %&lt;!--WPFORUM--&gt;%</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "WHERE": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT ID FROM ...')
+#2 /wordpress/wp-content/plugins/wpforum/forum-functions.php(574): wpdb->get_var('SELECT ID FROM ...')
+#3 /wordpress/wp-content/plugins/wpforum/forum-functions.php(9): forum_get_page_id()
+#4 /wordpress/wp-content/plugins/wpforum/wp-forum.php(11): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpforum/wp-foru...')
+#7 /internal/eval.php(20): activate_plugin('wpforum/wp-foru...')
+#8 {main}</pre>
+ for query SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpforum/wp-forum.php'), include('/plugins/wpforum/forum-functions.php'), forum_get_page_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:30:23 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wpforum/bbcode.php on line 173
+[07-May-2025 07:30:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT ID FROM  WHERE post_content LIKE :param0  | parameters: %&lt;!--WPFORUM--&gt;%</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "WHERE": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('SELECT ID FROM ...')
+#2 /wordpress/wp-content/plugins/wpforum/forum-functions.php(574): wpdb->get_var('SELECT ID FROM ...')
+#3 /wordpress/wp-content/plugins/wpforum/forum-functions.php(9): forum_get_page_id()
+#4 /wordpress/wp-content/plugins/wpforum/wp-forum.php(11): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wpforum/wp-foru...')
+#7 /internal/eval.php(20): activate_plugin('wpforum/wp-foru...')
+#8 {main}</pre>
+ for query SELECT ID FROM  WHERE post_content LIKE '%<!--WPFORUM-->%' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wpforum/wp-forum.php'), include('/plugins/wpforum/forum-functions.php'), forum_get_page_id, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:30:31 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wpforum/bbcode.php on line 173
+[07-May-2025 07:31:07 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:07 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:08 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:09 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:09 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:10 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:10 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:11 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 451
+[07-May-2025 07:31:11 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (7) for the number of arguments passed (8). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:11 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:11 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:22 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:22 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>truncate table wp_newsman_locks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: truncate.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanLocks.php(74): WP_SQLite_DB->query('truncate table ...')
+#2 /wordpress/wp-content/plugins/wpnewsman-newsletters/core.php(1888): newsmanLocks->clearLocks()
+#3 /wordpress/wp-content/plugins/wpnewsman-newsletters/wpnewsman.php(245): newsman->onActivate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wpnewsmanActivationHook(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpnews...', false)
+#8 /internal/eval.php(20): activate_plugin('wpnewsman-newsl...')
+#9 {main}</pre>
+ for query truncate table wp_newsman_locks made by activate_plugin, do_action('activate_wpnewsman-newsletters/wpnewsman.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpnewsmanActivationHook, newsman->onActivate, newsmanLocks->clearLocks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:31:23 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:23 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:23 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:25 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:25 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:25 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 451
+[07-May-2025 07:31:25 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (7) for the number of arguments passed (8). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:26 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:26 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:38 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:38 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>truncate table wp_newsman_locks</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown query type: truncate.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanLocks.php(74): WP_SQLite_DB->query('truncate table ...')
+#2 /wordpress/wp-content/plugins/wpnewsman-newsletters/core.php(1888): newsmanLocks->clearLocks()
+#3 /wordpress/wp-content/plugins/wpnewsman-newsletters/wpnewsman.php(245): newsman->onActivate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wpnewsmanActivationHook(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpnews...', false)
+#8 /internal/eval.php(20): activate_plugin('wpnewsman-newsl...')
+#9 {main}</pre>
+ for query truncate table wp_newsman_locks made by activate_plugin, do_action('activate_wpnewsman-newsletters/wpnewsman.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpnewsmanActivationHook, newsman->onActivate, newsmanLocks->clearLocks, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 07:31:39 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:39 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:39 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:40 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (8) for the number of arguments passed (9). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:40 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (13) for the number of arguments passed (14). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:41 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 451
+[07-May-2025 07:31:41 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (7) for the number of arguments passed (8). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:41 UTC] PHP Deprecated:  Required parameter $pageId follows optional parameter $lang in /wordpress/wp-content/plugins/wpnewsman-newsletters/classes/class.newsmanUtils.php on line 1594
+[07-May-2025 07:31:41 UTC] PHP Deprecated:  File class-phpmailer.php is <strong>deprecated</strong> since version 5.5.0! Use wp-includes/PHPMailer/PHPMailer.php instead. The PHPMailer class has been moved to wp-includes/PHPMailer subdirectory and now uses the PHPMailer\PHPMailer namespace. in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:31:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:31:51 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:31:58 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:31:59 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:32:07 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "HTTP_CLIENT_IP" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 253
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 255
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 257
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED_FOR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 259
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "HTTP_FORWARDED" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 261
+[07-May-2025 07:32:08 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/wti-like-post/wti_like_post.php on line 264
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/index.js:237:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
