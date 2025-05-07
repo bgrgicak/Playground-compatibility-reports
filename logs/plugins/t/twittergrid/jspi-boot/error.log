@@ -2,39 +2,194 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 04:33:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-May-2025 05:29:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id);</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wth_travel_button_buttons</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wth_travel_button_buttons</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wth_travel_button_buttons</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/the-travel-button/includes/class-wth-travel-button-activator.php(64): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/the-travel-button/the-travel-button.php(74): WTH_Travel_Button_Activator::activate(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): activate_wth_travel_button(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(174): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(361): Tip_Jar_WP::instance()
+#5 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(59): tip_jar_wp()
+#6 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(41): tip_jar_wp_run_install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_install(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tip-ja...', false)
+#11 /internal/eval.php(20): activate_plugin('tip-jar-wp/tip-...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_tip-jar-wp/tip-jar-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_install, tip_jar_wp_run_install, tip_jar_wp, Tip_Jar_WP::instance, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:29:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(59): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(41): tip_jar_wp_run_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_install(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_the-tr...', false)
-#9 /internal/eval.php(20): activate_plugin('the-travel-butt...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tip-ja...', false)
+#9 /internal/eval.php(20): activate_plugin('tip-jar-wp/tip-...')
 #10 {main}</pre>
- for query ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id); made by activate_plugin, do_action('activate_the-travel-button/the-travel-button.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wth_travel_button, WTH_Travel_Button_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 04:33:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_tip-jar-wp/tip-jar-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_install, tip_jar_wp_run_install, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:29:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id);</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -42,23 +197,80 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-travel-button/includes/class-wth-travel-button-activator.php(64): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/the-travel-button/the-travel-button.php(74): WTH_Travel_Button_Activator::activate(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_wth_travel_button(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_the-tr...', false)
-#7 /internal/eval.php(20): activate_plugin('the-travel-butt...')
-#8 {main}</pre>
- for query ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id); made by activate_plugin, do_action('activate_the-travel-button/the-travel-button.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wth_travel_button, WTH_Travel_Button_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 04:33:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(174): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(361): Tip_Jar_WP::instance()
+#5 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(371): tip_jar_wp()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_initialize('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_initialize, tip_jar_wp, Tip_Jar_WP::instance, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:29:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id);</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -66,115 +278,241 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: (.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/the-travel-button/includes/class-wth-travel-button-activator.php(64): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#2 /wordpress/wp-content/plugins/the-travel-button/the-travel-button.php(74): WTH_Travel_Button_Activator::activate(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): activate_wth_travel_button(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_the-tr...', false)
-#7 /internal/eval.php(20): activate_plugin('the-travel-butt...')
-#8 {main}</pre>
- for query ALTER TABLE wp_wth_travel_button_buttons ADD FOREIGN KEY (style) REFERENCES wp_wth_travel_button_styles (id); made by activate_plugin, do_action('activate_the-travel-button/the-travel-button.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wth_travel_button, WTH_Travel_Button_Activator::activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 04:34:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php:72
-Stack trace:
-#0 /wordpress/wp-content/plugins/tinysou-search/tinysou.php(16): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tinysou-search/...')
-#3 /internal/eval.php(20): activate_plugin('tinysou-search/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php on line 72
-[06-May-2025 04:34:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php:72
-Stack trace:
-#0 /wordpress/wp-content/plugins/tinysou-search/tinysou.php(16): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tinysou-search/...')
-#3 /internal/eval.php(20): activate_plugin('tinysou-search/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php on line 72
-[06-May-2025 04:34:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php:72
-Stack trace:
-#0 /wordpress/wp-content/plugins/tinysou-search/tinysou.php(16): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tinysou-search/...')
-#3 /internal/eval.php(20): activate_plugin('tinysou-search/...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php on line 72
-[06-May-2025 04:35:03 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:35:04 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/titleimage/display.php on line 18
-[06-May-2025 04:35:12 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:35:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/titleimage/display.php on line 18
-[06-May-2025 04:35:21 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:35:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/titleimage/display.php on line 18
-[06-May-2025 04:36:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php:206
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('topspin-streami...')
-#2 /internal/eval.php(20): activate_plugin('topspin-streami...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php on line 206
-[06-May-2025 04:36:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php:206
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('topspin-streami...')
-#2 /internal/eval.php(20): activate_plugin('topspin-streami...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php on line 206
-[06-May-2025 04:36:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php:206
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('topspin-streami...')
-#2 /internal/eval.php(20): activate_plugin('topspin-streami...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/topspin-streaming-player-plugin/topspin-streaming-player.php on line 206
-[06-May-2025 04:40:34 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:34 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:35 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:43 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:43 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:52 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:52 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/tweetsuite/TweetSuite.php on line 991
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:40:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 04:41:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(174): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(361): Tip_Jar_WP::instance()
+#5 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(59): tip_jar_wp()
+#6 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(41): tip_jar_wp_run_install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_install(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tip-ja...', false)
+#11 /internal/eval.php(20): activate_plugin('tip-jar-wp/tip-...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_tip-jar-wp/tip-jar-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_install, tip_jar_wp_run_install, tip_jar_wp, Tip_Jar_WP::instance, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:29:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(59): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/includes/misc-functions/install.php(41): tip_jar_wp_run_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tip-ja...', false)
+#9 /internal/eval.php(20): activate_plugin('tip-jar-wp/tip-...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by activate_plugin, do_action('activate_tip-jar-wp/tip-jar-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_install, tip_jar_wp_run_install, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:29:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3280): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/tip-jar-wp/includes/database-functions/class-tip-jar-wp-transactions-db.php(387): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(174): Tip_Jar_WP_Transactions_DB->create_table()
+#4 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(361): Tip_Jar_WP::instance()
+#5 /wordpress/wp-content/plugins/tip-jar-wp/tip-jar-wp.php(371): tip_jar_wp()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): tip_jar_wp_initialize('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query CREATE TABLE wp_tip_jar_wp_transactions (
+		id int(20) unsigned NOT NULL AUTO_INCREMENT,
+		user_id int(20) unsigned NOT NULL,
+		date_created datetime NOT NULL,
+		date_paid datetime NOT NULL,
+		period_start_date datetime NOT NULL,
+		period_end_date datetime NOT NULL,
+		type mediumtext NOT NULL,
+		method mediumtext NOT NULL,
+		page_url mediumtext NOT NULL,
+		form_id int NOT NULL,
+		charged_amount int NOT NULL,
+		charged_currency mediumtext NOT NULL,
+		home_currency mediumtext NOT NULL,
+		gateway_fee_hc int NOT NULL,
+		earnings_hc int NOT NULL,
+		charge_id mediumtext NOT NULL,
+		refund_id mediumtext NOT NULL,
+		statement_descriptor mediumtext NOT NULL,
+		note_with_tip int(20) unsigned NOT NULL,
+		arrangement_id int(20) unsigned NOT NULL,
+		payment_intent_id mediumtext NOT NULL,
+		is_live_mode int(1) NOT NULL,
+		initial_emails_sent int(1) NOT NULL,
+		PRIMARY KEY  id (id),
+		KEY id (id)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, tip_jar_wp_initialize, tip_jar_wp, Tip_Jar_WP::instance, Tip_Jar_WP_Transactions_DB->create_table, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 05:30:19 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 34
+[07-May-2025 05:30:19 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 35
+[07-May-2025 05:30:19 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 36
+[07-May-2025 05:30:28 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 34
+[07-May-2025 05:30:28 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 35
+[07-May-2025 05:30:28 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 36
+[07-May-2025 05:30:37 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 34
+[07-May-2025 05:30:37 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 35
+[07-May-2025 05:30:37 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/tokentracker/tokentracker.php on line 36
+[07-May-2025 05:32:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 88
+[07-May-2025 05:32:28 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 185
+[07-May-2025 05:32:28 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 186
+[07-May-2025 05:32:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 88
+[07-May-2025 05:32:36 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 185
+[07-May-2025 05:32:36 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 186
+[07-May-2025 05:32:45 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 88
+[07-May-2025 05:32:45 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 185
+[07-May-2025 05:32:45 UTC] PHP Warning:  Undefined variable $i in /wordpress/wp-content/plugins/tweep-roll/tweep-roll.php on line 186
+[07-May-2025 05:34:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twittergrid/twi...')
 #2 /internal/eval.php(20): activate_plugin('twittergrid/twi...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/twittergrid/twittergrid.php on line 328
-[06-May-2025 04:41:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
+[07-May-2025 05:34:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twittergrid/twi...')
 #2 /internal/eval.php(20): activate_plugin('twittergrid/twi...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/twittergrid/twittergrid.php on line 328
-[06-May-2025 04:42:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
+[07-May-2025 05:34:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twittergrid/twi...')
