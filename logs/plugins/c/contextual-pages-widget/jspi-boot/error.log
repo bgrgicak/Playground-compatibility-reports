@@ -2,69 +2,140 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 14:31:24 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>check-broken-links</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 14:31:33 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>check-broken-links</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 14:31:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>check-broken-links</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 14:32:17 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ctt::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Error: [07-May-2025 21:25:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `api_value` FROM `wp_call_sheet_setting` WHERE `api_name` = 'castupload' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_call_sheet_setting
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('SELECT api_valu...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('SELECT api_valu...')
+#3 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT api_valu...')
+#4 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(81): wpdb->get_row('SELECT api_valu...')
+#5 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(58): Callsheet_Api_Castupload->get_api_key()
+#6 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(165): Callsheet_Api_Castupload->__construct('callsheet', '1.0.0')
+#7 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(79): Callsheet->define_admin_hooks()
+#8 /wordpress/wp-content/plugins/callsheet/callsheet.php(201): Callsheet->__construct()
+#9 /wordpress/wp-content/plugins/callsheet/callsheet.php(206): run_callsheet()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('callsheet/calls...')
+#12 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#13 {main}</pre>
+ for query SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/callsheet/callsheet.php'), run_callsheet, Callsheet->__construct, Callsheet->define_admin_hooks, Callsheet_Api_Castupload->__construct, Callsheet_Api_Castupload->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 21:25:19 UTC] PHP Fatal error:  Uncaught TypeError: Illegal offset type in isset or empty in /wordpress/wp-includes/class-wp-roles.php:276
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clickt...', false)
-#3 /internal/eval.php(20): activate_plugin('clicktotweetcom...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[06-May-2025 14:32:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ctt::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/callsheet/callsheet.php(75): WP_Roles->is_role(Object(WP_Role))
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_callsheet(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_callsh...', false)
+#5 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-roles.php on line 276
+[07-May-2025 21:25:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT api_value FROM wp_call_sheet_setting  WHERE api_name=:param0  | parameters: castupload</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_call_sheet_setting.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT api_valu...')
+#2 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(81): wpdb->get_row('SELECT api_valu...')
+#3 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(58): Callsheet_Api_Castupload->get_api_key()
+#4 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(165): Callsheet_Api_Castupload->__construct('callsheet', '1.0.0')
+#5 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(79): Callsheet->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/callsheet/callsheet.php(201): Callsheet->__construct()
+#7 /wordpress/wp-content/plugins/callsheet/callsheet.php(206): run_callsheet()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('callsheet/calls...')
+#10 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#11 {main}</pre>
+ for query SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/callsheet/callsheet.php'), run_callsheet, Callsheet->__construct, Callsheet->define_admin_hooks, Callsheet_Api_Castupload->__construct, Callsheet_Api_Castupload->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 21:25:28 UTC] PHP Fatal error:  Uncaught TypeError: Illegal offset type in isset or empty in /wordpress/wp-includes/class-wp-roles.php:276
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clickt...', false)
-#3 /internal/eval.php(20): activate_plugin('clicktotweetcom...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[06-May-2025 14:32:32 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ctt::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+#0 /wordpress/wp-content/plugins/callsheet/callsheet.php(75): WP_Roles->is_role(Object(WP_Role))
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_callsheet(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_callsh...', false)
+#5 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-roles.php on line 276
+[07-May-2025 21:25:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT api_value FROM wp_call_sheet_setting  WHERE api_name=:param0  | parameters: castupload</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_call_sheet_setting.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3065): WP_SQLite_DB->query('SELECT api_valu...')
+#2 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(81): wpdb->get_row('SELECT api_valu...')
+#3 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet-api-castupload.php(58): Callsheet_Api_Castupload->get_api_key()
+#4 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(165): Callsheet_Api_Castupload->__construct('callsheet', '1.0.0')
+#5 /wordpress/wp-content/plugins/callsheet/includes/class-callsheet.php(79): Callsheet->define_admin_hooks()
+#6 /wordpress/wp-content/plugins/callsheet/callsheet.php(201): Callsheet->__construct()
+#7 /wordpress/wp-content/plugins/callsheet/callsheet.php(206): run_callsheet()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('callsheet/calls...')
+#10 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#11 {main}</pre>
+ for query SELECT api_value FROM wp_call_sheet_setting  WHERE api_name='castupload' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/callsheet/callsheet.php'), run_callsheet, Callsheet->__construct, Callsheet->define_admin_hooks, Callsheet_Api_Castupload->__construct, Callsheet_Api_Castupload->get_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 21:25:36 UTC] PHP Fatal error:  Uncaught TypeError: Illegal offset type in isset or empty in /wordpress/wp-includes/class-wp-roles.php:276
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clickt...', false)
-#3 /internal/eval.php(20): activate_plugin('clicktotweetcom...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[06-May-2025 14:32:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/clovertize/clovertize.php:125
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('clovertize/clov...')
-#2 /internal/eval.php(20): activate_plugin('clovertize/clov...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/clovertize/clovertize.php on line 125
-[06-May-2025 14:32:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/clovertize/clovertize.php:125
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('clovertize/clov...')
-#2 /internal/eval.php(20): activate_plugin('clovertize/clov...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/clovertize/clovertize.php on line 125
-[06-May-2025 14:32:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/clovertize/clovertize.php:125
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('clovertize/clov...')
-#2 /internal/eval.php(20): activate_plugin('clovertize/clov...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/clovertize/clovertize.php on line 125
-[06-May-2025 14:36:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
+#0 /wordpress/wp-content/plugins/callsheet/callsheet.php(75): WP_Roles->is_role(Object(WP_Role))
+#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_callsheet(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_callsh...', false)
+#5 /internal/eval.php(20): activate_plugin('callsheet/calls...')
+#6 {main}
+  thrown in /wordpress/wp-includes/class-wp-roles.php on line 276
+[07-May-2025 21:26:34 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cc-post-republisher</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 21:26:42 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cc-post-republisher</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 21:26:50 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cc-post-republisher</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
+[07-May-2025 21:32:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('contextual-page...')
 #2 /internal/eval.php(20): activate_plugin('contextual-page...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php on line 157
-[06-May-2025 14:36:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
+[07-May-2025 21:32:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('contextual-page...')
 #2 /internal/eval.php(20): activate_plugin('contextual-page...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php on line 157
-[06-May-2025 14:36:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
+[07-May-2025 21:32:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/contextual-pages-widget/contextual-pages-widgets.php:157
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('contextual-page...')
