@@ -2,155 +2,115 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
         throw new Error(y, { cause: u });
               ^
 
-Error: [06-May-2025 15:36:14 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tmm-wp-plugins-core</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 15:36:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-May-2025 22:28:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                        </p>
+<p>	CREATE TABLE IF NOT EXISTS wp_campaignpress1_client (
+										`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT ,
+										`api_id` CHAR(32) NULL ,
+										`created` DATETIME NULL DEFAULT NULL ,
+										`updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+										`status` VARCHAR(100) NOT NULL ,
+										`company` VARCHAR(150) NOT NULL ,
+										`contact_name` VARCHAR(150) NOT NULL ,
+										`email` VARCHAR(200) NOT NULL ,
+										`username` VARCHAR(255) NULL ,
+										`temp_password` VARCHAR(255) NULL ,
+										`country` VARCHAR(50) NOT NULL ,
+										`timezone` VARCHAR(100) NOT NULL ,
+										`additional_info` TEXT NULL ,
+										`group_id` INT UNSIGNED NOT NULL ,
+										PRIMARY KEY (`id`) ,
+										INDEX `fk_campaignpress_client_campaignpress_group` (`group_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_client_campaignpress_group`
+											FOREIGN KEY (`group_id` )
+											REFERENCES `wp_campaignpress1_group` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_STATISTICS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_cache_warmer_warm_ups_logs' AND `INDEX_NAME` = 'fk_wp_cache_warmer_warm_ups_list_id' | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(75): wpdb->get_var('\n              ...')
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#6 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query 
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_STATISTICS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_cache_warmer_warm_ups_logs' AND `INDEX_NAME` = 'fk_wp_cache_warmer_warm_ups_list_id' | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(75): wpdb->get_var('\n              ...')
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#6 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query 
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `_wp_sqlite_mysql_information_schema_tables` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_campaignpress1_client</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_tables` (`table_schema`, `table_name`, `table_type`, `engine`, `row_format`, `table_collation`, `table_comment`) VALUES (?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci, </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, id, 1, , NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, api_id, 2, , YES, char, 32, 128, , , , utf8mb4, utf8mb4_general_ci, char(32), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, created, 3, , YES, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, updated, 4, CURRENT_TIMESTAMP, NO, timestamp, , , , , 0, , , timestamp, , on update CURRENT_TIMESTAMP, select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, status, 5, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, company, 6, , NO, varchar, 150, 600, , , , utf8mb4, utf8mb4_general_ci, varchar(150), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, contact_name, 7, , NO, varchar, 150, 600, , , , utf8mb4, utf8mb4_general_ci, varchar(150), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, email, 8, , NO, varchar, 200, 800, , , , utf8mb4, utf8mb4_general_ci, varchar(200), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, username, 9, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, temp_password, 10, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, country, 11, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, timezone, 12, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, additional_info, 13, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_columns` (`table_schema`, `table_name`, `column_name`, `ordinal_position`, `column_default`, `is_nullable`, `data_type`, `character_maximum_length`, `character_octet_length`, `numeric_precision`, `numeric_scale`, `datetime_precision`, `character_set_name`, `collation_name`, `column_type`, `column_key`, `extra`, `privileges`, `column_comment`, `generation_expression`, `srs_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, group_id, 14, , NO, int, , , 10, 0, , , , int unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_campaignpress1_client, id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_campaignpress1_client, database_name_here, wp_campaignpress1_client</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM `_wp_sqlite_mysql_information_schema_columns`
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_campaignpress1_client, group_id</li>
+<li>Executing: INSERT INTO `_wp_sqlite_mysql_information_schema_statistics` (`table_schema`, `table_name`, `non_unique`, `index_schema`, `index_name`, `seq_in_index`, `column_name`, `collation`, `cardinality`, `sub_part`, `packed`, `nullable`, `index_type`, `comment`, `index_comment`, `is_visible`, `expression`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) | parameters: database_name_here, wp_campaignpress1_client, 1, database_name_here, fk_campaignpress_client_campaignpress_group, 1, group_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM `_wp_sqlite_mysql_information_schema_statistics`
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE `_wp_sqlite_mysql_information_schema_columns` AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_campaignpress1_client, database_name_here, wp_campaignpress1_client</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
@@ -158,659 +118,196 @@ FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\tCREATE TABLE I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\tCREATE TABLE I...')
+#3 /wordpress/wp-content/plugins/campaign-press/admin/admin.php(1515): WP_SQLite_DB->query('\tCREATE TABLE I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): campaignpress_install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campai...', false)
+#8 /internal/eval.php(20): activate_plugin('campaign-press/...')
+#9 {main}</pre>
+ for query 	CREATE TABLE IF NOT EXISTS wp_campaignpress1_client (
+										`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT ,
+										`api_id` CHAR(32) NULL ,
+										`created` DATETIME NULL DEFAULT NULL ,
+										`updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+										`status` VARCHAR(100) NOT NULL ,
+										`company` VARCHAR(150) NOT NULL ,
+										`contact_name` VARCHAR(150) NOT NULL ,
+										`email` VARCHAR(200) NOT NULL ,
+										`username` VARCHAR(255) NULL ,
+										`temp_password` VARCHAR(255) NULL ,
+										`country` VARCHAR(50) NOT NULL ,
+										`timezone` VARCHAR(100) NOT NULL ,
+										`additional_info` TEXT NULL ,
+										`group_id` INT UNSIGNED NOT NULL ,
+										PRIMARY KEY (`id`) ,
+										INDEX `fk_campaignpress_client_campaignpress_group` (`group_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_client_campaignpress_group`
+											FOREIGN KEY (`group_id` )
+											REFERENCES `wp_campaignpress1_group` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ; made by activate_plugin, do_action('activate_campaign-press/campaignpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, campaignpress_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:28:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                        </p>
+<p>	CREATE TABLE IF NOT EXISTS wp_campaignpress1_list_field (
+										`campaignpress_list_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`campaignpress_field_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`cm_key` VARCHAR(255) NOT NULL ,
+										INDEX `fk_campaignpress_list_field_campaignpress_list1` (`campaignpress_list_id` ASC) ,
+										INDEX `fk_campaignpress_list_field_campaignpress_field1` (`campaignpress_field_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_list1`
+											FOREIGN KEY (`campaignpress_list_id` )
+											REFERENCES `wp_campaignpress1_list` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_field1`
+											FOREIGN KEY (`campaignpress_field_id` )
+											REFERENCES `wp_campaignpress1_field` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_STATISTICS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_cache_warmer_warm_ups_logs' AND `INDEX_NAME` = 'fk_wp_cache_warmer_warm_ups_list_id' | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, campaignpress_list_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, campaignpress_field_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, cm_key, varchar(255)</li>
+<li>Executing: 	CREATE TABLE IF NOT EXISTS &quot;wp_campaignpress1_list_field&quot; (
+&quot;campaignpress_list_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;campaignpress_field_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;cm_key&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_campaignpress1_list_field__fk_campaignpress_list_field_campaignpress_list1&quot; ON &quot;wp_campaignpress1_list_field&quot; (&quot;campaignpress_list_id&quot;, &quot;)&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, wp_campaignpress1_list_field__fk_campaignpress_list_field_campaignpress_list1, KEY</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_campaignpress1_list_field__&quot; ON &quot;wp_campaignpress1_list_field&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, wp_campaignpress1_list_field__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(75): wpdb->get_var('\n              ...')
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#6 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query 
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_STATISTICS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_cache_warmer_warm_ups_logs' AND `INDEX_NAME` = 'fk_wp_cache_warmer_warm_ups_list_id' | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(75): wpdb->get_var('\n              ...')
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#6 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query 
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                        </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM _wp_sqlite_mysql_information_schema_STATISTICS WHERE `TABLE_SCHEMA` = DATABASE ( ) AND `TABLE_NAME` = 'wp_cache_warmer_warm_ups_logs' AND `INDEX_NAME` = 'fk_wp_cache_warmer_warm_ups_list_id' | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such function: DATABASE
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 'HY000', Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3031): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(75): wpdb->get_var('\n              ...')
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#6 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query 
-                                        SELECT COUNT(*)
-                                        FROM information_schema.STATISTICS
-                                        WHERE
-                                            TABLE_SCHEMA = DATABASE() AND
-                                            TABLE_NAME = 'wp_cache_warmer_warm_ups_logs' AND
-                                            INDEX_NAME = 'fk_wp_cache_warmer_warm_ups_list_id'
-                                         made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT COLUMN_NAME FROM `_wp_sqlite_mysql_information_schema_columns` WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cache_warmer_warm_ups_logs</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-FOREIGN KEY and CHECK constraints are not supported yet.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(683): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(491): WP_SQLite_Driver->query('\n              ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(432): WP_SQLite_DB->_do_query('\n              ...')
-#3 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#4 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#5 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tmm-wp-plugins-core</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 15:36:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /wordpress/wp-content/plugins/campaign-press/admin/admin.php(1685): WP_SQLite_DB->query('\tCREATE TABLE I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): campaignpress_install(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campai...', false)
+#6 /internal/eval.php(20): activate_plugin('campaign-press/...')
+#7 {main}</pre>
+ for query 	CREATE TABLE IF NOT EXISTS wp_campaignpress1_list_field (
+										`campaignpress_list_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`campaignpress_field_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`cm_key` VARCHAR(255) NOT NULL ,
+										INDEX `fk_campaignpress_list_field_campaignpress_list1` (`campaignpress_list_id` ASC) ,
+										INDEX `fk_campaignpress_list_field_campaignpress_field1` (`campaignpress_field_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_list1`
+											FOREIGN KEY (`campaignpress_list_id` )
+											REFERENCES `wp_campaignpress1_list` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_field1`
+											FOREIGN KEY (`campaignpress_field_id` )
+											REFERENCES `wp_campaignpress1_field` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ; made by activate_plugin, do_action('activate_campaign-press/campaignpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, campaignpress_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
+<p>	CREATE TABLE IF NOT EXISTS wp_campaignpress1_list_field (
+										`campaignpress_list_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`campaignpress_field_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`cm_key` VARCHAR(255) NOT NULL ,
+										INDEX `fk_campaignpress_list_field_campaignpress_list1` (`campaignpress_list_id` ASC) ,
+										INDEX `fk_campaignpress_list_field_campaignpress_field1` (`campaignpress_field_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_list1`
+											FOREIGN KEY (`campaignpress_list_id` )
+											REFERENCES `wp_campaignpress1_list` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_field1`
+											FOREIGN KEY (`campaignpress_field_id` )
+											REFERENCES `wp_campaignpress1_field` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, campaignpress_list_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, campaignpress_field_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, cm_key, varchar(255)</li>
+<li>Executing: 	CREATE TABLE IF NOT EXISTS &quot;wp_campaignpress1_list_field&quot; (
+&quot;campaignpress_list_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;campaignpress_field_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;cm_key&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_campaignpress1_list_field__fk_campaignpress_list_field_campaignpress_list1&quot; ON &quot;wp_campaignpress1_list_field&quot; (&quot;campaignpress_list_id&quot;, &quot;)&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, wp_campaignpress1_list_field__fk_campaignpress_list_field_campaignpress_list1, KEY</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_campaignpress1_list_field__&quot; ON &quot;wp_campaignpress1_list_field&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_campaignpress1_list_field, wp_campaignpress1_list_field__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>tmm-wp-plugins-core</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6121
-[06-May-2025 15:36:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:36:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:37:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-            </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: SAVEPOINT LEVEL1 | (no parameters)</li>
-<li>Executing: ROLLBACK TO SAVEPOINT LEVEL1 | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Data type expected in MySQL query, unknown token received: fk_wp_cache_warmer_warm_ups_list_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/cache-warmer/src/class-databases.php(148): WP_SQLite_DB->query('\n              ...')
-#2 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(292): Cache_Warmer\DB::do_migrations()
-#3 /wordpress/wp-content/plugins/cache-warmer/cache-warmer.php(102): Cache_Warmer\Cache_Warmer->handle_version_update()
-#4 /wordpress/wp-includes/class-wp-hook.php(324): Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}('')
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-settings.php(578): do_action('plugins_loaded')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query 
-                ALTER TABLE wp_cache_warmer_warm_ups_logs
-                ADD CONSTRAINT fk_wp_cache_warmer_warm_ups_list_id
-                FOREIGN KEY (list_id)
-                REFERENCES wp_cache_warmer_warm_ups_list(id) ON DELETE CASCADE
-             made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Cache_Warmer\Cache_Warmer->Cache_Warmer\{closure}, Cache_Warmer\Cache_Warmer->handle_version_update, Cache_Warmer\DB::do_migrations, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-May-2025 15:37:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/category-list-widget.php:151
+#1 /wordpress/wp-content/plugins/campaign-press/admin/admin.php(1685): WP_SQLite_DB->query('\tCREATE TABLE I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): campaignpress_install(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_campai...', false)
+#6 /internal/eval.php(20): activate_plugin('campaign-press/...')
+#7 {main}</pre>
+ for query 	CREATE TABLE IF NOT EXISTS wp_campaignpress1_list_field (
+										`campaignpress_list_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`campaignpress_field_id` BIGINT(20) UNSIGNED NOT NULL ,
+										`cm_key` VARCHAR(255) NOT NULL ,
+										INDEX `fk_campaignpress_list_field_campaignpress_list1` (`campaignpress_list_id` ASC) ,
+										INDEX `fk_campaignpress_list_field_campaignpress_field1` (`campaignpress_field_id` ASC) ,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_list1`
+											FOREIGN KEY (`campaignpress_list_id` )
+											REFERENCES `wp_campaignpress1_list` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION,
+										CONSTRAINT `fk_campaignpress_list_field_campaignpress_field1`
+											FOREIGN KEY (`campaignpress_field_id` )
+											REFERENCES `wp_campaignpress1_field` (`id` )
+											ON DELETE NO ACTION
+											ON UPDATE NO ACTION) ; made by activate_plugin, do_action('activate_campaign-press/campaignpress.php'), WP_Hook->do_action, WP_Hook->apply_filters, campaignpress_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-May-2025 22:29:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/category-list-widget.php:151
 Stack trace:
 #0 /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/carseller.php(22): include()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -818,7 +315,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('cars-seller-aut...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/category-list-widget.php on line 151
-[06-May-2025 15:37:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/category-list-widget.php:151
+[07-May-2025 22:29:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/category-list-widget.php:151
 Stack trace:
 #0 /wordpress/wp-content/plugins/cars-seller-auto-classifieds-script/carseller.php(22): include()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
